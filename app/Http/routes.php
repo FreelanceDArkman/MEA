@@ -28,7 +28,7 @@
 
 Route::group(['middleware' => ['web']], function () {
 
-    Route::get('/', 'HomeController@getIndex');
+    Route::get('/', 'HomeController@getIndexs');
 
 });
 
