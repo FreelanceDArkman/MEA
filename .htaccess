@@ -1,0 +1,7 @@
+RewriteEngine On
+#Options +FollowSymlinks
+
+
+#RewriteRule ^admin/(.*)$ admin/$1 [NC,L]
+#RewriteCond %{REQUEST_URI} !^admin
+RewriteRule ^(.*)$ public/$1 [L]
