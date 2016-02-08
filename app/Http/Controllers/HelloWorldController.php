@@ -7,14 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class HelloWorldController extends Controller
 {
+    //
 
     public function getIndex()
     {
         return view('frontend.pages.home');
     }
-
-
-
 }

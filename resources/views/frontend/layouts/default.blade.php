@@ -12,14 +12,33 @@
 
 <!-- BEGIN BODY -->
 <body>
-@include('frontend.includes.header')
-<!-- BEGIN PAGE CONTAINER -->
-<div class="page-container">
 
-    @yield('content')
+<div class="wrapper">
+    <!--=== Header ===-->
+    @include('frontend.includes.header')
+<!--=== End Header ===-->
+    @include('frontend.includes.slider')
+    @include('frontend.includes.slider_level2')
+
+
+    <!-- BEGIN PAGE CONTAINER -->
+    <div class="container content-sm">
+
+        @yield('content')
+
+
+        @include('frontend.includes.client')
+    </div>
+    <!-- END PAGE CONTAINER -->
+
 
 </div>
-<!-- END PAGE CONTAINER -->
+
+
+
+
+
+
 
 @include('frontend.includes.footer')
 

@@ -1,1 +1,47 @@
 /* Add here all your css styles (customizations) */
+@font-face {
+    font-family: 'TH SarabunPSK';
+    src: url('fonts/THSarabun.ttf');
+}
+@font-face {
+    font-family: 'DB Ozone X';
+    src: url('fonts/DB Ozone X v3.2.ttf');
+}
+
+body, a, h1, h2{
+    font-family: "DB Ozone X" !important;
+}
+
+.footer .list-unstyled li{
+    line-height: 20px;
+}
+
+.footer a{
+    font-size: 18px !important;
+}
+
+.footer h2{
+    font-size: 22px !important;
+}
+.header .navbar-nav > li > a{
+    font-family: "DB Ozone X" !important;
+    font-size: 20px !important;
+}
+
+.header > .container {
+
+    /*margin-bottom: -25px !important;*/
+}
+
+.header .topbar a{
+    font-family: "DB Ozone X" !important;
+    font-size: 15px !important;
+}
+
+@media (min-width: 992px){
+
+    .header .navbar-nav > li > a {
+
+        padding: 9px 29px 9px 15px !important;
+    }
+}
