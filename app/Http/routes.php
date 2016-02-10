@@ -28,14 +28,31 @@
 
 Route::group(['middleware' => ['web']], function () {
 
+    Route::get('login','Auth\AuthController@showLogin');
+    Route::post('login','Auth\AuthController@checkLogin');
+    Route::get('logout','Auth\AuthController@checkLogout');
+
     Route::get('/', 'HomeController@getIndex');
-
     Route::get('/home','HelloWorldController@getIndex');
-
+    Route::get('/view',function() {
+        dd(Session::get('user_data'));
+    });
 });
 
 
+Route::group(['middleware' => ['backend'], 'prefix' => 'admin'], function () {
+    Route::get('/', function() {
+        if(Session::get('admin_logged_in')) {
+            return redirect()->to('admin/dashboard');
+        } else {
+            return redirect()->to('admin/login');
+        }
+    });
 
-Route::group(['middleware' => ['backend']], function () {
-
+    Route::get('/dashboard', function() {
+        return 'OK';
+    });
+    Route::get('login','Auth\AdminAuthController@showLogin');
+    Route::post('login','Auth\AdminAuthController@checkLogin');
+    Route::get('logout','Auth\AdminAuthController@checkLogout');
 });

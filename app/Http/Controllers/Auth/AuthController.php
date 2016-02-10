@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Package\Curl;
+use Illuminate\Http\Request;
+use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use App\Package\MeaAgent;
 
 class AuthController extends Controller
 {
@@ -21,52 +23,47 @@ class AuthController extends Controller
     |
     */
 
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    //use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
 
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function showLogin()
     {
-        $this->middleware('guest', ['except' => 'logout']);
+        if(session()->get('logged_in')) {
+            return redirect()->to('/');
+        }
+        return view('frontend.pages.login');
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
+    public function checkLogin(Request $request)
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
-        ]);
+        $agent = new MeaAgent();
+        $data = array(
+            "session_id" => Session::getId(),
+            "username" => $request->input('username'),
+            "pwd" => $request->input('password'),
+            "os" => $agent->device(),
+            "browser" => $agent->browser(),
+            "ip_address" => $request->ip(),
+            "access_channel" => $agent->access_channel(),
+            "device_id" => "",
+            "device_os" => $agent->platform()
+        );
+        $curl = new Curl('Login', $data);
+
+        $result_login = $curl->getResult();
+        if($result_login->errCode != 0) {
+            // login fail
+            return Redirect::to('login')->with('messages', 'The email or password you entered is incorrect.');
+        } else {
+            // logged in
+            session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
+            return redirect()->intended('view');
+        }
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
+    public function checkLogout()
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        Session::flush();
+        return redirect()->to('login');
     }
 }
