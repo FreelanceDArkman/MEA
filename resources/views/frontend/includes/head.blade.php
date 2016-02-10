@@ -11,6 +11,10 @@
 <!-- Favicon -->
 <link rel="shortcut icon" href="favicon.ico">
 
+@if(Request::is('/someUrl'))
+
+@endif
+
 <!-- Web Fonts -->
 <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
 
@@ -28,6 +32,7 @@
 <link rel="stylesheet" href="frontend/assets/plugins/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="frontend/assets/plugins/parallax-slider/css/parallax-slider.css">
 <link rel="stylesheet" href="frontend/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+<link rel="stylesheet" href="frontend/assets/plugins/layer-slider/layerslider/css/layerslider.css">
 
 <!-- CSS Theme -->
 <link rel="stylesheet" href="frontend/assets/css/theme-colors/default.css" id="style_color">

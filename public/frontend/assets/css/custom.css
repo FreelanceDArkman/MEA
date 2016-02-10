@@ -12,6 +12,15 @@ body, a, h1, h2{
     font-family: "DB Ozone X" !important;
 }
 
+.footer-v3 .footer {
+    padding: 30px 0;
+    background: #63666a;
+    border-top: 5px solid #555;
+}
+
+.footer-v3 .footer p{
+    font-size: 18px !important;
+}
 .footer .list-unstyled li{
     line-height: 20px;
 }
@@ -38,10 +47,58 @@ body, a, h1, h2{
     font-size: 15px !important;
 }
 
+.dropdown-menu {
+    font-size: 18px !important;
+}
+
+
+.header .dropdown-hide-sub > a:after{
+    content:"";
+}
+
+.call-action-v1 p{
+    font-size: 30px !important;
+    color:#fe5000;
+}
+.purchase{
+    /*background-color: #bbbcbc;*/
+    /*background-image: none;*/
+}
+.purchase p{
+    color:#63666a;
+    font-size: 35px;
+}
+.purchase span{
+    color: #fe5000;
+     /*color:#fe5000;*/
+    margin-bottom: 0;
+    font-size: 40px;
+ }
+
+.btn-u{
+    background-color:#fe5000;
+}
+
 @media (min-width: 992px){
 
     .header .navbar-nav > li > a {
 
         padding: 9px 29px 9px 15px !important;
     }
+
+    .header .dropdown-menu li a {
+
+        font-size: 18px !important;
+
+    }
 }
+
+@media (max-width: 991px){
+    .header .dropdown .dropdown-submenu > a {
+        font-size: 18px !important;
+
+    }
+}
+
+
+

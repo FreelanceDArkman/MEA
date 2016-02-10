@@ -5,10 +5,10 @@
         <div class="container">
             <div class="row">
                 <!-- About -->
-                <div class="col-sm-3 md-margin-bottom-40">
+                <div class="col-sm-3 md-margin-bottom-40" style="text-align: center;">
                     <a href="index.html"><img id="logo-footer" class="footer-logo" src="frontend/assets/img/logo2-default.png" alt=""></a>
-                    <p>About Unify dolor sit amet, consectetur adipiscing elit. Maecenas eget nisl id libero tincidunt sodales.</p>
-                    <p>Duis eleifend fermentum ante ut aliquam. Cras mi risus, dignissim sed adipiscing ut, placerat non arcu.</p>
+                    <p style="text-align: left">มีหลักฐานที่เป็นข้อเท็จจริงยืนยันมานานแล้ว ว่าเนื้อหาที่อ่านรู้เรื่องนั้นจะไปกวนสมาธิของคนอ่านให้เขวไปจากส่วนที้เป็น Layout เรานำ Lorem Ipsum มาใช้เพราะความที่มันมีการกระจายของตัวอักษรธรรมดาๆ แบบพอประมาณ </p>
+                    <p style="text-align: left">ซึ่งเอามาใช้แทนการเขียนว่า ‘ตรงนี้เป็นเนื้อหา, ตรงนี้เป็นเนื้อหา' ได้ และยังทำให้มองดูเหมือนกับภาษาอังกฤษที่อ่านได้ปกติ</p>
                 </div><!--/col-md-3-->
                 <!-- End About -->
 
@@ -260,19 +260,26 @@
 <script type="text/javascript" src="frontend/assets/plugins/parallax-slider/js/modernizr.js"></script>
 <script type="text/javascript" src="frontend/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
 <script type="text/javascript" src="frontend/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+
+<script type="text/javascript" src="frontend/assets/plugins/layer-slider/layerslider/js/greensock.js"></script>
+<script type="text/javascript" src="frontend/assets/plugins/layer-slider/layerslider/js/layerslider.transitions.js"></script>
+<script type="text/javascript" src="frontend/assets/plugins/layer-slider/layerslider/js/layerslider.kreaturamedia.jquery.js"></script>
 <!-- JS Customization -->
 <script type="text/javascript" src="frontend/assets/js/custom.js"></script>
 <!-- JS Page Level -->
 <script type="text/javascript" src="frontend/assets/js/app.js"></script>
+<script type="text/javascript" src="frontend/assets/js/plugins/layer-slider.js"></script>
 <script type="text/javascript" src="frontend/assets/js/plugins/owl-carousel.js"></script>
 <script type="text/javascript" src="frontend/assets/js/plugins/style-switcher.js"></script>
 <script type="text/javascript" src="frontend/assets/js/plugins/parallax-slider.js"></script>
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
+        LayerSlider.initLayerSlider();
         OwlCarousel.initOwlCarousel();
         StyleSwitcher.initStyleSwitcher();
         ParallaxSlider.initParallaxSlider();
+
     });
 </script>
 <!--[if lt IE 9]>
