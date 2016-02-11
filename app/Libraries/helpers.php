@@ -36,9 +36,15 @@ if (!function_exists('is_admin')) {
 if (!function_exists('access_menu_list')) {
     function access_menu_list()
     {
-        $menu_data = session()->get('user_data')->access_menu_list;
-        if(!$menu_data) return false;
-        return $menu_data;
+        if(session()->has('user_data')){
+
+            $menu_data = session()->get('user_data')->access_menu_list;
+            if(!$menu_data) return false;
+            return $menu_data;
+        }
+
+        return false;
+
     }
 }
 

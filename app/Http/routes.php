@@ -29,10 +29,16 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('logout','Auth\AuthController@checkLogout');
 
     Route::get('/', 'HomeController@getIndex');
+
+
     Route::get('/home','HelloWorldController@getIndex');
-    Route::get('/view',function() {
-        dd(Session::get('user_data'));
-    });
+
+
+//    Route::get('/view',function() {
+//        dd(Session::get('user_data'));
+//    });
+
+
 
     Route::group(['middleware' => ['auth.frontend']], function() {
         // login required
@@ -46,10 +52,13 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
     Route::post('login','Auth\AdminAuthController@checkLogin');
     Route::get('logout','Auth\AdminAuthController@checkLogout');
 
+
+
+
     Route::group(['middleware' => ['auth.backend']], function() {
         // login required
-
         Route::get('dashboard', 'DashboardController@showIndex');
+
         Route::get('/', function() {
             dd(Session::get('user_data'));
         });

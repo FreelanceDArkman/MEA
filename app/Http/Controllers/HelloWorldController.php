@@ -13,6 +13,6 @@ class HelloWorldController extends Controller
 
     public function getIndex()
     {
-        return view('frontend.pages.home');
+        return view('frontend.pages.dd');
     }
 }
