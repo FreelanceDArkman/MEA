@@ -1,0 +1,7 @@
+<li>
+    <a href="index.html">Home</a>
+    <i class="fa fa-circle"></i>
+</li>
+<li>
+    <span class="active">Dashboard</span>
+</li>

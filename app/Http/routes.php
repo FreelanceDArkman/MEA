@@ -11,9 +11,6 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +24,6 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-
     Route::get('login','Auth\AuthController@showLogin');
     Route::post('login','Auth\AuthController@checkLogin');
     Route::get('logout','Auth\AuthController@checkLogout');
@@ -37,22 +33,26 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/view',function() {
         dd(Session::get('user_data'));
     });
+
+    Route::group(['middleware' => ['auth.frontend']], function() {
+        // login required
+    });
 });
 
 
-Route::group(['middleware' => ['backend'], 'prefix' => 'admin'], function () {
-    Route::get('/', function() {
-        if(Session::get('admin_logged_in')) {
-            return redirect()->to('admin/dashboard');
-        } else {
-            return redirect()->to('admin/login');
-        }
-    });
+Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
-    Route::get('/dashboard', function() {
-        return 'OK';
-    });
     Route::get('login','Auth\AdminAuthController@showLogin');
     Route::post('login','Auth\AdminAuthController@checkLogin');
     Route::get('logout','Auth\AdminAuthController@checkLogout');
+
+    Route::group(['middleware' => ['auth.backend']], function() {
+        // login required
+
+        Route::get('dashboard', 'DashboardController@showIndex');
+        Route::get('/', function() {
+            dd(Session::get('user_data'));
+        });
+    });
+
 });

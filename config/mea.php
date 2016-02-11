@@ -1,7 +1,14 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: napa
- * Date: 2/11/2016 AD
- * Time: 11:54 AM
- */
+
+
+
+return [
+
+    /**
+     * Mea Setting
+     */
+
+    'admin_groups' => [0,1,3,4],
+    'frontend_groups' => [2]
+
+];

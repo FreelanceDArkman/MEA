@@ -10,4 +10,16 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    public function pageSetting($data)
+    {
+
+        if($data['menu_id'] && $data['menu_group_id']) {
+            if(!menu_access($data['menu_id'],$data['menu_group_id']))
+                abort(404);
+        }
+
+        view()->share('page_setting', $data);
+    }
+
 }

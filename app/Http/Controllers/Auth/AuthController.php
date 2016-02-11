@@ -28,9 +28,9 @@ class AuthController extends Controller
 
     public function showLogin()
     {
-        if(session()->get('logged_in')) {
+        if(logged_in())
             return redirect()->to('/');
-        }
+
         return view('frontend.pages.login');
     }
 
@@ -49,11 +49,10 @@ class AuthController extends Controller
             "device_os" => $agent->platform()
         );
         $curl = new Curl('Login', $data);
-
         $result_login = $curl->getResult();
         if($result_login->errCode != 0) {
             // login fail
-            return Redirect::to('login')->with('messages', 'The email or password you entered is incorrect.');
+            return redirect()->to('login')->with('messages', 'The email or password you entered is incorrect.');
         } else {
             // logged in
             session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);

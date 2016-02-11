@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Package\Curl;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -28,9 +29,9 @@ class AdminAuthController extends Controller
 
     public function showLogin()
     {
-        if(session()->get('admin_logged_in')) {
-            return redirect()->to('/admin/login');
-        }
+        if(is_admin())
+            return redirect()->to('admin/dashboard');
+
         return view('backend.pages.login');
     }
 
@@ -52,11 +53,14 @@ class AdminAuthController extends Controller
         $result_login = $curl->getResult();
         if($result_login->errCode != 0) {
             // login fail
-            return Redirect::to('admin/login')->with('messages', 'The email or password you entered is incorrect.');
+            return redirect()->to('admin/login')->with('messages', 'The username or password you entered is incorrect.');
         } else {
             // logged in
+            if(!in_array($result_login->result[0]->user_privilege_id, Config::get('mea.admin_groups'))) {
+                return redirect()->to('admin/login')->with('messages', 'The username or password you entered is incorrect.');
+            }
             session(['logged_in' => true, 'user_data' => $result_login->result[0],'access_channel' => 'backend']);
-            return redirect()->intended('view');
+            return redirect()->intended('admin/dashboard');
         }
     }
 

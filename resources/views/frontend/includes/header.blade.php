@@ -49,6 +49,7 @@
                         ข้อมูลส่วนตัว
                     </a>
                     <ul class="dropdown-menu">
+                        @if(menu_access(1,1))
                         <li class="dropdown-submenu">
                             <a href="javascript:void(0);">แก้ไขข้อมูลส่วนตัว</a>
                             <ul class="dropdown-menu">
@@ -58,6 +59,7 @@
 
                             </ul>
                         </li>
+                        @endif
                         <li class="dropdown-submenu" >
                             <a href="javascript:void(0);">ข้อมูลการลงทุน</a>
                             <ul class="dropdown-menu">
