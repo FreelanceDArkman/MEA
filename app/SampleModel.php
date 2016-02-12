@@ -10,6 +10,10 @@ class SampleModel extends Model
 
     public function getRow()
     {
+
+
+
+
         $sql = "SELECT * FROM TBL_USER WHERE EMP_ID = 1234567";
         return DB::select(DB::raw($sql))[0];
 
@@ -49,6 +53,8 @@ class SampleModel extends Model
 
     public function getRows()
     {
+        //return DB::table('TBL_USER')->skip(10)->take(5)->where('USER_PRIVILEGE_ID',0)->get();
+
         $sql = "SELECT TOP 5 * FROM TBL_USER";
         return DB::select(DB::raw($sql));
 
