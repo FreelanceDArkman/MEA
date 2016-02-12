@@ -60,17 +60,28 @@
     <script src="{{ asset('backend/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
     <script src="{{ asset('backend/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
 @endif
+
+@if(Request::is('admin/userGroup/add'))
+    <script src="{{ asset('backend/assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('backend/assets/global/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('backend/assets/global/plugins/jquery-validation/js/additional-methods.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('backend/assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}" type="text/javascript"></script>
+@endif
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="{{ asset('backend/assets/global/scripts/app.min.js') }}" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-@if(Request::is('/'))
+@if(Request::is('admin'))
 <script src="{{ asset('backend/assets/pages/scripts/dashboard.min.js') }}" type="text/javascript"></script>
 @endif
 
 @if(Request::is('admin/userGroup'))
     <script src="{{ asset('backend/assets/pages/scripts/user-group.min.js') }}" type="text/javascript"></script>
+@endif
+
+@if(Request::is('admin/userGroup/add'))
+    <script src="{{ asset('backend/assets/pages/scripts/form-wizard.min.js') }}" type="text/javascript"></script>
 @endif
 
 <!-- END PAGE LEVEL SCRIPTS -->

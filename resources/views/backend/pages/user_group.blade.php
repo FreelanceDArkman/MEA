@@ -15,12 +15,11 @@
                     <span class="caption-subject font-green sbold uppercase">จัดการกลุ่มผู้ใช้</span>
                 </div>
                 <div class="actions">
-                    <div class="btn-group btn-group-devided" data-toggle="buttons">
-                        <label class="btn btn-transparent green btn-outline btn-outline btn-circle btn-sm active">
-                            <input type="radio" name="options" class="toggle" id="option1">สร้างกลุ่มผู้ใช้</label>
+                    {{--<div class="btn-group btn-group-devided" data-toggle="buttons">--}}
+                            <a class="btn btn-circle green btn-outline" href="{{ action('UserGroupController@getAddUserGroup') }}" target="_blank">สร้างกลุ่มผู้ใช้</a>
                         {{--<label class="btn btn-transparent blue btn-outline btn-circle btn-sm">--}}
                             {{--<input type="radio" name="options" class="toggle" id="option2">Settings</label>--}}
-                    </div>
+                    {{--</div>--}}
                     {{--<div class="btn-group">--}}
                         {{--<a class="btn red btn-outline btn-circle" href="javascript:;" data-toggle="dropdown">--}}
                             {{--<i class="fa fa-share"></i>--}}
@@ -68,10 +67,10 @@
                         <tr role="row" class="filter">
                             <td> </td>
                             <td>
-                                <input type="text" class="form-control form-filter input-sm" name="order_id"> </td>
+                                <input type="text" class="form-control form-filter input-sm" name="user_group_id" id="user_group_id"> </td>
 
                             <td>
-                                <input type="text" class="form-control form-filter input-sm" name="order_customer_name"> </td>
+                                <input type="text" class="form-control form-filter input-sm" name="user_group_name" id="user_group_name"> </td>
 
                             <td>
                                 <div class="margin-bottom-5">

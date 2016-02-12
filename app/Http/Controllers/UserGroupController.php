@@ -19,11 +19,6 @@ class UserGroupController extends Controller
             'title' => 'จัดการกลุ่มผู้ใช้ | จัดการผู้ใช้'
         ] );
 
-        //$user_group = DB::table('TBL_PRIVILEGE')->skip(10)->take(5)->where('USER_PRIVILEGE_ID',0)->get();
-
-        //$query = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC');
-        //$dd = $query->skip(1)->take(2)->get();
-        //dd($dd);
         return view('backend.pages.user_group');
     }
 
@@ -31,52 +26,23 @@ class UserGroupController extends Controller
     {
         $records = [];
         $records["data"] = [];
-        //$filters = [];
+        $filters = [];
 
         $query = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC');
 
-//        $sql = "SELECT a.*,b.`prefix`,b.`first_name`,b.`last_name`,b.`email` FROM `orders` a LEFT JOIN `customers` b ON a.`customer_id` = b.`customer_id` ";
 
-//        if (!empty($request->input('order_id'))) {
-//            $filters[] = " a.order_id = " . $request->input('order_id');
-//        }
-//        if (!empty($request->input('order_date_from')) && !empty($request->input('order_date_to'))) {
-//            $filters[] = " a.order_date BETWEEN '" . $request->input('order_date_from') . " 00:00:00' AND '" . $request->input('order_date_to') . " 23:59:59'";
-//        }
-//        if (!empty($request->input('order_customer_name'))) {
-//            $filters[] = " b.first_name LIKE '%" . $request->input('order_customer_name') . "%' OR b.last_name LIKE '%" . $request->input('order_customer_name') . "%'";
-//            //$filters[] = " b.first_name = '".$request->input('order_customer_name')."'";
-//        }
-//        if (!empty($request->input('order_grand_total_from')) && empty($request->input('order_grand_total_to'))) {
-//            $filters[] = " a.grand_total >= " . $request->input('order_grand_total_from');
-//        } elseif (empty($request->input('order_grand_total_from')) && !empty($request->input('order_grand_total_to'))) {
-//            $filters[] = " a.grand_total <= " . $request->input('order_grand_total_to');
-//        } elseif (!empty($request->input('order_grand_total_from')) || !empty($request->input('order_grand_total_to'))) {
-//            $filters[] = " a.grand_total BETWEEN '" . $request->input('order_grand_total_from') . "' AND '" . $request->input('order_grand_total_to') . "'";
-//        }
-//
-//        if (!empty($request->input('shipping_date_from')) && !empty($request->input('shipping_date_to'))) {
-//            $filters[] = " a.order_shipping_date BETWEEN '" . $request->input('shipping_date_from') . " 00:00:00' AND '" . $request->input('shipping_date_to') . " 23:59:59'";
-//        }
-//
-//        if (!empty($request->input('shipping_no'))) {
-//            $filters[] = " a.order_shipping_id LIKE '%" . $request->input('shipping_no') . "%'";
-//        }
-//        if ($request->input('order_status') && $request->input('order_status') != '-1') {
-//            $filters[] = " a.order_status = '" . $request->input('order_status') . "'";
-//        }
-//        if (count($filters) > 0) {
-//            $sql .= " WHERE";
-//            foreach ($filters as $key => $filter) {
-//                if ($key > 0) {
-//                    $sql .= " AND";
-//                }
-//                $sql .= $filter;
-//            }
-//        }
+        if(!empty($request->input('user_group_id'))) {
+            $filters = ['USER_PRIVILEGE_ID',$request->input('user_group_id')];
+        }
+
+        if(!empty($request->input('user_group_name'))) {
+            $filters = ['USER_PRIVILEGE_DESC','like',$request->input('user_group_name').'%'];
+        }
+
+        if($filters)
+            $query->where([$filters]);
 
         $total = $query->count();
-        $total = count($total);
         $limit = intval($request->input('length'));
         $limit = $limit < 0 ? $limit : $limit;
         $iDisplayStart = intval($request->input('start'));
@@ -88,34 +54,13 @@ class UserGroupController extends Controller
             2 => 'USER_PRIVILEGE_DESC'
         ];
         if ($order) {
-            //$sql .= " ORDER BY {$orderColumns[$order[0]['column']]} {$order[0]['dir']}";
             $query->orderBy($orderColumns[$order[0]['column']], $order[0]['dir']);
         } else {
-            //$sql .= " ORDER BY a.`order_id` DESC";
             $query->orderBy('USER_PRIVILEGE_ID', 'desc');
         }
-        //$sql .= " LIMIT $iDisplayStart, $limit";
 
         $user_groups = $query->skip($iDisplayStart)->take($limit)->get();
 
-        //$orders = DB::select(DB::raw($sql));
-
-        $order_status = [
-            'on-hold' => 'On Hold',
-            'pending' => 'Pending Payment',
-            'pending-shipping' => 'Pending Shipping',
-            'pre-order' => 'Pre Order',
-            'completed' => 'Completed',
-            'cancelled' => 'Cancelled'
-        ];
-        $status_color = [
-            'on-hold' => 'on-hold',
-            'pending' => 'pending',
-            'pending-shipping' => 'pending-shipping',
-            'pre-order' => 'pre-order',
-            'completed' => 'completed',
-            'cancelled' => 'cancelled'
-        ];
         if ($user_groups) {
             foreach ($user_groups as $group) {
                 $records["data"][] = [
@@ -142,6 +87,17 @@ class UserGroupController extends Controller
         $records["recordsTotal"] = $total;
         $records["recordsFiltered"] = $total;
         return response()->json($records);
+    }
+
+
+    public function getAddUserGroup()
+    {
+        $this->pageSetting( [
+            'menu_group_id' => 50,
+            'menu_id' => 1,
+            'title' => 'เพิ่มกลุ่มผู้ใช้ | จัดการผู้ใช้'
+        ] );
+        return view('backend.pages.add_user_group');
     }
 
 }

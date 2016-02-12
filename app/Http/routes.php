@@ -57,6 +57,8 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
         Route::group(['prefix' => 'userGroup'] , function() {
             Route::get('/', 'UserGroupController@userGroups');
             Route::post('getUserGroups', 'UserGroupController@getUserGroups');
+
+            Route::get('add', 'UserGroupController@getAddUserGroup');
         });
 
     });
