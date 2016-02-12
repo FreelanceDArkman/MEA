@@ -15,23 +15,29 @@
                 <span class="arrow open"></span>
             </a>
         </li>
+        @if(menu_access(1,50) || menu_access(2,50))
         <li class="heading">
             <h3 class="uppercase">จัดการผู้ใช้</h3>
         </li>
+        @if(menu_access(1,50))
         <li class="nav-item  ">
             <a href="javascript:;" class="nav-link nav-toggle">
-                <i class="icon-diamond"></i>
+                <i class="icon-users"></i>
                 <span class="title">จัดการกลุ่มผู้ใช้</span>
                 <span class="arrow"></span>
             </a>
         </li>
+        @endif
+        @if(menu_access(2,50))
         <li class="nav-item  ">
             <a href="javascript:;" class="nav-link nav-toggle">
-                <i class="icon-puzzle"></i>
+                <i class="icon-user"></i>
                 <span class="title">จัดการผู้ใช้</span>
                 <span class="arrow"></span>
             </a>
         </li>
+        @endif
+        @endif
         <li class="heading">
             <h3 class="uppercase">จัดการสมาชิกกองทุน</h3>
         </li>

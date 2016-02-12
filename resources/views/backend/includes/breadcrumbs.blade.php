@@ -1,5 +1,5 @@
 <li>
-    <a href="index.html">Home</a>
+    <a href="{{ action('DashboardController@showIndex') }}">Home</a>
     <i class="fa fa-circle"></i>
 </li>
 <li>

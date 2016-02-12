@@ -30,7 +30,7 @@ class AdminAuthController extends Controller
     public function showLogin()
     {
         if(is_admin())
-            return redirect()->to('admin/dashboard');
+            return redirect()->to('admin');
 
         return view('backend.pages.login');
     }
@@ -60,7 +60,7 @@ class AdminAuthController extends Controller
                 return redirect()->to('admin/login')->with('messages', 'The username or password you entered is incorrect.');
             }
             session(['logged_in' => true, 'user_data' => $result_login->result[0],'access_channel' => 'backend']);
-            return redirect()->intended('admin/dashboard');
+            return redirect()->intended('admin');
         }
     }
 

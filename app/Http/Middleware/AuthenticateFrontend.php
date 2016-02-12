@@ -15,11 +15,9 @@ class AuthenticateFrontend
      */
     public function handle($request, Closure $next)
     {
-        if($request->ajax())
-            return response('Unauthorized.', 401);
 
         if(!logged_in())
-            return redirect()->to('admin/login');
+            return redirect()->to('login');
 
         return $next($request);
     }

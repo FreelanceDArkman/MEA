@@ -47,21 +47,18 @@ Route::group(['middleware' => ['web']], function () {
 
 
 Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
-
     Route::get('login','Auth\AdminAuthController@showLogin');
     Route::post('login','Auth\AdminAuthController@checkLogin');
     Route::get('logout','Auth\AdminAuthController@checkLogout');
 
-
-
-
     Route::group(['middleware' => ['auth.backend']], function() {
         // login required
-        Route::get('dashboard', 'DashboardController@showIndex');
-
-        Route::get('/', function() {
-            dd(Session::get('user_data'));
+        Route::get('/', 'DashboardController@showIndex');
+        Route::group(['prefix' => 'userGroup'] , function() {
+            Route::get('/', 'UserGroupController@userGroups');
+            Route::post('getUserGroups', 'UserGroupController@getUserGroups');
         });
+
     });
 
 });

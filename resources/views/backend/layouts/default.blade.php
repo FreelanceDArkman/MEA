@@ -10,7 +10,7 @@
     @include('backend.includes.head')
     <script type="text/javascript">
         var backendSetting = {
-            baseUrl: '{{url('/')}}'
+            ajaxUrl: '{{url('/admin')}}'
         };
     </script>
 </head>
