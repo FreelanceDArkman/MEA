@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers;
+use App\SampleModel;
 
 class DashboardController extends Controller
 {
@@ -19,6 +20,8 @@ class DashboardController extends Controller
             'title' => 'Some title page'
         ] );
 
+        $obj = new SampleModel();
+        dd($obj->getRows());
         return view('backend.pages.dashboard');
     }
 
