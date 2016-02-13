@@ -61,11 +61,13 @@
     <script src="{{ asset('backend/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
 @endif
 
-@if(Request::is('admin/userGroup/add'))
+@if(Request::is('admin/userGroup/add') || Request::is('admin/userGroup/edit/*'))
     <script src="{{ asset('backend/assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('backend/assets/global/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('backend/assets/global/plugins/jquery-validation/js/additional-methods.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('backend/assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}" type="text/javascript"></script>
+
+    <script src="{{ asset('backend/assets/global/plugins/jstree/dist/jstree.min.js') }}" type="text/javascript"></script>
 @endif
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
@@ -82,6 +84,12 @@
 
 @if(Request::is('admin/userGroup/add'))
     <script src="{{ asset('backend/assets/pages/scripts/form-wizard.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('backend/assets/pages/scripts/ui-tree.min.js') }}" type="text/javascript"></script>
+@endif
+
+@if(Request::is('admin/userGroup/edit/*'))
+    <script src="{{ asset('backend/assets/pages/scripts/form-edit-user-group.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('backend/assets/pages/scripts/ui-tree.min.js') }}" type="text/javascript"></script>
 @endif
 
 <!-- END PAGE LEVEL SCRIPTS -->

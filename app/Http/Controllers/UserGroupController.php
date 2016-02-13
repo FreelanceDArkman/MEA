@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+use App\UserGroup;
+use Illuminate\Support\Facades\Validator;
+
 class UserGroupController extends Controller
 {
     //
@@ -97,7 +100,106 @@ class UserGroupController extends Controller
             'menu_id' => 1,
             'title' => 'เพิ่มกลุ่มผู้ใช้ | จัดการผู้ใช้'
         ] );
-        return view('backend.pages.add_user_group');
+        $arr = $this->getMenuList();
+        return view('backend.pages.add_user_group')->with([
+            'menu_frontend_list' => $arr['frontend'],
+            'menu_backend_list' => $arr['backend']
+        ]);
+    }
+
+    public function getMenuList()
+    {
+        $menu = DB::select(DB::raw("SELECT a.MENU_GROUP_ID, a.MENU_GROUP_NAME,a.MENU_FLAG AS MENU_GROUP_FLAG ,b.MENU_ID,b.MENU_NAME,b.MENU_FLAG FROM TBL_MENU_GROUP a LEFT JOIN TBL_MENU_LIST b ON a.MENU_GROUP_ID = b.MENU_GROUP_ID"));
+
+        $arr = [];
+        $type = "frontend";
+        if($menu)
+        {
+            foreach($menu as $key => $value)
+            {
+                if((int)$value->MENU_GROUP_ID > 49) {
+                    $type = "backend";
+                }
+
+                $arr[$type][$value->MENU_GROUP_ID]['MENU_GROUP_ID'] = $value->MENU_GROUP_ID;
+                $arr[$type][$value->MENU_GROUP_ID]['MENU_GROUP_NAME'] = $value->MENU_GROUP_NAME;
+                $arr[$type][$value->MENU_GROUP_ID]['MENU_GROUP_FLAG'] = $value->MENU_GROUP_FLAG;
+                $arr[$type][$value->MENU_GROUP_ID]['MENU_GROUP_NAME'] = $value->MENU_GROUP_NAME;
+                $arr[$type][$value->MENU_GROUP_ID]['item'][$key] = [
+                    'MENU_ID'   => $value->MENU_ID,
+                    'MENU_FLAG' => $value->MENU_FLAG,
+                    'MENU_NAME' => $value->MENU_NAME
+                ];
+
+            }
+        }
+        return $arr;
+    }
+
+    public function UserGroupIdExist(Request $request)
+    {
+        $return_data = true;
+        if($request->ajax()) {
+            $user_group_exist = UserGroup::UserGroupExist($request->input('USER_PRIVILEGE_ID'))->first();
+            if($user_group_exist)
+                $return_data = false;
+        }
+
+        return response()->json($return_data);
+    }
+
+    public function postAddUserGroup(Request $request)
+    {
+        $messages = [
+            'USER_PRIVILEGE_ID.required'    => 'กรุณาระบุรหัสกลุ่มผู้ใช้',
+            'USER_PRIVILEGE_ID.unique'      => 'มีรหัสกลุ่มผู้ใช้นี้ในระบบแล้ว',
+            'USER_PRIVILEGE_ID.numeric'     => 'กรุณาระบุรหัสกลุ่มผู้ใช้ เป็นรูปแบบตัวเลขเท่านั้น',
+            'user_group_name.required'      => 'กรุณาระบุชื่อรหัสกลุ่มผู้ใช้',
+            'menuSelected.required'         => 'กรุณากําหนดสิทธิ์ในการเข้าถึงเมนูของกลุ่มผู้ใช้'
+        ];
+
+        $rules = [
+            'USER_PRIVILEGE_ID'     => 'required|numeric|unique:TBL_PRIVILEGE',
+            'user_group_name'       => 'required',
+            'menuSelected'          => 'required'
+        ];
+        $validator = Validator::make($request->all(), $rules,$messages);
+        if($validator->fails()) {
+            return redirect()->action('UserGroupController@getAddUserGroup')->withErrors($validator)->withInput();
+        } else {
+            $access_permissions = implode('|',json_decode($request->input('menuSelected')));
+            $insert = DB::table('TBL_PRIVILEGE')->insert([
+                'USER_PRIVILEGE_ID' => $request->input('USER_PRIVILEGE_ID'),
+                'USER_PRIVILEGE_DESC' => $request->input('user_group_name'),
+                'ACCESS_PERMISSIONS' => $access_permissions
+            ]);
+
+            if($insert) {
+                return redirect()->action('UserGroupController@editUserGroup',$request->input('USER_PRIVILEGE_ID'))->with('submit_success', 'เพิ่มข้อมูลกลุ่มผู้ใช้เรียบร้อยแล้ว');
+            } else {
+                return redirect()->action('UserGroupController@getAddUserGroup')->with('messages', 'ไม่สามารถเพิ่มข้อมูลกลุ่มผู้ใช้ได้');
+            }
+        }
+    }
+
+    public function editUserGroup($id)
+    {
+        $this->pageSetting([
+            'menu_group_id' => 50,
+            'menu_id' => 1,
+            'title' => 'แก้ไขข้อมูลกลุ่มผู้ใช้ | จัดการผู้ใช้'
+        ]);
+
+        if(empty($id)) abort(404);
+
+        $user_group_data = UserGroup::where('USER_PRIVILEGE_ID', $id)->first();
+
+        $arr = $this->getMenuList();
+        return view('backend.pages.edit_user_group')->with([
+            'menu_frontend_list'    => $arr['frontend'],
+            'menu_backend_list'     => $arr['backend'],
+            'user_group'            => $user_group_data
+        ]);
     }
 
 }

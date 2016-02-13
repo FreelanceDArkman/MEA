@@ -36,15 +36,6 @@ var FormWizard = function () {
                 focusInvalid: false, // do not focus the last invalid input
                 rules: {
                     //account
-                    USER_PRIVILEGE_ID: {
-                        maxlength:10,
-                        required: true,
-                        number: true,
-                        remote: {
-                            url: backendSetting.ajaxUrl + "/userGroup/checkUserGroupIdExist",
-                            type: "post"
-                        }
-                    },
                     user_group_name: {
                         maxlength: 50,
                         required: true
@@ -52,12 +43,6 @@ var FormWizard = function () {
                 },
 
                 messages: { // custom messages for radio buttons and checkboxes
-                    USER_PRIVILEGE_ID: {
-                        required: "กรุณาระบุรหัสกลุ่มผู้ใช้",
-                        maxlength: jQuery.validator.format("กรอกข้อมูลได้ไม่เกิน 10 ตัวอักษร"),
-                        number: "กรุณาระบุรหัสกลุ่มผู้ใช้ เป็นรูปแบบตัวเลขเท่านั้น",
-                        remote: jQuery.validator.format("รหัสกลุ่มผู้ใช้นี้ถูกใช้แล้ว กรุณาเปลี่ยนรหัสกลุ่มผู้ใช้ใหม่")
-                    },
                     user_group_name: {
                         required: "กรุณาระบุชื่อรหัสกลุ่มผู้ใช้",
                         maxlength: jQuery.validator.format("กรอกข้อมูลได้ไม่เกิน 50 ตัวอักษร")

@@ -21,7 +21,7 @@
         </li>
         @if(menu_access(1,50))
         <li class="nav-item  ">
-            <a href="javascript:;" class="nav-link nav-toggle">
+            <a href="{{ action('UserGroupController@userGroups') }}" class="nav-link nav-toggle">
                 <i class="icon-users"></i>
                 <span class="title">จัดการกลุ่มผู้ใช้</span>
                 <span class="arrow"></span>

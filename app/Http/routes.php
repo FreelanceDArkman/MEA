@@ -54,11 +54,16 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
     Route::group(['middleware' => ['auth.backend']], function() {
         // login required
         Route::get('/', 'DashboardController@showIndex');
+
         Route::group(['prefix' => 'userGroup'] , function() {
+
             Route::get('/', 'UserGroupController@userGroups');
             Route::post('getUserGroups', 'UserGroupController@getUserGroups');
-
+            Route::post('checkUserGroupIdExist','UserGroupController@UserGroupIdExist');
             Route::get('add', 'UserGroupController@getAddUserGroup');
+            Route::post('add', 'UserGroupController@postAddUserGroup');
+            Route::get('edit/{id}', 'UserGroupController@editUserGroup')->where('id', '[0-9]+');
+
         });
 
     });
