@@ -22,39 +22,11 @@
 </script>
 
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-@if(Request::is('/'))
-<script src="{{ asset('backend/assets/global/plugins/moment.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/morris/morris.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/morris/raphael-min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/counterup/jquery.waypoints.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/counterup/jquery.counterup.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/amcharts/amcharts/amcharts.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/amcharts/amcharts/serial.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/amcharts/amcharts/pie.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/amcharts/amcharts/radar.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/amcharts/amcharts/themes/light.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/amcharts/amcharts/themes/patterns.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/amcharts/amcharts/themes/chalk.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/amcharts/ammap/ammap.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/amcharts/ammap/maps/js/worldLow.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/amcharts/amstockcharts/amstock.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/fullcalendar/fullcalendar.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/flot/jquery.flot.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/flot/jquery.flot.resize.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/flot/jquery.flot.categories.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/jquery-easypiechart/jquery.easypiechart.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/jquery.sparkline.min.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/jqvmap/jqvmap/jquery.vmap.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.russia.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.world.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.europe.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.germany.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js') }}" type="text/javascript"></script>
+@if(Request::is('admin'))
+
 @endif
 
-@if(Request::is('admin/userGroup'))
+@if(Request::is('admin/userGroup') || Request::is('admin/users'))
     <script src="{{ asset('backend/assets/global/scripts/datatable.js') }}" type="text/javascript"></script>
     <script src="{{ asset('backend/assets/global/plugins/datatables/datatables.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('backend/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js') }}" type="text/javascript"></script>
@@ -66,8 +38,19 @@
     <script src="{{ asset('backend/assets/global/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('backend/assets/global/plugins/jquery-validation/js/additional-methods.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('backend/assets/global/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js') }}" type="text/javascript"></script>
-
     <script src="{{ asset('backend/assets/global/plugins/jstree/dist/jstree.min.js') }}" type="text/javascript"></script>
+@endif
+
+@if(Request::is('admin/users/add'))
+    <script src="{{ asset('backend/assets/global/plugins/select2/js/select2.full.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('backend/assets/global/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('backend/assets/global/plugins/jquery-validation/js/additional-methods.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('backend/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('backend/assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('backend/assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('backend/assets/global/plugins/ckeditor/ckeditor.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('backend/assets/global/plugins/bootstrap-markdown/lib/markdown.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('backend/assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js') }}" type="text/javascript"></script>
 @endif
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
@@ -75,7 +58,7 @@
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 @if(Request::is('admin'))
-<script src="{{ asset('backend/assets/pages/scripts/dashboard.min.js') }}" type="text/javascript"></script>
+
 @endif
 
 @if(Request::is('admin/userGroup'))
@@ -91,6 +74,15 @@
     <script src="{{ asset('backend/assets/pages/scripts/form-edit-user-group.js') }}" type="text/javascript"></script>
     <script src="{{ asset('backend/assets/pages/scripts/ui-tree.min.js') }}" type="text/javascript"></script>
 @endif
+
+@if(Request::is('admin/users'))
+        <script src="{{ asset('backend/assets/pages/scripts/users.min.js') }}" type="text/javascript"></script>
+@endif
+
+    @if(Request::is('admin/users/add'))
+        <script src="{{ asset('backend/assets/pages/scripts/add-user.js') }}" type="text/javascript"></script>
+    @endif
+
 
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->

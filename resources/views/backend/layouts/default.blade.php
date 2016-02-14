@@ -22,7 +22,7 @@
 <div class="page-header navbar navbar-fixed-top">
     <!-- BEGIN HEADER INNER -->
     @include('backend.includes.header')
-    <!-- END HEADER INNER -->
+            <!-- END HEADER INNER -->
 </div>
 <!-- END HEADER -->
 <!-- BEGIN HEADER & CONTENT DIVIDER -->
@@ -36,7 +36,7 @@
         <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
         <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
         @include('backend.includes.sidebar')
-        <!-- END SIDEBAR -->
+                <!-- END SIDEBAR -->
     </div>
     <!-- END SIDEBAR -->
     <!-- BEGIN CONTENT -->
@@ -63,7 +63,7 @@
 
             <!-- BEGIN PAGE BASE CONTENT -->
             @yield('content')
-            <!-- END PAGE BASE CONTENT -->
+                    <!-- END PAGE BASE CONTENT -->
         </div>
         <!-- END CONTENT BODY -->
     </div>
@@ -76,7 +76,7 @@
     @include('backend.includes.footer-content')
 </div>
 <!-- END FOOTER -->
-    @include('backend.includes.footer')
+@include('backend.includes.footer')
 </body>
 
 

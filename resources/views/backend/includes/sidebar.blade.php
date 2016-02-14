@@ -30,7 +30,7 @@
         @endif
         @if(menu_access(2,50))
         <li class="nav-item  ">
-            <a href="javascript:;" class="nav-link nav-toggle">
+            <a href="{{ action('UserController@users') }}" class="nav-link nav-toggle">
                 <i class="icon-user"></i>
                 <span class="title">จัดการผู้ใช้</span>
                 <span class="arrow"></span>

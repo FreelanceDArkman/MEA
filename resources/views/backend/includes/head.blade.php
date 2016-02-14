@@ -16,13 +16,13 @@
 <!-- BEGIN PAGE LEVEL PLUGINS -->
 
 @if(Request::is('admin'))
-<link href="{{ asset('backend/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('backend/assets/global/plugins/morris/morris.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('backend/assets/global/plugins/fullcalendar/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('backend/assets/global/plugins/jqvmap/jqvmap/jqvmap.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/global/plugins/morris/morris.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/global/plugins/fullcalendar/fullcalendar.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/global/plugins/jqvmap/jqvmap/jqvmap.css') }}" rel="stylesheet" type="text/css" />
 @endif
 
-@if(Request::is('admin/userGroup'))
+@if(Request::is('admin/userGroup') || Request::is('admin/users'))
     <link href="{{ asset('backend/assets/global/plugins/datatables/datatables.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('backend/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('backend/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
@@ -33,14 +33,24 @@
     <link href="{{ asset('backend/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('backend/assets/global/plugins/jstree/dist/themes/default/style.min.css') }}" rel="stylesheet" type="text/css" />
 @endif
+
+@if(Request::is('admin/users/add'))
+    <link href="{{ asset('backend/assets/global/plugins/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/global/plugins/select2/css/select2-bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css') }}" rel="stylesheet" type="text/css" />
+@endif
 <!-- END PAGE LEVEL PLUGINS -->
-<!-- BEGIN THEME GLOBAL STYLES -->
-<link href="{{ asset('backend/assets/global/css/components.min.css') }}" rel="stylesheet" id="style_components" type="text/css" />
-<link href="{{ asset('backend/assets/global/css/plugins.min.css') }}" rel="stylesheet" type="text/css" />
-<!-- END THEME GLOBAL STYLES -->
-<!-- BEGIN THEME LAYOUT STYLES -->
-<link href="{{ asset('backend/assets/layouts/layout4/css/layout.min.css') }}" rel="stylesheet" type="text/css" />
-<link href="{{ asset('backend/assets/layouts/layout4/css/themes/light.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />
-<link href="{{ asset('backend/assets/layouts/layout4/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
-<!-- END THEME LAYOUT STYLES -->
-{{--<link rel="shortcut icon" href="favicon.ico" />--}}
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="{{ asset('backend/assets/global/css/components.min.css') }}" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="{{ asset('backend/assets/global/css/plugins.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="{{ asset('backend/assets/layouts/layout4/css/layout.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('backend/assets/layouts/layout4/css/themes/light.min.css') }}" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="{{ asset('backend/assets/layouts/layout4/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- END THEME LAYOUT STYLES -->
+    {{--<link rel="shortcut icon" href="favicon.ico" />--}}
+
+    <link href="{{ asset('backend/assets/css/master.css') }}" rel="stylesheet" type="text/css">

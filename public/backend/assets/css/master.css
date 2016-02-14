@@ -1,0 +1,3 @@
+table.dataTable tr.heading>th {
+    vertical-align: middle;
+}
