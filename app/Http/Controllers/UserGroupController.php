@@ -31,6 +31,21 @@ class UserGroupController extends Controller
         $records["data"] = [];
         $filters = [];
 
+
+        if ($request->input('customActionType') && $request->input('customActionType') == "group_action" && $request->input('customActionName') == "delete") {
+            if (count($request->input('id')) > 0) {
+                $deleted = DB::table('TBL_PRIVILEGE')->whereIn('USER_PRIVILEGE_ID', $request->input('id'))->delete();
+                if ($deleted) {
+                    $records["customActionStatus"] = "OK";
+                    $records["customActionMessage"] = "ลบข้อมูลกลุ่มผู้ใช้เรียบร้อยแล้ว";
+                } else {
+                    $records["customActionStatus"] = "Errors";
+                    $records["customActionMessage"] = "ไม่สามารถลบข้อมูลกลุ่มผู้ใช้ได้";
+                }
+            }
+        }
+
+
         $query = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC');
 
 
@@ -70,20 +85,8 @@ class UserGroupController extends Controller
                     sprintf('<input type="checkbox" name="id[]" value="%1$s">', $group->USER_PRIVILEGE_ID),
                     $group->USER_PRIVILEGE_ID,
                     $group->USER_PRIVILEGE_DESC,
-                    sprintf('<a href="javascript:;" class="btn btn-sm btn-outline grey-salsa"><i class="fa fa-pencil"></i>&nbsp;แก้ไข</a><a href="javascript:;" class="btn btn-sm btn-outline red-thunderbird"><i class="fa fa-remove"></i>&nbsp;ลบ</a>')
+                    sprintf('<a href="%1$s" target="_blank"  class="btn btn-sm btn-outline grey-salsa"><i class="fa fa-pencil"></i>&nbsp;แก้ไข</a><a data-toggle="modal" href="#deleteUserGroup" data-group_name="%2$s" data-group_id="%3$s" class="btn btn-sm btn-outline red-thunderbird row-user-group-%4$s"><i class="fa fa-remove"></i>&nbsp;ลบ</a>',action('UserGroupController@getEditUserGroup',$group->USER_PRIVILEGE_ID),$group->USER_PRIVILEGE_DESC,$group->USER_PRIVILEGE_ID,$group->USER_PRIVILEGE_ID)
                 ];
-            }
-        }
-        if ($request->input('customActionType') && $request->input('customActionType') == "group_action" && $request->input('customActionName') != "-1") {
-            if (count($request->input('id')) > 0) {
-                $update_result = DB::table('orders')->whereIn('order_id', $request->input('id'))->update(['order_status' => $request->input('customActionName')]);
-                if ($update_result) {
-                    $records["customActionStatus"] = "OK";
-                    $records["customActionMessage"] = "Update orders status successfully has been completed. Well done!";
-                } else {
-                    $records["customActionStatus"] = "Errors";
-                    $records["customActionMessage"] = "Cannot update orders status. Please try again!";
-                }
             }
         }
         $records["draw"] = $sEcho;
@@ -91,6 +94,20 @@ class UserGroupController extends Controller
         $records["recordsFiltered"] = $total;
         return response()->json($records);
     }
+
+    public function deleteUserGroup(Request $request)
+    {
+        if($request->ajax())
+        {
+            $user_group_exist = UserGroup::UserGroupExist($request->input('group_id'))->first();
+            if(!$user_group_exist) return response()->json(["errors" => "ไม่สามารถลบข้อมูลกลุ่มผู้ใช้ได้"]);
+            $deleted = DB::table('TBL_PRIVILEGE')->where('USER_PRIVILEGE_ID', $request->input('group_id'))->delete();
+            if($deleted) return response()->json(["success" => "ลบข้อมูลกลุ่มผู้ใช้เรียบร้อยแล้ว"]);
+            else return response()->json(["errors" => "ไม่สามารถลบข้อมูลกลุ่มผู้ใช้ได้"]);
+        }
+        return response()->json(["errors" => "ไม่สามารถลบข้อมูลกลุ่มผู้ใช้ได้"]);
+    }
+
 
 
     public function getAddUserGroup()
@@ -107,9 +124,12 @@ class UserGroupController extends Controller
         ]);
     }
 
-    public function getMenuList()
+    public function getMenuList($menu_access = '')
     {
         $menu = DB::select(DB::raw("SELECT a.MENU_GROUP_ID, a.MENU_GROUP_NAME,a.MENU_FLAG AS MENU_GROUP_FLAG ,b.MENU_ID,b.MENU_NAME,b.MENU_FLAG FROM TBL_MENU_GROUP a LEFT JOIN TBL_MENU_LIST b ON a.MENU_GROUP_ID = b.MENU_GROUP_ID"));
+        if($menu_access) {
+            $menu_access = explode('|',$menu_access);
+        }
 
         $arr = [];
         $type = "frontend";
@@ -130,7 +150,14 @@ class UserGroupController extends Controller
                     'MENU_FLAG' => $value->MENU_FLAG,
                     'MENU_NAME' => $value->MENU_NAME
                 ];
-
+                if($menu_access && is_array($menu_access))
+                {
+                    if(in_array($value->MENU_GROUP_ID.":".$value->MENU_ID,$menu_access)) {
+                        $arr[$type][$value->MENU_GROUP_ID]['item'][$key]['MENU_SELECTED'] = 1;
+                    } else {
+                        $arr[$type][$value->MENU_GROUP_ID]['item'][$key]['MENU_SELECTED'] = 0;
+                    }
+                }
             }
         }
         return $arr;
@@ -175,14 +202,14 @@ class UserGroupController extends Controller
             ]);
 
             if($insert) {
-                return redirect()->action('UserGroupController@editUserGroup',$request->input('USER_PRIVILEGE_ID'))->with('submit_success', 'เพิ่มข้อมูลกลุ่มผู้ใช้เรียบร้อยแล้ว');
+                return redirect()->action('UserGroupController@getEditUserGroup',$request->input('USER_PRIVILEGE_ID'))->with('submit_success', 'เพิ่มข้อมูลกลุ่มผู้ใช้เรียบร้อยแล้ว');
             } else {
-                return redirect()->action('UserGroupController@getAddUserGroup')->with('messages', 'ไม่สามารถเพิ่มข้อมูลกลุ่มผู้ใช้ได้');
+                return redirect()->action('UserGroupController@getAddUserGroup')->with('submit_errors', 'ไม่สามารถเพิ่มข้อมูลกลุ่มผู้ใช้ได้');
             }
         }
     }
 
-    public function editUserGroup($id)
+    public function getEditUserGroup($id)
     {
         $this->pageSetting([
             'menu_group_id' => 50,
@@ -190,16 +217,50 @@ class UserGroupController extends Controller
             'title' => 'แก้ไขข้อมูลกลุ่มผู้ใช้ | จัดการผู้ใช้'
         ]);
 
-        if(empty($id)) abort(404);
+        //if(isset($id)) abort(404);
 
         $user_group_data = UserGroup::where('USER_PRIVILEGE_ID', $id)->first();
-
-        $arr = $this->getMenuList();
+        $arr = $this->getMenuList($user_group_data->ACCESS_PERMISSIONS);
         return view('backend.pages.edit_user_group')->with([
             'menu_frontend_list'    => $arr['frontend'],
             'menu_backend_list'     => $arr['backend'],
             'user_group'            => $user_group_data
         ]);
     }
+
+    public function postEditUserGroup(Request $request)
+    {
+        $messages = [
+            'USER_PRIVILEGE_ID.required'    => 'กรุณาระบุรหัสกลุ่มผู้ใช้',
+            'USER_PRIVILEGE_ID.numeric'     => 'กรุณาระบุรหัสกลุ่มผู้ใช้ เป็นรูปแบบตัวเลขเท่านั้น',
+            'user_group_name.required'      => 'กรุณาระบุชื่อรหัสกลุ่มผู้ใช้',
+            'menuSelected.required'         => 'กรุณากําหนดสิทธิ์ในการเข้าถึงเมนูของกลุ่มผู้ใช้'
+        ];
+
+        $rules = [
+            'USER_PRIVILEGE_ID'     => 'required|numeric',
+            'user_group_name'       => 'required',
+            'menuSelected'          => 'required'
+        ];
+        $validator = Validator::make($request->all(), $rules,$messages);
+        if($validator->fails()) {
+            return redirect()->action('UserGroupController@getEditUserGroup')->withErrors($validator);
+        } else {
+            $access_permissions = implode('|',json_decode($request->input('menuSelected')));
+            $updated = DB::table('TBL_PRIVILEGE')
+                            ->where('USER_PRIVILEGE_ID',$request->input('USER_PRIVILEGE_ID'))
+                            ->update([
+                                'USER_PRIVILEGE_DESC' => $request->input('user_group_name'),
+                                'ACCESS_PERMISSIONS' => $access_permissions
+                            ]);
+
+            if($updated) {
+                return redirect()->action('UserGroupController@getEditUserGroup',$request->input('USER_PRIVILEGE_ID'))->with('submit_success', 'แก้ไขข้อมูลกลุ่มผู้ใช้เรียบร้อยแล้ว');
+            } else {
+                return redirect()->action('UserGroupController@getEditUserGroup')->with('submit_errors', 'ไม่สามารถแก้ไขข้อมูลกลุ่มผู้ใช้ได้');
+            }
+        }
+    }
+
 
 }

@@ -92,4 +92,27 @@
 </div>
 <!-- END PAGE BASE CONTENT -->
 
+<!-- /.modal -->
+<div class="modal fade bs-modal-sm" id="deleteUserGroup" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">ยืนยันการลบกลุ่มผู้ใช้</h4>
+            </div>
+            <div class="modal-body">คุณต้องการลบข้อมูลกลุ่มผู้ใช้ ?.
+                <input type="hidden" name="userGroupId" id="userGroupId">
+                <input type="hidden" name="deleteStatus" id="deleteStatus">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">ยกเลิก</button>
+                <button type="button" id="btnDeleteUserGroup" class="btn red">ลบ</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 @stop

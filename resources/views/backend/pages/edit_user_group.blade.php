@@ -29,8 +29,9 @@
                     {{--</div>--}}
                 </div>
                 <div class="portlet-body form">
-                    <form class="form-horizontal" action="{{ action('UserGroupController@postAddUserGroup') }}" id="submit_form" method="POST">
+                    <form class="form-horizontal" action="{{ action('UserGroupController@postEditUserGroup') }}" id="submit_form" method="POST">
                         {!! csrf_field() !!}
+                        <input type="hidden" name="UserGroupId" value="{{ $user_group->USER_PRIVILEGE_ID }}">
                         <div class="form-wizard">
                             <div class="form-body">
                                 <ul class="nav nav-pills nav-justified steps">
@@ -69,9 +70,13 @@
                                         @endforeach
                                     @endif
 
-                                    @if(session('messages'))
+                                    @if(session('submit_success'))
+                                            <div class="alert alert-success display-block">
+                                                <button class="close" data-dismiss="alert"></button> {{ session('submit_success') }} </div>
+                                    @endif
+                                    @if(session('submit_errors'))
                                         <div class="alert alert-danger display-block">
-                                            <button class="close" data-dismiss="alert"></button>{{ session('messages') }}</div>
+                                            <button class="close" data-dismiss="alert"></button>{{ session('submit_errors') }}</div>
                                     @endif
 
                                     <div class="alert alert-danger display-none">
@@ -113,16 +118,12 @@
                                                     @if(isset($menu_frontend_list))
                                                         <ul>
                                                             @foreach($menu_frontend_list as $menu)
-                                                                @if($menu['MENU_GROUP_FLAG'] == 0)
-                                                                    <li data-jstree='{ "selected" : true,"opened" : true }'>
-                                                                @else
-                                                                    <li>
-                                                                        @endif
+                                                                    <li data-jstree='{ "opened" : true }'>
                                                                         {{$menu['MENU_GROUP_NAME']}}
                                                                         @if($menu['item'])
                                                                             <ul>
                                                                                 @foreach($menu['item'] as $sub_menu)
-                                                                                    @if($sub_menu['MENU_FLAG'] == 0)
+                                                                                    @if($sub_menu['MENU_SELECTED'] == 1)
                                                                                         <li data-jstree='{ "selected" : true }' data-menu-item="{{$menu['MENU_GROUP_ID']}}:{{$sub_menu['MENU_ID']}}">
                                                                                     @else
                                                                                         <li data-menu-item="{{$menu['MENU_GROUP_ID']}}:{{$sub_menu['MENU_ID']}}">
@@ -151,16 +152,12 @@
                                                     @if(isset($menu_backend_list))
                                                         <ul>
                                                             @foreach($menu_backend_list as $menu)
-                                                                @if($menu['MENU_GROUP_FLAG'] == 0)
-                                                                    <li data-jstree='{ "selected" : true,"opened" : true }'>
-                                                                @else
-                                                                    <li>
-                                                                        @endif
+                                                                    <li data-jstree='{ "opened" : true }'>
                                                                         {{$menu['MENU_GROUP_NAME']}}
                                                                         @if($menu['item'])
                                                                             <ul>
                                                                                 @foreach($menu['item'] as $sub_menu)
-                                                                                    @if($sub_menu['MENU_FLAG'] == 0)
+                                                                                    @if($sub_menu['MENU_SELECTED'] == 1)
                                                                                         <li data-jstree='{ "selected" : true }' data-menu-item="{{$menu['MENU_GROUP_ID']}}:{{$sub_menu['MENU_ID']}}">
                                                                                     @else
                                                                                         <li data-menu-item="{{$menu['MENU_GROUP_ID']}}:{{$sub_menu['MENU_ID']}}">

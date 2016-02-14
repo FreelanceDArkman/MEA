@@ -13,12 +13,13 @@ class Controller extends BaseController
 
     public function pageSetting($data)
     {
-
-        if($data['menu_id'] && $data['menu_group_id']) {
-            if(!menu_access($data['menu_id'],$data['menu_group_id']))
-                abort(404);
+        if(isset($data['menu_id']) && isset($data['menu_group_id']))
+        {
+            if($data['menu_id'] && $data['menu_group_id']) {
+                if(!menu_access($data['menu_id'],$data['menu_group_id']))
+                    abort(404);
+            }
         }
-
         view()->share('page_setting', $data);
     }
 

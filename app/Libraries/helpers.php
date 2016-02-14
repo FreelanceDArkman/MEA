@@ -91,3 +91,14 @@ if (!function_exists('objectToArray')) {
         }
     }
 }
+
+if(!function_exists('get_username')) {
+    function get_username()
+    {
+        if(session()->has('user_data')){
+
+            return session()->get('user_data')->full_name;
+        }
+        return '';
+    }
+}

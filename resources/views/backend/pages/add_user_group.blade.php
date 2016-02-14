@@ -69,9 +69,9 @@
                                     @endforeach
                                 @endif
 
-                                    @if(session('messages'))
+                                    @if(session('submit_errors'))
                                         <div class="alert alert-danger display-block">
-                                            <button class="close" data-dismiss="alert"></button>{{ session('messages') }}</div>
+                                            <button class="close" data-dismiss="alert"></button>{{ session('submit_errors') }}</div>
                                     @endif
 
                                 <div class="alert alert-danger display-none">

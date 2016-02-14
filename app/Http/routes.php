@@ -62,7 +62,9 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::post('checkUserGroupIdExist','UserGroupController@UserGroupIdExist');
             Route::get('add', 'UserGroupController@getAddUserGroup');
             Route::post('add', 'UserGroupController@postAddUserGroup');
-            Route::get('edit/{id}', 'UserGroupController@editUserGroup')->where('id', '[0-9]+');
+            Route::get('edit/{id}', 'UserGroupController@getEditUserGroup')->where('id', '[0-9]+');
+            Route::post('edit', 'UserGroupController@postEditUserGroup');
+            Route::post('delete', 'UserGroupController@deleteUserGroup');
 
         });
 
