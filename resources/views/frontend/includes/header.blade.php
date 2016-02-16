@@ -51,7 +51,7 @@
                 <!-- End Home -->
 
                 <!-- Demo Pages -->
-               @if(menu_access(20,1))
+               @if(menu_access(1,20))
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         ข้อมูลส่วนตัว
