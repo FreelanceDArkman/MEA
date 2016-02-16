@@ -16,7 +16,7 @@ class DashboardController extends Controller
             'title' => 'Dashboard | MEA FUND'
         ] );
 
-        return view('frontend.pages.dashboard');
+        return view('backend.pages.dashboard');
     }
 
 }

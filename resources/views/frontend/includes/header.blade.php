@@ -17,7 +17,14 @@
                 <li class="topbar-devider"></li>
                 <li><a href="/contact">ติดต่อ กทช.</a></li>
                 <li class="topbar-devider"></li>
-                <li><a href="/login">เข้าสู่ระบบ</a></li>
+
+             @if(logged_in())
+                    <li><a href="/login"> {{get_username()}}</a></li>
+
+               @else
+                    <li><a href="/login">เข้าสู่ระบบ</a></li>
+                @endif
+
             </ul>
         </div>
         <!-- End Topbar -->

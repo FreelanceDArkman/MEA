@@ -28,6 +28,11 @@ class AuthController extends Controller
 
     public function showLogin()
     {
+
+        $this->pageSetting( [
+            'title' => 'Login | MEA FUND'
+        ] );
+
         if(logged_in())
             return redirect()->to('/');
 

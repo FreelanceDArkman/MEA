@@ -12,7 +12,11 @@ class HomeController extends Controller
 
     public function getIndex()
     {
-        return view('frontend.pages.home');
+        $this->pageSetting( [
+            'title' => 'Dashboard | MEA FUND'
+        ] );
+
+        return view('frontend.pages.dashboard');
     }
 
 }

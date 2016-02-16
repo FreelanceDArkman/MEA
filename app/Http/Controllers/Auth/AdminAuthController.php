@@ -51,16 +51,18 @@ class AdminAuthController extends Controller
         );
         $curl = new Curl('Login', $data);
         $result_login = $curl->getResult();
-        if($result_login->errCode != 0) {
-            // login fail
-            return redirect()->to('admin/login')->with('messages', 'The username or password you entered is incorrect.');
-        } else {
-            // logged in
-            if(!in_array($result_login->result[0]->user_privilege_id, Config::get('mea.admin_groups'))) {
+        if($result_login) {
+            if($result_login->errCode != 0) {
+                // login fail
                 return redirect()->to('admin/login')->with('messages', 'The username or password you entered is incorrect.');
+            } else {
+                // logged in
+                if(!in_array($result_login->result[0]->user_privilege_id, Config::get('mea.admin_groups'))) {
+                    return redirect()->to('admin/login')->with('messages', 'The username or password you entered is incorrect.');
+                }
+                session(['logged_in' => true, 'user_data' => $result_login->result[0],'access_channel' => 'backend']);
+                return redirect()->intended('admin');
             }
-            session(['logged_in' => true, 'user_data' => $result_login->result[0],'access_channel' => 'backend']);
-            return redirect()->intended('admin');
         }
     }
 

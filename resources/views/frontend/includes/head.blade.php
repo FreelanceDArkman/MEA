@@ -1,6 +1,6 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
+<title> {{$page_setting['title']}}</title>
 
 <!-- Meta -->
 <meta charset="utf-8">
@@ -25,6 +25,10 @@
 <!-- CSS Header and Footer -->
 <link rel="stylesheet" href="frontend/assets/css/headers/header-default.css">
 <link rel="stylesheet" href="frontend/assets/css/footers/footer-v3.css">
+
+<!-- CSS Page Style -->
+<link rel="stylesheet" href="frontend/assets/css/pages/page_log_reg_v1.css">
+
 
 <!-- CSS Implementing Plugins -->
 <link rel="stylesheet" href="frontend/assets/plugins/animate.css">
