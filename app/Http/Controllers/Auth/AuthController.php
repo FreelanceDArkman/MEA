@@ -61,7 +61,7 @@ class AuthController extends Controller
         } else {
             // logged in
             session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
-            return redirect()->intended('view');
+            return redirect()->intended('/');
         }
     }
 

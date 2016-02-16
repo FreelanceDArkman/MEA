@@ -1,7 +1,7 @@
 <div class="header">
     <div class="container">
         <!-- Logo -->
-        <a class="logo" href="index.html">
+        <a class="logo" href="/">
             <img src="/frontend/assets/img/logo1-default.png" alt="Logo">
         </a>
         <!-- End Logo -->
@@ -19,7 +19,7 @@
                 <li class="topbar-devider"></li>
 
              @if(logged_in())
-                    <li><a href="/login"> {{get_username()}}</a></li>
+                    <li><a href="/logout"> สวัสดี  {{get_username()}}</a></li>
 
                @else
                     <li><a href="/login">เข้าสู่ระบบ</a></li>
@@ -43,7 +43,7 @@
             <ul class="nav navbar-nav">
                 <!-- Home -->
                 <li class="dropdown dropdown-hide-sub active">
-                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
+                    <a href="/"  >
                         หน้าแรก
                     </a>
 
@@ -51,7 +51,7 @@
                 <!-- End Home -->
 
                 <!-- Demo Pages -->
-               {{--@if(menu_access(1,1))--}}
+               @if(menu_access(20,1))
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         ข้อมูลส่วนตัว
@@ -101,7 +101,7 @@
 
                     </ul>
                 </li>
-                    {{--@endif--}}
+                    @endif
                 <!-- End Demo Pages -->
 
 
