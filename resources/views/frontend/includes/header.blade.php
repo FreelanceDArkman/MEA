@@ -11,13 +11,13 @@
             <ul class="loginbar pull-right">
                 <li class="hoverSelector">
                     <i class="fa fa-globe"></i>
-                    <a>ถาม-ตอบ</a>
+                    <a href="/qa">ถาม-ตอบ</a>
 
                 </li>
                 <li class="topbar-devider"></li>
-                <li><a href="page_faq.html">ติดต่อ กทช.</a></li>
+                <li><a href="/contact">ติดต่อ กทช.</a></li>
                 <li class="topbar-devider"></li>
-                <li><a href="page_login.html">เข้าสู่ระบบ</a></li>
+                <li><a href="/login">เข้าสู่ระบบ</a></li>
             </ul>
         </div>
         <!-- End Topbar -->
@@ -44,36 +44,37 @@
                 <!-- End Home -->
 
                 <!-- Demo Pages -->
+               {{--@if(menu_access(1,1))--}}
                 <li class="dropdown">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         ข้อมูลส่วนตัว
                     </a>
                     <ul class="dropdown-menu">
-                        @if(menu_access(1,1))
+
                         <li class="dropdown-submenu">
                             <a href="javascript:void(0);">แก้ไขข้อมูลส่วนตัว</a>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href="One-Page/index.html">แก้ไขข้อมูลส่วนตัว</a></li>
-                                <li><a target="_blank" href="One-Page/one_page_dark.html">ข้อมูลผู้รับผลประโยชน์</a></li>
-                                <li><a target="_blank" href="One-Page/one_page_home1.html">เปลี่ยนรหัสผ่าน</a></li>
+                                <li><a target="_blank" href="/editprofile">แก้ไขข้อมูลส่วนตัว</a></li>
+                                <li><a target="_blank" href="/informationbeneficiary">ข้อมูลผู้รับผลประโยชน์</a></li>
+                                <li><a target="_blank" href="/resetpassword">เปลี่ยนรหัสผ่าน</a></li>
 
                             </ul>
                         </li>
-                        @endif
+
                         <li class="dropdown-submenu" >
                             <a href="javascript:void(0);">ข้อมูลการลงทุน</a>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href="One-Page/index.html">แนวโน้มสัดส่วนการลงทุน</a></li>
-                                <li><a target="_blank" href="One-Page/one_page_dark.html">รายงานผลประโยชน์สมาชิก</a></li>
-                                <li><a target="_blank" href="One-Page/one_page_home1.html">รายงานเปรียบเทียบเงินกองทุนสำรองเลี้ยงชีพ กับเงินบำเหน็จ</a></li>
+                                <li><a target="_blank" href="/trends">แนวโน้มสัดส่วนการลงทุน</a></li>
+                                <li><a target="_blank" href="/reportingmemberbenefit">รายงานผลประโยชน์สมาชิก</a></li>
+                                <li><a target="_blank" href="/compares">รายงานเปรียบเทียบเงินกองทุนสำรองเลี้ยงชีพ กับเงินบำเหน็จ</a></li>
 
                             </ul>
                         </li>
                         <li class="dropdown-submenu" >
                             <a href="javascript:void(0);">แผนการลงทุน</a>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href="One-Page/index.html">เปลี่ยนแผนการลงทุน</a></li>
-                                <li><a target="_blank" href="One-Page/one_page_dark.html">ประวัติการเปลี่ยนแผนการลงทุน</a></li>
+                                <li><a target="_blank" href="/changeplan">เปลี่ยนแผนการลงทุน</a></li>
+                                <li><a target="_blank" href="/historyinvestmentplan">ประวัติการเปลี่ยนแผนการลงทุน</a></li>
 
 
                             </ul>
@@ -81,18 +82,19 @@
                         <li class="dropdown-submenu" >
                             <a href="javascript:void(0);">ข้อมูลอัตราสะสม</a>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href="One-Page/index.html">เปลี่ยนอัตราสะสม</a></li>
-                                <li><a target="_blank" href="One-Page/one_page_dark.html">ประวัติการเปลี่ยนอัตราสะสม</a></li>
+                                <li><a target="_blank" href="/cumulative">เปลี่ยนอัตราสะสม</a></li>
+                                <li><a target="_blank" href="/historycumulative">ประวัติการเปลี่ยนอัตราสะสม</a></li>
 
 
                             </ul>
                         </li>
                         <li>
-                            <a href="#">แบบประเมินความเสี่ยง</a>
+                            <a href="/riskassessment">แบบประเมินความเสี่ยง</a>
                         </li>
 
                     </ul>
                 </li>
+                    {{--@endif--}}
                 <!-- End Demo Pages -->
 
 
@@ -104,15 +106,15 @@
                     </a>
                     <ul class="dropdown-menu">
                         <!-- About Pages -->
-                        <li class="dropdown-submenu">
-                            <a href="javascript:void(0);">รายงานมูลค่าทรัพย์สิน</a>
+                        <li>
+                            <a href="/netasset">รายงานมูลค่าทรัพย์สิน</a>
 
                         </li>
                         <!-- End About Pages -->
 
                         <!-- Service Pages -->
-                        <li class="dropdown-submenu">
-                            <a href="javascript:void(0);">สรุปภาวะเศรษฐกิจและกลยุทธ์</a>
+                        <li>
+                            <a href="/economic">สรุปภาวะเศรษฐกิจและกลยุทธ์</a>
 
                         </li>
                         <!-- End Service Pages -->
@@ -129,19 +131,19 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li >
-                            <a href="#">ประกาศ</a>
+                            <a href="/announce">ประกาศ</a>
 
                         </li>
                         <li >
-                            <a href="#">พระราชบัญญัติกองทุนสำรองเลี้ยงชีพ</a>
+                            <a href="/actfund">พระราชบัญญัติกองทุนสำรองเลี้ยงชีพ</a>
 
                         </li>
                         <li >
-                            <a href="#">คำสั่งแต่งตั้งคณะกรรมการ</a>
+                            <a href="/board">คำสั่งแต่งตั้งคณะกรรมการ</a>
 
                         </li>
                         <li >
-                            <a href="#">ข้อบังคับกองทุน</a>
+                            <a href="/fundregulations">ข้อบังคับกองทุน</a>
 
                         </li>
 
@@ -155,9 +157,9 @@
                         กองทุน
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">คณะกรรมการกองทุน</a> </li>
-                        <li><a href="#">โครงสร้างกองทุน</a> </li>
-                        <li><a href="#">รายงานประจำปี</a> </li>
+                        <li><a href="/fundboard">คณะกรรมการกองทุน</a> </li>
+                        <li><a href="/structuralfunds">โครงสร้างกองทุน</a> </li>
+                        <li><a href="/yearbook">รายงานประจำปี</a> </li>
                     </ul>
                 </li>
                 <!-- End Portfolio -->
@@ -169,11 +171,11 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li >
-                            <a href="#">เอกสารดาวน์โหลด</a>
+                            <a href="/download">เอกสารดาวน์โหลด</a>
 
                         </li>
 
-                        <li><a href="feature_gallery.html">แบบทดสอบ</a></li>
+                        <li><a href="/test">แบบทดสอบ</a></li>
 
                     </ul>
                 </li>
@@ -185,9 +187,9 @@
                         แบบฟอร์ม
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">แบบฟอร์มกรณีพ้นสมาชิกภาพ</a></li>
-                        <li><a href="#">แบบฟอร์มกรณีขอคงเงินหรือขอรับเงินเป็นงวด</a></li>
-                        <li><a href="#">แบบฟอร์มและใบคำร้องอื่นๆ</a></li>
+                        <li><a href="/membershipform">แบบฟอร์มกรณีพ้นสมาชิกภาพ</a></li>
+                        <li><a href="/form">แบบฟอร์มกรณีขอคงเงินหรือขอรับเงินเป็นงวด</a></li>
+                        <li><a href="/otherforms">แบบฟอร์มและใบคำร้องอื่นๆ</a></li>
                     </ul>
                 </li>
                 <!-- End Shortcodes -->
@@ -200,8 +202,8 @@
                         ข่าวประชาสัมพันธ์
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">ข่าวประชาสัมพันธ์</a></li>
-                        <li><a href="#">ข่าวกองทุน</a></li>
+                        <li><a href="/news">ข่าวประชาสัมพันธ์</a></li>
+                        <li><a href="/newsfund">ข่าวกองทุน</a></li>
                     </ul>
                 </li>
                 <!-- End Demo Pages -->

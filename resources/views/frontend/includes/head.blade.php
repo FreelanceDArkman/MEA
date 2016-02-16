@@ -1,6 +1,6 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Unify - Responsive Website Template</title>
+
 
 <!-- Meta -->
 <meta charset="utf-8">

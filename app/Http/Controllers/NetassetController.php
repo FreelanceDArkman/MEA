@@ -6,17 +6,16 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers;
 
-class DashboardController extends Controller
+class NetassetController extends Controller
 {
-    //
 
-    public function showIndex()
+
+    public function getIndex()
     {
         $this->pageSetting( [
             'title' => 'Dashboard | MEA FUND'
         ] );
 
-        return view('frontend.pages.dashboard');
+        return view('frontend.pages.1p1');
     }
-
 }
