@@ -23,6 +23,7 @@
 |
 */
 
+
 Route::group(['middleware' => ['web']], function () {
     Route::get('login','Auth\AuthController@showLogin');
     Route::post('login','Auth\AuthController@checkLogin');

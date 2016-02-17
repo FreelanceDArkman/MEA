@@ -102,3 +102,26 @@ if(!function_exists('get_username')) {
         return '';
     }
 }
+
+
+if(!function_exists('IsActive')) {
+    function IsActive($page)
+    {
+
+        $routes = Route::getCurrentRoute()->getPath();
+        $arrpages = explode(",", $page);
+
+
+
+        foreach ($arrpages as $v) {
+            if($routes == $v ){
+                return "active";
+            }
+        }
+
+        return "";
+    }
+}
+
+
+

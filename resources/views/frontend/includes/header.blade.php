@@ -22,7 +22,7 @@
                     <li><a href="/logout"> สวัสดี  {{get_username()}}</a></li>
 
                @else
-                    <li><a href="/login">เข้าสู่ระบบ</a></li>
+                    <li><a href="/login">เข้าสู่ระบบ </a></li>
                 @endif
 
             </ul>
@@ -42,7 +42,7 @@
         <div class="container">
             <ul class="nav navbar-nav">
                 <!-- Home -->
-                <li class="dropdown dropdown-hide-sub active">
+                <li class="dropdown dropdown-hide-sub {{IsActive('/')}}">
                     <a href="/"  >
                         หน้าแรก
                     </a>
@@ -52,7 +52,7 @@
 
                 <!-- Demo Pages -->
                @if(menu_access(1,20))
-                <li class="dropdown">
+                <li class="dropdown {{IsActive('editprofile,informationbeneficiary,resetpassword,trends,reportingmemberbenefit,compares,changeplan,historyinvestmentplan,cumulative,historycumulative,riskassessment')}}" >
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         ข้อมูลส่วนตัว
                     </a>
@@ -107,7 +107,7 @@
 
 
                 <!-- Pages -->
-                <li class="dropdown">
+                <li class="dropdown {{IsActive('netasset,economic')}}" >
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         ผลการดำเนินงาน
                     </a>
@@ -132,7 +132,7 @@
                 <!-- End Pages -->
 
                 <!-- Blog -->
-                <li class="dropdown">
+                <li class="dropdown {{IsActive('announce,actfund,board,fundregulations')}}">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         ประมวลระเบียบ
                     </a>
@@ -159,7 +159,7 @@
                 <!-- End Blog -->
 
                 <!-- Portfolio -->
-                <li class="dropdown">
+                <li class="dropdown {{IsActive('fundboard,structuralfunds,yearbook,fundregulations')}}">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         กองทุน
                     </a>
@@ -172,7 +172,7 @@
                 <!-- End Portfolio -->
 
                 <!-- Features -->
-                <li class="dropdown">
+                <li class="dropdown {{IsActive('download,test')}}">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         ความรู้การลงทุน
                     </a>
@@ -189,7 +189,7 @@
                 <!-- End Features -->
 
                 <!-- Shortcodes -->
-                <li class="dropdown">
+                <li class="dropdown {{IsActive('membershipform,form,otherforms')}}">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         แบบฟอร์ม
                     </a>
@@ -204,7 +204,7 @@
 
 
                 <!-- Demo Pages -->
-                <li class="dropdown">
+                <li class="dropdown {{IsActive('news,newsfund')}}">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         ข่าวประชาสัมพันธ์
                     </a>

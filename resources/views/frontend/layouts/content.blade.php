@@ -17,8 +17,8 @@
     <!--=== Header ===-->
     @include('frontend.includes.header')
 <!--=== End Header ===-->
-    @include('frontend.includes.slider')
-    @include('frontend.includes.slider_level2')
+    @include('frontend.includes.content_head')
+
 
 
     <!-- BEGIN PAGE CONTAINER -->
