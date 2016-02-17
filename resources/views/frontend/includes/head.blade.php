@@ -44,3 +44,5 @@
 
 <!-- CSS Customization -->
 <link rel="stylesheet" href="frontend/assets/css/custom.css">
+
+<link rel="stylesheet" href="frontend/assets/css/pages/portfolio-v2.css">

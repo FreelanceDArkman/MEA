@@ -257,8 +257,10 @@
 <!-- JS Implementing Plugins -->
 <script type="text/javascript" src="frontend/assets/plugins/back-to-top.js"></script>
 <script type="text/javascript" src="frontend/assets/plugins/smoothScroll.js"></script>
-<script type="text/javascript" src="frontend/assets/plugins/parallax-slider/js/modernizr.js"></script>
-<script type="text/javascript" src="frontend/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>
+<script type="text/javascript" src="frontend/assets/plugins/jquery.mixitup.min.js"></script>
+{{--<script type="text/javascript" src="frontend/assets/plugins/parallax-slider/js/modernizr.js"></script>--}}
+{{--<script type="text/javascript" src="frontend/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>--}}
+
 <script type="text/javascript" src="frontend/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
 
 <script type="text/javascript" src="frontend/assets/plugins/layer-slider/layerslider/js/greensock.js"></script>
@@ -271,14 +273,19 @@
 <script type="text/javascript" src="frontend/assets/js/plugins/layer-slider.js"></script>
 <script type="text/javascript" src="frontend/assets/js/plugins/owl-carousel.js"></script>
 <script type="text/javascript" src="frontend/assets/js/plugins/style-switcher.js"></script>
-<script type="text/javascript" src="frontend/assets/js/plugins/parallax-slider.js"></script>
+<script type="text/javascript" src="frontend/assets/js/pages/page_portfolio.js"></script>
+
+{{--<script type="text/javascript" src="frontend/assets/js/plugins/parallax-slider.js"></script>--}}
 <script type="text/javascript">
     jQuery(document).ready(function() {
         App.init();
+
         LayerSlider.initLayerSlider();
         OwlCarousel.initOwlCarousel();
+
         StyleSwitcher.initStyleSwitcher();
-        ParallaxSlider.initParallaxSlider();
+        PortfolioPage.init();
+//        ParallaxSlider.initParallaxSlider();
 
     });
 </script>
