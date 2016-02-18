@@ -3,6 +3,15 @@
 use Jenssegers\Date\Date;
 
 
+if(!function_exists('get_date')) {
+    function get_date($input)
+    {
+        Date::setLocale('th');
+        $create_date = new Date($input);
+        return $create_date->add('543 years')->format('d M Y H:i:s');
+    }
+}
+
 if(!function_exists(meaFormatDate)){
     function meaFormatDate($input){
 

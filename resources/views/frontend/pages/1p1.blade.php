@@ -19,7 +19,7 @@
 
 
 
-        ข้อมูล ณ วันที่ {{meaFormatDate($FUNDSIZE[0]->REFERENCE_DATE)}}
+        ข้อมูล ณ วันที่ {{get_date($FUNDSIZE[0]->REFERENCE_DATE)}}
 
 
         <table class="table table-bordered">
