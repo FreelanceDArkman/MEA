@@ -109,7 +109,7 @@ if(!function_exists('get_username')) {
 }
 
 
-if(!function_exists(meaFormatDate)){
+if(!function_exists('meaFormatDate')){
     function meaFormatDate($input){
 
         $create_date = new Date($input);
@@ -128,7 +128,7 @@ if(!function_exists('get_date')) {
     }
 }
 
-if(!function_exists(meaNumbermoney)){
+if(!function_exists('meaNumbermoney')){
     function meaNumbermoney($input){
 
         return number_format($input,2,'.',',');
