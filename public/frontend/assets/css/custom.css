@@ -79,6 +79,37 @@ body, a, h1, h2{
     background-color:#fe5000;
 }
 
+.content-sm{
+    padding-top: 25px !important;
+}
+
+.headline h2, .headline h3, .headline h4{
+    font-size: 50px !important;
+}
+ .breadcrumbs-v1 h1{
+    color: #fe5000;
+     line-height: 20px;
+}
+.custom-content{
+
+    margin-bottom: 40px;
+    margin-top: 40px;
+}
+.custom-content table tr td,.custom-content table tr th{
+    font-size:25px;
+}
+.heading-v1 h2:before, .heading-v1 h2:after{
+    border-color: #fe5000;
+}
+.margin-bottom-40{
+    padding-bottom: 40px;
+    border-bottom: 1px dotted #e4e9f0;
+
+}
+.margin-bottom-40 h2{
+    font-size: 40px;
+}
+
 @media (min-width: 992px){
 
     .header .navbar-nav > li > a {

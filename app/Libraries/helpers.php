@@ -1,5 +1,18 @@
 <?php
 
+use Jenssegers\Date\Date;
+
+
+if(!function_exists(meaFormatDate)){
+    function meaFormatDate($input){
+
+        $create_date = new Date($input);
+        $create_date_str = $create_date->add('543 years')->format('d M Y H:i:s');
+
+        return $create_date_str;
+    }
+}
+
 
 if (!function_exists('logged_in')) {
 
@@ -103,6 +116,23 @@ if(!function_exists('get_username')) {
     }
 }
 
+
+if(!function_exists(meaFormatDate)){
+    function meaFormatDate($input){
+
+        $create_date = new Date($input);
+        $create_date_str = $create_date->add('543 years')->format('d M Y H:i:s');
+
+        return $create_date_str;
+    }
+}
+
+if(!function_exists(meaNumbermoney)){
+    function meaNumbermoney($input){
+
+        return number_format($input,2,'.',',');
+    }
+}
 
 if(!function_exists('IsActive')) {
     function IsActive($page)

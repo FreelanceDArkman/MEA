@@ -107,11 +107,16 @@
 
 
                 <!-- Pages -->
-                <li class="dropdown {{IsActive('netasset,economic')}}" >
+                <li class="dropdown {{IsActive('valuefund,netasset,economic')}}" >
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         ผลการดำเนินงาน
                     </a>
                     <ul class="dropdown-menu">
+
+                        <li>
+                            <a href="/valuefund">มูลค่ากองทุน</a>
+
+                        </li>
                         <!-- About Pages -->
                         <li>
                             <a href="/netasset">รายงานมูลค่าทรัพย์สิน</a>

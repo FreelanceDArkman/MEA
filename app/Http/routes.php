@@ -35,6 +35,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
+    Route::get('/valuefund','ValueFundController@getIndex');
     Route::get('/netasset','NetassetController@getIndex');
 
     Route::get('/economic','EconomicController@getIndex');
@@ -74,8 +75,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/riskassessment','riskassessmentController@getIndex');
 
     });
-
-
+    
 
 });
 

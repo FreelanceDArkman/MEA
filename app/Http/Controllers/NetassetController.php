@@ -16,6 +16,6 @@ class NetassetController extends Controller
             'title' => 'Dashboard | MEA FUND'
         ] );
 
-        return view('frontend.pages.1p1');
+        return view('frontend.pages.1p2');
     }
 }

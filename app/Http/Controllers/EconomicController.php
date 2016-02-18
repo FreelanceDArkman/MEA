@@ -15,6 +15,6 @@ class EconomicController extends Controller
             'title' => 'Dashboard | MEA FUND'
         ] );
 
-        return view('frontend.pages.1p2');
+        return view('frontend.pages.1p3');
     }
 }
