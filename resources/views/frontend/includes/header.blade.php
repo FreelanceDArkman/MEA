@@ -164,7 +164,7 @@
                 <!-- End Blog -->
 
                 <!-- Portfolio -->
-                <li class="dropdown {{IsActive('fundboard,structuralfunds,yearbook,fundregulations')}}">
+                <li class="dropdown {{IsActive('fundboard,structuralfunds,yearbook')}}">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         กองทุน
                     </a>
