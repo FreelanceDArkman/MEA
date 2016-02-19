@@ -256,7 +256,7 @@
 <script type="text/javascript" src="frontend/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <!-- JS Implementing Plugins -->
 <script type="text/javascript" src="frontend/assets/plugins/back-to-top.js"></script>
-<script type="text/javascript" src="frontend/assets/plugins/smoothScroll.js"></script>
+{{--<script type="text/javascript" src="frontend/assets/plugins/smoothScroll.js"></script>--}}
 <script type="text/javascript" src="frontend/assets/plugins/jquery.mixitup.min.js"></script>
 {{--<script type="text/javascript" src="frontend/assets/plugins/parallax-slider/js/modernizr.js"></script>--}}
 {{--<script type="text/javascript" src="frontend/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>--}}

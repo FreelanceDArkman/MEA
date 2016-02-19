@@ -128,6 +128,15 @@ if(!function_exists('get_date')) {
     }
 }
 
+if(!function_exists('get_date_notime')) {
+    function get_date_notime($input)
+    {
+        Date::setLocale('th');
+        $create_date = new Date($input);
+        return $create_date->add('543 years')->format('d M Y');
+    }
+}
+
 if(!function_exists('meaNumbermoney')){
     function meaNumbermoney($input){
 

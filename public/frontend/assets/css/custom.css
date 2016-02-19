@@ -47,6 +47,8 @@ body, a, h1, h2{
     font-size: 15px !important;
 }
 
+
+
 .dropdown-menu {
     font-size: 18px !important;
 }
@@ -96,7 +98,15 @@ body, a, h1, h2{
     margin-top: 40px;
 }
 .custom-content table tr td,.custom-content table tr th{
-    font-size:25px;
+    font-size: 20px;
+}
+
+.custom-content .date_topic{
+    font-size: 20px;
+}
+
+.btn{
+    font-size: 20px;
 }
 .heading-v1 h2:before, .heading-v1 h2:after{
     border-color: #fe5000;
@@ -130,6 +140,13 @@ body, a, h1, h2{
 
     }
 }
+
+.sorting-block .sorting-grid li .sorting-cover span {
+    font-size: 25px !important;
+    line-height: 30px;
+    text-align: center;
+}
+
 
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 class NetassetController extends Controller
 {
@@ -16,6 +17,10 @@ class NetassetController extends Controller
             'title' => 'Dashboard | MEA FUND'
         ] );
 
-        return view('frontend.pages.1p2');
+
+        $sql = "SELECT * FROM tbl_news_topic WHERE NEWS_CATE_ID = 15 ORDER BY create_date DESC";
+        $netasset = DB::select(DB::raw($sql));
+
+        return view('frontend.pages.1p2')->with(['netasset' => $netasset]);
     }
 }

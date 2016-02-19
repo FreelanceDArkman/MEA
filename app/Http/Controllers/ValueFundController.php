@@ -18,10 +18,15 @@ class ValueFundController extends Controller
         ] );
 
 
-        $sql = "SELECT TOP 2 * FROM TBL_FUND_SIZE WHERE policy_id IN (1,2) ORDER BY REFERENCE_DATE DESC, POLICY_ID";
+        $sql = "SELECT * FROM TBL_FUND_SIZE WHERE policy_id IN (1,2) ORDER BY REFERENCE_DATE DESC, POLICY_ID";
         $FUNDSIZE = DB::select(DB::raw($sql));
 
-        return view('frontend.pages.1p1')->with(['FUNDSIZE' => $FUNDSIZE]);
+
+        $sql2 = "SELECT DISTINCT(REFERENCE_DATE) AS dateref FROM TBL_FUND_SIZE ORDER BY REFERENCE_DATE DESC";
+        $FUNDSIZEref = DB::select(DB::raw($sql2));
+
+
+        return view('frontend.pages.1p1')->with(['FUNDSIZE' => $FUNDSIZE,'FUNDSIZEref' => $FUNDSIZEref]);
     }
 
 
