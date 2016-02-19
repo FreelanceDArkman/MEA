@@ -49,11 +49,14 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/fundboard','FundboardController@getIndex');
     Route::get('/structuralfunds','StrucController@getIndex');
     Route::get('/yearbook','YearbookController@getIndex');
+
     Route::get('/download','DownloadController@getIndex');
     Route::get('/test','TestController@getIndex');
+
     Route::get('/membershipform','MembershipfornController@getIndex');
     Route::get('/form','FormController@getIndex');
     Route::get('/otherforms','OtherFormController@getIndex');
+
     Route::get('/qa','QaController@getIndex');
     Route::get('/news','NewsController@getIndex');
     Route::get('/newsfund','NeesfundController@getIndex');

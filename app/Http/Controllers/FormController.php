@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class FormController extends Controller
 {
@@ -14,7 +15,9 @@ class FormController extends Controller
         $this->pageSetting( [
             'title' => 'Dashboard | MEA FUND'
         ] );
+        $sql = "SELECT * FROM tbl_news_topic WHERE NEWS_CATE_ID = 13 ORDER BY create_date DESC";
+        $netasset = DB::select(DB::raw($sql));
 
-        return view('frontend.pages.5p2');
+        return view('frontend.pages.5p2')->with(['netasset' => $netasset]);
     }
 }

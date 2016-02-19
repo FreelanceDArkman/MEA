@@ -1,4 +1,4 @@
-@extends('frontend.layouts.default')
+@extends('frontend.layouts.content')
 @section('content')
 
     <div class="heading heading-v1 margin-bottom-40">
