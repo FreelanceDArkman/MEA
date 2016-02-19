@@ -44,6 +44,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/actfund','ActfundController@getIndex');
     Route::get('/board','BoardController@getIndex');
     Route::get('/fundregulations','FundreController@getIndex');
+
+
     Route::get('/fundboard','FundboardController@getIndex');
     Route::get('/structuralfunds','StrucController@getIndex');
     Route::get('/yearbook','YearbookController@getIndex');
