@@ -57,7 +57,26 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/form','FormController@getIndex');
     Route::get('/otherforms','OtherFormController@getIndex');
 
-    Route::get('/qa','QaController@getIndex');
+
+    Route::group(['prefix' => 'qa'] , function() {
+
+        Route::get('/', 'QaController@getIndex');
+        Route::get('{id}', 'QaController@getIndexByID')->where('id', '[0-9]+');
+
+
+    });
+
+    //Route::get('/qa/{id}','QaController@getIndex')->where('id', '[0-9]+');
+
+
+//    Route::get('/qa/{id}', function($id){
+//
+//        return $id;
+//    });
+//    Route::get('/qa/{id}', function ($id) {
+//        return 'QaController@getIndex';
+//    });
+
 
     Route::get('/news','NewsController@getIndex');
     Route::get('/newsfund','NeesfundController@getIndex');

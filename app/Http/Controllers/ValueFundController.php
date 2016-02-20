@@ -18,6 +18,7 @@ class ValueFundController extends Controller
         ] );
 
 
+
         $sql = "SELECT * FROM TBL_FUND_SIZE WHERE policy_id IN (1,2) ORDER BY REFERENCE_DATE DESC, POLICY_ID";
         $FUNDSIZE = DB::select(DB::raw($sql));
 
@@ -27,6 +28,7 @@ class ValueFundController extends Controller
 
 
         return view('frontend.pages.1p1')->with(['FUNDSIZE' => $FUNDSIZE,'FUNDSIZEref' => $FUNDSIZEref]);
+
     }
 
 

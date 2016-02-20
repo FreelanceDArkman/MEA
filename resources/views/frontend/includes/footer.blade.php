@@ -6,7 +6,7 @@
             <div class="row">
                 <!-- About -->
                 <div class="col-sm-3 md-margin-bottom-40" style="text-align: center;">
-                    <a href="index.html"><img id="logo-footer" class="footer-logo" src="frontend/assets/img/logo2-default.png" alt=""></a>
+                    <a href="index.html"><img id="logo-footer" class="footer-logo" src="{{asset('frontend/assets/img/logo2-default.png')}}" alt=""></a>
                     <p style="text-align: left">มีหลักฐานที่เป็นข้อเท็จจริงยืนยันมานานแล้ว ว่าเนื้อหาที่อ่านรู้เรื่องนั้นจะไปกวนสมาธิของคนอ่านให้เขวไปจากส่วนที้เป็น Layout เรานำ Lorem Ipsum มาใช้เพราะความที่มันมีการกระจายของตัวอักษรธรรมดาๆ แบบพอประมาณ </p>
                     <p style="text-align: left">ซึ่งเอามาใช้แทนการเขียนว่า ‘ตรงนี้เป็นเนื้อหา, ตรงนี้เป็นเนื้อหา' ได้ และยังทำให้มองดูเหมือนกับภาษาอังกฤษที่อ่านได้ปกติ</p>
                 </div><!--/col-md-3-->
@@ -251,29 +251,29 @@
 {{--<!--=== End Footer Version 1 ===-->--}}
 
 <!-- JS Global Compulsory -->
-<script type="text/javascript" src="frontend/assets/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="frontend/assets/plugins/jquery/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="frontend/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/jquery/jquery.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/jquery/jquery-migrate.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- JS Implementing Plugins -->
-<script type="text/javascript" src="frontend/assets/plugins/back-to-top.js"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/back-to-top.js')}}"></script>
 {{--<script type="text/javascript" src="frontend/assets/plugins/smoothScroll.js"></script>--}}
-<script type="text/javascript" src="frontend/assets/plugins/jquery.mixitup.min.js"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/jquery.mixitup.min.js')}}"></script>
 {{--<script type="text/javascript" src="frontend/assets/plugins/parallax-slider/js/modernizr.js"></script>--}}
 {{--<script type="text/javascript" src="frontend/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>--}}
 
-<script type="text/javascript" src="frontend/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js')}}"></script>
 
-<script type="text/javascript" src="frontend/assets/plugins/layer-slider/layerslider/js/greensock.js"></script>
-<script type="text/javascript" src="frontend/assets/plugins/layer-slider/layerslider/js/layerslider.transitions.js"></script>
-<script type="text/javascript" src="frontend/assets/plugins/layer-slider/layerslider/js/layerslider.kreaturamedia.jquery.js"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/layer-slider/layerslider/js/greensock.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/layer-slider/layerslider/js/layerslider.transitions.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/layer-slider/layerslider/js/layerslider.kreaturamedia.jquery.js')}}"></script>
 <!-- JS Customization -->
-<script type="text/javascript" src="frontend/assets/js/custom.js"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/js/custom.js')}}"></script>
 <!-- JS Page Level -->
-<script type="text/javascript" src="frontend/assets/js/app.js"></script>
-<script type="text/javascript" src="frontend/assets/js/plugins/layer-slider.js"></script>
-<script type="text/javascript" src="frontend/assets/js/plugins/owl-carousel.js"></script>
-<script type="text/javascript" src="frontend/assets/js/plugins/style-switcher.js"></script>
-<script type="text/javascript" src="frontend/assets/js/pages/page_portfolio.js"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/js/app.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/js/plugins/layer-slider.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/js/plugins/owl-carousel.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/js/plugins/style-switcher.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/js/pages/page_portfolio.js')}}"></script>
 
 {{--<script type="text/javascript" src="frontend/assets/js/plugins/parallax-slider.js"></script>--}}
 <script type="text/javascript">
@@ -299,15 +299,9 @@
 
 </script>
 <!--[if lt IE 9]>
-<script src="frontend/assets/plugins/respond.js"></script>
-<script src="frontend/assets/plugins/html5shiv.js"></script>
-<script src="frontend/assets/plugins/placeholder-IE-fixes.js"></script>
-
-<script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/respond.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/html5shiv.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/placeholder-IE-fixes.js')}}"></script>
 
 
-
-
-
-</script>
 <![endif]-->
