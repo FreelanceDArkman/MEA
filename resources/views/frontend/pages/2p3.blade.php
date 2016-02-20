@@ -59,6 +59,10 @@
                 </ul>
 
                 <div class="clearfix"></div>
+
+                <div class="text-center">
+                    {{$netasset->links()}}
+                </div>
             </div>
             <!-- End Pager v3 -->
         </div>

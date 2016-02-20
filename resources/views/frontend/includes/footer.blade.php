@@ -287,10 +287,27 @@
         PortfolioPage.init();
 //        ParallaxSlider.initParallaxSlider();
 
+
+        jQuery("DIV[id^='modol']").on('hidden.bs.modal', function (e) {
+            // do something...
+            jQuery("DIV[id^='modol'] video").get(0).pause();
+//            jQuery("DIV[id^='modol'] video source").attr("src",  jQuery("DIV[id^='modol'] video source").attr("src"));
+        })
     });
+
+
+
 </script>
 <!--[if lt IE 9]>
 <script src="frontend/assets/plugins/respond.js"></script>
 <script src="frontend/assets/plugins/html5shiv.js"></script>
 <script src="frontend/assets/plugins/placeholder-IE-fixes.js"></script>
+
+<script>
+
+
+
+
+
+</script>
 <![endif]-->

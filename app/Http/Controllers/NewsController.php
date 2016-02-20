@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
@@ -15,6 +16,11 @@ class NewsController extends Controller
             'title' => 'Dashboard | MEA FUND'
         ] );
 
-        return view('frontend.pages.7p1');
+        $netasset  = DB::table('tbl_news_topic')->where('NEWS_CATE_ID','1')->orderBy('create_date', 'desc')->paginate(10);
+
+        return view('frontend.pages.7p1')->with(['netasset' => $netasset]);
+
+
+
     }
 }

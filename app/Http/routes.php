@@ -58,8 +58,11 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/otherforms','OtherFormController@getIndex');
 
     Route::get('/qa','QaController@getIndex');
+
     Route::get('/news','NewsController@getIndex');
     Route::get('/newsfund','NeesfundController@getIndex');
+
+
     Route::get('/contact','ContactController@getIndex');
 
     Route::get('/forservices','ForserviceController@getIndex');

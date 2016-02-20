@@ -20,17 +20,19 @@
     @include('frontend.includes.content_head')
 
 
-
+    {{--<div class="bg-color-light">--}}
     <!-- BEGIN PAGE CONTAINER -->
-    <div class="container content-sm">
+        <div class="container content-sm">
 
-        @yield('content')
+            @yield('content')
 
 
-        @include('frontend.includes.client')
+            @include('frontend.includes.client')
 
-    </div>
+        </div>
     <!-- END PAGE CONTAINER -->
+{{--</div>--}}
+
 
 
 </div>
