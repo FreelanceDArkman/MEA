@@ -52,6 +52,9 @@
 
             </div>
 
+            <div class="text-center">
+                {{$netasset->links()}}
+            </div>
 
         </div>
         <!-- End Blog All Posts -->
