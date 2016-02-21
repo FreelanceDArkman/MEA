@@ -27,7 +27,7 @@
 <link rel="stylesheet" href="{{asset('frontend/assets/css/footers/footer-v3.css')}}">
 
 <!-- CSS Page Style -->
-<link rel="stylesheet" href="{{asset('frontend/assets/css/pages/page_log_reg_v1.css')}}">
+<link rel="stylesheet" href="{{asset('frontend/assets/css/pages/page_contact.css')}}">
 
 
 <!-- CSS Implementing Plugins -->
@@ -42,7 +42,12 @@
 <link rel="stylesheet" href="{{asset('frontend/assets/css/theme-colors/default.css')}}" id="style_color">
 <link rel="stylesheet" href="{{asset('frontend/assets/css/theme-skins/dark.css')}}">
 
+<link rel="stylesheet" href="{{asset('frontend/assets/plugins/sky-forms-pro/skyforms/css/sky-forms.css')}}">
+<link rel="stylesheet" href="{{asset('frontend/assets/plugins/sky-forms-pro/skyforms/custom/custom-sky-forms.css')}}">
+
 <!-- CSS Customization -->
 <link rel="stylesheet" href="{{asset('frontend/assets/css/custom.css')}}">
+
+<link rel="stylesheet" href="{{asset('frontend/assets/css/pages/portfolio-v2.css')}}">
 
 <link rel="stylesheet" href="{{asset('frontend/assets/css/pages/portfolio-v2.css')}}">

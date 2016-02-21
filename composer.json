@@ -9,7 +9,11 @@
         "laravel/framework": "5.2.*",
         "jenssegers/agent": "^2.3",
         "davejamesmiller/laravel-breadcrumbs": "^3.0",
-        "jenssegers/date": "^3.1"
+        "jenssegers/date": "^3.1",
+        "latrell/captcha": "dev-master",
+        "laravelcollective/html": "5.2.*",
+        "guzzlehttp/guzzle": "~5.3|~6.0"
+
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

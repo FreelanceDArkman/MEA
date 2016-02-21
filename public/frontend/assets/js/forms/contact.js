@@ -4,6 +4,21 @@ var ContactForm = function () {
         
         //Contact Form
         initContactForm: function () {
+
+			$.validator.addMethod("valueNotEquals", function(value, element, arg){
+				return arg != value;
+			}, "Value must not equal arg.");
+
+
+			//$("form").validate({
+			//	rules: {
+			//		SelectName: { valueNotEquals: "default" }
+			//	},
+			//	messages: {
+			//		SelectName: { valueNotEquals: "Please select an item!" }
+			//	}
+			//});
+
 	        // Validation
 	        $("#sky-form3").validate({
 	            // Rules for form validation
@@ -18,15 +33,25 @@ var ContactForm = function () {
 	                    required: true,
 	                    email: true
 	                },
-	                message:
+					PHONE:{
+						required: true,
+						number: true
+					},
+					DEP_LNG:{
+						required: true
+					},
+					TYPE_TOPIC:{
+						valueNotEquals: "default"
+					},
+					DETAIL:
 	                {
-	                    required: true,
-	                    minlength: 10
+	                    required: true
+
 	                },
 	                captcha:
 	                {
 	                    required: true,
-	                    remote: 'assets/plugins/sky-forms-pro/skyforms/captcha/process.php'
+	                    remote: 'frontend/assets/plugins/sky-forms-pro/skyforms/captcha/process.php'
 	                }
 	            },
 	                                
@@ -35,16 +60,26 @@ var ContactForm = function () {
 	            {
 	                name:
 	                {
-	                    required: 'Please enter your name',
+	                    required: 'กรุณากรอกชื่อ-สกุล',
 	                },
 	                email:
 	                {
-	                    required: 'Please enter your email address',
-	                    email: 'Please enter a VALID email address'
+	                    required: 'กรุณากรอกที่อยู่อีเมล์',
+	                    email: 'อีเมล์ที่ท่านกรอกไม่ตรงกับ format'
 	                },
-	                message:
+					PHONE:{
+						required: 'กรุณากรอกเบอร์โทรศัพท์',
+						number: 'เบอร์โทรศัพท์จะต้องเป็นตัวเลขเท่านั้น'
+					},
+					DEP_LNG:{
+						required: 'กรุณากรอกหน่วยงาน'
+					},
+					TYPE_TOPIC:{
+						valueNotEquals: "Please select an item!"
+					},
+					DETAIL:
 	                {
-	                    required: 'Please enter your message'
+	                    required: 'กรณุกรอกรายละเอียด'
 	                },
 	                captcha:
 	                {

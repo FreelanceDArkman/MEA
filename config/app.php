@@ -147,6 +147,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+        'Latrell\Captcha\CaptchaServiceProvider',
 
         /*
          * Application Service Providers...
@@ -204,6 +206,9 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Agent'     => Jenssegers\Agent\Facades\Agent::class,
         'Date'      => Jenssegers\Date\Date::class,
+        'Form'      => Collective\Html\FormFacade::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
+        'Captcha' => 'Latrell\Captcha\Facades\Captcha',
     ],
 
 ];

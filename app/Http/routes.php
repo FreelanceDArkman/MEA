@@ -32,6 +32,31 @@ Route::group(['middleware' => ['web']], function () {
      Route::get('/','HomeController@getIndex');
 
 
+    Route::any('/captcha-test', function()
+    {
+
+        if (Request::getMethod() == 'POST')
+        {
+            $rules =  ['captcha' => 'required|captcha'];
+            $validator = Validator::make(Input::all(), $rules);
+            if ($validator->fails())
+            {
+                echo '<p style="color: #ff0000;">Incorrect!</p>';
+            }
+            else
+            {
+                echo '<p style="color: #00ff30;">Matched :)</p>';
+            }
+        }
+
+        $content = Form::open(array(URL::to(Request::segment(1))));
+        $content .= '<p><img src="'.Captcha::url().'"/></p>';
+        $content .= '<p>' . Form::text('captcha') . '</p>';
+        $content .= '<p>' . Form::submit('Check') . '</p>';
+        $content .= '<p>' . Form::close() . '</p>';
+        return $content;
+
+    });
 
 
 
