@@ -148,8 +148,8 @@ class AuthController extends Controller
                 return redirect()->to('firstlogin')->with('emp_id',$result_login->result[0]->emp_id);
             }else{
                 // logged in
-                    echo  "hello";
-               // return redirect()->intended('/profile');
+                   // echo  "hello";
+                return redirect()->intended('/profile');
             }
 
         }
