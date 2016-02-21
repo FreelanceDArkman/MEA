@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "12b7449ef6d468f5e8c58a7d53665ed5",
-    "content-hash": "c78d068d4d72d5403674ee09917515d0",
+    "hash": "c5bdae481a1f3287b57c6a811f412a0d",
+    "content-hash": "02cfde82aa61cc3028c0c4b78359be8f",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -209,54 +209,6 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
-        },
-        {
-            "name": "gregwar/captcha",
-            "version": "v1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Gregwar/Captcha.git",
-                "reference": "1240ab993ca713680573b2d4166900da5f758623"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Gregwar/Captcha/zipball/1240ab993ca713680573b2d4166900da5f758623",
-                "reference": "1240ab993ca713680573b2d4166900da5f758623",
-                "shasum": ""
-            },
-            "require": {
-                "ext-gd": "*",
-                "php": ">=5.3.0"
-            },
-            "type": "captcha",
-            "autoload": {
-                "psr-4": {
-                    "Gregwar\\Captcha\\": "/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Grégoire Passault",
-                    "email": "g.passault@gmail.com",
-                    "homepage": "http://www.gregwar.com/"
-                },
-                {
-                    "name": "Jeremy Livingston",
-                    "email": "jeremy.j.livingston@gmail.com"
-                }
-            ],
-            "description": "Captcha generator",
-            "homepage": "https://github.com/Gregwar/Captcha",
-            "keywords": [
-                "bot",
-                "captcha",
-                "spam"
-            ],
-            "time": "2015-09-11 15:23:20"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -869,55 +821,6 @@
             "description": "HTML and Form Builders for the Laravel Framework",
             "homepage": "http://laravelcollective.com",
             "time": "2016-01-27 22:29:54"
-        },
-        {
-            "name": "latrell/captcha",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Latrell/Captcha.git",
-                "reference": "9ca53e2c61dcf529643612547f25d457c36ea14e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Latrell/Captcha/zipball/9ca53e2c61dcf529643612547f25d457c36ea14e",
-                "reference": "9ca53e2c61dcf529643612547f25d457c36ea14e",
-                "shasum": ""
-            },
-            "require": {
-                "gregwar/captcha": "1.*",
-                "illuminate/support": "5.*",
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src/controllers"
-                ],
-                "psr-0": {
-                    "Latrell\\Captcha\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Latrell Chan",
-                    "email": "i@latrell.me"
-                }
-            ],
-            "description": "Captcha Package for Laravel 5",
-            "keywords": [
-                "captcha",
-                "captcha image",
-                "l5",
-                "laravel",
-                "laravel 5",
-                "security"
-            ],
-            "time": "2015-07-07 08:43:37"
         },
         {
             "name": "league/flysystem",
@@ -3592,9 +3495,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "latrell/captcha": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

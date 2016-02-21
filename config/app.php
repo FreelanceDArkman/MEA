@@ -148,7 +148,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        'Latrell\Captcha\CaptchaServiceProvider',
+
 
         /*
          * Application Service Providers...
@@ -208,7 +208,7 @@ return [
         'Date'      => Jenssegers\Date\Date::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
-        'Captcha' => 'Latrell\Captcha\Facades\Captcha',
+      
     ],
 
 ];
