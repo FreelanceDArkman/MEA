@@ -29,34 +29,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('login','Auth\AuthController@checkLogin');
     Route::get('logout','Auth\AuthController@checkLogout');
 
+    Route::get('forgotpassword','Auth\AuthController@showForgotPassword');
+    Route::post('forgotpassword','Auth\AuthController@GetPassword');
+
+   Route::get('firstlogin','Auth\AuthController@ShowSetNewpass');
+    Route::post('firstlogin','Auth\AuthController@ResetPassword');
+
      Route::get('/','HomeController@getIndex');
-
-
-    Route::any('/captcha-test', function()
-    {
-
-        if (Request::getMethod() == 'POST')
-        {
-            $rules =  ['captcha' => 'required|captcha'];
-            $validator = Validator::make(Input::all(), $rules);
-            if ($validator->fails())
-            {
-                echo '<p style="color: #ff0000;">Incorrect!</p>';
-            }
-            else
-            {
-                echo '<p style="color: #00ff30;">Matched :)</p>';
-            }
-        }
-
-        $content = Form::open(array(URL::to(Request::segment(1))));
-        $content .= '<p><img src="'.Captcha::url().'"/></p>';
-        $content .= '<p>' . Form::text('captcha') . '</p>';
-        $content .= '<p>' . Form::submit('Check') . '</p>';
-        $content .= '<p>' . Form::close() . '</p>';
-        return $content;
-
-    });
 
 
 
@@ -114,6 +93,9 @@ Route::group(['middleware' => ['web']], function () {
 
 
     Route::group(['middleware' => ['auth.frontend']], function(){
+
+        Route::get('/profile','ProfileController@getIndex');
+
         Route::get('/editprofile','editprofileController@getIndex');
         Route::get('/informationbeneficiary','InformationController@getIndex');
         Route::get('/resetpassword','ResetPassword@getIndex');

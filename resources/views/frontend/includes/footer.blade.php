@@ -281,13 +281,16 @@
 <script type="text/javascript" src="{{asset('frontend/assets/js/forms/login.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend/assets/js/forms/contact.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend/assets/js/pages/page_contacts.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/circles-master/circles.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/counter/jquery.counterup.min.js')}}"></script>
+
 
 <script type="text/javascript" src="{{asset('frontend/assets/js/plugins/layer-slider.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend/assets/js/plugins/owl-carousel.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend/assets/js/plugins/style-switcher.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend/assets/js/pages/page_portfolio.js')}}"></script>
 
-
+<script type="text/javascript" src="{{asset('frontend/assets/js/plugins/circles-master.js')}}"></script>
 
 
 
@@ -308,7 +311,8 @@
         StyleSwitcher.initStyleSwitcher();
         PortfolioPage.init();
 //        ParallaxSlider.initParallaxSlider();
-
+        CirclesMaster.initCirclesMaster1();
+//        CirclesMaster.initCirclesMaster2();
 
         jQuery("DIV[id^='modol']").on('hidden.bs.modal', function (e) {
             // do something...

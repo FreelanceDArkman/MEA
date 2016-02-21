@@ -7,9 +7,12 @@
     font-family: 'DB Ozone X';
     src: url('fonts/DB Ozone X v3.2.ttf');
 }
-
+body{
+    font-size: 20px !important;
+}
 body, a, h1, h2{
     font-family: "DB Ozone X" !important;
+
 }
 
 .footer-v3 .footer {
@@ -148,5 +151,12 @@ body, a, h1, h2{
 }
 
 
+
+/*profile*/
+.service-in ul li{
+    display: inline-block;
+    list-style: none;
+    margin-right: 30px;
+}
 
 
