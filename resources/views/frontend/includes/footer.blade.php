@@ -292,7 +292,8 @@
 
 <script type="text/javascript" src="{{asset('frontend/assets/js/plugins/circles-master.js')}}"></script>
 
-
+<script type="text/javascript" src="{{asset('frontend/assets/highchart/highcharts.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/highchart/exporting.js')}}"></script>
 
 
 

@@ -7,6 +7,7 @@
 <!-- BEGIN HEAD -->
 <head>
     @include('frontend.includes.head')
+    @include('frontend.includes.head_script')
 </head>
 <!-- END HEAD -->
 
@@ -40,9 +41,8 @@
 
 
 
-@include('frontend.includes.footer')
 
-
+@include('frontend.includes.footer_custom')
 </body>
 <!-- END BODY -->
 </html>

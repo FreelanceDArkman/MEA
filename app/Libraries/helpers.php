@@ -97,6 +97,20 @@ if (!function_exists('objectToArray')) {
     }
 }
 
+
+if(!function_exists('get_userID')) {
+    function get_userID()
+    {
+        if(session()->has('user_data')){
+
+            return session()->get('user_data')->emp_id;
+        }
+        return '';
+    }
+}
+
+
+
 if(!function_exists('get_username')) {
     function get_username()
     {
@@ -136,6 +150,16 @@ if(!function_exists('get_date_notime')) {
         return $create_date->add('543 years')->format('d M Y');
     }
 }
+
+if(!function_exists('get_date_nodate')) {
+    function get_date_nodate($input)
+    {
+        Date::setLocale('th');
+        $create_date = new Date($input);
+        return $create_date->add('543 years')->format('M Y');
+    }
+}
+
 
 if(!function_exists('meaNumbermoney')){
     function meaNumbermoney($input){

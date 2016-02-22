@@ -99,9 +99,13 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/editprofile','editprofileController@getIndex');
         Route::get('/informationbeneficiary','InformationController@getIndex');
         Route::get('/resetpassword','ResetPassword@getIndex');
+
+
         Route::get('/trends','TrendsController@getIndex');
-        Route::get('/reportingmemberbenefit','ReportController@getIndex');
-        Route::get('/compares','comparesController@getIndex');
+        Route::get('/reportingmemberbenefit','TrendsController@getIndex');
+        Route::get('/compares','TrendsController@getIndex');
+
+
         Route::get('/changeplan','changeplanController@getIndex');
         Route::get('/historyinvestmentplan','historyinvestmentplanController@getIndex');
         Route::get('/cumulative','cumulativeController@getIndex');
