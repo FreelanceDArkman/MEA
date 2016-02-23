@@ -159,6 +159,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,
+        'Maatwebsite\Excel\ExcelServiceProvider',
     ],
 
     /*
@@ -208,6 +209,7 @@ return [
         'Date'      => Jenssegers\Date\Date::class,
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
+        'Excel' => 'Maatwebsite\Excel\Facades\Excel',
 
     ],
 

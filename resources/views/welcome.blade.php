@@ -1,45 +1,21 @@
-<!DOCTYPE html>
 <html>
-    <head>
-        <title>Laravel</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+<!-- Horizontal alignment -->
+<td align="right">Big title</td>
 
-        <style>
-            html, body {
-                height: 100%;
-            }
+<!--  Vertical alignment -->
+<td valign="middle">Bold cell</td>
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+<!-- Rowspan -->
+<td rowspan="3">Bold cell</td>
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
+<!-- Colspan -->
+<td colspan="6">Italic cell</td>
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
+<!-- Width -->
+<td width="100">Cell with width of 100</td>
 
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
-        </div>
-    </body>
+<!-- Height -->
+<td height="100">Cell with height of 100</td>
+
 </html>
