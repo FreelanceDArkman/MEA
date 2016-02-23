@@ -138,7 +138,7 @@ if(!function_exists('get_date')) {
     {
         Date::setLocale('th');
         $create_date = new Date($input);
-        return $create_date->add('543 years')->format('d M Y H:i:s');
+        return $create_date->add('543 years')->format('j F Y H:i:s');
     }
 }
 
@@ -146,8 +146,10 @@ if(!function_exists('get_date_notime')) {
     function get_date_notime($input)
     {
         Date::setLocale('th');
+
+//        Date::setLocale('th');
         $create_date = new Date($input);
-        return $create_date->add('543 years')->format('d M Y');
+        return $create_date->add('543 years')->format('j F Y');
     }
 }
 
@@ -156,7 +158,7 @@ if(!function_exists('get_date_nodate')) {
     {
         Date::setLocale('th');
         $create_date = new Date($input);
-        return $create_date->add('543 years')->format('M Y');
+        return $create_date->add('543 years')->format('F Y');
     }
 }
 
