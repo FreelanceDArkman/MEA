@@ -11,12 +11,12 @@
                     <a href="/profile"><i class="fa fa-bar-chart-o"></i> Overall Profile</a>
                 </li>
 
-                <li class="list-group-item active">
+                <li class="list-group-item ">
                     <a href="/trends"><i class="fa fa-bar-chart-o"></i> ข้อมูลการลงทุน</a>
                 </li>
 
 
-                <li class="list-group-item">
+                <li class="list-group-item active">
                     <a href="/changeplan"><i class="fa fa-cubes"></i> แผนการลงทุน</a>
                 </li>
                 <li class="list-group-item">
@@ -108,119 +108,94 @@
                     <div class="tab-content">
                         <div class="tab-pane fade active in" id="home-1" style="position: relative" >
 
-                            <form action="#" id="sky-form1" class="sky-form">
-                                <header>เลือกแผนการลงทุน</header>
-                                <div class="alert alert-warning fade in">
-                                    <strong>Warning!</strong> * สามารถเปลี่ยนแผนได้ ระหว่างวันที่ 01-31 ของทุกเดือน
+
+                            <div id="all_invest" style="{{objectcheckdisplaynone($CurrnentPlan)}}" >
+                                <div class="row">
+                                    <div class="headline-center margin-bottom-60">
+                                        <h2>แผนปัจจุบัน</h2>
+                                        <p>แบบที่ {{$CurrnentPlan->PLAN_ID}} ({{$CurrnentPlan->PLAN_NAME}})</p>
+                                    </div>
                                 </div>
-                                <fieldset>
-                                    <div class="row">
-                                        <section class="col col-6">
-                                            <label class="label">Required field</label>
-                                            <label class="input">
-                                                <i class="icon-append fa fa-asterisk"></i>
-                                                <input type="text" name="required">
-                                            </label>
-                                        </section>
-                                        <section class="col col-6">
-                                            <label class="label">Email validation</label>
-                                            <label class="input">
-                                                <i class="icon-append fa fa-envelope"></i>
-                                                <input type="email" name="email">
-                                            </label>
-                                        </section>
+                                <div class="row">
+                                    <div class="inner-pchart col-md-6 col-xs-6" style="text-align: right">
+                                        <div class="circle" id="circles-1"></div>
+                                        <h3 class="circle-title">สัดส่วนตราสารทุน</h3>
+                                        {{--<p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>--}}
+                                    </div>
+                                    <div class="inner-pchart col-md-6 col-xs-6" style="text-align: left">
+                                        <div class="circle" id="circles-2"></div>
+                                        <h3 class="circle-title">สัดส่วนตราสารหนี้</h3>
+                                        {{--<p>Lorem ipsum dolor sit amet, consectetur adipiscing</p>--}}
                                     </div>
 
-                                    <div class="row">
-                                        <section class="col col-6">
-                                            <label class="label">URL validation</label>
-                                            <label class="input">
-                                                <i class="icon-append fa fa-globe"></i>
-                                                <input type="url" name="url">
-                                            </label>
-                                        </section>
-                                        <section class="col col-6">
-                                            <label class="label">Date validation</label>
-                                            <label class="input">
-                                                <i class="icon-append fa fa-calendar"></i>
-                                                <input type="text" name="date">
-                                            </label>
-                                        </section>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12" style="padding: 0 100px 0 100px;">
+                                        <button class="btn-u btn-u-lg btn-block btn-u-blue" id="btn_changplan" type="button">ยกเลิกแผนปัจจุบัน</button>
                                     </div>
 
-                                    <div class="row">
-                                        <section class="col col-4">
-                                            <label class="label">Minimum length</label>
-                                            <label class="input">
-                                                <i class="icon-append fa fa-asterisk"></i>
-                                                <input type="text" name="min">
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="label">Maximum length</label>
-                                            <label class="input">
-                                                <i class="icon-append fa fa-asterisk"></i>
-                                                <input type="text" name="max">
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="label">Range length</label>
-                                            <label class="input">
-                                                <i class="icon-append fa fa-asterisk"></i>
-                                                <input type="text" name="range">
-                                            </label>
-                                        </section>
-                                    </div>
-                                </fieldset>
+                                </div>
+                            </div>
 
-                                <fieldset>
-                                    <div class="row">
-                                        <section class="col col-6">
-                                            <label class="label">Digits validation</label>
-                                            <label class="input">
-                                                <i class="icon-append fa fa-asterisk"></i>
-                                                <input type="text" name="digits">
-                                            </label>
-                                        </section>
-                                        <section class="col col-6">
-                                            <label class="label">Decimal number validation</label>
-                                            <label class="input">
-                                                <i class="icon-append fa fa-asterisk"></i>
-                                                <input type="text" name="number">
-                                            </label>
-                                        </section>
+                            <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}" >
+                                <form action="#" id="sky-form1" class="sky-form">
+                                    <header>เลือกแผนการลงทุน</header>
+                                    <div class="alert alert-warning fade in">
+                                        <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ 4 ครั้ง ภายในวันที่ 1-10 ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
                                     </div>
+                                    <fieldset>
+                                        <legend>เปลี่ยนแผนการลงทุน</legend>
+                                        <div class="row">
+                                            <section class="col col-6">
+                                                <label class="label">แผนการลงทุน</label>
 
-                                    <div class="row">
-                                        <section class="col col-4">
-                                            <label class="label">Minimum value</label>
-                                            <label class="input">
-                                                <i class="icon-append fa fa-asterisk"></i>
-                                                <input type="text" name="minVal">
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="label">Maximum value</label>
-                                            <label class="input">
-                                                <i class="icon-append fa fa-asterisk"></i>
-                                                <input type="text" name="maxVal">
-                                            </label>
-                                        </section>
-                                        <section class="col col-4">
-                                            <label class="label">Range value</label>
-                                            <label class="input">
-                                                <i class="icon-append fa fa-asterisk"></i>
-                                                <input type="text" name="rangeVal">
-                                            </label>
-                                        </section>
-                                    </div>
-                                </fieldset>
 
-                                <footer>
-                                    <button type="submit" class="btn-u btn-u-default">Submit</button>
-                                    <button type="button" class="btn-u" onclick="window.history.back();">Back</button>
-                                </footer>
-                            </form>
+                                                <select name="TYPE_TOPIC" id="TYPE_TOPIC"  class="form-control">
+                                                    <option value="default"> กรุณาเลือก </option>
+                                                    @foreach($dropplan as $index => $item)
+
+                                                    <option value="{{$item->PLAN_ID}}">{{$item->PLAN_NAME}}</option>
+
+                                                    @endforeach
+                                                </select>
+                                            </section>
+
+                                        </div>
+
+
+
+                                    </fieldset>
+                                    <br/>
+                                    <fieldset>
+                                        <legend>ระบุสัดส่วนการลงทุน</legend>
+                                        <div class="row">
+                                            <section class="col col-4">
+                                                <label class="label">สัดส่วนตราสารทุน (%)</label>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-asterisk"></i>
+                                                    <input type="text" name="maxVal1" id="maxVal1">
+                                                </label>
+                                            </section>
+                                            <section class="col col-4">
+                                                <label class="label">สัดส่วนตราสารหนี้ (%)</label>
+                                                <label class="input">
+                                                    <i class="icon-append fa fa-asterisk"></i>
+                                                    <input type="text" name="maxVal2"  id="maxVal2">
+                                                </label>
+                                            </section>
+                                        </div>
+
+
+                                    </fieldset>
+
+                                    <footer>
+                                        <button type="submit" class="btn-u btn-u-default">ส่งข้อมูล</button>
+                                        <button type="button" class="btn-u" id="btn_cancelinvest" >ยกเลิก</button>
+                                    </footer>
+                                </form>
+                            </div>
+
+
 
                         </div>
                         <div class="tab-pane fade " id="profile-1">
@@ -240,6 +215,164 @@
         <!-- End Profile Content -->
     </div>
 
+    <script>
+        $(document).ready(function(){
+
+
+            $('#maxVal1').on('keyup',function(){
+
+              var val =  $(this).val();
+                if(val <= 100){
+
+                    $('#maxVal2').val(100 -val);
+                }else {
+
+                    alert('กรุณาใส่ข้อมูล ไม่เกิน 100');
+                }
+
+
+            });
+
+            $('#maxVal2').on('keyup',function(){
+                var val =  $(this).val();
+
+                if(val <= 100){
+
+                    $('#maxVal1').val(100 -val);
+                }else {
+
+                    alert('กรุณาใส่ข้อมูล ไม่เกิน 100');
+                }
+
+
+            });
+
+            $('#btn_changplan').on('click',function(){
+
+                $('#all_invest').slideUp('400',function(){
+                    $('#invest_form').slideDown();
+
+                })
+               //
+            //invest_form
+            });
+
+            $('#btn_cancelinvest').on('click',function(){
+
+                $('#invest_form').slideUp('400',function(){
+                    $('#all_invest').slideDown();
+
+                })
+                //
+                //invest_form
+            });
+
+
+
+            var colors = [
+                ['#D3B6C6', '#9B6BCC'], ['#C9FF97', '#72c02c'], ['#BEE3F7', '#3498DB'], ['#FFC2BB', '#E74C3C']
+            ];
+
+           // for (var i = 1; i <= 2; i++) {
+
+               // var child = document.getElementById('circles-' + i),
+                        //percentage = 45 + (i * 9);
+
+
+
+                Circles.create({
+                id:         'circles-1',
+                percentage: '{{$Currnentasset->EQUITY}}',
+                radius:     70,
+                width:      2,
+                number:     '{{$Currnentasset->EQUITY}}',
+                text:       '%',
+                colors:      ['#D3B6C6', '#9B6BCC'],
+                duration:   2000,
+            });
+
+            Circles.create({
+                id:         'circles-2',
+                percentage: '{{$Currnentasset->DEBT}}',
+                radius:     70,
+                width:      2,
+                number:     '{{$Currnentasset->DEBT}}',
+                text:       '%',
+                colors:     ['#FFC2BB', '#E74C3C'],
+                duration:   2000,
+            });
+           // }
+
+
+
+
+            $.validator.addMethod("valueNotEquals", function(value, element, arg){
+                return arg != value;
+            }, "Value must not equal arg.");
+
+
+            //$("form").validate({
+            //	rules: {
+            //		SelectName: { valueNotEquals: "default" }
+            //	},
+            //	messages: {
+            //		SelectName: { valueNotEquals: "Please select an item!" }
+            //	}
+            //});
+
+            // Validation
+            $("#sky-form1").validate({
+                // Rules for form validation
+                rules:
+                {
+                    maxVal1:
+                    {
+                        required: true,
+                        max: 100
+                    },
+                    maxVal2:
+                    {
+                        required: true,
+                        max: 100
+                    },
+                    TYPE_TOPIC:{
+                        valueNotEquals: "default"
+                    },
+
+                },
+
+                // Messages for form validation
+                messages:
+                {
+                    maxVal:
+                    {
+                        required: 'Please enter some value'
+                    },
+                    required:
+                    {
+                        required: 'Please enter something'
+                    },
+                    TYPE_TOPIC:{
+                        valueNotEquals: "Please select an item!"
+                    },
+
+                },
+
+
+
+                // Do not change code below
+                errorPlacement: function(error, element)
+                {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+
+        });
+
+
+
+    </script>
 
 @stop
 

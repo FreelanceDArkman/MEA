@@ -52,8 +52,8 @@
         App.init();
 
 //        ContactPage.initMap();
-        LoginForm.initLoginForm();
-        ContactForm.initContactForm();
+//        LoginForm.initLoginForm();
+//        ContactForm.initContactForm();
 
         LayerSlider.initLayerSlider();
         OwlCarousel.initOwlCarousel();
@@ -63,7 +63,7 @@
 //        ParallaxSlider.initParallaxSlider();
         CirclesMaster.initCirclesMaster1();
 //        CirclesMaster.initCirclesMaster2();
-
+//
         jQuery("DIV[id^='modol']").on('hidden.bs.modal', function (e) {
             // do something...
             jQuery("DIV[id^='modol'] video").get(0).pause();

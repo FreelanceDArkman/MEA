@@ -102,6 +102,9 @@ Route::group(['middleware' => ['web']], function () {
 
 
         Route::get('/trends','TrendsController@getIndex');
+        Route::get('/trends_excel1','TrendsController@ExportExcel1');
+        Route::get('/trends_excel2','TrendsController@ExportExcel2');
+
         Route::get('/reportingmemberbenefit','TrendsController@getIndex');
         Route::get('/compares','TrendsController@getIndex');
 

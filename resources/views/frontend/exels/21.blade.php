@@ -1,57 +1,82 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
-<html lang="en" class="no-js">
+
+<html>
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
 <head>
-    <meta charset="utf-8">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    {{--<link rel="stylesheet" href="{{asset('frontend/assets/plugins/bootstrap/css/bootstrap.min.css')}}">--}}
+    {{--<script type="text/javascript" src="{{asset('frontend/assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>--}}
+
+    <style>
+
+        .table{
+            background-color: #00A0D1;
+        }
+    </style>
 </head>
 <!-- END HEAD -->
 
 <!-- BEGIN BODY -->
 <body>
+
+
+
+{{--{{!! HTML::style(asset('frontend/assets/plugins/bootstrap/js/bootstrap.min.js')); }}--}}
 <table class="table table-bordered table-striped">
-    <thead>
-    <tr >
-        <th rowspan="3" width="100" style="text-align:center;">งวด</th>
-        <th rowspan="3" width="100" style="text-align:center;">เงินเดือน</th>
-        <th rowspan="3" width="100" style="text-align:center;">อายุ (ปี/วัน)</th>
-        <th rowspan="3" width="100" style="text-align:center;">อายุงาน (ปี/วัน)</th>
-        <th colspan="4" style="text-align:center;">เงินกองทุนสำรองเลี้ยงชีพฯ (บาท)</th>
-        <th width="100" rowspan="3" style="text-align:center;">รวม</th>
+
+    <tr>
+        <td widtd="100" style="text-align:center;">งวด</td>
+        <td  widtd="100" style="text-align:center;">เงินเดือน</td>
+        <td  widtd="100" style="text-align:center;">อายุ (ปี/วัน)</td>
+        <td  widtd="100" style="text-align:center;">อายุงาน (ปี/วัน)</td>
+        <td style="text-align:center;">เงินกองทุนสำรองเลี้ยงชีพฯ (บาท)</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td widtd="100"  style="text-align:center;">รวม</td>
     </tr>
-    <tr >
-        <th colspan="2" style="text-align:center;">ส่วนของนายจ้าง</th>
-        <th colspan="2" style="text-align:center;">ส่วนของลูกจ้าง</th>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="text-align:center;">ส่วนของนายจ้าง</td>
+        <td></td>
+        <td style="text-align:center;">ส่วนของลูกจ้าง</td>
+        <td></td>
+        <td></td>
+    </tr>
 
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="text-align:center;">เงินสมทบ</td>
+        <td style="text-align:center;">ผลประโยชน์เงินสมทบ</td>
+        <td style="text-align:center;">เงินสะสม</td>
+        <td style="text-align:center;">ผลประโยชน์เงินสะสม</td>
+        <td></td>
 
     </tr>
 
-    <tr >
-        <th style="text-align:center;">เงินสมทบ</th>
-        <th style="text-align:center;">ผลประโยชน์เงินสมทบ</th>
-
-        <th style="text-align:center;">เงินสะสม</th>
-        <th style="text-align:center;">ผลประโยชน์เงินสะสม</th>
+    <tr>
+        <td style="text-align:center;">1</td>
+        <td style="text-align:center;">2</td>
+        <td style="text-align:center;">3</td>
+        <td style="text-align:center;">4</td>
+        <td style="text-align:center;">5</td>
+        <td style="text-align:center;">6</td>
+        <td style="text-align:center;">7</td>
+        <td style="text-align:center;">8</td>
+        <td style="text-align:center;">9</td>
     </tr>
 
-    <tr >
-        <th style="text-align:center;">1</th>
-        <th style="text-align:center;">2</th>
-        <th style="text-align:center;">3</th>
-        <th style="text-align:center;">4</th>
-        <th style="text-align:center;">5</th>
-        <th style="text-align:center;">6</th>
-        <th style="text-align:center;">7</th>
-        <th style="text-align:center;">8</th>
-        <th style="text-align:center;">9</th>
-    </tr>
-    </thead>
 
 
-    <tbody>
+
 
     @foreach($netasset2 as $index =>$item)
         <tr>
@@ -66,7 +91,7 @@
             <td style="text-align: right;">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1 + $item->EMPLOYER_EARNING_2+$item->MEMBER_CONTRIBUTION_3+$item->MEMBER_EARNING_4)}}</td>
         </tr>
     @endforeach
-    </tbody>
+
 
 
 </table>

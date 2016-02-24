@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Package\Curl;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Jenssegers\Date\Date;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TrendsController extends Controller
 {
@@ -273,5 +274,77 @@ class TrendsController extends Controller
 
 
         return view('frontend.pages.21p1')->with(['netasset' => $netasset,'graph' =>$graph , 'netasset2'=>$netasset2, 'graph2'=>$graph2 , 'show'=>$show , 'graph3'=>$graph3]);
+    }
+
+
+    public function ExportExcel1(Request $request)
+    {
+        $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
+        $netasset2 = DB::select(DB::raw($sql2));
+        Excel::create('New file', function($excel) use ($netasset2){
+
+            $excel->sheet('New sheet', function($sheet)use ($netasset2) {
+                $sheet->mergeCells('E1:H1');
+                $sheet->mergeCells('E2:F2');
+                $sheet->mergeCells('G2:H2');
+
+                $sheet->setMergeColumn(array(
+                    'columns' => array('A','B','C','D','I'),
+                    'rows' => array(
+                        array(1,3)
+
+                    )
+                ));
+//                $sheet->setColumnFormat(array(
+//                    'A' => '0.00',
+//                    'B' => '0.00',
+//                    'C' => '0.00',
+//                    'D' => '0.00',
+//                    'E' => '0.00',
+//                    'F' => '0.00',
+//                    'G' => '0.00',
+//                    'H' => '0.00',
+//                    'I' => '0.00',
+//                ));
+                $sheet->loadView('frontend.exels.21')->with(['netasset2' => $netasset2]);
+
+            });
+
+        })->download('xls');
+    }
+    public function ExportExcel2(Request $request)
+    {
+        $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
+        $netasset2 = DB::select(DB::raw($sql2));
+        Excel::create('New file', function($excel) use ($netasset2){
+
+            $excel->sheet('New sheet', function($sheet)use ($netasset2) {
+                $sheet->mergeCells('E1:H1');
+                $sheet->mergeCells('E2:F2');
+                $sheet->mergeCells('G2:H2');
+
+                $sheet->setMergeColumn(array(
+                    'columns' => array('A','B','C','D','I'),
+                    'rows' => array(
+                        array(1,3)
+
+                    )
+                ));
+//                $sheet->setColumnFormat(array(
+//                    'A' => '0.00',
+//                    'B' => '0.00',
+//                    'C' => '0.00',
+//                    'D' => '0.00',
+//                    'E' => '0.00',
+//                    'F' => '0.00',
+//                    'G' => '0.00',
+//                    'H' => '0.00',
+//                    'I' => '0.00',
+//                ));
+                $sheet->loadView('frontend.exels.trends2')->with(['netasset2' => $netasset2]);
+
+            });
+
+        })->download('xls');
     }
 }

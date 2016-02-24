@@ -31,25 +31,25 @@ class changeplanController extends Controller
         $dropplan  = DB::table('TBL_INVESTMENT_PLAN')->where('PLAN_ACTIVE_FLAG','=','0')->get();
 
 
-        $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
-        $netasset2 = DB::select(DB::raw($sql2));
-        Excel::create('New file', function($excel) use ($netasset2){
 
-            $excel->sheet('New sheet', function($sheet)use ($netasset2) {
+      $sql = "SELECT TOP 1  * FROM TBL_USER_FUND_CHOOSE pl
+            INNER JOIN TBL_INVESTMENT_PLAN ip ON ip.plan_id = pl.plan_id
+            wHERE pl.EMP_ID  =  '".get_userID()."' AND MONTH(pl.EFFECTIVE_DATE) = MONTH(GETDATe())
+            ORDER BY pl.Modify_count_timestamp DESC";
 
-                $sheet->loadView('frontend.exels.21')->with(['netasset2' => $netasset2]);
-
-            });
-
-        })->download('xls');
+        $CurrnentPlan = DB::select(DB::raw($sql))[0];
 
 
+
+        $sql2 = "SELECT TOP 1 * FROM TBL_INFORMATION_FROM_ASSET WHERE EMP_ID  = 1234567  ORDER BY Create_DATE DESC";
+
+        $Currnentasset = DB::select(DB::raw($sql2))[0];
 
 
 
 
 
 //var_dump($dropplan);
-        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan]);
+        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset]);
     }
 }

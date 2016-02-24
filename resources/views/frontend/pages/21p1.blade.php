@@ -117,6 +117,11 @@
                             <div id="container2"  data-reflow="1"  style=" min-width: 310px; height: 400px; margin: 0 auto"></div>
 
                             <hr>
+
+                            {{--<form class="reg-page" action="{{ action('TrendsController@ExportExcel1') }}" method="post">--}}
+                                {{--</form>--}}
+                            <a href="{{ action('TrendsController@ExportExcel1') }}" class="btn btn-success" style="margin-bottom: 10px" type="button"><i class="fa fa-download"></i> Export</a>
+
                             <div class="table-responsive">
 
                                 @if($netasset2)
@@ -188,6 +193,8 @@
 
 
                             <hr>
+                            <a href="{{ action('TrendsController@ExportExcel2') }}" class="btn btn-success" style="margin-bottom: 10px" type="button"><i class="fa fa-download"></i> Export</a>
+
                             <div class="table-responsive">
 
                                 @if($netasset2)

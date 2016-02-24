@@ -40,17 +40,17 @@ var CirclesMaster = function () {
 		        duration:   2000
 		    })
 
-		    //Circles 4
-		    Circles.create({
-		        id:         'circle-4',
-		        percentage: 69,
-		        radius:     35,
-		        width:      2,
-		        number:     69,
-		        text:       '%',
-		        colors:     ['#eee', '#72c02c'],
-		        duration:   2000
-		    })
+			//Circles 4
+			Circles.create({
+				id:         'circle-4',
+				percentage: 65,
+				radius:     80,
+				width:      8,
+				number:     65,
+				text:       '%',
+				colors:     ['#eee', '#72c02c'],
+				duration:   2000
+			})
 
 		    //Circles 5
 		    Circles.create({

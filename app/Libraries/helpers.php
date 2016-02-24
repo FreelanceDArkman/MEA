@@ -170,6 +170,39 @@ if(!function_exists('meaNumbermoney')){
     }
 }
 
+if(!function_exists('objectcheckdisplaynone')) {
+    function objectcheckdisplaynone($obj)
+    {
+
+        $ret = "";
+
+        if($obj){
+            $ret = "display:block";
+        }else{
+            $ret = "display:none";
+        }
+
+        return $ret;
+    }
+}
+if(!function_exists('objectcheckdisplayblock')) {
+    function objectcheckdisplayblock($obj)
+    {
+
+        $ret = "";
+
+        if($obj){
+            $ret = "display:none";
+
+
+        }else{
+            $ret = "display:block";
+        }
+
+        return $ret;
+    }
+}
+
 if(!function_exists('IsActive')) {
     function IsActive($page)
     {

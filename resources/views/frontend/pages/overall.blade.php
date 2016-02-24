@@ -100,24 +100,24 @@
                 <hr>
                 <div class="row pie-progress-charts margin-bottom-60">
                     <div class="inner-pchart col-md-3">
-                        <div class="circle" id="circle-1"><div class="circles-wrp" style="position:relative; display:inline-block;"><svg width="160" height="160"><path fill="transparent" stroke="#eee" stroke-width="8" d="M 79.98452083651917 4.000001576345426 A 76 76 0 1 1 79.89443752470656 4.0000733121155605 Z"></path><path fill="transparent" stroke="#72c02c" stroke-width="8" d="M 79.98452083651917 4.000001576345426 A 76 76 0 1 1 24.568484463513414 28.00627840471269 "></path></svg><div class="circles-text-wrp" style="position:absolute; top:0; left:0; text-align:center; width:100%; font-size:40px; height:160px; line-height:160px;"><span class="circles-number"><span class="circles-number">55</span></span><span class="circles-text">%</span></div></div></div>
+                        <div class="circle" id="circle-1"></div>
                         <h3 class="circle-title">ตราสารทุน</h3>
 
                     </div>
                     <div class="inner-pchart col-md-3">
-                        <div class="circle" id="circle-2"><div class="circles-wrp" style="position:relative; display:inline-block;"><svg width="160" height="160"><path fill="transparent" stroke="#eee" stroke-width="8" d="M 79.98452083651917 4.000001576345426 A 76 76 0 1 1 79.89443752470656 4.0000733121155605 Z"></path><path fill="transparent" stroke="#72c02c" stroke-width="8" d="M 79.98452083651917 4.000001576345426 A 76 76 0 1 1 4.153621191303614 84.82978484072875 "></path></svg><div class="circles-text-wrp" style="position:absolute; top:0; left:0; text-align:center; width:100%; font-size:40px; height:160px; line-height:160px;"><span class="circles-number"><span class="circles-number">45</span></span><span class="circles-text">%</span></div></div></div>
+                        <div class="circle" id="circle-2"></div>
                         <h3 class="circle-title">ตราสารหนี้</h3>
-                        {{--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>--}}
+
                     </div>
                     <div class="inner-pchart col-md-3">
-                        <div class="circle" id="circle-3"><div class="circles-wrp" style="position:relative; display:inline-block;"><svg width="160" height="160"><path fill="transparent" stroke="#eee" stroke-width="8" d="M 79.98452083651917 4.000001576345426 A 76 76 0 1 1 79.89443752470656 4.0000733121155605 Z"></path><path fill="transparent" stroke="#72c02c" stroke-width="8" d="M 79.98452083651917 4.000001576345426 A 76 76 0 1 1 18.57167552753244 124.74998270955244 "></path></svg><div class="circles-text-wrp" style="position:absolute; top:0; left:0; text-align:center; width:100%; font-size:40px; height:160px; line-height:160px;"><span class="circles-number"><span class="circles-number">13</span></span><span class="circles-text">%</span></div></div></div>
+                        <div class="circle" id="circle-3"></div>
                         <h3 class="circle-title">อัตราสะสม</h3>
-                        {{--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>--}}
+
                     </div>
                     <div class="inner-pchart col-md-3">
-                        <div class="circle" id="circle-3"><div class="circles-wrp" style="position:relative; display:inline-block;"><svg width="160" height="160"><path fill="transparent" stroke="#eee" stroke-width="8" d="M 79.98452083651917 4.000001576345426 A 76 76 0 1 1 79.89443752470656 4.0000733121155605 Z"></path><path fill="transparent" stroke="#72c02c" stroke-width="8" d="M 79.98452083651917 4.000001576345426 A 76 76 0 1 1 18.57167552753244 124.74998270955244 "></path></svg><div class="circles-text-wrp" style="position:absolute; top:0; left:0; text-align:center; width:100%; font-size:40px; height:160px; line-height:160px;"><span class="circles-number"><span class="circles-number">10</span></span><span class="circles-text">%</span></div></div></div>
+                        <div class="circle" id="circle-4"></div>
                         <h3 class="circle-title">อัตราสมทบ</h3>
-                        {{--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>--}}
+
                     </div>
                 </div>
                 <hr>
