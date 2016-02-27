@@ -75,19 +75,7 @@
                                 </div>
 
 
-                                {{--<div class="col-xs-4 col-md-3 service-in">--}}
-                                {{--<small>สังกัด</small>--}}
-                                {{--<h4 class="counter">ฝ่ายพัฒนาระบบงานประยุกต์</h4>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-xs-4 col-md-3 service-in">--}}
-                                {{--<small>แผนการลงทุน</small>--}}
-                                {{--<h4 class="counter">แบบที่ 4 (D.I.Y)</h4>--}}
-                                {{--</div>--}}
 
-                                {{--<div class="col-xs-6 text-right service-in">--}}
-                                {{--<small>สังกัด</small>--}}
-                                {{--<h4 class="counter">6,048</h4>--}}
-                                {{--</div>--}}
                             </div>
 
 
@@ -253,7 +241,7 @@
 
                                                 <td style="text-align: center;">{{get_date_notime($item->MODIFY_DATE)}}</td>
                                                 <td style="text-align: center;">
-                                                    01 มี.ค. 2559</td>
+                                                    {{get_date_notime($item->EFFECTIVE_DATE)}}</td>
                                             </tr>
                                         @endforeach
                                     @endif

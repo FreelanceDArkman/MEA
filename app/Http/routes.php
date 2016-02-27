@@ -114,8 +114,19 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('/historyinvestmentplan','changeplanController@getIndex');
 
+
+
         Route::get('/cumulative','cumulativeController@getIndex');
-        Route::get('/historycumulative','historycumulativeController@getIndex');
+        Route::get('/delplan','cumulativeController@deleplan');
+        Route::post('/cumulative','cumulativeController@InsertPlan');
+
+
+
+        Route::get('/historycumulative','cumulativeController@getIndex');
+
+
+
+
         Route::get('/riskassessment','riskassessmentController@getIndex');
 
     });

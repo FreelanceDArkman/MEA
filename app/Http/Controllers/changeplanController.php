@@ -37,34 +37,7 @@ class changeplanController extends Controller
         $equip =   $request->input('maxVal1');
         $dept =   $request->input('maxVal2');
 
-//        $modify =   $create_date;
-//
-//        $effecdate =   $create_date;
-//        $modicount =  2;
-//
-//        $curentCount = $request->input('count_modify');
-//        $curentModify = $request->input('date_modify');
 
-
-
-//        echo "Day = ".$today["mday"]."<br>";
-//        echo "Month = ".$today["mon"]."<br>";
-//        echo "Year = ".$today["year"]."<br>";
-
-
-
-//        var_dump($create_date .'<br/>');
-////        var_dump($dateCurrentModify.'<br/>');
-//        var_dump($effectiveDate.'<br/>');
-//        var_dump($Modify_count.'<br/>');
-//        var_dump($emp_id.'<br/>');
-//        var_dump($plan_id.'<br/>');
-//        var_dump($equip.'<br/>');
-//        var_dump($dept.'<br/>');
-
-
-//
-//
         $sql = "INSERT INTO TBL_USER_FUND_CHOOSE (EMP_ID,PLAN_ID,EQUITY_RATE,DEBT_RATE,MODIFY_DATE,EFFECTIVE_DATE,MODIFY_COUNT)
 VALUES($emp_id,$plan_id,$equip,$dept,'".$create_date."','".$effectiveDate."',$Modify_count)";
 
