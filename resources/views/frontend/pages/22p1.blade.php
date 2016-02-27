@@ -138,7 +138,8 @@
                             </div>
 
                             <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}" >
-                                <form action="#" id="sky-form1" class="sky-form">
+                                <form action="{{ action('changeplanController@InsertInvestPlan') }}" id="sky-form1" class="sky-form" method="post">
+                                    {!! csrf_field() !!}
                                     <header>เลือกแผนการลงทุน</header>
                                     <div class="alert alert-warning fade in">
                                         <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ 4 ครั้ง ภายในวันที่ 1-10 ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
@@ -188,6 +189,8 @@
 
                                     </fieldset>
 
+                                    <input type="hidden" id="count_modify" name="count_modify" value="{{$CurrnentPlan->MODIFY_COUNT}}">
+                                    <input type="hidden" id="date_modify" name="date_modify" value="{{$CurrnentPlan->MODIFY_DATE}}">
                                     <footer>
                                         <button type="submit" class="btn-u btn-u-default">ส่งข้อมูล</button>
                                         <button type="button" class="btn-u" id="btn_cancelinvest" >ยกเลิก</button>
@@ -200,7 +203,64 @@
                         </div>
                         <div class="tab-pane fade " id="profile-1">
 
+                            <div class="table-responsive">
 
+                                <table style="width:1024px ; font-size:12px; border:solid thin #C7DCF9; border-spacing: 1px !important;
+               border-collapse: separate !important;">
+                                    <thead>
+
+                                    <tr style="background-color: #26A9E0;color:white;">
+                                        <th style="text-align:center;">ครั้งที่</th>
+                                        <th style="text-align:center;">รหัสพนักงาน</th>
+                                        <th style="text-align:center;">ชื่อ-สกุล</th>
+                                        <th style="text-align:center;">แผนการลงทุน(เดิม)</th>
+                                        <th style="text-align:center;">ตราสารทุน(เดิม)</th>
+                                        <th style="text-align:center;">ตราสารหนี้(เดิม)</th>
+
+                                        <th style="text-align:center;">แผนการลงทุน(ใหม่)</th>
+                                        <th style="text-align:center;">ตราสารทุน(ใหม่)</th>
+                                        <th style="text-align:center;">ตราสารหนี้(ใหม่)</th>
+
+                                        <th style="text-align:center;">วันทำรายการ</th>
+                                        <th style="text-align:center;">วันที่มีผล</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    @if($historyPlan)
+                                        @foreach($historyPlan as $index => $item)
+                                            <tr>
+
+                                                <td style="text-align: center;">{{$item->MODIFY_COUNT .'/'.get_date_year($item->MODIFY_DATE) }}</td>
+                                                <td style="text-align: center;">{{$item->EMP_ID}}</td>
+                                                <td style="text-align: center;">{{$item->FULL_NAME}}</td>
+
+                                                @if( count($historyPlan) > $index+1)
+
+                                                <td style="text-align: center;">{{$historyPlan[$index+1]->PLAN_NAME}}</td>
+                                                <td style="text-align: center;">{{$historyPlan[$index+1]->DEBT_RATE}}</td>
+                                                <td style="text-align: center;">{{$historyPlan[$index+1]->EQUITY_RATE}}</td>
+                                                @else
+                                                    <td style="text-align: center;">-</td>
+                                                    <td style="text-align: center;">-</td>
+                                                    <td style="text-align: center;">-</td>
+                                                @endif
+
+                                                <td style="text-align: center;">{{$item->PLAN_NAME}}</td>
+                                                <td style="text-align: center;">{{$item->DEBT_RATE}}</td>
+                                                <td style="text-align: center;">{{$item->EQUITY_RATE}}</td>
+
+                                                <td style="text-align: center;">{{get_date_notime($item->MODIFY_DATE)}}</td>
+                                                <td style="text-align: center;">
+                                                    01 มี.ค. 2559</td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
 
@@ -278,14 +338,16 @@
                // var child = document.getElementById('circles-' + i),
                         //percentage = 45 + (i * 9);
 
-
+           // $CurrnentPlan
+            //$Currnentasset->EQUITY
+            //$Currnentasset->DEBT}}
 
                 Circles.create({
                 id:         'circles-1',
-                percentage: '{{$Currnentasset->EQUITY}}',
+                percentage: '{{$CurrnentPlan->EQUITY_RATE}}',
                 radius:     70,
                 width:      2,
-                number:     '{{$Currnentasset->EQUITY}}',
+                number:     '{{$CurrnentPlan->EQUITY_RATE}}',
                 text:       '%',
                 colors:      ['#D3B6C6', '#9B6BCC'],
                 duration:   2000,
@@ -293,10 +355,10 @@
 
             Circles.create({
                 id:         'circles-2',
-                percentage: '{{$Currnentasset->DEBT}}',
+                percentage: '{{$CurrnentPlan->DEBT_RATE}}',
                 radius:     70,
                 width:      2,
-                number:     '{{$Currnentasset->DEBT}}',
+                number:     '{{$CurrnentPlan->DEBT_RATE}}',
                 text:       '%',
                 colors:     ['#FFC2BB', '#E74C3C'],
                 duration:   2000,

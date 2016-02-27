@@ -162,6 +162,15 @@ if(!function_exists('get_date_nodate')) {
     }
 }
 
+if(!function_exists('get_date_year')) {
+    function get_date_year($input)
+    {
+        Date::setLocale('th');
+        $create_date = new Date($input);
+        return $create_date->add('543 years')->format('Y');
+    }
+}
+
 
 if(!function_exists('meaNumbermoney')){
     function meaNumbermoney($input){

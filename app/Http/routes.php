@@ -110,7 +110,9 @@ Route::group(['middleware' => ['web']], function () {
 
 
         Route::get('/changeplan','changeplanController@getIndex');
-        Route::get('/historyinvestmentplan','historyinvestmentplanController@getIndex');
+        Route::post('/changeplan','changeplanController@InsertInvestPlan');
+
+        Route::get('/historyinvestmentplan','changeplanController@getIndex');
 
         Route::get('/cumulative','cumulativeController@getIndex');
         Route::get('/historycumulative','historycumulativeController@getIndex');
