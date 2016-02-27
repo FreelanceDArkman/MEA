@@ -101,12 +101,22 @@
 
                 <div class="tab-v2">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >เปลี่ยนแผนการลงทุน</a></li>
-                        <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">ประวัติเลือกแผนการลงทุน</a></li>
+
+                        @if($ishowhis)
+                        <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >เปลี่ยนแผนการลงทุน</a></li>
+                        <li class="active"><a href="#profile-1" data-toggle="tab" aria-expanded="true">ประวัติเลือกแผนการลงทุน</a></li>
+                        @else
+                            <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >เปลี่ยนแผนการลงทุน</a></li>
+                            <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">ประวัติเลือกแผนการลงทุน</a></li>
+                        @endif
 
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade active in" id="home-1" style="position: relative" >
+                        @if($ishowhis)
+                            <div class="tab-pane fade " id="home-1" style="position: relative" >
+                                @else
+                                    <div class="tab-pane fade active in" id="home-1" style="position: relative" >
+                                        @endif
 
 
                             <div id="all_invest" style="{{objectcheckdisplaynone($CurrnentPlan)}}" >
@@ -194,7 +204,35 @@
 
 
                         </div>
-                        <div class="tab-pane fade " id="profile-1">
+
+                        @if($ishowhis)
+                            <div class="tab-pane fade active in" id="profile-1">
+                                @else
+                                    <div class="tab-pane fade " id="profile-1">
+                                        @endif
+
+
+
+                            <form class="form-inline" role="form" method="post" action="{{action('cumulativeController@getIndexbysearch')}}">
+                                {!! csrf_field() !!}
+                                <div class="form-group">
+                                    <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                    <select name="drop_year" id="drop_year">
+                                            {!! $ret !!}}
+                                        {{--<option value="2011">2554</option>--}}
+                                        {{--<option value="2012">2555</option>--}}
+                                        {{--<option value="2013">2556</option>--}}
+                                        {{--<option value="2014">2557</option>--}}
+                                        {{--<option value="2015">2558</option>--}}
+                                        {{--<option value="2016">2559</option>--}}
+                                        {{--<option value="2017">2560</option>--}}
+                                        {{--<option value="2018">2561</option>--}}
+                                    </select>
+                                </div>
+
+
+                                <button type="submit" class="btn-u btn-u-default">ค้นหา</button>
+                            </form>
 
                             <div class="table-responsive">
                                 <table style="width:1024px ;font-size:12px; border:solid thin #C7DCF9; border-spacing: 1px !important;

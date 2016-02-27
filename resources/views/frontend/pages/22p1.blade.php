@@ -89,19 +89,48 @@
 
                 <div class="tab-v2">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >เปลี่ยนแผนการลงทุน</a></li>
-                        <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">ประวัติเลือกแผนการลงทุน</a></li>
+                        @if($ishowhis)
+                        <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >เปลี่ยนแผนการลงทุน</a></li>
+                        <li class="active"><a href="#profile-1" data-toggle="tab" aria-expanded="true">ประวัติเลือกแผนการลงทุน</a></li>
+                        @else
+                            <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >เปลี่ยนแผนการลงทุน</a></li>
+                            <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">ประวัติเลือกแผนการลงทุน</a></li>
+                        @endif
 
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane fade active in" id="home-1" style="position: relative" >
+                        @if($ishowhis)
+                        <div class="tab-pane fade " id="home-1" style="position: relative" >
+                            @else
+                                <div class="tab-pane fade active in" id="home-1" style="position: relative" >
+                                    @endif
+
+
+                            @if($CurrnentPlan)
+                                @if($CurrnentPlan[0]->MODIFY_COUNT == session()->get('user_data')->fund_plan_change_per_year)
+                                    <div class="alert alert-warning fade in">
+                                        <strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>
+                                    </div>
+                                    @endif
+                            @else
+                                @if($effective[0]->MODIFY_COUNT == session()->get('user_data')->fund_plan_change_per_year)
+                                <div class="alert alert-warning fade in">
+                                    <strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>
+                                </div>
+                                @endif
+                            @endif
 
 
                             <div id="all_invest" style="{{objectcheckdisplaynone($CurrnentPlan)}}" >
                                 <div class="row">
                                     <div class="headline-center margin-bottom-60">
                                         <h2>แผนปัจจุบัน</h2>
-                                        <p>แบบที่ {{$CurrnentPlan->PLAN_ID}} ({{$CurrnentPlan->PLAN_NAME}})</p>
+
+                                        @if($CurrnentPlan)
+                                        <p>แบบที่ {{$CurrnentPlan[0]->PLAN_ID}} ({{$CurrnentPlan[0]->PLAN_NAME}})</p>
+                                            @else
+                                            <p>แบบที่ {{$effective[0]->PLAN_ID}} ({{$effective[0]->PLAN_NAME}})</p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="row">
@@ -119,7 +148,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12" style="padding: 0 100px 0 100px;">
-                                        <button class="btn-u btn-u-lg btn-block btn-u-blue" id="btn_changplan" type="button">ยกเลิกแผนปัจจุบัน</button>
+                                        <a href="{{action('changeplanController@deleplan')}}" class="btn-u btn-u-lg btn-block btn-u-blue" id="btn_changplan" type="button">ยกเลิกแผนปัจจุบัน</a>
                                     </div>
 
                                 </div>
@@ -130,7 +159,7 @@
                                     {!! csrf_field() !!}
                                     <header>เลือกแผนการลงทุน</header>
                                     <div class="alert alert-warning fade in">
-                                        <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ 4 ครั้ง ภายในวันที่ 1-10 ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
+                                        <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
                                     </div>
                                     <fieldset>
                                         <legend>เปลี่ยนแผนการลงทุน</legend>
@@ -143,7 +172,7 @@
                                                     <option value="default"> กรุณาเลือก </option>
                                                     @foreach($dropplan as $index => $item)
 
-                                                    <option value="{{$item->PLAN_ID}}">{{$item->PLAN_NAME}}</option>
+                                                    <option value="{{$item->PLAN_ID ."," .$item->EQUITY_MIN_PERCENTAGE."," .$item->EQUITY_MAX_PERCENTAGE."," .$item->DEBT_MIN_PERCENTAGE."," .$item->DEBT_MAX_PERCENTAGE}}">{{$item->PLAN_NAME}}</option>
 
                                                     @endforeach
                                                 </select>
@@ -152,7 +181,7 @@
                                         </div>
 
 
-
+                                        <input type="hidden" id="user" name="user" value="{{$users->USER_PRIVILEGE_DESC}}">
                                     </fieldset>
                                     <br/>
                                     <fieldset>
@@ -176,9 +205,13 @@
 
 
                                     </fieldset>
-
-                                    <input type="hidden" id="count_modify" name="count_modify" value="{{$CurrnentPlan->MODIFY_COUNT}}">
-                                    <input type="hidden" id="date_modify" name="date_modify" value="{{$CurrnentPlan->MODIFY_DATE}}">
+                                    @if($CurrnentPlan)
+                                    <input type="hidden" id="count_modify" name="count_modify" value="{{$CurrnentPlan[0]->MODIFY_COUNT}}">
+                                    <input type="hidden" id="date_modify" name="date_modify" value="{{$CurrnentPlan[0]->MODIFY_DATE}}">
+                                    @else
+                                        <input type="hidden" id="count_modify" name="count_modify" value="{{$effective[0]->MODIFY_COUNT}}">
+                                        <input type="hidden" id="date_modify" name="date_modify" value="{{$effective[0]->MODIFY_DATE}}">
+                                    @endif
                                     <footer>
                                         <button type="submit" class="btn-u btn-u-default">ส่งข้อมูล</button>
                                         <button type="button" class="btn-u" id="btn_cancelinvest" >ยกเลิก</button>
@@ -189,7 +222,36 @@
 
 
                         </div>
-                        <div class="tab-pane fade " id="profile-1">
+
+                                @if($ishowhis)
+                        <div class="tab-pane fade active in" id="profile-1">
+                            @else
+                                <div class="tab-pane fade " id="profile-1">
+                                    @endif
+
+
+                                    <form class="form-inline" role="form" method="post" action="{{action('changeplanController@getIndexbysearch')}}">
+                                        {!! csrf_field() !!}
+                                        <div class="form-group">
+                                            <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                            <select name="drop_year" id="drop_year">
+                                                {!!$ret !!}
+                                                {{--<option value="2011">2554</option>--}}
+                                                {{--<option value="2012">2555</option>--}}
+                                                {{--<option value="2013">2556</option>--}}
+                                                {{--<option value="2014">2557</option>--}}
+                                                {{--<option value="2015">2558</option>--}}
+                                                {{--<option value="2016">2559</option>--}}
+                                                {{--<option value="2017">2560</option>--}}
+                                                {{--<option value="2018">2561</option>--}}
+                                            </select>
+                                        </div>
+                                        
+
+                                        <button type="submit" class="btn-u btn-u-default">ค้นหา</button>
+                                    </form>
+
+
 
                             <div class="table-responsive">
 
@@ -267,53 +329,53 @@
         $(document).ready(function(){
 
 
-            $('#maxVal1').on('keyup',function(){
+//            $('#maxVal1').on('keyup',function(){
+//
+//              var val =  $(this).val();
+//                if(val <= 100){
+//
+//                    $('#maxVal2').val(100 -val);
+//                }else {
+//
+//                    alert('กรุณาใส่ข้อมูล ไม่เกิน 100');
+//                }
+//
+//
+//            });
+//
+//            $('#maxVal2').on('keyup',function(){
+//                var val =  $(this).val();
+//
+//                if(val <= 100){
+//
+//                    $('#maxVal1').val(100 -val);
+//                }else {
+//
+//                    alert('กรุณาใส่ข้อมูล ไม่เกิน 100');
+//                }
+//
+//
+//            });
 
-              var val =  $(this).val();
-                if(val <= 100){
-
-                    $('#maxVal2').val(100 -val);
-                }else {
-
-                    alert('กรุณาใส่ข้อมูล ไม่เกิน 100');
-                }
-
-
-            });
-
-            $('#maxVal2').on('keyup',function(){
-                var val =  $(this).val();
-
-                if(val <= 100){
-
-                    $('#maxVal1').val(100 -val);
-                }else {
-
-                    alert('กรุณาใส่ข้อมูล ไม่เกิน 100');
-                }
-
-
-            });
-
-            $('#btn_changplan').on('click',function(){
-
-                $('#all_invest').slideUp('400',function(){
-                    $('#invest_form').slideDown();
-
-                })
-               //
-            //invest_form
-            });
-
-            $('#btn_cancelinvest').on('click',function(){
-
-                $('#invest_form').slideUp('400',function(){
-                    $('#all_invest').slideDown();
-
-                })
-                //
-                //invest_form
-            });
+//            $('#btn_changplan').on('click',function(){
+//
+//                $('#all_invest').slideUp('400',function(){
+//                    $('#invest_form').slideDown();
+//
+//                })
+//               //
+//            //invest_form
+//            });
+//
+//            $('#btn_cancelinvest').on('click',function(){
+//
+//                $('#invest_form').slideUp('400',function(){
+//                    $('#all_invest').slideDown();
+//
+//                })
+//                //
+//                //invest_form
+//            });
 
 
 
@@ -321,21 +383,23 @@
                 ['#D3B6C6', '#9B6BCC'], ['#C9FF97', '#72c02c'], ['#BEE3F7', '#3498DB'], ['#FFC2BB', '#E74C3C']
             ];
 
-           // for (var i = 1; i <= 2; i++) {
 
-               // var child = document.getElementById('circles-' + i),
-                        //percentage = 45 + (i * 9);
 
-           // $CurrnentPlan
-            //$Currnentasset->EQUITY
-            //$Currnentasset->DEBT}}
 
                 Circles.create({
                 id:         'circles-1',
-                percentage: '{{$CurrnentPlan->EQUITY_RATE}}',
+                    @if($CurrnentPlan)
+                    percentage: '{{$CurrnentPlan[0]->EQUITY_RATE}}',
+                    @else
+                    percentage: '{{$effective[0]->EQUITY_RATE}}',
+                    @endif
                 radius:     70,
                 width:      2,
-                number:     '{{$CurrnentPlan->EQUITY_RATE}}',
+                    @if($CurrnentPlan)
+                number:     '{{$CurrnentPlan[0]->EQUITY_RATE}}',
+                    @else
+                    number: '{{$effective[0]->EQUITY_RATE}}',
+                    @endif
                 text:       '%',
                 colors:      ['#D3B6C6', '#9B6BCC'],
                 duration:   2000,
@@ -343,15 +407,24 @@
 
             Circles.create({
                 id:         'circles-2',
-                percentage: '{{$CurrnentPlan->DEBT_RATE}}',
+                @if($CurrnentPlan)
+                percentage: '{{$CurrnentPlan[0]->DEBT_RATE}}',
+                @else
+                percentage: '{{$effective[0]->DEBT_RATE}}',
+                @endif
+
                 radius:     70,
                 width:      2,
-                number:     '{{$CurrnentPlan->DEBT_RATE}}',
+                    @if($CurrnentPlan)
+                number: '{{$CurrnentPlan[0]->DEBT_RATE}}',
+                @else
+                number:'{{$effective[0]->DEBT_RATE}}',
+                @endif
                 text:       '%',
                 colors:     ['#FFC2BB', '#E74C3C'],
                 duration:   2000,
             });
-           // }
+
 
 
 
@@ -370,45 +443,98 @@
             //	}
             //});
 
+
+            $("#TYPE_TOPIC").on('change',function(){
+
+//                alert($(this).val());
+
+                var arrval = $(this).val().split(',');
+
+                var maxeq = arrval[2]
+                var mineq = arrval[1]
+                var maxdeb =arrval[4]
+                var mindeb =arrval[3]
+
+
+                $("#maxVal1").attr('placeholder',mineq + "-" + maxeq)
+
+                $("#maxVal2").attr('placeholder',mindeb + "-" + maxdeb)
+
+
+
+            });
+
             // Validation
             $("#sky-form1").validate({
                 // Rules for form validation
                 rules:
                 {
-                    maxVal1:
-                    {
-                        required: true,
-                        max: 100
-                    },
-                    maxVal2:
-                    {
-                        required: true,
-                        max: 100
-                    },
+
                     TYPE_TOPIC:{
                         valueNotEquals: "default"
                     },
+                    maxVal1:{
+                        required: true,
+                    },
+                    maxVal2:{
+                        required: true,
+                    }
 
                 },
 
                 // Messages for form validation
                 messages:
                 {
-                    maxVal:
-                    {
-                        required: 'Please enter some value'
-                    },
-                    required:
-                    {
-                        required: 'Please enter something'
-                    },
+
                     TYPE_TOPIC:{
                         valueNotEquals: "Please select an item!"
-                    },
+                    }
 
                 },
 
+// Ajax form submition
+                submitHandler: function(form)
+                {
 
+
+
+                    var arrval =  $("#TYPE_TOPIC").val().split(',');
+
+
+                    var flag100 = {{session()->get('user_data')->access_status_flag}};
+
+                    var maxeq = arrval[2]
+                    if(flag100 == 2){
+                        maxeq = 100;
+                    }
+
+                    var mineq = arrval[1]
+                    var maxdeb =arrval[4]
+                    var mindeb =arrval[3]
+
+
+                    var maxVal1 = $("#maxVal1").val();
+                    var maxVal2 = $("#maxVal2").val();
+
+
+
+                    if(((parseInt(maxVal1)>=parseInt(mineq) && parseInt(maxVal1)<=parseInt(maxeq)) && (parseInt(maxVal2)>=parseInt(mindeb) && parseInt(maxVal2)<=parseInt(maxdeb)) ) ){
+                        $(form).submit();
+                    }else {
+                        alert('กรุณาระบุ ค่าให้ถูกต้อง')
+                    }
+//                    $(form).ajaxSubmit(
+//                            {
+//                                beforeSend: function()
+//                                {
+//                                    $('#sky-form3 button[type="submit"]').attr('disabled', true);
+//                                },
+//                                success: function()
+//                                {
+//                                    $("#sky-form3").addClass('submited');
+//                                }
+//                            });
+                },
 
                 // Do not change code below
                 errorPlacement: function(error, element)

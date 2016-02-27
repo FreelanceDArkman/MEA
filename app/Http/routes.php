@@ -109,16 +109,31 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/compares','TrendsController@getIndex');
 
 
-        Route::get('/changeplan','changeplanController@getIndex');
-        Route::post('/changeplan','changeplanController@InsertInvestPlan');
+//        Route::get('/changeplan','changeplanController@getIndex');
+
+
+        Route::group(['prefix' => 'changeplan'] , function() {
+
+            Route::get('/', 'changeplanController@getIndex');
+            Route::post('/changeplan','changeplanController@InsertInvestPlan');
+            Route::get('/delplan1','changeplanController@deleplan');
+            Route::post('/', 'changeplanController@getIndexbysearch');
+//            Route::get('{id}', 'QaController@getIndexByID')->where('id', '[0-9]+');
+
+
+        });
+
+
 
         Route::get('/historyinvestmentplan','changeplanController@getIndex');
 
 
-
-        Route::get('/cumulative','cumulativeController@getIndex');
-        Route::get('/delplan','cumulativeController@deleplan');
-        Route::post('/cumulative','cumulativeController@InsertPlan');
+        Route::group(['prefix' => 'cumulative'] , function() {
+            Route::get('/', 'cumulativeController@getIndex');
+            Route::get('/delplan', 'cumulativeController@deleplan');
+            Route::post('/cumulative', 'cumulativeController@InsertPlan');
+            Route::post('/', 'cumulativeController@getIndexbysearch');
+        });
 
 
 

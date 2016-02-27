@@ -17,7 +17,8 @@ class changeplanController extends Controller
     public  function  InsertInvestPlan(Request $request){
 
 
-
+        $sqlchk = "SELECT * FROM TBL_CONTROL_CFG";
+        $dataCheck =  DB::select(DB::raw($sqlchk))[0];
         $create_date = new Date();
         $dateCurrentModify = new Date($request->input('date_modify'));
         $datenextmont = date("Y-m-d H:i:s",strtotime('+1 month'));
@@ -25,27 +26,138 @@ class changeplanController extends Controller
 
         $Modify_count = 0;
 
-        if(date("m",strtotime($create_date)) == date("m",strtotime($dateCurrentModify)) && date("Y",strtotime($create_date)) == date("Y",strtotime($dateCurrentModify))){
-            $Modify_count = $request->input('count_modify');
+        $arrpages = explode("-", $dataCheck->FUND_PLAN_CHANGE_PERIOD);
+
+        if(date("Y",strtotime($create_date)) != date("Y",strtotime($dateCurrentModify))){
+            $Modify_count = 1;
         }else{
-            $Modify_count = $request->input('count_modify') + 1;
+
+            if( date("d",strtotime($create_date)) == (int)$arrpages[1] &&  date("m",strtotime($create_date)) == date("m",strtotime($dateCurrentModify)) && date("Y",strtotime($create_date)) == date("Y",strtotime($dateCurrentModify))){
+
+                $Modify_count = $request->input('count_modify');
+
+            }else{
+                $Modify_count = $request->input('count_modify') + 1;
+            }
+
         }
+
+        $arrPlanTopic = explode(",", $request->input('TYPE_TOPIC'));
 
         $effectiveDate = New Date(date("Y",strtotime($datenextmont))."-".date("m",strtotime($datenextmont))."-1");
         $emp_id =  get_userID();
-        $plan_id =   $request->input('TYPE_TOPIC');
+        $plan_id =   $arrPlanTopic[0];
         $equip =   $request->input('maxVal1');
         $dept =   $request->input('maxVal2');
+        $addby = $request->input('user');
 
-
-        $sql = "INSERT INTO TBL_USER_FUND_CHOOSE (EMP_ID,PLAN_ID,EQUITY_RATE,DEBT_RATE,MODIFY_DATE,EFFECTIVE_DATE,MODIFY_COUNT)
-VALUES($emp_id,$plan_id,$equip,$dept,'".$create_date."','".$effectiveDate."',$Modify_count)";
+        $sql = "INSERT INTO TBL_USER_FUND_CHOOSE (EMP_ID,PLAN_ID,EQUITY_RATE,DEBT_RATE,MODIFY_DATE,EFFECTIVE_DATE,MODIFY_COUNT,MODIFY_BY)
+VALUES($emp_id,$plan_id,$equip,$dept,'".$create_date."','".$effectiveDate."',$Modify_count,'".$addby."')";
 
        DB::insert(DB::raw($sql));
 //
         return redirect()->to('/changeplan');
     }
 
+
+    public function getIndexbysearch(Request $request)
+    {
+        $this->pageSetting( [
+            'menu_group_id' => 22,
+            'menu_id' => 1,
+            'title' => 'จัดการผู้ใช้'
+        ] );
+
+
+
+        // saving_rate_change_periodaccess_status_flag
+//         var_dump(session()->get('user_data')->fund_plan_change_per_year . "<br/>");
+//        var_dump(session()->get('user_data')->current_fund_plan_modify_count);
+//access_status_flag
+
+        $sql5 = "SELECT USER_PRIVILEGE_DESC FROM tbl_USER us
+INNER JOIN tbl_privilege pi ON pi.USER_PRIVILEGE_ID = us.USER_PRIVILEGE_ID
+WHERE us.EMP_ID = '".get_userID()."'";
+        $users =  DB::select(DB::raw($sql5))[0];
+
+        $sqlchk = "SELECT * FROM TBL_CONTROL_CFG";
+        $dataCheck =  DB::select(DB::raw($sqlchk))[0];
+
+        //history
+
+        $sqlhis = "SELECT uc.MODIFY_COUNT,uc.MODIFY_DATE,uc.EMP_ID,enf.FULL_NAME ,uc.PLAN_ID , pl.PLAN_NAME ,uc.DEBT_RATE
+,uc.EQUITY_RATE,uc.EFFECTIVE_DATE, ROW_NUMBER() OVER (ORDER BY uc.MODIFY_DATE DESC) AS rownum
+FROM TBL_EMPLOYEE_INFO enf
+INNER JOIN TBL_USER_FUND_CHOOSE uc ON uc.EMP_ID = enf.EMP_ID
+INNER JOIN TBL_INVESTMENT_PLAN pl ON pl.PLAN_ID =uc.PLAN_ID
+WHERE  YEAR(uc.MODIFY_DATE) = '". $request->input('drop_year') ."' AND  enf.EMP_ID ='".get_userID()."'";
+
+        $historyPlan = DB::select(DB::raw($sqlhis));
+
+
+
+        $dropplan  = DB::table('TBL_INVESTMENT_PLAN')->where('PLAN_ACTIVE_FLAG','=','0')->get();
+
+
+
+        $sql = "SELECT TOP 1  * FROM TBL_USER_FUND_CHOOSE pl
+            INNER JOIN TBL_INVESTMENT_PLAN ip ON ip.plan_id = pl.plan_id
+            wHERE pl.EMP_ID  =  '".get_userID()."' AND (MONTH(pl.MODIFY_DATE) = MONTH(GETDATe()) AND YEAR(pl.MODIFY_DATE) = YEAR(GETDATE()))
+            ORDER BY pl.Modify_DATE DESC";
+
+        $CurrnentPlan = DB::select(DB::raw($sql));
+
+
+        $sql4 ="SELECT TOP 1  * FROM TBL_USER_FUND_CHOOSE pl
+            INNER JOIN TBL_INVESTMENT_PLAN ip ON ip.plan_id = pl.plan_id
+            wHERE pl.EMP_ID  =  '".get_userID()."'
+            ORDER BY pl.Modify_DATE DESC";
+        $effective = DB::select(DB::raw($sql4));
+
+
+         $currentyear = "";
+
+        if($CurrnentPlan){
+            $currentyear = get_date_year($CurrnentPlan[0]->MODIFY_DATE);
+        }else{
+            $currentyear = get_date_year($effective[0]->MODIFY_DATE);
+        }
+
+
+
+        $arrDropYear = array();
+        $count = 0;
+        $ret ="<option>เลือกปี</option>";
+        for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
+            $arrDropYear[$count] = $i;
+
+            if(($i-543) == (int)$request->input('drop_year')){
+                $ret = $ret . "<option selected='selected' value=".($i-543).">".$i."</option>";
+            }else{
+                $ret = $ret . "<option value=".($i-543).">".$i."</option>";
+            }
+
+
+            $count = $count+1;
+
+
+
+        }
+
+
+
+
+        $sql2 = "SELECT TOP 1 * FROM TBL_INFORMATION_FROM_ASSET WHERE EMP_ID  = '".get_userID()."'  ORDER BY Create_DATE DESC";
+
+        $Currnentasset = DB::select(DB::raw($sql2))[0];
+
+
+        $ishowhis = true;
+
+
+//var_dump($dropplan);
+        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset, 'historyPlan'=>$historyPlan, 'dataCheck'=>$dataCheck, 'effective'=>$effective, 'users'=>$users,'ishowhis'=> $ishowhis,'ret'=>$ret] );
+    }
 
 
     public function getIndex()
@@ -56,6 +168,20 @@ VALUES($emp_id,$plan_id,$equip,$dept,'".$create_date."','".$effectiveDate."',$Mo
             'title' => 'จัดการผู้ใช้'
         ] );
 
+
+
+        // saving_rate_change_periodaccess_status_flag
+//         var_dump(session()->get('user_data')->fund_plan_change_per_year . "<br/>");
+//        var_dump(session()->get('user_data')->current_fund_plan_modify_count);
+//access_status_flag
+
+        $sql5 = "SELECT USER_PRIVILEGE_DESC FROM tbl_USER us
+INNER JOIN tbl_privilege pi ON pi.USER_PRIVILEGE_ID = us.USER_PRIVILEGE_ID
+WHERE us.EMP_ID = '".get_userID()."'";
+        $users =  DB::select(DB::raw($sql5))[0];
+
+        $sqlchk = "SELECT * FROM TBL_CONTROL_CFG";
+        $dataCheck =  DB::select(DB::raw($sqlchk))[0];
 
         //history
 
@@ -76,11 +202,17 @@ WHERE enf.EMP_ID ='".get_userID()."'";
 
         $sql = "SELECT TOP 1  * FROM TBL_USER_FUND_CHOOSE pl
             INNER JOIN TBL_INVESTMENT_PLAN ip ON ip.plan_id = pl.plan_id
-            wHERE pl.EMP_ID  =  '".get_userID()."' AND (MONTH(pl.EFFECTIVE_DATE) = MONTH(GETDATe()) AND YEAR(pl.EFFECTIVE_DATE) = YEAR(GETDATE()))
-            ORDER BY pl.Modify_count_timestamp DESC";
+            wHERE pl.EMP_ID  =  '".get_userID()."' AND (MONTH(pl.MODIFY_DATE) = MONTH(GETDATe()) AND YEAR(pl.MODIFY_DATE) = YEAR(GETDATE()))
+            ORDER BY pl.Modify_DATE DESC";
 
-        $CurrnentPlan = DB::select(DB::raw($sql))[0];
+        $CurrnentPlan = DB::select(DB::raw($sql));
 
+
+        $sql4 ="SELECT TOP 1  * FROM TBL_USER_FUND_CHOOSE pl
+            INNER JOIN TBL_INVESTMENT_PLAN ip ON ip.plan_id = pl.plan_id
+            wHERE pl.EMP_ID  =  '".get_userID()."'
+            ORDER BY pl.Modify_DATE DESC";
+        $effective = DB::select(DB::raw($sql4));
 
 
         $sql2 = "SELECT TOP 1 * FROM TBL_INFORMATION_FROM_ASSET WHERE EMP_ID  = '".get_userID()."'  ORDER BY Create_DATE DESC";
@@ -88,10 +220,43 @@ WHERE enf.EMP_ID ='".get_userID()."'";
         $Currnentasset = DB::select(DB::raw($sql2))[0];
 
 
+        $currentyear = "";
+
+        if($CurrnentPlan){
+            $currentyear = get_date_year($CurrnentPlan[0]->MODIFY_DATE);
+        }else{
+            $currentyear = get_date_year($effective[0]->MODIFY_DATE);
+        }
+
+
+        $arrDropYear = array();
+        $count = 0;
+        $ret ="<option selected='selected'>เลือกปี</option>";
+        for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
+            $arrDropYear[$count] = $i;
+
+            $ret = $ret . "<option value=".($i-543).">".$i."</option>";
+
+            $count = $count+1;
+
+
+
+        }
 
 
 
 //var_dump($dropplan);
-        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset, 'historyPlan'=>$historyPlan]);
+        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset, 'historyPlan'=>$historyPlan, 'dataCheck'=>$dataCheck, 'effective'=>$effective, 'users'=>$users, 'ishowhis'=> false, 'ret'=>$ret]);
+    }
+
+    public function deleplan(Request $request)
+    {
+
+        $sql = "DELETE FROM TBL_USER_FUND_CHOOSE WHERE EMP_ID = '".get_userID()."' AND MONTH(MODIFY_DATE) = MONTH(GETDATE())
+AND YEAR(MODIFY_DATE) = YEAR(GETDATE())";
+
+        DB::delete(DB::raw($sql));
+
+        return redirect()->to('/changeplan')->with('del2','ok');
     }
 }

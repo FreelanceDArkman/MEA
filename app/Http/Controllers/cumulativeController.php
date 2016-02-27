@@ -68,9 +68,130 @@ WHERe sav.EMP_ID = '".get_userID()."'";
 
         $historyPlan = DB::select(DB::raw($sqlhis));
 
-        return view('frontend.pages.23p1')->with(['CurrnentPlan'=>$CurrnentPlan, 'dataCheck'=>$dataCheck , 'effective'=>$effective, 'Workcheck' =>$Workcheck, 'users'=>$users , 'historyPlan'=>$historyPlan]);
+
+
+
+        $currentyear = "";
+
+        if($CurrnentPlan){
+            $currentyear = get_date_year($CurrnentPlan[0]->CHANGE_SAVING_RATE_DATE);
+        }else{
+            $currentyear = get_date_year($effective[0]->CHANGE_SAVING_RATE_DATE);
+        }
+
+
+        $arrDropYear = array();
+        $count = 0;
+        $ret ="<option selected='selected'>เลือกปี</option>";
+        for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
+            $arrDropYear[$count] = $i;
+
+            $ret = $ret . "<option value=".($i-543).">".$i."</option>";
+
+            $count = $count+1;
+
+
+
+        }
+
+        return view('frontend.pages.23p1')->with(['CurrnentPlan'=>$CurrnentPlan, 'dataCheck'=>$dataCheck , 'effective'=>$effective, 'Workcheck' =>$Workcheck, 'users'=>$users , 'historyPlan'=>$historyPlan,'ishowhis'=>false, 'ret'=>$ret]);
     }
 
+
+    public function getIndexbysearch(Request $request)
+    {
+        $this->pageSetting( [
+            'menu_group_id' => 23,
+            'menu_id' => 1,
+            'title' => 'จัดการผู้ใช้'
+        ] );
+
+
+        $sqlchk = "SELECT * FROM TBL_CONTROL_CFG";
+        $dataCheck =  DB::select(DB::raw($sqlchk))[0];
+
+
+
+
+
+        // saving_rate_change_period
+        // var_dump(session()->get('user_data')->saving_rate_change_period);
+//access_status_flag
+
+        $sql = "SELECT TOP 1 * FROM TBL_USER_SAVING_RATE WHERe EMP_ID =  '".get_userID()."' AND MONTH(CHANGE_SAVING_RATE_DATE) = MONTH(GETDATE())
+AND YEAR(CHANGE_SAVING_RATE_DATE) = YEAR(GETDATE())";
+
+        $CurrnentPlan = DB::select(DB::raw($sql));
+
+
+        $sql4 ="SELECT TOP 1 * FROM TBL_USER_SAVING_RATE WHERe EMP_ID = '".get_userID()."' ORDER BY EFFeCTIVE_DATE DESC";
+        $effective = DB::select(DB::raw($sql4));
+
+
+
+
+
+        $sql2 = "SELECT * FROM TBL_SAVING_RATE_INFO";
+        $Workcheck =  DB::select(DB::raw($sql2))[0];
+
+
+        $sql3 ="SELECT TOP 1 * FROM TBL_MEMBER_BENEFITS WHERE EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE DESC";
+        $Workhrs =  DB::select(DB::raw($sql3));
+
+
+
+        $sql5 = "SELECT USER_PRIVILEGE_DESC FROM tbl_USER us
+INNER JOIN tbl_privilege pi ON pi.USER_PRIVILEGE_ID = us.USER_PRIVILEGE_ID
+WHERE us.EMP_ID = '".get_userID()."'";
+        $users =  DB::select(DB::raw($sql5))[0];
+
+
+
+
+
+        $sqlhis = "SELECT * FROM TBL_EMPLOYEE_INFO emp
+INNER JOIN TBL_USER_SAVING_RATE sav ON sav.EMP_ID = emp.EMP_ID
+WHERe YEAR(sav.CHANGE_SAVING_RATE_DATE) = '".$request->input('drop_year')."' AND sav.EMP_ID = '".get_userID()."'";
+
+        $historyPlan = DB::select(DB::raw($sqlhis));
+
+
+        $ishowhis = true;
+
+
+
+
+        $currentyear = "";
+
+        if($CurrnentPlan){
+            $currentyear = get_date_year($CurrnentPlan[0]->CHANGE_SAVING_RATE_DATE);
+        }else{
+            $currentyear = get_date_year($effective[0]->CHANGE_SAVING_RATE_DATE);
+        }
+
+
+
+        $arrDropYear = array();
+        $count = 0;
+        $ret ="<option>เลือกปี</option>";
+        for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
+            $arrDropYear[$count] = $i;
+
+            if(($i-543) == (int)$request->input('drop_year')){
+                $ret = $ret . "<option selected='selected' value=".($i-543).">".$i."</option>";
+            }else{
+                $ret = $ret . "<option value=".($i-543).">".$i."</option>";
+            }
+
+
+            $count = $count+1;
+
+
+
+        }
+
+        return view('frontend.pages.23p1')->with(['CurrnentPlan'=>$CurrnentPlan, 'dataCheck'=>$dataCheck , 'effective'=>$effective, 'Workcheck' =>$Workcheck, 'users'=>$users , 'historyPlan'=>$historyPlan, 'ishowhis'=>$ishowhis, 'ret'=>$ret]);
+    }
 
     public  function  InsertPlan(Request $request){
 
