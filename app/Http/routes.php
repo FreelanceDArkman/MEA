@@ -144,6 +144,11 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('/riskassessment','riskassessmentController@getIndex');
 
+        Route::get('/quiz','riskassessmentController@getquiz');
+
+        Route::post('/quiz','riskassessmentController@insertQuiz');
+
+
     });
     
 

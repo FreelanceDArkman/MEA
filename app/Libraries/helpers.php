@@ -231,5 +231,44 @@ if(!function_exists('IsActive')) {
     }
 }
 
+if(!function_exists('quizScore')) {
+    function quizScore($quiz_result)
+    {
+
+        $ret = 0;
+
+        //1:B|2:B|3:C|4:B|5:C|6:A|7:B|8:B|9:B|10:B
+        $arrtopic = explode("|", $quiz_result);
+
+        foreach($arrtopic as $index=>$list){
+
+            $arrtchoice = explode(":", $list);
+
+            $ans = $arrtchoice[1];
+
+            if($ans == "A"){
+                $ret = $ret +1;
+            }
+            if($ans == "B"){
+                $ret = $ret +2;
+            }
+            if($ans == "C"){
+                $ret = $ret +3;
+            }
+            if($ans == "D"){
+                $ret = $ret +4;
+            }
+
+
+
+        }
+
+
+
+
+        return $ret;
+    }
+}
+
 
 
