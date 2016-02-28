@@ -8,10 +8,10 @@
 
             <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
                 <li class="list-group-item ">
-                    <a href="/profile"><i class="fa fa-bar-chart-o"></i> Overall Profile</a>
+                    <a href="/profile"><i class="fa fa-home"></i> Overall Profile</a>
                 </li>
 
-                <li class="list-group-item ">
+                <li class="list-group-item">
                     <a href="/trends"><i class="fa fa-bar-chart-o"></i> ข้อมูลการลงทุน</a>
                 </li>
 
@@ -19,13 +19,13 @@
                 <li class="list-group-item active">
                     <a href="/changeplan"><i class="fa fa-cubes"></i> แผนการลงทุน</a>
                 </li>
-                <li class="list-group-item">
-                    <a href="/cumulative"><i class="fa fa-comments"></i> ข้อมูลอัตราสะสม</a>
+                <li class="list-group-item ">
+                    <a href="/cumulative"><i class="fa fa-level-up"></i> ข้อมูลอัตราสะสม</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="/riskassessment"><i class="fa fa-history"></i> แบบประเมินความเสียง</a>
+                    <a href="/riskassessment"><i class="fa fa-exclamation-triangle"></i> แบบประเมินความเสียง</a>
                 </li>
-                <li class="list-group-item">
+                <li class="list-group-item ">
                     <a href="/editprofile"><i class="fa fa-user"></i> แก้ไขข้อมูลส่วนตัว</a>
                 </li>
 
@@ -56,21 +56,22 @@
                                 <div class="col-xs-12 col-md-12 service-in">
                                     <ul>
                                         <li>
-                                            <small>รหัสพนักงาน</small>
-                                            <h4 class="counter">1234567</h4>
+                                            <small>ข้อมูลวันที่</small>
+                                            <h4 class="counter">{{get_date_notime($infoaset->REFERENCE_DATE)}}</h4>
                                         </li>
                                         <li>
-                                            <small>สังกัด</small>
-                                            <h4 class="counter">ฝ่ายพัฒนาระบบงานประยุกต์</h4>
+                                            <small>เงินลงทุนทั้งหมด</small>
+                                            <h4 class="counter">{{meaNumbermoney($infoaset->INVESTMENT_MONEY) }} บาท</h4>
                                         </li>
                                         <li>
-                                            <small>แผนการลงทุน</small>
-                                            <h4 class="counter">แบบที่ 4 (D.I.Y)</h4>
+                                            <small>เงินตราสารทุน</small>
+                                            <h4 class="counter">{{meaNumbermoney($infoaset->EQUITY_FUNDS) }} บาท</h4>
                                         </li>
                                         <li>
-                                            <small>สัดส่วนการลงทุน</small>
-                                            <h4 class="counter">ข้อมูลวันที่ 14 ก.ย. 2558</h4>
+                                            <small>เงินตราสารหนี้</small>
+                                            <h4 class="counter">{{meaNumbermoney($infoaset->BOND_FUNDS) }} บาท</h4>
                                         </li>
+
                                     </ul>
                                 </div>
 
@@ -127,9 +128,9 @@
                                         <h2>แผนปัจจุบัน</h2>
 
                                         @if($CurrnentPlan)
-                                        <p>แบบที่ {{$CurrnentPlan[0]->PLAN_ID}} ({{$CurrnentPlan[0]->PLAN_NAME}})</p>
+                                        <p class="plan_name">แบบที่ {{$CurrnentPlan[0]->PLAN_ID}} ({{$CurrnentPlan[0]->PLAN_NAME}})</p>
                                             @else
-                                            <p>แบบที่ {{$effective[0]->PLAN_ID}} ({{$effective[0]->PLAN_NAME}})</p>
+                                            <p class="plan_name">แบบที่ {{$effective[0]->PLAN_ID}} ({{$effective[0]->PLAN_NAME}})</p>
                                         @endif
                                     </div>
                                 </div>
@@ -230,7 +231,7 @@
                                     @endif
 
 
-                                    <form class="form-inline" role="form" method="post" action="{{action('changeplanController@getIndexbysearch')}}">
+                                    <form class="form-inline mea_searchbox" role="form" method="post" action="{{action('changeplanController@getIndexbysearch')}}">
                                         {!! csrf_field() !!}
                                         <div class="form-group">
                                             <label class="sr-only" for="exampleInputEmail2">Email address</label>
@@ -255,8 +256,7 @@
 
                             <div class="table-responsive">
 
-                                <table style="width:1024px ; font-size:12px; border:solid thin #C7DCF9; border-spacing: 1px !important;
-               border-collapse: separate !important;">
+                                <table  class="table table-bordered table-striped tbl_mea">
                                     <thead>
 
                                     <tr style="background-color: #26A9E0;color:white;">
@@ -329,33 +329,33 @@
         $(document).ready(function(){
 
 
-//            $('#maxVal1').on('keyup',function(){
-//
-//              var val =  $(this).val();
-//                if(val <= 100){
-//
-//                    $('#maxVal2').val(100 -val);
-//                }else {
-//
-//                    alert('กรุณาใส่ข้อมูล ไม่เกิน 100');
-//                }
-//
-//
-//            });
-//
-//            $('#maxVal2').on('keyup',function(){
-//                var val =  $(this).val();
-//
-//                if(val <= 100){
-//
-//                    $('#maxVal1').val(100 -val);
-//                }else {
-//
-//                    alert('กรุณาใส่ข้อมูล ไม่เกิน 100');
-//                }
-//
-//
-//            });
+            $('#maxVal1').on('keyup',function(){
+
+              var val =  $(this).val();
+                if(val <= 100){
+
+                    $('#maxVal2').val(100 -val);
+                }else {
+
+                    alert('กรุณาใส่ข้อมูล ไม่เกิน 100');
+                }
+
+
+            });
+
+            $('#maxVal2').on('keyup',function(){
+                var val =  $(this).val();
+
+                if(val <= 100){
+
+                    $('#maxVal1').val(100 -val);
+                }else {
+
+                    alert('กรุณาใส่ข้อมูล ไม่เกิน 100');
+                }
+
+
+            });
 
 //            $('#btn_changplan').on('click',function(){
 //
@@ -475,9 +475,11 @@
                     },
                     maxVal1:{
                         required: true,
+                        number:true
                     },
                     maxVal2:{
                         required: true,
+                        number:true
                     }
 
                 },

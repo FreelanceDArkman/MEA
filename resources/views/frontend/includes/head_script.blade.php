@@ -8,8 +8,8 @@
 {{--<script type="text/javascript" src="frontend/assets/plugins/smoothScroll.js"></script>--}}
 
 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-<script type="text/javascript" src="{{asset('frontend/assets/plugins/gmap/gmap.js')}}"></script>
+{{--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>--}}
+{{--<script type="text/javascript" src="{{asset('frontend/assets/plugins/gmap/gmap.js')}}"></script>--}}
 <script type="text/javascript" src="{{asset('frontend/assets/plugins/jquery.mixitup.min.js')}}"></script>
 {{--<script type="text/javascript" src="frontend/assets/plugins/parallax-slider/js/modernizr.js"></script>--}}
 {{--<script type="text/javascript" src="frontend/assets/plugins/parallax-slider/js/jquery.cslider.js"></script>--}}
@@ -61,7 +61,7 @@
         StyleSwitcher.initStyleSwitcher();
         PortfolioPage.init();
 //        ParallaxSlider.initParallaxSlider();
-        CirclesMaster.initCirclesMaster1();
+
 //        CirclesMaster.initCirclesMaster2();
 //
         jQuery("DIV[id^='modol']").on('hidden.bs.modal', function (e) {

@@ -10,7 +10,7 @@
         <!-- Blog Sidebar -->
         <div class="col-md-3">
             <div class="headline-v2 bg-color-light"><h2>ถาม-ตอบ</h2></div>
-            <ul class="nav nav-pills nav-stacked">
+            <ul class="nav nav-pills nav-stacked "  id="mea_let_custom">
 
                 @if($qatopic)
 
@@ -36,10 +36,10 @@
                     @if($netasset)
 
                             @foreach($netasset as $index => $item)
-                                <p><span class="dropcap dropcap-bg bg-color-dark">Q</span>{{$item->FAQ_QUESTION_DETAIL}}</p>
+                                <p><span class="dropcap dropcap-bg bg-color-dark" style="background-color: #fe5000;">Q</span>{{$item->FAQ_QUESTION_DETAIL}}</p>
                                 <div class="clearfix"></div>
                                 <blockquote class="hero">
-                                    <p><em>"{{$item->FAQ_ANSWER_DETAIL}}"</em></p>
+                                    <p><em>"{!! $item->FAQ_ANSWER_DETAIL !!}"</em></p>
                                     {{--<small><em>Etiam porta sem malesuada</em></small>--}}
                                 </blockquote>
 

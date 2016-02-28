@@ -21,65 +21,65 @@
     <!-- End First slide -->
 
     <!-- Second Slide -->
-    <div class="ls-slide" data-ls="slidedelay:4500; transition2d:25;">
-        <img src="frontend/assets/img/sliders/layer/bg3.jpg" class="ls-bg" alt="Slide background"/>
+    {{--<div class="ls-slide" data-ls="slidedelay:4500; transition2d:25;">--}}
+        {{--<img src="frontend/assets/img/sliders/layer/bg3.jpg" class="ls-bg" alt="Slide background"/>--}}
 
-        <img class="ls-l" src="frontend/assets/img/mockup/iphone1.png" style="top: 85%; left: 44%;"
-             data-ls="offsetxin:left; durationin:1500; delayin:900; fadein:false; offsetxout:left; durationout:1000; fadeout:false;" />
+        {{--<img class="ls-l" src="frontend/assets/img/mockup/iphone1.png" style="top: 85%; left: 44%;"--}}
+             {{--data-ls="offsetxin:left; durationin:1500; delayin:900; fadein:false; offsetxout:left; durationout:1000; fadeout:false;" />--}}
 
-        <img src="frontend/assets/img/mockup/iphone.png" alt="Slider image" class="ls-s-1" style=" top:62px; left: 29%;"
-             data-ls="offsetxin:left; durationin:1500; delayin:1500; fadein:false; offsetxout:left; durationout:1000; fadeout:false;">
+        {{--<img src="frontend/assets/img/mockup/iphone.png" alt="Slider image" class="ls-s-1" style=" top:62px; left: 29%;"--}}
+             {{--data-ls="offsetxin:left; durationin:1500; delayin:1500; fadein:false; offsetxout:left; durationout:1000; fadeout:false;">--}}
 
-            <span class="ls-s-1" style=" text-transform: uppercase; line-height: 45px; font-size:35px; color:#fff; top:200px; left: 590px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 3500; delayin : 1000;">
-                Fully Responsive <br> Bootstrap 3 Template
-            </span>
+            {{--<span class="ls-s-1" style=" text-transform: uppercase; line-height: 45px; font-size:35px; color:#fff; top:200px; left: 590px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 3500; delayin : 1000;">--}}
+                {{--Fully Responsive <br> Bootstrap 3 Template--}}
+            {{--</span>--}}
 
-        <a class="btn-u btn-u-orange ls-s-1" href="#" style=" padding: 9px 20px; font-size:25px; top:340px; left: 590px; slidedirection : bottom; slideoutdirection : top; durationin : 3500; durationout : 2500; delayin : 1000; ">
-            Download Now
-        </a>
-    </div>
-    <!-- End Second Slide -->
+        {{--<a class="btn-u btn-u-orange ls-s-1" href="#" style=" padding: 9px 20px; font-size:25px; top:340px; left: 590px; slidedirection : bottom; slideoutdirection : top; durationin : 3500; durationout : 2500; delayin : 1000; ">--}}
+            {{--Download Now--}}
+        {{--</a>--}}
+    {{--</div>--}}
+    {{--<!-- End Second Slide -->--}}
 
-    <!-- Third Slide -->
-    <div class="ls-slide" data-ls="transition2d:93;">
-        <img src="frontend/assets/img/sliders/layer/bg3.jpg" class="ls-bg" alt="Slide background">
+    {{--<!-- Third Slide -->--}}
+    {{--<div class="ls-slide" data-ls="transition2d:93;">--}}
+        {{--<img src="frontend/assets/img/sliders/layer/bg3.jpg" class="ls-bg" alt="Slide background">--}}
 
-        <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:70px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 1500; durationout : 500; "></i>
+        {{--<i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:70px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 1500; durationout : 500; "></i>--}}
 
-            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:70px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 500; ">
-                Fully Responsive and Easy to Customize
-            </span>
+            {{--<span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:70px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 500; ">--}}
+                {{--Fully Responsive and Easy to Customize--}}
+            {{--</span>--}}
 
-        <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:120px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 2500; durationout : 1500; "></i>
+        {{--<i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:120px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 2500; durationout : 1500; "></i>--}}
 
-            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:120px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 2500; durationout : 1500; ">
-                Revolution and Layer Slider Included
-            </span>
+            {{--<span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:120px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 2500; durationout : 1500; ">--}}
+                {{--Revolution and Layer Slider Included--}}
+            {{--</span>--}}
 
-        <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:170px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 3500; durationout : 3500; "></i>
+        {{--<i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:170px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 3500; durationout : 3500; "></i>--}}
 
-            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:170px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 2500; ">
-                1000+ Glyphicons Pro and Font Awesome Icons
-            </span>
+            {{--<span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:170px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 2500; ">--}}
+                {{--1000+ Glyphicons Pro and Font Awesome Icons--}}
+            {{--</span>--}}
 
-        <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:220px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 4500; durationout : 3500; "></i>
+        {{--<i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:220px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 4500; durationout : 3500; "></i>--}}
 
-            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:220px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 4500; durationout : 3500; ">
-                Revolution and Layer Slider Included
-            </span>
+            {{--<span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:220px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 4500; durationout : 3500; ">--}}
+                {{--Revolution and Layer Slider Included--}}
+            {{--</span>--}}
 
-        <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:270px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 5500; durationout : 4500; "></i>
+        {{--<i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:270px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 5500; durationout : 4500; "></i>--}}
 
-            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:270px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 5500; durationout : 4500; ">
-                60+ Template Pages and 20+ Plugins Included
-            </span>
+            {{--<span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:270px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 5500; durationout : 4500; ">--}}
+                {{--60+ Template Pages and 20+ Plugins Included--}}
+            {{--</span>--}}
 
-        <a class="btn-u btn-u-blue ls-s1" href="#" style=" padding: 9px 20px; font-size:25px; top:340px; left: 40px; slidedirection : bottom; slideoutdirection : bottom; durationin : 6500; durationout : 3500; ">
-            Twitter Bootstrap 3
-        </a>
+        {{--<a class="btn-u btn-u-blue ls-s1" href="#" style=" padding: 9px 20px; font-size:25px; top:340px; left: 40px; slidedirection : bottom; slideoutdirection : bottom; durationin : 6500; durationout : 3500; ">--}}
+            {{--Twitter Bootstrap 3--}}
+        {{--</a>--}}
 
-        <img src="frontend/assets/img/mockup/iphone1.png" alt="Slider Image" class="ls-s-1" style=" top:30px; left: 650px; slidedirection : right; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
-    </div>
+        {{--<img src="frontend/assets/img/mockup/iphone1.png" alt="Slider Image" class="ls-s-1" style=" top:30px; left: 650px; slidedirection : right; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">--}}
+    {{--</div>--}}
     <!-- Third Slide -->
 </div><!--/layer_slider-->
 <!--=== End Slider ===-->

@@ -30,22 +30,22 @@
 
             <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
                 <li class="list-group-item ">
-                    <a href="/profile"><i class="fa fa-bar-chart-o"></i> Overall Profile</a>
+                    <a href="/profile"><i class="fa fa-home"></i> Overall Profile</a>
                 </li>
 
-                <li class="list-group-item ">
+                <li class="list-group-item">
                     <a href="/trends"><i class="fa fa-bar-chart-o"></i> ข้อมูลการลงทุน</a>
                 </li>
 
 
-                <li class="list-group-item ">
+                <li class="list-group-item">
                     <a href="/changeplan"><i class="fa fa-cubes"></i> แผนการลงทุน</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="/cumulative"><i class="fa fa-comments"></i> ข้อมูลอัตราสะสม</a>
+                    <a href="/cumulative"><i class="fa fa-level-up"></i> ข้อมูลอัตราสะสม</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="/riskassessment"><i class="fa fa-history"></i> แบบประเมินความเสียง</a>
+                    <a href="/riskassessment"><i class="fa fa-exclamation-triangle"></i> แบบประเมินความเสียง</a>
                 </li>
                 <li class="list-group-item active">
                     <a href="/editprofile"><i class="fa fa-user"></i> แก้ไขข้อมูลส่วนตัว</a>
@@ -78,21 +78,22 @@
                                 <div class="col-xs-12 col-md-12 service-in">
                                     <ul>
                                         <li>
-                                            <small>รหัสพนักงาน</small>
-                                            <h4 class="counter">1234567</h4>
+                                            <small>ข้อมูลวันที่</small>
+                                            <h4 class="counter">{{get_date_notime($infoaset->REFERENCE_DATE)}}</h4>
                                         </li>
                                         <li>
-                                            <small>สังกัด</small>
-                                            <h4 class="counter">ฝ่ายพัฒนาระบบงานประยุกต์</h4>
+                                            <small>เงินลงทุนทั้งหมด</small>
+                                            <h4 class="counter">{{meaNumbermoney($infoaset->INVESTMENT_MONEY) }} บาท</h4>
                                         </li>
                                         <li>
-                                            <small>แผนการลงทุน</small>
-                                            <h4 class="counter">แบบที่ 4 (D.I.Y)</h4>
+                                            <small>เงินตราสารทุน</small>
+                                            <h4 class="counter">{{meaNumbermoney($infoaset->EQUITY_FUNDS) }} บาท</h4>
                                         </li>
                                         <li>
-                                            <small>สัดส่วนการลงทุน</small>
-                                            <h4 class="counter">ข้อมูลวันที่ 14 ก.ย. 2558</h4>
+                                            <small>เงินตราสารหนี้</small>
+                                            <h4 class="counter">{{meaNumbermoney($infoaset->BOND_FUNDS) }} บาท</h4>
                                         </li>
+
                                     </ul>
                                 </div>
 
@@ -233,6 +234,7 @@
                                         <td>ลำดับที่</td>
                                         <td>ชื่อไฟล์</td>
                                         <td>วันที่เปลี่ยนแปลงข้อมูล</td>
+                                        <td>ดูไฟล์</td>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -244,6 +246,7 @@
                                             <td>{{$row->FILE_NO}}</td>
                                             <td>{{$row->FILE_NAME}}</td>
                                             <td>{{get_date_notime($row->CREATE_DATE)}}</td>
+                                            <td><a  href="{{$row->FILE_PATH}}" class="btn-u btn-u-red" type="button">ดูไฟล์</a></td>
                                         </tr>
                                         @endforeach
 
@@ -277,15 +280,15 @@
 
                                 <div class="input-group margin-bottom-20" style="padding: 0 40px 0 40px;">
                                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    <input type="password" placeholder="รหัสผ่านเดิม" class="form-control" name="old_password" id="old_password">
+                                    <input type="password" maxlength="12" placeholder="รหัสผ่านเดิม" class="form-control" name="old_password" id="old_password">
                                 </div>
                                 <div class="input-group margin-bottom-20"  style="padding: 0 40px 0 40px;">
                                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    <input type="password" placeholder="รหัสผ่านใหม่" class="form-control" name="new_password" id="new_password">
+                                    <input type="password" maxlength="12" placeholder="รหัสผ่านใหม่" class="form-control" name="new_password" id="new_password">
                                 </div>
                                 <div class="input-group margin-bottom-20"  style="padding: 0 40px 0 40px;">
                                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    <input type="password" placeholder="ยืนยันรหัสผ่านใหม่" class="form-control" name="con_password" id="con_password">
+                                    <input type="password" maxlength="12" placeholder="ยืนยันรหัสผ่านใหม่" class="form-control" name="con_password" id="con_password">
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12"   style="padding: 0 40px 30px 40px;">

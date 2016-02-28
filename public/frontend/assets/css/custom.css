@@ -160,3 +160,54 @@ body, a, h1, h2{
 }
 
 
+/*client*/
+
+.owl-clients-v1 a img{
+    width: 80px;
+}
+#client_titile{
+    font-size: 30px !important;
+}
+
+
+.list-group-item a:hover{
+
+    color: #fe5000 !important;
+
+}
+
+.tbl_mea {
+    font-size: 16px;
+}
+.tbl_mea thead tr th{
+    padding: 3px;
+    background-color: #fef7f8;
+    /*border-color: #862633;*/
+    color: #202020;
+}
+
+.mea_searchbox{
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+.mea_searchbox .form-group label{
+    margin-left: 15px;
+    color: #fe5000;
+}
+
+.hero p em{
+    font-size: 18px;
+}
+.dropcap-bg.dropcap.bg-color-dark{
+    background-color: #fe5000 !important;
+}
+.mea_let_custom li a:hover{
+        color: #fe5000 !important;
+}
+.plan_name{
+    font-size: 30px !important;
+    font-weight: bold;
+}

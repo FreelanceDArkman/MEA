@@ -179,6 +179,13 @@ if(!function_exists('meaNumbermoney')){
     }
 }
 
+if(!function_exists('meaNumbermoney4')){
+    function meaNumbermoney4($input){
+
+        return number_format($input,4,'.',',');
+    }
+}
+
 if(!function_exists('objectcheckdisplaynone')) {
     function objectcheckdisplaynone($obj)
     {

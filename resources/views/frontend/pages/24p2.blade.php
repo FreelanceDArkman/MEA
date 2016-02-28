@@ -105,12 +105,12 @@
                                             <input type="hidden" id="totalquiz" value="{{count($dataqtopic)}}">
 
 
-                        </fieldset>
+                                </fieldset>
 
 
 
                         <footer>
-                            <button type="submit" class="btn-u" onclick="Checkbefore()">ส่งคำตอบแบบสอบถาม</button>
+                            <button type="submit" class="btn-u" onclick="return Checkbefore()">ส่งคำตอบแบบสอบถาม</button>
                             <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
                         </footer>
                     </form>

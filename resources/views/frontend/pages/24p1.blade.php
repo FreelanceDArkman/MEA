@@ -8,24 +8,24 @@
 
             <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
                 <li class="list-group-item ">
-                    <a href="/profile"><i class="fa fa-bar-chart-o"></i> Overall Profile</a>
+                    <a href="/profile"><i class="fa fa-home"></i> Overall Profile</a>
                 </li>
 
-                <li class="list-group-item ">
+                <li class="list-group-item">
                     <a href="/trends"><i class="fa fa-bar-chart-o"></i> ข้อมูลการลงทุน</a>
                 </li>
 
 
-                <li class="list-group-item ">
+                <li class="list-group-item">
                     <a href="/changeplan"><i class="fa fa-cubes"></i> แผนการลงทุน</a>
                 </li>
-                <li class="list-group-item ">
-                    <a href="/cumulative"><i class="fa fa-comments"></i> ข้อมูลอัตราสะสม</a>
+                <li class="list-group-item">
+                    <a href="/cumulative"><i class="fa fa-level-up"></i> ข้อมูลอัตราสะสม</a>
                 </li>
                 <li class="list-group-item active">
-                    <a href="/riskassessment"><i class="fa fa-history"></i> แบบประเมินความเสียง</a>
+                    <a href="/riskassessment"><i class="fa fa-exclamation-triangle"></i> แบบประเมินความเสียง</a>
                 </li>
-                <li class="list-group-item">
+                <li class="list-group-item ">
                     <a href="/editprofile"><i class="fa fa-user"></i> แก้ไขข้อมูลส่วนตัว</a>
                 </li>
 

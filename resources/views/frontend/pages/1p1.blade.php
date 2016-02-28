@@ -32,37 +32,37 @@
                 <thead>
                 <tr>
                     <th></th>
-                    <th>นโยบายตราสารทุน</th>
-                    <th>นโยบายตราสารหนี้</th>
+                    <th style="text-align: center">นโยบายตราสารทุน</th>
+                    <th style="text-align: center">นโยบายตราสารหนี้</th>
 
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td>มูลค่าต่อหน่วย (บาท)</td>
-                    <td>{{meaNumbermoney($FUNDSIZE[0]->NAV_UNIT) }}</td>
-                    <td>{{meaNumbermoney($FUNDSIZE[1]->NAV_UNIT)}}</td>
+                    <td style="text-align: right">{{meaNumbermoney4($FUNDSIZE[0]->NAV_UNIT) }}</td>
+                    <td style="text-align: right">{{meaNumbermoney4($FUNDSIZE[1]->NAV_UNIT)}}</td>
 
                 </tr>
                 <tr>
                     <td>มูลค่าทรัพย์สินสุทธิ (ล้านบาท)</td>
-                    <td>{{meaNumbermoney($FUNDSIZE[0]->NAV)}}</td>
-                    <td>{{meaNumbermoney($FUNDSIZE[1]->NAV)}}</td>
+                    <td style="text-align: right">{{meaNumbermoney4($FUNDSIZE[0]->NAV)}}</td>
+                    <td style="text-align: right">{{meaNumbermoney4($FUNDSIZE[1]->NAV)}}</td>
 
 
                 </tr>
                 <tr>
                     <td>อัตราผลตอบแทนการลงทุนสะสม (%)</td>
                     @if($FUNDSIZE[0]->RETURN_RATE < 0)
-                        <td><span style="color: red">{{meaNumbermoney($FUNDSIZE[0]->RETURN_RATE)}}</span></td>
+                        <td style="text-align: right"><span style="color: red">{{meaNumbermoney4($FUNDSIZE[0]->RETURN_RATE)}}</span></td>
                     @else
-                        <td><span>{{meaNumbermoney($FUNDSIZE[0]->RETURN_RATE)}}</span></td>
+                        <td style="text-align: right"><span>{{meaNumbermoney4($FUNDSIZE[0]->RETURN_RATE)}}</span></td>
                     @endif
 
                     @if($FUNDSIZE[1]->RETURN_RATE < 0)
-                        <td><span style="color: red">{{meaNumbermoney($FUNDSIZE[1]->RETURN_RATE)}}</span></td>
+                        <td style="text-align: right"><span style="color: red">{{meaNumbermoney4($FUNDSIZE[1]->RETURN_RATE)}}</span></td>
                     @else
-                        <td><span>{{meaNumbermoney($FUNDSIZE[1]->RETURN_RATE)}}</span></td>
+                        <td style="text-align: right"><span>{{meaNumbermoney4($FUNDSIZE[1]->RETURN_RATE)}}</span></td>
                     @endif
 
                 </tr>
@@ -85,11 +85,11 @@
         <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th>ลำดับที่</th>
+            <th style="text-align: center">ลำดับที่</th>
             <th></th>
-            <th>นโยบายตราสารทุน</th>
-            <th>นโยบายตราสารหนี้</th>
-            <th>ข้อมูล ณ วันที่</th>
+            <th style="text-align: center">นโยบายตราสารทุน</th>
+            <th style="text-align: center">นโยบายตราสารหนี้</th>
+            <th style="text-align: center">ข้อมูล ณ วันที่</th>
 
         </tr>
         </thead>
@@ -103,18 +103,18 @@
 
                 @foreach($FUNDSIZE as  $index => $value )
                     @if($value->REFERENCE_DATE == $element->dateref && $value->POLICY_ID == 1)
-                        <td>{{meaNumbermoney($value->NAV_UNIT) }}</td>
+                        <td style="text-align: right">{{meaNumbermoney4($value->NAV_UNIT) }}</td>
                     @endif
 
                 @endforeach
 
                 @foreach($FUNDSIZE as  $index => $value )
                     @if($value->REFERENCE_DATE == $element->dateref && $value->POLICY_ID == 2)
-                        <td>{{meaNumbermoney($value->NAV_UNIT) }}</td>
+                        <td style="text-align: right">{{meaNumbermoney4($value->NAV_UNIT) }}</td>
                     @endif
                 @endforeach
 
-                <td rowspan="3">{{get_date_notime($element->dateref)}}</td>
+                <td rowspan="3" style="text-align: center">{{get_date_notime($element->dateref)}}</td>
             </tr>
 
 
@@ -123,14 +123,14 @@
 
                 @foreach($FUNDSIZE as  $index => $value )
                     @if($value->REFERENCE_DATE == $element->dateref && $value->POLICY_ID == 1)
-                        <td>{{meaNumbermoney($value->NAV) }}</td>
+                        <td style="text-align: right">{{meaNumbermoney4($value->NAV) }}</td>
                     @endif
 
                 @endforeach
 
                 @foreach($FUNDSIZE as  $index => $value )
                     @if($value->REFERENCE_DATE == $element->dateref && $value->POLICY_ID == 2)
-                        <td>{{meaNumbermoney($value->NAV) }}</td>
+                        <td style="text-align: right">{{meaNumbermoney4($value->NAV) }}</td>
                     @endif
                 @endforeach
 
@@ -142,9 +142,9 @@
                 @foreach($FUNDSIZE as  $index => $value )
                     @if($value->REFERENCE_DATE == $element->dateref && $value->POLICY_ID == 1)
                         @if($value->RETURN_RATE < 0)
-                            <td><span style="color: red">{{meaNumbermoney($value->RETURN_RATE)}}</span></td>
+                            <td style="text-align: right"><span style="color: red">{{meaNumbermoney4($value->RETURN_RATE)}}</span></td>
                         @else
-                            <td><span>{{meaNumbermoney($value->RETURN_RATE)}}</span></td>
+                            <td style="text-align: right"><span>{{meaNumbermoney4($value->RETURN_RATE)}}</span></td>
                         @endif
                     @endif
 
@@ -154,9 +154,9 @@
                 @foreach($FUNDSIZE as  $index => $value )
                     @if($value->REFERENCE_DATE == $element->dateref && $value->POLICY_ID == 2)
                         @if($value->RETURN_RATE < 0)
-                            <td><span style="color: red">{{meaNumbermoney($value->RETURN_RATE)}}</span></td>
+                            <td style="text-align: right"><span style="color: red">{{meaNumbermoney4($value->RETURN_RATE)}}</span></td>
                         @else
-                            <td><span>{{meaNumbermoney($value->RETURN_RATE)}}</span></td>
+                            <td style="text-align: right"><span>{{meaNumbermoney4($value->RETURN_RATE)}}</span></td>
                         @endif
                     @endif
                 @endforeach

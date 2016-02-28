@@ -33,12 +33,14 @@ WHERe info.EMP_ID = '".get_userID()."'";
         $userbenefit =  DB::select(DB::raw($sqlbenefit));
 
 
+        $sql44  = "SELECT TOP 1 * FROM TBL_INFORMATION_FROM_ASSET WHERE EMP_ID =  '".get_userID()."' ORDER BY CREATE_DATE DESC";
+
+        $infoaset = DB::select(DB::raw($sql44))[0];
 
 
 
 
-
-        return view('frontend.pages.20p1')->with(['userinfo'=>$userinfo,'userbenefit'=>$userbenefit]);
+        return view('frontend.pages.20p1')->with(['userinfo'=>$userinfo,'userbenefit'=>$userbenefit, 'infoaset'=>$infoaset]);
 
 
     }
@@ -46,6 +48,11 @@ WHERe info.EMP_ID = '".get_userID()."'";
     public  function  EditProfile(Request $request){
 
 
+
+        var_dump($request->input('phone'));
+
+        var_dump($request->input('address'));
+        var_dump($request->input('email'));
 
         $sql = "UPDATE TBL_USER SET PHONE='".$request->input('phone')."', ADDRESS='".$request->input('address')."' , EMAIL='".$request->input('email')."' WHERE EMP_ID='".get_userID()."'";
 

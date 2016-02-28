@@ -70,16 +70,6 @@ Route::group(['middleware' => ['web']], function () {
 
     });
 
-    //Route::get('/qa/{id}','QaController@getIndex')->where('id', '[0-9]+');
-
-
-//    Route::get('/qa/{id}', function($id){
-//
-//        return $id;
-//    });
-//    Route::get('/qa/{id}', function ($id) {
-//        return 'QaController@getIndex';
-//    });
 
 
     Route::get('/news','NewsController@getIndex');
@@ -96,16 +86,40 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('/profile','ProfileController@getIndex');
 
-        Route::get('/editprofile','editprofileController@getIndex');
-        Route::post('/editprofile','editprofileController@EditProfile');
-        Route::post('/editprofile','editprofileController@ResetPassworduser');
+
+        Route::group(['prefix' => 'editprofile'] , function() {
+
+            Route::get('/','editprofileController@getIndex');
+            Route::post('/e1','editprofileController@EditProfile');
+            Route::post('/e2','editprofileController@ResetPassworduser');
+
+        });
+
 
 
         Route::get('/informationbeneficiary','InformationController@getIndex');
         Route::get('/resetpassword','ResetPassword@getIndex');
 
 
-        Route::get('/trends','TrendsController@getIndex');
+        Route::group(['prefix' => 'trends'] , function() {
+            Route::get('/','TrendsController@getIndex');
+
+            Route::post('/','TrendsController@getIndexbysearchColum');
+
+            Route::get('/s2','TrendsController@getIndex');
+            Route::post('/s2','TrendsController@getIndexbysearchgp2');
+
+
+           Route::post('/s3','TrendsController@getIndexbysearchgpLastest');
+            Route::get('/s3','TrendsController@getIndex');
+        });
+
+
+
+
+
+
+
         Route::get('/trends_excel1','TrendsController@ExportExcel1');
         Route::get('/trends_excel2','TrendsController@ExportExcel2');
 

@@ -8,7 +8,7 @@
 
             <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
                 <li class="list-group-item ">
-                    <a href="/profile"><i class="fa fa-bar-chart-o"></i> Overall Profile</a>
+                    <a href="/profile"><i class="fa fa-home"></i> Overall Profile</a>
                 </li>
 
                 <li class="list-group-item active">
@@ -20,10 +20,10 @@
                     <a href="/changeplan"><i class="fa fa-cubes"></i> แผนการลงทุน</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="/cumulative"><i class="fa fa-comments"></i> ข้อมูลอัตราสะสม</a>
+                    <a href="/cumulative"><i class="fa fa-level-up"></i> ข้อมูลอัตราสะสม</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="/riskassessment"><i class="fa fa-history"></i> แบบประเมินความเสียง</a>
+                    <a href="/riskassessment"><i class="fa fa-exclamation-triangle"></i> แบบประเมินความเสียง</a>
                 </li>
                 <li class="list-group-item">
                     <a href="/editprofile"><i class="fa fa-user"></i> แก้ไขข้อมูลส่วนตัว</a>
@@ -48,7 +48,7 @@
                         <div class="service-block-v3 service-block-u">
                             <i class="icon-users"></i>
                             <span class="service-heading">Overall Profile</span>
-                            <span class="counter">ยินดีต้อนรับคุณ นัฐวุฒิ สกุณา</span>
+                            <span class="counter">ยินดีต้อนรับคุณ {{$empinfo->FULL_NAME}}</span>
 
                             <div class="clearfix margin-bottom-10"></div>
 
@@ -57,37 +57,22 @@
                                     <ul>
                                         <li>
                                             <small>รหัสพนักงาน</small>
-                                            <h4 class="counter">1234567</h4>
+                                            <h4 class="counter">{{$empinfo->EMP_ID}}</h4>
                                         </li>
                                         <li>
                                             <small>สังกัด</small>
-                                            <h4 class="counter">ฝ่ายพัฒนาระบบงานประยุกต์</h4>
+                                            <h4 class="counter">{{$empinfo->DEP_SHT}}</h4>
                                         </li>
                                         <li>
                                             <small>แผนการลงทุน</small>
-                                            <h4 class="counter">แบบที่ 4 (D.I.Y)</h4>
+                                            <h4 class="counter">แบบที่ {{$planchoose->PLAN_ID}} ({{$planchoose->PLAN_NAME}})</h4>
                                         </li>
-                                        <li>
-                                            <small>สัดส่วนการลงทุน</small>
-                                            <h4 class="counter">ข้อมูลวันที่ 14 ก.ย. 2558</h4>
-                                        </li>
+
                                     </ul>
                                 </div>
 
 
-                                {{--<div class="col-xs-4 col-md-3 service-in">--}}
-                                {{--<small>สังกัด</small>--}}
-                                {{--<h4 class="counter">ฝ่ายพัฒนาระบบงานประยุกต์</h4>--}}
-                                {{--</div>--}}
-                                {{--<div class="col-xs-4 col-md-3 service-in">--}}
-                                {{--<small>แผนการลงทุน</small>--}}
-                                {{--<h4 class="counter">แบบที่ 4 (D.I.Y)</h4>--}}
-                                {{--</div>--}}
 
-                                {{--<div class="col-xs-6 text-right service-in">--}}
-                                {{--<small>สังกัด</small>--}}
-                                {{--<h4 class="counter">6,048</h4>--}}
-                                {{--</div>--}}
                             </div>
 
 
@@ -101,19 +86,109 @@
 
                 <div class="tab-v2">
                     <ul class="nav nav-tabs">
+
+                        @if($show2 == 1)
                         <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >แนวโน้มสัดส่วนการลงทุน</a></li>
                         <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">รายงานผลประโยชน์สมาชิก</a></li>
                         <li class=""><a href="#messages-1" data-toggle="tab" aria-expanded="true">รายงานเปรียบเทียบกองทุนสำรองเลี้ยงชีพ กับเงินบำเหน็จ</a></li>
+                            @elseif($show2 == 2)
+                            <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >แนวโน้มสัดส่วนการลงทุน</a></li>
+                            <li class="active"><a href="#profile-1" data-toggle="tab" aria-expanded="true">รายงานผลประโยชน์สมาชิก</a></li>
+                            <li class=""><a href="#messages-1" data-toggle="tab" aria-expanded="true">รายงานเปรียบเทียบกองทุนสำรองเลี้ยงชีพ กับเงินบำเหน็จ</a></li>
+                        @elseif($show2 == 2)
+                            <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >แนวโน้มสัดส่วนการลงทุน</a></li>
+                            <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">รายงานผลประโยชน์สมาชิก</a></li>
+                            <li class="active"><a href="#messages-1" data-toggle="tab" aria-expanded="true">รายงานเปรียบเทียบกองทุนสำรองเลี้ยงชีพ กับเงินบำเหน็จ</a></li>
+                            @endif
 
                     </ul>
                     <div class="tab-content">
+
+                        @if($show2 == 1)
                         <div class="tab-pane fade active in" id="home-1" style="position: relative" >
+                            @else
+                                <div class="tab-pane fade" id="home-1" style="position: relative" >
+                            @endif
 
-                            <div id="container" data-reflow="1" style=" min-width: 310px; height: 400px; margin: 0 auto"></div>
+                            <form class="form-inline mea_searchbox" role="form" method="post" action="{{action('TrendsController@getIndexbysearchColum')}}">
+                                {!! csrf_field() !!}
+                                <div class="form-group">
+
+                                    <select name="drop_month" id="drop_month">
+                                         {!! $monthColum !!}
+                                    </select>
+                                    <select name="drop_year" id="drop_year">
+                                        {!! $yearColume !!}}
+                                        {{--<option value="2011">2554</option>--}}
+                                        {{--<option value="2012">2555</option>--}}
+                                        {{--<option value="2013">2556</option>--}}
+                                        {{--<option value="2014">2557</option>--}}
+                                        {{--<option value="2015">2558</option>--}}
+                                        {{--<option value="2016">2559</option>--}}
+                                        {{--<option value="2017">2560</option>--}}
+                                        {{--<option value="2018">2561</option>--}}
+                                    </select>
+                                </div>
+
+
+                                <button type="submit" class="btn-u btn-u-default">ค้นหา</button>
+                            </form>
+
+                            <div id="container" data-reflow="1" style=" min-width: 310px; height: 400px; margin: 0 auto">
+
+                                <div class="alert alert-danger fade in " id="nodata-1" style="display: none;">
+                                    <strong>ขออภัย!</strong>ไม่พบข้อมูล
+                                </div>
+                            </div>
                         </div>
-                        <div class="tab-pane fade " id="profile-1">
+
+                                @if($show2 == 2)
+                        <div class="tab-pane fade active in" id="profile-1">
+                            @else
+                                <div class="tab-pane fade " id="profile-1">
+                                @endif
 
 
+                            <form class="form-inline mea_searchbox" role="form" method="post" action="{{action('TrendsController@getIndexbysearchgp2')}}">
+                                {!! csrf_field() !!}
+                                <div class="form-group">
+                                    <label>ตั้งแต่</label>
+                                    <select name="drop_month_2_start" id="drop_month_2_start">
+                                        {!! $monthColum2 !!}
+                                    </select>
+                                    <select name="drop_year_2_start" id="drop_year_2_start">
+                                        {!! $yearColume2 !!}}
+                                        {{--<option value="2011">2554</option>--}}
+                                        {{--<option value="2012">2555</option>--}}
+                                        {{--<option value="2013">2556</option>--}}
+                                        {{--<option value="2014">2557</option>--}}
+                                        {{--<option value="2015">2558</option>--}}
+                                        {{--<option value="2016">2559</option>--}}
+                                        {{--<option value="2017">2560</option>--}}
+                                        {{--<option value="2018">2561</option>--}}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>ถึง</label>
+                                    <select name="drop_month_2_end" id="drop_month_2_end">
+                                        {!! $monthColumend2 !!}
+                                    </select>
+                                    <select name="drop_year_2_end" id="drop_year_2_end">
+                                        {!! $yearColumeend2 !!}}
+                                        {{--<option value="2011">2554</option>--}}
+                                        {{--<option value="2012">2555</option>--}}
+                                        {{--<option value="2013">2556</option>--}}
+                                        {{--<option value="2014">2557</option>--}}
+                                        {{--<option value="2015">2558</option>--}}
+                                        {{--<option value="2016">2559</option>--}}
+                                        {{--<option value="2017">2560</option>--}}
+                                        {{--<option value="2018">2561</option>--}}
+                                    </select>
+                                </div>
+
+
+                                <button type="submit" class="btn-u btn-u-default">ค้นหา</button>
+                            </form>
                             <div id="container2"  data-reflow="1"  style=" min-width: 310px; height: 400px; margin: 0 auto"></div>
 
                             <hr>
@@ -124,8 +199,8 @@
 
                             <div class="table-responsive">
 
-                                @if($netasset2)
-                                <table class="table table-bordered table-striped">
+                                @if($netasset2tbl)
+                                <table class="table table-bordered table-striped tbl_mea">
                                     <thead>
                                     <tr >
                                         <th rowspan="3" width="100" style="text-align:center;">งวด</th>
@@ -136,18 +211,18 @@
                                         <th width="100" rowspan="3" style="text-align:center;">รวม</th>
                                     </tr>
                                     <tr >
-                                        <th colspan="2" style="text-align:center;">ส่วนของนายจ้าง</th>
-                                        <th colspan="2" style="text-align:center;">ส่วนของลูกจ้าง</th>
+                                        <th colspan="2" style="text-align:center;background-color: #fe5000">ส่วนของนายจ้าง</th>
+                                        <th colspan="2" style="text-align:center;background-color: #ffbf3f">ส่วนของลูกจ้าง</th>
 
 
                                     </tr>
 
                                     <tr >
-                                        <th style="text-align:center;">เงินสมทบ</th>
-                                        <th style="text-align:center;">ผลประโยชน์เงินสมทบ</th>
+                                        <th style="text-align:center;background-color: #fe5000">เงินสมทบ</th>
+                                        <th style="text-align:center;background-color: #fe5000">ผลประโยชน์เงินสมทบ</th>
 
-                                        <th style="text-align:center;">เงินสะสม</th>
-                                        <th style="text-align:center;">ผลประโยชน์เงินสะสม</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">เงินสะสม</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">ผลประโยชน์เงินสะสม</th>
                                     </tr>
 
                                     <tr >
@@ -155,10 +230,10 @@
                                         <th style="text-align:center;">2</th>
                                         <th style="text-align:center;">3</th>
                                         <th style="text-align:center;">4</th>
-                                        <th style="text-align:center;">5</th>
-                                        <th style="text-align:center;">6</th>
-                                        <th style="text-align:center;">7</th>
-                                        <th style="text-align:center;">8</th>
+                                        <th style="text-align:center;background-color: #fe5000">5</th>
+                                        <th style="text-align:center;background-color: #fe5000">6</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">7</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">8</th>
                                         <th style="text-align:center;">9</th>
                                     </tr>
                                     </thead>
@@ -166,16 +241,16 @@
 
                                     <tbody>
 
-                                    @foreach($netasset2 as $index =>$item)
+                                    @foreach($netasset2tbl as $index =>$item)
                                         <tr>
                                             <td style="text-align: center;">{{ get_date_nodate($item->RECORD_DATE)}}</td>
                                             <td style="text-align: right;">{{meaNumbermoney($item->SALARY)}}</td>
                                             <td style="text-align: center;">{{ $item->AGE_YEAR .'/'. $item->AGE_DAY }}</td>
                                             <td style="text-align: center;">{{ $item->JOB_YEAR .'/'. $item->JOB_DAY }}</td>
-                                            <td style="text-align: right;">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1)}}</td>
-                                            <td style="text-align: right;">{{meaNumbermoney($item->EMPLOYER_EARNING_2)}}</td>
-                                            <td style="text-align: right;">{{meaNumbermoney($item->MEMBER_CONTRIBUTION_3)}}</td>
-                                            <td style="text-align: right;">{{meaNumbermoney($item->MEMBER_EARNING_4)}}</td>
+                                            <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1)}}</td>
+                                            <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->EMPLOYER_EARNING_2)}}</td>
+                                            <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->MEMBER_CONTRIBUTION_3)}}</td>
+                                            <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->MEMBER_EARNING_4)}}</td>
                                             <td style="text-align: right;">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1 + $item->EMPLOYER_EARNING_2+$item->MEMBER_CONTRIBUTION_3+$item->MEMBER_EARNING_4)}}</td>
                                         </tr>
                                     @endforeach
@@ -187,7 +262,53 @@
                             </div>
 
                         </div>
-                        <div class="tab-pane fade" id="messages-1">
+
+                                @if($show2 == 3)
+                        <div class="tab-pane fade active in" id="messages-1">
+                            @else
+                                <div class="tab-pane fade" id="messages-1">
+                                    @endif
+
+                            <form class="form-inline mea_searchbox" role="form" method="post" action="{{action('TrendsController@getIndexbysearchgpLastest')}}">
+                                {!! csrf_field() !!}
+                                <div class="form-group">
+                                    <label>ตั้งแต่</label>
+                                    <select name="drop_month_3_start" id="drop_month_3_start">
+                                        {!! $monthColum3 !!}
+                                    </select>
+                                    <select name="drop_year_3_start" id="drop_year_3_start">
+                                        {!! $yearColume3 !!}}
+                                        {{--<option value="2011">2554</option>--}}
+                                        {{--<option value="2012">2555</option>--}}
+                                        {{--<option value="2013">2556</option>--}}
+                                        {{--<option value="2014">2557</option>--}}
+                                        {{--<option value="2015">2558</option>--}}
+                                        {{--<option value="2016">2559</option>--}}
+                                        {{--<option value="2017">2560</option>--}}
+                                        {{--<option value="2018">2561</option>--}}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>ถึง</label>
+                                    <select name="drop_month_3_end" id="drop_month_3_end">
+                                        {!! $monthColumend3 !!}
+                                    </select>
+                                    <select name="drop_year_3_end" id="drop_year_3_end">
+                                        {!! $yearColumeend3 !!}}
+                                        {{--<option value="2011">2554</option>--}}
+                                        {{--<option value="2012">2555</option>--}}
+                                        {{--<option value="2013">2556</option>--}}
+                                        {{--<option value="2014">2557</option>--}}
+                                        {{--<option value="2015">2558</option>--}}
+                                        {{--<option value="2016">2559</option>--}}
+                                        {{--<option value="2017">2560</option>--}}
+                                        {{--<option value="2018">2561</option>--}}
+                                    </select>
+                                </div>
+
+
+                                <button type="submit" class="btn-u btn-u-default">ค้นหา</button>
+                            </form>
 
                             <div id="container3" data-reflow="1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
@@ -197,8 +318,8 @@
 
                             <div class="table-responsive">
 
-                                @if($netasset2)
-                                <table class="table table-bordered table-striped">
+                                @if($netasset2tbl)
+                                <table class="table table-bordered table-striped tbl_mea">
                                     <thead>
                                     <tr >
                                         <th rowspan="3" width="70" style="text-align:center;">งวด</th>
@@ -209,30 +330,30 @@
 
 
 
-                                        <th width="100" rowspan="2" colspan="3" style="text-align:center;">เงินบำเหน็จ (บาท)</th>
-                                        <th width="100" rowspan="2" colspan="3" style="text-align:center;">เปรียบเทียบกองทุนสำรองเลี้ยงชีพฯ กับเงินบำเหน็จ(บาท)</th>
+                                        <th width="100" rowspan="2" colspan="3" style="text-align:center;background-color: #fe5000">เงินบำเหน็จ (บาท)</th>
+                                        <th width="100" rowspan="2" colspan="3" style="text-align:center;background-color: #ffbf3f">เปรียบเทียบกองทุนสำรองเลี้ยงชีพฯ กับเงินบำเหน็จ(บาท)</th>
                                     </tr>
                                     <tr >
-                                        <th colspan="3" style="text-align:center;">ส่วนของนายจ้าง</th>
-                                        <th colspan="3" style="text-align:center;">ส่วนของลูกจ้าง</th>
+                                        <th colspan="3" style="text-align:center;background-color: #fe5000">ส่วนของนายจ้าง</th>
+                                        <th colspan="3" style="text-align:center;background-color: #ffbf3f">ส่วนของลูกจ้าง</th>
                                     </tr>
                                     <tr >
-                                        <th style="text-align:center;">เงินสมทบ</th>
-                                        <th style="text-align:center;">ผลประโยชน์เงินสมทบ</th>
-                                        <th style="text-align:center;">รวม</th>
+                                        <th style="text-align:center;background-color: #fe5000">เงินสมทบ</th>
+                                        <th style="text-align:center;background-color: #fe5000">ผลประโยชน์เงินสมทบ</th>
+                                        <th style="text-align:center;background-color: #fe5000">รวม</th>
 
-                                        <th style="text-align:center;">เงินสะสม</th>
-                                        <th style="text-align:center;">ผลประโยชน์เงินสะสม</th>
-                                        <th style="text-align:center;">รวม</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">เงินสะสม</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">ผลประโยชน์เงินสะสม</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">รวม</th>
 
-                                        <th style="text-align:center;">เงินบำเหน็จก่อนหักภาษี</th>
-                                        <th style="text-align:center;">ภาษี</th>
-                                        <th style="text-align:center;">เงินบำเหน็จสุทธิหลังหักภาษี</th>
+                                        <th style="text-align:center;background-color: #fe5000">เงินบำเหน็จก่อนหักภาษี</th>
+                                        <th style="text-align:center;background-color: #fe5000">ภาษี</th>
+                                        <th style="text-align:center;background-color: #fe5000">เงินบำเหน็จสุทธิหลังหักภาษี</th>
 
 
-                                        <th style="text-align:center;">ผลรวมส่วนของนายจ้าง </th>
-                                        <th style="text-align:center;">เงินสุทธิหลังหักภาษี</th>
-                                        <th style="text-align:center;">ส่วนต่าง </th>
+                                        <th style="text-align:center;background-color: #ffbf3f">ผลรวมส่วนของนายจ้าง </th>
+                                        <th style="text-align:center;background-color: #ffbf3f">เงินสุทธิหลังหักภาษี</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">ส่วนต่าง </th>
 
 
                                     </tr>
@@ -241,18 +362,18 @@
                                         <th style="text-align:center;">2</th>
                                         <th style="text-align:center;">3</th>
                                         <th style="text-align:center;">4</th>
-                                        <th style="text-align:center;">5</th>
-                                        <th style="text-align:center;">6</th>
-                                        <th style="text-align:center;">7</th>
-                                        <th style="text-align:center;">8</th>
-                                        <th style="text-align:center;">9</th>
-                                        <th style="text-align:center;">10</th>
-                                        <th style="text-align:center;">11</th>
-                                        <th style="text-align:center;">12</th>
-                                        <th style="text-align:center;">13</th>
-                                        <th style="text-align:center;">14</th>
-                                        <th style="text-align:center;">15</th>
-                                        <th style="text-align:center;">16</th>
+                                        <th style="text-align:center;background-color: #fe5000">5</th>
+                                        <th style="text-align:center;background-color: #fe5000">6</th>
+                                        <th style="text-align:center;background-color: #fe5000">7</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">8</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">9</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">10</th>
+                                        <th style="text-align:center;background-color: #fe5000">11</th>
+                                        <th style="text-align:center;background-color: #fe5000">12</th>
+                                        <th style="text-align:center;background-color: #fe5000">13</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">14</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">15</th>
+                                        <th style="text-align:center;background-color: #ffbf3f">16</th>
                                     </tr>
 
 
@@ -262,25 +383,25 @@
 
                                     <tbody style="cellpadding:2px;">
 
-                                    @foreach($netasset2 as $index =>$item)
+                                    @foreach($netasset2tbl as $index =>$item)
                                     <tr>
                                         <td style="text-align: center;">{{ get_date_nodate($item->RECORD_DATE)}}</td>
                                         <td style="text-align: right;">{{meaNumbermoney($item->SALARY)}}</td>
                                         <td style="text-align: center;">{{ $item->AGE_YEAR .'/'. $item->AGE_DAY }}</td>
 
                                         <td style="text-align: center;">{{ $item->JOB_YEAR .'/'. $item->JOB_DAY }}</td>
-                                        <td style="text-align: right;">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1)}}</td>
-                                        <td style="text-align: right;">{{meaNumbermoney($item->EMPLOYER_EARNING_2)}}</td>
-                                        <td style="text-align: right;">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1  + $item->EMPLOYER_EARNING_2)}}</td>
-                                        <td style="text-align: right;">{{meaNumbermoney($item->MEMBER_CONTRIBUTION_3)}}</td>
-                                        <td style="text-align: right;">{{meaNumbermoney($item->MEMBER_EARNING_4)}}</td>
-                                        <td style="text-align: right;">{{meaNumbermoney($item->MEMBER_CONTRIBUTION_3 + $item->MEMBER_EARNING_4)}}</td>
-                                        <td style="text-align: right;">{{meaNumbermoney($item->GRATUITY)}}</td>
-                                        <td style="text-align: right;">{{meaNumbermoney($item->GRATUITY_TAX)}}</td>
-                                        <td style="text-align: right;">{{meaNumbermoney($item->GRATUITY - $item->GRATUITY_TAX)}}</td>
-                                        <td style="text-align: right;">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1 + $item->EMPLOYER_EARNING_2 )}}</td>
-                                        <td style="text-align: right;">{{meaNumbermoney($item->GRATUITY - $item->GRATUITY_TAX)}}</td>
-                                        <td style="text-align: right;">{{meaNumbermoney(($item->EMPLOYER_CONTRIBUTION_1 + $item->EMPLOYER_EARNING_2) - ($item->GRATUITY - $item->GRATUITY_TAX))}}</td>
+                                        <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1)}}</td>
+                                        <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->EMPLOYER_EARNING_2)}}</td>
+                                        <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1  + $item->EMPLOYER_EARNING_2)}}</td>
+                                        <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->MEMBER_CONTRIBUTION_3)}}</td>
+                                        <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->MEMBER_EARNING_4)}}</td>
+                                        <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->MEMBER_CONTRIBUTION_3 + $item->MEMBER_EARNING_4)}}</td>
+                                        <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->GRATUITY)}}</td>
+                                        <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->GRATUITY_TAX)}}</td>
+                                        <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->GRATUITY - $item->GRATUITY_TAX)}}</td>
+                                        <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1 + $item->EMPLOYER_EARNING_2 )}}</td>
+                                        <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->GRATUITY - $item->GRATUITY_TAX)}}</td>
+                                        <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney(($item->EMPLOYER_CONTRIBUTION_1 + $item->EMPLOYER_EARNING_2) - ($item->GRATUITY - $item->GRATUITY_TAX))}}</td>
 
                                     </tr>
                                     @endforeach
@@ -317,6 +438,21 @@
 
         $(function () {
 
+            {{--var showw = {{$show2}};--}}
+
+            {{--if(showw == "1"){--}}
+                {{--$("#home-1").attr("class","active in")--}}
+                {{--$("#profile-1").removeAttr("class","active in")--}}
+                {{--$("#messages-1").removeAttr("class","active in")--}}
+            {{--}--}}
+
+            {{--if(showw == "2"){--}}
+
+            {{--}--}}
+
+            {{--if(showw == "3"){--}}
+
+            {{--}--}}
 
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 //                e.target // newly activated tab
@@ -331,9 +467,12 @@
 
             })
 
+           // chart.showLoading('No data to display');
+
             jQuery('#container').highcharts(
                     {!! json_encode($graph)!!}
             )
+
 
             jQuery('#container2').highcharts(
                     {!! json_encode($graph2)!!}
@@ -342,6 +481,11 @@
             jQuery('#container3').highcharts(
                     {!! json_encode($graph3)!!}
             )
+
+
+            {{--@if(!$netasset)--}}
+            {{--$("#nodata-1").show();--}}
+            {{--@endif--}}
 
 
         });

@@ -58,15 +58,7 @@
                     </a>
                     <ul class="dropdown-menu">
 
-                        <li class="dropdown-submenu">
-                            <a href="javascript:void(0);">แก้ไขข้อมูลส่วนตัว</a>
-                            <ul class="dropdown-menu">
-                                <li><a target="_blank" href="/editprofile">แก้ไขข้อมูลส่วนตัว</a></li>
-                                <li><a target="_blank" href="/informationbeneficiary">ข้อมูลผู้รับผลประโยชน์</a></li>
-                                <li><a target="_blank" href="/resetpassword">เปลี่ยนรหัสผ่าน</a></li>
 
-                            </ul>
-                        </li>
 
                         <li class="dropdown-submenu" >
                             <a href="javascript:void(0);">ข้อมูลการลงทุน</a>
@@ -97,6 +89,15 @@
                         </li>
                         <li>
                             <a href="/riskassessment">แบบประเมินความเสี่ยง</a>
+                        </li>
+                        <li class="dropdown-submenu">
+                            <a href="javascript:void(0);">แก้ไขข้อมูลส่วนตัว</a>
+                            <ul class="dropdown-menu">
+                                <li><a target="_blank" href="/editprofile">แก้ไขข้อมูลส่วนตัว</a></li>
+                                <li><a target="_blank" href="/informationbeneficiary">ข้อมูลผู้รับผลประโยชน์</a></li>
+                                <li><a target="_blank" href="/resetpassword">เปลี่ยนรหัสผ่าน</a></li>
+
+                            </ul>
                         </li>
 
                     </ul>
@@ -224,17 +225,17 @@
 
 
                 <!-- Search Block -->
-                <li>
-                    <i class="search fa fa-search search-btn"></i>
-                    <div class="search-open">
-                        <div class="input-group animated fadeInDown">
-                            <input type="text" class="form-control" placeholder="Search">
-								<span class="input-group-btn">
-									<button class="btn-u" type="button">Go</button>
-								</span>
-                        </div>
-                    </div>
-                </li>
+                {{--<li>--}}
+                    {{--<i class="search fa fa-search search-btn"></i>--}}
+                    {{--<div class="search-open">--}}
+                        {{--<div class="input-group animated fadeInDown">--}}
+                            {{--<input type="text" class="form-control" placeholder="Search">--}}
+								{{--<span class="input-group-btn">--}}
+									{{--<button class="btn-u" type="button">Go</button>--}}
+								{{--</span>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</li>--}}
                 <!-- End Search Block -->
             </ul>
         </div><!--/end container-->

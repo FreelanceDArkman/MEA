@@ -90,7 +90,7 @@ WHERE us.EMP_ID = '".get_userID()."'";
 FROM TBL_EMPLOYEE_INFO enf
 INNER JOIN TBL_USER_FUND_CHOOSE uc ON uc.EMP_ID = enf.EMP_ID
 INNER JOIN TBL_INVESTMENT_PLAN pl ON pl.PLAN_ID =uc.PLAN_ID
-WHERE  YEAR(uc.MODIFY_DATE) = '". $request->input('drop_year') ."' AND  enf.EMP_ID ='".get_userID()."'";
+WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND YEAR(uc.MODIFY_DATE) = '". $request->input('drop_year') ."' AND  enf.EMP_ID ='".get_userID()."'";
 
         $historyPlan = DB::select(DB::raw($sqlhis));
 
@@ -155,8 +155,13 @@ WHERE  YEAR(uc.MODIFY_DATE) = '". $request->input('drop_year') ."' AND  enf.EMP_
         $ishowhis = true;
 
 
+
+        $sql44  = "SELECT TOP 1 * FROM TBL_INFORMATION_FROM_ASSET WHERE EMP_ID =  '".get_userID()."' ORDER BY CREATE_DATE DESC";
+
+        $infoaset = DB::select(DB::raw($sql44))[0];
+
 //var_dump($dropplan);
-        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset, 'historyPlan'=>$historyPlan, 'dataCheck'=>$dataCheck, 'effective'=>$effective, 'users'=>$users,'ishowhis'=> $ishowhis,'ret'=>$ret] );
+        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset, 'historyPlan'=>$historyPlan, 'dataCheck'=>$dataCheck, 'effective'=>$effective, 'users'=>$users,'ishowhis'=> $ishowhis,'ret'=>$ret ,'infoaset'=>$infoaset] );
     }
 
 
@@ -190,7 +195,7 @@ WHERE us.EMP_ID = '".get_userID()."'";
 FROM TBL_EMPLOYEE_INFO enf
 INNER JOIN TBL_USER_FUND_CHOOSE uc ON uc.EMP_ID = enf.EMP_ID
 INNER JOIN TBL_INVESTMENT_PLAN pl ON pl.PLAN_ID =uc.PLAN_ID
-WHERE enf.EMP_ID ='".get_userID()."'";
+WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND enf.EMP_ID ='".get_userID()."' ";
 
         $historyPlan = DB::select(DB::raw($sqlhis));
 
@@ -243,10 +248,12 @@ WHERE enf.EMP_ID ='".get_userID()."'";
 
         }
 
+        $sql44  = "SELECT TOP 1 * FROM TBL_INFORMATION_FROM_ASSET WHERE EMP_ID =  '".get_userID()."' ORDER BY CREATE_DATE DESC";
 
+        $infoaset = DB::select(DB::raw($sql44))[0];
 
 //var_dump($dropplan);
-        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset, 'historyPlan'=>$historyPlan, 'dataCheck'=>$dataCheck, 'effective'=>$effective, 'users'=>$users, 'ishowhis'=> false, 'ret'=>$ret]);
+        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset, 'historyPlan'=>$historyPlan, 'dataCheck'=>$dataCheck, 'effective'=>$effective, 'users'=>$users, 'ishowhis'=> false, 'ret'=>$ret, 'infoaset'=>$infoaset]);
     }
 
     public function deleplan(Request $request)

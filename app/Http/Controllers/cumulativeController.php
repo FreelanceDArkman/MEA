@@ -64,7 +64,7 @@ WHERE us.EMP_ID = '".get_userID()."'";
 
         $sqlhis = "SELECT * FROM TBL_EMPLOYEE_INFO emp
 INNER JOIN TBL_USER_SAVING_RATE sav ON sav.EMP_ID = emp.EMP_ID
-WHERe sav.EMP_ID = '".get_userID()."'";
+WHERe sav.EMP_ID = '".get_userID()."' ORDER BY sav.CHANGE_SAVING_RATE_DATE DESC";
 
         $historyPlan = DB::select(DB::raw($sqlhis));
 
@@ -94,7 +94,11 @@ WHERe sav.EMP_ID = '".get_userID()."'";
 
         }
 
-        return view('frontend.pages.23p1')->with(['CurrnentPlan'=>$CurrnentPlan, 'dataCheck'=>$dataCheck , 'effective'=>$effective, 'Workcheck' =>$Workcheck, 'users'=>$users , 'historyPlan'=>$historyPlan,'ishowhis'=>false, 'ret'=>$ret]);
+        $sql44  = "SELECT TOP 1 * FROM TBL_INFORMATION_FROM_ASSET WHERE EMP_ID =  '".get_userID()."' ORDER BY CREATE_DATE DESC";
+
+        $infoaset = DB::select(DB::raw($sql44))[0];
+
+        return view('frontend.pages.23p1')->with(['CurrnentPlan'=>$CurrnentPlan, 'dataCheck'=>$dataCheck , 'effective'=>$effective, 'Workcheck' =>$Workcheck, 'users'=>$users , 'historyPlan'=>$historyPlan,'ishowhis'=>false, 'ret'=>$ret , 'infoaset'=>$infoaset]);
     }
 
 
@@ -151,7 +155,7 @@ WHERE us.EMP_ID = '".get_userID()."'";
 
         $sqlhis = "SELECT * FROM TBL_EMPLOYEE_INFO emp
 INNER JOIN TBL_USER_SAVING_RATE sav ON sav.EMP_ID = emp.EMP_ID
-WHERe YEAR(sav.CHANGE_SAVING_RATE_DATE) = '".$request->input('drop_year')."' AND sav.EMP_ID = '".get_userID()."'";
+WHERe YEAR(sav.CHANGE_SAVING_RATE_DATE) = '".$request->input('drop_year')."' AND sav.EMP_ID = '".get_userID()."'  ORDER BY sav.CHANGE_SAVING_RATE_DATE DESC";
 
         $historyPlan = DB::select(DB::raw($sqlhis));
 
@@ -190,7 +194,11 @@ WHERe YEAR(sav.CHANGE_SAVING_RATE_DATE) = '".$request->input('drop_year')."' AND
 
         }
 
-        return view('frontend.pages.23p1')->with(['CurrnentPlan'=>$CurrnentPlan, 'dataCheck'=>$dataCheck , 'effective'=>$effective, 'Workcheck' =>$Workcheck, 'users'=>$users , 'historyPlan'=>$historyPlan, 'ishowhis'=>$ishowhis, 'ret'=>$ret]);
+        $sql44  = "SELECT TOP 1 * FROM TBL_INFORMATION_FROM_ASSET WHERE EMP_ID =  '".get_userID()."' ORDER BY CREATE_DATE DESC";
+
+        $infoaset = DB::select(DB::raw($sql44))[0];
+
+        return view('frontend.pages.23p1')->with(['CurrnentPlan'=>$CurrnentPlan, 'dataCheck'=>$dataCheck , 'effective'=>$effective, 'Workcheck' =>$Workcheck, 'users'=>$users , 'historyPlan'=>$historyPlan, 'ishowhis'=>$ishowhis, 'ret'=>$ret,'infoaset'=>$infoaset]);
     }
 
     public  function  InsertPlan(Request $request){
