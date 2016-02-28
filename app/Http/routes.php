@@ -97,6 +97,10 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/profile','ProfileController@getIndex');
 
         Route::get('/editprofile','editprofileController@getIndex');
+        Route::post('/editprofile','editprofileController@EditProfile');
+        Route::post('/editprofile','editprofileController@ResetPassworduser');
+
+
         Route::get('/informationbeneficiary','InformationController@getIndex');
         Route::get('/resetpassword','ResetPassword@getIndex');
 

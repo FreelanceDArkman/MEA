@@ -69,6 +69,9 @@ class AuthController extends Controller
         return view('frontend.pages.forgotpassword');
     }
 
+
+
+
     public function ResetPassword(Request $request)
     {
 

@@ -45,7 +45,77 @@
         </div>
     </div><!--/row-->
 
+        <script>
+            $(document).ready(function(){
+                $("#form_resetpass").validate({
 
+                    rules:
+                    {
+
+                        old_password:
+                        {
+                            required: true,
+                            minlength : 8,
+                            maxlength :12
+
+                        },
+                        new_password:{
+                            required: true,
+                            minlength : 8,
+                            maxlength :12
+
+                        },
+
+
+                        con_password:
+                        {
+                            required: true,
+                            equalTo : '#new_password',
+                            minlength : 8,
+                            maxlength :12
+
+                        }
+
+                    },
+
+                    // Messages for form validation
+                    messages:
+                    {
+
+                        old_password:
+                        {
+                            required: 'กรุณากรอกข้อมูล',
+                            minlength: 'กรุณากรอก 8 ตัวอักษร',
+                            maxlength : 'กรุณากรอกไม่เกิน 12 ตัวอักษร'
+                        },
+                        new_password  :{
+                            required: 'กรุณากรอกข้อมูล',
+                            minlength: 'กรุณากรอก 8 ตัวอักษร',
+                            maxlength : 'กรุณากรอกไม่เกิน 12 ตัวอักษร'
+
+                        },
+                        con_password  :{
+                            equalTo: 'กรุณาใส่ รหัสผ่านให้ถูกต้อง',
+                            required: 'กรุณากรอกข้อมูล',
+                            minlength: 'กรุณากรอก 8 ตัวอักษร',
+                            maxlength : 'กรุณากรอกไม่เกิน 12 ตัวอักษร'
+
+                        }
+                    },
+
+                    // Do not change code below
+                    errorPlacement: function(error, element)
+                    {
+                        error.insertAfter(element.parent());
+                    }
+                });
+
+
+
+            });
+
+
+        </script>
 
 @stop
 
