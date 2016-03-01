@@ -18,7 +18,7 @@ class HomeController extends Controller
         ] );
 
 
-        $netasset  = DB::table('tbl_news_topic')->where('NEWS_CATE_ID','1')->orWhere('NEWS_CATE_ID','2')->orderBy('create_date', 'desc')->paginate(10);
+        $netasset  = DB::table('tbl_news_topic')->where('NEWS_CATE_ID','1')->orWhere('NEWS_CATE_ID','2')->orderBy('create_date', 'desc')->paginate(6);
 
         return view('frontend.pages.dashboard')->with(['netasset' => $netasset]);
     }

@@ -1,6 +1,17 @@
 @extends('frontend.layouts.default')
 @section('content')
 
+    <div class="tab-v1">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#home" data-toggle="tab">มาใหม่</a></li>
+            <li><a href="#profile" data-toggle="tab">เปิดดู</a></li>
+            <li><a href="#messages" data-toggle="tab">ดาวโหลด</a></li>
+
+        </ul>
+
+    </div>
+
+    <br/>
     @if($netasset)
     @foreach(array_chunk($netasset->all(),3) as $row)
 
@@ -50,7 +61,9 @@
                             <li><span>By</span> <a href="#">{{$item->CREATE_BY}}</a></li>
                             <li>|</li>
                             <li><i class="fa fa-clock-o"></i> {{get_date_notime($item->CREATE_DATE)}}</li>
-                            {{--<li class="pull-right"><a href="#"><i class="fa fa-comments-o"></i> 14</a></li>--}}
+                            @if($item->FILE_PATH)
+                            <li class="pull-right "><a  class="download_pdf" href="#"><i class="fa fa-download"></i> download</a></li>
+                            @endif
                         </ul>
 
 

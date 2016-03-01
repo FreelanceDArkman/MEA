@@ -95,10 +95,10 @@ Route::group(['middleware' => ['web']], function () {
 
         });
 
+        Route::get('/resetpassword','editprofileController@getIndex');
 
+        Route::get('/informationbeneficiary','editprofileController@getIndex');
 
-        Route::get('/informationbeneficiary','InformationController@getIndex');
-        Route::get('/resetpassword','ResetPassword@getIndex');
 
 
         Route::group(['prefix' => 'trends'] , function() {

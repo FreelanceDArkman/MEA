@@ -1,7 +1,7 @@
 <div class="header">
     <div class="container">
         <!-- Logo -->
-        <a class="logo" href="/">
+        <a class="logo" href="/" target="_blank">
             <img src="/frontend/assets/img/logo1-default.png" alt="Logo">
         </a>
         <!-- End Logo -->
@@ -9,20 +9,21 @@
         <!-- Topbar -->
         <div class="topbar">
             <ul class="loginbar pull-right">
-                <li class="hoverSelector">
-                    <i class="fa fa-globe"></i>
-                    <a href="/qa">ถาม-ตอบ</a>
-
+                {{--hoverSelector--}}
+                <li ><a href="/qa"> <i class="fa fa-comment"></i> ถาม-ตอบ</a></li>
+                <li class="topbar-devider"></li>
+                <li>
+                    <a> <i class="fa fa-cog"></i> คู่มือการใช้งาน</a>
                 </li>
                 <li class="topbar-devider"></li>
-                <li><a href="/contact">ติดต่อ กทช.</a></li>
+                <li><a href="/contact"><i class="fa fa-map-marker"></i> ติดต่อ กสช.</a></li>
                 <li class="topbar-devider"></li>
 
              @if(logged_in())
-                    <li><a href="/logout"> สวัสดี  {{get_username()}}</a></li>
+                    <li><a href="/logout"> <i class="fa fa-user"></i> สวัสดี  {{get_username()}}</a></li>
 
                @else
-                    <li><a href="/login">เข้าสู่ระบบ </a></li>
+                    <li><a href="/login"> <i class="fa fa-user"></i> เข้าสู่ระบบ </a></li>
                 @endif
 
             </ul>
