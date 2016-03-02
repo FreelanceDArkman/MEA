@@ -97,10 +97,21 @@ class HomeController extends Controller
 
         $data =  DB::table('TBL_NEWS_TOPIC')->where('NEWS_CATE_ID',$cate_id)->Where('NEWS_TOPIC_ID',$topic_id)->first();
 
-       // var_dump($data->FILE_NAME);
 
 
-         file_put_contents("downloadtmp/Tmpfile3.pdf", fopen($data->FILE_PATH, 'r'));
+//download file from url
+
+        // file_put_contents("downloadtmp/Tmpfile3.pdf", fopen($data->FILE_PATH, 'r'));
+
+        $arrfile  = explode("/", $data->FILE_PATH);
+
+
+        $arrfileName= $arrfile[count($arrfile) - 1];
+
+
+
+        //http://suntrue.sun-system.com:8843/contents/fundnews1.pdf
+       // http://suntrue.sun-system.com:8843/contents/t_fundnews1.jpg
 
 
         $dlno = ((int)$data->DL_STAT) + 1;
@@ -110,11 +121,11 @@ class HomeController extends Controller
         DB::update(DB::raw($sql));
 
 
-        $file = 'downloadtmp/Tmpfile3.pdf';
+        $file = 'contents/' . $arrfileName;
         $headers = array(
             'Content-Type: application/pdf',
         );
-        return \Response::download($file, 'mea_pdf.pdf', $headers);
+        return \Response::download($file, $arrfileName, $headers);
 
     }
 
