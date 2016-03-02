@@ -49,10 +49,10 @@ WHERe info.EMP_ID = '".get_userID()."'";
 
 
 
-        var_dump($request->input('phone'));
-
-        var_dump($request->input('address'));
-        var_dump($request->input('email'));
+//        var_dump($request->input('phone'));
+//
+//        var_dump($request->input('address'));
+//        var_dump($request->input('email'));
 
         $sql = "UPDATE TBL_USER SET PHONE='".$request->input('phone')."', ADDRESS='".$request->input('address')."' , EMAIL='".$request->input('email')."' WHERE EMP_ID='".get_userID()."'";
 

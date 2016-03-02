@@ -3,9 +3,20 @@
 
     <div class="tab-v1">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#home" data-toggle="tab">มาใหม่</a></li>
-            <li><a href="#profile" data-toggle="tab">เปิดดู</a></li>
-            <li><a href="#messages" data-toggle="tab">ดาวโหลด</a></li>
+
+            @if($sortby == 1 || $sortby == null)
+            <li class="active"><a href="/1" >มาใหม่</a></li>
+            <li><a href="/2" >เปิดดู</a></li>
+            <li><a href="/3" >ดาวโหลด</a></li>
+                @elseif($sortby == 2)
+                <li ><a href="/1" >มาใหม่</a></li>
+                <li class="active"><a href="/2"  >เปิดดู</a></li>
+                <li><a href="/3" >ดาวโหลด</a></li>
+            @elseif($sortby == 3)
+                <li ><a href="/1" >มาใหม่</a></li>
+                <li ><a href="/2"  >เปิดดู</a></li>
+                <li class="active"><a href="/3" >ดาวโหลด</a></li>
+                @endif
 
         </ul>
 
@@ -32,7 +43,7 @@
 
 
                         @if($item->FILE_PATH)
-                            <h3><a target="_blank" href="{{$item->FILE_PATH}}" ><i class="fa fa-file-pdf-o" style="color: red"></i>{{$item->FILE_NAME}}</a></h3>
+                            <h3><a target="_blank" href="/view/{{$item->NEWS_CATE_ID ."-". $item->NEWS_TOPIC_ID}}"><i class="fa fa-file-pdf-o" style="color: red"></i>{{$item->FILE_NAME}}</a></h3>
                         @else
                             <h3><a href="#" data-toggle="modal" data-target="#modol_{{$item->NEWS_TOPIC_ID}}">{{$item->FILE_NAME}}</a></h3>
                             <div class="modal fade bs-example-modal-lg" id="modol_{{$item->NEWS_TOPIC_ID}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
@@ -62,7 +73,12 @@
                             <li>|</li>
                             <li><i class="fa fa-clock-o"></i> {{get_date_notime($item->CREATE_DATE)}}</li>
                             @if($item->FILE_PATH)
-                            <li class="pull-right "><a  class="download_pdf" href="#"><i class="fa fa-download"></i> download</a></li>
+                            <li class="pull-right ">
+
+                                {{--{{Crypt::encrypt($item->FILE_PATH)}}--}}
+                                <a  class="download_pdf" href="/download/{{$item->NEWS_CATE_ID ."-". $item->NEWS_TOPIC_ID}}"><i class="fa fa-download"></i> download</a>
+
+                            </li>
                             @endif
                         </ul>
 

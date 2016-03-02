@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Response;
+use Jenssegers\Date\Date;
+
 
 class HomeController extends Controller
 {
@@ -14,13 +16,109 @@ class HomeController extends Controller
     public function getIndex()
     {
         $this->pageSetting( [
-            'title' => 'Dashboard | MEA FUND'
+            'title' => 'หน้าแรก | MEA FUND'
         ] );
 
 
-        $netasset  = DB::table('tbl_news_topic')->where('NEWS_CATE_ID','1')->orWhere('NEWS_CATE_ID','2')->orderBy('create_date', 'desc')->paginate(6);
+        $netasset = $this->GetFeed(1);
 
-        return view('frontend.pages.dashboard')->with(['netasset' => $netasset]);
+        return view('frontend.pages.dashboard')->with(['netasset' => $netasset,'sortby'=>1]);
     }
+
+
+    public function getIndexByID($id)
+    {
+        $this->pageSetting( [
+            'title' => 'หน้าแรก | MEA FUND'
+        ] );
+
+
+        $netasset = $this->GetFeed($id);
+
+        return view('frontend.pages.dashboard')->with(['netasset' => $netasset, 'sortby'=>$id]);
+    }
+
+    public function  GetFeed($feedby){
+
+        if($feedby == null || $feedby == 1){
+            return DB::table('tbl_news_topic')->where('NEWS_CATE_ID','1')->orWhere('NEWS_CATE_ID','2')->orderBy('create_date', 'desc')->paginate(6);
+        }
+
+        if($feedby == 2){
+            return DB::table('tbl_news_topic')->where('NEWS_CATE_ID','1')->orWhere('NEWS_CATE_ID','2')->orderBy('VIEW_STAT', 'desc')->paginate(6);
+        }
+
+        if($feedby == 3){
+            return DB::table('tbl_news_topic')->where('NEWS_CATE_ID','1')->orWhere('NEWS_CATE_ID','2')->orderBy('DL_STAT', 'desc')->paginate(6);
+        }
+
+    }
+
+
+    public  function  ViewFile($id){
+        $arr = explode("-", $id);
+
+        $cate_id = $arr[0];
+        $topic_id = $arr[1];
+
+        $today = new Date();
+
+        $data =  DB::table('TBL_NEWS_TOPIC')->where('NEWS_CATE_ID',$cate_id)->Where('NEWS_TOPIC_ID',$topic_id)->first();
+
+
+
+        $dlno = ((int)$data->VIEW_STAT) + 1;
+
+        $sql = "UPDATE tbl_news_topic SET VIEW_STAT='".$dlno."', LAST_VIEW_DATE='".$today."'  WHERE NEWS_CATE_ID='".$cate_id."' AND NEWS_TOPIC_ID = '".$topic_id."'";
+
+        DB::update(DB::raw($sql));
+
+        return redirect()->to($data->FILE_PATH);
+    }
+
+
+    public function  DownloadFile($id){
+
+        //User::where('encrypted_id', $file)->firstOrFail();
+//        $decrypted = \Crypt::decrypt($file);
+//
+//        var_dump($decrypted);
+
+
+        $arr = explode("-", $id);
+
+        $cate_id = $arr[0];
+        $topic_id = $arr[1];
+
+        $today = new Date();
+
+
+
+
+        $data =  DB::table('TBL_NEWS_TOPIC')->where('NEWS_CATE_ID',$cate_id)->Where('NEWS_TOPIC_ID',$topic_id)->first();
+
+       // var_dump($data->FILE_NAME);
+
+
+         file_put_contents("downloadtmp/Tmpfile3.pdf", fopen($data->FILE_PATH, 'r'));
+
+
+        $dlno = ((int)$data->DL_STAT) + 1;
+
+         $sql = "UPDATE tbl_news_topic SET DL_STAT='".$dlno."', LAST_DL_DATE='".$today."'  WHERE NEWS_CATE_ID='".$cate_id."' AND NEWS_TOPIC_ID = '".$topic_id."'";
+
+        DB::update(DB::raw($sql));
+
+
+        $file = 'downloadtmp/Tmpfile3.pdf';
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return \Response::download($file, 'mea_pdf.pdf', $headers);
+
+    }
+
+
+
 
 }

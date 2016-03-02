@@ -35,7 +35,10 @@ Route::group(['middleware' => ['web']], function () {
    Route::get('firstlogin','Auth\AuthController@ShowSetNewpass');
     Route::post('firstlogin','Auth\AuthController@ResetPassword');
 
-     Route::get('/','HomeController@getIndex');
+
+
+
+
 
 
 
@@ -70,6 +73,15 @@ Route::group(['middleware' => ['web']], function () {
 
     });
 
+
+    Route::group(['prefix' => '/'] , function($id) {
+
+        Route::get('/','HomeController@getIndex');
+        Route::get('{id}','HomeController@getIndexByID')->where('id', '[0-9]+');
+//        Route::get('download/{file}','HomeController@DownloadFile');
+        Route::get('download/{id}','HomeController@DownloadFile');
+        Route::get('view/{id}','HomeController@ViewFile');
+    });
 
 
     Route::get('/news','NewsController@getIndex');
