@@ -1,4 +1,4 @@
-@extends('frontend.layouts.default')
+@extends('frontend.layouts.content_chart')
 @section('content')
 
     <div class="tab-v1">
@@ -45,7 +45,11 @@
                         @if($item->FILE_PATH)
                             <h3><a target="_blank" href="/view/{{$item->NEWS_CATE_ID ."-". $item->NEWS_TOPIC_ID}}"><i class="fa fa-file-pdf-o" style="color: red"></i>{{$item->FILE_NAME}}</a></h3>
                         @else
-                            <h3><a href="#" data-toggle="modal" data-target="#modol_{{$item->NEWS_TOPIC_ID}}">{{$item->FILE_NAME}}</a></h3>
+                            <h3>
+                                {{--{!! Form::open(['method' => 'DELETE', 'id'=>'delForm']) !!}--}}
+                                <a href="#"  data-modal="{{$item->NEWS_TOPIC_ID}}" data-param="{{$item->NEWS_CATE_ID ."-". $item->NEWS_TOPIC_ID}}" ">{{$item->FILE_NAME}}</a>
+                                {{--{!! Form::close() !!}--}}
+                            </h3>
                             <div class="modal fade bs-example-modal-lg" id="modol_{{$item->NEWS_TOPIC_ID}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                 <div class="modal-dialog modal-lg">
                                     <div class="modal-content">
@@ -106,5 +110,67 @@
         {{$netasset->links()}}
     </div>
     @endif
+
+
+    <script>
+
+
+
+
+        $(document).ready(function(){
+
+            //var $link = $("a[data-modal]");
+
+
+
+            $("a[data-modal]").on('click',function(){
+
+
+                var $param = $(this).attr('data-param');
+                var $modal = $(this).attr('data-modal');
+
+                $('#modol_' + $modal).modal('show')
+
+                var jsondata = {rec : $param};
+
+                        $.ajax({
+                            type: 'post', // or post?
+                            dataType: 'json',
+                            url: '/viewrecord',
+                            data: jsondata,
+
+                            success: function(data) {
+
+
+
+                               // var ii = data;
+//                                ) {
+//                                    // notice that we are expecting a json array with success = true and a payload
+//                                    //$('.modal').empty().append(data.payload).modal();
+//                                } else {
+//                                    // for debugging
+//                                    if (data// alert(data);
+//                                }
+                            },
+                            error: function(xhr, textStatus, thrownError) {
+                                alert(xhr.status);
+                                alert(thrownError);
+                                alert(textStatus);
+                            }
+                        });
+
+
+
+                return false;
+
+            });
+
+
+
+        });
+        //JS
+
+    </script>
+
 @stop
 

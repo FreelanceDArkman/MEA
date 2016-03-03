@@ -240,6 +240,8 @@ body, a, h1, h2{
 
 .news-v1 .news-v1-info li{
     font-size: 16px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 .download_pdf {
     vertical-align: middle;
@@ -257,3 +259,7 @@ body, a, h1, h2{
     font-size: 20px;
     padding: 5px 15px;
 }
+.news-v1 .news-v1-info{
+    margin-top: 20px;
+}
+

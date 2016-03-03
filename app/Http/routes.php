@@ -77,15 +77,33 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['prefix' => '/'] , function($id) {
 
         Route::get('/','HomeController@getIndex');
+        Route::post('/viewrecord','HomeController@viewrecord');
         Route::get('{id}','HomeController@getIndexByID')->where('id', '[0-9]+');
 //        Route::get('download/{file}','HomeController@DownloadFile');
         Route::get('download/{id}','HomeController@DownloadFile');
         Route::get('view/{id}','HomeController@ViewFile');
+
+
+    });
+
+    Route::group(['prefix' => '/newsfund'] , function($id) {
+
+        Route::get('/','NeesfundController@getIndex');
+        Route::post('/viewrecord','NeesfundController@viewrecord');
+        Route::get('{id}','NeesfundController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','NeesfundController@DownloadFile');
+        Route::get('view/{id}','NeesfundController@ViewFile');
+
     });
 
 
+
+
+
+
     Route::get('/news','NewsController@getIndex');
-    Route::get('/newsfund','NeesfundController@getIndex');
+
 
 
     Route::get('/contact','ContactController@getIndex');

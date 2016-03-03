@@ -77,6 +77,28 @@ class HomeController extends Controller
     }
 
 
+
+    public  function  viewrecord(Request $request){
+
+            //return $request->input('rec');
+
+        $arr = explode("-", $request->input('rec'));
+
+        $cate_id = $arr[0];
+        $topic_id = $arr[1];
+
+        $today = new Date();
+
+        $data =  DB::table('TBL_NEWS_TOPIC')->where('NEWS_CATE_ID',$cate_id)->Where('NEWS_TOPIC_ID',$topic_id)->first();
+
+        $dlno = ((int)$data->VIEW_STAT) + 1;
+
+        $sql = "UPDATE tbl_news_topic SET VIEW_STAT='".$dlno."', LAST_VIEW_DATE='".$today."'  WHERE NEWS_CATE_ID='".$cate_id."' AND NEWS_TOPIC_ID = '".$topic_id."'";
+
+        DB::update(DB::raw($sql));
+
+    }
+
     public function  DownloadFile($id){
 
         //User::where('encrypted_id', $file)->firstOrFail();
