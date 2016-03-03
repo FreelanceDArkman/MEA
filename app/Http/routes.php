@@ -55,9 +55,9 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/fundboard','FundboardController@getIndex');
     Route::get('/structuralfunds','StrucController@getIndex');
-    Route::get('/yearbook','YearbookController@getIndex');
 
-    Route::get('/download','DownloadController@getIndex');
+
+    //Route::get('/download','DownloadController@getIndex');
     Route::get('/test','TestController@getIndex');
 
     Route::get('/membershipform','MembershipfornController@getIndex');
@@ -74,7 +74,7 @@ Route::group(['middleware' => ['web']], function () {
     });
 
 
-    Route::group(['prefix' => '/'] , function($id) {
+    Route::group(['prefix' => '/'] , function() {
 
         Route::get('/','HomeController@getIndex');
         Route::post('/viewrecord','HomeController@viewrecord');
@@ -86,7 +86,7 @@ Route::group(['middleware' => ['web']], function () {
 
     });
 
-    Route::group(['prefix' => '/newsfund'] , function($id) {
+    Route::group(['prefix' => '/newsfund'] , function() {
 
         Route::get('/','NeesfundController@getIndex');
         Route::post('/viewrecord','NeesfundController@viewrecord');
@@ -98,11 +98,49 @@ Route::group(['middleware' => ['web']], function () {
     });
 
 
+    Route::group(['prefix' => '/news'] , function() {
+        Route::get('/','NewsController@getIndex');
+
+        Route::post('/viewrecord','NewsController@viewrecord');
+        Route::get('{id}','NewsController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','NewsController@DownloadFile');
+        Route::get('view/{id}','NewsController@ViewFile');
+
+    });
 
 
 
 
-    Route::get('/news','NewsController@getIndex');
+    Route::group(['prefix' => '/yearbook'] , function() {
+        Route::get('/','YearbookController@getIndex');
+
+        Route::post('/viewrecord','YearbookController@viewrecord');
+        Route::get('{id}','YearbookController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','YearbookController@DownloadFile');
+        Route::get('view/{id}','YearbookController@ViewFile');
+
+
+    });
+
+    Route::group(['prefix' => '/downloads'] , function() {
+
+        Route::get('/','DownloadController@getIndex');
+
+        Route::post('/viewrecord','DownloadController@viewrecord');
+        Route::get('{id}','DownloadController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','DownloadController@DownloadFile');
+        Route::get('view/{id}','DownloadController@ViewFile');
+
+    });
+
+
+
+
+
+
 
 
 

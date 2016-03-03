@@ -179,13 +179,13 @@
                 <!-- End Portfolio -->
 
                 <!-- Features -->
-                <li class="dropdown {{IsActive('download,test')}}">
+                <li class="dropdown {{IsActive('downloads,test')}}">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
                         ความรู้การลงทุน
                     </a>
                     <ul class="dropdown-menu">
                         <li >
-                            <a href="/download">เอกสารดาวน์โหลด</a>
+                            <a href="/downloads">เอกสารดาวน์โหลด</a>
 
                         </li>
 

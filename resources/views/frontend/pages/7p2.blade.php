@@ -34,17 +34,17 @@
                 <ul class="nav nav-tabs">
 
                     @if($sortby == 1 || $sortby == null)
-                        <li class="active"><a href="1" >มาใหม่</a></li>
-                        <li><a href="2" >เปิดดู</a></li>
-                        <li><a href="3" >ดาวโหลด</a></li>
+                        <li class="active"><a href="/newsfund/1" >มาใหม่</a></li>
+                        <li><a href="/newsfund/2" >เปิดดู</a></li>
+                        <li><a href="/newsfund/3" >ดาวโหลด</a></li>
                     @elseif($sortby == 2)
-                        <li ><a href="1" >มาใหม่</a></li>
-                        <li class="active"><a href="2"  >เปิดดู</a></li>
-                        <li><a href="3" >ดาวโหลด</a></li>
+                        <li ><a href="/newsfund/1" >มาใหม่</a></li>
+                        <li class="active"><a href="/newsfund/2"  >เปิดดู</a></li>
+                        <li><a href="/newsfund/3" >ดาวโหลด</a></li>
                     @elseif($sortby == 3)
-                        <li ><a href="1" >มาใหม่</a></li>
-                        <li ><a href="2"  >เปิดดู</a></li>
-                        <li class="active"><a href="3" >ดาวโหลด</a></li>
+                        <li ><a href="/newsfund/1" >มาใหม่</a></li>
+                        <li ><a href="/newsfund/2"  >เปิดดู</a></li>
+                        <li class="active"><a href="/newsfund/3" >ดาวโหลด</a></li>
                     @endif
 
                 </ul>

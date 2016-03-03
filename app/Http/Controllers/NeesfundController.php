@@ -13,7 +13,7 @@ class NeesfundController extends Controller
     public function getIndex()
     {
         $this->pageSetting( [
-            'title' => 'ข่าวประชาสัมพันธ์ | MEA FUND'
+            'title' => 'ข่าวกองทุน | MEA FUND'
         ] );
 
 

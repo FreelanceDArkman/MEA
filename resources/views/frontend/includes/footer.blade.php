@@ -43,7 +43,7 @@
 
                     <div class="thumb-headline"><h2>ความรู้การลงทุน</h2></div>
                     <ul class="list-unstyled simple-list">
-                        <li><a href="/download">เอกสารดาวน์โหลด</a></li>
+                        <li><a href="/downloads">เอกสารดาวน์โหลด</a></li>
                         <li><a href="/test">แบบทดสอบ</a></li>
 
                     </ul>
