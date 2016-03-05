@@ -55,7 +55,8 @@ a,
 a:focus,
 a:hover,
 a:active {
-   outline: 0 !important;
+
+	color: #fe5000 !important;
 }
 a:focus {
   text-decoration: none;

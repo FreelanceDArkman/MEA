@@ -18,7 +18,7 @@ class cumulativeController extends Controller
         $this->pageSetting( [
             'menu_group_id' => 23,
             'menu_id' => 1,
-            'title' => 'จัดการผู้ใช้'
+            'title' => 'ข้อมูลอัตราสะสม MEA FUND'
         ] );
 
 
@@ -107,7 +107,7 @@ WHERe sav.EMP_ID = '".get_userID()."' ORDER BY sav.CHANGE_SAVING_RATE_DATE DESC"
         $this->pageSetting( [
             'menu_group_id' => 23,
             'menu_id' => 1,
-            'title' => 'จัดการผู้ใช้'
+            'title' => 'ข้อมูลอัตราสะสม MEA FUND'
         ] );
 
 

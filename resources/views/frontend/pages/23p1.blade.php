@@ -112,7 +112,7 @@
                             <div id="all_invest" style="{{objectcheckdisplaynone($CurrnentPlan)}}" >
                                 <div class="row">
                                     <div class="headline-center margin-bottom-60">
-                                        <h2>อัตราสะสมเดิม</h2>
+                                        <h2>อัตราสะสมปัจจุบันที่ท่านเลือก</h2>
                                         @if($CurrnentPlan)
                                         <p> {{$CurrnentPlan[0]->USER_SAVING_RATE}} %</p>
                                         @else

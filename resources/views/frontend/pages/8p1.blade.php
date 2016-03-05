@@ -38,12 +38,11 @@
             <div class="headline"><h2>ที่อยู่</h2></div>
 
             <!-- Contacts -->
-            <h3>The Office</h3>
             <ul class="list-unstyled who">
-                <li><a href="#"><i class="fa fa-home"></i>การไฟฟ้านครหลวง อาคารสำนักงานใหญ่ เพลินจิตร เลขที่ 30 ซอยชิดลม ถนนเพลินจิตร แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330</a></li>
-                <li><a href="#"><i class="fa fa-envelope"></i>mea_fund@mea.or.th</a></li>
-                <li><a href="#"><i class="fa fa-phone"></i>1130</a></li>
-                <li><a href="#"><i class="fa fa-globe"></i>รถเมล์สาย 40, 48, ปรับอากาศสาย 511 รถไฟฟ้า BTS-สถานีชิดลม</a></li>
+                <li><i class="fa fa-home"></i>การไฟฟ้านครหลวง อาคารสำนักงานใหญ่ เพลินจิตร เลขที่ 30 ซอยชิดลม ถนนเพลินจิตร แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330</li>
+                <li><i class="fa fa-envelope"></i>mea_fund@mea.or.th</li>
+                <li><i class="fa fa-phone"></i>1130</li>
+                <li><i class="fa fa-globe"></i>รถเมล์สาย 40, 48, ปรับอากาศสาย 511 รถไฟฟ้า BTS-สถานีชิดลม</li>
             </ul>
 
             <hr>
@@ -57,6 +56,8 @@
             {{--</ul>--}}
         </div>
     </div>
+
+    @if(logged_in())
 
     <div class="row margin-bottom-30">
 
@@ -73,7 +74,7 @@
                     <div class="row sky-space-20">
                         <div class="col-md-7 col-md-offset-0">
                             <div>
-                                <input type="text" name="name" id="name" class="form-control">
+                                <input type="text" name="name" id="name" class="form-control" value="{{get_username()}}">
                             </div>
                         </div>
                     </div>
@@ -82,7 +83,7 @@
                     <div class="row sky-space-20">
                         <div class="col-md-7 col-md-offset-0">
                             <div>
-                                <input type="text" name="email" id="email" class="form-control">
+                                <input type="text" name="email" id="email"  value="{{$userinfo[0]->EMAIL}}"  class="form-control">
                             </div>
                         </div>
                     </div>
@@ -91,7 +92,7 @@
                     <div class="row sky-space-20">
                         <div class="col-md-7 col-md-offset-0">
                             <div>
-                                <input type="text" name="PHONE" id="PHONE" class="form-control">
+                                <input type="text" name="PHONE" id="PHONE" value="{{$userinfo[0]->PHONE}}"  class="form-control">
                             </div>
                         </div>
                     </div>
@@ -100,7 +101,7 @@
                     <div class="row sky-space-20">
                         <div class="col-md-7 col-md-offset-0">
                             <div>
-                                <input type="text" name="DEP_LNG" id="DEP_LNG" class="form-control">
+                                <input type="text" name="DEP_LNG" id="DEP_LNG" value="{{ session()->get('user_data')->dep_lng}}" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -112,8 +113,8 @@
                             <div>
                                 <select name="TYPE_TOPIC" id="TYPE_TOPIC"  class="form-control">
                                     <option value="default"> กรุณาเลือก </option>
-                                    <option value="งานทะเบียน">งานทะเบียน</option>
-                                    <option value="ผลตอบแทน">ผลตอบแทน</option>
+                                    <option value="งานควบคมุ ระบบบญั ชีสมาชิกและสทิ ธิประโยชน์(คส.)">งานควบคมุ ระบบบญั ชีสมาชิกและสทิ ธิประโยชน์(คส.)</option>
+                                    <option value="งานบัญชีการเงิน วิเคราะห์และประเมินผลการลงทุน (บป.)">งานบัญชีการเงิน วิเคราะห์และประเมินผลการลงทุน (บป.)</option>
                                     <option value="ปัญหาการใช้งานระบบ">ปัญหาการใช้งานระบบ</option>
                                 </select>
                             </div>
@@ -158,6 +159,6 @@
 
 
     </div><!--/row-->
-
+    @endif
 @stop
 

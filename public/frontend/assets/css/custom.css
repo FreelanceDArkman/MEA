@@ -105,7 +105,13 @@ body, a, h1, h2{
  }
 
 .btn-u{
-    background-color:#fe5000;
+    background-color:#fe5000 !important;
+    font-size: 18px !important;
+    color: #fff !important;
+}
+
+.btn-u:hover{
+    color: #fff !important;
 }
 
 .content-sm{
@@ -196,7 +202,7 @@ body, a, h1, h2{
 }
 
 .tbl_mea {
-    font-size: 16px;
+    font-size: 18px;
 }
 .tbl_mea thead tr th{
     padding: 3px;
@@ -208,7 +214,7 @@ body, a, h1, h2{
 .mea_searchbox{
     text-align: center;
     padding: 20px;
-    font-size: 14px;
+    font-size: 18px;
     border: 1px solid #ccc;
     margin-bottom: 20px;
 }
@@ -233,6 +239,11 @@ body, a, h1, h2{
 
 .footer-logo{
     width: 140px;
+}
+
+.footer a{
+    color: #fff !important;
+    text-decoration: underline !important;
 }
 .logo img{
     width: 100px !important;
@@ -278,5 +289,37 @@ a {
     text-decoration: none;
 }
 .tab-v1 .nav-tabs > .active > a, .tab-v1 .nav-tabs > .active > a:hover, .tab-v1 .nav-tabs > .active > a:focus {
+    color: #fff !important;
+}
+
+.tags-v2 li a {
+    color: #555;
+    font-size: 18px;
+    padding: 5px 10px;
+    border: solid 1px #bbb;
+
+}
+
+.tags-v2 li a:hover {
+    color: #fff !important;
+    background-color: #fe5000 !important;
+
+}
+.headline-v2{
+    border-left: 2px solid #fe5000 !important;
+}
+
+.who li i {
+    color: #fe5000 !important;
+}
+
+.md-margin-bottom-40 .sidebar-nav-v1 > li.active {
+    background-color: #fe5000 !important;
+    color: #ffffff !important;
+}
+.md-margin-bottom-40 .sidebar-nav-v1 > li.active a{
+    color: #fff !important;
+}
+.md-margin-bottom-40 .sidebar-nav-v1 > li.active a:hover{
     color: #fff !important;
 }

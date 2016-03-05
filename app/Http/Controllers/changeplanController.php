@@ -65,7 +65,7 @@ VALUES($emp_id,$plan_id,$equip,$dept,'".$create_date."','".$effectiveDate."',$Mo
         $this->pageSetting( [
             'menu_group_id' => 22,
             'menu_id' => 1,
-            'title' => 'จัดการผู้ใช้'
+            'title' => 'แผนการลงทุน MEA FUND'
         ] );
 
 
@@ -170,7 +170,7 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND YE
         $this->pageSetting( [
             'menu_group_id' => 22,
             'menu_id' => 1,
-            'title' => 'จัดการผู้ใช้'
+            'title' => 'แผนการลงทุน MEA FUND'
         ] );
 
 

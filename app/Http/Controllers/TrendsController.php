@@ -19,7 +19,7 @@ class TrendsController extends Controller
         $this->pageSetting( [
             'menu_group_id' => 21,
             'menu_id' => 1,
-            'title' => 'จัดการผู้ใช้'
+            'title' => 'ข้อมูลการลงทุน MEA FUND'
         ] );
 
         $monthstart = $request->input('drop_month_2_start');
@@ -88,7 +88,7 @@ class TrendsController extends Controller
         $this->pageSetting( [
             'menu_group_id' => 21,
             'menu_id' => 1,
-            'title' => 'จัดการผู้ใช้'
+            'title' => 'ข้อมูลการลงทุน MEA FUND'
         ] );
 
 
@@ -155,7 +155,7 @@ class TrendsController extends Controller
         $this->pageSetting( [
             'menu_group_id' => 21,
             'menu_id' => 1,
-            'title' => 'จัดการผู้ใช้'
+            'title' => 'ข้อมูลการลงทุน MEA FUND'
         ] );
 
         $month = $request->input('drop_month');
@@ -216,7 +216,7 @@ class TrendsController extends Controller
         $this->pageSetting( [
             'menu_group_id' => 21,
             'menu_id' => 1,
-            'title' => 'จัดการผู้ใช้'
+            'title' => 'ข้อมูลการลงทุน MEA FUND'
         ] );
 
 
@@ -508,7 +508,8 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
             ),
             array(
                 "name" => "เงินบำเหน็จสุทธิหลักหักภาษี",
-                "data" =>$item2_2
+                "data" =>$item2_2,
+                "color" => "#FFBF3F"
             )
         );
 
@@ -564,7 +565,8 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         $graph2["series"] = array(
             array(
                 "name" => "จำนวนเงิน",
-                "data" =>$item1
+                "data" =>$item1,
+                "color" => "#ffbf3f",
             )
         );
 

@@ -124,7 +124,11 @@
 
                             <div id="all_invest" style="{{objectcheckdisplaynone($CurrnentPlan)}}" >
                                 <div class="row">
+
                                     <div class="headline-center margin-bottom-60">
+                                        <div class="alert alert-warning fade in">
+                                            <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
+                                        </div>
                                         <h2>แผนปัจจุบัน</h2>
 
                                         @if($CurrnentPlan)
@@ -132,6 +136,14 @@
                                             @else
                                             <p class="plan_name">แบบที่ {{$effective[0]->PLAN_ID}} ({{$effective[0]->PLAN_NAME}})</p>
                                         @endif
+
+
+                                        @if($CurrnentPlan)
+                                        <div>วันที่ทำรายการล่าสุด {{get_date_notime($CurrnentPlan[0]->MODIFY_DATE)}}</div>
+                                            @else
+                                            <div>วันที่ทำรายการล่าสุด {{get_date_notime($effective[0]->MODIFY_DATE)}}</div>
+                                        @endif
+
                                     </div>
                                 </div>
                                 <div class="row">
@@ -401,7 +413,7 @@
                     number: '{{$effective[0]->EQUITY_RATE}}',
                     @endif
                 text:       '%',
-                colors:      ['#D3B6C6', '#9B6BCC'],
+                colors:      ['#FFC2BB', '#fe5000'],
                 duration:   2000,
             });
 
@@ -421,7 +433,7 @@
                 number:'{{$effective[0]->DEBT_RATE}}',
                 @endif
                 text:       '%',
-                colors:     ['#FFC2BB', '#E74C3C'],
+                colors:     ['#ffeba7', '#ffbf3f'],
                 duration:   2000,
             });
 

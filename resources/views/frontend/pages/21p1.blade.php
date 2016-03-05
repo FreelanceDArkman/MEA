@@ -88,15 +88,15 @@
                     <ul class="nav nav-tabs">
 
                         @if($show2 == 1)
-                        <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >แนวโน้มสัดส่วนการลงทุน</a></li>
+                        <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >สัดส่วนการลงทุน</a></li>
                         <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">รายงานผลประโยชน์สมาชิก</a></li>
                         <li class=""><a href="#messages-1" data-toggle="tab" aria-expanded="true">รายงานเปรียบเทียบกองทุนสำรองเลี้ยงชีพ กับเงินบำเหน็จ</a></li>
                             @elseif($show2 == 2)
-                            <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >แนวโน้มสัดส่วนการลงทุน</a></li>
+                            <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >สัดส่วนการลงทุน</a></li>
                             <li class="active"><a href="#profile-1" data-toggle="tab" aria-expanded="true">รายงานผลประโยชน์สมาชิก</a></li>
                             <li class=""><a href="#messages-1" data-toggle="tab" aria-expanded="true">รายงานเปรียบเทียบกองทุนสำรองเลี้ยงชีพ กับเงินบำเหน็จ</a></li>
                         @elseif($show2 == 2)
-                            <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >แนวโน้มสัดส่วนการลงทุน</a></li>
+                            <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >สัดส่วนการลงทุน</a></li>
                             <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">รายงานผลประโยชน์สมาชิก</a></li>
                             <li class="active"><a href="#messages-1" data-toggle="tab" aria-expanded="true">รายงานเปรียบเทียบกองทุนสำรองเลี้ยงชีพ กับเงินบำเหน็จ</a></li>
                             @endif
@@ -211,31 +211,31 @@
                                         <th width="100" rowspan="3" style="text-align:center;">รวม</th>
                                     </tr>
                                     <tr >
-                                        <th colspan="2" style="text-align:center;background-color: #fe5000">ส่วนของนายจ้าง</th>
-                                        <th colspan="2" style="text-align:center;background-color: #ffbf3f">ส่วนของลูกจ้าง</th>
+                                        <th colspan="2" style="text-align:center;background-color: #ffeba7">ส่วนของนายจ้าง</th>
+                                        <th colspan="2" style="text-align:center;background-color: #fff5b4">ส่วนของลูกจ้าง</th>
 
 
                                     </tr>
 
                                     <tr >
-                                        <th style="text-align:center;background-color: #fe5000">เงินสมทบ</th>
-                                        <th style="text-align:center;background-color: #fe5000">ผลประโยชน์เงินสมทบ</th>
+                                        <th style="text-align:center;background-color: #ffeba7">เงินสมทบ</th>
+                                        <th style="text-align:center;background-color: #ffeba7">ผลประโยชน์เงินสมทบ</th>
 
-                                        <th style="text-align:center;background-color: #ffbf3f">เงินสะสม</th>
-                                        <th style="text-align:center;background-color: #ffbf3f">ผลประโยชน์เงินสะสม</th>
+                                        <th style="text-align:center;background-color: #fff5b4">เงินสะสม</th>
+                                        <th style="text-align:center;background-color: #fff5b4">ผลประโยชน์เงินสะสม</th>
                                     </tr>
 
-                                    <tr >
-                                        <th style="text-align:center;">1</th>
-                                        <th style="text-align:center;">2</th>
-                                        <th style="text-align:center;">3</th>
-                                        <th style="text-align:center;">4</th>
-                                        <th style="text-align:center;background-color: #fe5000">5</th>
-                                        <th style="text-align:center;background-color: #fe5000">6</th>
-                                        <th style="text-align:center;background-color: #ffbf3f">7</th>
-                                        <th style="text-align:center;background-color: #ffbf3f">8</th>
-                                        <th style="text-align:center;">9</th>
-                                    </tr>
+                                    {{--<tr >--}}
+                                        {{--<th style="text-align:center;">1</th>--}}
+                                        {{--<th style="text-align:center;">2</th>--}}
+                                        {{--<th style="text-align:center;">3</th>--}}
+                                        {{--<th style="text-align:center;">4</th>--}}
+                                        {{--<th style="text-align:center;background-color: #ffeba7">5</th>--}}
+                                        {{--<th style="text-align:center;background-color: #ffeba7">6</th>--}}
+                                        {{--<th style="text-align:center;background-color: #fff5b4">7</th>--}}
+                                        {{--<th style="text-align:center;background-color: #fff5b4">8</th>--}}
+                                        {{--<th style="text-align:center;">9</th>--}}
+                                    {{--</tr>--}}
                                     </thead>
 
 
@@ -247,10 +247,10 @@
                                             <td style="text-align: right;">{{meaNumbermoney($item->SALARY)}}</td>
                                             <td style="text-align: center;">{{ $item->AGE_YEAR .'/'. $item->AGE_DAY }}</td>
                                             <td style="text-align: center;">{{ $item->JOB_YEAR .'/'. $item->JOB_DAY }}</td>
-                                            <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1)}}</td>
-                                            <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->EMPLOYER_EARNING_2)}}</td>
-                                            <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->MEMBER_CONTRIBUTION_3)}}</td>
-                                            <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->MEMBER_EARNING_4)}}</td>
+                                            <td style="text-align: right;background-color: #ffeba7">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1)}}</td>
+                                            <td style="text-align: right;background-color: #ffeba7">{{meaNumbermoney($item->EMPLOYER_EARNING_2)}}</td>
+                                            <td style="text-align: right;background-color: #fff5b4">{{meaNumbermoney($item->MEMBER_CONTRIBUTION_3)}}</td>
+                                            <td style="text-align: right;background-color: #fff5b4">{{meaNumbermoney($item->MEMBER_EARNING_4)}}</td>
                                             <td style="text-align: right;">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1 + $item->EMPLOYER_EARNING_2+$item->MEMBER_CONTRIBUTION_3+$item->MEMBER_EARNING_4)}}</td>
                                         </tr>
                                     @endforeach
@@ -330,51 +330,51 @@
 
 
 
-                                        <th width="100" rowspan="2" colspan="3" style="text-align:center;background-color: #fe5000">เงินบำเหน็จ (บาท)</th>
-                                        <th width="100" rowspan="2" colspan="3" style="text-align:center;background-color: #ffbf3f">เปรียบเทียบกองทุนสำรองเลี้ยงชีพฯ กับเงินบำเหน็จ(บาท)</th>
+                                        <th width="100" rowspan="2" colspan="3" style="text-align:center;background-color: #ffeba7">เงินบำเหน็จ (บาท)</th>
+                                        <th width="100" rowspan="2" colspan="3" style="text-align:center;background-color: #fff5b4">เปรียบเทียบกองทุนสำรองเลี้ยงชีพฯ กับเงินบำเหน็จ(บาท)</th>
                                     </tr>
                                     <tr >
-                                        <th colspan="3" style="text-align:center;background-color: #fe5000">ส่วนของนายจ้าง</th>
-                                        <th colspan="3" style="text-align:center;background-color: #ffbf3f">ส่วนของลูกจ้าง</th>
+                                        <th colspan="3" style="text-align:center;background-color: #ffeba7">ส่วนของนายจ้าง</th>
+                                        <th colspan="3" style="text-align:center;background-color: #fff5b4">ส่วนของลูกจ้าง</th>
                                     </tr>
                                     <tr >
-                                        <th style="text-align:center;background-color: #fe5000">เงินสมทบ</th>
-                                        <th style="text-align:center;background-color: #fe5000">ผลประโยชน์เงินสมทบ</th>
-                                        <th style="text-align:center;background-color: #fe5000">รวม</th>
+                                        <th style="text-align:center;background-color: #ffeba7">เงินสมทบ</th>
+                                        <th style="text-align:center;background-color: #ffeba7">ผลประโยชน์เงินสมทบ</th>
+                                        <th style="text-align:center;background-color: #ffeba7">รวม</th>
 
-                                        <th style="text-align:center;background-color: #ffbf3f">เงินสะสม</th>
-                                        <th style="text-align:center;background-color: #ffbf3f">ผลประโยชน์เงินสะสม</th>
-                                        <th style="text-align:center;background-color: #ffbf3f">รวม</th>
+                                        <th style="text-align:center;background-color: #fff5b4">เงินสะสม</th>
+                                        <th style="text-align:center;background-color: #fff5b4">ผลประโยชน์เงินสะสม</th>
+                                        <th style="text-align:center;background-color: #fff5b4">รวม</th>
 
-                                        <th style="text-align:center;background-color: #fe5000">เงินบำเหน็จก่อนหักภาษี</th>
-                                        <th style="text-align:center;background-color: #fe5000">ภาษี</th>
-                                        <th style="text-align:center;background-color: #fe5000">เงินบำเหน็จสุทธิหลังหักภาษี</th>
+                                        <th style="text-align:center;background-color: #ffeba7">เงินบำเหน็จก่อนหักภาษี</th>
+                                        <th style="text-align:center;background-color: #ffeba7">ภาษี</th>
+                                        <th style="text-align:center;background-color: #ffeba7">เงินบำเหน็จสุทธิหลังหักภาษี</th>
 
 
-                                        <th style="text-align:center;background-color: #ffbf3f">ผลรวมส่วนของนายจ้าง </th>
-                                        <th style="text-align:center;background-color: #ffbf3f">เงินสุทธิหลังหักภาษี</th>
-                                        <th style="text-align:center;background-color: #ffbf3f">ส่วนต่าง </th>
+                                        <th style="text-align:center;background-color: #fff5b4">ผลรวมส่วนของนายจ้าง </th>
+                                        <th style="text-align:center;background-color: #fff5b4">เงินสุทธิหลังหักภาษี</th>
+                                        <th style="text-align:center;background-color: #fff5b4">ส่วนต่าง </th>
 
 
                                     </tr>
-                                    <tr >
-                                        <th style="text-align:center;">1</th>
-                                        <th style="text-align:center;">2</th>
-                                        <th style="text-align:center;">3</th>
-                                        <th style="text-align:center;">4</th>
-                                        <th style="text-align:center;background-color: #fe5000">5</th>
-                                        <th style="text-align:center;background-color: #fe5000">6</th>
-                                        <th style="text-align:center;background-color: #fe5000">7</th>
-                                        <th style="text-align:center;background-color: #ffbf3f">8</th>
-                                        <th style="text-align:center;background-color: #ffbf3f">9</th>
-                                        <th style="text-align:center;background-color: #ffbf3f">10</th>
-                                        <th style="text-align:center;background-color: #fe5000">11</th>
-                                        <th style="text-align:center;background-color: #fe5000">12</th>
-                                        <th style="text-align:center;background-color: #fe5000">13</th>
-                                        <th style="text-align:center;background-color: #ffbf3f">14</th>
-                                        <th style="text-align:center;background-color: #ffbf3f">15</th>
-                                        <th style="text-align:center;background-color: #ffbf3f">16</th>
-                                    </tr>
+                                    {{--<tr >--}}
+                                        {{--<th style="text-align:center;">1</th>--}}
+                                        {{--<th style="text-align:center;">2</th>--}}
+                                        {{--<th style="text-align:center;">3</th>--}}
+                                        {{--<th style="text-align:center;">4</th>--}}
+                                        {{--<th style="text-align:center;background-color: #ffeba7">5</th>--}}
+                                        {{--<th style="text-align:center;background-color: #ffeba7">6</th>--}}
+                                        {{--<th style="text-align:center;background-color: #ffeba7">7</th>--}}
+                                        {{--<th style="text-align:center;background-color: #fff5b4">8</th>--}}
+                                        {{--<th style="text-align:center;background-color: #fff5b4">9</th>--}}
+                                        {{--<th style="text-align:center;background-color: #fff5b4">10</th>--}}
+                                        {{--<th style="text-align:center;background-color: #ffeba7">11</th>--}}
+                                        {{--<th style="text-align:center;background-color: #ffeba7">12</th>--}}
+                                        {{--<th style="text-align:center;background-color: #ffeba7">13</th>--}}
+                                        {{--<th style="text-align:center;background-color: #fff5b4">14</th>--}}
+                                        {{--<th style="text-align:center;background-color: #fff5b4">15</th>--}}
+                                        {{--<th style="text-align:center;background-color: #fff5b4">16</th>--}}
+                                    {{--</tr>--}}
 
 
 
@@ -390,18 +390,18 @@
                                         <td style="text-align: center;">{{ $item->AGE_YEAR .'/'. $item->AGE_DAY }}</td>
 
                                         <td style="text-align: center;">{{ $item->JOB_YEAR .'/'. $item->JOB_DAY }}</td>
-                                        <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1)}}</td>
-                                        <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->EMPLOYER_EARNING_2)}}</td>
-                                        <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1  + $item->EMPLOYER_EARNING_2)}}</td>
-                                        <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->MEMBER_CONTRIBUTION_3)}}</td>
-                                        <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->MEMBER_EARNING_4)}}</td>
-                                        <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->MEMBER_CONTRIBUTION_3 + $item->MEMBER_EARNING_4)}}</td>
-                                        <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->GRATUITY)}}</td>
-                                        <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->GRATUITY_TAX)}}</td>
-                                        <td style="text-align: right;background-color: #fe5000">{{meaNumbermoney($item->GRATUITY - $item->GRATUITY_TAX)}}</td>
-                                        <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1 + $item->EMPLOYER_EARNING_2 )}}</td>
-                                        <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney($item->GRATUITY - $item->GRATUITY_TAX)}}</td>
-                                        <td style="text-align: right;background-color: #ffbf3f">{{meaNumbermoney(($item->EMPLOYER_CONTRIBUTION_1 + $item->EMPLOYER_EARNING_2) - ($item->GRATUITY - $item->GRATUITY_TAX))}}</td>
+                                        <td style="text-align: right;background-color: #ffeba7">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1)}}</td>
+                                        <td style="text-align: right;background-color: #ffeba7">{{meaNumbermoney($item->EMPLOYER_EARNING_2)}}</td>
+                                        <td style="text-align: right;background-color: #ffeba7">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1  + $item->EMPLOYER_EARNING_2)}}</td>
+                                        <td style="text-align: right;background-color: #fff5b4">{{meaNumbermoney($item->MEMBER_CONTRIBUTION_3)}}</td>
+                                        <td style="text-align: right;background-color: #fff5b4">{{meaNumbermoney($item->MEMBER_EARNING_4)}}</td>
+                                        <td style="text-align: right;background-color: #fff5b4">{{meaNumbermoney($item->MEMBER_CONTRIBUTION_3 + $item->MEMBER_EARNING_4)}}</td>
+                                        <td style="text-align: right;background-color: #ffeba7">{{meaNumbermoney($item->GRATUITY)}}</td>
+                                        <td style="text-align: right;background-color: #ffeba7">{{meaNumbermoney($item->GRATUITY_TAX)}}</td>
+                                        <td style="text-align: right;background-color: #ffeba7">{{meaNumbermoney($item->GRATUITY - $item->GRATUITY_TAX)}}</td>
+                                        <td style="text-align: right;background-color: #fff5b4">{{meaNumbermoney($item->EMPLOYER_CONTRIBUTION_1 + $item->EMPLOYER_EARNING_2 )}}</td>
+                                        <td style="text-align: right;background-color: #fff5b4">{{meaNumbermoney($item->GRATUITY - $item->GRATUITY_TAX)}}</td>
+                                        <td style="text-align: right;background-color: #fff5b4">{{meaNumbermoney(($item->EMPLOYER_CONTRIBUTION_1 + $item->EMPLOYER_EARNING_2) - ($item->GRATUITY - $item->GRATUITY_TAX))}}</td>
 
                                     </tr>
                                     @endforeach
