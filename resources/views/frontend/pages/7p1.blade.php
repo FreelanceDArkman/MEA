@@ -86,7 +86,7 @@
                                     @else
                                         <h3>
                                             {{--{!! Form::open(['method' => 'DELETE', 'id'=>'delForm']) !!}--}}
-                                            <a href="#"  data-modal="{{$item->NEWS_TOPIC_ID}}" data-param="{{$item->NEWS_CATE_ID ."-". $item->NEWS_TOPIC_ID}}" ">{{$item->FILE_NAME}}</a>
+                                            <a href="#"  data-modal="{{$item->NEWS_TOPIC_ID}}" data-param="{{$item->NEWS_CATE_ID ."-". $item->NEWS_TOPIC_ID}}">{{$item->FILE_NAME}}</a>
                                             {{--{!! Form::close() !!}--}}
                                         </h3>
                                         <div class="modal fade bs-example-modal-lg" id="modol_{{$item->NEWS_TOPIC_ID}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">

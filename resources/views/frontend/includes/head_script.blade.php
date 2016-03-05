@@ -44,6 +44,8 @@
 <script type="text/javascript" src="{{asset('frontend/assets/highchart/highcharts.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend/assets/highchart/exporting.js')}}"></script>
 
+<script type="text/javascript" src="{{asset('frontend/assets/js/plugins/clipboard.min.js')}}"></script>
+
 
 
 {{--<script type="text/javascript" src="frontend/assets/js/plugins/parallax-slider.js"></script>--}}

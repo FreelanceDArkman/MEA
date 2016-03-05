@@ -263,3 +263,20 @@ body, a, h1, h2{
     margin-top: 20px;
 }
 
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: #fef0dd;
+}
+
+.table tr th{
+    background-color: #fe5000;
+    color: #fff;
+    text-align: center;
+}
+
+a {
+    color: #63666a !important;
+    text-decoration: none;
+}
+.tab-v1 .nav-tabs > .active > a, .tab-v1 .nav-tabs > .active > a:hover, .tab-v1 .nav-tabs > .active > a:focus {
+    color: #fff !important;
+}

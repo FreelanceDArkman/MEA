@@ -43,14 +43,97 @@ Route::group(['middleware' => ['web']], function () {
 
 
     Route::get('/valuefund','ValueFundController@getIndex');
-    Route::get('/netasset','NetassetController@getIndex');
 
-    Route::get('/economic','EconomicController@getIndex');
 
-    Route::get('/announce','AnnounceController@getIndex');
-    Route::get('/actfund','ActfundController@getIndex');
-    Route::get('/board','BoardController@getIndex');
-    Route::get('/fundregulations','FundreController@getIndex');
+
+//    Route::get('/netasset','NetassetController@getIndex');
+
+
+    Route::group(['prefix' => '/netasset'] , function() {
+        Route::get('/','NetassetController@getIndex');
+
+        Route::post('/viewrecord','NetassetController@viewrecord');
+        Route::get('{id}','NetassetController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','NetassetController@DownloadFile');
+        Route::get('view/{id}','NetassetController@ViewFile');
+
+
+    });
+
+
+//
+//
+//    Route::get('/economic','EconomicController@getIndex');
+
+
+    Route::group(['prefix' => '/economic'] , function() {
+        Route::get('/','EconomicController@getIndex');
+
+        Route::post('/viewrecord','EconomicController@viewrecord');
+        Route::get('{id}','EconomicController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','EconomicController@DownloadFile');
+        Route::get('view/{id}','EconomicController@ViewFile');
+
+
+    });
+
+
+
+//    Route::get('/announce','AnnounceController@getIndex');
+
+    Route::group(['prefix' => '/announce'] , function() {
+        Route::get('/','AnnounceController@getIndex');
+
+        Route::post('/viewrecord','AnnounceController@viewrecord');
+        Route::get('{id}','AnnounceController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','AnnounceController@DownloadFile');
+        Route::get('view/{id}','AnnounceController@ViewFile');
+
+
+    });
+
+//    Route::get('/actfund','ActfundController@getIndex');
+
+    Route::group(['prefix' => '/actfund'] , function() {
+        Route::get('/','ActfundController@getIndex');
+
+        Route::post('/viewrecord','ActfundController@viewrecord');
+        Route::get('{id}','ActfundController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','ActfundController@DownloadFile');
+        Route::get('view/{id}','ActfundController@ViewFile');
+
+
+    });
+
+//    Route::get('/board','BoardController@getIndex');
+
+    Route::group(['prefix' => '/board'] , function() {
+        Route::get('/','BoardController@getIndex');
+
+        Route::post('/viewrecord','BoardController@viewrecord');
+        Route::get('{id}','BoardController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','BoardController@DownloadFile');
+        Route::get('view/{id}','BoardController@ViewFile');
+
+
+    });
+//    Route::get('/fundregulations','FundreController@getIndex');
+    Route::group(['prefix' => '/fundregulations'] , function() {
+        Route::get('/','FundreController@getIndex');
+
+        Route::post('/viewrecord','FundreController@viewrecord');
+        Route::get('{id}','FundreController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','FundreController@DownloadFile');
+        Route::get('view/{id}','FundreController@ViewFile');
+
+
+    });
 
 
     Route::get('/fundboard','FundboardController@getIndex');
@@ -60,9 +143,54 @@ Route::group(['middleware' => ['web']], function () {
     //Route::get('/download','DownloadController@getIndex');
     Route::get('/test','TestController@getIndex');
 
-    Route::get('/membershipform','MembershipfornController@getIndex');
-    Route::get('/form','FormController@getIndex');
-    Route::get('/otherforms','OtherFormController@getIndex');
+    Route::group(['prefix' => '/test'] , function() {
+        Route::get('/','TestController@getIndex');
+
+        Route::post('/viewrecord','TestController@viewrecord');
+        Route::get('{id}','TestController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','TestController@DownloadFile');
+        Route::get('view/{id}','TestController@ViewFile');
+
+
+    });
+
+//    Route::get('/membershipform','MembershipfornController@getIndex');
+    Route::group(['prefix' => '/membershipform'] , function() {
+        Route::get('/','MembershipfornController@getIndex');
+
+        Route::post('/viewrecord','MembershipfornController@viewrecord');
+        Route::get('{id}','MembershipfornController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','MembershipfornController@DownloadFile');
+        Route::get('view/{id}','MembershipfornController@ViewFile');
+
+
+    });
+//    Route::get('/form','FormController@getIndex');
+    Route::group(['prefix' => '/form'] , function() {
+        Route::get('/','FormController@getIndex');
+
+        Route::post('/viewrecord','FormController@viewrecord');
+        Route::get('{id}','FormController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','FormController@DownloadFile');
+        Route::get('view/{id}','FormController@ViewFile');
+
+
+    });
+//    Route::get('/otherforms','OtherFormController@getIndex');
+    Route::group(['prefix' => '/otherforms'] , function() {
+        Route::get('/','OtherFormController@getIndex');
+
+        Route::post('/viewrecord','OtherFormController@viewrecord');
+        Route::get('{id}','OtherFormController@getIndexByID')->where('id', '[0-9]+');
+
+        Route::get('download/{id}','OtherFormController@DownloadFile');
+        Route::get('view/{id}','OtherFormController@ViewFile');
+
+
+    });
 
 
     Route::group(['prefix' => 'qa'] , function() {

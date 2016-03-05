@@ -238,6 +238,32 @@ if(!function_exists('IsActive')) {
     }
 }
 
+
+
+
+if(!function_exists('getfilesize')) {
+    function getfilesize($file_path)
+    {
+        $arrfile  = explode("/", $file_path);
+
+
+        $arrfileName= $arrfile[count($arrfile) - 1];
+
+        $file = 'contents/' . $arrfileName;
+        $bytes = File::size($file);
+
+        $filesize = round(($bytes / 1000)) ;
+
+        if($filesize < 1000){
+
+            return  $filesize . " KB";
+        }else{
+            return  round(($filesize  / 1000)) . " MB";
+        }
+
+    }
+}
+
 if(!function_exists('quizScore')) {
     function quizScore($quiz_result)
     {

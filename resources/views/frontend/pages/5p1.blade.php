@@ -1,4 +1,4 @@
-@extends('frontend.layouts.content')
+@extends('frontend.layouts.content_chart')
 @section('content')
 
     <div class="heading heading-v1 margin-bottom-40">
@@ -28,46 +28,114 @@
 
         </div>
         <!-- End Blog Sidebar -->
-
         <!-- Blog All Posts -->
         <div class="col-md-9">
-            <div class="sorting-block">
-                {{--<div class="content-xs">--}}
-                {{--<ul class="sorting-nav sorting-nav-v1 text-center">--}}
-                {{--<li class="filter" data-filter="all">All</li>--}}
-                {{--<li class="filter" data-filter="category_1">UI Design</li>--}}
-                {{--<li class="filter" data-filter="category_2">Wordpress</li>--}}
-                {{--<li class="filter" data-filter="category_3">HTML5/CSS3</li>--}}
-                {{--<li class="filter" data-filter="category_4">Bootstrap 3</li>--}}
-                {{--</ul>--}}
-                {{--</div>--}}
 
-                <ul class="row sorting-grid">
-                    @if($netasset)
-                        @foreach($netasset as $index => $item)
-                            <li class="col-md-3 col-sm-6 col-xs-12 mix category_1 category_3" data-cat="1">
-                                <a target="_blank" href="{{$item->FILE_PATH}}">
-                                    <img class="img-responsive" src="frontend/assets/custom_pic/pdf.jpg" alt="">
-                            <span class="sorting-cover">
-                                <span>{{$item->FILE_NAME}}</span>
-                                {{--<p>Anim pariatur cliche reprehenderit</p>--}}
-                            </span>
-                                </a>
-                            </li>
 
-                        @endforeach
+            <div class="tab-v1">
+                <ul class="nav nav-tabs">
+
+                    @if($sortby == 1 || $sortby == null)
+                        <li class="active"><a href="/membershipform/1" >มาใหม่</a></li>
+                        <li><a href="/membershipform/2" >เปิดดู</a></li>
+                        <li><a href="/membershipform/3" >ดาวโหลด</a></li>
+                    @elseif($sortby == 2)
+                        <li ><a href="/membershipform/1" >มาใหม่</a></li>
+                        <li class="active"><a href="/membershipform/2"  >เปิดดู</a></li>
+                        <li><a href="/membershipform/3" >ดาวโหลด</a></li>
+                    @elseif($sortby == 3)
+                        <li ><a href="/membershipform/1" >มาใหม่</a></li>
+                        <li ><a href="/membershipform/2"  >เปิดดู</a></li>
+                        <li class="active"><a href="/membershipform/3" >ดาวโหลด</a></li>
                     @endif
+
                 </ul>
 
-                <div class="clearfix"></div>
-
-                <div class="text-center">
-                    {{$netasset->links()}}
-                </div>
             </div>
-            <!-- End Pager v3 -->
+
+            <br/>
+
+
+
+
+
+            <style>
+
+
+
+            </style>
+
+
+
+            @if($netasset)
+
+
+
+                <div class="row news-v1">
+
+
+                    <div class="col-xs-12 col-md-12">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ไฟล์แนบ</th>
+                                    <th>ขนาดไฟล์</th>
+                                    <th>จำนวนการดาวโหลด</th>
+                                    <th>วันที่ทำรายการ</th>
+                                    <th>ดาวโหลด</th>
+                                    <th>คัดลอก URL</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($netasset as $index => $item)
+                                    <tr>
+                                        <td><a target="_blank" href="/view/{{$item->NEWS_CATE_ID ."-". $item->NEWS_TOPIC_ID}}"><i class="fa fa-file-pdf-o" style="color: red"></i> {{$item->FILE_NAME}}</a></td>
+                                        <td style="text-align: center">{{ getfilesize($item->FILE_PATH)     }}</td>
+                                        <td style="text-align: center">{{$item->DL_STAT}}</td>
+                                        <td style="text-align: center">{{get_date_notime($item->LAST_DL_DATE)}}</td>
+                                        <td style="text-align: center"> <a  class="download_pdf" href="/download/{{$item->NEWS_CATE_ID ."-". $item->NEWS_TOPIC_ID}}"><i class="fa fa-download"></i></a></td>
+                                        <td style="text-align: center">
+
+                                            <input style="display: none" type="text"  id="copy_clip_{{$item->NEWS_TOPIC_ID}}" name="Element To Be Copied" id="copy-me" value="{{ asset('download/' . $item->NEWS_CATE_ID ."-". $item->NEWS_TOPIC_ID) }}" />
+
+
+                                            <a href="#" data-copyclip="copy_clip_{{$item->NEWS_TOPIC_ID}}" class="copy-btn"><i class="fa fa-clipboard"></i></a>
+
+                                            {{--<button  >Copy</button><br/><br/>--}}
+
+                                            {{--<input style="display: none"  id="copyme_{{$item->NEWS_TOPIC_ID}}"  />--}}
+                                            {{--<button data-copytarget="#copyme_{{$item->NEWS_TOPIC_ID}}">copy</button>--}}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                    <div class="clearfix"></div>
+                </div>
+
+
+                @endif
+
+
+
+
+                        <!-- End Pager v3 -->
         </div>
         <!-- End Blog All Posts -->
+
+        <div class="clearfix"></div>
     </div>
 
 @stop
