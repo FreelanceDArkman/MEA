@@ -14,7 +14,7 @@ class ValueFundController extends Controller
     public function getIndex()
     {
         $this->pageSetting( [
-            'title' => 'Dashboard | MEA FUND'
+            'title' => 'มูลค่ากองทุน | MEA FUND'
         ] );
 
 
