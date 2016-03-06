@@ -1,3 +1,6 @@
+<?php
+$data = getmemulist();
+?>
 <div class="header">
     <div class="container">
         <!-- Logo -->
@@ -10,13 +13,13 @@
         <div class="topbar">
             <ul class="loginbar pull-right">
                 {{--hoverSelector--}}
-                <li ><a href="/qa"> <i class="fa fa-comment"></i> ถาม-ตอบ</a></li>
+                <li ><a href="/qa"> <i class="fa fa-comment"></i> {{ getGoupName($data,6) }}</a></li>
                 <li class="topbar-devider"></li>
                 <li>
                     <a> <i class="fa fa-cog"></i> คู่มือการใช้งาน</a>
                 </li>
                 <li class="topbar-devider"></li>
-                <li><a href="/contact"><i class="fa fa-map-marker"></i> ติดต่อ กสช.</a></li>
+                <li><a href="/contact"><i class="fa fa-map-marker"></i> {{ getGoupName($data,8) }}</a></li>
                 <li class="topbar-devider"></li>
 
              @if(logged_in())
@@ -55,48 +58,48 @@
                @if(menu_access(1,20))
                 <li class="dropdown {{IsActive('editprofile,informationbeneficiary,resetpassword,trends,reportingmemberbenefit,compares,changeplan,historyinvestmentplan,cumulative,historycumulative,riskassessment')}}" >
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                        ข้อมูลส่วนตัว
+
+
+                        {{ getGoupName($data,20) }}
                     </a>
                     <ul class="dropdown-menu">
 
-
-
                         <li class="dropdown-submenu" >
-                            <a href="javascript:void(0);">ข้อมูลการลงทุน</a>
+                            <a href="javascript:void(0);">{{ getGoupName($data,21) }}</a>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href="/trends">แนวโน้มสัดส่วนการลงทุน</a></li>
-                                <li><a target="_blank" href="/reportingmemberbenefit">รายงานผลประโยชน์สมาชิก</a></li>
-                                <li><a target="_blank" href="/compares">รายงานเปรียบเทียบเงินกองทุนสำรองเลี้ยงชีพ กับเงินบำเหน็จ</a></li>
+                                <li><a target="_blank" href="/trends">{{ getMenuName($data,21,1) }}</a></li>
+                                <li><a target="_blank" href="/reportingmemberbenefit">{{ getMenuName($data,21,2)}}</a></li>
+                                <li><a target="_blank" href="/compares">{{ getMenuName($data,21,3) }}</a></li>
 
                             </ul>
                         </li>
                         <li class="dropdown-submenu" >
-                            <a href="javascript:void(0);">แผนการลงทุน</a>
+                            <a href="javascript:void(0);">{{ getGoupName($data,22) }}</a>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href="/changeplan">เปลี่ยนแผนการลงทุน</a></li>
-                                <li><a target="_blank" href="/historyinvestmentplan">ประวัติการเปลี่ยนแผนการลงทุน</a></li>
+                                <li><a target="_blank" href="/changeplan">{{ getMenuName($data,22,1) }}</a></li>
+                                <li><a target="_blank" href="/historyinvestmentplan">{{ getMenuName($data,22,2) }}</a></li>
 
 
                             </ul>
                         </li>
                         <li class="dropdown-submenu" >
-                            <a href="javascript:void(0);">ข้อมูลอัตราสะสม</a>
+                            <a href="javascript:void(0);">{{ getGoupName($data,23) }}</a>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href="/cumulative">เปลี่ยนอัตราสะสม</a></li>
-                                <li><a target="_blank" href="/historycumulative">ประวัติการเปลี่ยนอัตราสะสม</a></li>
+                                <li><a target="_blank" href="/cumulative">{{ getMenuName($data,23,1) }}</a></li>
+                                <li><a target="_blank" href="/historycumulative">{{ getMenuName($data,23,2) }}</a></li>
 
 
                             </ul>
                         </li>
                         <li>
-                            <a href="/riskassessment">แบบประเมินความเสี่ยง</a>
+                            <a href="/riskassessment">{{ getGoupName($data,24) }}</a>
                         </li>
                         <li class="dropdown-submenu">
-                            <a href="javascript:void(0);">แก้ไขข้อมูลส่วนตัว</a>
+                            <a href="javascript:void(0);">{{ getMenuName($data,20,1) }}</a>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href="/editprofile">แก้ไขข้อมูลส่วนตัว</a></li>
-                                <li><a target="_blank" href="/informationbeneficiary">ข้อมูลผู้รับผลประโยชน์</a></li>
-                                <li><a target="_blank" href="/resetpassword">เปลี่ยนรหัสผ่าน</a></li>
+                                <li><a target="_blank" href="/editprofile">{{ getMenuName($data,20,1) }}</a></li>
+                                <li><a target="_blank" href="/informationbeneficiary">{{ getMenuName($data,20,2) }}</a></li>
+                                <li><a target="_blank" href="/resetpassword">{{ getMenuName($data,20,3) }}</a></li>
 
                             </ul>
                         </li>
@@ -111,24 +114,24 @@
                 <!-- Pages -->
                 <li class="dropdown {{IsActive('valuefund,netasset,economic')}}" >
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                        ผลการดำเนินงาน
+                        {{ getGoupName($data,1) }}
                     </a>
                     <ul class="dropdown-menu">
 
                         <li>
-                            <a href="/valuefund">มูลค่ากองทุน</a>
+                            <a href="/valuefund">{{ getMenuName($data,1,1) }}</a>
 
                         </li>
                         <!-- About Pages -->
                         <li>
-                            <a href="/netasset">รายงานมูลค่าทรัพย์สิน</a>
+                            <a href="/netasset">{{ getMenuName($data,1,2) }}</a>
 
                         </li>
                         <!-- End About Pages -->
 
                         <!-- Service Pages -->
                         <li>
-                            <a href="/economic">สรุปภาวะเศรษฐกิจและกลยุทธ์</a>
+                            <a href="/economic">{{ getMenuName($data,1,3) }}</a>
 
                         </li>
                         <!-- End Service Pages -->
@@ -141,23 +144,23 @@
                 <!-- Blog -->
                 <li class="dropdown {{IsActive('announce,actfund,board,fundregulations')}}">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                        ประมวลระเบียบ
+                        {{ getGoupName($data,2) }}
                     </a>
                     <ul class="dropdown-menu">
                         <li >
-                            <a href="/announce">ประกาศ</a>
+                            <a href="/announce">{{ getMenuName($data,2,1) }}</a>
 
                         </li>
                         <li >
-                            <a href="/actfund">พระราชบัญญัติกองทุนสำรองเลี้ยงชีพ</a>
+                            <a href="/actfund">{{ getMenuName($data,2,2) }}</a>
 
                         </li>
                         <li >
-                            <a href="/board">คำสั่งแต่งตั้งคณะกรรมการ</a>
+                            <a href="/board">{{ getMenuName($data,2,3) }}</a>
 
                         </li>
                         <li >
-                            <a href="/fundregulations">ข้อบังคับกองทุน</a>
+                            <a href="/fundregulations">{{ getMenuName($data,2,4) }}</a>
 
                         </li>
 
@@ -168,12 +171,12 @@
                 <!-- Portfolio -->
                 <li class="dropdown {{IsActive('fundboard,structuralfunds,yearbook')}}">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                        กองทุน
+                        {{ getGoupName($data,3) }}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/fundboard">คณะกรรมการกองทุน</a> </li>
-                        <li><a href="/structuralfunds">โครงสร้างกองทุน</a> </li>
-                        <li><a href="/yearbook">รายงานประจำปี</a> </li>
+                        <li><a href="/fundboard">{{ getMenuName($data,3,1) }}</a> </li>
+                        <li><a href="/structuralfunds">{{ getMenuName($data,3,2) }}</a> </li>
+                        <li><a href="/yearbook">{{ getMenuName($data,3,3) }}</a> </li>
                     </ul>
                 </li>
                 <!-- End Portfolio -->
@@ -181,15 +184,15 @@
                 <!-- Features -->
                 <li class="dropdown {{IsActive('downloads,test')}}">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                        ความรู้การลงทุน
+                        {{ getGoupName($data,4) }}
                     </a>
                     <ul class="dropdown-menu">
                         <li >
-                            <a href="/downloads">เอกสารดาวน์โหลด</a>
+                            <a href="/downloads">{{ getMenuName($data,4,1) }}</a>
 
                         </li>
 
-                        <li><a href="/test">แบบทดสอบ</a></li>
+                        <li><a href="/test">{{ getMenuName($data,4,2) }}</a></li>
 
                     </ul>
                 </li>
@@ -198,12 +201,12 @@
                 <!-- Shortcodes -->
                 <li class="dropdown {{IsActive('membershipform,form,otherforms')}}">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                        แบบฟอร์ม
+                        {{ getGoupName($data,5) }}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/membershipform">แบบฟอร์มกรณีพ้นสมาชิกภาพ</a></li>
-                        <li><a href="/form">แบบฟอร์มกรณีขอคงเงินหรือขอรับเงินเป็นงวด</a></li>
-                        <li><a href="/otherforms">แบบฟอร์มและใบคำร้องอื่นๆ</a></li>
+                        <li><a href="/membershipform">{{ getMenuName($data,5,1) }}</a></li>
+                        <li><a href="/form">{{ getMenuName($data,5,2) }}</a></li>
+                        <li><a href="/otherforms">{{ getMenuName($data,5,3) }}</a></li>
                     </ul>
                 </li>
                 <!-- End Shortcodes -->
@@ -213,11 +216,11 @@
                 <!-- Demo Pages -->
                 <li class="dropdown {{IsActive('news,newsfund')}}">
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                        ข่าวประชาสัมพันธ์
+                        {{ getGoupName($data,7) }}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="/news">ข่าวประชาสัมพันธ์</a></li>
-                        <li><a href="/newsfund">ข่าวกองทุน</a></li>
+                        <li><a href="/news">{{ getMenuName($data,7,1) }}</a></li>
+                        <li><a href="/newsfund">{{ getMenuName($data,7,2) }}</a></li>
                     </ul>
                 </li>
                 <!-- End Demo Pages -->

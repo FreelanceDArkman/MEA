@@ -1,10 +1,65 @@
 <?php
 
 use Jenssegers\Date\Date;
+use Illuminate\Support\Facades\DB;
 
 
 
 
+
+if (!function_exists('getmemulist')) {
+
+    function getmemulist()
+    {
+
+
+
+         $sql44  = "SELECT * FROM TBL_MENU_GROUP mg
+        INNER JOIN TBL_MENU_LIST ml ON ml.MENU_GROUP_ID = mg.MENU_GROUP_ID";
+
+        $menu = DB::select(DB::raw($sql44));
+
+
+//        $user_group = DB::table('TBL_MENU_LIST')->get();
+        return $menu;
+
+    }
+}
+
+if (!function_exists('getGoupName')) {
+
+    function getGoupName($menulist, $grouid)
+    {
+        $ret = "";
+        foreach($menulist as $item){
+            if($item->MENU_GROUP_ID == $grouid){
+                $ret = $item->MENU_GROUP_NAME;
+                break;
+            }
+        }
+
+        return $ret;
+
+    }
+}
+
+
+if (!function_exists('getMenuName')) {
+
+    function getMenuName($menulist, $grouid, $menuid)
+    {
+        $ret = "";
+        foreach($menulist as $item){
+            if($item->MENU_GROUP_ID == $grouid && $item->MENU_ID == $menuid ){
+                $ret = $item->MENU_NAME;
+                break;
+            }
+        }
+
+        return $ret;
+
+    }
+}
 
 if (!function_exists('logged_in')) {
 

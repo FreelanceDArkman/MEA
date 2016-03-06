@@ -1,4 +1,6 @@
-
+<?php
+$data = getmemulist();
+?>
 
 <div id="footer-v3" class="footer-v3">
     <div class="footer">
@@ -14,66 +16,66 @@
 
                 <!-- Simple List -->
                 <div class="col-sm-3 md-margin-bottom-40">
-                    <div class="thumb-headline"><h2>ผลการดำเนินงาน</h2></div>
+                    <div class="thumb-headline"><h2>{{ getGoupName($data,1) }}</h2></div>
                     <ul class="list-unstyled simple-list margin-bottom-20">
-                        <li><a href="/valuefund">มูลค่ากองทุน</a></li>
-                        <li><a href="/netasset">รายงานมูลค่าทรัพย์สิน</a></li>
-                        <li><a href="/economic">สรุปภาวะเศรษฐกิจและกลยุทธ์</a></li>
+                        <li><a href="/valuefund">{{ getMenuName($data,1,1) }}</a></li>
+                        <li><a href="/netasset">{{ getMenuName($data,1,2) }}</a></li>
+                        <li><a href="/economic">{{ getMenuName($data,1,3) }}</a></li>
 
                     </ul>
 
-                    <div class="thumb-headline"><h2>ประมวลระเบียบ</h2></div>
+                    <div class="thumb-headline"><h2>{{ getGoupName($data,2) }}</h2></div>
                     <ul class="list-unstyled simple-list">
-                        <li><a href="/announce">ประกาศ</a></li>
-                        <li><a href="/actfund">พระราชบัญญัติกองทุนสำรองเลี้ยงชีพ</a></li>
-                        <li><a href="/board">คำสั่งแต่งตั้งคณะกรรมการ</a></li>
-                        <li><a href="/fundregulations">ข้อบังคับกองทุน</a></li>
+                        <li><a href="/announce">{{ getMenuName($data,2,1) }}</a></li>
+                        <li><a href="/actfund">{{ getMenuName($data,2,2) }}</a></li>
+                        <li><a href="/board">{{ getMenuName($data,2,3) }}</a></li>
+                        <li><a href="/fundregulations">{{ getMenuName($data,2,4) }}</a></li>
 
                     </ul>
                 </div><!--/col-md-3-->
 
                 <div class="col-sm-3">
-                    <div class="thumb-headline"><h2>กองทุน</h2></div>
+                    <div class="thumb-headline"><h2>{{ getGoupName($data,3) }}</h2></div>
                     <ul class="list-unstyled simple-list margin-bottom-20">
-                        <li><a href="/คณะกรรมการกองทุน">คณะกรรมการกองทุน</a></li>
-                        <li><a href="/structuralfunds">โครงสร้างกองทุน</a></li>
-                        <li><a href="/yearbook">รายงานประจำปี</a></li>
+                        <li><a href="/คณะกรรมการกองทุน">{{ getMenuName($data,3,1) }}</a></li>
+                        <li><a href="/structuralfunds">{{ getMenuName($data,3,2) }}</a></li>
+                        <li><a href="/yearbook">{{ getMenuName($data,3,3) }}</a></li>
 
                     </ul>
 
-                    <div class="thumb-headline"><h2>ความรู้การลงทุน</h2></div>
+                    <div class="thumb-headline"><h2>{{ getGoupName($data,4) }}</h2></div>
                     <ul class="list-unstyled simple-list">
-                        <li><a href="/downloads">เอกสารดาวน์โหลด</a></li>
-                        <li><a href="/test">แบบทดสอบ</a></li>
+                        <li><a href="/downloads">{{ getMenuName($data,4,1) }}</a></li>
+                        <li><a href="/test">{{ getMenuName($data,4,2) }}</a></li>
 
                     </ul>
 
-                    <div class="thumb-headline"><h2>แบบฟอร์ม</h2></div>
+                    <div class="thumb-headline"><h2>{{ getGoupName($data,5) }}</h2></div>
                     <ul class="list-unstyled simple-list">
-                        <li><a href="/membershipform">แบบฟอร์มกรณีพ้นสมาชิกภาพ</a></li>
-                        <li><a href="/form">แบบฟอร์มกรณีขอคงเงินหรือขอรับเงินเป็นงวด</a></li>
-                        <li><a href="/otherforms">แบบฟอร์มและใบคำร้องอื่นๆ</a></li>
+                        <li><a href="/membershipform">{{ getMenuName($data,5,1) }}</a></li>
+                        <li><a href="/form">{{ getMenuName($data,5,2) }}</a></li>
+                        <li><a href="/otherforms">{{ getMenuName($data,5,3) }}</a></li>
                     </ul>
                 </div><!--/col-md-3-->
 
                 <div class="col-sm-3">
-                    <div class="thumb-headline"><h2>ข่าวประชาสัมพันธ์</h2></div>
+                    <div class="thumb-headline"><h2>{{ getGoupName($data,7) }}</h2></div>
                     <ul class="list-unstyled simple-list margin-bottom-20">
-                        <li><a href="#">ข่าวประชาสัมพันธ์</a></li>
-                        <li><a href="#">ข่าวกองทุน</a></li>
+                        <li><a href="/news">{{ getMenuName($data,7,1) }}</a></li>
+                        <li><a href="/newsfund">{{ getMenuName($data,7,2) }}</a></li>
 
                     </ul>
 
-                    <div class="thumb-headline"><h2>ติดต่อ กทช.</h2></div>
+                    <div class="thumb-headline"><h2>{{ getGoupName($data,8) }}</h2></div>
                     <ul class="list-unstyled simple-list">
-                        <li><a href="/news">ที่อยู่</a></li>
-                        <li><a href="/newsfund">สอบถามแนะนำบริการ</a></li>
+                        <li><a href="/contact">{{ getMenuName($data,8,1) }}</a></li>
+                        <li><a href="/contact">{{ getMenuName($data,8,2) }}</a></li>
 
                     </ul>
 
-                    <div class="thumb-headline"><h2>ถาม-ตอบ</h2>  </div>
+                    <div class="thumb-headline"><h2>{{ getGoupName($data,6) }}</h2>  </div>
                     <ul class="list-unstyled simple-list">
-                        <li><a href="/qa">ถาม-ตอบ</a></li>
+                        <li><a href="/qa">{{ getGoupName($data,6) }}</a></li>
 
 
                     </ul>
