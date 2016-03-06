@@ -4,6 +4,8 @@
 
     <?php
 
+    $data = getmemulist();
+
     // Make the page validate
     ini_set('session.use_trans_sid', '0');
 
@@ -34,21 +36,21 @@
                 </li>
 
                 <li class="list-group-item">
-                    <a href="/trends"><i class="fa fa-bar-chart-o"></i> ข้อมูลการลงทุน</a>
+                    <a href="/trends"><i class="fa fa-bar-chart-o"></i> {{ getGoupName($data,21) }}</a>
                 </li>
 
 
                 <li class="list-group-item">
-                    <a href="/changeplan"><i class="fa fa-cubes"></i> แผนการลงทุน</a>
+                    <a href="/changeplan"><i class="fa fa-cubes"></i> {{ getGoupName($data,22) }}</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="/cumulative"><i class="fa fa-level-up"></i> ข้อมูลอัตราสะสม</a>
+                    <a href="/cumulative"><i class="fa fa-level-up"></i> {{ getGoupName($data,23) }}</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="/riskassessment"><i class="fa fa-exclamation-triangle"></i> แบบประเมินความเสียง</a>
+                    <a href="/riskassessment"><i class="fa fa-exclamation-triangle"></i> {{ getGoupName($data,24) }}</a>
                 </li>
                 <li class="list-group-item active">
-                    <a href="/editprofile"><i class="fa fa-user"></i> แก้ไขข้อมูลส่วนตัว</a>
+                    <a href="/editprofile"><i class="fa fa-user"></i> {{ getMenuName($data,20,1) }}</a>
                 </li>
 
             </ul>
@@ -105,9 +107,9 @@
                 <div class="tab-v2">
                     <ul class="nav nav-tabs">
 
-                            <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >แก้ไขข้อมูลส่วนตัว</a></li>
-                            <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">ข้อมูลผู้รับผลประโยชน์</a></li>
-                        <li class=""><a href="#profile-2" data-toggle="tab" aria-expanded="true">เปลี่ยนรหัสผ่าน</a></li>
+                            <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,20,1) }}</a></li>
+                            <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,20,2) }}</a></li>
+                        <li class=""><a href="#profile-2" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,20,3) }}</a></li>
 
                     </ul>
                     <div class="tab-content">

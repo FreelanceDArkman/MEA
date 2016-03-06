@@ -1,10 +1,12 @@
 @extends('frontend.layouts.content_chart')
 @section('content')
 
-
+    <?php
+    $data = getmemulist();
+    ?>
 
     <div class="heading heading-v1 margin-bottom-40">
-        <h2>รายงานมูลค่าทรัพย์สิน</h2>
+        <h2>{{ getMenuName($data,1,2) }}</h2>
 
     </div>
 
@@ -15,11 +17,11 @@
         <!-- Blog Sidebar -->
         <div class="col-md-3">
 
-            <div class="headline-v2 bg-color-light"><h2>ผลการดำเนินงาน</h2></div>
+            <div class="headline-v2 bg-color-light"><h2>{{ getGoupName($data,1) }}</h2></div>
             <!-- Tags v2 -->
             <ul class="list-inline tags-v2 margin-bottom-50">
-                <li><a href="/netasset">รายงานมูลค่าทรัพย์สิน</a></li>
-                <li><a href="/economic">สรุปภาวะเศรษฐกิจและกลยุทธ์</a></li>
+                <li><a href="/netasset">{{ getMenuName($data,1,2) }}</a></li>
+                <li><a href="/economic">{{ getMenuName($data,1,3) }}</a></li>
 
             </ul>
             <!-- End Tags v2 -->

@@ -1,8 +1,11 @@
 @extends('frontend.layouts.content_chart')
 @section('content')
+    <?php
+    $data = getmemulist();
+    ?>
 
     <div class="heading heading-v1 margin-bottom-40">
-        <h2>รายงานประจำปี</h2>
+        <h2>{{ getMenuName($data,3,3) }}</h2>
 
     </div>
 
@@ -13,12 +16,12 @@
         <!-- Blog Sidebar -->
         <div class="col-md-3">
 
-            <div class="headline-v2 bg-color-light"><h2>กองทุน</h2></div>
+            <div class="headline-v2 bg-color-light"><h2>{{ getGoupName($data,3) }}</h2></div>
             <!-- Tags v2 -->
             <ul class="list-inline tags-v2 margin-bottom-50">
-                <li><a href="/fundboard">คณะกรรมการกองทุน</a></li>
-                <li><a href="/structuralfunds">โครงสร้างกองทุน</a></li>
-                <li><a href="/yearbook">รายงานประจำปี</a></li>
+                <li><a href="/fundboard">{{ getMenuName($data,3,1) }}</a></li>
+                <li><a href="/structuralfunds">{{ getMenuName($data,3,2) }}</a></li>
+                <li><a href="/yearbook">{{ getMenuName($data,3,3) }}</a></li>
 
 
             </ul>

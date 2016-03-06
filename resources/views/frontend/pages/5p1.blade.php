@@ -1,8 +1,10 @@
 @extends('frontend.layouts.content_chart')
 @section('content')
-
+    <?php
+    $data = getmemulist();
+    ?>
     <div class="heading heading-v1 margin-bottom-40">
-        <h2>แบบฟอร์มกรณีพ้นสมาชิกภาพ</h2>
+        <h2>{{ getMenuName($data,5,1) }}</h2>
 
     </div>
 
@@ -13,12 +15,12 @@
         <!-- Blog Sidebar -->
         <div class="col-md-3">
 
-            <div class="headline-v2 bg-color-light"><h2>แบบฟอร์ม</h2></div>
+            <div class="headline-v2 bg-color-light"><h2>{{ getGoupName($data,5) }}</h2></div>
             <!-- Tags v2 -->
             <ul class="list-inline tags-v2 margin-bottom-50">
-                <li><a href="/membershipform">แบบฟอร์มกรณีพ้นสมาชิกภาพ</a></li>
-                <li><a href="/form">แบบฟอร์มกรณีขอคงเงินหรือขอรับเงินเป็นงวด</a></li>
-                <li><a href="/otherforms">แบบฟอร์มและใบคำร้องอื่นๆ</a></li>
+                <li><a href="/membershipform">{{ getMenuName($data,5,1) }}</a></li>
+                <li><a href="/form">{{ getMenuName($data,5,2) }}</a></li>
+                <li><a href="/otherforms">{{ getMenuName($data,5,3) }}</a></li>
 
 
 

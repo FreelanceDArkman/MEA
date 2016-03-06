@@ -1,6 +1,8 @@
 @extends('frontend.layouts.content_chart')
 @section('content')
-
+    <?php
+    $data = getmemulist();
+    ?>
     <div class="row">
         <!--Left Sidebar-->
         <div class="col-md-3 md-margin-bottom-40">
@@ -12,21 +14,21 @@
                 </li>
 
                 <li class="list-group-item">
-                    <a href="/trends"><i class="fa fa-bar-chart-o"></i> ข้อมูลการลงทุน</a>
+                    <a href="/trends"><i class="fa fa-bar-chart-o"></i> {{ getGoupName($data,21) }}</a>
                 </li>
 
 
                 <li class="list-group-item">
-                    <a href="/changeplan"><i class="fa fa-cubes"></i> แผนการลงทุน</a>
+                    <a href="/changeplan"><i class="fa fa-cubes"></i> {{ getGoupName($data,22) }}</a>
                 </li>
                 <li class="list-group-item active">
-                    <a href="/cumulative"><i class="fa fa-level-up"></i> ข้อมูลอัตราสะสม</a>
+                    <a href="/cumulative"><i class="fa fa-level-up"></i> {{ getGoupName($data,23) }}</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="/riskassessment"><i class="fa fa-exclamation-triangle"></i> แบบประเมินความเสียง</a>
+                    <a href="/riskassessment"><i class="fa fa-exclamation-triangle"></i> {{ getGoupName($data,24) }}</a>
                 </li>
                 <li class="list-group-item ">
-                    <a href="/editprofile"><i class="fa fa-user"></i> แก้ไขข้อมูลส่วนตัว</a>
+                    <a href="/editprofile"><i class="fa fa-user"></i> {{ getMenuName($data,20,1) }}</a>
                 </li>
 
             </ul>
@@ -85,11 +87,11 @@
                     <ul class="nav nav-tabs">
 
                         @if($ishowhis)
-                        <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >เปลี่ยนอัตราสะสม</a></li>
-                        <li class="active"><a href="#profile-1" data-toggle="tab" aria-expanded="true">ประวัตการเปลี่ยนอัตราสะสม</a></li>
+                        <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,23,1) }}</a></li>
+                        <li class="active"><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,23,2) }}</a></li>
                         @else
-                            <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >เปลี่ยนอัตราสะสม</a></li>
-                            <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">ประวัตการเปลี่ยนอัตราสะสม</a></li>
+                            <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,23,1) }}</a></li>
+                            <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,23,2) }}</a></li>
                         @endif
 
                     </ul>

@@ -1,9 +1,11 @@
 @extends('frontend.layouts.content')
 @section('content')
-
+    <?php
+    $data = getmemulist();
+    ?>
     {{--<div class="headline"><h2>มูลค่าลงทุน</h2></div>--}}
     <div class="heading heading-v1 margin-bottom-40">
-        <h2>มูลค่ากองทุน</h2>
+        <h2> {{ getMenuName($data,1,1) }}</h2>
 
     </div>
 
