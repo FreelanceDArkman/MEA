@@ -37,10 +37,18 @@ WHERe info.EMP_ID = '".get_userID()."'";
 
         $infoaset = DB::select(DB::raw($sql44))[0];
 
+        $sql111 = "SELECT TOP  5 * FROM  TBL_EMPLOYEE_INFO WHERE EMP_ID = '".get_userID()."'";
+        $empinfo = DB::select(DB::raw($sql111))[0];
 
 
+        $sql222 = "SELECT TOP 1 * FROM TBL_USER_FUND_CHOOSE fm
+INNER JOIN TBL_INVESTMENT_PLAN pl ON pl.PlAN_ID = fm.PLAN_ID
+WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
-        return view('frontend.pages.20p1')->with(['userinfo'=>$userinfo,'userbenefit'=>$userbenefit, 'infoaset'=>$infoaset]);
+        $planchoose = DB::select(DB::raw($sql222))[0];
+
+
+        return view('frontend.pages.20p1')->with(['userinfo'=>$userinfo,'userbenefit'=>$userbenefit, 'infoaset'=>$infoaset,'empinfo'=>$empinfo,'planchoose'=>$planchoose]);
 
 
     }

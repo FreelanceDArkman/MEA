@@ -40,6 +40,9 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         $infoaset = DB::select(DB::raw($sql4))[0];
 
 
+
+
+
         return view('frontend.pages.overall')->with(['empinfo'=>$empinfo , 'planchoose'=>$planchoose , 'savingrate'=>$savingrate , 'infoaset'=>$infoaset]);
     }
 }

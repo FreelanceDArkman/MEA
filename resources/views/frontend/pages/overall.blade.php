@@ -50,37 +50,39 @@
                             <span class="service-heading">Overall Profile</span>
                             <span class="counter">ยินดีต้อนรับคุณ {{$empinfo->FULL_NAME}}</span>
 
-                            <div class="clearfix margin-bottom-10"></div>
-
-                            <div class="row margin-bottom-20">
-                                <div class="col-xs-12 col-md-12 service-in">
-                                    <ul>
-                                        <li>
-                                            <small>รหัสพนักงาน</small>
-                                            <h4 class="counter">{{$empinfo->EMP_ID}}</h4>
-                                        </li>
-                                        <li>
-                                            <small>สังกัด</small>
-                                            <h4 class="counter">{{$empinfo->DEP_SHT}}</h4>
-                                        </li>
-                                        <li>
-                                            <small>แผนการลงทุน</small>
-                                            <h4 class="counter">แบบที่ {{$planchoose->PLAN_ID}} ({{$planchoose->PLAN_NAME}})</h4>
-                                        </li>
-
-                                    </ul>
-                                </div>
-
-
-
-                            </div>
 
 
                         </div>
                     </div>
 
+                    <div class="col-xs-12 col-md-12 service-in">
+                        <div style="background-color: #f1f1f1;width: 100%">
+                        <ul>
+                            <li>
+                                <small>รหัสพนักงาน</small>
+                                <h4 class="counter">{{$empinfo->EMP_ID}}</h4>
+                            </li>
+                            <li>
+                                <small>สังกัด</small>
+                                <h4 class="counter">{{$empinfo->DEP_SHT}}</h4>
+                            </li>
+                            <li>
+                                <small>แผนการลงทุน</small>
+                                <h4 class="counter">แบบที่ {{$planchoose->PLAN_ID}} ({{$planchoose->PLAN_NAME}})</h4>
+                            </li>
+
+                        </ul>
+                            </div>
+                    </div>
+
                 </div><!--/end row-->
                 <!--End Service Block v3-->
+
+
+
+
+
+
 
                 <hr>
                 <div class="row pie-progress-charts margin-bottom-60">
@@ -120,37 +122,38 @@
                             <span class="service-heading"></span>
                             <span class="counter">สัดส่วนการลงทุน</span>
 
-                            <div class="clearfix margin-bottom-10"></div>
-
-                            <div class="row margin-bottom-20">
-                                <div class="col-xs-12 col-md-12 service-in">
-                                    <ul>
-                                        <li>
-                                            <small>ข้อมูลวันที่</small>
-                                            <h4 class="counter">{{get_date_notime($infoaset->REFERENCE_DATE)}}</h4>
-                                        </li>
-                                        <li>
-                                            <small>เงินลงทุนทั้งหมด</small>
-                                            <h4 class="counter">{{meaNumbermoney($infoaset->INVESTMENT_MONEY) }} บาท</h4>
-                                        </li>
-                                        <li>
-                                            <small>เงินตราสารทุน</small>
-                                            <h4 class="counter">{{meaNumbermoney($infoaset->EQUITY_FUNDS) }} บาท</h4>
-                                        </li>
-                                        <li>
-                                            <small>เงินตราสารหนี้</small>
-                                            <h4 class="counter">{{meaNumbermoney($infoaset->BOND_FUNDS) }} บาท</h4>
-                                        </li>
-
-                                    </ul>
-                                </div>
 
 
 
-                            </div>
 
 
                         </div>
+                    </div>
+
+                    <div class="col-xs-12 col-md-12 service-in" >
+                        <div style="background-color: #f1f1f1;width: 100%">
+
+                            <ul>
+                                <li>
+                                    <small>ข้อมูลวันที่</small>
+                                    <h4 class="counter">{{get_date_notime($infoaset->REFERENCE_DATE)}}</h4>
+                                </li>
+                                <li>
+                                    <small>เงินลงทุนทั้งหมด</small>
+                                    <h4 class="counter">{{meaNumbermoney($infoaset->INVESTMENT_MONEY) }} บาท</h4>
+                                </li>
+                                <li>
+                                    <small>เงินตราสารทุน</small>
+                                    <h4 class="counter">{{meaNumbermoney($infoaset->EQUITY_FUNDS) }} บาท</h4>
+                                </li>
+                                <li>
+                                    <small>เงินตราสารหนี้</small>
+                                    <h4 class="counter">{{meaNumbermoney($infoaset->BOND_FUNDS) }} บาท</h4>
+                                </li>
+
+                            </ul>
+                        </div>
+
                     </div>
 
                 </div><!--/end row-->
@@ -271,7 +274,7 @@
                         width:      3,
                         number:     {{meaNumbermoney($infoaset->EQUITY) }},
                         text:       '%',
-                        colors:     ['#eee', '#FFBF3F'],
+                        colors:     ['#eee', '#fe5000'],
                         duration:   2000
                     })
 

@@ -49,9 +49,9 @@
                 <div class="row">
 
                     <div class="headline-center-v2 headline-center-v2-dark margin-bottom-60">
-                        <h2>ท่านทำแบบประเมินความเสี่ยงการลงทุนครั้งล่าสุด</h2>
+                        <h2 style="font-size: 30px">ท่านทำแบบประเมินความเสี่ยงการลงทุนครั้งล่าสุด</h2>
                         <span class="bordered-icon"><i class="fa fa-th-large"></i></span>
-                        <p> {{get_date_notime($quizprofile->QUIZ_TEST_DATE)}}</p>
+                        <p style="font-size: 24px"> {{get_date_notime($quizprofile->QUIZ_TEST_DATE)}}</p>
                     </div>
 
 
@@ -61,7 +61,7 @@
                 <div class="row margin-bottom-60">
                     <div class="col-sm-4">
                         <div class="service-block-v1 md-margin-bottom-50">
-                            <i class="rounded-x icon-energy"></i>
+                            <i class="rounded-x fa fa-bars"></i>
                             <h3 class="title-v3-bg text-uppercase">คะแนนรวม</h3>
                             <p>{{$quizprofile->QUIZ_SCORE}} คะแนน</p>
 
@@ -69,7 +69,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="service-block-v1 md-margin-bottom-50">
-                            <i class="rounded-x icon-badge"></i>
+                            <i class="rounded-x fa fa-check"></i>
                             <h3 class="title-v3-bg text-uppercase">ระดับความเสี่ยงที่ยอมรับได้</h3>
                             <p>{{$mappingret->RISK_RATE}}</p>
 
@@ -77,7 +77,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="service-block-v1 md-margin-bottom-50">
-                            <i class="rounded-x icon-diamond"></i>
+                            <i class="rounded-x fa fa-flag"></i>
                             <h3 class="title-v3-bg text-uppercase">สัดส่วนการลงทุนที่แนะนำ</h3>
                             <p>{{$mappingret->RATIO_RECOMMENDED}}</p>
 

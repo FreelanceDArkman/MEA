@@ -141,7 +141,6 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND YE
             $count = $count+1;
 
 
-
         }
 
 
@@ -160,8 +159,19 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND YE
 
         $infoaset = DB::select(DB::raw($sql44))[0];
 
+
+        $sql111 = "SELECT TOP  5 * FROM  TBL_EMPLOYEE_INFO WHERE EMP_ID = '".get_userID()."'";
+        $empinfo = DB::select(DB::raw($sql111))[0];
+
+
+        $sql222 = "SELECT TOP 1 * FROM TBL_USER_FUND_CHOOSE fm
+INNER JOIN TBL_INVESTMENT_PLAN pl ON pl.PlAN_ID = fm.PLAN_ID
+WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
+
+        $planchoose = DB::select(DB::raw($sql222))[0];
+
 //var_dump($dropplan);
-        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset, 'historyPlan'=>$historyPlan, 'dataCheck'=>$dataCheck, 'effective'=>$effective, 'users'=>$users,'ishowhis'=> $ishowhis,'ret'=>$ret ,'infoaset'=>$infoaset] );
+        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset, 'historyPlan'=>$historyPlan, 'dataCheck'=>$dataCheck, 'effective'=>$effective, 'users'=>$users,'ishowhis'=> $ishowhis,'ret'=>$ret ,'infoaset'=>$infoaset,'empinfo'=>$empinfo,'planchoose'=>$planchoose] );
     }
 
 
@@ -252,8 +262,18 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND en
 
         $infoaset = DB::select(DB::raw($sql44))[0];
 
+        $sql111 = "SELECT TOP  5 * FROM  TBL_EMPLOYEE_INFO WHERE EMP_ID = '".get_userID()."'";
+        $empinfo = DB::select(DB::raw($sql111))[0];
+
+
+        $sql222 = "SELECT TOP 1 * FROM TBL_USER_FUND_CHOOSE fm
+INNER JOIN TBL_INVESTMENT_PLAN pl ON pl.PlAN_ID = fm.PLAN_ID
+WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
+
+        $planchoose = DB::select(DB::raw($sql222))[0];
+
 //var_dump($dropplan);
-        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset, 'historyPlan'=>$historyPlan, 'dataCheck'=>$dataCheck, 'effective'=>$effective, 'users'=>$users, 'ishowhis'=> false, 'ret'=>$ret, 'infoaset'=>$infoaset]);
+        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset, 'historyPlan'=>$historyPlan, 'dataCheck'=>$dataCheck, 'effective'=>$effective, 'users'=>$users, 'ishowhis'=> false, 'ret'=>$ret, 'infoaset'=>$infoaset,'empinfo'=>$empinfo, 'planchoose'=>$planchoose]);
     }
 
     public function deleplan(Request $request)

@@ -48,38 +48,30 @@
                         <div class="service-block-v3 service-block-u">
                             <i class="icon-users"></i>
                             <span class="service-heading">Overall Profile</span>
-                            <span class="counter">ยินดีต้อนรับคุณ นัฐวุฒิ สกุณา</span>
-
-                            <div class="clearfix margin-bottom-10"></div>
-
-                            <div class="row margin-bottom-20">
-                                <div class="col-xs-12 col-md-12 service-in">
-                                    <ul>
-                                        <li>
-                                            <small>ข้อมูลวันที่</small>
-                                            <h4 class="counter">{{get_date_notime($infoaset->REFERENCE_DATE)}}</h4>
-                                        </li>
-                                        <li>
-                                            <small>เงินลงทุนทั้งหมด</small>
-                                            <h4 class="counter">{{meaNumbermoney($infoaset->INVESTMENT_MONEY) }} บาท</h4>
-                                        </li>
-                                        <li>
-                                            <small>เงินตราสารทุน</small>
-                                            <h4 class="counter">{{meaNumbermoney($infoaset->EQUITY_FUNDS) }} บาท</h4>
-                                        </li>
-                                        <li>
-                                            <small>เงินตราสารหนี้</small>
-                                            <h4 class="counter">{{meaNumbermoney($infoaset->BOND_FUNDS) }} บาท</h4>
-                                        </li>
-
-                                    </ul>
-                                </div>
+                            <span class="counter">ยินดีต้อนรับคุณ {{$empinfo->FULL_NAME}}</span>
 
 
 
-                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-xs-12 col-md-12 service-in">
+                        <div style="background-color: #f1f1f1;width: 100%">
+                            <ul>
+                                <li>
+                                    <small>รหัสพนักงาน</small>
+                                    <h4 class="counter">{{$empinfo->EMP_ID}}</h4>
+                                </li>
+                                <li>
+                                    <small>สังกัด</small>
+                                    <h4 class="counter">{{$empinfo->DEP_SHT}}</h4>
+                                </li>
+                                <li>
+                                    <small>แผนการลงทุน</small>
+                                    <h4 class="counter">แบบที่ {{$planchoose->PLAN_ID}} ({{$planchoose->PLAN_NAME}})</h4>
+                                </li>
 
+                            </ul>
                         </div>
                     </div>
 
@@ -109,13 +101,13 @@
 
                             @if($CurrnentPlan)
                                 @if($CurrnentPlan[0]->MODIFY_COUNT == session()->get('user_data')->fund_plan_change_per_year)
-                                    <div class="alert alert-warning fade in">
+                                    <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                         <strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>
                                     </div>
                                     @endif
                             @else
                                 @if($effective[0]->MODIFY_COUNT == session()->get('user_data')->fund_plan_change_per_year)
-                                <div class="alert alert-warning fade in">
+                                <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                     <strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>
                                 </div>
                                 @endif
@@ -126,7 +118,7 @@
                                 <div class="row">
 
                                     <div class="headline-center margin-bottom-60">
-                                        <div class="alert alert-warning fade in">
+                                        <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                             <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
                                         </div>
                                         <h2>แผนปัจจุบัน</h2>
@@ -171,7 +163,7 @@
                                 <form action="{{ action('changeplanController@InsertInvestPlan') }}" id="sky-form1" class="sky-form" method="post">
                                     {!! csrf_field() !!}
                                     <header>เลือกแผนการลงทุน</header>
-                                    <div class="alert alert-warning fade in">
+                                    <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                         <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
                                     </div>
                                     <fieldset>

@@ -49,38 +49,30 @@
                         <div class="service-block-v3 service-block-u">
                             <i class="icon-users"></i>
                             <span class="service-heading">Overall Profile</span>
-                            <span class="counter">ยินดีต้อนรับคุณ นัฐวุฒิ สกุณา</span>
-
-                            <div class="clearfix margin-bottom-10"></div>
-
-                            <div class="row margin-bottom-20">
-                                <div class="col-xs-12 col-md-12 service-in">
-                                    <ul>
-                                        <li>
-                                            <small>ข้อมูลวันที่</small>
-                                            <h4 class="counter">{{get_date_notime($infoaset->REFERENCE_DATE)}}</h4>
-                                        </li>
-                                        <li>
-                                            <small>เงินลงทุนทั้งหมด</small>
-                                            <h4 class="counter">{{meaNumbermoney($infoaset->INVESTMENT_MONEY) }} บาท</h4>
-                                        </li>
-                                        <li>
-                                            <small>เงินตราสารทุน</small>
-                                            <h4 class="counter">{{meaNumbermoney($infoaset->EQUITY_FUNDS) }} บาท</h4>
-                                        </li>
-                                        <li>
-                                            <small>เงินตราสารหนี้</small>
-                                            <h4 class="counter">{{meaNumbermoney($infoaset->BOND_FUNDS) }} บาท</h4>
-                                        </li>
-
-                                    </ul>
-                                </div>
+                            <span class="counter">ยินดีต้อนรับคุณ {{$empinfo->FULL_NAME}}</span>
 
 
 
-                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-xs-12 col-md-12 service-in">
+                        <div style="background-color: #f1f1f1;width: 100%">
+                            <ul>
+                                <li>
+                                    <small>รหัสพนักงาน</small>
+                                    <h4 class="counter">{{$empinfo->EMP_ID}}</h4>
+                                </li>
+                                <li>
+                                    <small>สังกัด</small>
+                                    <h4 class="counter">{{$empinfo->DEP_SHT}}</h4>
+                                </li>
+                                <li>
+                                    <small>แผนการลงทุน</small>
+                                    <h4 class="counter">แบบที่ {{$planchoose->PLAN_ID}} ({{$planchoose->PLAN_NAME}})</h4>
+                                </li>
 
+                            </ul>
                         </div>
                     </div>
 
@@ -110,11 +102,26 @@
 
 
                             <div id="all_invest" style="{{objectcheckdisplaynone($CurrnentPlan)}}" >
+
+
                                 <div class="row">
                                     <div class="headline-center margin-bottom-60">
-                                        <h2>อัตราสะสมปัจจุบันที่ท่านเลือก</h2>
+
+                                        <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
+                                            <strong> * การเปลี่นแปลงและแก้ไขอัตราสะสม ทำได้ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือนและมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป </strong>
+                                        </div>
+
                                         @if($CurrnentPlan)
-                                        <p> {{$CurrnentPlan[0]->USER_SAVING_RATE}} %</p>
+                                            <div style="width: 100% ;padding:0 70px 0 70px; "><h3 class="heading-xs" style="font-size: 20px"><span class="pull-left">0%</span>อัตราสะสมปัจจุบันที่ท่านเลือก <span class="pull-right">{{$CurrnentPlan[0]->USER_SAVING_RATE}}%</span></h3>
+                                                <div class="progress progress-u">
+                                                    <div class="progress-bar progress-bar-purple" role="progressbar" aria-valuenow="{{$CurrnentPlan[0]->USER_SAVING_RATE}}" aria-valuemin="0" aria-valuemax="100" style="width:{!! $CurrnentPlan[0]->USER_SAVING_RATE !!}%">
+                                                        <span style="font-size: 18px">{{$CurrnentPlan[0]->USER_SAVING_RATE}}%</span>
+                                                    </div>
+                                                </div></div>
+
+                                            <div>วันที่ทำรายการล่าสุด {{get_date_notime($CurrnentPlan[0]->CHANGE_SAVING_RATE_DATE)}}</div>
+
+                                        {{--<p> {{$CurrnentPlan[0]->USER_SAVING_RATE}} %</p>--}}
                                         @else
                                             <p> %</p>
                                         @endif
@@ -135,7 +142,7 @@
                                 <form action="{{ action('cumulativeController@InsertPlan') }}" id="sky-form1" class="sky-form" method="post">
                                     {!! csrf_field() !!}
                                     <header>เลือกแผนการลงทุน</header>
-                                    <div class="alert alert-warning fade in">
+                                    <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                         <strong> * การเปลี่นแปลงและแก้ไขอัตราสะสม ทำได้ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือนและมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป </strong>
                                     </div>
 

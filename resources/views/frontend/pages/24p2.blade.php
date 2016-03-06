@@ -8,30 +8,28 @@
 
             <ul class="list-group sidebar-nav-v1 margin-bottom-40" id="sidebar-nav-1">
                 <li class="list-group-item ">
-                    <a href="/profile"><i class="fa fa-bar-chart-o"></i> Overall Profile</a>
+                    <a href="/profile"><i class="fa fa-home"></i> Overall Profile</a>
                 </li>
 
-                <li class="list-group-item ">
+                <li class="list-group-item">
                     <a href="/trends"><i class="fa fa-bar-chart-o"></i> ข้อมูลการลงทุน</a>
                 </li>
 
 
-                <li class="list-group-item ">
+                <li class="list-group-item">
                     <a href="/changeplan"><i class="fa fa-cubes"></i> แผนการลงทุน</a>
                 </li>
-                <li class="list-group-item ">
-                    <a href="/cumulative"><i class="fa fa-comments"></i> ข้อมูลอัตราสะสม</a>
+                <li class="list-group-item">
+                    <a href="/cumulative"><i class="fa fa-level-up"></i> ข้อมูลอัตราสะสม</a>
                 </li>
                 <li class="list-group-item active">
-                    <a href="/riskassessment"><i class="fa fa-history"></i> แบบประเมินความเสียง</a>
+                    <a href="/riskassessment"><i class="fa fa-exclamation-triangle"></i> แบบประเมินความเสียง</a>
                 </li>
-                <li class="list-group-item">
+                <li class="list-group-item ">
                     <a href="/editprofile"><i class="fa fa-user"></i> แก้ไขข้อมูลส่วนตัว</a>
                 </li>
 
             </ul>
-
-
 
         </div>
 
@@ -70,10 +68,12 @@
                                             @else
                                                 <section id="sec_{{$index}}" style="display: none">
                                                     @endif
-
-                                                    <label class="label">{{$index +1}} . {{$item->QUESTION_DESC}}</label>
+                                                    <p class="qa-topic">
+                                                        <span class="dropcap dropcap-bg bg-color-dark" style="background-color: #fe5000;">{{$index +1}}</span>{{$item->QUESTION_DESC}}</p>
+                                                    <div class="clearfix"></div>
+                                                    {{--<label class="label"> . </label>--}}
                                                     <div class="row">
-                                                        <div class="col col-12">
+                                                        <div class="col col-12 qa-choice">
 
                                                             @foreach($datachoice as $index1 => $items)
                                                                 @if($items->QUESTION_NO == $item->QUESTION_NO)
@@ -87,9 +87,9 @@
                                                     <br/>
                                                     <div class="nextquiz">
                                                         @if($index > 0)
-                                                            <button class="btn-u btn-brd btn-brd-hover rounded btn-u-green btn-u-sm" onclick='previous({{$index}})' type="button"><i class="fa fa-angle-double-left"></i> ข้อก่อนหน้า</button>
+                                                            <button style="float: left;background-color: #95a5a6 !important; border-color: #95a5a6!important;" class="btn-u btn-brd btn-brd-hover rounded btn-u-green btn-u-sm" onclick='previous({{$index}})' type="button"><i class="fa fa-angle-double-left"></i> ข้อก่อนหน้า</button>
                                                         @endif
-
+        <span class="qa-page"> {{ ($index+1) . "/".  count($dataqtopic)}} </span>
                                                         @if(($index+1) < count($dataqtopic))
                                                             <button class="btn-u btn-brd btn-brd-hover rounded btn-u-green btn-u-sm" onclick='next({{$index}})'  style="float: right" type="button"> ข้อถัดไป <i class="fa fa-angle-double-right"></i></button>
                                                         @endif
@@ -121,7 +121,7 @@
             <div id="quizresult" style="display: none;">
 
                 <div class="heading margin-bottom-40">
-                    <h2> ท่านทำแบบประเมินความเสี่ยงฯ เสร็จสมบูรณ์แล้ว</h2>
+                    <h2> <strong>ท่านทำแบบประเมินความเสี่ยงฯ เสร็จสมบูรณ์แล้ว</strong></h2>
 
                     @if($quizprofile && $mappingret)
 
@@ -134,14 +134,14 @@
 
 
                 <div class="row-fluid privacy">
-                    <h2>แนวทางในการพิจารณาเลือกสัดส่วนการลงทุนระหว่างตราสารทุนและตราสารหนี้</h2>
+                    <h2><strong>แนวทางในการพิจารณาเลือกสัดส่วนการลงทุนระหว่างตราสารทุนและตราสารหนี้</strong></h2>
 
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr>
-                            <td>คะแนนรวม</td>
-                            <td>ความเสี่ยงที่ยอมรับได้</td>
-                            <td>สัดส่วนการลงทุนระหว่างตราสารหนี้และตราสารทุน</td>
+                            <td style="background-color: #fe5000;color: #fff" >คะแนนรวม</td>
+                            <td style="background-color: #fe5000;color: #fff">ความเสี่ยงที่ยอมรับได้</td>
+                            <td style="background-color: #fe5000;color: #fff">สัดส่วนการลงทุนระหว่างตราสารหนี้และตราสารทุน</td>
                         </tr>
 
                         </thead>
@@ -158,9 +158,9 @@
                         </tbody>
                     </table>
 
-                    <p>  หมายเหตุ: ตารางข้างต้นเป็นเพียงส่วนหนึ่งในการประกอบการตัดสินใจเลือกสัดส่วนการลงทุนระหว่างตราสารทุนและตราสารหนี้ของท่านเท่านั้นมิได้เป็นสิ่งยืนยันว่า สัดส่วนการลงทุนดังกล่าว เหมาะสมกับท่านทุกประการ ทั้งนี้ ท่านต้องศึกษาข้อมูลจากปัจจัยอื่นๆประกอบเพิ่มเติม</p>
+                    <p>  <strong>หมายเหตุ:</strong> ตารางข้างต้นเป็นเพียงส่วนหนึ่งในการประกอบการตัดสินใจเลือกสัดส่วนการลงทุนระหว่างตราสารทุนและตราสารหนี้ของท่านเท่านั้นมิได้เป็นสิ่งยืนยันว่า สัดส่วนการลงทุนดังกล่าว เหมาะสมกับท่านทุกประการ ทั้งนี้ ท่านต้องศึกษาข้อมูลจากปัจจัยอื่นๆประกอบเพิ่มเติม</p>
 
-                    <p> ข้อกำหนดและเงื่อนไขแนบท้าย “แบบประเมินความเสี่ยงเพื่อความเหมาะสมในการเลือกสัดส่วนการลงทุนระหว่างตราสารทุนและตราสารหนี้”</p>
+                    <p> <strong>ข้อกำหนดและเงื่อนไขแนบท้าย “แบบประเมินความเสี่ยงเพื่อความเหมาะสมในการเลือกสัดส่วนการลงทุนระหว่างตราสารทุนและตราสารหนี้”</strong></p>
                     <ol>
                         <li>1. ข้าพเจ้ารับทราบและตกลงว่า ข้าพเจ้ามีหน้าที่จะต้องทบทวนข้อมูลใน “แบบประเมินความเสี่ยงเพื่อความเหมาะสมในการเลือกสัดส่วนการลงทุนระหว่างตราสารทุนและตราสารหนี้” ให้เป็นปัจจุบันตามรอบระยะเวลาที่หน่วยงานกำกับดูแลที่เกี่ยวข้องหรือบริษัทจัดการกำหนด รวมถึงที่จะมีการเปลี่ยนแปลงในอนาคตด้วย</li>
                         <li> 2. ในกรณีที่ครบรอบระยะเวลาการทบทวนข้อมูลใน “แบบประเมินความเสี่ยงเพื่อความเหมาะสมในการเลือกสัดส่วนการลงทุนระหว่างตราสารทุนและตราสารหนี้” หากบริษัทจัดการไม่ได้รับข้อมูลในแบบประเมินในรอบใหม่จากข้าพเจ้าภายในระยะเวลาที่บริษัทจัดการกำหนด ข้าพเจ้าตกลงและยินยอมให้บริษัทจัดการถือเอาข้อมูลของข้าพเจ้าที่ปรากฎตาม “แบบประเมินความเสี่ยงเพื่อความเหมาะสมในการเลือกสัดส่วนการลงทุนระหว่างตราสารทุนและตราสารหนี้” ครั้งล่าสุดเป็นข้อมูลปัจจุบันของข้าพเจ้า โดยมีผลใช้ได้จนถึงเวลาที่บริษัทจัดการได้รับข้อมูลในแบบประเมินความเสี่ยงเพื่อความเหมาะสมในการเลือกสัดส่วนการลงทุนระหว่างตราสารทุนและตราสารหนี้แล้ว</li>

@@ -17,7 +17,7 @@ class riskassessmentController extends Controller
         $this->pageSetting( [
             'menu_group_id' => 24,
             'menu_id' => 1,
-            'title' => 'จัดการผู้ใช้'
+            'title'=> 'แบบประเมินความเสี่ยง MEA FUND'
         ] );
 
 
@@ -87,7 +87,7 @@ class riskassessmentController extends Controller
         $this->pageSetting( [
             'menu_group_id' => 24,
             'menu_id' => 1,
-            'title' => 'จัดการผู้ใช้'
+            'title' => 'แบบประเมินความเสี่ยง MEA FUND'
         ] );
 
 

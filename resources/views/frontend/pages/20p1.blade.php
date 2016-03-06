@@ -70,38 +70,30 @@
                         <div class="service-block-v3 service-block-u">
                             <i class="icon-users"></i>
                             <span class="service-heading">Overall Profile</span>
-                            <span class="counter">ยินดีต้อนรับคุณ นัฐวุฒิ สกุณา</span>
-
-                            <div class="clearfix margin-bottom-10"></div>
-
-                            <div class="row margin-bottom-20">
-                                <div class="col-xs-12 col-md-12 service-in">
-                                    <ul>
-                                        <li>
-                                            <small>ข้อมูลวันที่</small>
-                                            <h4 class="counter">{{get_date_notime($infoaset->REFERENCE_DATE)}}</h4>
-                                        </li>
-                                        <li>
-                                            <small>เงินลงทุนทั้งหมด</small>
-                                            <h4 class="counter">{{meaNumbermoney($infoaset->INVESTMENT_MONEY) }} บาท</h4>
-                                        </li>
-                                        <li>
-                                            <small>เงินตราสารทุน</small>
-                                            <h4 class="counter">{{meaNumbermoney($infoaset->EQUITY_FUNDS) }} บาท</h4>
-                                        </li>
-                                        <li>
-                                            <small>เงินตราสารหนี้</small>
-                                            <h4 class="counter">{{meaNumbermoney($infoaset->BOND_FUNDS) }} บาท</h4>
-                                        </li>
-
-                                    </ul>
-                                </div>
+                            <span class="counter">ยินดีต้อนรับคุณ {{$empinfo->FULL_NAME}}</span>
 
 
 
-                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-xs-12 col-md-12 service-in">
+                        <div style="background-color: #f1f1f1;width: 100%">
+                            <ul>
+                                <li>
+                                    <small>รหัสพนักงาน</small>
+                                    <h4 class="counter">{{$empinfo->EMP_ID}}</h4>
+                                </li>
+                                <li>
+                                    <small>สังกัด</small>
+                                    <h4 class="counter">{{$empinfo->DEP_SHT}}</h4>
+                                </li>
+                                <li>
+                                    <small>แผนการลงทุน</small>
+                                    <h4 class="counter">แบบที่ {{$planchoose->PLAN_ID}} ({{$planchoose->PLAN_NAME}})</h4>
+                                </li>
 
+                            </ul>
                         </div>
                     </div>
 

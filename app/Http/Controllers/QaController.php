@@ -13,7 +13,7 @@ class QaController extends Controller
     public function getIndex()
     {
         $this->pageSetting( [
-            'title' => 'Dashboard | MEA FUND'
+            'title' => 'ถาม-ตอบ | MEA FUND'
         ] );
 
     $qatopic = DB::table('TBL_FAQ_CATE')->get();
@@ -26,7 +26,7 @@ class QaController extends Controller
     public function getIndexByID($id)
     {
         $this->pageSetting( [
-            'title' => 'Dashboard | MEA FUND'
+            'title' => 'ถาม-ตอบ | MEA FUND'
         ] );
 
         $qatopic = DB::table('TBL_FAQ_CATE')->get();

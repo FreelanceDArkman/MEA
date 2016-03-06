@@ -15,6 +15,11 @@ body, a, h1, h2{
 
 }
 
+h1, h2, h3, h4, h5, h6{
+    font-family: "DB Ozone X" !important;
+    font-size: 24px  !important;
+}
+
 .footer-v3 .footer {
     padding: 30px 0;
     background: #63666a;
@@ -322,4 +327,53 @@ a {
 }
 .md-margin-bottom-40 .sidebar-nav-v1 > li.active a:hover{
     color: #fff !important;
+}
+.progress-bar-purple {
+    background: #ffbf3f;
+}
+
+.progress .progress-bar{
+    line-height: 30px !important;
+
+}
+.progress.progress-u{
+    line-height: 30px !important;
+    /*border: 5px solid #ccc;*/
+}
+.progress{
+    height: 30px !important;
+}
+
+.qa-topic{
+    padding: 0px;
+    font-size: 16px;
+    line-height: 30px;
+    background-color: #fef0dd;
+    height: 49px;
+}
+
+.qa-topic .dropcap-bg {
+    float: left;
+    color: #fff;
+    padding: 7px 0;
+    min-width: 50px;
+    font-size: 25px;
+    font-weight: 200;
+    line-height: 35px;
+    text-align: center;
+    background: #fe5000;
+    margin: 0px 10px 0 0;
+}
+.qa-choice{
+    margin-left: 60px;
+}
+
+.btn-u.btn-brd.btn-u-green {
+    border-color: #fe5000;
+}
+.nextquiz{
+    text-align: center;
+}
+.qa-page{
+    font-size: 18px;
 }
