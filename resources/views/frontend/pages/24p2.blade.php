@@ -127,6 +127,7 @@
 
                     <p>  คะแนนรวมของท่าน : {{$quizprofile->QUIZ_SCORE}}  คะแนน</p>
                     <p>ระดับความเสี่ยงที่ยอมรับได้ : {{$mappingret->RISK_RATE}}</p>
+                        <p> {{$mappingret->RATIO_RECOMMENDED}}</p>
                     @endif
 
                 </div>

@@ -14,7 +14,7 @@ if (!function_exists('getmemulist')) {
 
 
 
-         $sql44  = "SELECT * FROM TBL_MENU_GROUP mg
+        $sql44  = "SELECT * FROM TBL_MENU_GROUP mg
         INNER JOIN TBL_MENU_LIST ml ON ml.MENU_GROUP_ID = mg.MENU_GROUP_ID";
 
         $menu = DB::select(DB::raw($sql44));
@@ -60,6 +60,41 @@ if (!function_exists('getMenuName')) {
 
     }
 }
+
+
+if (!function_exists('checkShowList_valid')) {
+
+    function checkShowList_valid($validata, $dateCompare)
+    {
+       $ret = false;
+
+        $today = New Date();
+
+        $arrmaxdate=  explode('-',$validata);
+        $max = $arrmaxdate[1];
+
+        $datecheck = new Date($dateCompare);
+        //return $create_date->add('543 years')->format('j F Y');
+
+        if($today > $datecheck){
+            $ret = true;
+        }
+
+
+
+        if(get_date_month($today) == get_date_month($datecheck) && get_date_year($today) == get_date_year($datecheck)){
+
+           if((int)get_date_day($today) <= (int)$max) {
+               $ret = false;
+           }
+
+        }
+
+        return $ret;
+    }
+}
+
+
 
 if (!function_exists('logged_in')) {
 
@@ -214,6 +249,24 @@ if(!function_exists('get_date_nodate')) {
         Date::setLocale('th');
         $create_date = new Date($input);
         return $create_date->add('543 years')->format('F Y');
+    }
+}
+
+if(!function_exists('get_date_day')) {
+    function get_date_day($input)
+    {
+        //Date::setLocale('th');
+        $create_date = new Date($input);
+        return $create_date->format('d');
+    }
+}
+
+if(!function_exists('get_date_month')) {
+    function get_date_month($input)
+    {
+        //Date::setLocale('th');
+        $create_date = new Date($input);
+        return $create_date->format('m');
     }
 }
 

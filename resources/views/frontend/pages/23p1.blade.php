@@ -254,6 +254,8 @@
 
                                     @if($historyPlan)
                                         @foreach($historyPlan as $index => $item)
+
+                                            @if(checkShowList_valid($dataCheck->SAVING_RATE_CHANGE_PERIOD,$item->EFFECTIVE_DATE ))
                                             <tr>
 
                                                 <td style="text-align: center;">{{$item->MODIFY_COUNT .'/'.get_date_year($item->CHANGE_SAVING_RATE_DATE) }}</td>
@@ -276,6 +278,8 @@
                                                 <td style="text-align: center;">
                                                     {{get_date_notime($item->EFFECTIVE_DATE)}}</td>
                                             </tr>
+
+                                            @endif
                                         @endforeach
                                     @endif
 

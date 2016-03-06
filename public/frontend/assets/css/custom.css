@@ -381,3 +381,7 @@ a {
     line-height: 20px;
     font-size: 18px;
 }
+
+.tab-v1 .nav-tabs a:hover {
+    color: #fff !important;
+}

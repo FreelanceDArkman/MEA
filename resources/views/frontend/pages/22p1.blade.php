@@ -121,7 +121,7 @@
 
                                     <div class="headline-center margin-bottom-60">
                                         <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
-                                            <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
+                                            <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->FUND_PLAN_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
                                         </div>
                                         <h2>แผนปัจจุบัน</h2>
 
@@ -166,7 +166,7 @@
                                     {!! csrf_field() !!}
                                     <header>เลือกแผนการลงทุน</header>
                                     <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
-                                        <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
+                                        <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->FUND_PLAN_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
                                     </div>
                                     <fieldset>
                                         <legend>เปลี่ยนแผนการลงทุน</legend>
@@ -286,6 +286,9 @@
 
                                     @if($historyPlan)
                                         @foreach($historyPlan as $index => $item)
+
+
+                                            @if(checkShowList_valid($dataCheck->FUND_PLAN_CHANGE_PERIOD,$item->EFFECTIVE_DATE ))
                                             <tr>
 
                                                 <td style="text-align: center;">{{$item->MODIFY_COUNT .'/'.get_date_year($item->MODIFY_DATE) }}</td>
@@ -311,6 +314,9 @@
                                                 <td style="text-align: center;">
                                                     {{get_date_notime($item->EFFECTIVE_DATE)}}</td>
                                             </tr>
+
+                                            @endif
+
                                         @endforeach
                                     @endif
 
