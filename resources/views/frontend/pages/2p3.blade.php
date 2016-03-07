@@ -32,28 +32,28 @@
 
         <!-- Blog All Posts -->
         <div class="col-md-9">
+            @include('frontend.includes.sort')
 
+            {{--<div class="tab-v1">--}}
+                {{--<ul class="nav nav-tabs">--}}
 
-            <div class="tab-v1">
-                <ul class="nav nav-tabs">
+                    {{--@if($sortby == 1 || $sortby == null)--}}
+                        {{--<li class="active"><a href="/board/1" >มาใหม่</a></li>--}}
+                        {{--<li><a href="/board/2" >เปิดดู</a></li>--}}
+                        {{--<li><a href="/board/3" >ดาวโหลด</a></li>--}}
+                    {{--@elseif($sortby == 2)--}}
+                        {{--<li ><a href="/board/1" >มาใหม่</a></li>--}}
+                        {{--<li class="active"><a href="/board/2"  >เปิดดู</a></li>--}}
+                        {{--<li><a href="/board/3" >ดาวโหลด</a></li>--}}
+                    {{--@elseif($sortby == 3)--}}
+                        {{--<li ><a href="/board/1" >มาใหม่</a></li>--}}
+                        {{--<li ><a href="/board/2"  >เปิดดู</a></li>--}}
+                        {{--<li class="active"><a href="/board/3" >ดาวโหลด</a></li>--}}
+                    {{--@endif--}}
 
-                    @if($sortby == 1 || $sortby == null)
-                        <li class="active"><a href="/board/1" >มาใหม่</a></li>
-                        <li><a href="/board/2" >เปิดดู</a></li>
-                        <li><a href="/board/3" >ดาวโหลด</a></li>
-                    @elseif($sortby == 2)
-                        <li ><a href="/board/1" >มาใหม่</a></li>
-                        <li class="active"><a href="/board/2"  >เปิดดู</a></li>
-                        <li><a href="/board/3" >ดาวโหลด</a></li>
-                    @elseif($sortby == 3)
-                        <li ><a href="/board/1" >มาใหม่</a></li>
-                        <li ><a href="/board/2"  >เปิดดู</a></li>
-                        <li class="active"><a href="/board/3" >ดาวโหลด</a></li>
-                    @endif
+                {{--</ul>--}}
 
-                </ul>
-
-            </div>
+            {{--</div>--}}
 
             <br/>
 
@@ -84,9 +84,15 @@
                                 <tr>
                                     <th>ไฟล์แนบ</th>
                                     <th>ขนาดไฟล์</th>
-                                    <th>จำนวนการดาวโหลด</th>
-                                    <th>วันที่ทำรายการ</th>
-                                    <th>ดาวโหลด</th>
+                                    @if($sortby== 1 || $sortby == 2)
+                                        <th>จํานวนการดูข้อมลู </th>
+                                        <th>วันที่ดูข้อมูลล่าสุด</th>
+                                    @else
+                                        <th>จำนวนการดาวน์โหลด</th>
+                                        <th>วันที่ดาวน์โหลดข้อมุลล่าสุด</th>
+                                    @endif
+
+                                    <th>ดาวน์โหลด</th>
                                     <th>คัดลอก URL</th>
                                 </tr>
                                 </thead>
@@ -95,8 +101,13 @@
                                     <tr>
                                         <td><a target="_blank" href="/view/{{$item->NEWS_CATE_ID ."-". $item->NEWS_TOPIC_ID}}"><i class="fa fa-file-pdf-o" style="color: red"></i> {{$item->FILE_NAME}}</a></td>
                                         <td style="text-align: center">{{ getfilesize($item->FILE_PATH)     }}</td>
-                                        <td style="text-align: center">{{$item->DL_STAT}}</td>
-                                        <td style="text-align: center">{{get_date_notime($item->LAST_DL_DATE)}}</td>
+                                        @if($sortby== 1 || $sortby == 2)
+                                            <td style="text-align: center">{{$item->VIEW_STAT}}</td>
+                                            <td style="text-align: center">{{get_date_notime($item->LAST_VIEW_DATE)}}</td>
+                                        @else
+                                            <td style="text-align: center">{{$item->DL_STAT}}</td>
+                                            <td style="text-align: center">{{get_date_notime($item->LAST_DL_DATE)}}</td>
+                                        @endif
                                         <td style="text-align: center"> <a  class="download_pdf" href="/download/{{$item->NEWS_CATE_ID ."-". $item->NEWS_TOPIC_ID}}"><i class="fa fa-download"></i></a></td>
                                         <td style="text-align: center">
 

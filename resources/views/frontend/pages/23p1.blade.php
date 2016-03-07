@@ -71,7 +71,7 @@
                                 </li>
                                 <li>
                                     <small>แผนการลงทุน</small>
-                                    <h4 class="counter">แบบที่ {{$planchoose->PLAN_ID}} ({{$planchoose->PLAN_NAME}})</h4>
+                                    <h4 style="text-align: center" class="counter">{{$planchoose->PLAN_NAME}}</h4>
                                 </li>
 
                             </ul>
@@ -239,8 +239,8 @@
 
                                     <tr style="background-color: #26A9E0;color:white;">
                                         <th style="text-align:center;">ครั้งที่</th>
-                                        <th style="text-align:center;">รหัสพนักงาน</th>
-                                        <th style="text-align:center;">ชื่อ-สกุล</th>
+                                        {{--<th style="text-align:center;">รหัสพนักงาน</th>--}}
+                                        {{--<th style="text-align:center;">ชื่อ-สกุล</th>--}}
                                         <th style="text-align:center;">อัตราการสะสมเดิม</th>
                                         <th style="text-align:center;">อัตราการสะสมใหม่</th>
 
@@ -259,8 +259,8 @@
                                             <tr>
 
                                                 <td style="text-align: center;">{{$item->MODIFY_COUNT .'/'.get_date_year($item->CHANGE_SAVING_RATE_DATE) }}</td>
-                                                <td style="text-align: center;">{{$item->EMP_ID}}</td>
-                                                <td style="text-align: center;">{{$item->FULL_NAME}}</td>
+                                                {{--<td style="text-align: center;">{{$item->EMP_ID}}</td>--}}
+                                                {{--<td style="text-align: center;">{{$item->FULL_NAME}}</td>--}}
 
                                                 @if( count($historyPlan) > $index+1)
 

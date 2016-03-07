@@ -70,7 +70,7 @@
                                 </li>
                                 <li>
                                     <small>แผนการลงทุน</small>
-                                    <h4 class="counter">แบบที่ {{$planchoose->PLAN_ID}} ({{$planchoose->PLAN_NAME}})</h4>
+                                    <h4 style="text-align: center" class="counter">{{$planchoose->PLAN_NAME}}</h4>
                                 </li>
 
                             </ul>
@@ -123,12 +123,12 @@
                                         <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                             <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->FUND_PLAN_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
                                         </div>
-                                        <h2>แผนปัจจุบัน</h2>
+                                        <h2>แผนการลงทุนปัจจุบันที่ท่านเลือก</h2>
 
                                         @if($CurrnentPlan)
-                                        <p class="plan_name">แบบที่ {{$CurrnentPlan[0]->PLAN_ID}} ({{$CurrnentPlan[0]->PLAN_NAME}})</p>
+                                        <p class="plan_name">{{$CurrnentPlan[0]->PLAN_NAME}}</p>
                                             @else
-                                            <p class="plan_name">แบบที่ {{$effective[0]->PLAN_ID}} ({{$effective[0]->PLAN_NAME}})</p>
+                                            <p class="plan_name">{{$effective[0]->PLAN_NAME}}</p>
                                         @endif
 
 
@@ -267,8 +267,8 @@
 
                                     <tr style="background-color: #26A9E0;color:white;">
                                         <th style="text-align:center;">ครั้งที่</th>
-                                        <th style="text-align:center;">รหัสพนักงาน</th>
-                                        <th style="text-align:center;">ชื่อ-สกุล</th>
+                                        {{--<th style="text-align:center;">รหัสพนักงาน</th>--}}
+                                        {{--<th style="text-align:center;">ชื่อ-สกุล</th>--}}
                                         <th style="text-align:center;">แผนการลงทุน(เดิม)</th>
                                         <th style="text-align:center;">ตราสารทุน(เดิม)</th>
                                         <th style="text-align:center;">ตราสารหนี้(เดิม)</th>
@@ -292,8 +292,8 @@
                                             <tr>
 
                                                 <td style="text-align: center;">{{$item->MODIFY_COUNT .'/'.get_date_year($item->MODIFY_DATE) }}</td>
-                                                <td style="text-align: center;">{{$item->EMP_ID}}</td>
-                                                <td style="text-align: center;">{{$item->FULL_NAME}}</td>
+                                                {{--<td style="text-align: center;">{{$item->EMP_ID}}</td>--}}
+                                                {{--<td style="text-align: center;">{{$item->FULL_NAME}}</td>--}}
 
                                                 @if( count($historyPlan) > $index+1)
 

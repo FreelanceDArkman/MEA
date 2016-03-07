@@ -38,7 +38,17 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
+    Route::group(['prefix' => '/'] , function() {
 
+        Route::get('/','HomeController@getIndex');
+        Route::post('/viewrecord','HomeController@viewrecord');
+        Route::get('{id}','HomeController@getIndexByID')->where('id', '[0-9]+');
+//        Route::get('download/{file}','HomeController@DownloadFile');
+        Route::get('download/{id}','HomeController@DownloadFile');
+        Route::get('view/{id}','HomeController@ViewFile');
+
+
+    });
 
 
 
@@ -167,6 +177,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
     });
+
 //    Route::get('/form','FormController@getIndex');
     Route::group(['prefix' => '/form'] , function() {
         Route::get('/','FormController@getIndex');
@@ -202,17 +213,7 @@ Route::group(['middleware' => ['web']], function () {
     });
 
 
-    Route::group(['prefix' => '/'] , function() {
 
-        Route::get('/','HomeController@getIndex');
-        Route::post('/viewrecord','HomeController@viewrecord');
-        Route::get('{id}','HomeController@getIndexByID')->where('id', '[0-9]+');
-//        Route::get('download/{file}','HomeController@DownloadFile');
-        Route::get('download/{id}','HomeController@DownloadFile');
-        Route::get('view/{id}','HomeController@ViewFile');
-
-
-    });
 
     Route::group(['prefix' => '/newsfund'] , function() {
 

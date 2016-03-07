@@ -70,7 +70,7 @@
                                 </li>
                                 <li>
                                     <small>แผนการลงทุน</small>
-                                    <h4 class="counter">แบบที่ {{$planchoose->PLAN_ID}} ({{$planchoose->PLAN_NAME}})</h4>
+                                    <h4 style="text-align: center" class="counter">{{$planchoose->PLAN_NAME}}</h4>
                                 </li>
 
                             </ul>
