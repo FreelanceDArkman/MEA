@@ -114,9 +114,9 @@
                                         </div>
 
                                         @if($CurrnentPlan)
-                                            <div style="width: 100% ;padding:0 70px 0 70px; "><h3 class="heading-xs" style="font-size: 20px"><span class="pull-left">0%</span>อัตราสะสมปัจจุบันที่ท่านเลือก <span class="pull-right">{{$CurrnentPlan[0]->USER_SAVING_RATE}}%</span></h3>
+                                            <div style="width: 100% ;padding:0 70px 0 70px; "><h3 class="heading-xs" style="font-size: 20px"><span class="pull-left">0%</span>อัตราสะสมปัจจุบันที่ท่านเลือก <span class="pull-right">{{$Workcheck->SAVING_MAX_RATE}}%</span></h3>
                                                 <div class="progress progress-u">
-                                                    <div class="progress-bar progress-bar-purple" role="progressbar" aria-valuenow="{{$CurrnentPlan[0]->USER_SAVING_RATE}}" aria-valuemin="0" aria-valuemax="100" style="width:{!! $CurrnentPlan[0]->USER_SAVING_RATE !!}%">
+                                                    <div class="progress-bar progress-bar-purple" role="progressbar" aria-valuenow="{{$CurrnentPlan[0]->USER_SAVING_RATE}}" aria-valuemin="0" aria-valuemax="{{$Workcheck->SAVING_MAX_RATE}}" style="width:{!! ($CurrnentPlan[0]->USER_SAVING_RATE * 100)/$Workcheck->SAVING_MAX_RATE  !!}%">
                                                         <span style="font-size: 18px">{{$CurrnentPlan[0]->USER_SAVING_RATE}}%</span>
                                                     </div>
                                                 </div></div>
