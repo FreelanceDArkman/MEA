@@ -11,6 +11,11 @@
 <script src="{{ asset('backend/assets/global/plugins/jquery.blockui.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('backend/assets/global/plugins/uniform/jquery.uniform.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('backend/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js') }}" type="text/javascript"></script>
+
+
+
+
+
 <!-- END CORE PLUGINS -->
 
 <script>
@@ -79,13 +84,15 @@
         <script src="{{ asset('backend/assets/pages/scripts/users.min.js') }}" type="text/javascript"></script>
 @endif
 
-    @if(Request::is('admin/users/add'))
-        <script src="{{ asset('backend/assets/pages/scripts/add-user.js') }}" type="text/javascript"></script>
-    @endif
+@if(Request::is('admin/users/add'))
+    <script src="{{ asset('backend/assets/pages/scripts/add-user.js') }}" type="text/javascript"></script>
+@endif
 
 
 <!-- END PAGE LEVEL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="{{ asset('backend/assets/layouts/layout4/scripts/layout.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('backend/assets/layouts/layout4/scripts/demo.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('backend/assets/layouts/global/scripts/quick-sidebar.min.js') }}" type="text/javascript"></script>
+
 <!-- END THEME LAYOUT SCRIPTS -->
