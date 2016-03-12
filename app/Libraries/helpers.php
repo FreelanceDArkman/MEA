@@ -4,6 +4,20 @@ use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\DB;
 
 
+if (!function_exists('getManual')) {
+
+    function getManual(){
+        $sql44  = "SELECT * FROM TBL_NEWS_TOPIC WHERE NEWS_CATE_ID = 99 AND NEWS_TOPIC_ID = 2";
+
+
+        $man = DB::select(DB::raw($sql44));
+
+
+//        $user_group = DB::table('TBL_MENU_LIST')->get();
+        return $man[0]->FILE_PATH;
+    }
+
+}
 
 
 
@@ -217,9 +231,22 @@ if(!function_exists('meaFormatDate')){
     function meaFormatDate($input){
 
         $create_date = new Date($input);
-        $create_date_str = $create_date->add('543 years')->format('d M Y H:i:s');
 
-        return $create_date_str;
+
+
+        if($create_date->isLeapYear() == 1 && date("m",strtotime($create_date)) == 2 && date("d",strtotime($create_date)) == 29){
+
+//            $LeapDate = New Date(date("Y",strtotime($create_date))  ."-".date("m",strtotime($create_date))."-".date("d",strtotime($create_date)));
+//            var_dump($LeapDate->format('j F Y'));
+
+            return "29 ก.พ. " . (date("Y",strtotime($create_date)) + 543). " " . $create_date->format('H:i:s');
+
+        }else{
+            return $create_date->add('543 years')->format('d M Y H:i:s');
+        }
+       // $create_date_str = $create_date->add('543 years')->format('d M Y H:i:s');
+
+//        return $create_date_str;
     }
 }
 
@@ -228,18 +255,38 @@ if(!function_exists('get_date')) {
     {
         Date::setLocale('th');
         $create_date = new Date($input);
-        return $create_date->add('543 years')->format('j F Y H:i:s');
+
+        if($create_date->isLeapYear() == 1 && date("m",strtotime($create_date)) == 2 && date("d",strtotime($create_date)) == 29){
+
+            return "29 ก.พ. " . (date("Y",strtotime($create_date)) + 543) . " " . $create_date->format('H:i:s');
+
+        }else{
+            return $create_date->add('543 years')->format('j F Y H:i:s');
+        }
+
     }
 }
 
 if(!function_exists('get_date_notime')) {
     function get_date_notime($input)
     {
-        Date::setLocale('th');
-
 //        Date::setLocale('th');
+//var_dump(($create_date->isLeapYear() == 1) ? "Leap Year" : "Not Leap Year");
+        //->addDay(1)->format('j F Y')
+        Date::setLocale('th');
         $create_date = new Date($input);
-        return $create_date->add('543 years')->format('j F Y');
+
+        if($create_date->isLeapYear() == 1 && date("m",strtotime($create_date)) == 2 && date("d",strtotime($create_date)) == 29){
+
+//            $LeapDate = New Date(date("Y",strtotime($create_date))  ."-".date("m",strtotime($create_date))."-".date("d",strtotime($create_date)));
+//            var_dump($LeapDate->format('j F Y'));
+
+            return "29 ก.พ. " . (date("Y",strtotime($create_date)) + 543);
+
+        }else{
+            return $create_date->addDay(543)->format('j F Y');
+        }
+
     }
 }
 
@@ -248,7 +295,16 @@ if(!function_exists('get_date_nodate')) {
     {
         Date::setLocale('th');
         $create_date = new Date($input);
-        return $create_date->add('543 years')->format('F Y');
+//        return $create_date->add('543 years')->format('F Y');
+
+        if($create_date->isLeapYear() == 1 && date("m",strtotime($create_date)) == 2 && date("d",strtotime($create_date)) == 29){
+
+
+            return "ก.พ. " . (date("Y",strtotime($create_date)) + 543);
+
+        }else{
+            return $create_date->addDay(543)->format('F Y');
+        }
     }
 }
 

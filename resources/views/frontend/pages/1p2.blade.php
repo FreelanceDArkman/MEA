@@ -104,10 +104,20 @@
 
                                         @if($sortby== 1 || $sortby == 2)
                                             <td style="text-align: center">{{$item->VIEW_STAT}}</td>
-                                            <td style="text-align: center">{{get_date_notime($item->LAST_VIEW_DATE)}}</td>
+
+                                            @if($item->VIEW_STAT > 0)
+                                                <td style="text-align: center">{{get_date_notime($item->LAST_VIEW_DATE)}}</td>
+                                            @else
+                                                <td style="text-align: center">-</td>
+                                            @endif
                                         @else
                                             <td style="text-align: center">{{$item->DL_STAT}}</td>
-                                            <td style="text-align: center">{{get_date_notime($item->LAST_DL_DATE)}}</td>
+                                            @if($item->DL_STAT > 0)
+
+                                                <td style="text-align: center">{{get_date_notime($item->LAST_DL_DATE)}}</td>
+                                            @else
+                                                <td style="text-align: center">-</td>
+                                            @endif
                                         @endif
 
 
@@ -129,6 +139,10 @@
                                     </tbody>
 
                                 </table>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="text-center">
+                                {{$netasset->links()}}
                             </div>
 
                         </div>

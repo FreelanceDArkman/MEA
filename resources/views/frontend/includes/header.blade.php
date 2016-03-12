@@ -16,7 +16,7 @@ $data = getmemulist();
                 <li ><a href="/qa"> <i class="fa fa-comment"></i> {{ getGoupName($data,6) }}</a></li>
                 <li class="topbar-devider"></li>
                 <li>
-                    <a> <i class="fa fa-cog"></i> คู่มือการใช้งาน</a>
+                    <a href="{{getManual()}}" target="_blank"> <i class="fa fa-cog"></i> คู่มือการใช้งาน</a>
                 </li>
                 <li class="topbar-devider"></li>
                 <li><a href="/contact"><i class="fa fa-map-marker"></i> {{ getGoupName($data,8) }}</a></li>

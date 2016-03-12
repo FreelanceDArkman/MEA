@@ -104,10 +104,20 @@
                                         <td style="text-align: center">{{ getfilesize($item->FILE_PATH)     }}</td>
                                         @if($sortby== 1 || $sortby == 2)
                                             <td style="text-align: center">{{$item->VIEW_STAT}}</td>
+
+                                            @if($item->VIEW_STAT > 0)
                                             <td style="text-align: center">{{get_date_notime($item->LAST_VIEW_DATE)}}</td>
+                                                @else
+                                                <td style="text-align: center">-</td>
+                                               @endif
                                         @else
                                             <td style="text-align: center">{{$item->DL_STAT}}</td>
+                                            @if($item->DL_STAT > 0)
+
                                             <td style="text-align: center">{{get_date_notime($item->LAST_DL_DATE)}}</td>
+                                            @else
+                                                <td style="text-align: center">-</td>
+                                            @endif
                                         @endif
                                         <td style="text-align: center"> <a  class="download_pdf" href="/download/{{$item->NEWS_CATE_ID ."-". $item->NEWS_TOPIC_ID}}"><i class="fa fa-download"></i></a></td>
                                         <td style="text-align: center">
@@ -128,7 +138,10 @@
 
                             </table>
                         </div>
-
+                        <div class="clearfix"></div>
+                        <div class="text-center">
+                            {{$netasset->links()}}
+                        </div>
                     </div>
 
 
