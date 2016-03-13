@@ -35,4 +35,32 @@ WHERe info.EMP_ID = '".get_userID()."'";
         }
 
     }
+
+
+    public function  SendMail(Request $request){
+
+       /// var_dump($request);$name = $_POST['name'];
+
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+
+        $phone = $_POST['PHONE'];
+        $DEP_LNG= $_POST['DEP_LNG'];
+        $TYPE_TOPIC = $_POST['TYPE_TOPIC'];
+
+        $detail = $_POST['DETAIL'];
+
+        $create_date = new Date();
+
+
+        $sql = "INSERT INTO tbl_inform (INFM_NAME,INFM_EMAIL,INFM_PHONE,INFM_DEPT,INFM_TOPIC,INFM_DETAIL,INFM_FLAG) VALUES('".$name."','".$email."','".$phone."','".$DEP_LNG."','".$TYPE_TOPIC."','".$detail."',0)";
+
+        DB::insert(DB::raw($sql));
+//
+        return redirect()->to('/contact');
+
+
+
+
+    }
 }

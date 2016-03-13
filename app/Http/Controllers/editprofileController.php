@@ -21,7 +21,8 @@ class editprofileController extends Controller
             'title' => 'แก้ไขข้อมูลส่วนตัว'
         ] );
 
-
+        $agent = new MeaAgent();
+//        var_dump($agent->device());
         $sqlinfo = "SELECT * FROM TBL_EMPLOYEE_INFO info
 INNER JOIN TBL_USER us ON us.EMP_ID = info.EMP_ID
 WHERe info.EMP_ID = '".get_userID()."'";
@@ -29,7 +30,7 @@ WHERe info.EMP_ID = '".get_userID()."'";
 
 
 
-        $sqlbenefit = "SELECT * FROM TBL_USER_BENEFICIARY  WHERe EMP_ID = '1234567' ORDER BY CREATE_DATE DESC";
+        $sqlbenefit = "SELECT * FROM TBL_USER_BENEFICIARY  WHERe EMP_ID = '".get_userID()."' ORDER BY CREATE_DATE DESC";
         $userbenefit =  DB::select(DB::raw($sqlbenefit));
 
 

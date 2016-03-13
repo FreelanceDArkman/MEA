@@ -88,21 +88,21 @@ var ContactForm = function () {
 	                }
 	            },
 	                                
-	            // Ajax form submition                  
-	            submitHandler: function(form)
-	            {
-	                $(form).ajaxSubmit(
-	                {
-	                    beforeSend: function()
-	                    {
-	                        $('#sky-form3 button[type="submit"]').attr('disabled', true);
-	                    },
-	                    success: function()
-	                    {
-	                        $("#sky-form3").addClass('submited');
-	                    }
-	                });
-	            },
+	            //// Ajax form submition
+	            //submitHandler: function(form)
+	            //{
+	            //    $(form).ajaxSubmit(
+	            //    {
+	            //        beforeSend: function()
+	            //        {
+	            //            $('#sky-form3 button[type="submit"]').attr('disabled', true);
+	            //        },
+	            //        success: function()
+	            //        {
+	            //            $("#sky-form3").addClass('submited');
+	            //        }
+	            //    });
+	            //},
 	            
 	            // Do not change code below
 	            errorPlacement: function(error, element)

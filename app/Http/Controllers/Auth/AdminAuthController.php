@@ -42,7 +42,7 @@ class AdminAuthController extends Controller
             "session_id" => Session::getId(),
             "username" => $request->input('username'),
             "pwd" => $request->input('password'),
-            "os" => $agent->device(),
+            "os" => $agent->platform(),
             "browser" => $agent->browser(),
             "ip_address" => $request->ip(),
             "access_channel" => $agent->access_channel(),
