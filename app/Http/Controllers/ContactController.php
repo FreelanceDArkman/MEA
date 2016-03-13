@@ -57,7 +57,7 @@ WHERe info.EMP_ID = '".get_userID()."'";
 
         DB::insert(DB::raw($sql));
 //
-        return redirect()->to('/contact');
+        return redirect()->to('/contact')->with('message','ok');
 
 
 

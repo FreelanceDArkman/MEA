@@ -68,8 +68,11 @@
             <p>กสช. ขอขอบคุณที่ท่านให้ความสนใจเข้าเยี่ยมชมเว็บไซต์ของเรา
                 หากท่านมีข้อสอบถามหรือข้อแนะนำใดๆ สามารถกรอกลงในช่องข้อความ ด้านล่างนี้</p><br />
 {{--//action="frontend/assets/php/sky-forms-pro/demo-contacts-process.php"--}}
+
+
             <form action="{{action('ContactController@SendMail')}}" method="post" id="sky-form3" class="sky-form contact-style">
                 {!! csrf_field() !!}
+                @if (!Session::has('message'))
                 <fieldset class="no-padding">
                     <label>ชื่อ-สกุล <span class="color-red">*</span></label>
                     <div class="row sky-space-20">
@@ -150,12 +153,18 @@
 
                     <p><button type="submit" class="btn-u">Send Message</button></p>
                 </fieldset>
+                @endif
+                @if (Session::has('message'))
 
-                <div class="message">
-                    <i class="rounded-x fa fa-check"></i>
-                    <p>Your message was successfully sent!</p>
+                <div class="alert alert-success fade in alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Well done!</strong> Your message was successfully sent!
                 </div>
+
+                @endif
             </form>
+
+
         </div><!--/col-md-9-->
 
 
