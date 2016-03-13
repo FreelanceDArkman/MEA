@@ -52,4 +52,6 @@
 
 <link rel="stylesheet" href="{{asset('frontend/assets/css/pages/page_log_reg_v1.css')}}">
 
+<link rel="stylesheet" href="{{asset('frontend/assets/css/pages/page_search_inner.css')}}">
+
 {{--<link rel="stylesheet" href="assets/css/pages/page_log_reg_v1.css">--}}

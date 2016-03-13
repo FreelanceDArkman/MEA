@@ -133,8 +133,7 @@ $data = getmemulist();
 <script type="text/javascript" src="{{asset('frontend/assets/plugins/layer-slider/layerslider/js/greensock.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend/assets/plugins/layer-slider/layerslider/js/layerslider.transitions.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend/assets/plugins/layer-slider/layerslider/js/layerslider.kreaturamedia.jquery.js')}}"></script>
-<!-- JS Customization -->
-<script type="text/javascript" src="{{asset('frontend/assets/js/custom.js')}}"></script>
+
 <!-- JS Page Level -->
 
 <script type="text/javascript" src="{{asset('frontend/assets/plugins/sky-forms-pro/skyforms/js/jquery.form.min.js')}}"></script>
@@ -157,8 +156,8 @@ $data = getmemulist();
 
 <script type="text/javascript" src="{{asset('frontend/assets/highchart/highcharts.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend/assets/highchart/exporting.js')}}"></script>
-
-
+<!-- JS Customization -->
+<script type="text/javascript" src="{{asset('frontend/assets/js/custom.js')}}"></script>
 
 {{--<script type="text/javascript" src="frontend/assets/js/plugins/parallax-slider.js"></script>--}}
 <script type="text/javascript">

@@ -114,14 +114,13 @@
     @endif
 
 
-    <script>
-
+    <script type="text/javascript">
 
 
 
         $(document).ready(function(){
 
-            //var $link = $("a[data-modal]");
+
 
 
 
@@ -136,6 +135,7 @@
                 var jsondata = {rec : $param};
 
                         $.ajax({
+
                             type: 'post', // or post?
                             dataType: 'json',
                             url: '/viewrecord',
@@ -144,20 +144,11 @@
                             success: function(data) {
 
 
-
-                               // var ii = data;
-//                                ) {
-//                                    // notice that we are expecting a json array with success = true and a payload
-//                                    //$('.modal').empty().append(data.payload).modal();
-//                                } else {
-//                                    // for debugging
-//                                    if (data// alert(data);
-//                                }
                             },
                             error: function(xhr, textStatus, thrownError) {
-                                alert(xhr.status);
-                                alert(thrownError);
-                                alert(textStatus);
+//                                alert(xhr.status);
+//                                alert(thrownError);
+//                                alert(textStatus);
                             }
                         });
 
@@ -170,7 +161,7 @@
 
 
         });
-        //JS
+
 
     </script>
 

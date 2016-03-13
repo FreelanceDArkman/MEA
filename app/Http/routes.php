@@ -267,9 +267,9 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
+    Route::post('/search','SearchController@getIndex');
 
-
-
+    Route::get('/search','SearchController@getIndex');
 
 
 
@@ -284,6 +284,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => ['auth.frontend']], function(){
 
         Route::get('/profile','ProfileController@getIndex');
+
+
 
 
         Route::group(['prefix' => 'editprofile'] , function() {

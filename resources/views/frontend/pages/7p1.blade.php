@@ -202,9 +202,9 @@
 //                                }
                     },
                     error: function(xhr, textStatus, thrownError) {
-                        alert(xhr.status);
-                        alert(thrownError);
-                        alert(textStatus);
+//                        alert(xhr.status);
+//                        alert(thrownError);
+//                        alert(textStatus);
                     }
                 });
 
