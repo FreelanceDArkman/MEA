@@ -30,7 +30,9 @@
             "App\\": "app/"
         },
         "files": [
-            "app/Libraries/helpers.php"
+            "app/Libraries/helpers.php",
+            "app/Libraries/admintool.php",
+            "public/frontend/assets/php/sky-forms-pro/PHPMailer/PHPMailerAutoload.php"
         ]
     },
     "autoload-dev": {

@@ -110,7 +110,7 @@
                                     <div class="headline-center margin-bottom-60">
 
                                         <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
-                                            <strong> * การเปลี่นแปลงและแก้ไขอัตราสะสม ทำได้ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือนและมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป </strong>
+                                            <strong> * การเปลี่ยนแปลงและแก้ไขอัตราสะสม ทำได้ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือนและมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป </strong>
                                         </div>
 
                                         @if($CurrnentPlan)

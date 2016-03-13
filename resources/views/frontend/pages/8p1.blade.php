@@ -65,10 +65,11 @@
         <div class="col-md-12 mb-margin-bottom-30">
 
 
-            <p>กทช. ขอขอบคุณที่ท่านให้ความสนใจเข้าเยี่ยมชมเว็บไซต์ของเรา
+            <p>กสช. ขอขอบคุณที่ท่านให้ความสนใจเข้าเยี่ยมชมเว็บไซต์ของเรา
                 หากท่านมีข้อสอบถามหรือข้อแนะนำใดๆ สามารถกรอกลงในช่องข้อความ ด้านล่างนี้</p><br />
-
-            <form action="frontend/assets/php/sky-forms-pro/demo-contacts-process.php" method="post" id="sky-form3" class="sky-form contact-style">
+{{--//action="frontend/assets/php/sky-forms-pro/demo-contacts-process.php"--}}
+            <form action="{{action('ContactController@SendMail')}}" method="post" id="sky-form3" class="sky-form contact-style">
+                {!! csrf_field() !!}
                 <fieldset class="no-padding">
                     <label>ชื่อ-สกุล <span class="color-red">*</span></label>
                     <div class="row sky-space-20">
@@ -113,7 +114,7 @@
                             <div>
                                 <select name="TYPE_TOPIC" id="TYPE_TOPIC"  class="form-control">
                                     <option value="default"> กรุณาเลือก </option>
-                                    <option value="งานควบคมุ ระบบบญั ชีสมาชิกและสทิ ธิประโยชน์(คส.)">งานควบคมุ ระบบบญั ชีสมาชิกและสทิ ธิประโยชน์(คส.)</option>
+                                    <option value="งานควบคมุ ระบบบญั ชีสมาชิกและสทิ ธิประโยชน์(คส.)">งานควบคุมระบบบัญชีสมาชิกและสิทธิประโยชน์ (คส.)</option>
                                     <option value="งานบัญชีการเงิน วิเคราะห์และประเมินผลการลงทุน (บป.)">งานบัญชีการเงิน วิเคราะห์และประเมินผลการลงทุน (บป.)</option>
                                     <option value="ปัญหาการใช้งานระบบ">ปัญหาการใช้งานระบบ</option>
                                 </select>

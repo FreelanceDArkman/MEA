@@ -274,6 +274,8 @@ Route::group(['middleware' => ['web']], function () {
 
 
     Route::get('/contact','ContactController@getIndex');
+    Route::post('/contact','ContactController@SendMail');
+
 
     Route::get('/forservices','ForserviceController@getIndex');
 

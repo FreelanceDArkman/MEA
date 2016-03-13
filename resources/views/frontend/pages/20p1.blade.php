@@ -221,7 +221,7 @@
                            </div>
                          <div class="tab-pane fade a" id="profile-1">
                             <div class="table-responsiv">
-
+                                {{--$_SERVER['SCRIPT_FILENAME'];--}}
                                 <table class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
