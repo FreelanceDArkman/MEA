@@ -14,15 +14,27 @@ class SearchController extends Controller
 {
 
 
-    public function getIndex(Request $request)
+    public function getIndex()
     {
         $this->pageSetting( [
             'title' => 'ค้นหา | MEA FUND'
         ] );
 
-        $keyword = $request->input('sKeys');
+     //$keyword = \Request::getQueryString();
 
-        $arrKey = explode(' ',$keyword);
+        $keyword = rawurldecode(Input::get("keys"));
+
+
+
+//        var_dump( rawurldecode(Input::get("keys")));
+
+       // $keyword = $request->input('sKeys');
+
+
+
+        $arrKey = explode('+',$keyword);
+
+        $keyword  = urldecode($keyword);
 
 
 
@@ -99,7 +111,7 @@ class SearchController extends Controller
 
         $allrecord = count($records);
 
-        var_dump(count($recordss));
+//        var_dump(count($recordss));
         return view('frontend.pages.search')->with(['keyword' => $keyword, 'recordss'=>$recordss, 'allrecord'=>$allrecord]);
 
     }

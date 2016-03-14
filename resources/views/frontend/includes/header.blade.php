@@ -232,15 +232,15 @@ $data = getmemulist();
                 <li>
                     <i class="search fa fa-search search-btn"></i>
                     <div class="search-open">
-                        <form action="{{action('SearchController@getIndex')}}" method="post">
-                            {!! csrf_field() !!}
+                        {{--<form id="mea_search" action="{{action('SearchController@getIndex')}}" method="post">--}}
+                            {{--{!! csrf_field() !!}--}}
                             <div class="input-group animated fadeInDown">
-                                <input type="text" class="form-control" name="sKeys" placeholder="Search">
+                                <input type="text" class="form-control" onkeypress="return clickButton(event,'search_go');" id="sKeys" name="sKeys" placeholder="Search">
 								<span class="input-group-btn">
-									<button class="btn-u" type="submit">ค้นหา</button>
+									<a class="btn-u" id="search_go" type="submit">ค้นหา</a>
 								</span>
                             </div>
-                        </form>
+                        {{--</form>--}}
 
                     </div>
                 </li>
@@ -249,3 +249,73 @@ $data = getmemulist();
         </div><!--/end container-->
     </div><!--/navbar-collapse-->
 </div>
+<script type="text/javascript">
+
+//    function clickButton(e, buttonid) {
+//        var evt = e ? e : window.event;
+//        var bt = document.getElementById(buttonid);
+//        if (bt) {
+//            if (evt.keyCode == 13) {
+//                bt.click();
+//                return false;
+//            }
+//        }
+//    }
+
+    $(document).ready(function(){
+
+
+            $("#search_go").on('click',function(){
+
+                var key= $("#sKeys").val();
+
+                var arrkey = key.split(" ");
+
+                var keyret = "";
+                for(i = 0; i< arrkey.length; i++){
+
+                    if(arrkey.length == 0){
+
+                        if(arrkey[i] != ''){
+                            keyret = keyret + arrkey[i] ;
+                        }
+                    }
+
+                    if(arrkey.length > 0){
+
+                        if(arrkey[i] != ''){
+
+                            if( (i+1) < arrkey.length){
+                                keyret = keyret + arrkey[i] + '+';
+                            }else {
+                                keyret = keyret + arrkey[i] ;
+                            }
+
+
+                        }
+                    }
+
+                }
+
+
+                window.location.href = "/search?keys=" + encodeURIComponent(keyret);
+
+
+
+            });
+
+
+//        $("#sKeys").on('keypress' ,function(){
+//            var code = (e.keyCode ? e.keyCode : e.which);
+//            if(code == 13) { //Enter keycode
+//                alert('enter press');
+//            }
+//
+//        });
+
+
+
+
+    });
+
+</script>

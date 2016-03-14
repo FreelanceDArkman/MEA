@@ -6,7 +6,7 @@ var getXsrfToken = function() {
 
     for (var i = 0; i < cookies.length; i++) {
         var cookie = cookies[i].split('=');
-        if(cookie[0] == 'XSRF-TOKEN') {
+        if(cookie[0].trim() == 'XSRF-TOKEN') {
             token = decodeURIComponent(cookie[1]);
         }
     }
@@ -19,3 +19,15 @@ jQuery.ajaxSetup({
         'X-XSRF-TOKEN': getXsrfToken()
     }
 });
+
+
+function clickButton(e, buttonid) {
+    var evt = e ? e : window.event;
+    var bt = document.getElementById(buttonid);
+    if (bt) {
+        if (evt.keyCode == 13) {
+            bt.click();
+            return false;
+        }
+    }
+}
