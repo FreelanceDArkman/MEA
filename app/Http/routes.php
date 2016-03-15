@@ -271,6 +271,8 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('/search','SearchController@getIndex');
 
+    Route::get('/search_detail','SearchController@getDetail');
+
 
 
     Route::get('/contact','ContactController@getIndex');

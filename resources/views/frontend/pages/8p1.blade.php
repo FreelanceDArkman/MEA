@@ -170,5 +170,11 @@
 
     </div><!--/row-->
     @endif
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            ContactForm.initContactForm();
+        });
+    </script>
 @stop
 
