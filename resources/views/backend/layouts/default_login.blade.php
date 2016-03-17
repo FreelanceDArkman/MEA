@@ -65,45 +65,7 @@ include("backend/inc/scripts.php");
         <!-- PAGE RELATED PLUGIN(S)
 <script src="..."></script>-->
 
-<script type="text/javascript">
-    runAllForms();
 
-    $(function() {
-        // Validation
-        $("#login-form").validate({
-            // Rules for form validation
-            rules : {
-                username : {
-                    required : true,
-                    minlength : 1,
-                    maxlength : 7
-
-                },
-                password : {
-                    required : true,
-                    minlength : 3,
-                    maxlength : 20
-                }
-            },
-
-            // Messages for form validation
-            messages : {
-                username : {
-                    required : 'กรุณาใส่ชื่อผุ้ใช้',
-
-                },
-                password : {
-                    required : 'กรุณาใส่รหัสผ่าน'
-                }
-            },
-
-            // Do not change code below
-            errorPlacement : function(error, element) {
-                error.insertAfter(element.parent());
-            }
-        });
-    });
-</script>
 
 <?php
 //include footer

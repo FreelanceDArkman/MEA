@@ -2,6 +2,41 @@
 @section('content')
 
 <div class="row ">
+
+    @if($errors->any())
+        <div class="alert alert-danger fade in">
+            <button class="close" data-dismiss="alert">
+                ×
+            </button>
+            <i class="fa-fw fa fa-times"></i>
+            <strong>Error!</strong> {{$errors->first()}}
+        </div>
+
+    @endif
+
+
+
+        @if (Session::has('message'))
+            <div class="alert alert-success fade in">
+                <button class="close" data-dismiss="alert">
+                    ×
+                </button>
+                <i class="fa-fw fa fa-check"></i>
+                <strong>Success</strong> {{ Session::get('message') }}
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ไปหน้า <a href="{{action('Auth\AdminAuthController@checkLogout')}}">login</a>
+            </div>
+
+        @endif
+        @if (!Session::has('message') && !$errors->any())
+            <div class="alert alert-warning fade in">
+                <button class="close" data-dismiss="alert">
+                    ×
+                </button>
+                <i class="fa-fw fa fa-warning"></i>
+                <strong>ประกาศ</strong> ท่านสมาชิกเข้าใช้งานระบบครั้งแรก เพื่อความสะดวก รวดเร็ว ถูกต้องในการบริการ กรุณากรอกข้อมูลในช่องข้อความ.
+            </div>
+        @endif
         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm login-bg">
             <h1 class="txt-color-red login-header-big">มุ่งสู่องค์สมถนะสูง</h1>
             <div class="hero">
@@ -24,30 +59,54 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
             <div class="well no-padding">
-                <form action="{{ action('Auth\AdminAuthController@checkLogin') }}"  method="post" id="login-form" class="smart-form client-form">
+                <form action="{{ action('Auth\AdminAuthController@ResetPassword') }}"  method="post" id="login-form" class="smart-form client-form">
                     {!! csrf_field() !!}
                     <header>
-                        เข้าสู่ระบบ
+                        เปลี่ยนรหัสผ่าน
                     </header>
 
+
+                    @if (Session::has('emp_id'))
+                        <input type="hidden" name="emp_id" value="{{ Session::get('emp_id') }}" />
+                    @endif
                     <fieldset>
-
                         <section>
-                            <label class="label">Username</label>
-                            <label class="input"> <i class="icon-append fa fa-user"></i>
-                                <input type="text" name="username">
-                                <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter email address/username</b></label>
-                        </section>
-
-                        <section>
-                            <label class="label">Password</label>
+                            <label class="label">รหัสผ่านเดิม</label>
                             <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                <input type="password" name="password">
+                                <input type="password" name="old_password" id="old_password">
                                 <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b> </label>
-                            <div class="note">
-                                <a href="forgotpassword">ลืมรหัสผ่าน?</a>
-                            </div>
+
                         </section>
+                        <section>
+                            <label class="label">รหัสผ่านใหม่</label>
+                            <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                <input type="password" name="new_password" id="new_password">
+                                <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b> </label>
+
+                        </section>
+                        <section>
+                            <label class="label">ยืนยันรหัสผ่านใหม่</label>
+                            <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                <input type="password" name="con_password" id="con_password">
+                                <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b> </label>
+
+                        </section>
+                        {{--<section>--}}
+                            {{--<label class="label">Username</label>--}}
+                            {{--<label class="input"> <i class="icon-append fa fa-user"></i>--}}
+                                {{--<input type="text" name="old_password">--}}
+                                {{--<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter email address/username</b></label>--}}
+                        {{--</section>--}}
+
+                        {{--<section>--}}
+                            {{--<label class="label">Password</label>--}}
+                            {{--<label class="input"> <i class="icon-append fa fa-lock"></i>--}}
+                                {{--<input type="password" name="old_password">--}}
+                                {{--<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b> </label>--}}
+                            {{--<div class="note">--}}
+                                {{--<a href="forgotpassword">ลืมรหัสผ่าน?</a>--}}
+                            {{--</div>--}}
+                        {{--</section>--}}
 
                         {{--<section>--}}
                             {{--<label class="checkbox">--}}
@@ -57,7 +116,7 @@
                     </fieldset>
                     <footer>
                         <button type="submit" class="btn btn-primary">
-                            Sign in
+                           ส่งข้อมูล
                         </button>
                     </footer>
                 </form>
@@ -81,6 +140,71 @@
         </div>
     </div>
 <!-- END MAIN PANEL -->
+
+<script type="text/javascript">
+    runAllForms();
+
+    $(function() {
+        // Validation
+        $("#login-form").validate({
+            // Rules for form validation
+            rules : {
+
+                old_password:
+                {
+                    required: true,
+                    minlength : 8,
+                    maxlength :12
+
+                },
+                new_password:{
+                    required: true,
+                    minlength : 8,
+                    maxlength :12
+
+                },
+
+
+                con_password:
+                {
+                    required: true,
+                    equalTo : '#new_password',
+                    minlength : 8,
+                    maxlength :12
+
+                }
+            },
+
+            // Messages for form validation
+            messages : {
+                old_password:
+                {
+                    required: 'กรุณากรอกข้อมูล',
+                    minlength: 'กรุณากรอก 8 ตัวอักษร',
+                    maxlength : 'กรุณากรอกไม่เกิน 12 ตัวอักษร'
+                },
+                new_password  :{
+                    required: 'กรุณากรอกข้อมูล',
+                    minlength: 'กรุณากรอก 8 ตัวอักษร',
+                    maxlength : 'กรุณากรอกไม่เกิน 12 ตัวอักษร'
+
+                },
+                con_password  :{
+                    equalTo: 'กรุณาใส่ รหัสผ่านให้ถูกต้อง',
+                    required: 'กรุณากรอกข้อมูล',
+                    minlength: 'กรุณากรอก 8 ตัวอักษร',
+                    maxlength : 'กรุณากรอกไม่เกิน 12 ตัวอักษร'
+
+                }
+            },
+
+            // Do not change code below
+            errorPlacement : function(error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+    });
+</script>
 
 @stop
 

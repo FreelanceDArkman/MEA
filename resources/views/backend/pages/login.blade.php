@@ -2,6 +2,18 @@
 @section('content')
 
 <div class="row ">
+
+    @if (Session::has('messages'))
+        <div class="alert alert-danger fade in">
+            <button class="close" data-dismiss="alert">
+                ×
+            </button>
+            <i class="fa-fw fa fa-times"></i>
+            <strong>Error!</strong> {{ Session::get('messages') }}
+
+        </div>
+
+    @endif
         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm login-bg">
             <h1 class="txt-color-red login-header-big">มุ่งสู่องค์สมถนะสูง</h1>
             <div class="hero">
@@ -81,6 +93,48 @@
         </div>
     </div>
 <!-- END MAIN PANEL -->
+
+<script type="text/javascript">
+    runAllForms();
+
+    $(function() {
+        // Validation
+        $("#login-form").validate({
+            // Rules for form validation
+            rules : {
+                username : {
+                    required : true,
+                    minlength : 1,
+                    maxlength : 7
+
+                },
+                password : {
+                    required : true,
+                    minlength : 8,
+                    maxlength : 12
+                }
+            },
+
+            // Messages for form validation
+            messages : {
+                username : {
+                    required : 'กรุณาใส่ชื่อผุ้ใช้',
+
+                },
+                password : {
+                    required : 'กรุณาใส่รหัสผ่าน',
+                    minlength: 'กรุณากรอก 8 ตัวอักษร',
+                    maxlength : 'กรุณากรอกไม่เกิน 12 ตัวอักษร'
+                }
+            },
+
+            // Do not change code below
+            errorPlacement : function(error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+    });
+</script>
 
 @stop
 

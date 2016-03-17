@@ -107,5 +107,37 @@
     </div>
 <!-- END MAIN PANEL -->
 
+<script type="text/javascript">
+    runAllForms();
+
+    $(function() {
+        // Validation
+        $("#login-form").validate({
+            // Rules for form validation
+            rules : {
+                username : {
+                    required : true,
+                    minlength : 1,
+                    maxlength : 7
+
+                }
+            },
+
+            // Messages for form validation
+            messages : {
+                username : {
+                    required : 'กรุณาใส่ชื่อผุ้ใช้',
+
+                }
+            },
+
+            // Do not change code below
+            errorPlacement : function(error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+    });
+</script>
+
 @stop
 

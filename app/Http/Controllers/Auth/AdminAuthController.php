@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Session;
 use Validator;
 use App\Http\Controllers\Controller;
 use App\Package\MeaAgent;
+use Illuminate\Support\Facades\DB;
 
 class AdminAuthController extends Controller
 {
@@ -81,12 +82,12 @@ class AdminAuthController extends Controller
         $result_login = $curl->getResult();
         if($result_login->errCode != 0) {
             // login fail
-            return redirect()->to('firstlogin')->withErrors(['ไม่พบชื่อ login นี้', 'The email or password you entered is incorrect.']);
+            return redirect()->to('admin/firstlogin')->withErrors(['ไม่พบชื่อ login นี้', 'The email or password you entered is incorrect.']);
         } else {
             // logged in
 //            session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
 
-            return redirect()->to('firstlogin')->with('message','กรุณาตรวจสอบอีเมล์ที่ได้ลงทะเบียนไว้กับระบบ เพื่อยืนยันตัวตนและตรวจสอบสิทธิ์การใช้งานของท่าน');
+            return redirect()->to('admin/firstlogin')->with('message','กรุณาตรวจสอบอีเมล์ที่ได้ลงทะเบียนไว้กับระบบ เพื่อยืนยันตัวตนและตรวจสอบสิทธิ์การใช้งานของท่าน');
         }
     }
 
