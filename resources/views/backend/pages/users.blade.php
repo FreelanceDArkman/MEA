@@ -1,6 +1,8 @@
  @extends('backend.layouts.default')
 @section('content')
-
+ <?php
+ $data = getmemulist();
+ ?>
         <!-- BEGIN PAGE BASE CONTENT -->
 <div class="row">
     <div class="col-md-12">
@@ -11,8 +13,8 @@
         <div class="portlet light portlet-fit portlet-datatable bordered">
             <div class="portlet-title">
                 <div class="caption">
-                    <i class="icon-user font-green"></i>
-                    <span class="caption-subject font-green sbold uppercase">จัดการผู้ใช้</span>
+                    <i class="icon-user font-red"></i>
+                    <span class="caption-subject font-red sbold uppercase">{{ getMenuName($data,50,2) }}</span>
                 </div>
                 <div class="actions">
                     {{--<div class="btn-group btn-group-devided" data-toggle="buttons">--}}

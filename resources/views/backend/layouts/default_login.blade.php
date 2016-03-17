@@ -21,9 +21,19 @@ $page_title = "Login";
 $page_css[] = "your_style.css";
 $no_main_header = true;
 $page_html_prop = array("id"=>"extr-page", "class"=>"animated fadeInDown");
-include("backend/inc/header.php");
+
 
 ?>
+
+@include("backend/includes/header")
+
+
+<?php
+//include required scripts
+include("backend/inc/scripts.php");
+?>
+
+
         <!-- ==========================CONTENT STARTS HERE ========================== -->
 <!-- possible classes: minified, no-right-panel, fixed-ribbon, fixed-header, fixed-width-->
 <header id="header">
@@ -35,7 +45,7 @@ include("backend/inc/header.php");
         <!-- END AJAX-DROPDOWN -->
     </div>
 
-    <span id="extr-page-header-space"> <span class="hidden-mobile hiddex-xs">Need an account?</span> <a href="<?php echo APP_URL; ?>/register.php" class="btn btn-danger">Create account</a> </span>
+
 
 </header>
 
@@ -50,10 +60,7 @@ include("backend/inc/header.php");
 <!-- END MAIN PANEL -->
 <!-- ==========================CONTENT ENDS HERE ========================== -->
 
-<?php
-//include required scripts
-include("backend/inc/scripts.php");
-?>
+
 
         <!-- PAGE RELATED PLUGIN(S)
 <script src="..."></script>-->
@@ -66,9 +73,11 @@ include("backend/inc/scripts.php");
         $("#login-form").validate({
             // Rules for form validation
             rules : {
-                email : {
+                username : {
                     required : true,
-                    email : true
+                    minlength : 1,
+                    maxlength : 7
+
                 },
                 password : {
                     required : true,
@@ -79,12 +88,12 @@ include("backend/inc/scripts.php");
 
             // Messages for form validation
             messages : {
-                email : {
-                    required : 'Please enter your email address',
-                    email : 'Please enter a VALID email address'
+                username : {
+                    required : 'กรุณาใส่ชื่อผุ้ใช้',
+
                 },
                 password : {
-                    required : 'Please enter your password'
+                    required : 'กรุณาใส่รหัสผ่าน'
                 }
             },
 

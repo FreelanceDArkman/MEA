@@ -378,6 +378,13 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
     Route::get('login','Auth\AdminAuthController@showLogin');
+    Route::get('forgotpassword','Auth\AdminAuthController@showforgot');
+    Route::post('forgotpassword','Auth\AdminAuthController@ReqPassword');
+
+
+    Route::get('firstlogin','Auth\AdminAuthController@showfirstlogin');
+    Route::post('firstlogin','Auth\AdminAuthController@ResetPassword');
+
     Route::post('login','Auth\AdminAuthController@checkLogin');
     Route::get('logout','Auth\AdminAuthController@checkLogout');
 

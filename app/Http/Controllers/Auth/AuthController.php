@@ -116,7 +116,7 @@ class AuthController extends Controller
             return redirect()->to('forgotpassword')->withErrors(['ไม่พบชื่อ login นี้', 'The email or password you entered is incorrect.']);
         } else {
             // logged in
-            session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
+            //session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
 
             return redirect()->to('forgotpassword')->with('message','ระบบได้ส่ง password ใหม่ไปให้ท่านเรียบร้อยแล้ว');
         }

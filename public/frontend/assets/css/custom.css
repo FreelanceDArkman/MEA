@@ -10,7 +10,7 @@
 body{
     font-size: 20px !important;
 }
-body, a, h1, h2{
+body, a, h1, h2 ,header{
     font-family: "DB Ozone X" !important;
 
 }

@@ -1,3 +1,6 @@
+<?php
+$data = getmemulist();
+?>
 <div class="page-sidebar navbar-collapse collapse">
     <!-- BEGIN SIDEBAR MENU -->
     <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
@@ -19,27 +22,27 @@
             <h3 class="uppercase">การจัดการกลุ่มผู้ใช้และสมาชิก</h3>
         </li>
         @if(menu_access(1,50) || menu_access(2,50))
-        <li class="nav-item ">
+        <li class="nav-item {{activeGroupMenu('userGroup,users')}}">
             <a href="javascript:;" class="nav-link nav-toggle">
                 <i class="icon-users"></i>
-                <span class="title">จัดการผู้ใช้</span>
+                <span class="title">{{ getGoupName($data,50) }}</span>
                 <span class="selected"></span>
                 <span class="arrow"></span>
             </a>
-            <ul class="sub-menu" style="display: none;">
+            <ul class="sub-menu" style="display:{{activeDisplay('userGroup,users')}};">
                 @if(menu_access(1,50))
-                <li class="nav-item  ">
+                <li class="nav-item {{activeSidemenu('userGroup')}}">
                     <a href="{{ action('UserGroupController@userGroups') }}" class="nav-link ">
                         <i class="icon-users"></i>
-                        <span class="title">จัดการกลุ่มผู้ใช้</span>
+                        <span class="title">{{ getMenuName($data,50,1) }}</span>
                     </a>
                 </li>
                 @endif
                 @if(menu_access(2,50))
-                <li class="nav-item  ">
+                <li class="nav-item  {{activeSidemenu('users')}}">
                     <a href="{{ action('UserController@users') }}" class="nav-link ">
                         <i class="icon-user"></i>
-                        <span class="title">จัดการผู้ใช้</span>
+                        <span class="title">{{ getMenuName($data,50,2) }}</span>
                     </a>
                 </li>
                 @endif
