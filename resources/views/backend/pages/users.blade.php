@@ -1,7 +1,11 @@
  @extends('backend.layouts.default')
 @section('content')
  <?php
+// $page_title = getMenuName($data,50,2);
  $data = getmemulist();
+
+ $page_title = getMenuName($data,50,2);
+
  ?>
         <!-- BEGIN PAGE BASE CONTENT -->
 <div class="row">

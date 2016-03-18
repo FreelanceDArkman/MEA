@@ -1,7 +1,7 @@
 <?php
 
 //initilize the page
-require_once("backend/inc/init.php");
+//require_once("backend/inc/init.php");
 
 //require UI configuration (nav, ribbon, etc.)
 require_once("backend/inc/config.ui.php");
@@ -27,11 +27,8 @@ $page_html_prop = array("id"=>"extr-page", "class"=>"animated fadeInDown");
 
 @include("backend/includes/header")
 
+@include("backend/includes/script")
 
-<?php
-//include required scripts
-include("backend/inc/scripts.php");
-?>
 
 
         <!-- ==========================CONTENT STARTS HERE ========================== -->
@@ -40,7 +37,7 @@ include("backend/inc/scripts.php");
     <!--<span id="logo"></span>-->
 
     <div id="logo-group">
-        <span id="logo"> <img src="<?php echo ASSETS_URL; ?>/img/logo.png" alt="SmartAdmin"> </span>
+        <span id="logo"> <img src="{{asset('backend/img/logo.png')}}" alt="SmartAdmin"> </span>
 
         <!-- END AJAX-DROPDOWN -->
     </div>
@@ -66,7 +63,9 @@ include("backend/inc/scripts.php");
 <script src="..."></script>-->
 
 
-
+<?php
+include("backend/inc/footer.php");
+?>
 <?php
 //include footer
 //include("inc/google-analytics.php");

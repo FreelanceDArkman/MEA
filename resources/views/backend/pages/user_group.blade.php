@@ -12,7 +12,7 @@
             <div class="portlet-title">
                 <div class="caption">
                     <i class="icon-users font-red"></i>
-                    <span class="caption-subject font-red sbold uppercase">{{ getMenuName($data,50,1) }}</span>
+                    <span class="caption-subject font-red sbold uppercase">{{ getMenuName(getmemulist(),50,1) }}</span>
                 </div>
                 <div class="actions">
                     {{--<div class="btn-group btn-group-devided" data-toggle="buttons">--}}

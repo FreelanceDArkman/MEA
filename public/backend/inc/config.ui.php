@@ -32,7 +32,7 @@ $page_nav = array(
 			),
 			"social" => array(
 				"title" => "Social Wall",
-				"url" => APP_URL."/dashboard-social.php"
+				"url" => APP_URL."/admin/getUserGroups"
 			)
 		)
 	),

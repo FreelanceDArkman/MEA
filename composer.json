@@ -32,7 +32,21 @@
         "files": [
             "app/Libraries/helpers.php",
             "app/Libraries/admintool.php",
-            "public/frontend/assets/php/sky-forms-pro/PHPMailer/PHPMailerAutoload.php"
+            "app/Libraries/smartutill.php",
+            "app/Libraries/smartui.php",
+            "app/Libraries/smartui-nav.php",
+            "app/Libraries/smartui-widget.php",
+            "app/Libraries/smartui-datatable.php",
+            "app/Libraries/smartui-button.php",
+            "app/Libraries/smartui-tab.php",
+            "app/Libraries/smartui-accordion.php",
+            "app/Libraries/smartui-carousel.php",
+            "app/Libraries/smartui-smartform.php",
+            "app/Libraries/config.php",
+            "app/Libraries/func_global.php",
+            "app/Libraries/class-parsedown.php",
+            "app/Libraries/class.html-indent.php"
+
         ]
     },
     "autoload-dev": {

@@ -12,7 +12,21 @@
             $breadcrumb = $url != "" ? '<a href="'.$url.'">'.$display.'</a>' : $display;
             echo '<li>'.$breadcrumb.'</li>';
         }
-        echo '<li>'.$page_title.'</li>';
+
+        foreach($arrSidebar as $index => $list){
+            if(!array_key_exists("url",$list)){
+
+                foreach($list["sub"] as $submenu){
+                    if(Request::is( substr($submenu["url"],1,strlen($submenu["url"])))){
+                        echo '<li>'.$submenu["title"].'</li>';
+
+                        break;
+                    }
+                }
+
+            }
+        }
+
         ?>
     </ol>
     <!-- end breadcrumb -->

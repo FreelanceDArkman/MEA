@@ -7,11 +7,11 @@
 				<span> <!-- User image size is adjusted inside CSS, it should stay as is -->
 
 					<a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
-                        <img src="<?php echo ASSETS_URL; ?>/img/avatars/sunny.png" alt="me" class="online" />
+
 						<span>
-							john.doe
+						ยินดีต้อนรับ	{{get_username()}}
 						</span>
-                        <i class="fa fa-angle-down"></i>
+                        {{--<i class="fa fa-angle-down"></i>--}}
                     </a>
 
 				</span>
@@ -30,8 +30,19 @@
         traditional hre="" links. See documentation for details.
         -->
         <?php
+        use  App\Libraries\SmartUI;
+        use  App\Libraries;
+
+
+//        $arrSidebar["50"]["sub"]["2"]["active"] = true;
+
+
         $ui = new SmartUI();
-        $ui->create_nav($page_nav)->print_html();
+        $ui->create_nav($arrSidebar)->print_html();
+
+
+
+
         ?>
 
     </nav>
