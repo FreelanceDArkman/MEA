@@ -90,12 +90,34 @@ function getSideBar($menulsit){
                 "1" => array(
                     "menu_id" => 1,
                     "title" => getMenuName($data,50,1),
-                    "url" => "/admin/userGroup"
+                    "url" => "/admin/userGroup",
+                    "sub_mini" => array(
+                            "add" => array(
+                                  "title"=>"สร้างกลุ่มผู้ใช้",
+                                  "url" => "/admin/userGroup/add"
+
+                            ),
+                            "edit"=>array(
+                                "title"=> "แก้ไขกลุ่มผู้ใช้",
+                                "url" => "/admin/userGroup/edit"
+                            )
+                    )
                 ),
                 "2" => array(
                     "menu_id" => 2,
                     "title" => getMenuName($data,50,2),
-                    "url" => "/admin/users"
+                    "url" => "/admin/users",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"สร้างผู้ใช้",
+                            "url" => "/admin/users/add"
+
+                        ),
+                        "edit"=>array(
+                            "title"=> "แก้ไขผู้ใช้",
+                            "url" => "/admin/users/edit"
+                        )
+                    )
                 )
             )
         );
@@ -105,7 +127,7 @@ function getSideBar($menulsit){
 
     foreach($page_nav as $index => $list){
 
-//        var_dump(array_key_exists("url",$list));
+
 
         if(array_key_exists("url",$list)){
             if(Request::is( substr($list["url"],1,strlen($list["url"])))){
@@ -115,9 +137,20 @@ function getSideBar($menulsit){
         }else{
 
             foreach($list["sub"] as $submenu){
-                if(Request::is( substr($submenu["url"],1,strlen($submenu["url"])))){
+
+                $arrurlsub = explode('/',$submenu["url"]);
+                $path = $arrurlsub[1]. "/" . $arrurlsub[2];
+
+                if(Request::is($path) || array_key_exists("sub_mini",$submenu)){
+
                     $page_nav[$list["group_id"]]["sub"][$submenu["menu_id"]]["active"] = true;
+
+
                 }
+
+
+
+
             }
 
         }
@@ -127,6 +160,60 @@ function getSideBar($menulsit){
 
     return $page_nav;
 }
+
+
+ function getMenutitle($arrSidebar){
+ $ret = "";
+     foreach($arrSidebar as $index => $list){
+         if(!array_key_exists("url",$list)){
+
+             foreach($list["sub"] as $submenu){
+                 $arrurlsub = explode('/',$submenu["url"]);
+                 $path = $arrurlsub[1]. "/" . $arrurlsub[2];
+                 if(Request::is($path)){
+                     $ret = $submenu["title"];
+
+                     break;
+                 }
+
+                if(array_key_exists("sub_mini",$submenu)){
+
+
+                    foreach($submenu["sub_mini"] as $mini){
+                        $arrurlsub = explode('/',$mini["url"]);
+                        $path = $arrurlsub[1]. "/" . $arrurlsub[2] . "/" . $arrurlsub[3];
+
+                        $current = Route::getCurrentRoute()->getPath();
+                        $arrCount = explode('/',$current);
+
+                        if(count($arrCount) > 2 ){
+
+                            $Cpath = $arrCount[0] . "/" . $arrCount[1] . "/" . $arrCount[2];
+
+                            if( $Cpath == $path){
+                                $ret = $mini["title"];
+                                break;
+                            }
+
+                        }else{
+                            if(Request::is($path)){
+                                $ret = $mini["title"];
+                                break;
+                            }
+                        }
+
+
+
+                    }
+                }
+
+             }
+
+         }
+     }
+
+     return $ret;
+ }
 
 
 ?>

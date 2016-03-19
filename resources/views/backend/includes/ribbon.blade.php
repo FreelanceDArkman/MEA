@@ -17,10 +17,54 @@
             if(!array_key_exists("url",$list)){
 
                 foreach($list["sub"] as $submenu){
-                    if(Request::is( substr($submenu["url"],1,strlen($submenu["url"])))){
+                    $arrurlsub = explode('/',$submenu["url"]);
+                    $path = $arrurlsub[1]. "/" . $arrurlsub[2];
+                    if(Request::is($path)){
                         echo '<li>'.$submenu["title"].'</li>';
 
-                        break;
+
+                    }
+
+                    if(array_key_exists("sub_mini",$submenu)){
+
+
+
+                        foreach($submenu["sub_mini"] as $mini){
+                            $arrurlsub = explode('/',$mini["url"]);
+
+                            $path = $arrurlsub[1]. "/" . $arrurlsub[2] . "/" . $arrurlsub[3];
+
+
+
+//
+
+                           $current = Route::getCurrentRoute()->getPath();
+                            $arrCount = explode('/',$current);
+
+                            if(count($arrCount) > 2 ){
+
+                                $Cpath = $arrCount[0] . "/" . $arrCount[1] . "/" . $arrCount[2];
+//                                var_dump($Cpath);
+                                if( $Cpath == $path){
+                                    echo '<li><a href="'.$submenu['url'].'">'.$submenu["title"].'</a></li>';
+                                    echo '<li>'.$mini["title"].'</li>';
+                                    break;
+                                }
+
+                            }else{
+                                if(Request::is($path)){
+                                    echo '<li><a href="'.$submenu['url'].'">'.$submenu["title"].'</a></li>';
+                                    echo '<li>'.$mini["title"].'</li>';
+                                    break;
+                                }
+                            }
+                           //var_dump(Route::getCurrentRoute()->getPath());
+
+
+
+
+                        }
+
                     }
                 }
 

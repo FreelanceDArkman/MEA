@@ -1,7 +1,7 @@
 <!--================================================== -->
 
 <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
-<script data-pace-options='{ "restartOnRequestAfter": true }' src="{{asset('backend/js/plugin/pace/pace.min.js')}}"></script>
+<script data-pace-options='{ "restartOnRequestAfter": true  }' src="{{asset('backend/js/plugin/pace/pace.min.js')}}"></script>
 
 <!-- These scripts will be located in Header So we can add scripts inside body (used in class.datatables.php) -->
 <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local

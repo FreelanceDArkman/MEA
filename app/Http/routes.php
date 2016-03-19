@@ -403,6 +403,9 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::post('edit', 'UserGroupController@postEditUserGroup');
             Route::post('delete', 'UserGroupController@deleteUserGroup');
 
+            Route::post('ishave', 'UserGroupController@CheckUserGroup');
+
+
         });
 
         Route::group(['prefix' => 'users'], function() {

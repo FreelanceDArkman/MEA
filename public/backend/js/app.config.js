@@ -39,7 +39,7 @@
 /*
  * GLOBAL: Sound Config (define sound path, enable or disable all sounds)
  */
-	$.sound_path = "sound/";
+	$.sound_path = "/backend/sound/";
 	$.sound_on = true; 
 /*
  * SAVE INSTANCE REFERENCE (DO NOT CHANGE)
@@ -325,9 +325,29 @@
 	};
 /*
  * END APP.CONFIG
- */ 
- 
- 
+ */
+
+var getXsrfToken = function() {
+	var cookies = document.cookie.split(';');
+	var token = '';
+
+	for (var i = 0; i < cookies.length; i++) {
+		var cookie = cookies[i].split('=');
+		if(cookie[0].trim() == 'XSRF-TOKEN') {
+			token = decodeURIComponent(cookie[1]);
+		}
+	}
+
+	return token;
+}
+
+jQuery.ajaxSetup({
+	headers: {
+		'X-XSRF-TOKEN': getXsrfToken()
+	}
+});
+
+$(document).ajaxStart(function() { Pace.restart(); });
  
  
  	

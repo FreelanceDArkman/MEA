@@ -27,8 +27,8 @@
     font-family: 'DB Ozone X';
     src: url('fonts/DB Ozone X v3.2.ttf');
 }
-body,header,a{
-    font-size: 20px !important;
+body,header,a,select{
+    font-size: 18px !important;
 }
 
 em{
@@ -76,4 +76,13 @@ h1, h2, h3, h4, h5, h6{
 }
 #header{
     height: 70px !important;
+}
+i{
+    font-size: 14px !important;
+}
+table thead tr th{
+    font-size: 18px !important;
+}
+table tbody tr td{
+    font-size: 18px !important;
 }
