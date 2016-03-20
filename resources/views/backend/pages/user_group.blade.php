@@ -99,11 +99,11 @@ $arrSidebar =getSideBar($data);
 
                                 </tr>
                                 <tr>
-                                    <th>
+                                    <th id="index_th">
                                         <input type="checkbox" id="mainCheck" />
                                     </th>
                                     <th style="text-align: center">Action</th>
-                                    <th>รหัสกลุ่มผู้ใช้</th>
+                                    <th data-class="expand">รหัสกลุ่มผู้ใช้</th>
                                     <th data-hide="phone">ชื่อกลุ่มผู้ใช้</th>
 
                                 </tr>
@@ -421,7 +421,8 @@ $arrSidebar =getSideBar($data);
 
 
 
-
+        $("#index_th").removeClass("sorting_asc");
+        $("#index_th").addClass("sorting_disabled");
 
     })
 

@@ -1,0 +1,52 @@
+package csadapter.util;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Log {
+	private String _path = "";
+	
+	public Log( String path ) {
+		this._path = path;
+	}
+	
+	public synchronized void logFile( String text ) {
+		//mylog.setLogPath = ./bin/plugins/smsc/log/
+		
+		Date now        = new Date();
+		String strDate  = "";
+	    DateFormat df   = new SimpleDateFormat( "dd" );
+	    StringBuilder sb = new StringBuilder();
+	    	    
+		try {
+		    sb.append( _path );
+		    sb.append( df.format( now ) + ".log"  );
+		    if( !isCurrentFile( sb.toString() ) ) {
+		    	TextFile.writeFile( sb.toString(), MyDate.getTimeStamp( "yyyy-MM-dd" ), false );
+		    	TextFile.writeFile( sb.toString(), text, true );
+		    	return;
+		    }
+		    TextFile.writeFile( sb.toString(), text, true );
+		}catch( Exception ex ) {
+			ex.printStackTrace();
+		}finally {
+			now = null;
+			df  = null;
+			sb  = null;
+		}
+	}
+	
+	private static boolean isCurrentFile( String fileName ) {
+		boolean bOk    = false;
+		try {
+			String strDate = MyDate.getTimeStamp( "yyyy-MM-dd" );
+			String strTemp = TextFile.readFirstLine( fileName ).trim();
+			if( strDate.equalsIgnoreCase( strTemp ) ) {
+				bOk = true;
+			}
+		}catch(Exception ex ) {}
+		return bOk;
+	}
+
+} //end class

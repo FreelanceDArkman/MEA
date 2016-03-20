@@ -1,0 +1,43 @@
+package csadapter.util;
+
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+
+public class TcpProbe {
+	
+	public static boolean probePort( String host, int port ) {
+		boolean bOk    = false;
+		Socket socket  = null;              
+		
+		try {
+			InetAddress addr           = InetAddress.getByName( host );
+			InetSocketAddress remoteEP = new InetSocketAddress( addr, port );
+			socket = new Socket();
+			socket.connect( remoteEP, 30000 ); // timeout 30 sec.
+			bOk = true;
+			socket.close();
+		}catch( IOException ex ) {
+			ex.printStackTrace();
+		}catch( Exception ex ) {
+			ex.printStackTrace();
+		}
+		return bOk;
+	}
+	
+	public static void main( String[] args) throws Exception{
+		String status = "";
+		String host   = "10.125.16.4";
+		int    port   = 1521;
+		if( TcpProbe.probePort( host, port ) ) {
+			status = "Ok";
+		}else {
+			status = "Fail!";
+		}
+		System.out.println( "ProbePort: " + host + ":" + port + ", Status=" + status );
+		
+	}
+	
+	
+}//end class

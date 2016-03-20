@@ -1,0 +1,35 @@
+package csadapter.util;
+
+import java.io.File;
+import java.net.URL;
+
+
+public class CurrentPath {
+    //String userDir = System.getProperty("user.dir");
+	
+	public static String getCurrentFolder() {
+		return new File( "" ).getAbsolutePath();
+	}
+	
+	/*URL url = BatchProcess.class.getResource("BatchProcess.class");  
+	 
+	 URL dirUrl = BatchProcess.class.getResource( "./" );
+	 System.out.println( "xpath:" + dirUrl.getPath() );
+	 
+	 if( url != null ) {
+		 System.out.println( "path: " + url.getPath() );
+	 }
+	 
+	 String userDir = System.getProperty("user.dir");
+	 File dir1 = new File (".");
+	 System.out.println( dir1.getCanonicalPath() ); //D:\Project\Java_Application\CSAdapter
+	 System.out.println( userDir ); //D:\Project\Java_Application\CSAdapter
+	 System.out.println(new File("").getAbsolutePath());  
+	 System.out.println( BatchProcess.class.getResource("BatchProcess.class"));  
+	
+	
+	 CurrentPath xx = new CurrentPath();
+	 System.out.println( "CurrentPath: " + xx.getClassPath( this );
+	*/
+	
+}//end class

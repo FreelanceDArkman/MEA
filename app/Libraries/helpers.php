@@ -284,7 +284,7 @@ if(!function_exists('get_date_notime')) {
             return "29 ก.พ. " . (date("Y",strtotime($create_date)) + 543);
 
         }else{
-            return $create_date->addDay(543)->format('j F Y');
+            return $create_date->add('543 years')->format('j F Y');
         }
 
     }
@@ -303,7 +303,7 @@ if(!function_exists('get_date_nodate')) {
             return "ก.พ. " . (date("Y",strtotime($create_date)) + 543);
 
         }else{
-            return $create_date->addDay(543)->format('F Y');
+            return $create_date->add('543 years')->format('F Y');
         }
     }
 }

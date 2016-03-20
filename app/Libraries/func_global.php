@@ -141,14 +141,43 @@ function getSideBar($menulsit){
                 $arrurlsub = explode('/',$submenu["url"]);
                 $path = $arrurlsub[1]. "/" . $arrurlsub[2];
 
-                if(Request::is($path) || array_key_exists("sub_mini",$submenu)){
+                if(Request::is($path)){
 
                     $page_nav[$list["group_id"]]["sub"][$submenu["menu_id"]]["active"] = true;
 
 
                 }
 
+                if(array_key_exists("sub_mini",$submenu)){
 
+
+                    foreach($submenu["sub_mini"] as $mini){
+                        $arrurlsub = explode('/',$mini["url"]);
+                        $path = $arrurlsub[1]. "/" . $arrurlsub[2] . "/" . $arrurlsub[3];
+
+                        $current = Route::getCurrentRoute()->getPath();
+                        $arrCount = explode('/',$current);
+
+                        if(count($arrCount) > 2 ){
+
+                            $Cpath = $arrCount[0] . "/" . $arrCount[1] . "/" . $arrCount[2];
+
+                            if( $Cpath == $path){
+                                $page_nav[$list["group_id"]]["sub"][$submenu["menu_id"]]["active"] = true;
+                                break;
+                            }
+
+                        }else{
+                            if(Request::is($path)){
+                                $page_nav[$list["group_id"]]["sub"][$submenu["menu_id"]]["active"] = true;
+                                break;
+                            }
+                        }
+
+
+
+                    }
+                }
 
 
             }

@@ -1,0 +1,17 @@
+package csadapter.util;
+
+import org.apache.axis.encoding.Base64;
+
+public class MyBase64{
+	private static Base64 bas64 = new Base64();
+	
+	public static String convert2Base64( String str ){
+		return bas64.encode( str.getBytes() );
+	}
+	
+    public static String convertBase642String( String str ){
+		return new String( bas64.decode( str ) );
+	}
+	
+
+}

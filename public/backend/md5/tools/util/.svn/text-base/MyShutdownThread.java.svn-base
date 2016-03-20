@@ -1,0 +1,44 @@
+package csadapter.util;
+
+import csadapter.http.CSAdapterTCPServer;
+import csadapter.udp.CSAdapterUDPServer;
+
+public class MyShutdownThread extends Thread {
+
+	private CSAdapterTCPServer _tcpServer = null;
+	private CSAdapterUDPServer _udpServer = null;
+	
+	
+    //-------------------------
+	// Trap Ctrl + C
+	//-------------------------
+	/*
+	 
+	 Runtime.getRuntime().addShutdownHook( new Thread() {
+        public void run() {
+        	_logger.info( " ***** Called at shutdown. *****");
+            _tcpServer.stop();
+            _udpServer.release();
+    		_udpServer.stopAdapterPlugin();
+        }
+    });
+    
+    */
+	
+	public MyShutdownThread( CSAdapterTCPServer tcp, 
+			                 CSAdapterUDPServer udp ){
+		this._tcpServer = tcp;
+		this._udpServer = udp;
+		
+	}
+	
+	public void run() {
+    	System.out.println( " ***** Called at shutdown. *****");
+        _tcpServer.stop();
+        _udpServer.release();
+		_udpServer.stopAdapterPlugin();
+    }
+	
+	
+	
+}//end class
