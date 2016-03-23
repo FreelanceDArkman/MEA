@@ -88,22 +88,29 @@
                         @if($show2 == 1)
                         <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
                         <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,2) }}</a></li>
+                            @if(get_is_before_status_2538() == 0)
                         <li class=""><a href="#messages-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,3) }}</a></li>
+                            @endif
                             @elseif($show2 == 2)
                             <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
                             <li class="active"><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,2) }}</a></li>
+                            @if(get_is_before_status_2538() == 0)
                             <li class=""><a href="#messages-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,3) }}</a></li>
-                        @elseif($show2 == 2)
+                            @endif
+                        @elseif($show2 == 3)
+
                             <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
                             <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,2) }}</a></li>
+                            @if(get_is_before_status_2538() == 0)
                             <li class="active"><a href="#messages-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,3) }}</a></li>
                             @endif
+                        @endif
 
                     </ul>
                     <div class="tab-content">
 
                         @if($show2 == 1)
-                        <div class="tab-pane fade active in" id="home-1" style="position: relative" >
+                            <div class="tab-pane fade active in" id="home-1" style="position: relative" >
                             @else
                                 <div class="tab-pane fade" id="home-1" style="position: relative" >
                             @endif
@@ -261,10 +268,12 @@
 
                         </div>
 
+
+                           @if(get_is_before_status_2538() == 0)
                                 @if($show2 == 3)
-                        <div class="tab-pane fade active in" id="messages-1">
-                            @else
-                                <div class="tab-pane fade" id="messages-1">
+                            <div class="tab-pane fade active in" id="messages-1">
+                                     @els
+                            <div class="tab-pane fade" id="messages-1">
                                     @endif
 
                             <form class="form-inline mea_searchbox" role="form" method="post" action="{{action('TrendsController@getIndexbysearchgpLastest')}}">
@@ -413,9 +422,12 @@
                                 @endif
                             </div>
 
-                        </div>
+                             </div>
+                                @endif
 
                     </div>
+
+
                 </div>
 
 

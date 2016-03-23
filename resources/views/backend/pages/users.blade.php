@@ -13,6 +13,15 @@ $arrSidebar =getSideBar($data);
             left: 200px;
             top:5px
         }
+
+        #datatable_fixed_column tbody tr td a i{
+            font-size: 11px !important;
+            line-height: 12px!important;
+        }
+        #datatable_fixed_column tbody tr td a{
+            line-height: 12px!important;
+
+        }
     </style>
         <!-- MAIN CONTENT -->
 <div id="content">
@@ -109,7 +118,7 @@ $arrSidebar =getSideBar($data);
 
                                     </th>
 
-                                    <th style="width:7%;text-align: center">
+                                    <th style="width:11%;text-align: center">
 
                                     </th>
                                     <th class="hasinput" style="width:7%">
@@ -132,7 +141,7 @@ $arrSidebar =getSideBar($data);
                                     <th class="hasinput" style="width:8%">
                                         <input type="text" class="form-control" placeholder="Filter อีเมล์" />
                                     </th>
-                                    <th class="hasinput" style="width:10%">
+                                    <th class="hasinput" style="width:6%">
                                         <input type="text" class="form-control" placeholder="Filter โทรศัพท์" />
                                     </th>
                                     <th class="hasinput" style="width:10%">
@@ -171,11 +180,11 @@ $arrSidebar =getSideBar($data);
                                             <td style="text-align: center">
                                                 <a href="/admin/userGroup/edit/{{$userGroup->EMP_ID}}" class="btn btn-primary btn-xs"><i class="fa fa-gear"></i></a>
                                                 <a href="javascript:void(0);"  data-id="{{$userGroup->EMP_ID}}" class="mea_delete_by btn bg-color-red txt-color-white btn-xs"> <i class="glyphicon glyphicon-trash"></i></a>
-
+                                                <a href="javascript:void(0);"  data-id="{{$userGroup->EMP_ID}}" class="mea_delete_by btn txt-color-white bg-color-blueDark btn-xs"><i class="glyphicon glyphicon-repeat"></i></a></td>
                                             </td>
                                             <td>{{$userGroup->EMP_ID}}</td>
                                             <td>{{$userGroup->FULL_NAME}}</td>
-                                            <td>{{$userGroup->USERNAME}}</td>
+                                            <td>{{$userGroup->USERNAME}}
                                             <td>{{$userGroup->STATUS_DESC}}</td>
                                             <td>{{$userGroup->USER_PRIVILEGE_DESC}}</td>
                                             <td>{{$userGroup->EMAIL}}</td>

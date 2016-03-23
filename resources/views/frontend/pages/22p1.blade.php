@@ -123,23 +123,27 @@
                                         <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                             <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->FUND_PLAN_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
                                         </div>
+
+                                        @if($Isaccess && get_user_access_status_flag() != 2)
+
                                         <h2>แผนการลงทุนปัจจุบันที่ท่านเลือก</h2>
 
-                                        @if($CurrnentPlan)
-                                        <p class="plan_name">{{$CurrnentPlan[0]->PLAN_NAME}}</p>
-                                            @else
-                                            <p class="plan_name">{{$effective[0]->PLAN_NAME}}</p>
+                                            @if($CurrnentPlan)
+                                            <p class="plan_name">{{$CurrnentPlan[0]->PLAN_NAME}}</p>
+                                                @else
+                                                <p class="plan_name">{{$effective[0]->PLAN_NAME}}</p>
+                                            @endif
+
+
+                                            @if($CurrnentPlan)
+                                            <div>วันที่ทำรายการล่าสุด {{get_date_notime($CurrnentPlan[0]->MODIFY_DATE)}}</div>
+                                                @else
+                                                <div>วันที่ทำรายการล่าสุด {{get_date_notime($effective[0]->MODIFY_DATE)}}</div>
+                                            @endif
                                         @endif
-
-
-                                        @if($CurrnentPlan)
-                                        <div>วันที่ทำรายการล่าสุด {{get_date_notime($CurrnentPlan[0]->MODIFY_DATE)}}</div>
-                                            @else
-                                            <div>วันที่ทำรายการล่าสุด {{get_date_notime($effective[0]->MODIFY_DATE)}}</div>
-                                        @endif
-
                                     </div>
                                 </div>
+                                @if($Isaccess && get_user_access_status_flag() != 2)
                                 <div class="row">
                                     <div class="inner-pchart col-md-6 col-xs-6" style="text-align: right">
                                         <div class="circle" id="circles-1"></div>
@@ -159,6 +163,8 @@
                                     </div>
 
                                 </div>
+                                @endif
+
                             </div>
 
                             <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}" >

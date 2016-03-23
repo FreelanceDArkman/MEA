@@ -1,5 +1,6 @@
-@extends('frontend.layouts.content')
+@extends('frontend.layouts.content_chart')
 @section('content')
+
     <?php
     $data = getmemulist();
     ?>
@@ -201,3 +202,4 @@
 
 
 
+@stop

@@ -1,211 +1,320 @@
 @extends('backend.layouts.default')
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <!-- BEGIN VALIDATION STATES-->
-            <div class="portlet light portlet-fit portlet-form bordered">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="icon-user-follow font-red"></i>
-                        <span class="caption-subject font-red sbold uppercase">เพิ่มผู้ใช้</span>
-                    </div>
-                    <div class="actions">
-                        <div class="btn-group btn-group-devided" data-toggle="buttons">
-                            <label class="btn btn-transparent red btn-outline btn-circle btn-sm active">
-                                <input type="radio" name="options" class="toggle" id="option1">Actions</label>
-                            <label class="btn btn-transparent red btn-outline btn-circle btn-sm">
-                                <input type="radio" name="options" class="toggle" id="option2">Settings</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="portlet-body">
-                    <!-- BEGIN FORM-->
-                    <form action="#" id="add_user_form" class="form-horizontal">
-                        <div class="form-body">
-                            <div class="alert alert-danger display-hide">
-                                <button class="close" data-close="alert"></button> You have some form errors. Please check below. </div>
-                            <div class="alert alert-success display-hide">
-                                <button class="close" data-close="alert"></button> Your form validation is successful! </div>
+    <?php
+    $data = getmemulist();
+    $arrSidebar =getSideBar($data);
+    ?>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3">รหัสพนักงาน
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <input type="text" name="user_id" id="user_id" data-required="1" class="form-control" /> </div>
-                            </div>
+    <div id="content">
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3">ชื่อผู้ใช้
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <input type="text" name="user_name" id="user_name" data-required="1" class="form-control" /> </div>
-                            </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+                <h1 class="page-title txt-color-blueDark">
+                    <i class="fa fa-table fa-fw "></i>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3">รหัสผ่าน
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <input type="password" name="password" id="password" data-required="1" class="form-control" /> </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">ยืนยันรหัสผ่าน
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <input type="password" name="password_confirm" id="password_confirm" data-required="1" class="form-control" /> </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">ล็อกอินเข้าระบบครั้งแรก
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <div class="radio-list" data-error-container="#form_2_membership_error">
-                                        <label>
-                                            <input type="radio" checked name="first_login" value="1" /> ใช่ </label>
-                                        <label>
-                                            <input type="radio" name="first_login" value="2" /> ไม่ใช่ </label>
-                                    </div>
-                                    <div id="form_2_membership_error"> </div>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">โทรศัพท์
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <input name="phone" id="phone" type="text" class="form-control" /> </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">อีเมล์
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <input name="email" id="email" type="text" class="form-control" /> </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">ที่อยู่
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <textarea class="form-control" id="address" name="address"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">รหัสผ่านหมดอายุ
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <div class="radio-list" data-error-container="#form_2_membership_error">
-                                        <label>
-                                            <input type="radio" checked name="password_expire" value="1" /> ใช่ </label>
-                                        <label>
-                                            <input type="radio" name="password_expire" value="2" /> ไม่ใช่ </label>
-                                    </div>
-                                    <div id="form_2_membership_error"> </div>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">ระบุวันที่หมดอายุของรหัสผ่าน</label>
-                                <div class="col-md-4">
-                                    <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd" data-date-start-date="+0d">
-                                        <input type="text" class="form-control" name="password_expire_date" id="password_expire_date" readonly>
-                                                        <span class="input-group-btn">
-                                                            <button class="btn default" type="button">
-                                                                <i class="fa fa-calendar"></i>
-                                                            </button>
-                                                        </span>
-                                    </div>
-                                    <!-- /input-group -->
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">กลุ่มผู้ใช้
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <select class="form-control" name="select">
-                                        <option value="">Select...</option>
-                                        @if($user_group)
-                                            @foreach($user_group as $group)
-                                                <option value="{{ $group->USER_PRIVILEGE_ID }}">{{ $group->USER_PRIVILEGE_DESC }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">สถานะ
-                                    <span class="required"> * </span>
-                                </label>
-                                <div class="col-md-4">
-                                    <select class="form-control" name="select">
-                                        <option value="">Select...</option>
-                                        @if($user_status)
-                                            @foreach($user_status as $status)
-                                                <option value="{{ $status->USER_STATUS_ID }}">{{ $status->STATUS_DESC }}</option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">วันที่ลาออกจากกองทุน</label>
-                                <div class="col-md-4">
-                                    <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd">
-                                        <input type="text" class="form-control" name="LEAVE_FUND_GROUP_DATE" id="LEAVE_FUND_GROUP_DATE" readonly>
-                                                        <span class="input-group-btn">
-                                                            <button class="btn default" type="button">
-                                                                <i class="fa fa-calendar"></i>
-                                                            </button>
-                                                        </span>
-                                    </div>
-                                    <!-- /input-group -->
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3">วันที่กลับเข้ากองทุน</label>
-                                <div class="col-md-4">
-                                    <div class="input-group input-medium date date-picker" data-date-format="yyyy-mm-dd">
-                                        <input type="text" class="form-control" name="RETURN_FUND_GROUP_DATE" id="RETURN_FUND_GROUP_DATE" readonly>
-                                                        <span class="input-group-btn">
-                                                            <button class="btn default" type="button">
-                                                                <i class="fa fa-calendar"></i>
-                                                            </button>
-                                                        </span>
-                                    </div>
-                                    <!-- /input-group -->
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="form-actions">
-                            <div class="row">
-                                <div class="col-md-offset-3 col-md-9">
-                                    <button type="submit" class="btn green">Submit</button>
-                                    <button type="button" class="btn grey-salsa btn-outline">Cancel</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <!-- END FORM-->
-                </div>
+                    {{getMenutitle($arrSidebar)}}
+                </h1>
             </div>
-            <!-- END VALIDATION STATES-->
+
         </div>
+
+
+        <!-- NEW COL START -->
+        <article class="col-sm-12 col-md-12 col-lg-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-4" data-widget-editbutton="false" data-widget-custombutton="false">
+                <!-- widget options:
+                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                    data-widget-colorbutton="false"
+                    data-widget-editbutton="false"
+                    data-widget-togglebutton="false"
+                    data-widget-deletebutton="false"
+                    data-widget-fullscreenbutton="false"
+                    data-widget-custombutton="false"
+                    data-widget-collapsed="true"
+                    data-widget-sortable="false"
+
+                -->
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+
+
+                </header>
+
+                <!-- widget div-->
+                <div>
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <form id="smart-form-register" action="{{action('UserController@postAddUser') }}" method="post"  class="smart-form">
+                            {!! csrf_field() !!}
+
+
+                            <fieldset>
+                                <section>
+                                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                                        <input type="text" name="user_id" placeholder="รหัสพนักงาน">
+                                        <b class="tooltip tooltip-bottom-right">Needed to enter the website</b> </label>
+                                </section>
+
+                                <section>
+                                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                                        <input type="text" name="user_name" placeholder="ชื่อผู้ใช้">
+                                        <b class="tooltip tooltip-bottom-right">Needed to enter the website</b> </label>
+                                </section>
+
+
+
+                                <section>
+                                    <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                        <input type="password" name="password" placeholder="Password" id="password">
+                                        <b class="tooltip tooltip-bottom-right">Don't forget your password</b> </label>
+                                </section>
+
+                                <section>
+                                    <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                        <input type="password" name="passwordConfirm" placeholder="Confirm password">
+                                        <b class="tooltip tooltip-bottom-right">Don't forget your password</b> </label>
+                                </section>
+
+                                <header>
+                                    ล็อกอินเข้าระบบครั้งแรก
+                                </header>
+
+                                <section style="margin-top: 15px;margin-left: 20px;">
+                                    <div class="inline-group">
+                                        <label class="radio">
+                                            <input type="radio" name="first_login" checked="" value="1">
+                                            <i></i>ใช่</label>
+                                        <label class="radio">
+                                            <input type="radio" name="first_login" value="0">
+                                            <i></i>ไม่ใช่</label>
+
+                                    </div>
+                                </section>
+                            </fieldset>
+
+
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="input"> <i class="icon-append fa fa-envelope-o"></i>
+                                            <input type="email" name="email" placeholder="อีเมล์">
+                                            <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="input"><i class="icon-append fa fa-phone"></i>
+                                            <input type="text" name="phone" placeholder="โทรศัพท์">
+                                            <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+
+                                    <section class="col col-6">
+                                        <label class="input"><i class="icon-append fa fa-phone"></i>
+                                            <input type="text" name="address" placeholder="ที่อยู่">
+                                            <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
+                                    </section>
+
+                                    <section class="col col-6">
+                                        <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                               <input type="text" id="expire" name="expire"  class="mea_date_picker" placeholder="ระบุวันที่หมดอายุของรหัสผ่าน"   >
+                                        </label>
+                                    </section>
+                                </div>
+
+
+
+                            </fieldset>
+
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        <label class="select">
+                                            <select name="grop_id">
+                                                @if($user_group)
+                                                    <option value="">กลุ่มผู้ใช้</option>
+                                                    @foreach($user_group as $group)
+                                                        <option value="{{ $group->USER_PRIVILEGE_ID }}">{{ $group->USER_PRIVILEGE_DESC }}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select> <i></i> </label>
+                                    </section>
+                                    <section class="col col-6">
+                                        <label class="select">
+                                            <select name="status">
+                                                <option value="">สถานะ</option>
+                                                @if($user_status)
+                                                    @foreach($user_status as $status)
+                                                        <option value="{{ $status->USER_STATUS_ID }}">{{ $status->STATUS_DESC }}</option>
+                                                    @endforeach
+                                                @endif
+                                            </select> <i></i> </label>
+                                    </section>
+                                </div>
+
+                                <div class="row">
+
+                                    <section class="col col-6">
+                                        <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                            <input type="text" name="retire"  class="mea_date_picker" id="retire" placeholder="วันที่ลาออกจากกองทุน"  >
+                                        </label>
+                                    </section>
+
+                                    <section class="col col-6">
+                                        <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                            <input type="text" name="comeback"  class="mea_date_picker" id="comeback" placeholder="วันที่กลับเข้ากองทุน" >
+
+                                            {{--class="datepicker" data-dateformat='dd/mm/yy'--}}
+                                        </label>
+                                    </section>
+                                </div>
+
+
+                            </fieldset>
+                            <footer>
+                                <button type="submit" class="btn btn-primary">ส่งข้อมูล
+                                </button>
+                                <button type="button" class="btn btn-default" onclick="window.history.back();">
+                                    ยกเลิก
+                                </button>
+                            </footer>
+                        </form>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+
+
+
+
+
+
+        </article>
+        <!-- END COL -->
+
     </div>
+
+
+
+
+
+
+    <!-- PAGE RELATED PLUGIN(S) -->
+    <script src="{{asset('backend/js/plugin/jquery-form/jquery-form.min.js')}}"></script>
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+
+
+            var $registerForm = $("#smart-form-register").validate({
+
+                // Rules for form validation
+                rules : {
+                    username : {
+                        required : true
+                    },
+                    email : {
+                        required : true,
+                        email : true
+                    },
+                    password : {
+                        required : true,
+                        minlength : 3,
+                        maxlength : 20
+                    },
+                    passwordConfirm : {
+                        required : true,
+                        minlength : 3,
+                        maxlength : 20,
+                        equalTo : '#password'
+                    },
+                    firstname : {
+                        required : true
+                    },
+                    lastname : {
+                        required : true
+                    },
+                    gender : {
+                        required : true
+                    },
+                    terms : {
+                        required : true
+                    }
+                },
+
+                // Messages for form validation
+                messages : {
+                    login : {
+                        required : 'Please enter your login'
+                    },
+                    email : {
+                        required : 'Please enter your email address',
+                        email : 'Please enter a VALID email address'
+                    },
+                    password : {
+                        required : 'Please enter your password'
+                    },
+                    passwordConfirm : {
+                        required : 'Please enter your password one more time',
+                        equalTo : 'Please enter the same password as above'
+                    },
+                    firstname : {
+                        required : 'Please select your first name'
+                    },
+                    lastname : {
+                        required : 'Please select your last name'
+                    },
+                    gender : {
+                        required : 'Please select your gender'
+                    },
+                    terms : {
+                        required : 'You must agree with Terms and Conditions'
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement : function(error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+
+
+
+
+
+
+            meaDatepicker("mea_date_picker");
+//
+//
+//            meaDatepicker("retire");
+//
+//            meaDatepicker("comeback");
+
+
+
+
+        })
+
+    </script>
+
 @stop

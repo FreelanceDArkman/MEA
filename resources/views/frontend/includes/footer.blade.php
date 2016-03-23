@@ -37,7 +37,7 @@ $data = getmemulist();
                 <div class="col-sm-3">
                     <div class="thumb-headline"><h2>{{ getGoupName($data,3) }}</h2></div>
                     <ul class="list-unstyled simple-list margin-bottom-20">
-                        <li><a href="/คณะกรรมการกองทุน">{{ getMenuName($data,3,1) }}</a></li>
+                        <li><a href="/fundboard">{{ getMenuName($data,3,1) }}</a></li>
                         <li><a href="/structuralfunds">{{ getMenuName($data,3,2) }}</a></li>
                         <li><a href="/yearbook">{{ getMenuName($data,3,3) }}</a></li>
 

@@ -168,5 +168,9 @@ class UserController extends Controller
         ]);
     }
 
+    public  function  postAddUser(Request $request){
+
+    }
+
 
 }

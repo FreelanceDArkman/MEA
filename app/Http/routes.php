@@ -275,6 +275,8 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
+
+
     Route::get('/contact','ContactController@getIndex');
     Route::post('/contact','ContactController@SendMail');
 
@@ -412,6 +414,8 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::get('/', 'UserController@users');
             Route::post('getUsers', 'UserController@getUsers');
             Route::get('add','UserController@getAddUser');
+            Route::post('add','UserController@postAddUser');
+
         });
 
     });

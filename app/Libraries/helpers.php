@@ -226,6 +226,29 @@ if(!function_exists('get_username')) {
     }
 }
 
+if(!function_exists('get_user_access_status_flag')) {
+    function get_user_access_status_flag()
+    {
+        if(session()->has('user_data')){
+
+            return session()->get('user_data')->access_status_flag;
+        }
+        return '';
+    }
+}
+
+if(!function_exists('get_is_before_status_2538')) {
+    function get_is_before_status_2538()
+    {
+        if(session()->has('user_data')){
+//            var_dump(session()->get('user_data'));
+
+            return session()->get('user_data')->is_before_2538;
+        }
+        return '';
+    }
+}
+
 
 if(!function_exists('meaFormatDate')){
     function meaFormatDate($input){

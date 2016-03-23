@@ -170,8 +170,34 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
         $planchoose = DB::select(DB::raw($sql222))[0];
 
+
+        $Isaccess = true;
+        $arrpages = explode("-", $dataCheck->FUND_PLAN_CHANGE_PERIOD);
+        $Modify_count = 0;
+
+
+        $today = new Date();
+        $datetoday =  date("d",strtotime($today));
+
+        if($datetoday < $arrpages[0] || $datetoday>$arrpages[1]){
+            $Isaccess = false;
+        }
 //var_dump($dropplan);
-        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset, 'historyPlan'=>$historyPlan, 'dataCheck'=>$dataCheck, 'effective'=>$effective, 'users'=>$users,'ishowhis'=> $ishowhis,'ret'=>$ret ,'infoaset'=>$infoaset,'empinfo'=>$empinfo,'planchoose'=>$planchoose] );
+        return view('frontend.pages.22p1')->with([
+            'dropplan' => $dropplan,
+            'CurrnentPlan'=>$CurrnentPlan ,
+            'Currnentasset'=>$Currnentasset,
+            'historyPlan'=>$historyPlan,
+            'dataCheck'=>$dataCheck,
+            'effective'=>$effective,
+            'users'=>$users,
+            'ishowhis'=> $ishowhis,
+            'ret'=>$ret ,
+            'infoaset'=>$infoaset,
+            'empinfo'=>$empinfo,
+            'planchoose'=>$planchoose,
+            'Isaccess' =>$Isaccess
+        ] );
     }
 
 
@@ -272,8 +298,35 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
         $planchoose = DB::select(DB::raw($sql222))[0];
 
-//var_dump($dropplan);
-        return view('frontend.pages.22p1')->with(['dropplan' => $dropplan, 'CurrnentPlan'=>$CurrnentPlan , 'Currnentasset'=>$Currnentasset, 'historyPlan'=>$historyPlan, 'dataCheck'=>$dataCheck, 'effective'=>$effective, 'users'=>$users, 'ishowhis'=> false, 'ret'=>$ret, 'infoaset'=>$infoaset,'empinfo'=>$empinfo, 'planchoose'=>$planchoose]);
+
+        $Isaccess = true;
+        $arrpages = explode("-", $dataCheck->FUND_PLAN_CHANGE_PERIOD);
+        $Modify_count = 0;
+
+
+        $today = new Date();
+        $datetoday =  date("d",strtotime($today));
+
+        if($datetoday < $arrpages[0] || $datetoday>$arrpages[1]){
+            $Isaccess = false;
+        }
+
+
+        return view('frontend.pages.22p1')->with([
+            'dropplan' => $dropplan,
+            'CurrnentPlan'=>$CurrnentPlan ,
+            'Currnentasset'=>$Currnentasset,
+            'historyPlan'=>$historyPlan,
+            'dataCheck'=>$dataCheck,
+            'effective'=>$effective,
+            'users'=>$users,
+            'ishowhis'=> false,
+            'ret'=>$ret,
+            'infoaset'=>$infoaset,
+            'empinfo'=>$empinfo,
+            'planchoose'=>$planchoose,
+            'Isaccess'=>$Isaccess
+        ]);
     }
 
     public function deleplan(Request $request)

@@ -113,23 +113,26 @@
                                             <strong> * การเปลี่ยนแปลงและแก้ไขอัตราสะสม ทำได้ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือนและมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป </strong>
                                         </div>
 
-                                        @if($CurrnentPlan)
-                                            <div style="width: 100% ;padding:0 70px 0 70px; "><h3 class="heading-xs" style="font-size: 20px"><span class="pull-left">0%</span>อัตราสะสมปัจจุบันที่ท่านเลือก <span class="pull-right">{{$Workcheck->SAVING_MAX_RATE}}%</span></h3>
-                                                <div class="progress progress-u">
-                                                    <div class="progress-bar progress-bar-purple" role="progressbar" aria-valuenow="{{$CurrnentPlan[0]->USER_SAVING_RATE}}" aria-valuemin="0" aria-valuemax="{{$Workcheck->SAVING_MAX_RATE}}" style="width:{!! ($CurrnentPlan[0]->USER_SAVING_RATE * 100)/$Workcheck->SAVING_MAX_RATE  !!}%">
-                                                        <span style="font-size: 18px">{{$CurrnentPlan[0]->USER_SAVING_RATE}}%</span>
-                                                    </div>
-                                                </div></div>
+                                        @if($Isaccess && get_user_access_status_flag() != 2)
+                                            @if($CurrnentPlan)
+                                                <div style="width: 100% ;padding:0 70px 0 70px; "><h3 class="heading-xs" style="font-size: 20px"><span class="pull-left">0%</span>อัตราสะสมปัจจุบันที่ท่านเลือก <span class="pull-right">{{$Workcheck->SAVING_MAX_RATE}}%</span></h3>
+                                                    <div class="progress progress-u">
+                                                        <div class="progress-bar progress-bar-purple" role="progressbar" aria-valuenow="{{$CurrnentPlan[0]->USER_SAVING_RATE}}" aria-valuemin="0" aria-valuemax="{{$Workcheck->SAVING_MAX_RATE}}" style="width:{!! ($CurrnentPlan[0]->USER_SAVING_RATE * 100)/$Workcheck->SAVING_MAX_RATE  !!}%">
+                                                            <span style="font-size: 18px">{{$CurrnentPlan[0]->USER_SAVING_RATE}}%</span>
+                                                        </div>
+                                                    </div></div>
 
-                                            <div>วันที่ทำรายการล่าสุด {{get_date_notime($CurrnentPlan[0]->CHANGE_SAVING_RATE_DATE)}}</div>
+                                                <div>วันที่ทำรายการล่าสุด {{get_date_notime($CurrnentPlan[0]->CHANGE_SAVING_RATE_DATE)}}</div>
 
-                                        {{--<p> {{$CurrnentPlan[0]->USER_SAVING_RATE}} %</p>--}}
-                                        @else
-                                            <p> %</p>
-                                        @endif
+                                            {{--<p> {{$CurrnentPlan[0]->USER_SAVING_RATE}} %</p>--}}
+                                            @else
+                                                <p> %</p>
+                                            @endif
+
+                                         @endif
                                     </div>
                                 </div>
-
+                                @if($Isaccess && get_user_access_status_flag() != 2)
                                 <div class="row">
                                     <div class="col-md-12" style="padding: 0 100px 0 100px;">
 
@@ -138,6 +141,7 @@
                                     </div>
 
                                 </div>
+                                @endif
                             </div>
 
                             <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}"  >

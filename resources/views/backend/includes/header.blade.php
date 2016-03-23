@@ -23,6 +23,10 @@
     <!-- SmartAdmin RTL Support is under construction-->
     <link rel="stylesheet" type="text/css" media="screen" href="{{asset('backend/css/smartadmin-rtl.min.css')}}">
 
+
+
+
+    {{--<link rel="stylesheet" type="text/css" media="screen" href="{{asset('backend/css/datepicker.css')}}">--}}
     <!-- We recommend you use "your_style.css" to override SmartAdmin
 		     specific styles this will also ensure you retrain your customization with each SmartAdmin update.
 		<link rel="stylesheet" type="text/css" media="screen" href="{{asset('backend/css/your_style.css')}}"> -->
@@ -50,7 +54,7 @@
     <link rel="icon" href="{{asset('backend/img/favicon/favicon.ico')}}" type="image/x-icon">
 
     <!-- GOOGLE FONT -->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+    {{--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">--}}
 
     <!-- Specifying a Webpage Icon for Web Clip
          Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
@@ -69,20 +73,21 @@
     <link rel="apple-touch-startup-image" href="{{asset('backend/img/splash/iphone.png')}}" media="screen and (max-device-width: 320px)">
 
     <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script>
-        if (!window.jQuery) {
-            document.write('<script src="{{asset('backend/js/libs/jquery-2.1.1.min.js')}}"><\/script>');
-        }
-    </script>
+    {{--<script src="{{asset('backend/js/jquery2.1.1.min.js')}}"></script>--}}
+    {{--<script>--}}
+        {{--if (!window.jQuery) {--}}
+            {{--document.write('<script src="{{asset('backend/js/libs/jquery-2.1.1.min.js')}}"><\/script>');--}}
+        {{--}--}}
+    {{--</script>--}}
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-    <script>
-        if (!window.jQuery.ui) {
-            document.write('<script src="{{asset('backend/js/libs/jquery-ui-1.10.3.min.js')}}"><\/script>');
-        }
-    </script>
-
+    {{--<script src="{{asset('backend/js/jquery-ui1.10.3.min.js')}}"></script>--}}
+    {{--<script>--}}
+        {{--if (!window.jQuery.ui) {--}}
+            {{--document.write('<script src="{{asset('backend/js/libs/jquery-ui-1.10.3.min.js')}}"><\/script>');--}}
+        {{--}--}}
+    {{--</script>--}}
+    <script src="{{asset('backend/js/libs/jquery-2.1.1.min.js')}}"></script>
+    <script src="{{asset('backend/js/libs/jquery-ui-1.10.3.min.js')}}"></script>
 
 </head>
 <body <?php echo implode(' ', array_map(function($prop, $value) {

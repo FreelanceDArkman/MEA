@@ -69,6 +69,22 @@ class SearchController extends Controller
 
        // $keyword = $request->input('sKeys');
 
+        $keyret = $keyword;
+            $count = 1;
+        $Iskeyword = DB::table('TBL_SEARCH_TERM')->where('KEYWORD',$keyword)->get();
+        $today = new Date();
+
+
+        if( count($Iskeyword) > 0){
+            $keyret = $Iskeyword[0]->KEYWORD;
+            $count = $Iskeyword[0]->HITS_COUNT +1;
+            $sql = "UPDATE TBL_SEARCH_TERM SET HITS_COUNT='".$count."' , SEARCH_DATE = '".$today."' WHERE KEYWORD='".$keyret."' ";
+            DB::update(DB::raw($sql));
+        }else{
+            $sql = "INSERT INTO TBL_SEARCH_TERM (KEYWORD, SEARCH_DATE, HITS_COUNT) VALUES ('".$keyret."', '".$today."','".$count."' )";
+            DB::insert(DB::raw($sql));
+        }
+
 
 
         $arrKey = explode('+',$keyword);

@@ -23,7 +23,13 @@ $data = getmemulist();
                 <li class="topbar-devider"></li>
 
              @if(logged_in())
-                    <li><a href="/logout"> <i class="fa fa-user"></i> สวัสดี  {{get_username()}}</a></li>
+                    <li> <span style="font-size: 16px;color:#FE5000;"><i class="fa fa-user"></i> สวัสดี  {{get_username()}}</span>
+
+
+                    </li>
+                    <li class="topbar-devider"></li>
+                <li> <a href="/logout"><i class="fa fa fa-sign-out"></i> ออกจากระบบ</a> </li>
+
 
                @else
                     <li><a href="/login"> <i class="fa fa-user"></i> เข้าสู่ระบบ </a></li>

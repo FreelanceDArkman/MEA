@@ -28,6 +28,14 @@
 <!-- BOOTSTRAP JS -->
 <script src="{{asset('backend/js/bootstrap/bootstrap.min.js')}}"></script>
 
+
+{{--Custom By Darkman--}}
+
+{{--<script src="{{asset('backend/js/bootstrap/bootstrap-datepicker.js')}}"></script>--}}
+{{--<script src="{{asset('backend/js/bootstrap/bootstrap-datepicker-thai.js')}}"></script>--}}
+{{--<script src="{{asset('backend/js/bootstrap/locales/bootstrap-datepicker.th.js')}}"></script>--}}
+
+
 <!-- CUSTOM NOTIFICATION -->
 <script src="{{asset('backend/js/notification/SmartNotification.min.js')}}"></script>
 

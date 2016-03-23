@@ -108,7 +108,36 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
         $planchoose = DB::select(DB::raw($sql222))[0];
 
-        return view('frontend.pages.23p1')->with(['CurrnentPlan'=>$CurrnentPlan, 'dataCheck'=>$dataCheck , 'effective'=>$effective, 'Workcheck' =>$Workcheck, 'users'=>$users , 'historyPlan'=>$historyPlan,'ishowhis'=>false, 'ret'=>$ret , 'infoaset'=>$infoaset,'empinfo'=>$empinfo,'planchoose'=>$planchoose]);
+
+        $Isaccess = true;
+        $arrpages = explode("-", $dataCheck->SAVING_RATE_CHANGE_PERIOD);
+        $Modify_count = 0;
+
+
+        $today = new Date();
+        $datetoday =  date("d",strtotime($today));
+
+        if($datetoday < $arrpages[0] || $datetoday>$arrpages[1]){
+            $Isaccess = false;
+        }
+
+//    var_dump($Isaccess);
+
+
+        return view('frontend.pages.23p1')->with([
+            'CurrnentPlan'=>$CurrnentPlan,
+            'dataCheck'=>$dataCheck ,
+            'effective'=>$effective,
+            'Workcheck' =>$Workcheck,
+            'users'=>$users ,
+            'historyPlan'=>$historyPlan,
+            'ishowhis'=>false,
+            'ret'=>$ret ,
+            'infoaset'=>$infoaset,
+            'empinfo'=>$empinfo,
+            'planchoose'=>$planchoose,
+            'Isaccess'=>$Isaccess
+        ]);
     }
 
 
@@ -218,7 +247,34 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
         $planchoose = DB::select(DB::raw($sql222))[0];
 
-        return view('frontend.pages.23p1')->with(['CurrnentPlan'=>$CurrnentPlan, 'dataCheck'=>$dataCheck , 'effective'=>$effective, 'Workcheck' =>$Workcheck, 'users'=>$users , 'historyPlan'=>$historyPlan, 'ishowhis'=>$ishowhis, 'ret'=>$ret,'infoaset'=>$infoaset,'empinfo'=>$empinfo,'planchoose'=>$planchoose]);
+
+        $Isaccess = true;
+        $arrpages = explode("-", $dataCheck->SAVING_RATE_CHANGE_PERIOD);
+        $Modify_count = 0;
+
+
+        $today = new Date();
+        $datetoday =  date("d",strtotime($today));
+
+        if($datetoday < $arrpages[0] || $datetoday>$arrpages[1]){
+            $Isaccess = false;
+        }
+
+
+        return view('frontend.pages.23p1')->with([
+            'CurrnentPlan'=>$CurrnentPlan,
+            'dataCheck'=>$dataCheck ,
+            'effective'=>$effective,
+            'Workcheck' =>$Workcheck,
+            'users'=>$users ,
+            'historyPlan'=>$historyPlan,
+            'ishowhis'=>$ishowhis,
+            'ret'=>$ret,
+            'infoaset'=>$infoaset,
+            'empinfo'=>$empinfo,
+            'planchoose'=>$planchoose,
+            'Isaccess'=>$Isaccess
+        ]);
     }
 
     public  function  InsertPlan(Request $request){
@@ -233,7 +289,7 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         $dataCheck =  DB::select(DB::raw($sqlchk))[0];
 
 
-        $arrpages = explode("-", $dataCheck->FUND_PLAN_CHANGE_PERIOD);
+        $arrpages = explode("-", $dataCheck->SAVING_RATE_CHANGE_PERIOD);
         $Modify_count = 0;
 
        if(date("Y",strtotime($create_date)) != date("Y",strtotime($dateCurrentModify))){

@@ -348,6 +348,83 @@ jQuery.ajaxSetup({
 });
 
 $(document).ajaxStart(function() { Pace.restart(); });
- 
- 
- 	
+
+var d = new Date();
+
+if (month == 1) {
+	year = d.getYear();
+	if (year % 4 == 0){
+		days = 29;
+	}
+} else {
+	year = d.getYear();
+}
+var month  = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.']
+var toDay = d.getDate() + " " + (month[d.getMonth()])  + " " +  (d.getFullYear());
+
+
+//console.log(toDay);
+
+//$.fn.datepicker.dates['th'] = {
+//	days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+//	daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+//	daysMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa", "Su"],
+//	months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+//
+//	today: "Today"
+//};
+
+function meaDatepicker(id){
+
+	//$("."+classid).after("<input type='hidden' value='' id='hd_"+id+"' />");
+
+
+	//$("."+classid).datepicker({
+	//	format: 'M dd yy'
+	//	//monthsShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.']
+	//});
+
+
+	$("." + id).datepicker({
+		dateFormat: 'dd M yy',
+		altField: "#hd_"+id+"",
+		altFormat: "yy-mm-dd",
+		prevText : '<i class="fa fa-chevron-left"></i>',
+		nextText : '<i class="fa fa-chevron-right"></i>',
+		//defaultDate : new Date(d.getFullYear() + 543,d.getMonth(),d.getDate()),
+		isBuddhist: true,
+		//defaultDate: toDay,
+		dayNames: ['อาทิตย์', 'จันทร์', 'อังคาร', 'พุธ', 'พฤหัสบดี', 'ศุกร์', 'เสาร์'],
+		dayNamesMin: ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'],
+		monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
+		monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],
+		beforeShow : function(date){
+		 console.log($(date).val());
+			var dates = $(date).val()
+
+			var arrselectedDate = dates.split(' ');
+
+			var year = parseInt(arrselectedDate[2]);
+				year = year - 543;
+
+			$(date).val(arrselectedDate[0] + " " + arrselectedDate[1] + " " + (parseInt(arrselectedDate[2]) - 543))
+		},
+
+		onSelect : function(selectedDate) {
+			console.log(selectedDate);
+			var arrselectedDate = selectedDate.split(' ');
+			console.log(arrselectedDate);
+
+			var year = parseInt(arrselectedDate[2]);
+
+
+			$(this).val(arrselectedDate[0] + " " + arrselectedDate[1] + " " + (parseInt(arrselectedDate[2]) + 543));
+
+
+			//$('#finishdate').datepicker('option', 'minDate', selectedDate);
+		}
+
+	});
+
+//.datepicker("setDate" , new Date(d.getFullYear() + 543,d.getMonth(),d.getDate()));
+}

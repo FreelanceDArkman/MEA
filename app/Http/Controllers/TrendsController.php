@@ -260,7 +260,27 @@ class TrendsController extends Controller
         $empinfo = $this->getempINFO();
         $planchoose = $this->getPLanchoose();
 
-        return view('frontend.pages.21p1')->with(['netasset' => $netasset,'graph' =>$graph , 'netasset2'=>$netasset2, 'graph2'=>$graph2 , 'show'=>$show , 'graph3'=>$graph3,'yearColume' =>$yearColume ,'monthColum'=>$monthColum ,'yearColumeend2'=>$yearColumeend2, 'monthColumend2'=>$monthColumend2, 'monthColum2' => $monthColum2 , 'yearColume2'=>$yearColume2 ,'monthColum3'=>$monthColum3 ,'yearColume3'=>$yearColume3 ,'yearColumeend3'=>$yearColumeend3 ,'monthColumend3'=>$monthColumend3,'show2'=>$show2 ,'empinfo'=>$empinfo ,'planchoose'=>$planchoose,'netasset2tbl'=>$netasset2tbl]);
+        return view('frontend.pages.21p1')->with([
+            'netasset' => $netasset,
+            'graph' =>$graph ,
+            'netasset2'=>$netasset2,
+            'graph2'=>$graph2 ,
+            'show'=>$show ,
+            'graph3'=>$graph3,
+            'yearColume' =>$yearColume ,
+            'monthColum'=>$monthColum ,
+            'yearColumeend2'=>$yearColumeend2,
+            'monthColumend2'=>$monthColumend2,
+            'monthColum2' => $monthColum2 ,
+            'yearColume2'=>$yearColume2 ,
+            'monthColum3'=>$monthColum3 ,
+            'yearColume3'=>$yearColume3 ,
+            'yearColumeend3'=>$yearColumeend3 ,
+            'monthColumend3'=>$monthColumend3,
+            'show2'=>$show2 ,
+            'empinfo'=>$empinfo ,
+            'planchoose'=>$planchoose,
+            'netasset2tbl'=>$netasset2tbl]);
 
 
 
@@ -432,11 +452,12 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         $compardate = new Date('1995-11-3');
         $START_DATE = new Date($empStart->START_DATE);
         $show = true;
-        if($START_DATE < $compardate){
-
-        }else{
-            $show = false;
-        }
+//        var_dump($START_DATE);
+//        if($START_DATE < $compardate){
+//
+//        }else{
+//            $show = false;
+//        }
 
         return $show;
     }
