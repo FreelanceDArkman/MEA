@@ -28,7 +28,12 @@ class ProfileController extends Controller
 INNER JOIN TBL_INVESTMENT_PLAN pl ON pl.PlAN_ID = fm.PLAN_ID
 WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
-        $planchoose = DB::select(DB::raw($sql2))[0];
+        $planchoose = null;
+        if(DB::select(DB::raw($sql2))){
+            $planchoose = DB::select(DB::raw($sql2))[0];
+        }
+
+
 
 
         $sql3 = "SELECT TOP 1 * FROM TBL_USER_SAVING_RATE WHERE EMP_ID = '".get_userID()."' ORDER BY CHANGE_SAVING_RATE_DATE DESC";
@@ -39,10 +44,13 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         }
 
 
-
+        $infoaset =null;
         $sql4  = "SELECT TOP 1 * FROM TBL_INFORMATION_FROM_ASSET WHERE EMP_ID =  '".get_userID()."' ORDER BY CREATE_DATE DESC";
 
-        $infoaset = DB::select(DB::raw($sql4))[0];
+        if(DB::select(DB::raw($sql4))){
+            $infoaset = DB::select(DB::raw($sql4))[0];
+        }
+
 
 
 

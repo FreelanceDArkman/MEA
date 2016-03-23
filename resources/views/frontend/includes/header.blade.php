@@ -23,7 +23,7 @@ $data = getmemulist();
                 <li class="topbar-devider"></li>
 
              @if(logged_in())
-                    <li> <span style="font-size: 16px;color:#FE5000;"><i class="fa fa-user"></i> สวัสดี  {{get_username()}}</span>
+                    <li> <a href="/profile"><i class="fa fa-user"></i> สวัสดี  {{get_username()}}</a>
 
 
                     </li>

@@ -92,12 +92,13 @@
                         <h3 class="circle-title">อัตราสะสม</h3>
 
                     </div>
-
+                    @if($savingrate)
                     <div class="inner-pchart col-md-3">
                         <div class="circle" id="circle-2"></div>
                         <h3 class="circle-title">อัตราสมทบ</h3>
 
                     </div>
+                    @endif
                     <div class="inner-pchart col-md-3">
                         <div class="circle" id="circle-3"></div>
                         <h3 class="circle-title">ตราสารทุน</h3>
@@ -134,22 +135,30 @@
                         <div style="background-color: #f1f1f1;width: 100%">
 
                             <ul>
+                                @if($infoaset)
                                 <li>
                                     <small>ข้อมูลวันที่</small>
                                     <h4 class="counter">{{get_date_notime($infoaset->REFERENCE_DATE)}}</h4>
                                 </li>
+                                @endif
+                                    @if($infoaset)
                                 <li>
                                     <small>เงินลงทุนทั้งหมด</small>
                                     <h4 class="counter">{{meaNumbermoney($infoaset->INVESTMENT_MONEY) }} บาท</h4>
                                 </li>
+                                    @endif
+                                        @if($infoaset)
                                 <li>
                                     <small>เงินตราสารทุน</small>
                                     <h4 class="counter">{{meaNumbermoney($infoaset->EQUITY_FUNDS) }} บาท</h4>
                                 </li>
+                                    @endif
+                                            @if($infoaset)
                                 <li>
                                     <small>เงินตราสารหนี้</small>
                                     <h4 class="counter">{{meaNumbermoney($infoaset->BOND_FUNDS) }} บาท</h4>
                                 </li>
+                                    @endif
 
                             </ul>
                         </div>
@@ -230,6 +239,7 @@
                         duration:   2000
                     })
 
+                    @if($savingrate)
                     //Circles 2
                     Circles.create({
                         id:         'circle-2',
@@ -241,7 +251,9 @@
                         colors:     ['#eee', '#FE5000'],
                         duration:   2000
                     })
+                    @endif
 
+                    @if($planchoose)
                     //Circles 3
                     Circles.create({
                         id:         'circle-3',
@@ -253,7 +265,9 @@
                         colors:     ['#eee', '#FE5000'],
                         duration:   2000
                     })
+                    @endif
 
+                    @if($planchoose)
                     //Circles 4
                     Circles.create({
                         id:         'circle-4',
@@ -265,7 +279,8 @@
                         colors:     ['#eee', '#FFBF3F'],
                         duration:   2000
                     })
-
+                    @endif
+                    @if($infoaset)
                     //Circles 5
                     Circles.create({
                         id:         'circle-5',
@@ -277,7 +292,8 @@
                         colors:     ['#eee', '#fe5000'],
                         duration:   2000
                     })
-
+                    @endif
+                    @if($infoaset)
                     //Circles 6
                     Circles.create({
                         id:         'circle-6',
@@ -289,7 +305,7 @@
                         colors:     ['#eee', '#FFBF3F'],
                         duration:   2000
                     })
-
+                    @endif
 
                 }
 
