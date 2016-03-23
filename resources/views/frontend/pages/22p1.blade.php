@@ -211,7 +211,7 @@
                                                 <label class="label">สัดส่วนตราสารหนี้ (%)</label>
                                                 <label class="input">
                                                     <i class="icon-append fa fa-asterisk"></i>
-                                                    <input type="text" name="maxVal2" style="background-color: #e0e4ee"  disabled id="maxVal2">
+                                                    <input type="text" name="maxVal2" style="background-color: #e0e4ee"  readonly id="maxVal2">
                                                 </label>
                                             </section>
                                         </div>
