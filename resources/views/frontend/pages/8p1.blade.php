@@ -25,7 +25,7 @@
     <div class="row margin-bottom-60" style="margin-bottom: 10px">
         <div class="col-md-6 col-sm-6">
             <!-- Google Map -->
-            <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="450" src="https://maps.google.com/maps?hl=th&q=การไฟฟ้านครหลวง อาคารสำนักงานใหญ่ เพลินจิตร เลขที่ 30 ซอยชิดลม ถนนเพลินจิตร แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330&ie=UTF8&t=roadmap&z=13&iwloc=B&output=embed"></iframe>
+            <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"width="100%" height="450" src="https://maps.google.com/maps?hl=th&q=การไฟฟ้านครหลวง อาคารสำนักงานใหญ่ เพลินจิต เลขที่ 30 ซอยชิดลม ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330&ie=UTF8&t=roadmap&z=13&iwloc=B&output=embed"></iframe>
             <!-- End Google Map -->
         </div>
         <div class="col-md-6 col-sm-6">
@@ -39,7 +39,7 @@
 
             <!-- Contacts -->
             <ul class="list-unstyled who">
-                <li><i class="fa fa-home"></i>การไฟฟ้านครหลวง อาคารสำนักงานใหญ่ เพลินจิตร เลขที่ 30 ซอยชิดลม ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330</li>
+                <li><i class="fa fa-home"></i>การไฟฟ้านครหลวง อาคารสำนักงานใหญ่ เพลินจิต เลขที่ 30 ซอยชิดลม ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330</li>
                 <li><i class="fa fa-envelope"></i>mea_fund@mea.or.th</li>
                 <li><i class="fa fa-phone"></i>1130</li>
                 <li><i class="fa fa-globe"></i>รถเมล์สาย 40, 48, ปรับอากาศสาย 511 รถไฟฟ้า BTS-สถานีชิดลม</li>
