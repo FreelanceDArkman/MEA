@@ -90,7 +90,7 @@ $data = getmemulist();
                 <!-- Terms Info-->
                 <div class="col-md-12">
                     <p>
-                        &copy; สงวนลิขสิทธิ์ 2559 : การไฟฟ้านครหลวง 30 ซอยชิดลม ถนนเพลินจิตร แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330
+                        &copy; สงวนลิขสิทธิ์ 2559 : การไฟฟ้านครหลวง 30 ซอยชิดลม ถนนเพลินจิต แขวงลุมพินี เขตปทุมวัน กรุงเทพมหานคร 10330
                         {{--<a target="_blank" href="https://twitter.com/htmlstream">Htmlstream</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>--}}
                     </p>
                 </div>

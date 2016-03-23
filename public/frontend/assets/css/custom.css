@@ -248,7 +248,10 @@ h1, h2, h3, h4, h5, h6{
 
 .footer a{
     color: #fff !important;
-    text-decoration: underline !important;
+    /*text-decoration: underline !important;*/
+}
+.footer .thumb-headline h2{
+    color: #FE5000!important;
 }
 .logo img{
     width: 100px !important;
