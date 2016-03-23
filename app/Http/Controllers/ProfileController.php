@@ -32,7 +32,12 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
 
         $sql3 = "SELECT TOP 1 * FROM TBL_USER_SAVING_RATE WHERE EMP_ID = '".get_userID()."' ORDER BY CHANGE_SAVING_RATE_DATE DESC";
-        $savingrate = DB::select(DB::raw($sql3))[0];
+
+        $savingrate = null;
+        if(DB::select(DB::raw($sql3))){
+            $savingrate = DB::select(DB::raw($sql3))[0];
+        }
+
 
 
         $sql4  = "SELECT TOP 1 * FROM TBL_INFORMATION_FROM_ASSET WHERE EMP_ID =  '".get_userID()."' ORDER BY CREATE_DATE DESC";
