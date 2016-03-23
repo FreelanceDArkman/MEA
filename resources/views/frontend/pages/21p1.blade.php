@@ -272,7 +272,7 @@
                            @if(get_is_before_status_2538() == 0)
                                 @if($show2 == 3)
                             <div class="tab-pane fade active in" id="messages-1">
-                                     @els
+                                     @else
                             <div class="tab-pane fade" id="messages-1">
                                     @endif
 
