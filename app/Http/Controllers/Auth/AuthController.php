@@ -74,18 +74,28 @@ class AuthController extends Controller
 
     public function ResetPassword(Request $request)
     {
+        $id =get_userID();
 
-        $netasset  = DB::table('TBL_USER')->Where('EMP_ID', '=' , $request->input('emp_id'))->first();
+        $netasset  = DB::table('TBL_USER')->Where('EMP_ID', '=' , $id)->first();
 
+        $email = $netasset->EMAIL;
+        if($request->input('email')){
+            $email = $request->input('email');
+        }
+
+//        var_dump($email);
         $agent = new MeaAgent();
         $data = array(
             "session_id" => Session::getId(),
             "username" => $netasset->USERNAME,
             "old_password" => $request->input('old_password'),
             "new_password" => $request->input('new_password'),
-            "email" => $netasset->EMAIL
+            "email" => $email
 
         );
+
+//        var_dump($netasset->USERNAME);
+//        var_dump($email);
         $curl = new Curl('FIRST_LOGIN', $data);
 
         $result_login = $curl->getResult();

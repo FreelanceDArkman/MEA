@@ -23,4 +23,6 @@ class Controller extends BaseController
         view()->share('page_setting', $data);
     }
 
+
+
 }

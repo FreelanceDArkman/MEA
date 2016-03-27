@@ -73,17 +73,17 @@ $data = getmemulist();
                         <li class="dropdown-submenu" >
                             <a href="javascript:void(0);">{{ getGoupName($data,21) }}</a>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href="/trends">{{ getMenuName($data,21,1) }}</a></li>
-                                <li><a target="_blank" href="/reportingmemberbenefit">{{ getMenuName($data,21,2)}}</a></li>
-                                <li><a target="_blank" href="/compares">{{ getMenuName($data,21,3) }}</a></li>
+                                <li><a href="/trends">{{ getMenuName($data,21,1) }}</a></li>
+                                <li><a href="/reportingmemberbenefit">{{ getMenuName($data,21,2)}}</a></li>
+                                <li><a  href="/compares">{{ getMenuName($data,21,3) }}</a></li>
 
                             </ul>
                         </li>
                         <li class="dropdown-submenu" >
                             <a href="javascript:void(0);">{{ getGoupName($data,22) }}</a>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href="/changeplan">{{ getMenuName($data,22,1) }}</a></li>
-                                <li><a target="_blank" href="/historyinvestmentplan">{{ getMenuName($data,22,2) }}</a></li>
+                                <li><a  href="/changeplan">{{ getMenuName($data,22,1) }}</a></li>
+                                <li><a  href="/historyinvestmentplan">{{ getMenuName($data,22,2) }}</a></li>
 
 
                             </ul>
@@ -91,8 +91,8 @@ $data = getmemulist();
                         <li class="dropdown-submenu" >
                             <a href="javascript:void(0);">{{ getGoupName($data,23) }}</a>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href="/cumulative">{{ getMenuName($data,23,1) }}</a></li>
-                                <li><a target="_blank" href="/historycumulative">{{ getMenuName($data,23,2) }}</a></li>
+                                <li><a  href="/cumulative">{{ getMenuName($data,23,1) }}</a></li>
+                                <li><a  href="/historycumulative">{{ getMenuName($data,23,2) }}</a></li>
 
 
                             </ul>
@@ -103,9 +103,9 @@ $data = getmemulist();
                         <li class="dropdown-submenu">
                             <a href="javascript:void(0);">{{ getMenuName($data,20,1) }}</a>
                             <ul class="dropdown-menu">
-                                <li><a target="_blank" href="/editprofile">{{ getMenuName($data,20,1) }}</a></li>
-                                <li><a target="_blank" href="/informationbeneficiary">{{ getMenuName($data,20,2) }}</a></li>
-                                <li><a target="_blank" href="/resetpassword">{{ getMenuName($data,20,3) }}</a></li>
+                                <li><a  href="/editprofile">{{ getMenuName($data,20,1) }}</a></li>
+                                <li><a  href="/informationbeneficiary">{{ getMenuName($data,20,2) }}</a></li>
+                                <li><a  href="/resetpassword">{{ getMenuName($data,20,3) }}</a></li>
 
                             </ul>
                         </li>
