@@ -7,7 +7,7 @@
                 <p>กองทุนสำรองเลี้ยงชีพพนักงานการไฟฟ้านครหลวง ซึ่งจดทะเบียนแล้ว (กสช.กฟน)</p>
             </div>
             <div class="col-md-3 btn-buy animated fadeInRight">
-                <a href="https://meastore.mea.or.th/" class="btn-u btn-u-lg"><i class="fa fa-cloud-download"></i> Download MEA FUND Now</a>
+                <a href="https://meastore.mea.or.th/" target="_blank" class="btn-u btn-u-lg"><i class="fa fa-cloud-download"></i> Download MEA FUND Now</a>
             </div>
         </div>
     </div>

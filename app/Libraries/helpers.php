@@ -26,19 +26,104 @@ if (!function_exists('getmemulist')) {
     function getmemulist()
     {
 
-
-
         $sql44  = "SELECT * FROM TBL_MENU_GROUP mg
         INNER JOIN TBL_MENU_LIST ml ON ml.MENU_GROUP_ID = mg.MENU_GROUP_ID";
 
         $menu = DB::select(DB::raw($sql44));
-
 
 //        $user_group = DB::table('TBL_MENU_LIST')->get();
         return $menu;
 
     }
 }
+
+
+if (!function_exists('Logprocess')) {
+
+    function Logprocess($logtype,$val = [])
+    {
+            $activity ="";
+            $value = "";
+            $remark ="";
+
+
+        switch ($logtype){
+            case 1:
+                $activity = "FUND_PLAN_TERMINATE";
+               // [stamp ‘FUND_PLAN_TERMINATE’ ลงในฟิลด์ Activity] ยกเลกิ การเปลยี  นแผนลงทนุ
+                break;
+            case 2:
+                $activity = "FUND_PLAN_UPDATE";
+                $arr = [];
+                $arr[0] = $val;
+                $arrVal = array(
+                    "function" => "FUND_PLAN_UPDATE",
+                    "parameters" => $arr);
+                $remark = json_encode($arrVal);
+
+                break;
+            case 3:
+                $activity = "SAVING_RATE_TERMINATE";
+                $arr = [];
+                $arr[0] = $val;
+                $arrVal = array(
+                    "function" => "SAVING_RATE_TERMINATE",
+                    "parameters" => $arr);
+                $remark = json_encode($arrVal);
+
+                break;
+            case 4:
+                $activity = "SAVING_RATE_UPDATE";
+                $arr = [];
+                $arr[0] = $val;
+                $arrVal = array(
+                    "function" => "SAVING_RATE_UPDATE",
+                    "parameters" => $arr);
+                $remark = json_encode($arrVal);
+
+                break;
+            case 5:
+                $activity = "CHANGE_USER_INFO";
+                $arr = [];
+                $arr[0] = $val;
+                $arrVal = array(
+                    "function" => "CHANGE_USER_INFO",
+                    "parameters" => $arr);
+                $remark = json_encode($arrVal);
+
+                break;
+            case 6:
+                $activity = "INFORMER";
+                $arr = [];
+                $arr[0] = $val;
+                $arrVal = array(
+                    "function" => "INFORMER",
+                    "parameters" => $arr);
+                $remark = json_encode($arrVal);
+                $value = "";
+                //(เมนตู ิดตอ่ กสช สอบถามแนะนําบริการ) [stamp ‘INFORMER’ ลง ในฟิลด์ Activityและ value (ข้อมลู ที  user กรอก) ลงในฟิลด์ Remark]
+                break;
+            case 7:
+                $activity = "CHANGE_PASSWORD";
+
+                break;
+            case 8:
+                $activity = "REQUEST_NEW_PASS";
+
+                break;
+
+        }
+
+        $today = new Date();
+
+        $sql = "INSERT INTO TBL_HISTORY_LOG (USERNAME,ACTIVITY, REMARK, DATETIME) VALUES ('".get_userID()."','".$activity."','".$remark."' , '".$today."')";
+        return DB::insert(DB::raw($sql));
+
+
+
+    }
+}
+
 
 if (!function_exists('getGoupName')) {
 

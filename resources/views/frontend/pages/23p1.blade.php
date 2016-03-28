@@ -113,7 +113,7 @@
                                             <strong> * การเปลี่ยนแปลงและแก้ไขอัตราสะสม ทำได้ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือนและมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป </strong>
                                         </div>
 
-                                        @if($Isaccess && get_user_access_status_flag() != 2)
+                                        {{--@if($Isaccess && get_user_access_status_flag() != 2)--}}
                                             @if($CurrnentPlan)
                                                 <div style="width: 100% ;padding:0 70px 0 70px; "><h3 class="heading-xs" style="font-size: 20px"><span class="pull-left">0%</span>อัตราสะสมปัจจุบันที่ท่านเลือก <span class="pull-right">{{$Workcheck->SAVING_MAX_RATE}}%</span></h3>
                                                     <div class="progress progress-u">
@@ -129,7 +129,7 @@
                                                 <p> %</p>
                                             @endif
 
-                                         @endif
+                                         {{--@endif--}}
                                     </div>
                                 </div>
                                 @if($Isaccess && get_user_access_status_flag() != 2)

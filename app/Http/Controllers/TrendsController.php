@@ -420,7 +420,7 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         }
 
 
-        for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
+        for($i = ((int)$currentyear) - 5; $i <=  $currentyear ; $i++){
             $arrDropYear[$count] = $i;
 
 

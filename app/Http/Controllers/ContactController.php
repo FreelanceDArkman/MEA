@@ -55,7 +55,27 @@ WHERe info.EMP_ID = '".get_userID()."'";
 
         $sql = "INSERT INTO tbl_inform (INFM_NAME,INFM_EMAIL,INFM_PHONE,INFM_DEPT,INFM_TOPIC,INFM_DETAIL,INFM_FLAG) VALUES('".$name."','".$email."','".$phone."','".$DEP_LNG."','".$TYPE_TOPIC."','".$detail."',0)";
 
-        DB::insert(DB::raw($sql));
+
+
+
+        $ret =  DB::insert(DB::raw($sql));
+
+        $val =  array(
+            "emp_id" => get_userID(),
+            "name" => $name,
+            "email" => $email,
+            "phone" => $phone,
+            "DEP_LNG"=>$DEP_LNG,
+            "TYPE_TOPIC"=>$TYPE_TOPIC,
+            "detail"=>$detail
+
+        );
+
+        if($ret){
+            Logprocess(6,$val);
+        }
+
+
 //
         return redirect()->to('/contact')->with('message','ok');
 

@@ -319,7 +319,19 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         $sql = "INSERT INTO TBL_USER_SAVING_RATE (EMP_ID,USER_SAVING_RATE,CHANGE_SAVING_RATE_DATE,EFFECTIVE_DATE,MODIFY_COUNT,MODIFY_BY)
 VALUES( '".$emp_id."' ,$USER_SAVING_RATE, '".$create_date."','".$effectiveDate."',$Modify_count,'".$addby."')";
 
-        DB::insert(DB::raw($sql));
+        $ret =DB::insert(DB::raw($sql));
+
+
+        $val =  array(
+            "emp_id" => $emp_id,
+            "plan_id" => $plan_id,
+            "USER_SAVING_RATE" => $USER_SAVING_RATE,
+            "create_date" =>$create_date
+        );
+
+        if($ret){
+            Logprocess(4,$val);
+        }
 //
         return redirect()->to('/cumulative');
     }
@@ -330,7 +342,11 @@ VALUES( '".$emp_id."' ,$USER_SAVING_RATE, '".$create_date."','".$effectiveDate."
         $sql = "DELETE FROM TBL_USER_SAVING_RATE WHERE EMP_ID = '".get_userID()."' AND MONTH(CHANGE_SAVING_RATE_DATE) = MONTH(GETDATE())
 AND YEAR(CHANGE_SAVING_RATE_DATE) = YEAR(GETDATE())";
 
-        DB::delete(DB::raw($sql));
+        $ret = DB::delete(DB::raw($sql));
+
+        if($ret){
+            Logprocess(3);
+        }
 
         return redirect()->to('/cumulative')->with('del2','ok');
     }

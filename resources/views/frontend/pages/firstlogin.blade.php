@@ -63,7 +63,7 @@
                 <div class="margin-bottom-20"></div>
                 <div class="row">
                     <div class="col-md-12">
-                        <button class="btn-u btn-u-lg btn-block btn-u-red" type="submit">ส่งข้อมูล</button>
+                        <button class="btn-u btn-u-lg btn-block btn-u-red" type="submit" onclick="return confirm('กรุณาตรวจสอบอีเมลที่ได้ลงทะเบียนไว้กับ ระบบ เพื่อยืนยันตัวตนและตรวจสอบสิทธิ์การใช้งานของท่าน')">ส่งข้อมูล</button>
                     </div>
                 </div>
 

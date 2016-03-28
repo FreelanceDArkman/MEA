@@ -65,7 +65,19 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
         $sql = "UPDATE TBL_USER SET PHONE='".$request->input('phone')."', ADDRESS='".$request->input('address')."' , EMAIL='".$request->input('email')."' WHERE EMP_ID='".get_userID()."'";
 
-         DB::update(DB::raw($sql));
+        $ret =  DB::update(DB::raw($sql));
+
+        $val =  array(
+            "emp_id" => get_userID(),
+            "PHONE" => $request->input('phone'),
+            "ADDRESS" => $request->input('address'),
+            "EMAIL" => $request->input('email')
+
+        );
+
+        if($ret){
+            Logprocess(5,$val);
+        }
 
 
 
@@ -92,7 +104,7 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
         );
 
-        var_dump($data);
+//        var_dump($data);
         $curl = new Curl('CHANGE_PASS', $data);
 
         $result_login = $curl->getResult();
@@ -102,7 +114,7 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         } else {
             // logged in
 //            session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
-
+            Logprocess(7,$data);
             return redirect()->to('editprofile')->with('message','ท่านได้เปลี่ยนรหัสผ่านเรียบร้อยแล้ว');
         }
     }

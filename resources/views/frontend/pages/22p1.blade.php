@@ -124,7 +124,7 @@
                                             <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->FUND_PLAN_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
                                         </div>
 
-                                        @if($Isaccess && get_user_access_status_flag() != 2)
+                                        {{--@if($Isaccess && get_user_access_status_flag() != 2)--}}
 
                                         <h2>แผนการลงทุนปัจจุบันที่ท่านเลือก</h2>
 
@@ -140,10 +140,10 @@
                                                 @else
                                                 <div>วันที่ทำรายการล่าสุด {{get_date_notime($effective[0]->MODIFY_DATE)}}</div>
                                             @endif
-                                        @endif
+                                        {{--@endif--}}
                                     </div>
                                 </div>
-                                @if($Isaccess && get_user_access_status_flag() != 2)
+
                                 <div class="row">
                                     <div class="inner-pchart col-md-6 col-xs-6" style="text-align: right">
                                         <div class="circle" id="circles-1"></div>
@@ -157,6 +157,7 @@
                                     </div>
 
                                 </div>
+                                @if($Isaccess && get_user_access_status_flag() != 2)
                                 <div class="row">
                                     <div class="col-md-12" style="padding: 0 100px 0 100px;">
                                         <a href="{{action('changeplanController@deleplan')}}" class="btn-u btn-u-lg btn-block btn-u-blue" id="btn_changplan" type="button">ยกเลิกแผนปัจจุบัน</a>

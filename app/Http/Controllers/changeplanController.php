@@ -54,7 +54,22 @@ class changeplanController extends Controller
         $sql = "INSERT INTO TBL_USER_FUND_CHOOSE (EMP_ID,PLAN_ID,EQUITY_RATE,DEBT_RATE,MODIFY_DATE,EFFECTIVE_DATE,MODIFY_COUNT,MODIFY_BY)
 VALUES($emp_id,$plan_id,$equip,$dept,'".$create_date."','".$effectiveDate."',$Modify_count,'".$addby."')";
 
-       DB::insert(DB::raw($sql));
+        $val =  array(
+            "emp_id" => $emp_id,
+            "plan_id" => $plan_id,
+            "dept_rate" => $dept,
+            "create_date" =>$create_date
+        );
+
+
+
+      $ret = DB::insert(DB::raw($sql));
+
+        if($ret){
+            Logprocess(2,$val);
+        }
+
+
 //
         return redirect()->to('/changeplan');
     }
@@ -337,7 +352,12 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         $sql = "DELETE FROM TBL_USER_FUND_CHOOSE WHERE EMP_ID = '".get_userID()."' AND MONTH(MODIFY_DATE) = MONTH(GETDATE())
 AND YEAR(MODIFY_DATE) = YEAR(GETDATE())";
 
-        DB::delete(DB::raw($sql));
+        $ret=  DB::delete(DB::raw($sql));
+
+        //log
+        if($ret){
+            Logprocess(1);
+        }
 
         return redirect()->to('/changeplan')->with('del2','ok');
     }

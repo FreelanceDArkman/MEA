@@ -105,8 +105,8 @@ class AuthController extends Controller
         } else {
             // logged in
 //            session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
-
-            return redirect()->to('firstlogin')->with('message','กรุณาตรวจสอบอีเมล์ที่ได้ลงทะเบียนไว้กับระบบ เพื่อยืนยันตัวตนและตรวจสอบสิทธิ์การใช้งานของท่าน');
+            return redirect()->intended('/');
+            //return redirect()->to('firstlogin')->with('message','กรุณาตรวจสอบอีเมล์ที่ได้ลงทะเบียนไว้กับระบบ เพื่อยืนยันตัวตนและตรวจสอบสิทธิ์การใช้งานของท่าน');
         }
     }
 

@@ -6,11 +6,12 @@
         <img src="frontend/assets/img/sliders/layer/bg3.jpg" class="ls-bg" alt="Slide background">
 
             <span class="ls-s-1" style=" color: #ffffff; line-height:45px; text-decoration:none;text-shadow:0px 1px 0px #2f6627;font-weight: 200; font-size: 60px; top:100px; left: 50px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1000; ">
-                มุ่งสู่องค์กรสมถนะสูง
-            </span><br>
-        <span class="ls-s-1" style=" color: #ffffff; line-height:45px;text-decoration:none;text-shadow:0px 1px 0px #2f6627; font-weight: 200; font-size: 35px; top:159px; left: 50px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1000; ">
-             MOVING TOWARDS A HIGH <br>PERFORMANCE ORGANIZATION
-        </span>
+               เป็นองค์กรชั้นนำ<br>
+                ด้านธุรกิจพลังงานในระดับสากล
+            </span>
+        {{--<span class="ls-s-1" style=" color: #ffffff; line-height:45px;text-decoration:none;text-shadow:0px 1px 0px #2f6627; font-weight: 200; font-size: 35px; top:159px; left: 50px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1000; ">--}}
+             {{--MOVING TOWARDS A HIGH <br>PERFORMANCE ORGANIZATION--}}
+        {{--</span>--}}
 
         {{--<a class="btn-u btn-u-green ls-s-1" href="#" style=" padding: 9px 20px; font-size:25px; top:220px; left: 50px; slidedirection : bottom; slideoutdirection : bottom; durationin : 2000; durationout : 2000; ">--}}
             {{--Find Out More--}}
