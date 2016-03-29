@@ -1,6 +1,9 @@
 <?php
+use Illuminate\Support\Facades\DB;
 $data = getmemulist();
+$current = Route::getCurrentRoute()->getPath();
 ?>
+
 <div class="header">
     <div class="container">
         <!-- Logo -->
@@ -61,7 +64,7 @@ $data = getmemulist();
                 <!-- End Home -->
 
                 <!-- Demo Pages -->
-               @if(menu_access(1,20))
+               @if(menu_access(1,20) && ($current != "firstlogin"))
                 <li class="dropdown {{IsActive('editprofile,informationbeneficiary,resetpassword,trends,reportingmemberbenefit,compares,changeplan,historyinvestmentplan,cumulative,historycumulative,riskassessment')}}" >
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
 
