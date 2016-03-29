@@ -22,51 +22,60 @@ class riskassessmentController extends Controller
 
 
         $sql2 = "SELECT TOP 1 * FROM TBL_RISK_QUIZ_RESULT WHERE EMP_ID = '".get_userID()."' ORDER BY QUIZ_TEST_DATE DESC";
-        $quizprofile =  DB::select(DB::raw($sql2))[0];
 
-        $sql = "SELECT * FROM TBL_RISK_QUIZ_SCORE_MAPPING";
-        $mapping = DB::select(DB::raw($sql));
+        $quizprofile_data =  DB::select(DB::raw($sql2));
+        $quizprofile = null;
+        $mappingret = null;
+        $ischeckok = false;
 
-        $mappingret  = null;
+        if($quizprofile_data){
 
-        foreach($mapping as $index => $item){
+            $quizprofile = $quizprofile_data[0];
+            $sql = "SELECT * FROM TBL_RISK_QUIZ_SCORE_MAPPING";
+            $mapping = DB::select(DB::raw($sql));
 
-            $arr = explode("-", $item->SCORE_RANGE);
+            $mappingret  = null;
 
-            $min = $arr[0];
-            $max =$arr[1];
+            foreach($mapping as $index => $item){
 
-            if($quizprofile->QUIZ_SCORE >=$min && $quizprofile->QUIZ_SCORE <=$max){
-                $mappingret = $item;
-                break;
+                $arr = explode("-", $item->SCORE_RANGE);
+
+                $min = $arr[0];
+                $max =$arr[1];
+
+                if($quizprofile->QUIZ_SCORE >=$min && $quizprofile->QUIZ_SCORE <=$max){
+                    $mappingret = $item;
+                    break;
+                }
+            }
+
+            $sqlcheckquiz = "SELECT TOP 1 * FROM TBL_RISK_QUIZ";
+            $checkquiz = DB::select(DB::raw($sqlcheckquiz))[0];
+
+
+            $ischeckok = true;
+
+            if($checkquiz->QUIZ_ACTIVE_FLAG == "1"){
+                $ischeckok = false;
+            }
+
+            $today = new Date();
+
+            $dateQUIZ_EXPIRE_DATE = new Date($checkquiz->QUIZ_EXPIRE_DATE);
+
+            $dateQUIZ_ACTIVE_DATE = new Date($checkquiz->QUIZ_ACTIVE_DATE);
+
+
+
+            if($today < $dateQUIZ_ACTIVE_DATE){
+                $ischeckok = false;
+            }
+
+            if($today > $dateQUIZ_EXPIRE_DATE){
+                $ischeckok = false;
             }
         }
 
-        $sqlcheckquiz = "SELECT TOP 1 * FROM TBL_RISK_QUIZ";
-        $checkquiz = DB::select(DB::raw($sqlcheckquiz))[0];
-
-
-        $ischeckok = true;
-
-        if($checkquiz->QUIZ_ACTIVE_FLAG == "1"){
-            $ischeckok = false;
-        }
-
-        $today = new Date();
-
-        $dateQUIZ_EXPIRE_DATE = new Date($checkquiz->QUIZ_EXPIRE_DATE);
-
-        $dateQUIZ_ACTIVE_DATE = new Date($checkquiz->QUIZ_ACTIVE_DATE);
-
-
-
-        if($today < $dateQUIZ_ACTIVE_DATE){
-            $ischeckok = false;
-        }
-
-        if($today > $dateQUIZ_EXPIRE_DATE){
-            $ischeckok = false;
-        }
 
         //QUIZ_ACTIVE_DATE
 
@@ -78,7 +87,12 @@ class riskassessmentController extends Controller
 
         //var_dump(quizScore($quizprofile->QUIZ_RESULT));
 
-        return view('frontend.pages.24p1')->with(['quizprofile'=>$quizprofile, 'mappingret'=>$mappingret, 'ischeckok'=>$ischeckok]);
+        return view('frontend.pages.24p1')->with([
+            'quizprofile'=>$quizprofile,
+            'mappingret'=>$mappingret,
+            'ischeckok'=>$ischeckok,
+            'quizprofile_data'=>$quizprofile_data
+        ]);
     }
 
 
@@ -103,30 +117,44 @@ class riskassessmentController extends Controller
 
 
         $sql2 = "SELECT TOP 1 * FROM TBL_RISK_QUIZ_RESULT WHERE EMP_ID = '".get_userID()."' ORDER BY QUIZ_TEST_DATE DESC";
-        $quizprofile =  DB::select(DB::raw($sql2))[0];
+        $quizprofile_profile =  DB::select(DB::raw($sql2));
 
-
-        $sql = "SELECT * FROM TBL_RISK_QUIZ_SCORE_MAPPING";
-        $mapping = DB::select(DB::raw($sql));
-
+        $quizprofile = null;
+        $mapping =null;
         $mappingret  = null;
 
-        foreach($mapping as $index => $item){
+        if($quizprofile_profile){
+            $quizprofile = $quizprofile_profile[0];
 
-            $arr = explode("-", $item->SCORE_RANGE);
+            $sql = "SELECT * FROM TBL_RISK_QUIZ_SCORE_MAPPING";
+            $mapping = DB::select(DB::raw($sql));
 
-            $min = $arr[0];
-            $max =$arr[1];
 
-            if($quizprofile->QUIZ_SCORE >=$min && $quizprofile->QUIZ_SCORE <=$max){
-                $mappingret = $item;
-                break;
+
+            foreach($mapping as $index => $item){
+
+                $arr = explode("-", $item->SCORE_RANGE);
+
+                $min = $arr[0];
+                $max =$arr[1];
+
+                if($quizprofile->QUIZ_SCORE >=$min && $quizprofile->QUIZ_SCORE <=$max){
+                    $mappingret = $item;
+                    break;
+                }
             }
         }
+
+
 //
 
 
-        return view('frontend.pages.24p2')->with(['datachoice'=>$datachoice, 'dataqtopic'=>$dataqtopic,'mapping'=>$mapping , 'quizprofile'=>$quizprofile , 'mappingret'=>$mappingret]);
+        return view('frontend.pages.24p2')->with([
+            'datachoice'=>$datachoice,
+            'dataqtopic'=>$dataqtopic,
+            'mapping'=>$mapping ,
+            'quizprofile'=>$quizprofile ,
+            'mappingret'=>$mappingret]);
     }
 
 

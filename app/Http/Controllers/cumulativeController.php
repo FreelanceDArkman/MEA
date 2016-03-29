@@ -71,12 +71,15 @@ WHERe sav.EMP_ID = '".get_userID()."' ORDER BY sav.CHANGE_SAVING_RATE_DATE DESC"
 
 
 
-        $currentyear = "";
+        $currentyear = "2016";
 
         if($CurrnentPlan){
             $currentyear = get_date_year($CurrnentPlan[0]->CHANGE_SAVING_RATE_DATE);
         }else{
-            $currentyear = get_date_year($effective[0]->CHANGE_SAVING_RATE_DATE);
+            if($effective){
+                $currentyear = get_date_year($effective[0]->CHANGE_SAVING_RATE_DATE);
+            }
+
         }
 
 

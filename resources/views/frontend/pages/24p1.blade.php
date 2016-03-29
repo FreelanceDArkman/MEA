@@ -44,7 +44,7 @@
         <!-- Profile Content -->
         <div class="col-md-9">
 
-            @if($ischeckok)
+            @if($ischeckok && $quizprofile_data)
             <div class="profile-body">
 
 
@@ -98,9 +98,14 @@
             </div>
                 @else
                 <div class="alert alert-danger fade in">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                    <h4>ไม่มีข้อมูลแบบประเมินความเสี่ยง!</h4>
 
+                    <h4>ท่านยังไม่ได้ทำแบบประเมินความเสี่ยง กรุณาทำแบบประเมินความเสี่ยงเพื่อประเมินระดับความเสี่ยงที่ยอมรับได้ และสัดส่วนการลงทุนที่เหมาะสมกับท่าน
+                        </h4>
+
+                </div>
+
+                <div class="col-xs-12 col-md-12" style="text-align: center">
+                    <a href="quiz" class="btn-u btn-u-lg btn-u-red" type="button">ทำแบบสอบถาม</a>
                 </div>
             @endif
 

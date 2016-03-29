@@ -130,12 +130,16 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND YE
         $effective = DB::select(DB::raw($sql4));
 
 
-         $currentyear = "";
+         $currentyear = "2016";
 
         if($CurrnentPlan){
             $currentyear = get_date_year($CurrnentPlan[0]->MODIFY_DATE);
         }else{
-            $currentyear = get_date_year($effective[0]->MODIFY_DATE);
+
+            if($effective){
+                $currentyear = get_date_year($effective[0]->MODIFY_DATE);
+            }
+
         }
 
 
@@ -143,6 +147,8 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND YE
         $arrDropYear = array();
         $count = 0;
         $ret ="<option>เลือกปี</option>";
+
+
         for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
             $arrDropYear[$count] = $i;
 
@@ -275,15 +281,26 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND en
 
         $sql2 = "SELECT TOP 1 * FROM TBL_INFORMATION_FROM_ASSET WHERE EMP_ID  = '".get_userID()."'  ORDER BY Create_DATE DESC";
 
+        $Currnentasset = null;
+        $ret = null;
+        $infoaset = null;
+        $empinfo = null;
+        $planchoose = null;
+        $Isaccess = null;
         $Currnentasset = DB::select(DB::raw($sql2))[0];
 
 
-        $currentyear = "";
+
+
+        $currentyear = "2016";
 
         if($CurrnentPlan){
             $currentyear = get_date_year($CurrnentPlan[0]->MODIFY_DATE);
         }else{
-            $currentyear = get_date_year($effective[0]->MODIFY_DATE);
+            if($effective){
+                $currentyear = get_date_year($effective[0]->MODIFY_DATE);
+            }
+
         }
 
 
@@ -296,8 +313,6 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND en
             $ret = $ret . "<option value=".($i-543).">".$i."</option>";
 
             $count = $count+1;
-
-
 
         }
 
@@ -313,8 +328,12 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND en
 INNER JOIN TBL_INVESTMENT_PLAN pl ON pl.PlAN_ID = fm.PLAN_ID
 WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
-        $planchoose = DB::select(DB::raw($sql222))[0];
+        $planchoose_profile = DB::select(DB::raw($sql222));
 
+        $planchoose = null;
+        if($planchoose_profile){
+            $planchoose = $planchoose_profile[0];
+        }
 
         $Isaccess = true;
         $arrpages = explode("-", $dataCheck->FUND_PLAN_CHANGE_PERIOD);
@@ -327,6 +346,10 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         if($datetoday < $arrpages[0] || $datetoday>$arrpages[1]){
             $Isaccess = false;
         }
+
+        $q =   "SELECT * FROM TBL_RISK_QUIZ_RESULT WHERe EMP_ID = '".get_userID()."' AND YEAR(QUIZ_TEST_DATE) = YEAR(GETDATE())";
+
+        $quizdoit =DB::select(DB::raw($q));
 
 
         return view('frontend.pages.22p1')->with([
@@ -342,7 +365,8 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
             'infoaset'=>$infoaset,
             'empinfo'=>$empinfo,
             'planchoose'=>$planchoose,
-            'Isaccess'=>$Isaccess
+            'Isaccess'=>$Isaccess,
+            'quizdoit' => $quizdoit
         ]);
     }
 

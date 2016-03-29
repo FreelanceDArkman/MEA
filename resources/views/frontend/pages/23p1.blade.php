@@ -171,7 +171,11 @@
                                                     @if($CurrnentPlan)
                                                     <input type="text" style="background-color:#ccc" name="maxVal1" id="maxVal1" value="{{$CurrnentPlan[0]->USER_SAVING_RATE}}" disabled>
                                                     @else
+                                                        @if($effective)
                                                         <input type="text" style="background-color:#ccc" name="maxVal1" id="maxVal1"  value="{{$effective[0]->USER_SAVING_RATE}}" disabled>
+                                                        @else
+                                                            <input type="text"  name="maxVal1" id="maxVal1"  value="" >
+                                                        @endif
                                                     @endif
 
                                                 </label>
@@ -194,8 +198,13 @@
                                     <input type="hidden" id="count_modify" name="count_modify" value="{{$CurrnentPlan[0]->MODIFY_COUNT}}">
                                         <input type="hidden" id="date_modify" name="date_modify" value="{{$CurrnentPlan[0]->CHANGE_SAVING_RATE_DATE}}">
                                     @else
-                                        <input type="hidden" id="count_modify" name="count_modify" value="{{$effective[0]->MODIFY_COUNT}}">
-                                        <input type="hidden" id="date_modify" name="date_modify" value="{{$effective[0]->CHANGE_SAVING_RATE_DATE}}">
+                                        @if($effective)
+                                            <input type="hidden" id="count_modify" name="count_modify" value="{{$effective[0]->MODIFY_COUNT}}">
+                                            <input type="hidden" id="date_modify" name="date_modify" value="{{$effective[0]->CHANGE_SAVING_RATE_DATE}}">
+                                        @else
+                                            <input type="hidden" id="count_modify" name="count_modify" value="">
+                                            <input type="hidden" id="date_modify" name="date_modify" value="">
+                                        @endif
                                     @endif
                                     <footer>
                                         <button type="submit" class="btn-u btn-u-default">ส่งข้อมูล</button>
@@ -259,7 +268,7 @@
                                     @if($historyPlan)
                                         @foreach($historyPlan as $index => $item)
 
-                                            @if(checkShowList_valid($dataCheck->SAVING_RATE_CHANGE_PERIOD,$item->EFFECTIVE_DATE ))
+                                            @if(checkShowList_valid($dataCheck->SAVING_RATE_CHANGE_PERIOD,$item->CHANGE_SAVING_RATE_DATE ))
                                             <tr>
 
                                                 <td style="text-align: center;">{{$item->MODIFY_COUNT .'/'.get_date_year($item->CHANGE_SAVING_RATE_DATE) }}</td>

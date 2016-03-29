@@ -68,11 +68,12 @@
                                     <small>สังกัด</small>
                                     <h4 class="counter">{{$empinfo->DEP_SHT}}</h4>
                                 </li>
+                                @if($planchoose)
                                 <li>
                                     <small>แผนการลงทุน</small>
                                     <h4 style="text-align: center" class="counter">{{$planchoose->PLAN_NAME}}</h4>
                                 </li>
-
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -108,10 +109,12 @@
                                     </div>
                                     @endif
                             @else
-                                @if($effective[0]->MODIFY_COUNT == session()->get('user_data')->fund_plan_change_per_year)
-                                <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
-                                    <strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>
-                                </div>
+                                @if($effective)
+                                            @if($effective[0]->MODIFY_COUNT == session()->get('user_data')->fund_plan_change_per_year)
+                                            <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
+                                                <strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>
+                                            </div>
+                                            @endif
                                 @endif
                             @endif
 
@@ -131,14 +134,18 @@
                                             @if($CurrnentPlan)
                                             <p class="plan_name">{{$CurrnentPlan[0]->PLAN_NAME}}</p>
                                                 @else
-                                                <p class="plan_name">{{$effective[0]->PLAN_NAME}}</p>
+                                                    @if($effective)
+                                                        <p class="plan_name">{{$effective[0]->PLAN_NAME}}</p>
+                                                    @endif
                                             @endif
 
 
                                             @if($CurrnentPlan)
                                             <div>วันที่ทำรายการล่าสุด {{get_date_notime($CurrnentPlan[0]->MODIFY_DATE)}}</div>
                                                 @else
+                                                @if($effective)
                                                 <div>วันที่ทำรายการล่าสุด {{get_date_notime($effective[0]->MODIFY_DATE)}}</div>
+                                                @endif
                                             @endif
                                         {{--@endif--}}
                                     </div>
@@ -158,16 +165,24 @@
 
                                 </div>
                                 @if($Isaccess && get_user_access_status_flag() != 2)
-                                <div class="row">
-                                    <div class="col-md-12" style="padding: 0 100px 0 100px;">
-                                        <a href="{{action('changeplanController@deleplan')}}" class="btn-u btn-u-lg btn-block btn-u-blue" id="btn_changplan" type="button">ยกเลิกแผนปัจจุบัน</a>
-                                    </div>
+                                        @if($quizdoit)
+                                        <div class="row">
+                                            <div class="col-md-12" style="padding: 0 100px 0 100px;">
+                                                <a href="{{action('changeplanController@deleplan')}}" class="btn-u btn-u-lg btn-block btn-u-blue" id="btn_changplan" type="button">ยกเลิกแผนปัจจุบัน</a>
+                                            </div>
 
-                                </div>
+                                        </div>
+                                    @else
+                                        <div class="alert alert-info fade in">
+                                            <strong>กรุณาทำแบบประเมินความเสี่ยง ก่อนเปลี่ยนแผนการลงทุน</strong>
+                                        </div>
+                                    @endif
                                 @endif
 
                             </div>
 
+
+                            @if($quizdoit)
                             <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}" >
                                 <form action="{{ action('changeplanController@InsertInvestPlan') }}" id="sky-form1" class="sky-form" method="post">
                                     {!! csrf_field() !!}
@@ -223,8 +238,10 @@
                                     <input type="hidden" id="count_modify" name="count_modify" value="{{$CurrnentPlan[0]->MODIFY_COUNT}}">
                                     <input type="hidden" id="date_modify" name="date_modify" value="{{$CurrnentPlan[0]->MODIFY_DATE}}">
                                     @else
+                                        @if($effective)
                                         <input type="hidden" id="count_modify" name="count_modify" value="{{$effective[0]->MODIFY_COUNT}}">
                                         <input type="hidden" id="date_modify" name="date_modify" value="{{$effective[0]->MODIFY_DATE}}">
+                                        @endif
                                     @endif
                                     <footer>
                                         <button type="submit" class="btn-u btn-u-default">ส่งข้อมูล</button>
@@ -232,7 +249,11 @@
                                     </footer>
                                 </form>
                             </div>
-
+                            @else
+                                        <div class="alert alert-info fade in">
+                                            <strong>กรุณาทำแบบประเมินความเสี่ยง ก่อนเปลี่ยนแผนการลงทุน</strong>
+                                        </div>
+                            @endif
 
 
                         </div>
@@ -295,7 +316,7 @@
                                         @foreach($historyPlan as $index => $item)
 
 
-                                            @if(checkShowList_valid($dataCheck->FUND_PLAN_CHANGE_PERIOD,$item->EFFECTIVE_DATE ))
+                                            @if(checkShowList_valid($dataCheck->FUND_PLAN_CHANGE_PERIOD,$item->MODIFY_DATE ))
                                             <tr>
 
                                                 <td style="text-align: center;">{{$item->MODIFY_COUNT .'/'.get_date_year($item->MODIFY_DATE) }}</td>
@@ -322,7 +343,7 @@
                                                     {{get_date_notime($item->EFFECTIVE_DATE)}}</td>
                                             </tr>
 
-                                            @endif
+                                           @endif
 
                                         @endforeach
                                     @endif
@@ -410,14 +431,22 @@
                     @if($CurrnentPlan)
                     percentage: '{{$CurrnentPlan[0]->EQUITY_RATE}}',
                     @else
-                    percentage: '{{$effective[0]->EQUITY_RATE}}',
+                            @if($effective)
+                            percentage: '{{$effective[0]->EQUITY_RATE}}',
+                            @else
+                                percentage: '0',
+                            @endif
                     @endif
                 radius:     70,
                 width:      2,
                     @if($CurrnentPlan)
                 number:     '{{$CurrnentPlan[0]->EQUITY_RATE}}',
                     @else
-                    number: '{{$effective[0]->EQUITY_RATE}}',
+                            @if($effective)
+                            number: '{{$effective[0]->EQUITY_RATE}}',
+                            @else
+                            number: '0',
+                            @endif
                     @endif
                 text:       '%',
                 colors:      ['#FFC2BB', '#fe5000'],
@@ -429,7 +458,11 @@
                 @if($CurrnentPlan)
                 percentage: '{{$CurrnentPlan[0]->DEBT_RATE}}',
                 @else
-                percentage: '{{$effective[0]->DEBT_RATE}}',
+                        @if($effective)
+                        percentage: '{{$effective[0]->DEBT_RATE}}',
+                        @else
+                        percentage: '0',
+                        @endif
                 @endif
 
                 radius:     70,
@@ -437,7 +470,11 @@
                     @if($CurrnentPlan)
                 number: '{{$CurrnentPlan[0]->DEBT_RATE}}',
                 @else
-                number:'{{$effective[0]->DEBT_RATE}}',
+                        @if($effective)
+                        number:'{{$effective[0]->DEBT_RATE}}',
+                        @else
+                        number:'0',
+                        @endif
                 @endif
                 text:       '%',
                 colors:     ['#ffeba7', '#ffbf3f'],
