@@ -103,6 +103,8 @@ class AuthController extends Controller
             // login fail
             return redirect()->to('firstlogin')->withErrors(['ไม่พบชื่อ login นี้', 'The email or password you entered is incorrect.']);
         } else {
+
+            Session::flush();
             // logged in
 //            session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
             return redirect()->intended('/');
