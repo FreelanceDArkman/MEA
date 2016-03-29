@@ -418,6 +418,70 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
         });
 
+
+//        Report Start
+
+        Route::group(['prefix' => 'report1'], function() {
+            Route::get('/', 'AdminReportController@getreport1');
+
+        });
+        Route::group(['prefix' => 'report2'], function() {
+            Route::get('/', 'AdminReportController@getreport2');
+
+        });
+        Route::group(['prefix' => 'report2'], function() {
+            Route::get('/', 'AdminReportController@getreport2');
+
+        });
+        Route::group(['prefix' => 'report3'], function() {
+            Route::get('/', 'AdminReportController@getreport3');
+
+        });
+        Route::group(['prefix' => 'report4'], function() {
+            Route::get('/', 'AdminReportController@getreport4');
+
+        });
+        Route::group(['prefix' => 'report5'], function() {
+            Route::get('/', 'AdminReportController@getreport5');
+
+        });
+        Route::group(['prefix' => 'report6'], function() {
+            Route::get('/', 'AdminReportController@getreport6');
+
+        });
+        Route::group(['prefix' => 'report7'], function() {
+            Route::get('/', 'AdminReportController@getreport7');
+
+        });
+        Route::group(['prefix' => 'report8'], function() {
+            Route::get('/', 'AdminReportController@getreport8');
+
+        });
+        Route::group(['prefix' => 'report9'], function() {
+            Route::get('/', 'AdminReportController@getreport9');
+
+        });
+        Route::group(['prefix' => 'report10'], function() {
+            Route::get('/', 'AdminReportController@getreport10');
+
+        });
+        Route::group(['prefix' => 'report11'], function() {
+            Route::get('/', 'AdminReportController@getreport11');
+
+        });
+        Route::group(['prefix' => 'report12'], function() {
+            Route::get('/', 'AdminReportController@getreport12');
+
+        });
+        Route::group(['prefix' => 'report13'], function() {
+            Route::get('/', 'AdminReportController@getreport13');
+
+        });
+
+//        end report
+
+
+
     });
 
 });

@@ -54,24 +54,11 @@ function elog($log, $fn = "debug.log") {
 
 
 
-
-
-
 function getSideBar($menulsit){
 
     $data = $menulsit;
 
-//*navigation array config
 
-    //ex:
-//        "dashboard" => array(
-//            "title" => "Display Title",
-//            "url" => "http://yoururl.com",
-//            "url_target" => "_self",
-//            "icon" => "fa-home",
-//            "label_htm" => "<span>Add your custom label/badge html here</span>",
-//            "sub" => array() //contains array of sub items with the same format as the parent
-//        )
     $page_nav = array();
     $page_nav["dashboard"] = array(
         "group_id" => 0,
@@ -92,15 +79,15 @@ function getSideBar($menulsit){
                     "title" => getMenuName($data,50,1),
                     "url" => "/admin/userGroup",
                     "sub_mini" => array(
-                            "add" => array(
-                                  "title"=>"สร้างกลุ่มผู้ใช้",
-                                  "url" => "/admin/userGroup/add"
+                        "add" => array(
+                            "title"=>"สร้างกลุ่มผู้ใช้",
+                            "url" => "/admin/userGroup/add"
 
-                            ),
-                            "edit"=>array(
-                                "title"=> "แก้ไขกลุ่มผู้ใช้",
-                                "url" => "/admin/userGroup/edit"
-                            )
+                        ),
+                        "edit"=>array(
+                            "title"=> "แก้ไขกลุ่มผู้ใช้",
+                            "url" => "/admin/userGroup/edit"
+                        )
                     )
                 ),
                 "2" => array(
@@ -118,6 +105,96 @@ function getSideBar($menulsit){
                             "url" => "/admin/users/edit"
                         )
                     )
+                )
+            )
+        );
+    }
+
+
+    if(menu_access(1,58) || menu_access(2,58)|| menu_access(3,58)|| menu_access(4,58)|| menu_access(5,58)|| menu_access(6,58)|| menu_access(7,58)|| menu_access(8,58)|| menu_access(9,58)|| menu_access(10,58)|| menu_access(11,58)|| menu_access(12,58)|| menu_access(13,58)){
+        $page_nav["58"] = array(
+            "group_id" => 58,
+            "title" => getGoupName($data,58),
+            "icon" => "fa-home",
+
+            "sub" => array(
+                "1" => array(
+                    "menu_id" => 1,
+                    "title" => getMenuName($data,58,1),
+                    "url" => "/admin/report1"
+
+                ),
+                "2" => array(
+                    "menu_id" => 2,
+                    "title" => getMenuName($data,58,2),
+                    "url" => "/admin/report2"
+
+                ),
+                "3" => array(
+                    "menu_id" => 3,
+                    "title" => getMenuName($data,58,3),
+                    "url" => "/admin/report3"
+
+                ),
+                "4" => array(
+                    "menu_id" => 4,
+                    "title" => getMenuName($data,58,4),
+                    "url" => "/admin/report4"
+
+                ),
+                "5" => array(
+                    "menu_id" => 5,
+                    "title" => getMenuName($data,58,5),
+                    "url" => "/admin/report5"
+
+                ),
+                "6" => array(
+                    "menu_id" => 6,
+                    "title" => getMenuName($data,58,6),
+                    "url" => "/admin/report6"
+
+                ),
+                "7" => array(
+                    "menu_id" => 7,
+                    "title" => getMenuName($data,58,7),
+                    "url" => "/admin/report7"
+
+                ),
+                "8" => array(
+                    "menu_id" => 8,
+                    "title" => getMenuName($data,58,8),
+                    "url" => "/admin/report8"
+
+                ),
+                "9" => array(
+                    "menu_id" => 9,
+                    "title" => getMenuName($data,58,9),
+                    "url" => "/admin/report9"
+
+                ),
+                "10" => array(
+                    "menu_id" => 10,
+                    "title" => getMenuName($data,58,10),
+                    "url" => "/admin/report10"
+
+                ),
+                "11" => array(
+                    "menu_id" => 11,
+                    "title" => getMenuName($data,58,11),
+                    "url" => "/admin/report11"
+
+                ),
+                "12" => array(
+                    "menu_id" => 12,
+                    "title" => getMenuName($data,58,12),
+                    "url" => "/admin/report12"
+
+                ),
+                "13" => array(
+                    "menu_id" => 13,
+                    "title" => getMenuName($data,58,13),
+                    "url" => "/admin/report13"
+
                 )
             )
         );
