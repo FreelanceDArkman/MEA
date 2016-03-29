@@ -25,6 +25,7 @@
 
 <script type="text/javascript" src="{{asset('frontend/assets/plugins/sky-forms-pro/skyforms/js/jquery.form.min.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend/assets/plugins/sky-forms-pro/skyforms/js/jquery.validate.min.js')}}"></script>
+
 <script type="text/javascript" src="{{asset('frontend/assets/js/app.js')}}"></script>
 
 <script type="text/javascript" src="{{asset('frontend/assets/js/forms/login.js')}}"></script>
@@ -76,9 +77,5 @@
 
 
 </script>
-<!--[if lt IE 9]>
-<script type="text/javascript" src="{{asset('frontend/assets/plugins/respond.js')}}"></script>
-<script type="text/javascript" src="{{asset('frontend/assets/plugins/html5shiv.js')}}"></script>
-<script type="text/javascript" src="{{asset('frontend/assets/plugins/placeholder-IE-fixes.js')}}"></script>
 
 

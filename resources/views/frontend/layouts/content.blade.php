@@ -44,6 +44,11 @@
 {{--@include('frontend.includes.footer')--}}
 
 @include('frontend.includes.footer_custom')
+<!--[if lt IE 9]>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/respond.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/html5shiv.js')}}"></script>
+<script type="text/javascript" src="{{asset('frontend/assets/plugins/placeholder-IE-fixes.js')}}"></script>
+<![endif]-->
 
 </body>
 <!-- END BODY -->
