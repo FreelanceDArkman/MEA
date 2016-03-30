@@ -182,90 +182,94 @@
                             </div>
 
 
+                            <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}" >
 
-                            @if( $Isaccess && get_user_access_status_flag() != 2)
 
-                                        @if($quizdoit)
-                                            <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}" >
-                                <form action="{{ action('changeplanController@InsertInvestPlan') }}" id="sky-form1" class="sky-form" method="post">
-                                    {!! csrf_field() !!}
-                                    <header>เลือกแผนการลงทุน</header>
+                                @if( $Isaccess && get_user_access_status_flag() != 2)
+
+                                    @if($quizdoit)
+                                        <form action="{{ action('changeplanController@InsertInvestPlan') }}" id="sky-form1" class="sky-form" method="post">
+                                            {!! csrf_field() !!}
+                                            <header>เลือกแผนการลงทุน</header>
+                                            <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
+                                                <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->FUND_PLAN_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
+                                            </div>
+                                            <fieldset>
+                                                <legend>เปลี่ยนแผนการลงทุน</legend>
+                                                <div class="row">
+                                                    <section class="col col-6">
+                                                        <label class="label">แผนการลงทุน</label>
+
+
+                                                        <select name="TYPE_TOPIC" id="TYPE_TOPIC"  class="form-control">
+                                                            <option value="default"> กรุณาเลือก </option>
+                                                            @foreach($dropplan as $index => $item)
+
+                                                                <option value="{{$item->PLAN_ID ."," .$item->EQUITY_MIN_PERCENTAGE."," .$item->EQUITY_MAX_PERCENTAGE."," .$item->DEBT_MIN_PERCENTAGE."," .$item->DEBT_MAX_PERCENTAGE}}">{{$item->PLAN_NAME}}</option>
+
+                                                            @endforeach
+                                                        </select>
+                                                    </section>
+
+                                                </div>
+
+
+                                                <input type="hidden" id="user" name="user" value="{{$users->USER_PRIVILEGE_DESC}}">
+                                            </fieldset>
+                                            <br/>
+                                            <fieldset>
+                                                <legend>ระบุสัดส่วนการลงทุน</legend>
+                                                <div class="row">
+                                                    <section class="col col-4">
+                                                        <label class="label">สัดส่วนตราสารทุน (%)</label>
+                                                        <label class="input">
+                                                            <i class="icon-append fa fa-asterisk"></i>
+                                                            <input type="text" name="maxVal1" id="maxVal1">
+                                                        </label>
+                                                    </section>
+                                                    <section class="col col-4">
+                                                        <label class="label">สัดส่วนตราสารหนี้ (%)</label>
+                                                        <label class="input">
+                                                            <i class="icon-append fa fa-asterisk"></i>
+                                                            <input type="text" name="maxVal2" style="background-color: #e0e4ee"  readonly id="maxVal2">
+                                                        </label>
+                                                    </section>
+                                                </div>
+
+
+                                            </fieldset>
+                                            @if($CurrnentPlan)
+                                                <input type="hidden" id="count_modify" name="count_modify" value="{{$CurrnentPlan[0]->MODIFY_COUNT}}">
+                                                <input type="hidden" id="date_modify" name="date_modify" value="{{$CurrnentPlan[0]->MODIFY_DATE}}">
+                                            @else
+                                                @if($effective)
+                                                    <input type="hidden" id="count_modify" name="count_modify" value="{{$effective[0]->MODIFY_COUNT}}">
+                                                    <input type="hidden" id="date_modify" name="date_modify" value="{{$effective[0]->MODIFY_DATE}}">
+                                                @endif
+                                            @endif
+                                            <footer>
+                                                <button type="submit" class="btn-u btn-u-default">ส่งข้อมูล</button>
+                                                <button type="button" class="btn-u" id="btn_cancelinvest" >ยกเลิก</button>
+                                            </footer>
+                                        </form>
+                                    @else
+                                        <div class="alert alert-info fade in">
+                                            <strong>กรุณาทำแบบประเมินความเสี่ยง ก่อนเปลี่ยนแผนการลงทุน</strong>
+                                        </div>
+                                    @endif
+
+                                @else
+
                                     <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                         <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->FUND_PLAN_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
                                     </div>
-                                    <fieldset>
-                                        <legend>เปลี่ยนแผนการลงทุน</legend>
-                                        <div class="row">
-                                            <section class="col col-6">
-                                                <label class="label">แผนการลงทุน</label>
 
 
-                                                <select name="TYPE_TOPIC" id="TYPE_TOPIC"  class="form-control">
-                                                    <option value="default"> กรุณาเลือก </option>
-                                                    @foreach($dropplan as $index => $item)
+                                @endif
 
-                                                    <option value="{{$item->PLAN_ID ."," .$item->EQUITY_MIN_PERCENTAGE."," .$item->EQUITY_MAX_PERCENTAGE."," .$item->DEBT_MIN_PERCENTAGE."," .$item->DEBT_MAX_PERCENTAGE}}">{{$item->PLAN_NAME}}</option>
-
-                                                    @endforeach
-                                                </select>
-                                            </section>
-
-                                        </div>
-
-
-                                        <input type="hidden" id="user" name="user" value="{{$users->USER_PRIVILEGE_DESC}}">
-                                    </fieldset>
-                                    <br/>
-                                    <fieldset>
-                                        <legend>ระบุสัดส่วนการลงทุน</legend>
-                                        <div class="row">
-                                            <section class="col col-4">
-                                                <label class="label">สัดส่วนตราสารทุน (%)</label>
-                                                <label class="input">
-                                                    <i class="icon-append fa fa-asterisk"></i>
-                                                    <input type="text" name="maxVal1" id="maxVal1">
-                                                </label>
-                                            </section>
-                                            <section class="col col-4">
-                                                <label class="label">สัดส่วนตราสารหนี้ (%)</label>
-                                                <label class="input">
-                                                    <i class="icon-append fa fa-asterisk"></i>
-                                                    <input type="text" name="maxVal2" style="background-color: #e0e4ee"  readonly id="maxVal2">
-                                                </label>
-                                            </section>
-                                        </div>
-
-
-                                    </fieldset>
-                                    @if($CurrnentPlan)
-                                    <input type="hidden" id="count_modify" name="count_modify" value="{{$CurrnentPlan[0]->MODIFY_COUNT}}">
-                                    <input type="hidden" id="date_modify" name="date_modify" value="{{$CurrnentPlan[0]->MODIFY_DATE}}">
-                                    @else
-                                        @if($effective)
-                                        <input type="hidden" id="count_modify" name="count_modify" value="{{$effective[0]->MODIFY_COUNT}}">
-                                        <input type="hidden" id="date_modify" name="date_modify" value="{{$effective[0]->MODIFY_DATE}}">
-                                        @endif
-                                    @endif
-                                    <footer>
-                                        <button type="submit" class="btn-u btn-u-default">ส่งข้อมูล</button>
-                                        <button type="button" class="btn-u" id="btn_cancelinvest" >ยกเลิก</button>
-                                    </footer>
-                                </form>
                             </div>
-                                        @else
-                                            <div class="alert alert-info fade in">
-                                                <strong>กรุณาทำแบบประเมินความเสี่ยง ก่อนเปลี่ยนแผนการลงทุน</strong>
-                                            </div>
-                                        @endif
-
-                            @else
-
-                                        <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
-                                            <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->FUND_PLAN_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
-                                        </div>
 
 
-                            @endif
 
 
                         </div>
