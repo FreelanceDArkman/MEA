@@ -182,8 +182,11 @@
                             </div>
 
 
-                            @if($quizdoit)
-                            <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}" >
+
+                            @if( $Isaccess && get_user_access_status_flag() != 2)
+
+                                        @if($quizdoit)
+                                                <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}" >
                                 <form action="{{ action('changeplanController@InsertInvestPlan') }}" id="sky-form1" class="sky-form" method="post">
                                     {!! csrf_field() !!}
                                     <header>เลือกแผนการลงทุน</header>
@@ -249,10 +252,19 @@
                                     </footer>
                                 </form>
                             </div>
+                                        @else
+                                            <div class="alert alert-info fade in">
+                                                <strong>กรุณาทำแบบประเมินความเสี่ยง ก่อนเปลี่ยนแผนการลงทุน</strong>
+                                            </div>
+                                        @endif
+
                             @else
-                                        <div class="alert alert-info fade in">
-                                            <strong>กรุณาทำแบบประเมินความเสี่ยง ก่อนเปลี่ยนแผนการลงทุน</strong>
+
+                                        <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
+                                            <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->FUND_PLAN_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
                                         </div>
+
+
                             @endif
 
 
