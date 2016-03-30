@@ -186,7 +186,7 @@
                             @if( $Isaccess && get_user_access_status_flag() != 2)
 
                                         @if($quizdoit)
-                                                <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}" >
+                                            <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}" >
                                 <form action="{{ action('changeplanController@InsertInvestPlan') }}" id="sky-form1" class="sky-form" method="post">
                                     {!! csrf_field() !!}
                                     <header>เลือกแผนการลงทุน</header>
