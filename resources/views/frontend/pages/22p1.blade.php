@@ -339,11 +339,11 @@
                                                 {{--<td style="text-align: center;">{{$item->EMP_ID}}</td>--}}
                                                 {{--<td style="text-align: center;">{{$item->FULL_NAME}}</td>--}}
 
-                                                @if( count($historyPlan) > $index+1)
+                                                @if( count($historyPlan) > $index+1)DEBT_RATE
 
                                                 <td style="text-align: center;">{{$historyPlan[$index+1]->PLAN_NAME}}</td>
-                                                <td style="text-align: center;">{{$historyPlan[$index+1]->DEBT_RATE}}</td>
                                                 <td style="text-align: center;">{{$historyPlan[$index+1]->EQUITY_RATE}}</td>
+                                                <td style="text-align: center;">{{$historyPlan[$index+1]->DEBT_RATE}}</td>
                                                 @else
                                                     <td style="text-align: center;">-</td>
                                                     <td style="text-align: center;">-</td>
@@ -351,8 +351,8 @@
                                                 @endif
 
                                                 <td style="text-align: center;">{{$item->PLAN_NAME}}</td>
-                                                <td style="text-align: center;">{{$item->DEBT_RATE}}</td>
                                                 <td style="text-align: center;">{{$item->EQUITY_RATE}}</td>
+                                                <td style="text-align: center;">{{$item->DEBT_RATE}}</td>
 
                                                 <td style="text-align: center;">{{get_date_notime($item->MODIFY_DATE)}}</td>
                                                 <td style="text-align: center;">
