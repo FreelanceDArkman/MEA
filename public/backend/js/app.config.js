@@ -374,9 +374,30 @@ var toDay = d.getDate() + " " + (month[d.getMonth()])  + " " +  (d.getFullYear()
 //	today: "Today"
 //};
 
+
+
+
+function MeaAjax(jsondata,urls,callback){
+
+	$.ajax({
+
+		type: 'post', // or post?
+		dataType: 'json',
+		url: urls,
+		data: jsondata,
+
+		success: callback,
+		error: function(xhr, textStatus, thrownError) {
+//                                alert(xhr.status);
+//                                alert(thrownError);
+//                                alert(textStatus);
+		}
+	});
+}
+
 function meaDatepicker(id){
 
-	//$("."+classid).after("<input type='hidden' value='' id='hd_"+id+"' />");
+	$("."+id).after("<input type='hidden' value='' id='hd_"+id+"' />");
 
 
 	//$("."+classid).datepicker({
@@ -399,26 +420,26 @@ function meaDatepicker(id){
 		monthNames: ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'],
 		monthNamesShort: ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'],
 		beforeShow : function(date){
-		 console.log($(date).val());
-			var dates = $(date).val()
-
-			var arrselectedDate = dates.split(' ');
-
-			var year = parseInt(arrselectedDate[2]);
-				year = year - 543;
-
-			$(date).val(arrselectedDate[0] + " " + arrselectedDate[1] + " " + (parseInt(arrselectedDate[2]) - 543))
+		 //console.log($(date).val());
+			//var dates = $(date).val()
+         //
+			//var arrselectedDate = dates.split(' ');
+         //
+			//var year = parseInt(arrselectedDate[2]);
+			//	year = year - 543;
+         //
+			//$(date).val(arrselectedDate[0] + " " + arrselectedDate[1] + " " + (parseInt(arrselectedDate[2]) - 543))
 		},
 
 		onSelect : function(selectedDate) {
-			console.log(selectedDate);
-			var arrselectedDate = selectedDate.split(' ');
-			console.log(arrselectedDate);
-
-			var year = parseInt(arrselectedDate[2]);
-
-
-			$(this).val(arrselectedDate[0] + " " + arrselectedDate[1] + " " + (parseInt(arrselectedDate[2]) + 543));
+			//console.log(selectedDate);
+			//var arrselectedDate = selectedDate.split(' ');
+			//console.log(arrselectedDate);
+            //
+			//var year = parseInt(arrselectedDate[2]);
+            //
+            //
+			//$(this).val(arrselectedDate[0] + " " + arrselectedDate[1] + " " + (parseInt(arrselectedDate[2]) + 543));
 
 
 			//$('#finishdate').datepicker('option', 'minDate', selectedDate);

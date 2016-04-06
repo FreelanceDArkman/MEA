@@ -18,9 +18,10 @@ class UserController extends Controller
             'menu_group_id' => 50,
             'menu_id' => 2,
             'title' => 'จัดการผู้ใช้'
-        ] );
+        ]);
+
         $user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
-        $userAll = $this->getUserAll()->get();
+        $userAll = $this->getUserAll()->paginate(100);
         return view('backend.pages.users')->with([
             'user_group' => $user_group,
             'userAll' =>$userAll

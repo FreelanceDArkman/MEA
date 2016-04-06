@@ -224,7 +224,9 @@ $arrSidebar =getSideBar($data);
 
     </section>
     <!-- end widget grid -->
-
+    <div class="text-center">
+        {{$userAll->links()}}
+    </div>
 
 </div>
 <!-- END MAIN CONTENT -->

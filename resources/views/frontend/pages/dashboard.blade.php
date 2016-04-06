@@ -111,6 +111,14 @@
     <div class="text-center">
         {{$netasset->links()}}
     </div>
+
+
+
+
+
+
+
+
     @endif
 
 

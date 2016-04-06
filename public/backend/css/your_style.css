@@ -96,3 +96,27 @@ table tbody tr td{
 .ui-datepicker-calendar thead tr th {
     font-size: 12px !important;
 }
+.jarviswidget>header {
+    height: 40px !important;
+    padding: 0;
+    line-height: 50 !important;
+}
+#comment-form_darkman label{
+    font-size: 18px!important;
+}
+.report-title{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.mea-pagesize{
+    width: 80px;
+
+    position: absolute;
+    right:80px;
+    top:3px;
+}
+
+.odd{
+    background-color: #f9f9f9;
+}

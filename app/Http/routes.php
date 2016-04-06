@@ -423,6 +423,7 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
         Route::group(['prefix' => 'report1'], function() {
             Route::get('/', 'AdminReportController@getreport1');
+            Route::post('/', 'AdminReportController@ajax_report1');
 
         });
         Route::group(['prefix' => 'report2'], function() {
