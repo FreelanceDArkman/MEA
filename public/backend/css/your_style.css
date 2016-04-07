@@ -120,3 +120,6 @@ table tbody tr td{
 .odd{
     background-color: #f9f9f9;
 }
+.ui-state-disabled{
+    font-size: 12px !important;
+}

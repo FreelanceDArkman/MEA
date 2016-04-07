@@ -396,8 +396,10 @@ function MeaAjax(jsondata,urls,callback){
 }
 
 function meaDatepicker(id){
+	//var realid = $('.'+id).attr('id');
 
-	$("."+id).after("<input type='hidden' value='' id='hd_"+id+"' />");
+
+	$("#"+id).after("<input type='hidden' value='' id='hd_"+id+"' />");
 
 
 	//$("."+classid).datepicker({
@@ -406,7 +408,7 @@ function meaDatepicker(id){
 	//});
 
 
-	$("." + id).datepicker({
+	$("#" + id).datepicker({
 		dateFormat: 'dd M yy',
 		altField: "#hd_"+id+"",
 		altFormat: "yy-mm-dd",
@@ -432,6 +434,8 @@ function meaDatepicker(id){
 		},
 
 		onSelect : function(selectedDate) {
+
+			$("#date_end").datepicker('option', 'minDate', selectedDate);
 			//console.log(selectedDate);
 			//var arrselectedDate = selectedDate.split(' ');
 			//console.log(arrselectedDate);

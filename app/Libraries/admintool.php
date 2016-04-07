@@ -72,9 +72,10 @@ if (!function_exists('activeDisplay')) {
 
 if (!function_exists('Paginatre_gen')) {
 
-    function Paginatre_gen($total,$pagesize, $active = 1)
+    function Paginatre_gen($total,$pagesize, $id,$active = 1)
     {
-        $ret = "<ul class='pagination' id='page_click'>";
+
+        $ret = "<ul class='pagination' id='".$id."'>";
 
 
         $TotalPage =ceil($total/$pagesize);
@@ -97,6 +98,9 @@ if (!function_exists('Paginatre_gen')) {
 
         $ret = $ret . "</ul>";
 
+        if($total<$pagesize){
+            $ret = "";
+        }
 
 
         return $ret;

@@ -78,19 +78,19 @@ $arrSidebar =getSideBar($data);
                                                 <section class="col col-4">
                                                     <label class="label">รหัสพนักงาน</label>
                                                     <label class="input">
-                                                        <input type="text" name="name">
+                                                        <input type="text" name="name" id="name">
                                                     </label>
                                                 </section>
                                                 <section class="col col-4">
                                                     <label class="label">หน่วยงาน</label>
                                                     <label class="input">
-                                                        <input type="email" name="email">
+                                                        <input type="text" name="email" id="depart">
                                                     </label>
                                                 </section>
                                                 <section class="col col-4">
                                                     <label class="label">แผนการลงทุนก</label>
                                                     <label class="input">
-                                                        <input type="url" name="url">
+                                                        <input type="text" name="plan" id="plan">
                                                     </label>
                                                 </section>
                                             </div>
@@ -281,8 +281,8 @@ $arrSidebar =getSideBar($data);
 <script type="text/javascript">
 
     function Render(data){
-        $("#all_data").hide();
-
+//        $("#all_data").hide();
+        $("#all_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
 
         $("#all_data").html(data.html);
         $("#all_data").fadeIn('300');
@@ -296,7 +296,7 @@ $arrSidebar =getSideBar($data);
         var p = $(this).attr('data-page');
         var page_size = $('#page-size-all').val();
         var CurPage = $('#currentpage_all').val();
-
+        $("#all_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
 
         if(p == "pre"){
             p = parseInt(CurPage) - 1;
@@ -308,20 +308,23 @@ $arrSidebar =getSideBar($data);
         $('#currentpage_all').val(p);
         var jsondata = {pagesize : page_size,PageNumber:p};
 
-        MeaAjax(jsondata,"report1",Render);
+        MeaAjax(jsondata,"report1/all",Render);
     };
 
     $(document).ready(function(){
 
-        meaDatepicker("mea_date_picker");
+        meaDatepicker("date_start");
+        meaDatepicker("date_end");
 
         $("#all_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
 
         var jsondata = {pagesize : 25,PageNumber:1};
 
         $('html').append('<input type="hidden" value="1" id="currentpage_all" />');
+        $('html').append('<input type="hidden" value="1" id="currentpage_search" />');
 
-        MeaAjax(jsondata,"report1",Render);
+        MeaAjax(jsondata,"report1/all",Render);
+
 
 
 
@@ -331,17 +334,91 @@ $arrSidebar =getSideBar($data);
             $("#all_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
             var val = $(this).val();
             var jsondata = {pagesize : val,PageNumber:1};
-            MeaAjax(jsondata,"report1",Render);
+            MeaAjax(jsondata,"report1/all",Render);
 
 
             });
 
 
+        //end all data
+
+        //Start Search data
 
 
+
+
+        $('#btn_search').on('click',function(){
+
+            var PageSizeAll = $('#page-size-search').val();
+            var EmpID = $('#name').val();
+            var depart = $('#depart').val();
+            var plan = $('#plan').val();
+            var date_start = $('#hd_date_start').val();
+            var date_end =$('#hd_date_end').val();
+
+
+            var jsondata = {
+                pagesize : PageSizeAll,
+                PageNumber:1,
+                emp_id : EmpID,
+                depart :depart,
+                plan : plan,
+                date_start:date_start,
+                date_end:date_end
+
+            };
+
+            console.log(jsondata);
+            $("#serch_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+            MeaAjax(jsondata,"report1/search",RenderSearch);
+
+            return false;
+
+        });
+
+
+        $("#page-size-search").on('change',function(){
+            $("#serch_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+            var val = $(this).val();
+            var jsondata = {pagesize : val,PageNumber:1};
+            $("#serch_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');nbb
+            MeaAjax(jsondata,"report1/search",RenderSearch);
+
+
+        });
 
 
     });
+
+    function RenderSearch(data){
+//        $("#all_data").hide();
+
+
+        $("#serch_data").html(data.html);
+        $("#serch_data").fadeIn('300');
+
+
+        $("#page_click_search li a").on('click',PageRenderSearch);
+    }
+
+    function PageRenderSearch(){
+        var p = $(this).attr('data-page');
+        var page_size = $('#page-size-search').val();
+        var CurPage = $('#currentpage_search').val();
+        $("#serch_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+
+        if(p == "pre"){
+            p = parseInt(CurPage) - 1;
+        }
+
+        if(p == "next"){
+            p = parseInt(CurPage) + 1;
+        }
+        $('#currentpage_search').val(p);
+        var jsondata = {pagesize : page_size,PageNumber:p};
+
+        MeaAjax(jsondata,"report1/search",Render);
+    };
 
 
 </script>

@@ -1,4 +1,6 @@
 
+
+<div>Showing {{$PageNumber}} to {{ (($PageSize * $PageNumber) > $totals? $totals:($PageSize * $PageNumber))  }} of {{ $totals }}</div>
 <table class="table table-bordered">
     @if($data)
 
