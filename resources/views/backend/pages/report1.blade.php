@@ -380,8 +380,25 @@ $arrSidebar =getSideBar($data);
         $("#page-size-search").on('change',function(){
             $("#serch_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
             var val = $(this).val();
-            var jsondata = {pagesize : val,PageNumber:1};
-            $("#serch_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');nbb
+
+            var EmpID = $('#name').val();
+            var depart = $('#depart').val();
+            var plan = $('#plan').val();
+            var date_start = $('#hd_date_start').val();
+            var date_end =$('#hd_date_end').val();
+
+            var jsondata = {
+                pagesize : val,
+                PageNumber:1,
+                emp_id : EmpID,
+                depart :depart,
+                plan : plan,
+                date_start:date_start,
+                date_end:date_end
+
+            };
+//            var jsondata = {pagesize : val,PageNumber:1};
+            $("#serch_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
             MeaAjax(jsondata,"report1/search",RenderSearch);
 
 
@@ -415,9 +432,28 @@ $arrSidebar =getSideBar($data);
             p = parseInt(CurPage) + 1;
         }
         $('#currentpage_search').val(p);
-        var jsondata = {pagesize : page_size,PageNumber:p};
 
-        MeaAjax(jsondata,"report1/search",Render);
+//        var PageSizeAll = $('#page-size-search').val();
+        var EmpID = $('#name').val();
+        var depart = $('#depart').val();
+        var plan = $('#plan').val();
+        var date_start = $('#hd_date_start').val();
+        var date_end =$('#hd_date_end').val();
+
+
+        var jsondata = {
+            pagesize : page_size,
+            PageNumber:p,
+            emp_id : EmpID,
+            depart :depart,
+            plan : plan,
+            date_start:date_start,
+            date_end:date_end
+
+        };
+//        var jsondata = {pagesize : page_size,PageNumber:p};
+
+        MeaAjax(jsondata,"report1/search",RenderSearch);
     };
 
 
