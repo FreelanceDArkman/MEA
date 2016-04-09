@@ -25,6 +25,17 @@
 
     <thead>
     <tr>
+        <td style="text-align:center;">{{$topic}}</td>
+    </tr>
+    <tr>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td style="text-align:center;">รายงานข้อมูล ณ วันที่ {{ get_date_notime(date("Y-m-d H:i:s"))  }}</td>
+
+    </tr>
+    <tr>
         <th>รหัสพนักงาน</th>
         <th>ชื่อ-นามสกุล</th>
         <th>หน่วยงาน</th>

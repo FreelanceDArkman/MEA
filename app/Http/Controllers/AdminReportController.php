@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Jenssegers\Date\Date;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -33,15 +37,15 @@ class AdminReportController extends Controller
 
     }
 
-    public  function  DataSourceCount($request,$IsCase){
-        $PageSize = $request->input('pagesize');
-        $PageNumber = $request->input('PageNumber');
+    public  function  DataSourceCount($ArrParam,$IsCase){
+        $PageSize = $ArrParam['pagesize'];
+        $PageNumber = $ArrParam['PageNumber'];
 
-        $emp_id = $request->input('emp_id');
-        $depart = $request->input('depart');
-        $plan = $request->input('plan');
-        $date_start = $request->input('date_start');
-        $date_end = $request->input('date_end');
+        $emp_id =$ArrParam['emp_id'];
+        $depart = $ArrParam['depart'];
+        $plan = $ArrParam['plan'];
+        $date_start = $ArrParam['date_start'];
+        $date_end = $ArrParam['date_end'];
 
 
         $where = " WHERE focus.EMP_ID IS NOT  NULL";
@@ -72,31 +76,37 @@ class AdminReportController extends Controller
         return  $all[0]->total;
     }
 
-    public  function  DataSource($request, $IsCase, $ispageing= true){
+    public  function  DataSource($ArrParam, $IsCase, $ispageing= true){
 
-        $PageSize = $request->input('pagesize');
-        $PageNumber = $request->input('PageNumber');
-
-        $emp_id = $request->input('emp_id');
-        $depart = $request->input('depart');
-        $plan = $request->input('plan');
-        $date_start = $request->input('date_start');
-        $date_end = $request->input('date_end');
-
-
-        $where = " WHERE focus.EMP_ID IS NOT  NULL";
-
-        if(!empty($emp_id)){
-            $where .= " AND focus.EMP_ID = '".$emp_id."'";
+        $where = "";
+        if($ispageing){
+            $PageSize = $ArrParam['pagesize'];
+            $PageNumber = $ArrParam['PageNumber'];
         }
-        if(!empty($depart)){
-            $where .= " AND em.DEP_SHT  = '".$depart."'";
-        }
-        if(!empty($plan)){
-            $where .= " AND new.PLAN_ID = '".$plan."'";
-        }
-        if(!empty($date_start) && !empty($date_end)){
-            $where .= " AND new.MODIFY_DATE BETWEEN '".$date_start."' AND '".$date_end."'";
+
+        if($IsCase) {
+
+            $emp_id = $ArrParam['emp_id'];
+            $depart = $ArrParam['depart'];
+            $plan = $ArrParam['plan'];
+            $date_start = $ArrParam['date_start'];
+            $date_end = $ArrParam['date_end'];
+
+
+            $where = " WHERE focus.EMP_ID IS NOT  NULL";
+
+            if (!empty($emp_id)) {
+                $where .= " AND focus.EMP_ID = '" . $emp_id . "'";
+            }
+            if (!empty($depart)) {
+                $where .= " AND em.DEP_SHT  = '" . $depart . "'";
+            }
+            if (!empty($plan)) {
+                $where .= " AND new.PLAN_ID = '" . $plan . "'";
+            }
+            if (!empty($date_start) && !empty($date_end)) {
+                $where .= " AND new.MODIFY_DATE BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
+            }
         }
 
 
@@ -129,12 +139,27 @@ class AdminReportController extends Controller
         $PageSize = $request->input('pagesize');
         $PageNumber = $request->input('PageNumber');
 
+        $emp_id = $request->input('emp_id');
+        $depart = $request->input('depart');
+        $plan = $request->input('plan');
+        $date_start = $request->input('date_start');
+        $date_end = $request->input('date_end');
+
+        $ArrParam = array();
+        $ArrParam["pagesize"] =$PageSize;
+        $ArrParam["PageNumber"] =$PageNumber;
+        $ArrParam["emp_id"] =$emp_id;
+        $ArrParam["depart"] =$depart;
+        $ArrParam["plan"] =$plan;
+        $ArrParam["date_start"] =$date_start;
+        $ArrParam["date_end"] =$date_end;
 
 
 
-        $data = $this->DataSource($request,true);
 
-        $totals =  $this->DataSourceCount($request,true);
+        $data = $this->DataSource($ArrParam,true);
+
+        $totals =  $this->DataSourceCount($ArrParam,true);
 
         $htmlPaginate =Paginatre_gen($totals,$PageSize,'page_click_search',$PageNumber);
 
@@ -166,12 +191,18 @@ class AdminReportController extends Controller
 
         $PageSize = $request->input('pagesize');
         $PageNumber = $request->input('PageNumber');
+        $ArrParam = array();
+        $ArrParam["pagesize"] =$PageSize;
+        $ArrParam["PageNumber"] =$PageNumber;
+        $ArrParam["emp_id"] ="";
+        $ArrParam["depart"] ="";
+        $ArrParam["plan"] ="";
+        $ArrParam["date_start"] ="";
+        $ArrParam["date_end"] ="";
 
+        $data = $this->DataSource($ArrParam,false);
 
-
-        $data = $this->DataSource($request,false);
-
-        $totals =  $this->DataSourceCount($request,false);
+        $totals =  $this->DataSourceCount($ArrParam,false);
 //
         $htmlPaginate =Paginatre_gen($totals,$PageSize,'page_click',$PageNumber);
 
@@ -192,101 +223,60 @@ class AdminReportController extends Controller
     }
 
 
-    public function ajax_report1_all_export(Request $request)
+    public function ajax_report1_all_export()
     {
+
+        $ArrParam = array();
+        $ArrParam["pagesize"] ="";
+        $ArrParam["PageNumber"] ="";
+        $ArrParam["emp_id"] ="";
+        $ArrParam["depart"] ="";
+        $ArrParam["plan"] ="";
+        $ArrParam["date_start"] ="";
+        $ArrParam["date_end"] ="";
         // $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
-        $data = $this->DataSource($request,false,false);
+        $data = $this->DataSource($ArrParam,false,false);
 
         Excel::create('Export1', function($excel) use ($data){
 
             $excel->sheet('New sheet', function($sheet)use ($data) {
-//                $sheet->mergeCells('E1:J1');
-//                $sheet->mergeCells('K1:M1');
-//                $sheet->mergeCells('N1:P1');
-//
-//
-//                $sheet->mergeCells('E2:G2');
-//                $sheet->mergeCells('H2:J2');
-////                $sheet->mergeCells('G2:H2');
-////
-//                $sheet->setMergeColumn(array(
-//                    'columns' => array('A','B','C','D'),
-//                    'rows' => array(
-//                        array(1,3)
-//
-//                    )
-//                ));
-//
-//                $sheet->setMergeColumn(array(
-//                    'columns' => array('K','L','M','N','O','P'),
-//                    'rows' => array(
-//                        array(1,2)
-//
-//                    )
-//                ));
-//                $sheet->setColumnFormat(array(
-//                    'A' => '0.00',
-//                    'B' => '0.00',
-//                    'C' => '0.00',
-//                    'D' => '0.00',
-//                    'E' => '0.00',
-//                    'F' => '0.00',
-//                    'G' => '0.00',
-//                    'H' => '0.00',
-//                    'I' => '0.00',
-//                ));
+                $sheet->mergeCells('A1:M1');
+                $sheet->mergeCells('A3:M3');
+
                 $sheet->loadView('backend.pages.export.export_report1')->with([
-                    'data' => $data
+                    'data' => $data,
+                    'topic' => "รายชื่อสมาชิกทั้งหมดในระบบ"
                 ]);
 
             });
 
         })->download('xls');
     }
-    public function ajax_report1_search_export(Request $request)
+    public function ajax_report1_search_export()
     {
+//        window.location.href =  "report1/exportsearch?EmpID=" + EmpID +"&depart=" + depart + "&plan=" + plan + "&date_start" + "&date_end=" + date_end;
+//        Input::get("param");
+
+        $ArrParam = array();
+        $ArrParam["pagesize"] ="";
+        $ArrParam["PageNumber"] ="";
+        $ArrParam["emp_id"] =Input::get("EmpID");
+        $ArrParam["depart"] =Input::get("depart");
+        $ArrParam["plan"] =Input::get("plan");
+        $ArrParam["date_start"] =Input::get("date_start");
+        $ArrParam["date_end"] =Input::get("date_end");
         // $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
-        $netasset2 = $this->getDB_TBL_MEMBER_BENEFITS_table();
-        Excel::create('Export1', function($excel) use ($netasset2){
+        $data = $this->DataSource($ArrParam,true,false);
 
-            $excel->sheet('New sheet', function($sheet)use ($netasset2) {
-                $sheet->mergeCells('E1:J1');
-                $sheet->mergeCells('K1:M1');
-                $sheet->mergeCells('N1:P1');
+        Excel::create('Export1', function($excel) use ($data){
 
+            $excel->sheet('New sheet', function($sheet)use ($data) {
+                $sheet->mergeCells('A1:M1');
+                $sheet->mergeCells('A3:M3');
 
-                $sheet->mergeCells('E2:G2');
-                $sheet->mergeCells('H2:J2');
-//                $sheet->mergeCells('G2:H2');
-//
-                $sheet->setMergeColumn(array(
-                    'columns' => array('A','B','C','D'),
-                    'rows' => array(
-                        array(1,3)
-
-                    )
-                ));
-
-                $sheet->setMergeColumn(array(
-                    'columns' => array('K','L','M','N','O','P'),
-                    'rows' => array(
-                        array(1,2)
-
-                    )
-                ));
-//                $sheet->setColumnFormat(array(
-//                    'A' => '0.00',
-//                    'B' => '0.00',
-//                    'C' => '0.00',
-//                    'D' => '0.00',
-//                    'E' => '0.00',
-//                    'F' => '0.00',
-//                    'G' => '0.00',
-//                    'H' => '0.00',
-//                    'I' => '0.00',
-//                ));
                 $sheet->loadView('backend.pages.export.export_report1')->with([
-                    'netasset2' => $netasset2
+                    'data' => $data,
+                    'topic' => "รายชื่อสมาชิกเปลี่ยนแผนการลงทุน"
                 ]);
 
             });

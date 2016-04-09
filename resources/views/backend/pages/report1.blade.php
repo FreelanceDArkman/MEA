@@ -133,7 +133,7 @@ $arrSidebar =getSideBar($data);
 
 
 
-                                <a href="{{action('AdminReportController@ajax_report1_search_export')}}" style="margin-top: 30px;" class="btn btn-labeled btn-success mea-btn-export"> <span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i></span>Export </a>
+                                <a href="#" id="export_search" style="margin-top: 30px;" class="btn btn-labeled btn-success mea-btn-export"> <span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i></span>Export </a>
                                 <!-- Widget ID (each widget will need unique ID)-->
                                 <div class="jarviswidget jarviswidget-color-blueDark" style="margin-top: 5px;" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-togglebutton="false">
                                     <!-- widget options:
@@ -322,6 +322,21 @@ $arrSidebar =getSideBar($data);
     };
 
     $(document).ready(function(){
+
+
+        $('#export_search').on('click',function(){
+
+            var PageSizeAll = $('#page-size-search').val();
+            var EmpID = $('#name').val();
+            var depart = $('#depart').val();
+            var plan = $('#plan').val();
+            var date_start = $('#hd_date_start').val();
+            var date_end =$('#hd_date_end').val();
+
+                window.location.href =  "report1/exportsearch?EmpID=" + EmpID +"&depart=" + depart + "&plan=" + plan + "&date_start" + "&date_end=" + date_end;
+
+            return false;
+        });
 
         meaDatepicker("date_start");
         meaDatepicker("date_end");
