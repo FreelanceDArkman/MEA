@@ -113,9 +113,10 @@ table tbody tr td{
     width: 80px;
 
     position: absolute;
-    right:80px;
+    right:120px;
     top:3px;
 }
+
 
 .odd{
     background-color: #f9f9f9;

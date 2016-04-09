@@ -101,7 +101,7 @@ if (!function_exists('Paginatre_gen')) {
         if($total<$pagesize){
             $ret = "";
         }
-
+       // $ret = $total . "--".$pagesize. "--". $id . "--".$active;
 
         return $ret;
     }

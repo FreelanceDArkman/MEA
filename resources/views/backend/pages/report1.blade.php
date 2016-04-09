@@ -28,7 +28,7 @@ $arrSidebar =getSideBar($data);
 
 
             <!-- Widget ID (each widget will need unique ID)-->
-            <div class="jarviswidget" id="wid-id-5" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" data-widget-deletebutton="false" data-widget-colorbutton="false">
+            <div class="jarviswidget" id="wid-id-5" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false" data-widget-deletebutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false">
                 <!-- widget options:
                 usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -90,7 +90,15 @@ $arrSidebar =getSideBar($data);
                                                 <section class="col col-4">
                                                     <label class="label">แผนการลงทุนก</label>
                                                     <label class="input">
-                                                        <input type="text" name="plan" id="plan">
+                                                        <select name="plan" id="plan" class="form-control">
+                                                            <option value="">แผนการลงทุน</option>
+                                                            @if($planlist)
+                                                                @foreach($planlist as $plan)
+                                                                    <option value="{{$plan->PLAN_ID}}">{{$plan->PLAN_NAME}}</option>
+                                                                @endforeach
+                                                            @endif
+                                                        </select>
+                                                        {{--<input type="text" name="plan" id="plan">--}}
                                                     </label>
                                                 </section>
                                             </div>
@@ -125,9 +133,9 @@ $arrSidebar =getSideBar($data);
 
 
 
-
+                                <a href="{{action('AdminReportController@ajax_report1_search_export')}}" style="margin-top: 30px;" class="btn btn-labeled btn-success mea-btn-export"> <span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i></span>Export </a>
                                 <!-- Widget ID (each widget will need unique ID)-->
-                                <div class="jarviswidget jarviswidget-color-blueDark" style="margin-top: 30px;" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-colorbutton="false">
+                                <div class="jarviswidget jarviswidget-color-blueDark" style="margin-top: 5px;" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-togglebutton="false">
                                     <!-- widget options:
                                     usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -147,6 +155,7 @@ $arrSidebar =getSideBar($data);
                                         <option value="50">50</option>
                                         <option value="100">100</option>
                                     </select>
+
                                     <header>
                                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
 
@@ -185,8 +194,8 @@ $arrSidebar =getSideBar($data);
                                 <!-- end widget -->
 
 
-
-                                <div class="jarviswidget jarviswidget-color-blueDark" style="margin-top: 30px;" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-colorbutton="false">
+                                <a href="{{action('AdminReportController@ajax_report1_all_export')}}" style="margin-top: 30px;" class="btn btn-labeled btn-success mea-btn-export"> <span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i></span>Export </a>
+                                <div class="jarviswidget jarviswidget-color-blueDark" style="margin-top: 5px;" id="wid-id-2" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-togglebutton="false">
                                     <!-- widget options:
                                     usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -205,6 +214,7 @@ $arrSidebar =getSideBar($data);
                                         <option value="50">50</option>
                                         <option value="100">100</option>
                                     </select>
+
                                     <header>
                                         <span class="widget-icon"> <i class="fa fa-table"></i>
 
