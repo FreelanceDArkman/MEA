@@ -107,13 +107,13 @@ $arrSidebar =getSideBar($data);
                                                 <section class="col col-4">
                                                     <label class="label">ระบุช่วงเวลา</label>
                                                     <label class="input"><i class="icon-append fa fa-calendar"></i>
-                                                        <input type="text" class="mea_date_picker" id="date_start"  name="name">
+                                                        <input type="text" class="mea_date_picker" id="date_start"  >
                                                     </label>
                                                 </section>
                                                 <section class="col col-4">
                                                     <label class="label">ถึง</label>
                                                     <label class="input"><i class="icon-append fa fa-calendar"></i>
-                                                        <input type="email" class="mea_date_picker" id="date_end" name="email">
+                                                        <input type="text" class="mea_date_picker" id="date_end" >
                                                     </label>
                                                 </section>
                                                 <section class="col col-4">
@@ -259,7 +259,101 @@ $arrSidebar =getSideBar($data);
                             </div>
                             <div class="tab-pane" id="hr2">
 
+                                <div class="widget-body no-padding" style="width: 90% ;margin: 0 auto;background-color: #000000;border: 1px solid #E1E8F3">
+                                    <header style="color: #fff; height: 40px; line-height: 40px; font-size: 18px; background-color: #a90329;padding-left: 20px;"> กล่องค้นหา </header>
 
+                                    <form  id="ana_search_form" class="smart-form" novalidate="novalidate">
+
+                                        <fieldset>
+
+
+                                            <div class="row">
+                                                <section class="col col-4">
+                                                    <label class="label">ระบุตราสารทุน​ (%)</label>
+                                                    <label class="input">
+                                                        <input type="text"  id="per_start" name="per_start" >
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <label class="label">ถึง</label>
+                                                    <label class="input">
+                                                        <input type="text" id="per_end" name="per_end" >
+                                                    </label>
+                                                </section>
+                                                <section class="col col-4">
+                                                    <button type="submit" id="btn_search_2" style="padding: 5px 20px 5px 20px; margin-top:20px;font-size: 18px;" name="submit" class="btn btn-primary">
+                                                        ค้นหา
+                                                    </button>
+                                                </section>
+                                            </div>
+                                        </fieldset>
+
+
+
+
+                                    </form>
+
+                                </div>
+
+
+                                <a href="#" id="export_cal" style="margin-top: 30px;" class="btn btn-labeled btn-success mea-btn-export"> <span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i></span>Export </a>
+                                <!-- Widget ID (each widget will need unique ID)-->
+                                <div class="jarviswidget jarviswidget-color-blueDark" style="margin-top: 5px;" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-togglebutton="false">
+                                    <!-- widget options:
+                                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                                    data-widget-colorbutton="false"
+                                    data-widget-editbutton="false"
+                                    data-widget-togglebutton="false"
+                                    data-widget-deletebutton="false"
+                                    data-widget-fullscreenbutton="false"
+                                    data-widget-custombutton="false"
+                                    data-widget-collapsed="true"
+                                    data-widget-sortable="false"
+
+                                    -->
+
+                                    {{--<select class="form-control mea-pagesize" id="page-size-search">--}}
+                                        {{--<option value="25">25</option>--}}
+                                        {{--<option value="50">50</option>--}}
+                                        {{--<option value="100">100</option>--}}
+                                    {{--</select>--}}
+
+                                    <header>
+                                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+
+
+                                    </header>
+
+                                    <!-- widget div-->
+                                    <div>
+
+                                        <!-- widget edit box -->
+                                        <div class="jarviswidget-editbox">
+                                            <!-- This area used as dropdown edit box -->
+
+                                        </div>
+                                        <!-- end widget edit box -->
+
+                                        <!-- widget content -->
+                                        <div class="widget-body">
+                                            {{--<p class="report-title">--}}
+                                                {{--รายชื่อสมาชิกเปลี่ยนแผนการลงทุน--}}
+
+                                            {{--</p>--}}
+                                            <div class="table-responsive">
+                                                <div id="cal_data">
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <!-- end widget content -->
+
+                                    </div>
+                                    <!-- end widget div -->
+
+                                </div>
 
                             </div>
                         </div>
@@ -323,6 +417,87 @@ $arrSidebar =getSideBar($data);
 
     $(document).ready(function(){
 
+
+        var $loginForm = $("#ana_search_form").validate({
+            // Rules for form validation
+            rules : {
+                per_start : {
+                    required : true,
+                    number : true,
+                    min : 0,
+                    max : 100
+
+                },
+                per_end : {
+                    required : true,
+                    number : true,
+                    min : 0,
+                    max : 100
+                }
+            },
+
+            // Messages for form validation
+            messages : {
+                per_start : {
+                    required : "ท่านยังไม่ได้กรอกตัวเลขที่ต้องการค้นหา",
+                    max : "ท่านกรอกช่วงตัวเลข(%)ไม่ถูกต้อง"
+
+
+                },
+                per_end : {
+                    required : "ท่านยังไม่ได้กรอกตัวเลขที่ต้องการค้นหา",
+                    max : "ท่านกรอกช่วงตัวเลข(%)ไม่ถูกต้อง"
+
+
+                }
+            },
+            // Ajax form submition
+            submitHandler : function(form) {
+//                $(form).ajaxSubmit({
+//                    success : function() {
+//                        $("#comment-form").addClass('submited');
+//                    }
+//                });
+
+            var Perstart = $('#per_start').val();
+            var PerEnd = $('#per_end').val();
+
+                var jsondata = {
+                Perstart : Perstart,
+                PerEnd:PerEnd
+
+            };
+
+            $("#cal_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+            MeaAjax(jsondata,"report1/search_ana",RenderSearch_ana);
+//                alert('hello');
+            },
+
+
+            // Do not change code below
+            errorPlacement : function(error, element) {
+                error.insertAfter(element.parent());
+            }
+        });
+
+
+
+
+        $('#export_cal').on('click',function(){
+
+            var Perstart = $('#per_start').val();
+            var PerEnd = $('#per_end').val();
+
+//            var jsondata = {
+//                Perstart : Perstart,
+//                PerEnd:PerEnd
+//
+//            };
+
+            window.location.href =  "report1/exportsearch_ana?Perstart=" + Perstart +"&PerEnd=" + PerEnd ;
+
+            return false;
+        });
 
         $('#export_search').on('click',function(){
 
@@ -431,6 +606,12 @@ $arrSidebar =getSideBar($data);
 
 
     });
+
+    function RenderSearch_ana(data){
+
+        $("#cal_data").html(data.html);
+        $("#cal_data").fadeIn('300');
+    }
 
     function RenderSearch(data){
 //        $("#all_data").hide();

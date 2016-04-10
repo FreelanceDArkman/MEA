@@ -129,12 +129,12 @@ class AdminReportController extends Controller
 
     public function ajax_report1_search(Request $request)
     {
-        $data = getmemulist();
-        $this->pageSetting( [
-            'menu_group_id' => 58,
-            'menu_id' => 1,
-            'title' => getMenuName($data,58,1) . '|  MEA FUND'
-        ] );
+//        $data = getmemulist();
+//        $this->pageSetting( [
+//            'menu_group_id' => 58,
+//            'menu_id' => 1,
+//            'title' => getMenuName($data,58,1) . '|  MEA FUND'
+//        ] );
 
         $PageSize = $request->input('pagesize');
         $PageNumber = $request->input('PageNumber');
@@ -182,12 +182,12 @@ class AdminReportController extends Controller
 
     public function ajax_report1(Request $request)
     {
-        $data = getmemulist();
-        $this->pageSetting( [
-            'menu_group_id' => 58,
-            'menu_id' => 1,
-            'title' => getMenuName($data,58,1) . '|  MEA FUND'
-        ] );
+//        $data = getmemulist();
+//        $this->pageSetting( [
+//            'menu_group_id' => 58,
+//            'menu_id' => 1,
+//            'title' => getMenuName($data,58,1) . '|  MEA FUND'
+//        ] );
 
         $PageSize = $request->input('pagesize');
         $PageNumber = $request->input('PageNumber');
@@ -219,6 +219,56 @@ class AdminReportController extends Controller
         ])->render();
 
         return response()->json(array('success' => true, 'html'=>$returnHTML));
+
+    }
+
+
+    public  function  ajax_report1_search_ana(Request $request){
+        $ArrParam = array();
+        $ArrParam["pagesize"] ="";
+        $ArrParam["PageNumber"] ="";
+        $ArrParam["emp_id"] ="";
+        $ArrParam["depart"] ="";
+        $ArrParam["plan"] ="";
+        $ArrParam["date_start"] ="";
+        $ArrParam["date_end"] ="";
+
+        $per_start = $request->input('Perstart');
+        $per_end = $request->input('PerEnd');
+        $arrRet = array();
+        $data = $this->DataSource($ArrParam,false,false);
+        if($per_start < $per_end){
+
+
+
+            for($i= $per_start; $i <=$per_end ; $i++ ){
+                    $total = 0;
+                if(count($data) > 0){
+
+                    foreach($data as $item){
+                        if($item->EQUITY_RATE_NEW == $i){
+                            $total = $total +1;
+                        }
+                    }
+                }
+
+                $arrRet[$i] = $total;
+
+
+            }
+        }
+
+
+        $returnHTML = view('backend.pages.ajax.ajax_report1_ana')->with([
+            'arrRet'=> $arrRet,
+            'data'=>$data,
+            'per_start'=>$per_start,
+            'per_end'=>$per_end
+
+        ])->render();
+
+        return response()->json(array('success' => true, 'html'=>$returnHTML));
+
 
     }
 
@@ -283,6 +333,76 @@ class AdminReportController extends Controller
 
         })->download('xls');
     }
+
+    public function ajax_report1_search_ana_export()
+    {
+//        window.location.href =  "report1/exportsearch?EmpID=" + EmpID +"&depart=" + depart + "&plan=" + plan + "&date_start" + "&date_end=" + date_end;
+//        Input::get("param");
+
+//        $ArrParam = array();
+//        $ArrParam["pagesize"] ="";
+//        $ArrParam["PageNumber"] ="";
+//        $ArrParam["emp_id"] =Input::get("EmpID");
+//        $ArrParam["depart"] =Input::get("depart");
+//        $ArrParam["plan"] =Input::get("plan");
+//        $ArrParam["date_start"] =Input::get("date_start");
+//        $ArrParam["date_end"] =Input::get("date_end");
+//        // $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
+//        $data = $this->DataSource($ArrParam,true,false);
+
+
+
+
+        $ArrParam = array();
+        $ArrParam["pagesize"] ="";
+        $ArrParam["PageNumber"] ="";
+        $ArrParam["emp_id"] ="";
+        $ArrParam["depart"] ="";
+        $ArrParam["plan"] ="";
+        $ArrParam["date_start"] ="";
+        $ArrParam["date_end"] ="";
+
+        $per_start = Input::get("Perstart");
+        $per_end = Input::get("PerEnd");
+        $arrRet = array();
+        $data = $this->DataSource($ArrParam,false,false);
+        if($per_start < $per_end){
+
+
+
+            for($i= $per_start; $i <=$per_end ; $i++ ){
+                $total = 0;
+                if(count($data) > 0){
+
+                    foreach($data as $item){
+                        if($item->EQUITY_RATE_NEW == $i){
+                            $total = $total +1;
+                        }
+                    }
+                }
+
+                $arrRet[$i] = $total;
+
+
+            }
+        }
+
+        Excel::create('Export1', function($excel) use ($arrRet){
+
+            $excel->sheet('New sheet', function($sheet)use ($arrRet) {
+//                $sheet->mergeCells('A1:M1');
+//                $sheet->mergeCells('A3:M3');
+
+                $sheet->loadView('backend.pages.export.export_report1_ana')->with([
+                    'arrRet' => $arrRet
+
+                ]);
+
+            });
+
+        })->download('xls');
+    }
+
 
     public function getreport2()
     {
