@@ -53,16 +53,16 @@ class AdminReport2Controller extends Controller
 
         $where = " WHERE focus.EMP_ID IS NOT  NULL";
 
-        if(!empty($emp_id)&& $check_name){
+        if(!empty($emp_id)&& $check_name== "true"){
             $where .= " AND focus.EMP_ID = '".$emp_id."'";
         }
-        if(!empty($depart)&& $check_depart){
+        if(!empty($depart)&& $check_depart== "true"){
             $where .= " AND em.DEP_SHT  = '".$depart."'";
         }
-        if(!empty($plan)&& $check_plan){
+        if(!empty($plan)&& $check_plan== "true"){
             $where .= " AND new.USER_SAVING_RATE = '".$plan."'";
         }
-        if(!empty($date_start) && !empty($date_end)&& $check_date){
+        if(!empty($date_start) && !empty($date_end)&& $check_date== "true"){
             $where .= " AND new.CHANGE_SAVING_RATE_DATE  BETWEEN '".$date_start."' AND '".$date_end."'";
         }
 
@@ -102,16 +102,16 @@ class AdminReport2Controller extends Controller
 
             $where = " WHERE focus.EMP_ID IS NOT  NULL";
 
-            if(!empty($emp_id)&& $check_name){
+            if(!empty($emp_id)&& $check_name== "true"){
                 $where .= " AND focus.EMP_ID = '".$emp_id."'";
             }
-            if(!empty($depart)&& $check_depart){
+            if(!empty($depart)&& $check_depart== "true"){
                 $where .= " AND em.DEP_SHT  = '".$depart."'";
             }
-            if(!empty($plan)&& $check_plan){
+            if(!empty($plan)&& $check_plan== "true"){
                 $where .= " AND new.USER_SAVING_RATE = '".$plan."'";
             }
-            if(!empty($date_start) && !empty($date_end)&& $check_date){
+            if(!empty($date_start) && !empty($date_end)&& $check_date== "true"){
                 $where .= " AND new.CHANGE_SAVING_RATE_DATE  BETWEEN '".$date_start."' AND '".$date_end."'";
             }
         }

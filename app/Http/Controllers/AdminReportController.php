@@ -55,16 +55,16 @@ class AdminReportController extends Controller
 
         $where = " WHERE focus.EMP_ID IS NOT  NULL";
 
-        if(!empty($emp_id)&& $check_name){
+        if(!empty($emp_id)&& $check_name== "true"){
             $where .= " AND focus.EMP_ID = '".$emp_id."'";
         }
-        if(!empty($depart)&& $check_depart){
+        if(!empty($depart)&& $check_depart== "true"){
             $where .= " AND em.DEP_SHT  = '".$depart."'";
         }
-        if(!empty($plan)&& $check_plan){
+        if(!empty($plan)&& $check_plan== "true"){
             $where .= " AND new.PLAN_ID = '".$plan."'";
         }
-        if(!empty($date_start) && !empty($date_end)&& $check_date){
+        if(!empty($date_start) && !empty($date_end)&& $check_date== "true"){
             $where .= " AND new.MODIFY_DATE BETWEEN '".$date_start."' AND '".$date_end."'";
         }
 
@@ -105,16 +105,16 @@ class AdminReportController extends Controller
 
             $where = " WHERE focus.EMP_ID IS NOT  NULL";
 
-            if (!empty($emp_id)&& $check_name) {
+            if (!empty($emp_id)&& $check_name== "true") {
                 $where .= " AND focus.EMP_ID = '" . $emp_id . "'";
             }
-            if (!empty($depart)&& $check_depart) {
+            if (!empty($depart)&& $check_depart== "true") {
                 $where .= " AND em.DEP_SHT  = '" . $depart . "'";
             }
-            if (!empty($plan)&& $check_plan) {
+            if (!empty($plan)&& $check_plan== "true") {
                 $where .= " AND new.PLAN_ID = '" . $plan . "'";
             }
-            if (!empty($date_start) && !empty($date_end)&& $check_date) {
+            if (!empty($date_start) && !empty($date_end)&& $check_date== "true") {
                 $where .= " AND new.MODIFY_DATE BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
             }
         }
@@ -575,42 +575,8 @@ class AdminReportController extends Controller
 
 
 
-    public function getreport6()
-    {
-        $data = getmemulist();
-        $this->pageSetting( [
-            'menu_group_id' => 58,
-            'menu_id' => 6,
-            'title' =>  getMenuName($data,58,6) . '|  MEA FUND'
-        ] );
 
-//->with();
-        return view('backend.pages.report1');
-    }
-    public function getreport7()
-    {
-        $data = getmemulist();
-        $this->pageSetting( [
-            'menu_group_id' => 58,
-            'menu_id' => 7,
-            'title' =>  getMenuName($data,58,7) . '|  MEA FUND'
-        ] );
 
-//->with();
-        return view('backend.pages.report1');
-    }
-    public function getreport8()
-    {
-        $data = getmemulist();
-        $this->pageSetting( [
-            'menu_group_id' => 58,
-            'menu_id' => 8,
-            'title' =>  getMenuName($data,58,8) . '|  MEA FUND'
-        ] );
-
-//->with();
-        return view('backend.pages.report1');
-    }
     public function getreport9()
     {
         $data = getmemulist();

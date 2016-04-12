@@ -15,7 +15,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
-class AdminReport3Controller extends Controller
+class AdminReport7Controller extends Controller
 {
 
 
@@ -24,12 +24,14 @@ class AdminReport3Controller extends Controller
         $data = getmemulist();
         $this->pageSetting( [
             'menu_group_id' => 58,
-            'menu_id' => 3,
-            'title' => getMenuName($data,58,3) . '|  MEA FUND'
+            'menu_id' => 7,
+            'title' =>  getMenuName($data,58,7) . '|  MEA FUND'
         ] );
 
 //->with();
-        return view('backend.pages.report3');
+        $allquery = "SELECT * FROM TBL_USER_STATUS";
+        $planlist = DB::select(DB::raw($allquery));
+        return view('backend.pages.report7')->with(['planlist'=>$planlist]);
     }
 
 
@@ -52,25 +54,27 @@ class AdminReport3Controller extends Controller
         $check_date=$ArrParam["check_date"] ;
 
 
-        $where = " WHERE fn.EMP_ID IS NOT  NULL";
+        $where = " WHERE us.USER_STATUS_ID IN (05,06) AND fn.EMP_ID IS NOT  NULL";
 
-        if (!empty($emp_id)&& $check_name== "true") {
+        if (!empty($emp_id) && $check_name== "true") {
             $where .= " AND fn.EMP_ID = '" . $emp_id . "'";
         }
-        if (!empty($depart)&& $check_depart== "true") {
+        if (!empty($depart) && $check_depart== "true") {
             $where .= " AND fn.DEP_SHT  = '" . $depart . "'";
         }
-        if (!empty($plan)&& $check_plan== "true") {
-            $where .= " AND fn.CONTRIBUTION_RATE_NEW = '" . $plan . "'";
+        if (!empty($plan) && $check_plan== "true") {
+            $where .= " AND us.USER_STATUS_ID = '" . $plan . "'";
         }
-        if (!empty($date_start) && !empty($date_end)&& $check_date== "true") {
-            $where .= " AND fn.CONTRIBUTION_MODIFY_DATE  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
+        if (!empty($date_start) && !empty($date_end) && $check_date== "true") {
+            $where .= " AND us.LAST_MODIFY_DATE  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
         }
 
 
 //        $where = " WHERE (focus.EMP_ID = '".$emp_id."' OR em.DEP_SHT  = '".$depart."' OR new.PLAN_ID = '".$plan."' OR new.MODIFY_DATE BETWEEN '".$date_start."' AND '".$date_end."')";
 
-        $allquery = "SELECT COUNT(fn.EMP_ID) as total FROM TBL_EMPLOYEE_INFO fn";
+        $allquery = "SELECT COUNT(fn.EMP_ID) AS total FROM TBL_USER us
+INNER JOIN TBL_EMPLOYEE_INFO fn ON fn.EMP_ID = us.EMP_ID
+INNER JOIN TBL_USER_STATUS usr ON usr.USER_STATUS_ID = us.USER_STATUS_ID";
 
         if($IsCase){
             $allquery .= $where;
@@ -102,32 +106,34 @@ class AdminReport3Controller extends Controller
             $check_date=$ArrParam["check_date"] ;
 
 
-            $where = " WHERE fn.EMP_ID IS NOT  NULL";
 
-            if (!empty($emp_id)&& $check_name== "true") {
+            $where = " WHERE us.USER_STATUS_ID IN (05,06) AND fn.EMP_ID IS NOT  NULL";
+
+            if (!empty($emp_id) && $check_name == "true") {
                 $where .= " AND fn.EMP_ID = '" . $emp_id . "'";
             }
-            if (!empty($depart)&& $check_depart== "true") {
+            if (!empty($depart) && $check_depart== "true") {
                 $where .= " AND fn.DEP_SHT  = '" . $depart . "'";
             }
-            if (!empty($plan)&& $check_plan== "true") {
-                $where .= " AND fn.CONTRIBUTION_RATE_NEW = '" . $plan . "'";
+            if (!empty($plan) && $check_plan== "true") {
+                $where .= " AND us.USER_STATUS_ID = '" . $plan . "'";
             }
-            if (!empty($date_start) && !empty($date_end)&& $check_date== "true") {
-                $where .= " AND fn.CONTRIBUTION_MODIFY_DATE  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
+            if (!empty($date_start) && !empty($date_end) && $check_date== "true") {
+                $where .= " AND us.LAST_MODIFY_DATE  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
             }
         }
 
 
-        $query="SELECT fn.EMP_ID,fn.FULL_NAME ,fn.DEP_SHT,fn.CONTRIBUTION_RATE_NEW, fn.CONTRIBUTION_START_DATE
-FROM TBL_EMPLOYEE_INFO fn";
+        $query="SELECT fn.EMP_ID,fn.FULL_NAME, fn.DEP_SHT,usr.STATUS_DESC,us.LEAVE_FUND_GROUP_DATE FROM TBL_USER us
+INNER JOIN TBL_EMPLOYEE_INFO fn ON fn.EMP_ID = us.EMP_ID
+INNER JOIN TBL_USER_STATUS usr ON usr.USER_STATUS_ID = us.USER_STATUS_ID";
 
 
         if($IsCase){
             $query .= $where;
         }
 
-        $query .= " ORDER BY fn.CONTRIBUTION_MODIFY_DATE DESC";
+        $query .= " ORDER BY us.LAST_MODIFY_DATE DESC";
 
         if($ispageing){
             $query .=  " OFFSET ".$PageSize." * (".$PageNumber." - 1) ROWS FETCH NEXT ".$PageSize." ROWS ONLY OPTION (RECOMPILE)";
@@ -156,6 +162,7 @@ FROM TBL_EMPLOYEE_INFO fn";
         $check_plan = $request->input('check_plan');
         $check_date = $request->input('check_date');
 
+
         $ArrParam = array();
         $ArrParam["pagesize"] =$PageSize;
         $ArrParam["PageNumber"] =$PageNumber;
@@ -170,8 +177,6 @@ FROM TBL_EMPLOYEE_INFO fn";
         $ArrParam["check_plan"] =$check_plan;
         $ArrParam["check_date"] =$check_date;
 
-
-
         $data =null;
         $totals= 0;
 
@@ -185,7 +190,7 @@ FROM TBL_EMPLOYEE_INFO fn";
 
 
 
-        $returnHTML = view('backend.pages.ajax.ajax_report3')->with([
+        $returnHTML = view('backend.pages.ajax.ajax_report7')->with([
             'htmlPaginate'=> $htmlPaginate,
             'data' => $data,
             'totals' => $totals,
@@ -219,6 +224,8 @@ FROM TBL_EMPLOYEE_INFO fn";
         $ArrParam["check_depart"] =Input::get("check_depart");
         $ArrParam["check_plan"] =Input::get("check_plan");
         $ArrParam["check_date"] =Input::get("check_date");
+
+
         // $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
 
         $data = $this->DataSource($ArrParam,true,false);
@@ -257,15 +264,17 @@ FROM TBL_EMPLOYEE_INFO fn";
 
 //                $header = array('รายชื่อสมาชิกเปลี่ยนอัตราสะสม');
 
-                $sheet->row(1, array('รายชื่อสมาชิกเปลี่ยนอัตราสมทบ'));
+                $sheet->row(1, array('ข้อมูลสมาชิกแบบคงเงินหรือแบบรับเงินเป็นงวด'));
                 $sheet->row(2, array('รายงานข้อมูล ณ วันที่ ' . get_date_notime(date("Y-m-d H:i:s"))));
 
                 $header[] = null;
                 $header[0] = 'รหัสพนักงาน';
                 $header[1] = "ชื่อ-นามสกุล";
                 $header[2] = "หน่วยงาน";
-                $header[3] = "อัตราสมทบใหม่";
-                $header[4] = "วันที่มีผล";
+                $header[3] = "สถานะของสมาชิก";
+                $header[4] = "วันที่พ้นสภาพ";
+
+
 
 
                 $sheet->row(3, $header);

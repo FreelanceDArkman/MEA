@@ -53,16 +53,16 @@ class AdminReport4Controller extends Controller
 
         $where = " WHERE fn.EMP_ID IS NOT  NULL";
 
-        if (!empty($emp_id)&& $check_name) {
+        if (!empty($emp_id)&& $check_name== "true") {
             $where .= " AND fn.EMP_ID = '" . $emp_id . "'";
         }
-        if (!empty($depart)&& $check_depart) {
+        if (!empty($depart)&& $check_depart== "true") {
             $where .= " AND fn.DEP_SHT  = '" . $depart . "'";
         }
 //        if (!empty($plan)) {
 //            $where .= " AND fn.CONTRIBUTION_RATE_NEW = '" . $plan . "'";
 //        }
-        if (!empty($date_start) && !empty($date_end)&& $check_date) {
+        if (!empty($date_start) && !empty($date_end)&& $check_date== "true") {
             $where .= " AND mm.PERIOD  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
         }
 
@@ -103,16 +103,16 @@ class AdminReport4Controller extends Controller
 
             $where = " WHERE fn.EMP_ID IS NOT  NULL";
 
-            if (!empty($emp_id)&& $check_name) {
+            if (!empty($emp_id)&& $check_name== "true") {
                 $where .= " AND fn.EMP_ID = '" . $emp_id . "'";
             }
-            if (!empty($depart)&& $check_depart) {
+            if (!empty($depart)&& $check_depart== "true") {
                 $where .= " AND fn.DEP_SHT  = '" . $depart . "'";
             }
 //        if (!empty($plan)) {
 //            $where .= " AND fn.CONTRIBUTION_RATE_NEW = '" . $plan . "'";
 //        }
-            if (!empty($date_start) && !empty($date_end)&& $check_date) {
+            if (!empty($date_start) && !empty($date_end)&& $check_date== "true") {
                 $where .= " AND mm.PERIOD  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
             }
         }

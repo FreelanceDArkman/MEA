@@ -464,6 +464,28 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
         });
 
+        Route::group(['prefix' => 'report6'], function() {
+            Route::get('/', 'AdminReport6Controller@getreport');
+            Route::post('/search', 'AdminReport6Controller@ajax_report_search');
+            Route::get('/exportsearch', 'AdminReport6Controller@ajax_report_search_export');
+
+        });
+
+        Route::group(['prefix' => 'report7'], function() {
+            Route::get('/', 'AdminReport7Controller@getreport');
+            Route::post('/search', 'AdminReport7Controller@ajax_report_search');
+            Route::get('/exportsearch', 'AdminReport7Controller@ajax_report_search_export');
+
+        });
+
+
+        Route::group(['prefix' => 'report8'], function() {
+            Route::get('/', 'AdminReport8Controller@getreport');
+            Route::post('/search', 'AdminReport8Controller@ajax_report_search');
+            Route::get('/exportsearch', 'AdminReport8Controller@ajax_report_search_export');
+
+        });
+
 
 //        Route::group(['prefix' => 'report2'], function() {
 //            Route::get('/', 'AdminReportController@getreport2');
