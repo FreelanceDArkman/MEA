@@ -46,18 +46,24 @@ class AdminReport3Controller extends Controller
         $date_end = $ArrParam['date_end'];
 
 
+        $check_name =$ArrParam["check_name"] ;
+        $check_depart =$ArrParam["check_depart"] ;
+        $check_plan=$ArrParam["check_plan"] ;
+        $check_date=$ArrParam["check_date"] ;
+
+
         $where = " WHERE fn.EMP_ID IS NOT  NULL";
 
-        if (!empty($emp_id)) {
+        if (!empty($emp_id)&& $check_name) {
             $where .= " AND fn.EMP_ID = '" . $emp_id . "'";
         }
-        if (!empty($depart)) {
+        if (!empty($depart)&& $check_depart) {
             $where .= " AND fn.DEP_SHT  = '" . $depart . "'";
         }
-        if (!empty($plan)) {
+        if (!empty($plan)&& $check_plan) {
             $where .= " AND fn.CONTRIBUTION_RATE_NEW = '" . $plan . "'";
         }
-        if (!empty($date_start) && !empty($date_end)) {
+        if (!empty($date_start) && !empty($date_end)&& $check_date) {
             $where .= " AND fn.CONTRIBUTION_MODIFY_DATE  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
         }
 
@@ -90,19 +96,24 @@ class AdminReport3Controller extends Controller
             $date_start = $ArrParam['date_start'];
             $date_end = $ArrParam['date_end'];
 
+            $check_name =$ArrParam["check_name"] ;
+            $check_depart =$ArrParam["check_depart"] ;
+            $check_plan=$ArrParam["check_plan"] ;
+            $check_date=$ArrParam["check_date"] ;
+
 
             $where = " WHERE fn.EMP_ID IS NOT  NULL";
 
-            if (!empty($emp_id)) {
+            if (!empty($emp_id)&& $check_name) {
                 $where .= " AND fn.EMP_ID = '" . $emp_id . "'";
             }
-            if (!empty($depart)) {
+            if (!empty($depart)&& $check_depart) {
                 $where .= " AND fn.DEP_SHT  = '" . $depart . "'";
             }
-            if (!empty($plan)) {
+            if (!empty($plan)&& $check_plan) {
                 $where .= " AND fn.CONTRIBUTION_RATE_NEW = '" . $plan . "'";
             }
-            if (!empty($date_start) && !empty($date_end)) {
+            if (!empty($date_start) && !empty($date_end)&& $check_date) {
                 $where .= " AND fn.CONTRIBUTION_MODIFY_DATE  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
             }
         }
@@ -140,6 +151,11 @@ FROM TBL_EMPLOYEE_INFO fn";
         $date_start = $request->input('date_start');
         $date_end = $request->input('date_end');
 
+        $check_name = $request->input('check_name');
+        $check_depart = $request->input('check_depart');
+        $check_plan = $request->input('check_plan');
+        $check_date = $request->input('check_date');
+
         $ArrParam = array();
         $ArrParam["pagesize"] =$PageSize;
         $ArrParam["PageNumber"] =$PageNumber;
@@ -148,6 +164,12 @@ FROM TBL_EMPLOYEE_INFO fn";
         $ArrParam["plan"] =$plan;
         $ArrParam["date_start"] =$date_start;
         $ArrParam["date_end"] =$date_end;
+
+        $ArrParam["check_name"] =$check_name;
+        $ArrParam["check_depart"] =$check_depart;
+        $ArrParam["check_plan"] =$check_plan;
+        $ArrParam["check_date"] =$check_date;
+
 
 
         $data =null;
@@ -192,6 +214,11 @@ FROM TBL_EMPLOYEE_INFO fn";
         $ArrParam["plan"] =Input::get("plan");
         $ArrParam["date_start"] =Input::get("date_start");
         $ArrParam["date_end"] =Input::get("date_end");
+
+        $ArrParam["check_name"] =Input::get("check_name");
+        $ArrParam["check_depart"] =Input::get("check_depart");
+        $ArrParam["check_plan"] =Input::get("check_plan");
+        $ArrParam["check_date"] =Input::get("check_date");
         // $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
 
         $data = $this->DataSource($ArrParam,true,false);

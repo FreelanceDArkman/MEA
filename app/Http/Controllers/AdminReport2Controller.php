@@ -46,19 +46,23 @@ class AdminReport2Controller extends Controller
         $date_start = $ArrParam['date_start'];
         $date_end = $ArrParam['date_end'];
 
+        $check_name =$ArrParam["check_name"] ;
+        $check_depart =$ArrParam["check_depart"] ;
+        $check_plan=$ArrParam["check_plan"] ;
+        $check_date=$ArrParam["check_date"] ;
 
         $where = " WHERE focus.EMP_ID IS NOT  NULL";
 
-        if(!empty($emp_id)){
+        if(!empty($emp_id)&& $check_name){
             $where .= " AND focus.EMP_ID = '".$emp_id."'";
         }
-        if(!empty($depart)){
+        if(!empty($depart)&& $check_depart){
             $where .= " AND em.DEP_SHT  = '".$depart."'";
         }
-        if(!empty($plan)){
+        if(!empty($plan)&& $check_plan){
             $where .= " AND new.USER_SAVING_RATE = '".$plan."'";
         }
-        if(!empty($date_start) && !empty($date_end)){
+        if(!empty($date_start) && !empty($date_end)&& $check_date){
             $where .= " AND new.CHANGE_SAVING_RATE_DATE  BETWEEN '".$date_start."' AND '".$date_end."'";
         }
 
@@ -91,20 +95,24 @@ class AdminReport2Controller extends Controller
             $date_start = $ArrParam['date_start'];
             $date_end = $ArrParam['date_end'];
 
+            $check_name =$ArrParam["check_name"] ;
+            $check_depart =$ArrParam["check_depart"] ;
+            $check_plan=$ArrParam["check_plan"] ;
+            $check_date=$ArrParam["check_date"] ;
 
             $where = " WHERE focus.EMP_ID IS NOT  NULL";
 
-            if (!empty($emp_id)) {
-                $where .= " AND focus.EMP_ID = '" . $emp_id . "'";
+            if(!empty($emp_id)&& $check_name){
+                $where .= " AND focus.EMP_ID = '".$emp_id."'";
             }
-            if (!empty($depart)) {
-                $where .= " AND em.DEP_SHT  = '" . $depart . "'";
+            if(!empty($depart)&& $check_depart){
+                $where .= " AND em.DEP_SHT  = '".$depart."'";
             }
-            if (!empty($plan)) {
-                $where .= " AND new.USER_SAVING_RATE = '" . $plan . "'";
+            if(!empty($plan)&& $check_plan){
+                $where .= " AND new.USER_SAVING_RATE = '".$plan."'";
             }
-            if (!empty($date_start) && !empty($date_end)) {
-                $where .= " AND new.CHANGE_SAVING_RATE_DATE  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
+            if(!empty($date_start) && !empty($date_end)&& $check_date){
+                $where .= " AND new.CHANGE_SAVING_RATE_DATE  BETWEEN '".$date_start."' AND '".$date_end."'";
             }
         }
 
@@ -143,6 +151,11 @@ OUTER APPLY (SELECT TOP 1 ol.USER_SAVING_RATE FROM TBL_USER_SAVING_RATE ol WHERE
         $date_start = $request->input('date_start');
         $date_end = $request->input('date_end');
 
+        $check_name = $request->input('check_name');
+        $check_depart = $request->input('check_depart');
+        $check_plan = $request->input('check_plan');
+        $check_date = $request->input('check_date');
+
         $ArrParam = array();
         $ArrParam["pagesize"] =$PageSize;
         $ArrParam["PageNumber"] =$PageNumber;
@@ -151,6 +164,11 @@ OUTER APPLY (SELECT TOP 1 ol.USER_SAVING_RATE FROM TBL_USER_SAVING_RATE ol WHERE
         $ArrParam["plan"] =$plan;
         $ArrParam["date_start"] =$date_start;
         $ArrParam["date_end"] =$date_end;
+
+        $ArrParam["check_name"] =$check_name;
+        $ArrParam["check_depart"] =$check_depart;
+        $ArrParam["check_plan"] =$check_plan;
+        $ArrParam["check_date"] =$check_date;
 
 
         $data =null;
@@ -195,6 +213,11 @@ OUTER APPLY (SELECT TOP 1 ol.USER_SAVING_RATE FROM TBL_USER_SAVING_RATE ol WHERE
         $ArrParam["plan"] =Input::get("plan");
         $ArrParam["date_start"] =Input::get("date_start");
         $ArrParam["date_end"] =Input::get("date_end");
+
+        $ArrParam["check_name"] =Input::get("check_name");
+        $ArrParam["check_depart"] =Input::get("check_depart");
+        $ArrParam["check_plan"] =Input::get("check_plan");
+        $ArrParam["check_date"] =Input::get("check_date");
         // $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
 
         $data = $this->DataSource($ArrParam,true,false);
@@ -233,6 +256,7 @@ OUTER APPLY (SELECT TOP 1 ol.USER_SAVING_RATE FROM TBL_USER_SAVING_RATE ol WHERE
 //                $header = array('รายชื่อสมาชิกเปลี่ยนอัตราสะสม');
 
                 $sheet->row(1, array('รายชื่อสมาชิกเปลี่ยนอัตราสะสม'));
+                $sheet->row(2, array('รายงานข้อมูล ณ วันที่ ' . get_date_notime(date("Y-m-d H:i:s"))));
 
                 $header[] = null;
                 $header[0] = 'รหัสพนักงาน';
@@ -244,7 +268,7 @@ OUTER APPLY (SELECT TOP 1 ol.USER_SAVING_RATE FROM TBL_USER_SAVING_RATE ol WHERE
                 $header[6] = "วันที่มีผล";
                 $header[7] = "ผู้ทำรายการ";
 
-                $sheet->row(2, $header);
+                $sheet->row(3, $header);
 
                 // second row styling and writing content
 //                $sheet->row(2, function ($row) {

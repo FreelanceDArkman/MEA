@@ -35,19 +35,19 @@
                         <fieldset>
                             <div class="row">
                                 <section class="col col-4">
-                                    <label class="label">รหัสพนักงาน</label>
+                                    <label class="label"><input type="checkbox" id="check_name"  value="name"> รหัสพนักงาน</label>
                                     <label class="input">
                                         <input type="text" name="name" id="name">
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="label">หน่วยงาน</label>
+                                    <label class="label"><input type="checkbox" id="check_depart" value="depart"> หน่วยงาน</label>
                                     <label class="input">
                                         <input type="text" name="depart" id="depart">
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="label">อัตราสมทบ</label>
+                                    <label class="label"><input type="checkbox" id="check_plan" value="plan"> อัตราสมทบ</label>
                                     <label class="input">
                                         <input type="text" name="plan" id="plan">
                                         {{--<input type="text" name="plan" id="plan">--}}
@@ -57,7 +57,7 @@
 
                             <div class="row">
                                 <section class="col col-4">
-                                    <label class="label">ระบุช่วงเวลา</label>
+                                    <label class="label"><input type="checkbox" id="check_date" value="date_start"> ระบุช่วงเวลา</label>
                                     <label class="input"><i class="icon-append fa fa-calendar"></i>
                                         <input type="text" class="mea_date_picker" id="date_start"  >
                                     </label>
@@ -169,7 +169,12 @@
                 var date_start = $('#hd_date_start').val();
                 var date_end =$('#hd_date_end').val();
 
-                window.location.href =  "report3/exportsearch?EmpID=" + EmpID +"&depart=" + depart + "&plan=" + plan + "&date_start=" +date_start + "&date_end=" + date_end;
+                var check_name =$('#check_name').is(':checked');
+                var check_depart =$('#check_depart').is(':checked');
+                var check_plan =$('#check_plan').is(':checked');
+                var check_date =$('#check_date').is(':checked');
+
+                window.location.href =  "report3/exportsearch?EmpID=" + EmpID +"&depart=" + depart + "&plan=" + plan + "&date_start=" +date_start + "&date_end=" + date_end+ '&check_name=' + check_name+ '&check_depart=' + check_depart+ '&check_plan=' + check_plan+ '&check_date=' + check_date;
 
                 return false;
             });
@@ -194,6 +199,11 @@
                 var date_start = $('#hd_date_start').val();
                 var date_end =$('#hd_date_end').val();
 
+                var check_name =$('#check_name').is(':checked');
+                var check_depart =$('#check_depart').is(':checked');
+                var check_plan =$('#check_plan').is(':checked');
+                var check_date =$('#check_date').is(':checked');
+
 
                 var jsondata = {
                     pagesize : PageSizeAll,
@@ -202,7 +212,11 @@
                     depart :depart,
                     plan : plan,
                     date_start:date_start,
-                    date_end:date_end
+                    date_end:date_end,
+                    check_name :check_name,
+                    check_depart:check_depart,
+                    check_plan:check_plan,
+                    check_date:check_date
 
                 };
 
@@ -224,6 +238,10 @@
                 var plan = $('#plan').val();
                 var date_start = $('#hd_date_start').val();
                 var date_end =$('#hd_date_end').val();
+                var check_name =$('#check_name').is(':checked');
+                var check_depart =$('#check_depart').is(':checked');
+                var check_plan =$('#check_plan').is(':checked');
+                var check_date =$('#check_date').is(':checked');
 
                 var jsondata = {
                     pagesize : val,
@@ -232,7 +250,11 @@
                     depart :depart,
                     plan : plan,
                     date_start:date_start,
-                    date_end:date_end
+                    date_end:date_end,
+                    check_name :check_name,
+                    check_depart:check_depart,
+                    check_plan:check_plan,
+                    check_date:check_date
 
                 };
 //            var jsondata = {pagesize : val,PageNumber:1};
@@ -280,6 +302,11 @@
             var date_start = $('#hd_date_start').val();
             var date_end =$('#hd_date_end').val();
 
+            var check_name =$('#check_name').is(':checked');
+            var check_depart =$('#check_depart').is(':checked');
+            var check_plan =$('#check_plan').is(':checked');
+            var check_date =$('#check_date').is(':checked');
+
 
             var jsondata = {
                 pagesize : page_size,
@@ -288,7 +315,11 @@
                 depart :depart,
                 plan : plan,
                 date_start:date_start,
-                date_end:date_end
+                date_end:date_end,
+                check_name :check_name,
+                check_depart:check_depart,
+                check_plan:check_plan,
+                check_date:check_date
 
             };
 //        var jsondata = {pagesize : page_size,PageNumber:p};
