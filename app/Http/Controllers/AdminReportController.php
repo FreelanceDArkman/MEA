@@ -577,18 +577,7 @@ class AdminReportController extends Controller
 
 
 
-    public function getreport9()
-    {
-        $data = getmemulist();
-        $this->pageSetting( [
-            'menu_group_id' => 58,
-            'menu_id' => 9,
-            'title' =>  getMenuName($data,58,9) . '|  MEA FUND'
-        ] );
 
-//->with();
-        return view('backend.pages.report1');
-    }
     public function getreport10()
     {
         $data = getmemulist();

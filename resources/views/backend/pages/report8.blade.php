@@ -127,7 +127,8 @@
                         <!-- widget content -->
                         <div class="widget-body">
                             <p class="report-title">
-                                ข้อมูลสมากชิกทุกประเภท
+                                รายงานผลการทำแบบประเมินความเสี่ยง
+
 
                             </p>
                             <div class="table-responsive">

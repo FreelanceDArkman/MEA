@@ -375,6 +375,20 @@ if(!function_exists('get_date')) {
     }
 }
 
+if(!function_exists('get_date_period')) {
+    function get_date_period($input)
+    {
+
+        $strMonthCut = Array("","ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค.");
+        $ret = "";
+        if($input != ""){
+                $ar = explode('.',$input);
+            $ret = $strMonthCut[(int)$ar[1]] . ' '. (((int)$ar[0]) + 543);
+        }
+        return $ret;
+    }
+}
+
 if(!function_exists('get_date_notime')) {
     function get_date_notime($input)
     {
