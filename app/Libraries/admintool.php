@@ -86,14 +86,43 @@ if (!function_exists('Paginatre_gen')) {
         }
 
 
-        for($i = 1; $i <= $TotalPage ; $i++){
+        $PageSet = 15;
+        $pageSetlimit = $PageSet;
+        $TotalPageSet = ceil($TotalPage/$PageSet);
+        $start = 1;
+
+        if($active > ($PageSet - 7)){
+            $start = $active - 7;
+            $pageSetlimit = $pageSetlimit + $start;
+        }
+
+
+        for($i = $start; $i <= $TotalPage ; $i++){
+
+
+
+
             $classactive = "";
                 if($active == $i){
                     $classactive = "class='active'";
                 }
-            $ret = $ret . "<li ".$classactive." ><a href='javascript:void(0);' data-page='".$i."'>".$i."</a></li>";
+
+            if($i<=$pageSetlimit){
+                $ret = $ret . "<li ".$classactive." ><a href='javascript:void(0);' data-page='".$i."'>".$i."</a></li>";
+            }
+
+            if($i == ($TotalPage)){
+                $ret = $ret . "<li><a>.........</a></li><li ".$classactive." ><a href='javascript:void(0);' data-page='".$i."'>".$i."</a></li>";
+            }
+
+
         }
-        $ret = $ret . "<li><a href='javascript:void(0);' data-page='next' ><i class='fa fa-arrow-right'></i></a></li>";
+
+
+        if($active < $TotalPage){
+            $ret = $ret . "<li><a href='javascript:void(0);' data-page='next' ><i class='fa fa-arrow-right'></i></a></li>";
+        }
+
 
 
         $ret = $ret . "</ul>";
@@ -103,6 +132,46 @@ if (!function_exists('Paginatre_gen')) {
         }
        // $ret = $total . "--".$pagesize. "--". $id . "--".$active;
 
+        return $ret;
+    }
+}
+
+if (!function_exists('getYearDrop')) {
+    function getYearDrop($year)
+    {
+
+        $today = new Date();
+        $currentyear = get_date_year($today);
+
+        $arrDropYear = array();
+        $count = 0;
+        if ($year) {
+            $ret = "<option value='' >เลือกปี</option>";
+        } else {
+            $ret = "<option selected='selected' value='' >เลือกปี</option>";
+        }
+
+
+        for ($i = ((int)$currentyear) - 5; $i <= $currentyear; $i++) {
+            $arrDropYear[$count] = $i;
+
+
+            if ($year) {
+                if ($year == ($i - 543)) {
+                    $ret = $ret . "<option selected='selected' value=" . ($i - 543) . ">" . $i . "</option>";
+                } else {
+                    $ret = $ret . "<option value=" . ($i - 543) . ">" . $i . "</option>";
+                }
+
+            } else {
+                $ret = $ret . "<option value=" . ($i - 543) . ">" . $i . "</option>";
+            }
+
+
+            $count = $count + 1;
+
+
+        }
         return $ret;
     }
 }

@@ -437,57 +437,75 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
         });
         Route::group(['prefix' => 'report2'], function() {
-            Route::get('/', 'AdminReportController@getreport2');
+            Route::get('/', 'AdminReport2Controller@getreport2');
+            Route::post('/search', 'AdminReport2Controller@ajax_report2_search');
+            Route::get('/exportsearch', 'AdminReport2Controller@ajax_report2_search_export');
 
         });
-        Route::group(['prefix' => 'report2'], function() {
-            Route::get('/', 'AdminReportController@getreport2');
 
-        });
         Route::group(['prefix' => 'report3'], function() {
-            Route::get('/', 'AdminReportController@getreport3');
+            Route::get('/', 'AdminReport3Controller@getreport');
+            Route::post('/search', 'AdminReport3Controller@ajax_report_search');
+            Route::get('/exportsearch', 'AdminReport3Controller@ajax_report_search_export');
 
         });
+
         Route::group(['prefix' => 'report4'], function() {
-            Route::get('/', 'AdminReportController@getreport4');
+            Route::get('/', 'AdminReport4Controller@getreport');
+            Route::post('/search', 'AdminReport4Controller@ajax_report_search');
+            Route::get('/exportsearch', 'AdminReport4Controller@ajax_report_search_export');
 
         });
-        Route::group(['prefix' => 'report5'], function() {
-            Route::get('/', 'AdminReportController@getreport5');
 
-        });
-        Route::group(['prefix' => 'report6'], function() {
-            Route::get('/', 'AdminReportController@getreport6');
 
-        });
-        Route::group(['prefix' => 'report7'], function() {
-            Route::get('/', 'AdminReportController@getreport7');
-
-        });
-        Route::group(['prefix' => 'report8'], function() {
-            Route::get('/', 'AdminReportController@getreport8');
-
-        });
-        Route::group(['prefix' => 'report9'], function() {
-            Route::get('/', 'AdminReportController@getreport9');
-
-        });
-        Route::group(['prefix' => 'report10'], function() {
-            Route::get('/', 'AdminReportController@getreport10');
-
-        });
-        Route::group(['prefix' => 'report11'], function() {
-            Route::get('/', 'AdminReportController@getreport11');
-
-        });
-        Route::group(['prefix' => 'report12'], function() {
-            Route::get('/', 'AdminReportController@getreport12');
-
-        });
-        Route::group(['prefix' => 'report13'], function() {
-            Route::get('/', 'AdminReportController@getreport13');
-
-        });
+//        Route::group(['prefix' => 'report2'], function() {
+//            Route::get('/', 'AdminReportController@getreport2');
+//
+//        });
+//        Route::group(['prefix' => 'report3'], function() {
+//            Route::get('/', 'AdminReportController@getreport3');
+//
+//        });
+//        Route::group(['prefix' => 'report4'], function() {
+//            Route::get('/', 'AdminReportController@getreport4');
+//
+//        });
+//        Route::group(['prefix' => 'report5'], function() {
+//            Route::get('/', 'AdminReportController@getreport5');
+//
+//        });
+//        Route::group(['prefix' => 'report6'], function() {
+//            Route::get('/', 'AdminReportController@getreport6');
+//
+//        });
+//        Route::group(['prefix' => 'report7'], function() {
+//            Route::get('/', 'AdminReportController@getreport7');
+//
+//        });
+//        Route::group(['prefix' => 'report8'], function() {
+//            Route::get('/', 'AdminReportController@getreport8');
+//
+//        });
+//        Route::group(['prefix' => 'report9'], function() {
+//            Route::get('/', 'AdminReportController@getreport9');
+//
+//        });
+//        Route::group(['prefix' => 'report10'], function() {
+//            Route::get('/', 'AdminReportController@getreport10');
+//
+//        });
+//        Route::group(['prefix' => 'report11'], function() {
+//            Route::get('/', 'AdminReportController@getreport11');
+//
+//        });
+//        Route::group(['prefix' => 'report12'], function() {
+//            Route::get('/', 'AdminReportController@getreport12');
+//
+//        });
+//        Route::group(['prefix' => 'report13'], function() {
+//            Route::get('/', 'AdminReportController@getreport13');
+//
+//        });
 
 //        end report
 

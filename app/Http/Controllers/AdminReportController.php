@@ -287,20 +287,81 @@ class AdminReportController extends Controller
         // $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
         $data = $this->DataSource($ArrParam,false,false);
 
-        Excel::create('Export1', function($excel) use ($data){
+        $results = array();
+        foreach ($data as $item) {
+//            $item->filed1 = 'some modification';
+//            $item->filed2 = 'some modification2';
+            $results[] = (array)$item;
 
-            $excel->sheet('New sheet', function($sheet)use ($data) {
+            // $results[5] = get_date_notime($item->modify_new);
+
+            #or first convert it and then change its properties using
+            #an array syntax, it's up to you
+        }
+
+
+        Excel::create('ExcelExport', function ($excel) use ($results){
+
+            $excel->sheet('Sheetname', function ($sheet) use ($results){
+
                 $sheet->mergeCells('A1:M1');
-                $sheet->mergeCells('A3:M3');
+                $sheet->row(1, function ($row) {
+                    $row->setFontFamily('Comic Sans MS');
+                    $row->setFontSize(20);
+                    $row->setAlignment('center');
+                });
 
-                $sheet->loadView('backend.pages.export.export_report1')->with([
-                    'data' => $data,
-                    'topic' => "รายชื่อสมาชิกทั้งหมดในระบบ"
-                ]);
+//                $header = array('รายชื่อสมาชิกเปลี่ยนอัตราสะสม');
+
+                $sheet->row(1, array('รายชื่อสมาชิกทั้งหมดในระบบ'));
+
+
+
+
+                $header[] = null;
+                $header[0] = 'รหัสพนักงาน';
+                $header[1] = "ชื่อ-นามสกุล";
+                $header[2] = "หน่วยงาน";
+                $header[3] = "ระดับ";
+                $header[4] = "อายุ";
+                $header[5] = "แผนการลงทุนเดิม";
+                $header[6] = "ตราสารทุน(เดิม)";
+                $header[7] = "ตราสารหนี้(เดิม)";
+                $header[8] = "วันที่ทำรายการ(เดิม)";
+                $header[9] = "แผนการลงทุนใหม่";
+                $header[10] = "ตราสารทุน(ใหม่)";
+                $header[11] = "ตราสารหนี้(ใหม่)";
+                $header[12] = "วันที่ทำรายการ(ใหม่)";
+
+
+                $sheet->row(2, $header);
+
+
+                foreach ($results as $user) {
+
+                    $sheet->appendRow($user);
+                }
+
+
 
             });
 
         })->download('xls');
+
+//        Excel::create('Export1', function($excel) use ($data){
+//
+//            $excel->sheet('New sheet', function($sheet)use ($data) {
+//                $sheet->mergeCells('A1:M1');
+//                $sheet->mergeCells('A3:M3');
+//
+//                $sheet->loadView('backend.pages.export.export_report1')->with([
+//                    'data' => $data,
+//                    'topic' => "รายชื่อสมาชิกทั้งหมดในระบบ"
+//                ]);
+//
+//            });
+//
+//        })->download('xls');
     }
     public function ajax_report1_search_export()
     {
@@ -318,38 +379,86 @@ class AdminReportController extends Controller
         // $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
         $data = $this->DataSource($ArrParam,true,false);
 
-        Excel::create('Export1', function($excel) use ($data){
 
-            $excel->sheet('New sheet', function($sheet)use ($data) {
+        $results = array();
+        foreach ($data as $item) {
+//            $item->filed1 = 'some modification';
+//            $item->filed2 = 'some modification2';
+            $results[] = (array)$item;
+
+            // $results[5] = get_date_notime($item->modify_new);
+
+            #or first convert it and then change its properties using
+            #an array syntax, it's up to you
+        }
+
+
+        Excel::create('ExcelExport', function ($excel) use ($results){
+
+            $excel->sheet('Sheetname', function ($sheet) use ($results){
+
                 $sheet->mergeCells('A1:M1');
-                $sheet->mergeCells('A3:M3');
+                $sheet->row(1, function ($row) {
+                    $row->setFontFamily('Comic Sans MS');
+                    $row->setFontSize(20);
+                    $row->setAlignment('center');
+                });
 
-                $sheet->loadView('backend.pages.export.export_report1')->with([
-                    'data' => $data,
-                    'topic' => "รายชื่อสมาชิกเปลี่ยนแผนการลงทุน"
-                ]);
+//                $header = array('รายชื่อสมาชิกเปลี่ยนอัตราสะสม');
+
+                $sheet->row(1, array('รายชื่อสมาชิกเปลี่ยนแผนการลงทุน'));
+
+
+
+
+                $header[] = null;
+                $header[0] = 'รหัสพนักงาน';
+                $header[1] = "ชื่อ-นามสกุล";
+                $header[2] = "หน่วยงาน";
+                $header[3] = "ระดับ";
+                $header[4] = "อายุ";
+                $header[5] = "แผนการลงทุนเดิม";
+                $header[6] = "ตราสารทุน(เดิม)";
+                $header[7] = "ตราสารหนี้(เดิม)";
+                $header[8] = "วันที่ทำรายการ(เดิม)";
+                $header[9] = "แผนการลงทุนใหม่";
+                $header[10] = "ตราสารทุน(ใหม่)";
+                $header[11] = "ตราสารหนี้(ใหม่)";
+                $header[12] = "วันที่ทำรายการ(ใหม่)";
+
+
+                $sheet->row(2, $header);
+
+
+                foreach ($results as $user) {
+
+                    $sheet->appendRow($user);
+                }
+
+
 
             });
 
         })->download('xls');
+
+//        Excel::create('Export1', function($excel) use ($data){
+//
+//            $excel->sheet('New sheet', function($sheet)use ($data) {
+//                $sheet->mergeCells('A1:M1');
+//                $sheet->mergeCells('A3:M3');
+//
+//                $sheet->loadView('backend.pages.export.export_report1')->with([
+//                    'data' => $data,
+//                    'topic' => "รายชื่อสมาชิกเปลี่ยนแผนการลงทุน"
+//                ]);
+//
+//            });
+//
+//        })->download('xls');
     }
 
     public function ajax_report1_search_ana_export()
     {
-//        window.location.href =  "report1/exportsearch?EmpID=" + EmpID +"&depart=" + depart + "&plan=" + plan + "&date_start" + "&date_end=" + date_end;
-//        Input::get("param");
-
-//        $ArrParam = array();
-//        $ArrParam["pagesize"] ="";
-//        $ArrParam["PageNumber"] ="";
-//        $ArrParam["emp_id"] =Input::get("EmpID");
-//        $ArrParam["depart"] =Input::get("depart");
-//        $ArrParam["plan"] =Input::get("plan");
-//        $ArrParam["date_start"] =Input::get("date_start");
-//        $ArrParam["date_end"] =Input::get("date_end");
-//        // $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
-//        $data = $this->DataSource($ArrParam,true,false);
-
 
 
 
@@ -387,59 +496,61 @@ class AdminReportController extends Controller
             }
         }
 
-        Excel::create('Export1', function($excel) use ($arrRet){
 
-            $excel->sheet('New sheet', function($sheet)use ($arrRet) {
-//                $sheet->mergeCells('A1:M1');
-//                $sheet->mergeCells('A3:M3');
 
-                $sheet->loadView('backend.pages.export.export_report1_ana')->with([
-                    'arrRet' => $arrRet
+        Excel::create('ExcelExport', function ($excel) use ($arrRet){
 
-                ]);
+            $excel->sheet('Sheetname', function ($sheet) use ($arrRet){
+
+
+
+                $header[] = null;
+                $header[0] = 'สัดส่วนตราสารทุน (%)';
+                $header[1] = "จำนวน (คน)";
+
+
+                $sheet->row(2, $header);
+
+
+
+                foreach ($arrRet as $index => $item) {
+
+                    if($arrRet[$index] > 0){
+                        $data[] = null;
+                        $data[0] = $index;
+                        $data[1] = $arrRet[$index];
+                        $sheet->appendRow($data);
+                    }
+
+
+                }
+
+
+
 
             });
 
         })->download('xls');
+
+//        Excel::create('Export1', function($excel) use ($arrRet){
+//
+//            $excel->sheet('New sheet', function($sheet)use ($arrRet) {
+////                $sheet->mergeCells('A1:M1');
+////                $sheet->mergeCells('A3:M3');
+//
+//                $sheet->loadView('backend.pages.export.export_report1_ana')->with([
+//                    'arrRet' => $arrRet
+//
+//                ]);
+//
+//            });
+//
+//        })->download('xls');
     }
 
 
-    public function getreport2()
-    {
-        $data = getmemulist();
-        $this->pageSetting( [
-            'menu_group_id' => 58,
-            'menu_id' => 2,
-            'title' =>  getMenuName($data,58,2) . '|  MEA FUND'
-        ] );
 
-//->with();
-        return view('backend.pages.report1');
-    }
-    public function getreport3()
-    {
-        $data = getmemulist();
-        $this->pageSetting( [
-            'menu_group_id' => 58,
-            'menu_id' => 3,
-            'title' => getMenuName($data,58,3) . '|  MEA FUND'
-        ] );
 
-//->with();
-        return view('backend.pages.report1');
-    }
-    public function getreport4()
-    {
-        $data = getmemulist();
-        $this->pageSetting( [
-            'menu_group_id' => 58,
-            'menu_id' => 4,
-            'title' => getMenuName($data,58,4) . '|  MEA FUND'
-        ] );
-
-//->with();
-        return view('backend.pages.report1');
-    }
     public function getreport5()
     {
         $data = getmemulist();

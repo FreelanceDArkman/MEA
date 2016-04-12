@@ -508,7 +508,7 @@ $arrSidebar =getSideBar($data);
             var date_start = $('#hd_date_start').val();
             var date_end =$('#hd_date_end').val();
 
-                window.location.href =  "report1/exportsearch?EmpID=" + EmpID +"&depart=" + depart + "&plan=" + plan + "&date_start" + "&date_end=" + date_end;
+                window.location.href =  "report1/exportsearch?EmpID=" + EmpID +"&depart=" + depart + "&plan=" + plan + "&date_start=" +date_start + "&date_end=" + date_end;
 
             return false;
         });
