@@ -15,9 +15,8 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 
-class AdminReport6Controller extends Controller
+class AdminReport10Controller extends Controller
 {
-
 
 
     public function getreport()
@@ -25,13 +24,15 @@ class AdminReport6Controller extends Controller
         $data = getmemulist();
         $this->pageSetting( [
             'menu_group_id' => 58,
-            'menu_id' => 6,
-            'title' =>  getMenuName($data,58,6) . '|  MEA FUND'
+            'menu_id' => 10,
+            'title' =>  getMenuName($data,58,10) . '|  MEA FUND'
         ] );
 
 //->with();
-        return view('backend.pages.report6');
+        return view('backend.pages.report10');
     }
+
+
 
     public  function  DataSourceCount($ArrParam,$IsCase){
 
@@ -51,27 +52,29 @@ class AdminReport6Controller extends Controller
         $check_date=$ArrParam["check_date"] ;
 
 
-        $where = " WHERE us.USER_STATUS_ID IN (01,02,03,15) AND fn.EMP_ID IS NOT  NULL";
+        $where = " WHERE  CONVERT(VARCHAR(10), st.TIMESTAMP, 120) IS NOT  NULL";
 
-        if (!empty($emp_id) && $check_name== "true") {
-            $where .= " AND fn.EMP_ID = '" . $emp_id . "'";
-        }
-        if (!empty($depart) && $check_depart== "true") {
-            $where .= " AND fn.DEP_SHT  = '" . $depart . "'";
-        }
-        if (!empty($plan) && $check_plan== "true") {
-            $where .= " AND us.USER_STATUS_ID = '" . $plan . "'";
-        }
+//        if (!empty($emp_id) && $check_name== "true") {
+//            $where .= " AND fn.EMP_ID = '" . $emp_id . "'";
+//        }
+//        if (!empty($depart) && $check_depart== "true") {
+//            $where .= " AND fn.DEP_SHT  = '" . $depart . "'";
+//        }
+//        if (!empty($plan) && $check_plan== "true") {
+//            $where .= " AND us.USER_STATUS_ID = '" . $plan . "'";
+//        }
         if (!empty($date_start) && !empty($date_end) && $check_date== "true") {
-            $where .= " AND us.LAST_MODIFY_DATE  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
+
+            $where .= " AND CONVERT(VARCHAR(10), st.TIMESTAMP, 120)  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
         }
 
 
 //        $where = " WHERE (focus.EMP_ID = '".$emp_id."' OR em.DEP_SHT  = '".$depart."' OR new.PLAN_ID = '".$plan."' OR new.MODIFY_DATE BETWEEN '".$date_start."' AND '".$date_end."')";
 
-        $allquery = "SELECT COUNT(fn.EMP_ID) AS total FROM TBL_USER us
-INNER JOIN TBL_EMPLOYEE_INFO fn ON fn.EMP_ID = us.EMP_ID
-INNER JOIN TBL_USER_STATUS usr ON usr.USER_STATUS_ID = us.USER_STATUS_ID";
+        $allquery = "SELECT COUNT(DISTINCT( CONVERT(VARCHAR(10), st.TIMESTAMP, 120))) AS total FROm TBL_MOBILE_ACTIVATED_STAT st
+LEFT OUTER JOIN ( SELECT COUNT(ios.OS) as IOSCOUNT, CONVERT(VARCHAR(10), ios.TIMESTAMP, 120) AS iosTIme FROM  TBL_MOBILE_ACTIVATED_STAT ios WHERE ios.OS = 'iOS'
+GROUP BY ios.TIMESTAMP ) ioss ON ioss.iosTIme = CONVERT(VARCHAR(10), st.TIMESTAMP, 120)
+LEFT OUTER JOIN ( SELECT COUNT(andr.OS) as AndrCOUNT, CONVERT(VARCHAR(10), andr.TIMESTAMP, 120)  AS andrTIme FROM  TBL_MOBILE_ACTIVATED_STAT andr WHERE andr.OS = 'Android' GROUP BY andr.TIMESTAMP ) andrr ON andrr.andrTIme = CONVERT(VARCHAR(10), st.TIMESTAMP, 120)";
 
         if($IsCase){
             $allquery .= $where;
@@ -103,33 +106,36 @@ INNER JOIN TBL_USER_STATUS usr ON usr.USER_STATUS_ID = us.USER_STATUS_ID";
             $check_date=$ArrParam["check_date"] ;
 
 
-            $where = " WHERE us.USER_STATUS_ID IN (01,02,03,15) AND fn.EMP_ID IS NOT  NULL";
 
-            if (!empty($emp_id) && $check_name== "true") {
-                $where .= " AND fn.EMP_ID = '" . $emp_id . "'";
-            }
-            if (!empty($depart) && $check_depart== "true") {
-                $where .= " AND fn.DEP_SHT  = '" . $depart . "'";
-            }
+            $where = " WHERE CONVERT(VARCHAR(10), st.TIMESTAMP, 120) IS NOT  NULL";
+
+//            if (!empty($emp_id) && $check_name == "true") {
+//                $where .= " AND fn.EMP_ID = '" . $emp_id . "'";
+//            }
+//            if (!empty($depart) && $check_depart== "true") {
+//                $where .= " AND fn.DEP_SHT  = '" . $depart . "'";
+//            }
 //            if (!empty($plan) && $check_plan== "true") {
 //                $where .= " AND us.USER_STATUS_ID = '" . $plan . "'";
 //            }
             if (!empty($date_start) && !empty($date_end) && $check_date== "true") {
-                $where .= " AND us.LAST_MODIFY_DATE  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
+
+                $where .= " AND CONVERT(VARCHAR(10), st.TIMESTAMP, 120)  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
             }
         }
 
 
-        $query="SELECT fn.EMP_ID,fn.FULL_NAME,us.LEAVE_FUND_GROUP_DATE,usr.STATUS_DESC FROM TBL_USER us
-INNER JOIN TBL_EMPLOYEE_INFO fn ON fn.EMP_ID = us.EMP_ID
-INNER JOIN TBL_USER_STATUS usr ON usr.USER_STATUS_ID = us.USER_STATUS_ID";
+        $query="SELECT DISTINCT( CONVERT(VARCHAR(10), st.TIMESTAMP, 120)) AS DAteStamp ,ISNULL(ioss.IOSCOUNT,0) AS IOSUSE, ISNULL(andrr.AndrCOUNT,0) AS ANDRIODUSE FROm TBL_MOBILE_ACTIVATED_STAT st
+LEFT OUTER JOIN ( SELECT COUNT(ios.OS) as IOSCOUNT, CONVERT(VARCHAR(10), ios.TIMESTAMP, 120) AS iosTIme FROM  TBL_MOBILE_ACTIVATED_STAT ios WHERE ios.OS = 'iOS'
+GROUP BY ios.TIMESTAMP ) ioss ON ioss.iosTIme = CONVERT(VARCHAR(10), st.TIMESTAMP, 120)
+LEFT OUTER JOIN ( SELECT COUNT(andr.OS) as AndrCOUNT, CONVERT(VARCHAR(10), andr.TIMESTAMP, 120)  AS andrTIme FROM  TBL_MOBILE_ACTIVATED_STAT andr WHERE andr.OS = 'Android' GROUP BY andr.TIMESTAMP ) andrr ON andrr.andrTIme = CONVERT(VARCHAR(10), st.TIMESTAMP, 120)";
 
 
         if($IsCase){
             $query .= $where;
         }
 
-        $query .= " ORDER BY us.LAST_MODIFY_DATE DESC";
+        $query .= " ORDER BY CONVERT(VARCHAR(10), st.TIMESTAMP, 120) DESC";
 
         if($ispageing){
             $query .=  " OFFSET ".$PageSize." * (".$PageNumber." - 1) ROWS FETCH NEXT ".$PageSize." ROWS ONLY OPTION (RECOMPILE)";
@@ -186,7 +192,7 @@ INNER JOIN TBL_USER_STATUS usr ON usr.USER_STATUS_ID = us.USER_STATUS_ID";
 
 
 
-        $returnHTML = view('backend.pages.ajax.ajax_report6')->with([
+        $returnHTML = view('backend.pages.ajax.ajax_report10')->with([
             'htmlPaginate'=> $htmlPaginate,
             'data' => $data,
             'totals' => $totals,
@@ -250,8 +256,8 @@ INNER JOIN TBL_USER_STATUS usr ON usr.USER_STATUS_ID = us.USER_STATUS_ID";
 //                ));
                 //
                 // first row styling and writing content
-                $sheet->mergeCells('A1:D1');
-                $sheet->mergeCells('A2:D2');
+                $sheet->mergeCells('A1:F1');
+                $sheet->mergeCells('A2:F2');
                 $sheet->row(1, function ($row) {
                     $row->setFontFamily('Comic Sans MS');
                     $row->setFontSize(20);
@@ -260,16 +266,16 @@ INNER JOIN TBL_USER_STATUS usr ON usr.USER_STATUS_ID = us.USER_STATUS_ID";
 
 //                $header = array('รายชื่อสมาชิกเปลี่ยนอัตราสะสม');
 
-                $sheet->row(1, array('รายงานข้อมูลสมาชิกที่พ้นสภาพสมาขิก'));
+                $sheet->row(1, array('รายงานจำนวนผู้ติดตั้ง Application บน Mobile'));
                 $sheet->row(2, array('รายงานข้อมูล ณ วันที่ ' . get_date_notime(date("Y-m-d H:i:s"))));
 
                 $header[] = null;
-                $header[0] = 'รหัสพนักงาน';
-                $header[1] = "ชื่อ-นามสกุล";
-                $header[2] = "วันที่พ้นสภาพ";
-                $header[3] = "สาเหตุ้";
-//                $header[4] = "สถานะของสมาชิก";
-//                $header[5] = "วันที่พ้นสภาพ";
+                $header[0] = 'วันที่';
+                $header[1] = "จำนวนผู้ติดตั้งบน IOS";
+                $header[2] = "จำนวนผู้ติดตั้งบน Andriod";
+//                $header[3] = "วันที่ทำแบบประเมินความเสี่ยง";
+//                $header[4] = "คะแนนรวม";
+//                $header[5] = "รายละเอียก";
 
 
 

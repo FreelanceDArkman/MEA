@@ -111,7 +111,7 @@ if (!function_exists('Paginatre_gen')) {
                 $ret = $ret . "<li ".$classactive." ><a href='javascript:void(0);' data-page='".$i."'>".$i."</a></li>";
             }
 
-            if($i == ($TotalPage)){
+            if($i == ($TotalPage) && $i > $PageSet){
                 $ret = $ret . "<li><a>.........</a></li><li ".$classactive." ><a href='javascript:void(0);' data-page='".$i."'>".$i."</a></li>";
             }
 
