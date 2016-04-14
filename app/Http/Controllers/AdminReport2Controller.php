@@ -235,9 +235,9 @@ OUTER APPLY (SELECT TOP 1 ol.USER_SAVING_RATE FROM TBL_USER_SAVING_RATE ol WHERE
 
 
 
-        Excel::create('ExcelExport', function ($excel) use ($results){
+        Excel::create('ExcelExport', function ($excel) use ($results,$ArrParam){
 
-            $excel->sheet('Sheetname', function ($sheet) use ($results){
+            $excel->sheet('Sheetname', function ($sheet) use ($results,$ArrParam){
 
                 //format
 //                $sheet->setColumnFormat(array(
@@ -247,16 +247,27 @@ OUTER APPLY (SELECT TOP 1 ol.USER_SAVING_RATE FROM TBL_USER_SAVING_RATE ol WHERE
                 //
                 // first row styling and writing content
                 $sheet->mergeCells('A1:H1');
+                $sheet->mergeCells('A2:H2');
+                $sheet->mergeCells('A3:H3');
                 $sheet->row(1, function ($row) {
                     $row->setFontFamily('Comic Sans MS');
                     $row->setFontSize(20);
                     $row->setAlignment('center');
                 });
 
+
+                $sheet->row(2, function ($row) {$row->setAlignment('center');});
+                $sheet->row(3, function ($row) {$row->setAlignment('center');});
 //                $header = array('รายชื่อสมาชิกเปลี่ยนอัตราสะสม');
 
                 $sheet->row(1, array('รายชื่อสมาชิกเปลี่ยนอัตราสะสม'));
-                $sheet->row(2, array('รายงานข้อมูล ณ วันที่ ' . get_date_notime(date("Y-m-d H:i:s"))));
+
+                if($ArrParam["check_date"] == "true" && $ArrParam["date_start"] != "" && $ArrParam["date_end"] != ""){
+                    $sheet->row(2, array('ในช่วงวันที่ ' . get_date_notime($ArrParam["date_start"]) . ' ถึง ' . get_date_notime($ArrParam["date_end"])   ));
+                }
+
+
+                $sheet->row(3, array('รายงานข้อมูล ณ วันที่ ' . get_date_notime(date("Y-m-d H:i:s"))));
 
                 $header[] = null;
                 $header[0] = 'รหัสพนักงาน';
@@ -268,61 +279,19 @@ OUTER APPLY (SELECT TOP 1 ol.USER_SAVING_RATE FROM TBL_USER_SAVING_RATE ol WHERE
                 $header[6] = "วันที่มีผล";
                 $header[7] = "ผู้ทำรายการ";
 
-                $sheet->row(3, $header);
+                $sheet->row(4, $header);
 
-                // second row styling and writing content
-//                $sheet->row(2, function ($row) {
-//
-//                    // call cell manipulation methods
-//                    $row->setFontFamily('Comic Sans MS');
-//                    $row->setFontSize(15);
-//                    $row->setFontWeight('bold');
-//
-//                });
+
 
 
                 foreach ($results as $user) {
-//    var_dump($user["EMP_ID"]);
 
-//                    $data[] = null;
-//                    $data[0] = $user["EMP_ID"];
-//                    $data[1] =  $user["FULL_NAME"];
-//                    $data[2] =  $user["DEP_SHT"];
-//                    $data[3] =  $user["rate_old"];
-//                    $data[4] =  $user["rate_new"];
-//                    $data[5] = $user["modify_new"];//get_date_notime( $user["modify_new"]);
-//                    $data[6] =  $user["effec_new"];//get_date_notime( $user["effec_new"]);
-//                    $data[7] =  $user["new_modify_by"];
 
                     $sheet->appendRow($user);
                 }
 
 
 
-//
-//                $sheet->row(2, array('Something else here'));
-//                $sheet->appendRow(array_keys($results[0]));
-
-                //$sheet->fromArray($results);
-//
-//                // getting data to display - in my case only one record
-////                var_dump(gettype($data));
-//                $users = $data;
-//
-////                var_dump($users[0]);
-//                // setting column names for data - you can of course set it manually
-//                $sheet->appendRow(array_keys($users[0]->EMP_ID)); // column names
-//
-//                // getting last row number (the one we already filled and setting it to bold
-//                $sheet->row($sheet->getHighestRow(), function ($row) {
-//                    $row->setFontWeight('bold');
-//                });
-//
-//                // putting users data as next rows
-//                foreach ($users as $user) {
-//                    var_dump($user->EMP_ID);
-//                    $sheet->appendRow($user);
-//                }
             });
 
         })->download('xls');

@@ -6,6 +6,9 @@
 
     <thead>
     <tr>
+        <th colspan="9" style="text-align: center">รายงานข้อมูล ณ วันที่ {{get_date_notime(date("Y-m-d H:i:s"))}}</th>
+    </tr>
+    <tr>
         <th>งวด</th>
         <th>รหัสพนักงาน</th>
         <th>ชื่อ-นามสกุล</th>

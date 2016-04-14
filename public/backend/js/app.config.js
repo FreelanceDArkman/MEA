@@ -394,7 +394,17 @@ function MeaAjax(jsondata,urls,callback){
 		}
 	});
 }
+function  GetDateFormat (date){
 
+	var d = new Date(date);
+	var monthNamesShort = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+	var date = d.getDate();
+	var year = d.getFullYear();
+	var month = d.getMonth();
+
+	return '<span style="color:red">' + date + ' ' + monthNamesShort[month] + ' ' + (parseInt(year) + 543) + '</span>';
+
+}
 function meaDatepicker(id){
 	//var realid = $('.'+id).attr('id');
 
@@ -453,3 +463,4 @@ function meaDatepicker(id){
 
 //.datepicker("setDate" , new Date(d.getFullYear() + 543,d.getMonth(),d.getDate()));
 }
+

@@ -105,9 +105,16 @@ table tbody tr td{
     font-size: 18px!important;
 }
 .report-title{
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0px;
+}
+.report-period{
     font-size: 20px;
     font-weight: bold;
     text-align: center;
+    margin-top: 0px;
 }
 .mea-pagesize{
     width: 80px;

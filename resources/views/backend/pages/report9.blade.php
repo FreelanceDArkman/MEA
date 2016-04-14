@@ -144,6 +144,7 @@
                                 รายงานข้อมูลผลประโยชน์สมาชิก
 
                             </p>
+                            <p class="report-period"> </p>
                             <div class="table-responsive">
                                 <div id="serch_data">
 
@@ -262,7 +263,10 @@
                 var check_plan =$('#check_plan').is(':checked');
                 var check_date =$('#check_date').is(':checked');
 
-
+                if(check_date && date_start != "" && date_end != "" ){
+                    var str =  'ในช่วงวันที่ ' + GetDateFormat(date_start) + ' ถึง ' + GetDateFormat(date_end);
+                    $('.report-period').html(str);
+                }
                 var jsondata = {
                     pagesize : PageSizeAll,
                     PageNumber:1,

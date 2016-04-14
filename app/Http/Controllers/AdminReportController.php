@@ -41,33 +41,35 @@ class AdminReportController extends Controller
         $PageSize = $ArrParam['pagesize'];
         $PageNumber = $ArrParam['PageNumber'];
 
-        $emp_id =$ArrParam['emp_id'];
-        $depart = $ArrParam['depart'];
-        $plan = $ArrParam['plan'];
-        $date_start = $ArrParam['date_start'];
-        $date_end = $ArrParam['date_end'];
+        if($IsCase) {
 
-        $check_name =$ArrParam["check_name"] ;
-        $check_depart =$ArrParam["check_depart"] ;
-        $check_plan=$ArrParam["check_plan"] ;
-        $check_date=$ArrParam["check_date"] ;
+            $emp_id = $ArrParam['emp_id'];
+            $depart = $ArrParam['depart'];
+            $plan = $ArrParam['plan'];
+            $date_start = $ArrParam['date_start'];
+            $date_end = $ArrParam['date_end'];
+
+            $check_name = $ArrParam["check_name"];
+            $check_depart = $ArrParam["check_depart"];
+            $check_plan = $ArrParam["check_plan"];
+            $check_date = $ArrParam["check_date"];
 
 
-        $where = " WHERE focus.EMP_ID IS NOT  NULL";
+            $where = " WHERE focus.EMP_ID IS NOT  NULL";
 
-        if(!empty($emp_id)&& $check_name== "true"){
-            $where .= " AND focus.EMP_ID = '".$emp_id."'";
+            if (!empty($emp_id) && $check_name == "true") {
+                $where .= " AND focus.EMP_ID = '" . $emp_id . "'";
+            }
+            if (!empty($depart) && $check_depart == "true") {
+                $where .= " AND em.DEP_SHT  = '" . $depart . "'";
+            }
+            if (!empty($plan) && $check_plan == "true") {
+                $where .= " AND new.PLAN_ID = '" . $plan . "'";
+            }
+            if (!empty($date_start) && !empty($date_end) && $check_date == "true") {
+                $where .= " AND new.MODIFY_DATE BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
+            }
         }
-        if(!empty($depart)&& $check_depart== "true"){
-            $where .= " AND em.DEP_SHT  = '".$depart."'";
-        }
-        if(!empty($plan)&& $check_plan== "true"){
-            $where .= " AND new.PLAN_ID = '".$plan."'";
-        }
-        if(!empty($date_start) && !empty($date_end)&& $check_date== "true"){
-            $where .= " AND new.MODIFY_DATE BETWEEN '".$date_start."' AND '".$date_end."'";
-        }
-
 
 //        $where = " WHERE (focus.EMP_ID = '".$emp_id."' OR em.DEP_SHT  = '".$depart."' OR new.PLAN_ID = '".$plan."' OR new.MODIFY_DATE BETWEEN '".$date_start."' AND '".$date_end."')";
 
@@ -416,22 +418,32 @@ class AdminReportController extends Controller
         }
 
 
-        Excel::create('ExcelExport', function ($excel) use ($results){
+        Excel::create('ExcelExport', function ($excel) use ($results,$ArrParam){
 
-            $excel->sheet('Sheetname', function ($sheet) use ($results){
+            $excel->sheet('Sheetname', function ($sheet) use ($results,$ArrParam){
 
                 $sheet->mergeCells('A1:M1');
+                $sheet->mergeCells('A2:M2');
+                $sheet->mergeCells('A3:M3');
                 $sheet->row(1, function ($row) {
                     $row->setFontFamily('Comic Sans MS');
                     $row->setFontSize(20);
                     $row->setAlignment('center');
                 });
 
+                $sheet->row(2, function ($row) {$row->setAlignment('center');});
+                $sheet->row(3, function ($row) {$row->setAlignment('center');});
 //                $header = array('รายชื่อสมาชิกเปลี่ยนอัตราสะสม');
 
                 $sheet->row(1, array('รายชื่อสมาชิกเปลี่ยนแผนการลงทุน'));
+//                $sheet->row(2, array($ArrParam["date_start"] ));
+                if($ArrParam["check_date"] == "true" && $ArrParam["date_start"] != "" && $ArrParam["date_end"] != ""){
+                    $sheet->row(2, array('ในช่วงวันที่ ' . get_date_notime($ArrParam["date_start"]) . ' ถึง ' . get_date_notime($ArrParam["date_end"])   ));
+                }
 
-                $sheet->row(2, array('รายงานข้อมูล ณ วันที่ ' . get_date_notime(date("Y-m-d H:i:s"))));
+
+
+                $sheet->row(3, array('รายงานข้อมูล ณ วันที่ ' . get_date_notime(date("Y-m-d H:i:s"))));
 
 
                 $header[] = null;
@@ -450,7 +462,7 @@ class AdminReportController extends Controller
                 $header[12] = "วันที่ทำรายการ(ใหม่)";
 
 
-                $sheet->row(3, $header);
+                $sheet->row(4, $header);
 
 
                 foreach ($results as $user) {

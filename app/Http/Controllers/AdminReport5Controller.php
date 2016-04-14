@@ -240,9 +240,9 @@ INNER JOIN TBL_USER_STATUS usr ON usr.USER_STATUS_ID = us.USER_STATUS_ID";
 
 
 
-        Excel::create('ExcelExport', function ($excel) use ($results){
+        Excel::create('ExcelExport', function ($excel) use ($results,$ArrParam){
 
-            $excel->sheet('Sheetname', function ($sheet) use ($results){
+            $excel->sheet('Sheetname', function ($sheet) use ($results,$ArrParam){
 
                 //format
 //                $sheet->setColumnFormat(array(
@@ -253,6 +253,7 @@ INNER JOIN TBL_USER_STATUS usr ON usr.USER_STATUS_ID = us.USER_STATUS_ID";
                 // first row styling and writing content
                 $sheet->mergeCells('A1:F1');
                 $sheet->mergeCells('A2:F2');
+                $sheet->mergeCells('A3:F3');
                 $sheet->row(1, function ($row) {
                     $row->setFontFamily('Comic Sans MS');
                     $row->setFontSize(20);
@@ -261,8 +262,14 @@ INNER JOIN TBL_USER_STATUS usr ON usr.USER_STATUS_ID = us.USER_STATUS_ID";
 
 //                $header = array('รายชื่อสมาชิกเปลี่ยนอัตราสะสม');
 
+                $sheet->row(2, function ($row) {$row->setAlignment('center');});
+                $sheet->row(3, function ($row) {$row->setAlignment('center');});
                 $sheet->row(1, array('ข้อมูลสมาชิกทุกประเภท'));
-                $sheet->row(2, array('รายงานข้อมูล ณ วันที่ ' . get_date_notime(date("Y-m-d H:i:s"))));
+
+                if($ArrParam["check_date"] == "true" && $ArrParam["date_start"] != "" && $ArrParam["date_end"] != ""){
+                $sheet->row(2, array('ในช่วงวันที่ ' . get_date_notime($ArrParam["date_start"]) . ' ถึง ' . get_date_notime($ArrParam["date_end"])   ));
+                }
+                $sheet->row(3, array('รายงานข้อมูล ณ วันที่ ' . get_date_notime(date("Y-m-d H:i:s"))));
 
                 $header[] = null;
                 $header[0] = 'รหัสพนักงาน';
@@ -274,7 +281,7 @@ INNER JOIN TBL_USER_STATUS usr ON usr.USER_STATUS_ID = us.USER_STATUS_ID";
 
 
 
-                $sheet->row(3, $header);
+                $sheet->row(4, $header);
 
 
 

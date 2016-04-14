@@ -118,6 +118,7 @@
                                 รายชื่อสมาชิกเปลี่ยนแผนการลงทุน
 
                             </p>
+                            <p class="report-period"> </p>
                             <div class="table-responsive">
                                 <div id="serch_data">
 
@@ -206,6 +207,11 @@
                 var check_date =$('#check_date').is(':checked');
 
 
+                if(check_date && date_start != "" && date_end != "" ){
+                    var str =  'ในช่วงวันที่ ' + GetDateFormat(date_start) + ' ถึง ' + GetDateFormat(date_end);
+                    $('.report-period').html(str);
+                }
+
                 var jsondata = {
                     pagesize : PageSizeAll,
                     PageNumber:1,
@@ -220,6 +226,8 @@
                     check_date:check_date
 
                 };
+
+
 
                 console.log(jsondata);
                 $("#serch_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');

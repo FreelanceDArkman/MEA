@@ -178,6 +178,7 @@ $arrSidebar =getSideBar($data);
                                                 รายชื่อสมาชิกเปลี่ยนแผนการลงทุน
 
                                             </p>
+                                            <p class="report-period"> </p>
                                             <div class="table-responsive">
                                                 <div id="serch_data">
 
@@ -239,6 +240,7 @@ $arrSidebar =getSideBar($data);
                                                 รายชื่อสมาชิกทั้งหมดในระบบ
 
                                             </p>
+
                                             <div class="table-responsive">
                                                 <div id="all_data">
 
@@ -513,6 +515,8 @@ $arrSidebar =getSideBar($data);
             var check_plan =$('#check_plan').is(':checked');
             var check_date =$('#check_date').is(':checked');
 
+
+
                 window.location.href =  "report1/exportsearch?EmpID=" + EmpID +"&depart=" + depart + "&plan=" + plan + "&date_start=" +date_start + "&date_end=" + date_end+ '&check_name=' + check_name+ '&check_depart=' + check_depart+ '&check_plan=' + check_plan+ '&check_date=' + check_date;
 
             return false;
@@ -566,6 +570,13 @@ $arrSidebar =getSideBar($data);
             var check_plan =$('#check_plan').is(':checked');
             var check_date =$('#check_date').is(':checked');
 
+            if(check_date && date_start != "" && date_end != "" ){
+                var str =  'ในช่วงวันที่ ' + GetDateFormat(date_start) + ' ถึง ' + GetDateFormat(date_end);
+                $('.report-period').html(str);
+            }
+
+//            <p class=""> ในช่วงวันที่  1 - 10 กรกฎาคม 2558</p>
+//
 
             var jsondata = {
                 pagesize : PageSizeAll,
