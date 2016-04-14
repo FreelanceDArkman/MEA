@@ -396,6 +396,8 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
         Route::group(['prefix' => 'userGroup'] , function() {
 
+
+
             Route::get('/', 'UserGroupController@userGroups');
             Route::post('getUserGroups', 'UserGroupController@getUserGroups');
             Route::post('checkUserGroupIdExist','UserGroupController@UserGroupIdExist');
@@ -408,6 +410,9 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::post('ishave', 'UserGroupController@CheckUserGroup');
 
 
+            Route::post('getall', 'UserGroupController@Ajax_GetUserGroup');
+
+
         });
 
         Route::group(['prefix' => 'users'], function() {
@@ -415,6 +420,8 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::post('getUsers', 'UserController@getUsers');
             Route::get('add','UserController@getAddUser');
             Route::post('add','UserController@postAddUser');
+
+            Route::post('getall', 'UserController@Ajax_GetUser');
 
         });
 

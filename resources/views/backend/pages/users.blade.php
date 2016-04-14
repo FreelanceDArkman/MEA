@@ -7,13 +7,17 @@ $arrSidebar =getSideBar($data);
 
     <style type="text/css">
         #sort-by-year{
-            position:absolute;
-            width: 300px;
-            z-index: 999;
-            left: 200px;
-            top:5px
+            /*position:absolute;*/
+            width: 100%;
+            margin-bottom: 10px;
+            /*z-index: 999;*/
+            /*left: 200px;*/
+            /*top:5px*/
         }
+        #sort-by-year select{
+            width: 300px;
 
+        }
         #datatable_fixed_column tbody tr td a i{
             font-size: 11px !important;
             line-height: 12px!important;
@@ -64,7 +68,8 @@ $arrSidebar =getSideBar($data);
 
 
                 <!-- Widget ID (each widget will need unique ID)-->
-                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false">
+                <div class="jarviswidget jarviswidget-color-blueDark" id="wid-id-1" data-widget-editbutton="false"
+                     data-widget-deletebutton="false" data-widget-colorbutton="false" data-widget-togglebutton="false">
                     <!-- widget options:
 						usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
@@ -92,115 +97,36 @@ $arrSidebar =getSideBar($data);
 
                         </div>
                         <!-- end widget edit box -->
+                        <div id="sort-by-year">
 
+                            <select name="group_drop" id="group_drop" class="form-control" style="display: inline-block">
+
+                                @if($user_group)
+                                    {{--<option value="0" >ค้นหากลุ่มผู้ใช้</option>--}}
+                                    <option value="" >แสดงทั้งหมด</option>
+                                    @foreach($user_group as $index => $group)
+                                        <option value="{{$group->USER_PRIVILEGE_ID}}">{{$group->USER_PRIVILEGE_DESC}}</option>
+                                    @endforeach
+                                @endif
+                            </select>
+
+                            <input type="text" style="display: inline-block;width: 200px" class="form-control filter_row" id="user_code"   data-filter="us.EMP_ID" placeholder="Filter รหัสพนักงาน" data-operator="=" />
+
+                            <input type="text" style="display: inline-block;width: 200px" class="form-control filter_row" id="user_profile"  data-filter="emp.FULL_NAME" placeholder="Filter ชื่อ-สกุล" data-operator="LIKE" />
+
+                            <input type="text" style="display: inline-block;width: 200px" class="form-control filter_row" id="user_name"  data-filter="us.USERNAME" placeholder="Filter ชื่อผู้ใช้" data-operator="LIKE"/>
+                        </div>
                         <!-- widget content -->
                         <div class="widget-body no-padding">
 
-                            <div id="sort-by-year">
 
-                                <select name="group_drop" id="group_drop" class="form-control">
+                            <div class="table-responsive">
+                                <div class="result" style="width: 100%; padding: 10px;">
 
-                                    @if($user_group)
-                                            <option value="0" >ค้นหากลุ่มผู้ใช้</option>
-                                            <option value="1" >แสดงทั้งหมด</option>
-                                        @foreach($user_group as $index => $group)
-                                            <option value="{{$group->USER_PRIVILEGE_DESC}}">{{$group->USER_PRIVILEGE_DESC}}</option>
-                                        @endforeach
-                                    @endif
-                                </select>
+
+                                </div>
                             </div>
 
-                            <table id="datatable_fixed_column" class="table table-striped table-bordered" width="100%">
-
-                                <thead>
-                                <tr>
-                                    <th style="width:3%;text-align: center">
-
-                                    </th>
-
-                                    <th style="width:11%;text-align: center">
-
-                                    </th>
-                                    <th class="hasinput" style="width:7%">
-                                        <input type="text" class="form-control" placeholder="Filter รหัสพนักงาน" />
-
-
-                                    </th>
-                                    <th class="hasinput" style="width:15%">
-                                        <input type="text" class="form-control" placeholder="Filter ชื่อ-สกุล" />
-                                    </th>
-                                    <th class="hasinput" style="width:10%">
-                                        <input type="text" class="form-control" placeholder="Filter ชื่อผู้ใช้" />
-                                    </th>
-                                    <th class="hasinput" style="width:10%">
-                                        <input type="text" class="form-control" placeholder="Filter สถานะ" />
-                                    </th>
-                                    <th class="hasinput" style="width:10%">
-                                        <input type="text" class="form-control" placeholder="Filter กลุ่มผู้ใช้" />
-                                    </th>
-                                    <th class="hasinput" style="width:8%">
-                                        <input type="text" class="form-control" placeholder="Filter อีเมล์" />
-                                    </th>
-                                    <th class="hasinput" style="width:6%">
-                                        <input type="text" class="form-control" placeholder="Filter โทรศัพท์" />
-                                    </th>
-                                    <th class="hasinput" style="width:10%">
-                                        <input type="text" class="form-control" placeholder="Filter วันที่สร้าง" />
-                                    </th>
-                                    <th class="hasinput" style="width:10%">
-                                        <input type="text" class="form-control" placeholder="Filter วันที่แก้ไขล่าสุด" />
-                                    </th>
-
-                                </tr>
-                                <tr>
-                                    <th id="index_th" class="sorting_disabled">
-                                        <input type="checkbox" id="mainCheck" />
-                                    </th>
-                                    <th style="text-align: center">Action</th>
-                                    <th>รหัสพนักงาน</th>
-                                    <th data-class="expand">ชื่อ-สกุล</th>
-                                    <th data-hide="phone">ชื่อผู้ใช้</th>
-                                    <th data-hide="phone">สถานะ</th>
-                                    <th data-hide="phone">กลุ่มผู้ใช้</th>
-                                    <th data-hide="phone">อีเมล์</th>
-                                    <th data-hide="phone">โทรศัพท์</th>
-                                    <th data-hide="phone">วันที่สร้าง</th>
-                                    <th data-hide="phone">วันที่แก้ไขล่าสุด</th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-                                @if($userAll)
-                                    @foreach($userAll as $userGroup)
-
-                                        <tr>
-                                            <td><input type="checkbox"  name="check_item_edit[]" value="{{$userGroup->EMP_ID}}" class="item_checked" id="item_check_{{$userGroup->EMP_ID}}" />
-
-                                            </td>
-                                            <td style="text-align: center">
-                                                <a href="/admin/userGroup/edit/{{$userGroup->EMP_ID}}" class="btn btn-primary btn-xs"><i class="fa fa-gear"></i></a>
-                                                <a href="javascript:void(0);"  data-id="{{$userGroup->EMP_ID}}" class="mea_delete_by btn bg-color-red txt-color-white btn-xs"> <i class="glyphicon glyphicon-trash"></i></a>
-                                                <a href="javascript:void(0);"  data-id="{{$userGroup->EMP_ID}}" class="mea_delete_by btn txt-color-white bg-color-blueDark btn-xs"><i class="glyphicon glyphicon-repeat"></i></a></td>
-                                            </td>
-                                            <td>{{$userGroup->EMP_ID}}</td>
-                                            <td>{{$userGroup->FULL_NAME}}</td>
-                                            <td>{{$userGroup->USERNAME}}
-                                            <td>{{$userGroup->STATUS_DESC}}</td>
-                                            <td>{{$userGroup->USER_PRIVILEGE_DESC}}</td>
-                                            <td>{{$userGroup->EMAIL}}</td>
-                                            <td>{{$userGroup->PHONE}}</td>
-                                            <td>{{get_date_notime($userGroup->CREATE_DATE)}}</td>
-                                            <td>{{get_date_notime($userGroup->LAST_MODIFY_DATE)}}</td>
-                                        </tr>
-
-
-                                    @endforeach
-
-                                @endif
-
-                                </tbody>
-
-                            </table>
 
                         </div>
                         <!-- end widget content -->
@@ -224,9 +150,7 @@ $arrSidebar =getSideBar($data);
 
     </section>
     <!-- end widget grid -->
-    <div class="text-center">
-        {{$userAll->links()}}
-    </div>
+
 
 </div>
 <!-- END MAIN CONTENT -->
@@ -243,12 +167,12 @@ $arrSidebar =getSideBar($data);
 
 
 
+    function Render(data){
+//        $("#all_data").hide();
+        $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
 
-
-
-    // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
-    $(document).ready(function() {
+        $(".result").html(data.html);
+        $(".result").fadeIn('300');
 
         $(".mea_delete_by").on('click',function(){
 
@@ -402,135 +326,92 @@ $arrSidebar =getSideBar($data);
 
         $("#mainCheck").on("click",function(){$(".item_checked").not(this).prop('checked', this.checked);});
 
-        // With Callback
 
 
-        /* // DOM Position key index //
 
-         l - Length changing (dropdown)
-         f - Filtering input (search)
-         t - The Table! (datatable)
-         i - Information (records)
-         p - Pagination (paging)
-         r - pRocessing
-         < and > - div elements
-         <"#id" and > - div with an id
-         <"class" and > - div with a class
-         <"#id.class" and > - div with an id and class
+    }
 
-         Also see: http://legacy.datatables.net/usage/features
-         */
-        var responsiveHelper_datatable_fixed_column = undefined;
-        var breakpointDefinition = {
-            tablet : 1024,
-            phone : 480
+
+    //user is "finished typing," do something
+
+    function doneTyping () {
+        var jsondata = {
+            pagesize : 25,
+            PageNumber:1,
+            filter2 : jQuery(this).val(),
+            datasearch : jQuery(this).attr('data-filter'),
+            operator :jQuery(this).attr('data-operator')
         };
+        jQuery(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+        MeaAjax(jsondata,"users/getall",Render);
+    }
+
+    // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+    $(document).ready(function() {
+
+        var jsondata = {pagesize : 25,PageNumber:1};
+
+        $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+
+        MeaAjax(jsondata,"users/getall",Render);
 
 
-        /* COLUMN FILTER  */
-        var otable = $('#datatable_fixed_column').DataTable({
-            //"bFilter": false,
-            //"bInfo": false,
-            "bLengthChange": true,
-            //"bAutoWidth": false,
-            //"bPaginate": false,
-            //"bStateSave": true // saves sort state using localStorage
-            "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-6'f><'col-sm-6 col-xs-6 hidden-xs'Tl>r>"+"t"+
-            "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-sm-6 col-xs-12'p>>",
-            "aoColumnDefs": [ { "bSortable": false, "aTargets": [ 0,1 ] } ],
-            "oTableTools": {
-                "aButtons": [
-                    "copy",
-                    "csv",
-                    "xls",
-                    {
-                        "sExtends": "pdf",
-                        "sTitle": "SmartAdmin_PDF",
-                        "sPdfMessage": "SmartAdmin PDF Export",
-                        "sPdfSize": "letter"
-                    },
-                    {
-                        "sExtends": "print",
-                        "sMessage": "Generated by SmartAdmin <i>(press Esc to close)</i>"
-                    }
-                ],
-                "sSwfPath": "{{ asset('backend/js/plugin/datatables/swf/copy_csv_xls_pdf.swf')}}"
-            },
+        $('#group_drop').on('change',function(){
 
-            "autoWidth" : true,
-            "initComplete": function () {
-                this.api().columns(6).every(function () {
+            var jsondata = {
+                pagesize : 25,
+                PageNumber:1,
+                filter1 : $(this).val()
+            };
 
-                    var column = this;
+            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+            MeaAjax(jsondata,"users/getall",Render);
+        });
 
-                    var selectDropdown = $("#group_drop")
-                            .on('change', function () {
 
-                                if($(this).val() == 1 || $(this).val() == 0){
-                                    column.search("").draw();
-                                }else {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                            $(this).val()
+        var typingTimer;
+        var doneTypingInterval = 5000;
+        $('.filter_row').on('keyup',function(){
 
-                                    );
-                                    column
-                                            .search(val ? '^' + val + '$' : '', true, false)
-                                            .draw();
-                                }
+//            jQuery(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+            var filter2 = jQuery(this).val();
+            var datasearch = jQuery(this).attr('data-filter');
+            var operator = jQuery(this).attr('data-operator');
 
-                            });
+            delay(function(){
+                var jsondata = {
+                    pagesize : 25,
+                    PageNumber:1,
+                    filter2 : filter2,
+                    datasearch : datasearch,
+                    operator :operator
+                };
 
-//                    var selectDropdown = $('<select><option></option></select>')
-//                            .appendTo($('#sort-by-year'))
-//                            .on('change', function () {
-//                                var val = $.fn.dataTable.util.escapeRegex(
-//                                        $(this).val()
-//
-//                                );
-//                                column
-//                                        .search(val ? '^' + val + '$' : '', true, false)
-//                                        .draw();
-//                            });
+//                alert(filter2);
 
-//                    column.data().unique().sort().each(function (d, j) {
-//                        selectDropdown.append('<option value="' + d + '">' + d + '</option>')
-//                    });
-                });
-            },
-            "preDrawCallback" : function() {
-                // Initialize the responsive datatables helper once.
-                if (!responsiveHelper_datatable_fixed_column) {
-                    responsiveHelper_datatable_fixed_column = new ResponsiveDatatablesHelper($('#datatable_fixed_column'), breakpointDefinition);
-                }
-            },
-            "rowCallback" : function(nRow) {
-                responsiveHelper_datatable_fixed_column.createExpandIcon(nRow);
-            },
-            "drawCallback" : function(oSettings) {
-                responsiveHelper_datatable_fixed_column.respond();
-            }
+                MeaAjax(jsondata,"users/getall",Render);
+            }, 1000 ,filter2,datasearch,operator);
+
 
         });
 
-        // custom toolbar
-//        $("div.toolbar").html('<div class="text-right"><img src="img/logo.png" alt="SmartAdmin" style="width: 111px; margin-top: 3px; margin-right: 10px;"></div>');
-
-        // Apply the filter
-        $("#datatable_fixed_column thead th input[type=text]").on( 'keyup change', function () {
-
-            otable
-                    .column( $(this).parent().index()+':visible' )
-                    .search( this.value )
-                    .draw();
-
-        } );
-        /* END COLUMN FILTER */
 
 
-        $("#index_th").removeClass("sorting_asc");
-        $("#index_th").addClass("sorting_disabled");
+
+
+
 
     })
+
+
+    var delay = (function(){
+        var timer = 0;
+        return function(callback, ms,filter2,datasearch,operator){
+            clearTimeout (timer);
+            timer = setTimeout(callback, ms);
+        };
+    })();
 
 </script>
 

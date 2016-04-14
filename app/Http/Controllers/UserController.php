@@ -21,24 +21,119 @@ class UserController extends Controller
         ]);
 
         $user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
-        $userAll = $this->getUserAll()->paginate(100);
+
         return view('backend.pages.users')->with([
-            'user_group' => $user_group,
-            'userAll' =>$userAll
+            'user_group' => $user_group
         ]);
     }
 
-    public  function  getUserAll(){
 
-        $query = DB::table('TBL_USER')
-            ->select('TBL_USER.EMP_ID','TBL_EMPLOYEE_INFO.FULL_NAME','TBL_USER.USERNAME','TBL_USER.USER_STATUS_ID','TBL_USER_STATUS.STATUS_DESC','TBL_USER.USER_PRIVILEGE_ID','TBL_PRIVILEGE.USER_PRIVILEGE_DESC','TBL_USER.EMAIL','TBL_USER.PHONE','TBL_USER.CREATE_DATE','TBL_USER.LAST_MODIFY_DATE')
-            ->leftJoin('TBL_EMPLOYEE_INFO','TBL_USER.EMP_ID', '=', 'TBL_EMPLOYEE_INFO.EMP_ID')
-            ->leftJoin('TBL_PRIVILEGE','TBL_PRIVILEGE.USER_PRIVILEGE_ID', '=', 'TBL_USER.USER_PRIVILEGE_ID')
-            ->leftJoin('TBL_USER_STATUS', 'TBL_USER_STATUS.USER_STATUS_ID', '=', 'TBL_USER.USER_STATUS_ID');
+    public  function  getUserAlllData($ArrParam,$IsCase){
 
-        return $query;
+        $PageSize = $ArrParam['pagesize'];
+        $PageNumber = $ArrParam['PageNumber'];
+
+        $query =  "SELECT us.EMP_ID, emp.FULL_NAME , us.USERNAME, us.USER_STATUS_ID, st.STATUS_DESC,
+			us.USER_PRIVILEGE_ID, pri.USER_PRIVILEGE_DESC,us.EMAIL, us.PHONE ,us.CREATE_DATE,us.LAST_MODIFY_DATE
+			FROM TBL_USER us
+			LEFT JOIN TBL_EMPLOYEE_INFO emp ON emp.EMP_ID = us.EMP_ID
+			LEFT JOIN TBL_PRIVILEGE pri ON pri.USER_PRIVILEGE_ID = us.USER_PRIVILEGE_ID
+			LEFT JOIN TBL_USER_STATUS st ON st.USER_STATUS_ID = us.USER_STATUS_ID";
+
+        if($IsCase){
+            $query .= $this->Getfilter($ArrParam);
+        }
+
+        $query .= " ORDER BY us.EMP_ID DESC";
+        $query .= " OFFSET ".$PageSize." * (".$PageNumber." - 1) ROWS FETCH NEXT ".$PageSize." ROWS ONLY OPTION (RECOMPILE)";
+
+        return DB::select(DB::raw($query));
+    }
+
+    public  function  getUserAlllCount($ArrParam,$IsCase){
+
+
+
+        $allquery =  "SELECT COUNT(us.EMP_ID) AS total
+			FROM TBL_USER us
+			LEFT JOIN TBL_EMPLOYEE_INFO emp ON emp.EMP_ID = us.EMP_ID
+			LEFT JOIN TBL_PRIVILEGE pri ON pri.USER_PRIVILEGE_ID = us.USER_PRIVILEGE_ID
+			LEFT JOIN TBL_USER_STATUS st ON st.USER_STATUS_ID = us.USER_STATUS_ID";
+
+        if($IsCase){
+            $allquery .= $this->Getfilter($ArrParam);
+        }
+
+
+        $all = DB::select(DB::raw($allquery));
+        return  $all[0]->total;
+    }
+
+    public  function  Getfilter($ArrParam){
+
+
+
+        $filter1 =$ArrParam['filter1'];
+        $filter2 =$ArrParam['filter2'];
+        $datasearch =$ArrParam['datasearch'];
+        $operator = $ArrParam['operator'];
+
+
+        $where = " WHERE pri.USER_PRIVILEGE_ID IS NOT  NULL";
+
+        if ($filter1 != "") {
+            $where .= " AND pri.USER_PRIVILEGE_ID = '" . $filter1 . "'";
+        }
+
+        if ($filter2 != "" && $datasearch != ""){
+            if($operator == 'LIKE'){
+                $where .= " AND ".$datasearch." ".$operator." '%" . $filter2 . "%'";
+            }else{
+                $where .= " AND ".$datasearch." ".$operator." '" . $filter2 . "'";
+            }
+
+        }
+
+
+        return $where;
 
     }
+
+    public  function  Ajax_GetUser(Request $request){
+
+        $PageSize = $request->input('pagesize');
+        $PageNumber = $request->input('PageNumber');
+
+        $filter1 = $request->input('filter1');
+        $filter2 = $request->input('filter2');
+        $datasearch = $request->input('datasearch');
+        $operator = $request->input('operator');
+
+        $ArrParam["pagesize"] =$PageSize;
+        $ArrParam["PageNumber"] =$PageNumber;
+        $ArrParam["filter1"] =$filter1;
+        $ArrParam["filter2"] =$filter2;
+        $ArrParam["datasearch"] =$datasearch;
+        $ArrParam["operator"] =$operator;
+
+        $userAll = $this->getUserAlllData($ArrParam,true);
+
+        $totals = $this->getUserAlllCount($ArrParam,true);
+
+        $htmlPaginate =Paginatre_gen($totals,$PageSize,'page_click_search',$PageNumber);
+
+        $returnHTML = view('backend.pages.ajax.ajax_user')->with([
+            'htmlPaginate'=> $htmlPaginate,
+            'userAll'=>$userAll,
+            'totals' => $totals,
+            'PageSize' =>$PageSize,
+            'PageNumber' =>$PageNumber
+
+        ])->render();
+
+        return response()->json(array('success' => true, 'html'=>$returnHTML));
+    }
+
 
     public function getUsers(Request $request)
     {

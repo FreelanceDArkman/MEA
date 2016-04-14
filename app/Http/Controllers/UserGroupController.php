@@ -23,16 +23,47 @@ class UserGroupController extends Controller
         ] );
 
 
-        $UserGroupData = $this->getuserGroupAll();
-
-        return view('backend.pages.user_group')->with(['UserGroupData'=>$UserGroupData]);
+        return view('backend.pages.user_group');
     }
 
+
+    public  function Ajax_GetUserGroup(Request $request){
+
+        $PageSize = $request->input('pagesize');
+        $PageNumber = $request->input('PageNumber');
+
+        $ArrParam["pagesize"] =$PageSize;
+        $ArrParam["PageNumber"] =$PageNumber;
+
+        $UserGroupDatacount = $this->getuserGroupAll();
+        $UserGroupData = $this->getuserGroupAllData($ArrParam);
+
+        $totals = count($UserGroupDatacount);
+
+        $htmlPaginate =Paginatre_gen($totals,$PageSize,'page_click_search',$PageNumber);
+
+        $returnHTML = view('backend.pages.ajax.ajax_userGroup')->with([
+            'htmlPaginate'=> $htmlPaginate,
+            'UserGroupData'=>$UserGroupData
+
+        ])->render();
+
+        return response()->json(array('success' => true, 'html'=>$returnHTML));
+    }
 
     public  function  getuserGroupAll(){
 
         return DB::table('TBL_PRIVILEGE')->orderby("USER_PRIVILEGE_ID")->get();
     }
+    public  function  getuserGroupAllData($ArrParam){
+
+        $PageSize = $ArrParam['pagesize'];
+        $PageNumber = $ArrParam['PageNumber'];
+
+        $query =  "SELECT * FROM TBL_PRIVILEGE ORDER BY USER_PRIVILEGE_ID  OFFSET ".$PageSize." * (".$PageNumber." - 1) ROWS FETCH NEXT ".$PageSize." ROWS ONLY OPTION (RECOMPILE)";
+        return DB::select(DB::raw($query));
+    }
+
 
     public function getUserGroups(Request $request)
     {

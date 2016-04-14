@@ -249,7 +249,7 @@ FROM TBL_EMPLOYEE_INFO fn LEFT OUTER JOIN TBL_MEMBER_BENEFITS mm ON mm.EMP_ID = 
                 // first row styling and writing content
                 $sheet->mergeCells('A1:H1');
                 $sheet->mergeCells('A2:H2');
-                $sheet->mergeCells('A3:H3');
+                $sheet->mergeCells('A3:H');
                 $sheet->row(1, function ($row) {
                     $row->setFontFamily('Comic Sans MS');
                     $row->setFontSize(20);
