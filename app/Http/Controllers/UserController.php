@@ -266,6 +266,10 @@ class UserController extends Controller
 
     public  function  postAddUser(Request $request){
 
+
+
+
+        return response()->json(array('success' => true, 'html'=>"HELLO"));
     }
 
 

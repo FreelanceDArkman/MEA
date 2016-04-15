@@ -421,6 +421,7 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::get('add','UserController@getAddUser');
             Route::post('add','UserController@postAddUser');
 
+            Route::get('edit/{id}', 'UserController@getEditUser')->where('id', '[0-9]+');
             Route::post('getall', 'UserController@Ajax_GetUser');
 
         });
