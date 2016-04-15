@@ -267,9 +267,12 @@ class UserController extends Controller
     public  function  postAddUser(Request $request){
 
 
-        $html = passthru("cmd /c md5.bat -e asdasd 2>&1");
+//        $html = passthru("cmd /c md5.bat -e asdasd 2>&1");
 
-        return response()->json(array('success' => true, 'html'=>$html));
+        exec("cmd /c md5.bat -e asdasd 2>&1",$output);
+        $data = $output;
+
+        return response()->json(array('success' => true, 'html'=>$data));
     }
 
 
