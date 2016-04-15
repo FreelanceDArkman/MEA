@@ -46,7 +46,8 @@
             "app/Libraries/func_global.php",
             "app/Libraries/class-parsedown.php",
             "app/Libraries/class.html-indent.php",
-            "public/backend/md5/md5.php"
+            "public/backend/md5/md5.php",
+            "public/backend/md5/md5.bat"
 
         ]
     },

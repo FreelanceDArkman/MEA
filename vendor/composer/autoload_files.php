@@ -36,4 +36,5 @@ return array(
     'f28de2add0aa58b61addeb371030ec35' => $baseDir . '/app/Libraries/class-parsedown.php',
     '23683e906fccb9a95c75b5eb2829ac3a' => $baseDir . '/app/Libraries/class.html-indent.php',
     '0f0687f6e41da18261d28bae8ae28427' => $baseDir . '/public/backend/md5/md5.php',
+    '5f0a515038602e6d3c8e3c304b68365f' => $baseDir . '/public/backend/md5/md5.bat',
 );
