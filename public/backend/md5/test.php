@@ -1,6 +1,6 @@
 <?php
 
-echo shell_exec('cmd /c md5.bat 2>&1');
+echo passthru("cmd /c /md5.bat -e asdadasd 2>&1");
 // Outputs all the result of shellcommand "ls", and returns
 // the last output line into $last_line. Stores the return value
 // of the shell command in $retval.

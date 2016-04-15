@@ -15,8 +15,8 @@
 //echo exec("md5.bat");
 
 //var_dump($output);
-
-$output = shell_exec("./backend/md5/md5.sh -e ss 2>&1");
+$output = shell_exec("/backend/md5/md5.bat -e ss 2>&1");
+//$output = shell_exec("./backend/md5/md5.sh -e ss 2>&1");
 ////echo passthru("md5.bat");
 var_dump($output);
 ?>
