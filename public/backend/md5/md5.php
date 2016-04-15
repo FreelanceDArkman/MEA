@@ -2,7 +2,7 @@
 
 
 function MeAEncrypt($data){
-    return passthru("cmd /c /md5/md5.bat -e ".$data." 2>&1");
+    return passthru("cmd /c md5.bat -e ".$data." 2>&1");
     //return "hellosss";
 }
 //$data = $_GET['data'];
