@@ -1,10 +1,10 @@
 <?php
-
-
-function MeAEncrypt($data){
-    return passthru("cmd /c md5.bat -e ".$data." 2>&1");
-    //return "hellosss";
-}
+$data = "asdasdas";
+echo passthru("cmd /c md5.bat -e ".$data." 2>&1");
+//function MeAEncrypt($data){
+//    return passthru("cmd /c md5.bat -e ".$data." 2>&1");
+//    //return "hellosss";
+//}
 //$data = $_GET['data'];
 
 //echo passthru("cmd /c /md5.bat -e asdadasd 2>&1");
