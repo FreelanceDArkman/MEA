@@ -269,8 +269,8 @@ class UserController extends Controller
 
 //        $html = passthru("cmd /c md5.bat -e asdasd 2>&1");
 
-        exec("cmd /c md5.bat -e asdasd 2>&1",$output);
-        $data = $output;
+        //exec("cmd /c md5.bat -e asdasd 2>&1",$output);
+        $data = exec("cmd /c md5.bat -e asdasd 2>&1");
 
         return response()->json(array('success' => true, 'html'=>$data));
     }
