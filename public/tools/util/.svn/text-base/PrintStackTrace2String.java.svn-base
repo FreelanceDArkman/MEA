@@ -1,0 +1,19 @@
+package csadapter.util;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
+public class PrintStackTrace2String {
+
+	public static String stack2string( Exception ex ) {
+		try {
+			StringWriter sw = new StringWriter();
+			PrintWriter  pw = new PrintWriter( sw );
+			ex.printStackTrace( pw );
+			return "------\r\n" + sw.toString() + "------\r\n";
+		} catch (Exception e2) {
+			return "Bad Stack2String";
+		}
+	}
+
+}// end class

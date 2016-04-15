@@ -1,0 +1,208 @@
+package csadapter.util;
+
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
+
+public class MyDate {
+
+	public static int Year       = 0;
+	public static int Month      = 1;
+	public static int Day        = 2;
+	public static int Hour       = 3;
+	public static int Minute     = 4;
+	public static int Second     = 5;
+	public static int Milisecond = 6;
+	
+	public static long dateDiff( Date d1, Date d2 , int TypeDiff ){
+		long tdiff = 0;
+		long ttl   = 0;
+		
+		if( (d1== null) || (d2==null) ){
+			return 0;
+		}
+		
+		tdiff = d2.getTime() - d1.getTime();
+		switch( TypeDiff ){
+			case 0: //Year
+				ttl = ( tdiff/(1000*60*60*24*31*12) );
+				break;
+			case 1 ://Month
+				ttl = ( tdiff/(1000*60*60*24*31) );
+				break;
+			case 2: //Day
+				ttl = ( tdiff/(1000*60*60*24) );
+				break;
+			case 3://Hour
+				ttl = ( tdiff/(1000*60*60) );
+				break;
+			case 4://Minute
+				ttl = ( tdiff/(1000*60) );
+				break;
+			case 5://Second
+				ttl = ( tdiff/1000 );
+				break;
+			default://Milisecond
+				ttl = tdiff;
+				break;
+		}
+		return ttl;
+	}
+	
+	public static long dateDiff( String strDate1, String strDate2 , int TypeDiff ){
+		Date d1 = str2Date( strDate1 );
+		Date d2 = str2Date( strDate1 );
+		return dateDiff(d1, d2, TypeDiff);
+	}
+	
+	public static Date  str2Date( String strDate ){
+		//String strFormat = "yyyy-MM-dd HH:mm:ss:SSS";
+		strDate = strDate.trim();
+		
+		String strFormat = "yyyy-MM-dd HH:mm:ss";
+		if( strDate.length() == 10 ) { //date only
+			strDate += " 00:00:00";
+		}
+		
+		DateFormat df    = new SimpleDateFormat( strFormat , Locale.US);
+	    Date       xDate = null;
+	    try{
+	    	xDate  = df.parse( strDate );
+	    }catch(Exception ex ){
+	    	System.out.println( "Input=" + strDate );
+	    	ex.printStackTrace();
+	    }finally{
+	    	df = null;
+	    }
+		return xDate;
+	}
+	
+	public static String  date2String( Date date ){
+	    String strDate   = "";
+	    
+	    try{
+	    	Timestamp ts = new Timestamp( date.getTime() );
+	    	strDate = ts.toString();
+	    }catch(Exception ex ){
+	    	ex.printStackTrace();
+	    }finally{
+	    }
+		return strDate.trim();
+	}
+	
+	public static Timestamp getTimestamp(){
+		return  new Timestamp( System.currentTimeMillis() );
+	}
+	
+	public static String getCurrentTime2String(){
+		String strFormat = "HH:mm:ss:SSS";
+		DateFormat df    = new SimpleDateFormat( strFormat , Locale.US);
+	    String strDate   = "";
+	    
+	    try{
+	    	strDate  = df.format( new Date() );
+	    }catch(Exception ex ){
+	    	ex.printStackTrace();
+	    }finally{
+	    	df = null;
+	    }
+		return strDate.trim();
+	}
+	
+	public static String getTimeFormat( Date now ){
+		String strFormat = "HH:mm:ss:SSS";
+		DateFormat df    = new SimpleDateFormat( strFormat , Locale.US);
+	    String strDate   = "";
+	    
+	    try{
+	    	strDate  = df.format( now );
+	    }catch(Exception ex ){
+	    	ex.printStackTrace();
+	    }finally{
+	    	df = null;
+	    }
+		return strDate.trim();
+	}
+	
+	public static String getTimeFormat( Date now ,String format ){
+	    DateFormat df    = new SimpleDateFormat( format , Locale.US);
+	    String strDate   = "";
+	    
+	    try{
+	    	strDate  = df.format( now );
+	    }catch(Exception ex ){
+	    	ex.printStackTrace();
+	    }finally{
+	    	df = null;
+	    }
+		return strDate.trim();
+	}
+	
+	public static String getTimeStamp( String format ) {
+		DateFormat df    = new SimpleDateFormat( format , Locale.US);
+	    String strDate   = "";
+	    
+	    try{
+	    	strDate  = df.format( new Date() );
+	    }catch(Exception ex ){
+	    	ex.printStackTrace();
+	    }finally{
+	    	df = null;
+	    }
+		return strDate.trim();
+	}
+	
+	public static String getMilisecond2Second( long ms) {
+		StringBuilder sb = new StringBuilder();
+		sb.append( ""  + (ms/1000) );
+		sb.append( "." + (ms%1000) );
+		sb.append( " sec.");
+		return sb.toString();
+	}
+	
+	public static String ConvertDate( String str  ) {
+		str = str.trim();
+    	String year = str.trim().substring( 0, 4 );
+    	str = str.substring( 4 );
+    	if( Integer.parseInt( year ) >= 2553 ) {
+    		year = "" + (Integer.parseInt( year ) -543);
+    	}
+    	return year.trim() + str.trim();
+    }
+
+	
+	public static long getDateTimeMiliseconds( Date now ) {
+		
+		long dml = 0;
+		dml = Long.parseLong( getTimeFormat(now, "yyyyMMddHHmmssSSS" ) );		
+		return dml;
+	}
+	
+	public static Date getDateCalendar( int dayPosition ) {
+		Calendar cal = Calendar.getInstance();
+		if( dayPosition == 0 ) {
+			return cal.getTime();
+		}else{
+			cal.add( Calendar.DATE, dayPosition );
+		}
+		return cal.getTime();
+	}
+	
+	public static int getTime2Int( String s ) {
+		int time     = 0;
+		String str   ="";
+		String[] arr = MySplit.split( s.trim(), ":" );
+		for( String t:arr ) {
+			str += t;
+		}
+		time = Integer.parseInt( str );
+		return time;
+	}
+	
+}//end class
+

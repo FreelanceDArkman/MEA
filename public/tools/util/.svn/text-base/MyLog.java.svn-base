@@ -1,0 +1,453 @@
+package csadapter.util;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Properties;
+import java.util.ResourceBundle;
+
+import TestLog.ResourceAsStream;
+
+public class MyLog {
+	public static int LOG_OFF   = 0;
+	public static int LOG_INFO  = 1;
+	public static int LOG_DEBUG = 2;
+	public static int LOG_ERROR = 3;
+	public static int LOG_ALL   = 3;
+	
+	public static  String FILE_EXTENSION             = ".log";
+	public static  String DEFAULT_LOG_NAME_ROLLING   = "dd";
+	public static  String DEFAULT_DAT_FORMAT_ROLLING = "yyyy-MM-dd";
+	
+	
+	private String   _file_Extension       = FILE_EXTENSION;
+	private int      _log_level            = LOG_ALL;
+	private String   _logPath              = "./log/";
+	private String   _logName              = "";
+	private boolean  _isConsoleLayout      = false;
+	private String   _formatDateTimeLayout = "HH:mm:ss:SSS";
+	
+	private String   _dateFormatFileRolling      = DEFAULT_DAT_FORMAT_ROLLING;
+	private String   _dateFormatFileNameRolling  = DEFAULT_LOG_NAME_ROLLING;
+	public  boolean  _isHasFolders               = false;
+	private boolean  _isPrintTimeStamp           = false;
+	
+	public MyLog(){	}
+	public MyLog( String logPath ){ 
+		this._logPath = logPath;
+	}
+	
+	public void setFileExtension( String s ){ this._file_Extension = s; }
+	public void setPrintTimeStamp( boolean b ){ this._isPrintTimeStamp = b; }
+	public void setLogPath( String s ){ this._logPath = s; }
+	public void setLogName( String s ){ this._logName = s; }
+	public void setConsoleLayout( boolean b ){ this._isConsoleLayout = b; }
+	public void setFormatDateTimeLayout( String dateFormat ){ this._formatDateTimeLayout = dateFormat; }
+	public void setLogLevel( int level ){ this._log_level = level; }
+	public void setHasFolders( boolean b ){ this._isHasFolders = b; }
+	public void setDateFormatFileRolling( String dateFormat ){ this._dateFormatFileRolling = dateFormat; }
+	public void setDateFormatFileNameRolling( String dateFormat ){ this._dateFormatFileNameRolling = dateFormat; }
+	
+	public synchronized void info( String msg ){
+		if( msg == null ){
+			return;
+		}
+		if( this._log_level == LOG_OFF ){
+			return;
+		}
+		if( this.LOG_INFO <= this._log_level ){
+			logFile( msg );
+		}
+	}
+	
+	public  synchronized void debug( String msg ){
+		if( msg == null ){
+			return;
+		}
+		if( this._log_level == LOG_OFF ){
+			return;
+		}
+		if( this.LOG_DEBUG <= this._log_level ){
+			logFile( msg );
+		}
+	}
+	
+	public  synchronized void error( String msg ){
+		if( msg == null ){
+			return;
+		}
+		if( this._log_level == LOG_OFF ){
+			return;
+		}
+		logFile( msg );
+	}
+	
+	private synchronized void logFile( String msg ){
+		String currentFile = this.getFileName();
+		this.rollingNewFile( currentFile );
+		this.writeFileAppend( currentFile, msg );
+	}
+	
+	private void makeHasFolder( String sPath ){
+		File f = null;
+		try{
+			f = new File( sPath );
+			if( f.exists() )
+				return;
+			f.mkdirs();
+		}catch( Exception ex ){
+			System.out.println( "makeHasFolder(), Error: " + ex.getMessage() );
+		}finally{
+			f = null;
+		}
+	}
+	
+	private String getFileName(){
+		String sFile            = this._logPath;
+		Date mDate              = new Date();
+		SimpleDateFormat fmDate = new SimpleDateFormat( _dateFormatFileNameRolling );
+		try{
+			if( this._isHasFolders ){
+				sFile = this.getHasFolderPath();
+				this.makeHasFolder( sFile );
+				sFile += "/";
+				sFile += _logName + fmDate.format( mDate ) + _file_Extension;
+			}else{
+				sFile += _logName + fmDate.format( mDate ) + _file_Extension;		
+				this.makeHasFolder( sFile );
+			}
+		}catch( Exception ex ){
+		}finally{
+			mDate  = null;
+			fmDate = null;
+		}
+		return sFile;
+	}
+	
+	public String getFolderPathFile( String pathFileName ){
+		String pathFile = "";
+		pathFile = pathFileName.substring( 0, pathFileName.lastIndexOf( "/" ) );
+		return pathFile;
+	}
+	
+	private String getHasFolderPath(){
+		String temp_Path        = "";
+		String sFolderPath      = this._logPath + temp_Path;
+		Date mDate              = new Date();
+		SimpleDateFormat fmDate = new SimpleDateFormat( _dateFormatFileNameRolling );
+		try{
+			temp_Path = fmDate.format( mDate );
+			temp_Path = temp_Path.replace( "-", "/" );
+			temp_Path = temp_Path.replace( ":", "/" );
+			temp_Path = temp_Path.replaceFirst( " ", "/" );
+			sFolderPath += temp_Path;
+		}catch( Exception ex ){
+		}finally{
+			mDate  = null;
+			fmDate = null;
+		}
+		return sFolderPath;
+	}
+	
+	private String getCurrentDateTime( String format ){
+		String sResult = "";
+		Date mDate = new Date();
+		try{
+			SimpleDateFormat fmDate = new SimpleDateFormat( format );
+			sResult = fmDate.format( mDate );
+		}catch( Exception ex ){
+		}finally{
+			mDate = null;
+		}
+		return sResult;
+	}
+	
+	private synchronized String getFileRollingStamp( String fileName ){
+		File file = new File( fileName );
+		if( !file.exists() ){
+			return "";
+		}
+		
+		String fileStamp   = "";
+		FileInputStream fi =  null;
+		BufferedReader  rd = null;
+		
+		try{
+			fi  = new FileInputStream( fileName );
+			rd  = new BufferedReader( new InputStreamReader(fi) );
+			fileStamp = rd.readLine().trim();
+			rd.close();
+			fi.close();
+		}catch( Exception ex ){
+			System.out.println( "Function: getFileRollingStamp(), Error: " + ex.getMessage() );
+		}
+		finally{
+			fi  = null;
+			rd  = null;
+		}
+		return fileStamp;
+	}
+	
+	private void rollingNewFile( String fileName ){
+		String curentFileRolling = this.getCurrentDateTime( this._dateFormatFileRolling );
+		String fileRollingStamp  = this.getFileRollingStamp( fileName );
+		
+		if( curentFileRolling.equalsIgnoreCase( fileRollingStamp ) ){
+			return;
+		}
+		this.deleFile( fileName );
+		this.createNewFileRolling( fileName );
+	}
+	
+	private void createNewFileRolling( String fileName ){
+		FileOutputStream fo   = null;
+		OutputStreamWriter sw = null;
+		try{
+			fo = new FileOutputStream( fileName ,true );
+			sw = new OutputStreamWriter( fo );
+			String stampFile = getCurrentDateTime( this._dateFormatFileRolling ) ;
+			sw.write( stampFile  + "\r\n" );
+			sw.flush();
+			sw.close();
+			fo.close();
+		}catch( Exception ex ){
+			System.out.println( "MyLog-> createNewFileRolling(), Error: " + ex.getMessage() );
+		}finally{
+			fo = null;
+			sw = null;
+		}
+	}
+	
+	public synchronized void writeFileAppend( String fileName , String msg ){
+		FileOutputStream fo   = null;
+		OutputStreamWriter sw = null;
+		try{
+			if( _isPrintTimeStamp ){
+				if( this._formatDateTimeLayout.length() > 0 ){
+					String layOut = this.getCurrentDateTime( this._formatDateTimeLayout );
+					msg = layOut + " " + msg;
+				}
+			}
+			
+			fo = new FileOutputStream( fileName , true );
+			sw = new OutputStreamWriter( fo );
+			sw.write( msg + "\r\n" );
+			sw.flush();
+			sw.close();
+			fo.close();
+			
+			if( _isConsoleLayout ){
+				System.out.println( msg );
+			}
+		}catch( Exception ex ){
+			System.out.println( "MyLog->writeFileAppend(), Error: " + ex.getMessage() );
+		}finally{
+			fo = null;
+			sw = null;
+		}
+	}
+	
+	public synchronized void writeFileAppend( String msg ){
+		FileOutputStream fo   = null;
+		OutputStreamWriter sw = null;
+		try{
+			if( _isPrintTimeStamp ){
+				if( this._formatDateTimeLayout.length() > 0 ){
+					String layOut = this.getCurrentDateTime( this._formatDateTimeLayout );
+					msg = layOut + " " + msg;
+				}
+			}
+			
+			String fileName = this._logPath + this.getCurrentDateTime( this._dateFormatFileNameRolling );
+			
+			fo = new FileOutputStream( fileName , true );
+			sw = new OutputStreamWriter( fo );
+			sw.write( msg + "\r\n" );
+			sw.flush();
+			sw.close();
+			fo.close();
+			
+			if( _isConsoleLayout ){
+				System.out.println( msg );
+			}
+		}catch( Exception ex ){
+			System.out.println( "MyLog->writeFileAppend(), Error: " + ex.getMessage() );
+		}finally{
+			fo = null;
+			sw = null;
+		}
+	}
+	
+	
+	public synchronized void deleFile( String fileName ){
+		
+		try{
+		    File file = new File( fileName );
+		    if( file.exists() ){
+		    	file.delete();
+		    }
+		}catch( Exception ex ){
+			System.out.println( "MyLog->delete(), Error: " + ex.getMessage() );
+		}
+	}
+	
+	public void configuration( Properties prop ){
+		if( prop == null ){
+			return;
+		}
+		
+		/*
+		 mylog.setLogPath                     = bin/plugins/smsc/log/
+		 mylog.setLogName                     = 
+		 mylog.setHasFolders                  = false
+		 mylog.setLogLevel                    = DEBUG
+		 mylog.setConsoleLayout               = false
+		 mylog.setDateFormatFileRolling       = yyyy-MM-dd
+		 mylog.setDateFormatFileNameRolling   = dd
+		 mylog.setPrintTimeStamp              = false
+	    */
+		
+        try{
+        	String configValue = prop.getProperty( "mylog.setLogPath" ).trim();
+    		if( configValue.length() > 0){
+    			this.setLogPath( configValue );
+    		}
+    		
+    		configValue = prop.getProperty( "mylog.setLogName" ).trim();
+    		if( configValue.length() > 0){
+    			this.setLogName( configValue );
+    		}
+    		
+    		configValue = prop.getProperty( "mylog.setHasFolders" ).trim();
+    		if( configValue.equalsIgnoreCase( "true" )){
+    			this.setHasFolders( true );
+    		}
+    		
+    		configValue = prop.getProperty( "mylog.setLogLevel" ).trim();
+    		if( configValue.equalsIgnoreCase( "INFO" )){
+    			this.setLogLevel( this.LOG_INFO );
+    		}
+    		if( configValue.equalsIgnoreCase( "DEBUG" )){
+    			this.setLogLevel( this.LOG_DEBUG );
+    		}
+    		if( configValue.equalsIgnoreCase( "ALL" )){
+    			this.setLogLevel( this.LOG_ALL );
+    		}
+    		
+    		configValue = prop.getProperty( "mylog.setDateFormatFileRolling" ).trim();
+    		if( configValue.length() >0){
+    			this.setDateFormatFileRolling( configValue );
+    		}
+    		
+    		configValue = prop.getProperty( "mylog.setDateFormatFileNameRolling" ).trim();
+    		if( configValue.length() >0){
+    			this.setDateFormatFileNameRolling( configValue );
+    		}
+    		
+    		configValue = prop.getProperty( "mylog.setConsoleLayout" ).trim();
+    		if( configValue.equalsIgnoreCase( "false" )){
+    			this.setConsoleLayout( false );
+    		}
+    		
+    		configValue = prop.getProperty( "mylog.setPrintTimeStamp" ).trim();
+    		if( configValue.equalsIgnoreCase( "true" )){
+    			this.setPrintTimeStamp( true );
+    		}
+		}catch( Exception ex ){
+			System.out.println( "Error: MyLog->configuration(), Exception: " + ex.getMessage() );
+		}
+	}
+	
+	public void resourceBundleConfig( ResourceBundle rscBundle ){
+		
+		try{
+			String configValue = rscBundle.getString( "mylog.setLogPath" ).trim();
+			if( configValue.length() > 0){
+				this.setLogPath( configValue );
+			}
+			
+			configValue = rscBundle.getString( "mylog.setLogName" ).trim();
+			if( configValue.length() > 0){
+				this.setLogName( configValue );
+			}
+			
+			configValue = rscBundle.getString( "mylog.setHasFolders" ).trim();
+			if( configValue.equalsIgnoreCase( "true" )){
+				this.setHasFolders( true );
+			}
+			
+			configValue = rscBundle.getString( "mylog.setLogLevel" ).trim();
+			if( configValue.equalsIgnoreCase( "INFO" )){
+				this.setLogLevel( this.LOG_INFO );
+			}
+			if( configValue.equalsIgnoreCase( "DEBUG" )){
+				this.setLogLevel( this.LOG_DEBUG );
+			}
+			if( configValue.equalsIgnoreCase( "ALL" )){
+				this.setLogLevel( this.LOG_ALL );
+			}
+			if( configValue.equalsIgnoreCase( "OFF" )){
+				this.setLogLevel( this.LOG_OFF );
+			}
+			
+			configValue = rscBundle.getString( "mylog.setDateFormatFileRolling" ).trim();
+			if( configValue.length() >0){
+				this.setDateFormatFileRolling( configValue );
+			}
+			
+			configValue = rscBundle.getString( "mylog.setDateFormatFileNameRolling" ).trim();
+			if( configValue.length() >0){
+				this.setDateFormatFileNameRolling( configValue );
+			}
+			
+			configValue = rscBundle.getString( "mylog.setConsoleLayout" ).trim();
+			if( configValue.equalsIgnoreCase( "false" )){
+				this.setConsoleLayout( false );
+			}
+			
+			configValue = rscBundle.getString( "mylog.setPrintTimeStamp" ).trim();
+			if( configValue.equalsIgnoreCase( "true" )){
+				this.setPrintTimeStamp( true );
+			}
+		}catch( Exception ex ){
+			System.out.println( "Error: MyLog->resourceBundleConfig(), Exception: " + ex.getMessage() );
+		}
+	}
+	
+    public void configuration( String fileConfig ){
+		this.configuration( getConfig( fileConfig ) );
+	}
+    
+    private Properties getConfig( String file ){
+    	Properties props = null;
+		try{
+			InputStream is = ResourceAsStream.class.getResourceAsStream( file );
+			props = new Properties();
+			props.load( is );
+			is.close();
+		}catch( Exception ex ){
+			System.out.println( "MyLog->getPropertiesConfig(), Error: " + ex.getMessage() );
+		}
+		return props;
+    }
+	
+   /* private Properties getConfig( String fileName ){
+		Properties  config = null;
+		try{
+			FileInputStream in = new FileInputStream( fileName );
+			config = new Properties();
+			config.load( in );
+			in.close();
+		}catch( Exception ex ){
+			System.out.println( "MyLog->getConfig(), Error: " + ex.getMessage() );
+		}
+		return config;
+	}*/
+	
+}//end class

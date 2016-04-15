@@ -1,0 +1,189 @@
+package csadapter.util;
+
+import java.util.Calendar;
+import java.util.Date;
+
+public class ScheduleJob {
+
+	protected String  _schedule_time        = "DAILY;08:00-23:00"; // Optional-> DAILY;08:00-18:00;'yyyy-MM-dd HH:mm:ss';sysdate-3
+	protected boolean _isFirst_process      = false;
+	protected long    _last_Timestasmp      = System.currentTimeMillis();
+	protected int     _interval_miliseconds = 100;
+
+	public ScheduleJob() {
+		
+	}
+	
+	public ScheduleJob( String schedule_time ) {
+		_schedule_time = schedule_time;
+	}
+
+	/***********************************************
+	 * Format-Schedule_Time = {DAILY;08:00-23:00}, {HOURLY;INTERVAL=2}
+	 ***********************************************/
+	public void setScheduleTime( String s ) {
+		_schedule_time = s;
+	}
+	
+	
+	public boolean isScheduleJob() {
+		// MILISECONDLY;INTERVAL=100
+		// MINUTELY;INTERVAL =10
+		// HOURLY;INTERVAL   =1
+		// DAILY;08:00-18:00
+		// DAILY;08:00-18:00;'yyyy-MM-dd HH:mm:ss';sysdate-3
+		// MONTHLY;DATE_START_OF_MONTH;23:59-23:59
+		// MONTHLY;DATE_END_OF_MONTH;23:59-23:59
+		boolean bOk = false;
+		try {
+			// boolean bOk = true;
+			String[] freq = MySplit.split(_schedule_time, ";");
+			if (freq[0].equalsIgnoreCase("DAILY")) {
+				String[] arrTime = MySplit.split(freq[1], "-");
+				long start_time = Long.parseLong(arrTime[0].replaceAll(":", "")
+						.trim());
+				long end_time = Long.parseLong(arrTime[1].replaceAll(":", "")
+						.trim());
+
+				if (isPeriodTime(start_time, end_time)) {
+					/* time in perion */
+					if (!_isFirst_process) {
+						bOk = true;
+						_isFirst_process = true;
+						_last_Timestasmp = System.currentTimeMillis();
+					}
+				} else {
+					// reset flag
+					_isFirst_process = false;
+				}
+			} else if (freq[0].equalsIgnoreCase("HOURLY")) {
+				freq = MySplit.split(freq[1], "=");
+				int interval = Integer.parseInt(freq[1]);
+				if( interval == 1 ) {
+					//action at xx:59 Minute
+					if( MyDate.getTimeStamp( "mm" ).equalsIgnoreCase( "59" ) ) {
+						/* time in perion */
+						if (!_isFirst_process) {
+							bOk = true;
+							_isFirst_process = true;
+						}
+					}else {
+						// reset flag
+						_isFirst_process = false;
+					}
+				}else {
+					long ttl = MyDate.dateDiff(new Date( _last_Timestasmp ),
+							new Date(), MyDate.Hour);
+					if (ttl >= interval) {
+						bOk = true;
+						_last_Timestasmp = System.currentTimeMillis();
+					}
+				}
+			}else if (freq[0].equalsIgnoreCase("MINUTELY")) {
+				freq = MySplit.split(freq[1], "=");
+				int interval = Integer.parseInt(freq[1]);
+				long ttl = MyDate.dateDiff(new Date( _last_Timestasmp ),
+						new Date(), MyDate.Minute);
+				if (ttl >= interval) {
+					bOk = true;
+					_last_Timestasmp = System.currentTimeMillis();
+				}
+			}else if (freq[0].equalsIgnoreCase("MONTHLY")) {
+				// MONTHLY;DATE_START_OF_MONTH;23:59-23:59
+				// MONTHLY;DATE_END_OF_MONTH;23:59-23:59
+				Date now    = new Date();
+				
+				if( freq[1].equalsIgnoreCase("DATE_START_OF_MONTH") ) {
+					int currentDate  = now.getDate();
+					if( currentDate != 1 ) {
+						return bOk;
+					}
+				}else if( freq[1].equalsIgnoreCase("DATE_END_OF_MONTH") ) {
+					Calendar calendar = Calendar.getInstance();
+					int lastDate      = calendar.getActualMaximum(Calendar.DATE);
+					int currentDate   = now.getDate();
+					if( lastDate != currentDate ) {
+						return bOk;
+					}
+				}
+				//check period time
+				String[] arrTime = MySplit.split(freq[1], "-");
+				long start_time = Long.parseLong(arrTime[0].replaceAll(":", "")
+						.trim());
+				long end_time = Long.parseLong(arrTime[1].replaceAll(":", "")
+						.trim());
+
+				if (isPeriodTime(start_time, end_time)) {
+					/* time in perion */
+					if (!_isFirst_process) {
+						bOk = true;
+						_isFirst_process = true;
+						_last_Timestasmp = System.currentTimeMillis();
+					}
+				} else {
+					// reset flag
+					_isFirst_process = false;
+				}
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return bOk;
+	}
+
+	private boolean isPeriodTime( long start_time, long end_time ) {
+		boolean bOk = false;
+		long currentTime = Long.parseLong(MyDate.getTimeFormat( new Date(System.currentTimeMillis()), "HHmm"));
+
+		if ((currentTime >= start_time) && (currentTime <= end_time)) {
+			bOk = true;
+		}
+		return bOk;
+	}
+	
+	public boolean isMiliSecondInterval() {
+		boolean bOk = false;
+		try {
+			if( _schedule_time.trim().toUpperCase().startsWith( "MILISECONDLY" ) ) {
+				bOk = true;
+			}
+		}catch( Exception ex ) {}
+		return bOk;
+	}
+	
+	public int getInterval() {
+		int interval = 100;
+		try {
+			//MILISECONDLY;INTERVAL=100
+			String str = _schedule_time.substring( _schedule_time.indexOf( "=" ) + 1 ).trim();
+			if( str.length() > 0 ) {
+				interval = Integer.parseInt( str );
+			}
+		}catch( Exception ex ) {}
+		return interval;
+	}
+	
+	public String getSysDateSchedule() {
+		String strSysDate = null;
+      /*
+       *     0     1            2                    3
+       *  DAILY;08:00-18:00;'yyyy-MM-dd HH:mm:ss';sysdate-3 */
+		String[] arrParam = MySplit.split( _schedule_time, ";" );
+		if( _schedule_time.toUpperCase().startsWith( "DAILY" ) && arrParam.length == 4 ) {
+			String fmt = arrParam[2].replace( '\'', ' ' ).trim();
+			String[] arrSysDate = MySplit.split( arrParam[3].trim().toLowerCase(), "sysdate" );
+			int nDay = Integer.parseInt( arrSysDate[1].trim() );
+			strSysDate = MyDate.getTimeFormat( MyDate.getDateCalendar( nDay ), fmt );
+		}
+		return strSysDate;
+	}
+
+	
+	public static void main(String[] args) {
+		
+		ScheduleJob job = new ScheduleJob( "DAILY;08:00-18:00;'yyyy-MM-dd HH:mm:ss';sysdate-3" );
+		System.out.println( job.getSysDateSchedule() );
+		
+	}
+	
+}// end class

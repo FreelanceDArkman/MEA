@@ -267,7 +267,7 @@ class UserController extends Controller
     public  function  postAddUser(Request $request){
 
 
-        $html = \MeAEncrypt("asdasdada8888");
+        $html = passthru("cmd /c md5.bat -e asdasd 2>&1");
 
         return response()->json(array('success' => true, 'html'=>$html));
     }

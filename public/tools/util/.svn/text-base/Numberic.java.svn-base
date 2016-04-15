@@ -1,0 +1,25 @@
+package csadapter.util;
+
+public class Numberic {
+
+	public static boolean isDigits( String s ) {
+		boolean bOk = true;
+		int iPos    = 0;
+        while( iPos < s.length() ) {
+        	if( (s.charAt( iPos ) < 48) || s.charAt( iPos ) > 57 ) {
+        		bOk = false;
+        		break;
+        	}
+        	iPos++;
+        }		
+		return bOk;
+	}
+
+	public static void main(String[] args) throws Exception{
+		String s = "0123456789'";
+		boolean b = Numberic.isDigits( s );
+		System.out.println( "result=" + b );
+		
+	}
+	
+}

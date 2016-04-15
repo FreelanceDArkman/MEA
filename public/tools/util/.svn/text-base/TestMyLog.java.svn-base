@@ -1,0 +1,55 @@
+package csadapter.util;
+
+import java.io.FileInputStream;
+import java.util.Date;
+import java.util.Properties;
+
+public class TestMyLog {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) throws Exception{
+		
+		Log log = new Log( "c:/" );
+		for( int j=0; j< 100; j++ ) {
+			log.logFile( "Loop: " + j );
+			System.out.println( "Loop: " + j );
+			
+		}
+		
+		
+		
+		//MyLog log = new MyLog();
+		
+		//log.setLogName( "test" );
+		//log.setHasFolders( true );
+		//log.setLogLevel( MyLog.LOG_DEBUG );
+		//log.setDateFormatFileRolling(  "yyyy-MM-dd HH:mm" );
+		//log.setDateFormatFileNameRolling( "yyyy-MM-dd-HH-mm" );
+					
+		//log.configuration( "/csadapter/util/ivrDownloadContent.properties" );
+		
+		//for( int j=0; j< 5; j++ ){
+		//	log.info( "INFO Record: " + j + ", Msg=111111111111111111111111" );	
+		//	log.debug( "DEBUG Record: " + j + ", Msg=111111111111111111111111" );
+		//	log.error( "ERROR Record: " + j + ", Msg=111111111111111111111111" );
+		//	Thread.sleep( 500 );
+		//}
+		/*
+		String s1 = "c:/test.txt";
+		String s2 = "c:/test.bak";
+		
+		String[] text = TextFile.readLineTextFile( s1 );
+		for( int j=0; j< text.length; j++ ) {
+			System.out.println( text[ j ] );
+		}
+		
+		System.out.println( text );*/
+
+	}
+		
+	
+	
+
+}//end class

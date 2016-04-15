@@ -1,0 +1,194 @@
+package csadapter.util;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+import csadapter.startup.CSAdapterStarter;
+
+public class SUNLogger implements Runnable {
+	
+	/*********************************************************************************
+	 * Sub-Class:
+	 *********************************************************************************/
+	public class SUNFileAppender {
+		private String     _fileNameDateTimePattern = "'log-'yyyy-MM-dd'.log'";
+		
+		public SUNFileAppender( String fileNameDateTimePattern ) {
+			_fileNameDateTimePattern = fileNameDateTimePattern;
+		}
+		
+		public void  setFileNameDateTimePattern( String fileNameDateTimePattern ) {
+			_fileNameDateTimePattern = fileNameDateTimePattern;
+		}
+		public String getFileNameDateTimePattern() {
+			return _fileNameDateTimePattern;
+		}
+		
+		public void logInfo( String str ) {
+			addMessageLogger( _fileNameDateTimePattern, str );
+		}
+		
+		public void logInfo( String fileNameDateTimePattern, String str ) {
+			addMessageLogger( fileNameDateTimePattern, str );
+		}
+	};
+	
+    
+	/*********************************************************************************
+	 * Body Class Parent
+	 *********************************************************************************/
+	private boolean   _isDone                   = false;
+	private Map<String, SUNFileAppender> 
+	                    _mapFileAppender          = new HashMap<String, SUNLogger.SUNFileAppender>(); 
+	private ConcurrentLinkedQueue<String> 
+	                    _queue                    = new ConcurrentLinkedQueue<String>();
+	private String     _rootPathDateTimePattern  = "'./logs/'yyyy/MM/dd/";
+	private SUNFileAppender _defaultFileAppender = null;
+	
+	public SUNLogger() {
+		_defaultFileAppender = new SUNFileAppender( "yyyy-MM-dd'-log.log'" );
+		_mapFileAppender.put( _defaultFileAppender.getFileNameDateTimePattern(), _defaultFileAppender );
+	}
+	
+	
+	public void setRootPathDateTimePattern( String str ) {
+		_rootPathDateTimePattern = str.trim();
+	}
+	
+	public void setDefaultFileNameDateTimePattern( String str ) {
+		_defaultFileAppender.setFileNameDateTimePattern( str );
+	}
+	
+		
+	public void startLogger() {
+		new Thread(this).start();
+		CSAdapterStarter.logDebug( "SUNLogger-->started Logger()" );
+	}
+	
+	public void stopLogger() {
+		_isDone = true;
+		CSAdapterStarter.logDebug( "SUNLogger-->stopped Logger()" );
+	}
+	
+	public void run() {
+		String str = "";
+		while( !_isDone ) {
+			try {
+				if( _queue.size() == 0 ) {
+					Thread.sleep( 200 );
+					continue;
+				}
+				str = _queue.poll();
+				if( str != null ) {
+					writeLog( str );
+				}
+			}catch( Exception ex ) {
+				
+			}
+		}
+	}
+	
+	protected void addMessageLogger( String fileNameDateTimePattern, String str ) {
+		try {
+			_queue.offer( fileNameDateTimePattern + "@" + str );
+		}catch( Exception ex ) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void logInfo( String str ) {
+		addMessageLogger( _defaultFileAppender.getFileNameDateTimePattern(), str );
+	}
+	
+	public void logInfo( String fileNameDateTimePattern, String str ) {
+		addMessageLogger( fileNameDateTimePattern, str );
+	}
+	
+	private void writeLog( String str ) {
+		String fileNameDateTimePattern = "";
+		String msg = "";
+		try {
+			/*
+			 * Message-Format= { FileNameDateTimePattern@MessageLog }
+			 **/
+			fileNameDateTimePattern  = str.substring(0, str.indexOf( "@" ) );
+			msg = str.substring( 1 + str.indexOf( "@" ) );
+			
+			String loggerPathFile = (MyDate.getTimeStamp( _rootPathDateTimePattern ) 
+					              + MyDate.getTimeStamp( fileNameDateTimePattern )).trim();
+			
+			TextFile.writeFile( loggerPathFile, msg, true );
+			CSAdapterStarter.logDebug( msg );
+		}catch( Exception ex ) {
+			CSAdapterStarter.logError( "RootPathDateTimePattern= " + _rootPathDateTimePattern 
+					               +  ",FileNameDateTimePattern =" + fileNameDateTimePattern 
+					               + ", Exception: " + ex.getMessage() );
+			ex.printStackTrace();
+		}
+	}
+	
+	public boolean isLoggerIdle() {
+		boolean bOk = false;
+		if( _queue.size() == 0 ) {
+			bOk = true;
+		}
+		return bOk;
+	}
+	
+	public static void main(String[] args) {
+		SUNLogger log = new SUNLogger();
+		
+		log.setRootPathDateTimePattern( "'/home/somsak/'yyyy/MM/dd/" );
+		log.setDefaultFileNameDateTimePattern( "yyyy-MM-dd'-test1.log'" );
+		log.startLogger();
+		SUNFileAppender logger2 = log.getFileAppender( "yyyy-MM-dd'-test2.log'" );
+		
+		for( int j=0; j< 5; j++ ) {
+			log.logInfo( MyDate.getCurrentTime2String() + ", Msg-Loog= " + j );
+			logger2.logInfo( MyDate.getCurrentTime2String() + ", Msg-Loog= " + j );
+		}
+		while( !log.isLoggerIdle() ) {
+			System.out.println( "Logger Writing..." );
+			try {
+				Thread.sleep( 1000 );
+			}catch( Exception ex ) {}
+		}
+		System.out.println( "***Logger Done!****" );
+		log.stopLogger();
+		
+		
+		
+		
+	}//end of main
+		
+	
+	public SUNFileAppender getFileAppender( String fileNameDateTimePattern ) {
+		SUNFileAppender fileAppender = new SUNFileAppender( fileNameDateTimePattern );
+		_mapFileAppender.put( fileNameDateTimePattern, fileAppender );
+		return fileAppender;
+	}
+	
+	
+	public final static String getFileLogPathDateTimePattern( String dateTimePattern) {
+		/**
+		 * /home/somsak/workspace/Java_Application/CSAdapter/plugins/csalarm/doc/nagios/{yyyyMMdd'.log'} 
+		 **/
+		StringBuilder logPath = new StringBuilder();
+		String str            = dateTimePattern;
+		String[] arrMsg       = MySplit.split( str, "{" );
+		
+		String fmt = arrMsg[ 1 ].substring(0, arrMsg[ 1 ].indexOf( "}" ) );
+		logPath.append( arrMsg[ 0 ] );
+		logPath.append( MyDate.getTimeStamp( fmt ) );
+		
+		/*
+		 * initialize folder
+		 **/
+		TextFile.makeDirectorys( logPath.toString() );
+		return logPath.toString();
+	}
+	
+	
+}//end class
+

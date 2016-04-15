@@ -1,0 +1,37 @@
+package csadapter.util;
+
+import java.util.Vector;
+
+public class MySplit {
+	
+	/** 
+	 * Split string into multiple strings 
+	 * @param original      Original string
+	 * @param separator     Separator string in original string
+	 * @return              Splitted string array
+	 */
+
+	public static String[] split(String original, String separator) {
+	    Vector<String> nodes = new Vector<String>();
+	    int index = original.indexOf(separator);
+	    while(index>=0) {
+	        nodes.addElement( original.substring(0, index) );
+	        original = original.substring(index+separator.length());
+	        index = original.indexOf(separator);
+	    }
+	    nodes.addElement( original );
+	    String[] result = new String[ nodes.size() ];
+	    if( nodes.size()>0 ) {
+	        for(int loop=0; loop<nodes.size(); loop++)
+	        result[loop] = (String)nodes.elementAt(loop);
+	    }
+	    
+	    //CleanUp
+	    nodes = null;
+	    
+	    return result;
+	}
+	
+	
+
+}
