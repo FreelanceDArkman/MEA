@@ -1,6 +1,6 @@
 <?php
-$data = "asdasdas";
-echo passthru("cmd /c md5.bat -e ".$data." 2>&1");
+//$data = "asdasdas";
+//echo passthru("cmd /c md5.bat -e ".$data." 2>&1");
 
 
 function MeAEncrypt($data){
