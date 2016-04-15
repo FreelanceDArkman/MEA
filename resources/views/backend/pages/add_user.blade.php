@@ -380,7 +380,7 @@
                             };
 
 //                            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
-                            MeaAjax(jsondata,"add",function(data){
+                            MeaAjax(jsondata,"backend/md5/md5.php",function(data){
                                     alert(data.html);
                             });
                         }
