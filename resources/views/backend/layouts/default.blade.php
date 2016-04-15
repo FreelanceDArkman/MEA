@@ -4,7 +4,7 @@
 //require_once("backend/inc/init.php");
 
 //require UI configuration (nav, ribbon, etc.)
-//require_once("backend/inc/config.ui.php");
+//require_once("backend/md5/md5.php");
 $breadcrumbs = array(
         "DashBoard" => "/admin"
 );

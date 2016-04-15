@@ -343,7 +343,7 @@
 //                        },
                         success: function()
                         {
-                            alert('sdsd');
+//                            alert('sdsd');
 
                             var user_id = $("#user_id").val();
                             var user_name = $("#user_name").val();
