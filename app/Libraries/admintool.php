@@ -21,6 +21,15 @@ if (!function_exists('activeSidemenu')) {
     }
 }
 
+if (!function_exists('MEAMD5')) {
+
+    function MEAMD5($input)
+    {
+        $output = md5($input);
+        return $output;
+    }
+}
+
 if (!function_exists('activeGroupMenu')) {
 
     function activeGroupMenu($currentPage)

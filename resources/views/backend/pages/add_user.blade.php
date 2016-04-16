@@ -94,10 +94,10 @@
                                 <section style="margin-top: 15px;margin-left: 20px;">
                                     <div class="inline-group">
                                         <label class="radio">
-                                            <input type="radio" class="chk_firstlogin" name="first_login" checked="" value="1">
+                                            <input type="radio" class="chk_firstlogin" name="first_login" checked="" value="0">
                                             <i></i>ใช่</label>
                                         <label class="radio">
-                                            <input type="radio" class="chk_firstlogin" name="first_login" value="0">
+                                            <input type="radio" class="chk_firstlogin" name="first_login" value="1">
                                             <i></i>ไม่ใช่</label>
 
                                     </div>
@@ -112,10 +112,10 @@
                                 <section style="margin-top: 15px;margin-left: 20px;">
                                     <div class="inline-group">
                                         <label class="radio">
-                                            <input type="radio" class="chk_expire" name="pass_expire" checked="" value="1">
+                                            <input type="radio" class="chk_expire" name="pass_expire" checked="" value="0">
                                             <i></i>ใช่</label>
                                         <label class="radio">
-                                            <input type="radio" class="chk_expire" name="pass_expire" value="0">
+                                            <input type="radio" class="chk_expire" name="pass_expire" value="1">
                                             <i></i>ไม่ใช่</label>
 
                                     </div>
@@ -381,7 +381,13 @@
 
 //                            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
                             MeaAjax(jsondata,"add",function(data){
-                                    alert(data.html);
+                                if(data.success == "true"){
+
+                                    AlertSuccess("บันทึกผู้ใช้เรียบร้อยแล้ว")
+
+                                }else {
+                                    Alert("",data.html);
+                                }
                             });
                         }
                     });

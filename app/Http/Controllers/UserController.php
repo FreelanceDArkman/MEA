@@ -134,6 +134,88 @@ class UserController extends Controller
         return response()->json(array('success' => true, 'html'=>$returnHTML));
     }
 
+    public function getAddUser()
+    {
+        $this->pageSetting( [
+            'menu_group_id' => 50,
+            'menu_id' => 2,
+            'title' => 'เพิ่มผู้ใช้'
+        ] );
+        $user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
+        $user_status = DB::table('TBL_USER_STATUS')->get();
+        return view('backend.pages.add_user')->with([
+            'user_group' => $user_group,
+            'user_status' => $user_status
+        ]);
+    }
+
+    public  function  postAddUser(Request $request){
+
+
+                $user_id=$request->input('user_id');
+                $user_name =$request->input('user_name');
+                $password=$request->input('password');
+                $chk_firstlogin=$request->input('chk_firstlogin');
+                $chk_expire=$request->input('chk_expire');
+                $email=$request->input('email');
+                $phone=$request->input('phone');
+                $address=$request->input('address');
+                $retire=$request->input('retire');
+                $comeback=$request->input('comeback');
+                $expire=$request->input('expire');
+                $group_id=$request->input('group_id');
+                $status=$request->input('status');
+
+
+                if($chk_expire == 1){
+                    $expire = "9999-12-31 00:00:00.000";
+                }
+
+
+
+                if($chk_firstlogin == 1){
+
+                }
+
+
+
+        $allquery =  "SELECT COUNT(EMP_ID) AS total FROM TBL_USER WHERE EMP_ID =" .$user_id ;
+        $all = DB::select(DB::raw($allquery));
+        $total =$all[0]->total;
+        $data ="";
+        if($total > 0){
+            $staturet  = false;
+            $data = "user_id are used";
+        }else{
+
+//          $html = passthru("cmd /c md5.bat -e asdasd 2>&1");
+
+
+            $ecPass = MEAMD5($password);
+
+            //$ecPass = exec("cmd /c md5.bat -e ".$password." 2>&1");
+
+            $user_group = DB::table('TBL_PRIVILEGE')->select('ACCESS_PERMISSIONS')->where('USER_PRIVILEGE_ID',"=",$group_id)->get();
+
+            $insert = "INSERT INTO TBL_USER (EMP_ID,EMP_ID,PASSWORD,PASSWORD_EXPIRE_DATE,USER_STATUS_ID,
+USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
+,RETURN_FUND_GROUP_DATE,EMAIL,PHONE,CREATE_DATE,LAST_MODIFY_DATE
+
+)VALUES('".$user_id."','".$user_name."','".$ecPass."','".$ecPass."','".$expire."','".$status."','".$group_id."','".$chk_firstlogin."'
+)";
+
+
+        DB::insert(DB::raw($insert));
+
+//            $data =
+
+            $staturet= true;
+            $data = "OK";
+        }
+
+
+        return response()->json(array('success' => $staturet, 'html'=>$data));
+    }
 
     public function getUsers(Request $request)
     {
@@ -247,33 +329,4 @@ class UserController extends Controller
         $records["recordsFiltered"] = $total;
         return response()->json($records);
     }
-
-
-    public function getAddUser()
-    {
-        $this->pageSetting( [
-            'menu_group_id' => 50,
-            'menu_id' => 2,
-            'title' => 'เพิ่มผู้ใช้'
-        ] );
-        $user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
-        $user_status = DB::table('TBL_USER_STATUS')->get();
-        return view('backend.pages.add_user')->with([
-            'user_group' => $user_group,
-            'user_status' => $user_status
-        ]);
-    }
-
-    public  function  postAddUser(Request $request){
-
-
-//        $html = passthru("cmd /c md5.bat -e asdasd 2>&1");
-
-        //exec("cmd /c md5.bat -e asdasd 2>&1",$output);
-        $data = exec("cmd /c md5.bat -e asdasd 2>&1");
-
-        return response()->json(array('success' => true, 'html'=>$data));
-    }
-
-
 }
