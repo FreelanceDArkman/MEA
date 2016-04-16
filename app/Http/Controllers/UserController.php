@@ -199,7 +199,7 @@ class UserController extends Controller
 
             $user_group =  DB::table('TBL_PRIVILEGE')->where('USER_PRIVILEGE_ID',$group_id)->get();
 
-            var_dump($user_group);
+//            var_dump($user_group);
             $per = $user_group[0]->ACCESS_PERMISSIONS;
 
 
