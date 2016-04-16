@@ -55,8 +55,8 @@
 
                     <!-- widget content -->
                     <div class="widget-body no-padding">
-
-                        <form id="smart-form-register" action="{{action('UserController@postAddUser') }}" method="post"  class="smart-form">
+                        {{--action="{{action('UserController@postAddUser') }}"--}}
+                        <form id="smart-form-register" action=""   class="smart-form">
                             {!! csrf_field() !!}
 
 
@@ -299,38 +299,8 @@
 
                 // Messages for form validation
 //                messages : {
-//                    username : {
-//                        required : "กรุณากรอก ชื่อผู้ใช้",
-//                        maxlength: "ชื่อผู้ใช้ต้องมีจำนวนไม่เกิน 7 หลัก",
-//                        number : "ชื่อผู้ใช้ต้องเป็นตัวเลขเท่านั้น"
-//                    },
-//                    email : {
-//                        required : "กรุณากรอก ที่อยู่อีเมล์",
-//                        email :"ใส่อีเมล์ไม่ถูกต้อง"
-//                    },
-//                    password : {
-//                        required : true,
-//                        minlength : 3,
-//                        maxlength : 20
-//                    },
-//                    passwordConfirm : {
-//                        required : true,
-//                        minlength : 3,
-//                        maxlength : 20,
-//                        equalTo : '#password'
-//                    },
-//                    firstname : {
-//                        required : true
-//                    },
-//                    lastname : {
-//                        required : true
-//                    },
-//                    gender : {
-//                        required : true
-//                    },
-//                    terms : {
-//                        required : true
-//                    }
+
+//
 //                },
                 // Ajax form submition
                 submitHandler: function(form)
@@ -343,7 +313,7 @@
 //                        },
                         success: function()
                         {
-//                            alert('sdsd');
+//                             alert($("#hd_retire").val());
 
                             var user_id = $("#user_id").val();
                             var user_name = $("#user_name").val();
@@ -379,7 +349,8 @@
                                 status:status
                             };
 
-//                            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+
+                            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
                             MeaAjax(jsondata,"add",function(data){
                                 if(data.success == "true"){
 
@@ -389,6 +360,8 @@
                                     Alert("",data.html);
                                 }
                             });
+
+                            return false;
                         }
                     });
                 },
@@ -396,6 +369,8 @@
                 // Do not change code below
                 errorPlacement : function(error, element) {
                     error.insertAfter(element.parent());
+
+                    alert("error");
                 }
             });
 
