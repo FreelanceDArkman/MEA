@@ -210,11 +210,11 @@ class UserController extends Controller
 //            $data =
 
             $staturet= true;
-            $data = "OK";
+            $data = $ecPass .' '. $ecPasss;
         }
 
 
-        return response()->json(array('success' => $staturet, 'html'=>$ecPass .' '. $ecPasss));
+        return response()->json(array('success' => $staturet, 'html'=>$data));
     }
 
     public function getUsers(Request $request)
