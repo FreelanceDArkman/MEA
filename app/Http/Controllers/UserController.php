@@ -197,7 +197,7 @@ class UserController extends Controller
 
             $ecPass = exec("cmd /c md5.bat -e ".$password." 2>&1");
 
-            $user_group = DB::table('TBL_PRIVILEGE')->select('ACCESS_PERMISSIONS')->where('USER_PRIVILEGE_ID',"=",$group_id)->get();
+            $user_group =  DB::table('TBL_PRIVILEGE')->where('USER_PRIVILEGE_ID',$group_id)->get();
 
             $per = $user_group->ACCESS_PERMISSIONS;
 
