@@ -27,7 +27,7 @@ if (!function_exists('MEAMD5')) {
     {
 
 
-        $output = md5($input,true);
+        $output = md5($input);
         return $output;
     }
 }

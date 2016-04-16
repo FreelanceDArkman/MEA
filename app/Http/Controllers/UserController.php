@@ -191,26 +191,32 @@ class UserController extends Controller
 //          $html = passthru("cmd /c md5.bat -e asdasd 2>&1");
 
 
-            $ecPass = MEAMD5($password);
+            //$ecPass = MEAMD5($password);
 
-            $ecPasss = exec("cmd /c md5.bat -e ".$password." 2>&1");
+            $date = new Date();
 
-//            $user_group = DB::table('TBL_PRIVILEGE')->select('ACCESS_PERMISSIONS')->where('USER_PRIVILEGE_ID',"=",$group_id)->get();
-//
-//            $insert = "INSERT INTO TBL_USER (EMP_ID,EMP_ID,PASSWORD,PASSWORD_EXPIRE_DATE,USER_STATUS_ID,
-//USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
-//,RETURN_FUND_GROUP_DATE,EMAIL,PHONE,CREATE_DATE,LAST_MODIFY_DATE
-//
-//)VALUES('".$user_id."','".$user_name."','".$ecPass."','".$ecPass."','".$expire."','".$status."','".$group_id."','".$chk_firstlogin."'
-//)";
+            $ecPass = exec("cmd /c md5.bat -e ".$password." 2>&1");
+
+            $user_group = DB::table('TBL_PRIVILEGE')->select('ACCESS_PERMISSIONS')->where('USER_PRIVILEGE_ID',"=",$group_id)->get();
+
+            $per = $user_group->ACCESS_PERMISSIONS;
 
 
-//        DB::insert(DB::raw($insert));
+            $retire =
 
-//            $data =
+            $insert = "INSERT INTO TBL_USER (EMP_ID,EMP_ID,PASSWORD,PASSWORD_EXPIRE_DATE,USER_STATUS_ID,
+USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
+,RETURN_FUND_GROUP_DATE,EMAIL,PHONE,ADDRESS,CREATE_DATE,LAST_MODIFY_DATE
+
+)VALUES('".$user_id."','".$user_name."','".$ecPass."','".$ecPass."','".$expire."','".$status."','".$group_id."','".$per."','".$chk_firstlogin."',".($retire== "" ? NULL: "'". $retire ."'" ).",".($comeback== "" ? NULL: "'". $retire . "'" ).",'".$email."','".$phone."','".$address."','".$date."','".$date."')";
+
+
+        DB::insert(DB::raw($insert));
+
+
 
             $staturet= true;
-            $data = $ecPass .' '. $ecPasss;
+            $data = "ok";
         }
 
 
