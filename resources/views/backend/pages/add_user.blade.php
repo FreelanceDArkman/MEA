@@ -248,10 +248,10 @@
 
                     var res = $(this).val();
 
-                if(res == 0){
+                if(res == 1){
                     $("#expire_check").hide();
                 }
-                if(res == 1){
+                if(res == 0){
                     $("#expire_check").show();
                 }
 
@@ -350,9 +350,9 @@
                             };
 
 
-                            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+//                            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
                             MeaAjax(jsondata,"add",function(data){
-                                if(data.success == "true"){
+                                if(data.success){
 
                                     AlertSuccess("บันทึกผู้ใช้เรียบร้อยแล้ว")
 
