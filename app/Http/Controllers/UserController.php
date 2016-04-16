@@ -185,7 +185,7 @@ class UserController extends Controller
         $data ="";
         if($total > 0){
             $staturet  = false;
-            $data = "user_id are used";
+            $data = "รหัสผู้ใช้ที่ท่าน กรอก มีแล้วในระบบ";
         }else{
 
 //          $html = passthru("cmd /c md5.bat -e asdasd 2>&1");

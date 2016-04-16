@@ -464,7 +464,7 @@ function meaDatepicker(id){
 //.datepicker("setDate" , new Date(d.getFullYear() + 543,d.getMonth(),d.getDate()));
 }
 
-function Alert(title,message){
+function Alert(title,message,callbackok,callbackno){
 
 	var defaultmsg = "Congratulations! Your form was submitted";
 	var TitleDefault = "Error!";
@@ -484,17 +484,21 @@ function Alert(title,message){
 	}, function(ButtonPressed) {
 		if (ButtonPressed === "OK") {
 
-
+			if(typeof(callbackok) == 'function' && callbackok != null){
+				callbackok();
+			}
 		}
 		if (ButtonPressed === "No") {
-
+			if(typeof(callbackno) == 'function' && callbackno != null){
+				callbackno();
+			}
 		}
 
 	});
 }
 
 
-function AlertSuccess(message){
+function AlertSuccess(message,callback){
 
 	var defaultmsg = "Congratulations! Your form was submitted";
 
@@ -507,6 +511,6 @@ function AlertSuccess(message){
 		color: "#5F895F",
 		iconSmall: "fa fa-check bounce animated",
 		timeout: 4000
-	});
+	},callback);
 }
 

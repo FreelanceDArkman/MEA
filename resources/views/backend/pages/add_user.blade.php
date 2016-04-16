@@ -354,10 +354,13 @@
                             MeaAjax(jsondata,"add",function(data){
                                 if(data.success){
 
-                                    AlertSuccess("บันทึกผู้ใช้เรียบร้อยแล้ว")
+                                    AlertSuccess("บันทึกผู้ใช้เรียบร้อยแล้ว",function(){
+
+                                        window.location.href = "users";
+                                    });
 
                                 }else {
-                                    Alert("",data.html);
+                                    Alert("",data.html,null,null);
                                 }
                             });
 
@@ -370,7 +373,7 @@
                 errorPlacement : function(error, element) {
                     error.insertAfter(element.parent());
 
-                    alert("error");
+//                    alert("error");
                 }
             });
 
