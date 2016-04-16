@@ -193,19 +193,19 @@ class UserController extends Controller
 
             $ecPass = MEAMD5($password);
 
-            //$ecPass = exec("cmd /c md5.bat -e ".$password." 2>&1");
+            $ecPasss = exec("cmd /c md5.bat -e ".$password." 2>&1");
 
-            $user_group = DB::table('TBL_PRIVILEGE')->select('ACCESS_PERMISSIONS')->where('USER_PRIVILEGE_ID',"=",$group_id)->get();
+//            $user_group = DB::table('TBL_PRIVILEGE')->select('ACCESS_PERMISSIONS')->where('USER_PRIVILEGE_ID',"=",$group_id)->get();
+//
+//            $insert = "INSERT INTO TBL_USER (EMP_ID,EMP_ID,PASSWORD,PASSWORD_EXPIRE_DATE,USER_STATUS_ID,
+//USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
+//,RETURN_FUND_GROUP_DATE,EMAIL,PHONE,CREATE_DATE,LAST_MODIFY_DATE
+//
+//)VALUES('".$user_id."','".$user_name."','".$ecPass."','".$ecPass."','".$expire."','".$status."','".$group_id."','".$chk_firstlogin."'
+//)";
 
-            $insert = "INSERT INTO TBL_USER (EMP_ID,EMP_ID,PASSWORD,PASSWORD_EXPIRE_DATE,USER_STATUS_ID,
-USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
-,RETURN_FUND_GROUP_DATE,EMAIL,PHONE,CREATE_DATE,LAST_MODIFY_DATE
 
-)VALUES('".$user_id."','".$user_name."','".$ecPass."','".$ecPass."','".$expire."','".$status."','".$group_id."','".$chk_firstlogin."'
-)";
-
-
-        DB::insert(DB::raw($insert));
+//        DB::insert(DB::raw($insert));
 
 //            $data =
 
@@ -214,7 +214,7 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
         }
 
 
-        return response()->json(array('success' => $staturet, 'html'=>$data));
+        return response()->json(array('success' => $staturet, 'html'=>$ecPass .' '. $ecPasss));
     }
 
     public function getUsers(Request $request)
