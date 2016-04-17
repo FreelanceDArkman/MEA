@@ -204,7 +204,11 @@ $arrSidebar =getSideBar($data);
 
             if (files.length > 0) {
                 dataimport.append("exelimport", files[0]);
+
+
             }
+
+            dataimport.append('type',importType);
 //            var files = $("#imageInput_" + id).get(0).files;
 
 
@@ -219,6 +223,9 @@ $arrSidebar =getSideBar($data);
                 data: dataimport,
 
                 success: function(data){
+
+
+                    alert(data.html);
 
                 },
                 error: function(xhr, textStatus, thrownError) {

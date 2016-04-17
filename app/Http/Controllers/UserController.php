@@ -385,14 +385,116 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
 //        $inputfile= $request->input('exelimport');
         //Input::file('import1')
 
-        Excel::load($request->file('exelimport'), function ($reader) {
+        $results = null;
 
-            $reader->each(function($sheet) {
-                foreach ($sheet->toArray() as $row) {
-//                    User::firstOrCreate($row);
+        $type = $request->input('type');
+
+
+
+        Excel::load($request->file('exelimport'), function ($reader,$type) {
+
+            $results = $reader->get();
+
+            $ret = $results->toArray();
+
+            foreach($ret as $index => $value){
+
+                $EMP_ID = $value["emp_id"];
+                $StatusID = $value["user_status_id"];
+
+
+
+
+
+//                RETURN_FUND_GROUP_DATE
+
+                switch($type){
+                    case  "1":
+
+                        $update1 = "UPDATE TBL_USER SET USER_STATUS_ID = '".$StatusID."' WHERE EMP_ID = '".$EMP_ID."' ";
+                        DB::insert(DB::raw($update1));
+                        break;
+
+                    case  "2":
+                        $fund = $value["leave_fund_group_date"];
+                        $firstlogin = $value["first_login_flag"];
+
+                        $update1 = "UPDATE TBL_USER SET USER_STATUS_ID = '".$StatusID."', LEAVE_FUND_GROUP_DATE='".$fund."' ,FIRST_LOGIN_FLAG = '".$firstlogin."' WHERE EMP_ID = '".$EMP_ID."' ";
+                        DB::insert(DB::raw($update1));
+                        break;
+                    case "3":
+                        $return = $value["return_fund_group_date"];
+                        $update1 = "UPDATE TBL_USER SET USER_STATUS_ID = '".$StatusID."', RETURN_FUND_GROUP_DATE = '".$return."' WHERE EMP_ID = '".$EMP_ID."' ";
+                        DB::insert(DB::raw($update1));
+                        break;
+
                 }
-            });
+
+
+            }
+
+
+
+           // var_dump($results);
+
+
+//            $reader->each(function($sheet) {
+//                foreach ($sheet->toArray() as $row) {
+////                    User::firstOrCreate($row);
+////                    $ret .= $row;
+//                    $ret = $row-.
+//                }
+//            });
+
+//            $ret = (array)$results;
+
+
+
+//            var_dump($ret[0]["emp_id"]);
+
+
+
+
+
+//            $insert = "UPDATE TBL_USER SET USER_STATUS_ID = '".."' ";
+
+
+
+
+
+//            DB::insert(DB::raw($insert));
+
+
+
+            $staturet= true;
+            $data = "ok";
+
+//
+//            array(2) {
+//                ["*title"]=> string(6) "Sheet1"
+//                ["*items"]=>
+//  array(1) {
+//                    [0]=>
+//    object(Maatwebsite\Excel\Collections\CellCollection)#823 (2) {
+//    ["title":protected]=>
+//      NULL
+//      ["items":protected]=>
+//      array(2) {
+//                        ["emp_id"]=>
+//        string(8) "00000001"
+//                        ["user_status_id"]=>
+//        float(11)
+//      }
+//    }
+//  }
+//}
         });
+
+
+
+
+
+        return response()->json(array('success' => true, 'html'=>"hello"));
     }
 
 
