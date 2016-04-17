@@ -260,15 +260,15 @@ $arrSidebar =getSideBar($data);
 
 
 
-            if(checkcount > 1){
+            if(checkcount > 1 || checkcount  == 0){
                 $.SmartMessageBox({
                     title : "Error!",
-                    content : "ไม่สามารถแก้ไขได้ กรุณาเลือกรายการเดียว",
+                    content : "ไม่สามารถแก้ไขได้ กรุณาเลือกรายการเพียงรายการเดียว",
                     buttons : '[OK]'
                 }, function(ButtonPressed) {
                     if (ButtonPressed === "OK") {
 
-
+                         return false;
                     }
                     if (ButtonPressed === "No") {
 
@@ -278,6 +278,11 @@ $arrSidebar =getSideBar($data);
             }else {
                 window.location.href = "/admin/userGroup/edit/" + $(".item_checked:checked").val();
             }
+
+
+
+
+
 
         })
     }

@@ -291,6 +291,7 @@
         }
 
         function PageRenderSearch(){
+
             var p = $(this).attr('data-page');
             var page_size = $('#page-size-search').val();
             var CurPage = $('#currentpage_search').val();

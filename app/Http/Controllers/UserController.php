@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Package\Curl;
 use App\Http\Requests;
 use App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Jenssegers\Date\Date;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -17,7 +18,7 @@ class UserController extends Controller
         $this->pageSetting( [
             'menu_group_id' => 50,
             'menu_id' => 2,
-            'title' => 'จัดการผู้ใช้'
+            'title' => 'จัดการผู้ใช้ | MEA'
         ]);
 
         $user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
@@ -139,7 +140,7 @@ class UserController extends Controller
         $this->pageSetting( [
             'menu_group_id' => 50,
             'menu_id' => 2,
-            'title' => 'เพิ่มผู้ใช้'
+            'title' => 'เพิ่มผู้ใช้ | MEA'
         ] );
         $user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
         $user_status = DB::table('TBL_USER_STATUS')->get();
@@ -224,6 +225,134 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
 
         return response()->json(array('success' => $staturet, 'html'=>$data));
     }
+
+
+
+
+
+    public  function  getEditUser($id){
+        $this->pageSetting( [
+            'menu_group_id' => 50,
+            'menu_id' => 2,
+            'title' => 'แก้ไขข้อมูลผู้ใช้ | MEA'
+        ] );
+
+
+        $user =  DB::table('TBL_USER')->where('EMP_ID',$id)->get();
+
+        $user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
+        $user_status = DB::table('TBL_USER_STATUS')->get();
+        return view('backend.pages.edit_user')->with([
+            'user' => $user[0],
+            'user_group' => $user_group,
+            'user_status' => $user_status
+        ]);
+    }
+
+    public  function  postEditUser(Request $request){
+
+
+        $user_id=$request->input('user_id');
+        $user_name =$request->input('user_name');
+        $password=$request->input('password');
+        $chk_firstlogin=$request->input('chk_firstlogin');
+        $chk_expire=$request->input('chk_expire');
+        $email=$request->input('email');
+        $phone=$request->input('phone');
+        $address=$request->input('address');
+        $retire=$request->input('retire');
+        $comeback=$request->input('comeback');
+        $expire=$request->input('expire');
+        $group_id=$request->input('group_id');
+        $status=$request->input('status');
+
+
+        if($chk_expire == 1){
+            $expire = "9999-12-31 00:00:00.000";
+        }
+
+
+        $date = new Date();
+
+
+
+        $insert = "UPDATE TBL_USER SET EMAIL = '".$email."' , PHONE= '".$phone."' , ADDRESS='".$address."',FIRST_LOGIN_FLAG ='".$chk_firstlogin."',PASSWORD_EXPIRE_DATE='".$expire."',USER_PRIVILEGE_ID='".$group_id."',USER_STATUS_ID='".$status."'
+        ,LEAVE_FUND_GROUP_DATE= ".($retire== "" ? 'NULL': "'". $retire ."'" ).",RETURN_FUND_GROUP_DATE = ".($comeback== "" ? 'NULL': "'". $comeback . "'" )." ,LAST_MODIFY_DATE ='".$date."'  WHERE EMP_ID = '".$user_id."'";
+
+
+
+
+
+        DB::insert(DB::raw($insert));
+
+
+
+        $staturet= true;
+        $data = "ok";
+
+
+        return response()->json(array('success' => $staturet, 'html'=>$data));
+    }
+
+    public function deleteUser(Request $request)
+    {
+
+        $arrId = explode(',',$request->input('group_id'));
+
+        foreach($arrId as $index => $item){
+
+            if($item != ""){
+                $deleted = DB::table('TBL_USER')->where('EMP_ID', $item)->delete();
+            }
+
+        }
+        $staturet= true;
+        $data = "ok";
+//
+//        if($deleted)  {
+//            return response()->json(["ret" => "1"]);
+//        }else{
+//            return response()->json(["ret" => "0"]);
+//        }
+
+
+        return response()->json(array('success' => $staturet, 'html'=>$data));
+
+    }
+
+
+    public function ReqPassword(Request $request)
+    {
+
+        $data = array(
+            "session_id" => Session::getId(),
+            "username" => $request->input('username')
+
+        );
+
+
+        $curl = new Curl('REQUEST_NEW_PASS', $data);
+
+        $result_login = $curl->getResult();
+//        var_dump($result_login);
+        $staturet = false;
+        $message  ="";
+        if($result_login->errCode != 0) {
+
+            $message = "ไม่พบผู้ใช้นี้";
+        } else {
+
+            $message = "ระบบได้ส่ง password ใหม่ไปทางอีเมล์ ของผู้ใช้นี้เรียบร้อยแล้ว";
+            $staturet = true;
+
+        }
+
+        return response()->json(array('success' => $staturet, 'html'=>$message));
+    }
+
+
+
+
 
     public function getUsers(Request $request)
     {

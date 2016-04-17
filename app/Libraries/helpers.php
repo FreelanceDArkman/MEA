@@ -375,6 +375,27 @@ if(!function_exists('get_date')) {
     }
 }
 
+
+if(!function_exists('get_date_sql')) {
+    function get_date_sql($input)
+    {
+        Date::setLocale('th');
+        $create_date = new Date($input);
+
+//        if($create_date->isLeapYear() == 1 && date("m",strtotime($create_date)) == 2 && date("d",strtotime($create_date)) == 29){
+//
+//            return "29 ก.พ. " . (date("Y",strtotime($create_date)) + 543) . " " . $create_date->format('H:i:s');
+//
+//        }else{
+//            return $create_date->add('543 years')->format('j F Y H:i:s');
+//        }
+
+        return date("Y",strtotime($create_date)). '-' . date("m",strtotime($create_date)) . '-' .date("d",strtotime($create_date));
+
+    }
+}
+
+
 if(!function_exists('get_date_period')) {
     function get_date_period($input)
     {
@@ -389,6 +410,28 @@ if(!function_exists('get_date_period')) {
     }
 }
 
+if(!function_exists('get_date_notime')) {
+    function get_date_notime_en($input)
+    {
+//        Date::setLocale('th');
+//var_dump(($create_date->isLeapYear() == 1) ? "Leap Year" : "Not Leap Year");
+        //->addDay(1)->format('j F Y')
+//        Date::setLocale('th');
+        $create_date = new Date($input);
+
+        if($create_date->isLeapYear() == 1 && date("m",strtotime($create_date)) == 2 && date("d",strtotime($create_date)) == 29){
+
+//            $LeapDate = New Date(date("Y",strtotime($create_date))  ."-".date("m",strtotime($create_date))."-".date("d",strtotime($create_date)));
+//            var_dump($LeapDate->format('j F Y'));
+
+            return "29 ก.พ. " . (date("Y",strtotime($create_date)) );
+
+        }else{
+            return $create_date->format('j F Y');
+        }
+
+    }
+}
 if(!function_exists('get_date_notime')) {
     function get_date_notime($input)
     {

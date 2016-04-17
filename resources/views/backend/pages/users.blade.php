@@ -167,6 +167,32 @@ $arrSidebar =getSideBar($data);
 
 
 
+    function PageRenderSearch(){
+
+        var p = $(this).attr('data-page');
+        var page_size = $('#page-size-search').val();
+        var CurPage = $('#currentpage_search').val();
+//        $("#result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+
+        if(p == "pre"){
+            p = parseInt(CurPage) - 1;
+        }
+
+        if(p == "next"){
+            p = parseInt(CurPage) + 1;
+        }
+        $('#currentpage_search').val(p);
+
+
+        var jsondata = {pagesize : 25,PageNumber:p};
+
+        $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+
+        MeaAjax(jsondata,"users/getall",Render);
+
+
+    }
+
     function Render(data){
 //        $("#all_data").hide();
         $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
@@ -192,21 +218,74 @@ $arrSidebar =getSideBar($data);
 
                         type: 'post', // or post?
                         dataType: 'json',
-                        url: '/admin/userGroup/delete',
+                        url: '/admin/users/delete',
                         data: jsondata,
 
                         success: function(data) {
 
-                            if(data.ret == "1"){
+                            if(data.success){
                                 $.smallBox({
                                     title: "Congratulations! Your form was submitted",
                                     content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
                                     color: "#5F895F",
                                     iconSmall: "fa fa-check bounce animated",
-                                    timeout: 4000
+                                    timeout: 1000
+                                },function(){window.location.href = '/admin/users';});
+
+//
+                            }
+
+
+
+                        },
+                        error: function(xhr, textStatus, thrownError) {
+//                                alert(xhr.status);
+//                                alert(thrownError);
+//                                alert(textStatus);
+                        }
+                    });
+                }
+                if (ButtonPressed === "ยกเลิก") {
+
+                }
+
+            });
+
+        });
+
+
+        $(".mea_resetpass").on('click',function(){
+            var id = $(this).attr("data-id");
+            var user =  $(this).attr("data-user");
+            $.SmartMessageBox({
+                title : "Error!",
+                content : "ท่านแน่ใจที่ต้องการจะ reset  password ของผู้ใช้ใช่หรือไม่",
+                buttons : '[ยกเลิก][OK]'
+            }, function(ButtonPressed) {
+                if (ButtonPressed === "OK") {
+
+
+                    var jsondata = {username : user};
+
+                    $.ajax({
+
+                        type: 'post', // or post?
+                        dataType: 'json',
+                        url: '/admin/users/ReqPass',
+                        data: jsondata,
+
+                        success: function(data) {
+
+                            if(data.success){
+                                $.smallBox({
+                                    title: "Congratulations! Your form was submitted",
+                                    content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                                    color: "#5F895F",
+                                    iconSmall: "fa fa-check bounce animated",
+                                    timeout: 1000
                                 });
 
-                                window.location.href = '/admin/userGroup';
+//
                             }
 
 
@@ -234,7 +313,7 @@ $arrSidebar =getSideBar($data);
             var checkcount = $(".item_checked:checked").length;
 
 
-            if(checkcount > 0){
+            if(checkcount > 0 ){
                 var checked = "";
                 $(".item_checked").each(function(){
 
@@ -250,21 +329,21 @@ $arrSidebar =getSideBar($data);
 
                     type: 'post', // or post?
                     dataType: 'json',
-                    url: '/admin/userGroup/delete',
+                    url: '/admin/users/delete',
                     data: jsondata,
 
                     success: function(data) {
 
-                        if(data.ret == "1"){
+                        if(data.success){
                             $.smallBox({
                                 title: "Congratulations! Your form was submitted",
                                 content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
                                 color: "#5F895F",
                                 iconSmall: "fa fa-check bounce animated",
-                                timeout: 4000
-                            });
+                                timeout: 1000
+                            },function(){window.location.href = '/admin/users';});
 
-                            window.location.href = '/admin/userGroup';
+//                            window.location.href = '/admin/users';
                         }
 
 
@@ -302,10 +381,10 @@ $arrSidebar =getSideBar($data);
 
 
 
-            if(checkcount > 1){
+            if(checkcount > 1 || checkcount == 0){
                 $.SmartMessageBox({
                     title : "Error!",
-                    content : "ไม่สามารถแก้ไขได้ กรุณาเลือกรายการเดียว",
+                    content : "ไม่สามารถแก้ไขได้ กรุณาเลือกรายการเพียงรายการเดียว",
                     buttons : '[OK]'
                 }, function(ButtonPressed) {
                     if (ButtonPressed === "OK") {
@@ -318,7 +397,7 @@ $arrSidebar =getSideBar($data);
 
                 });
             }else {
-                window.location.href = "/admin/userGroup/edit/" + $(".item_checked:checked").val();
+                window.location.href = "/admin/users/edit/" + $(".item_checked:checked").val();
             }
 
         })
@@ -326,7 +405,7 @@ $arrSidebar =getSideBar($data);
 
         $("#mainCheck").on("click",function(){$(".item_checked").not(this).prop('checked', this.checked);});
 
-
+        $("#page_click_search li a").on('click',PageRenderSearch);
 
 
     }
@@ -349,6 +428,7 @@ $arrSidebar =getSideBar($data);
     // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
     $(document).ready(function() {
+        $('html').append('<input type="hidden" value="1" id="currentpage_search" />');
 
         var jsondata = {pagesize : 25,PageNumber:1};
 

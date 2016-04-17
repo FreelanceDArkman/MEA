@@ -68,9 +68,9 @@
 
                 </td>
                 <td style="text-align: center">
-                    <a href="/admin/userGroup/edit/{{$userGroup->EMP_ID}}" class="btn btn-primary btn-xs"><i class="fa fa-gear"></i></a>
-                    <a href="javascript:void(0);"  data-id="{{$userGroup->EMP_ID}}" class="mea_delete_by btn bg-color-red txt-color-white btn-xs"> <i class="glyphicon glyphicon-trash"></i></a>
-                    <a href="javascript:void(0);"  data-id="{{$userGroup->EMP_ID}}" class="mea_delete_by btn txt-color-white bg-color-blueDark btn-xs"><i class="glyphicon glyphicon-repeat"></i></a></td>
+                    <a href="/admin/users/edit/{{$userGroup->EMP_ID}}" class="btn btn-primary btn-xs"><i class="fa fa-gear"></i></a>
+                    <a href="javascript:void(0);"   data-id="{{$userGroup->EMP_ID}}" class="mea_delete_by btn bg-color-red txt-color-white btn-xs"> <i class="glyphicon glyphicon-trash"></i></a>
+                    <a href="javascript:void(0);"  data-id="{{$userGroup->EMP_ID}}" data-user="{{$userGroup->USERNAME}}" class="mea_resetpass btn txt-color-white bg-color-blueDark btn-xs"><i class="glyphicon glyphicon-repeat"></i></a></td>
                 </td>
                 <td>{{$userGroup->EMP_ID}}</td>
                 <td>{{$userGroup->FULL_NAME}}</td>
