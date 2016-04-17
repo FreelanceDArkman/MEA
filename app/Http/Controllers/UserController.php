@@ -9,6 +9,8 @@ use App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Input;
 
 class UserController extends Controller
 {
@@ -27,6 +29,11 @@ class UserController extends Controller
             'user_group' => $user_group
         ]);
     }
+
+
+
+
+
 
 
     public  function  getUserAlllData($ArrParam,$IsCase){
@@ -249,6 +256,9 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
         ]);
     }
 
+
+
+
     public  function  postEditUser(Request $request){
 
 
@@ -352,6 +362,38 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
 
 
 
+
+    public function getimport()
+    {
+        $this->pageSetting( [
+            'menu_group_id' => 50,
+            'menu_id' => 2,
+            'title' => 'นำเข้าข้อมูล | MEA'
+        ]);
+
+        $user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
+
+        return view('backend.pages.users_import')->with([
+            'user_group' => $user_group
+        ]);
+    }
+
+
+    public function importdata(Request $request){
+
+//        var_dump($request->file('exelimport'));
+//        $inputfile= $request->input('exelimport');
+        //Input::file('import1')
+
+        Excel::load($request->file('exelimport'), function ($reader) {
+
+            $reader->each(function($sheet) {
+                foreach ($sheet->toArray() as $row) {
+//                    User::firstOrCreate($row);
+                }
+            });
+        });
+    }
 
 
     public function getUsers(Request $request)

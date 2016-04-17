@@ -41,6 +41,9 @@ $arrSidebar =getSideBar($data);
         <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
             <ul id="sparks" class="">
                 <li class="sparks-info">
+                    <a href="{{action('UserController@getimport')}}" class="btn bg-color-orange txt-color-white"><i class="fa fa-download"></i> นำเข้า</a>
+                </li>
+                <li class="sparks-info">
 
                     <a href="{{action('UserController@getAddUser')}}" class="btn bg-color-green txt-color-white"><i class="fa fa-plus"></i> สร้างผู้ใช้</a>
                 </li>

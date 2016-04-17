@@ -103,7 +103,12 @@ function getSideBar($menulsit){
                         "edit"=>array(
                             "title"=> "แก้ไขผู้ใช้",
                             "url" => "/admin/users/edit"
+                        ),
+                        "getimport"=>array(
+                            "title"=> "นำเข้าผู้ใช้",
+                            "url" => "/admin/users/getimport"
                         )
+
                     )
                 )
             )
