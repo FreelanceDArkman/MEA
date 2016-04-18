@@ -223,9 +223,11 @@ $arrSidebar =getSideBar($data);
                 data: dataimport,
 
                 success: function(data){
+                    if(data.success){
+                        AlertSuccess("ข้อมูลได้ถูก update เรียบร้อยแล้ว");
+                    }
 
-
-                    alert(data.html);
+//                Alert('OK', "ข้อมูลได้ถูก update เรียบร้อยแล้ว");
 
                 },
                 error: function(xhr, textStatus, thrownError) {

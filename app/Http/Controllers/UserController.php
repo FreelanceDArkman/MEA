@@ -389,9 +389,9 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
 
         $type = $request->input('type');
 
+//        var_dump($type . "jjjjjj");
 
-
-        Excel::load($request->file('exelimport'), function ($reader,$type) {
+        Excel::load($request->file('exelimport'), function ($reader) use($type) {
 
             $results = $reader->get();
 
@@ -402,9 +402,9 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
                 $EMP_ID = $value["emp_id"];
                 $StatusID = $value["user_status_id"];
 
+//
 
-
-
+//                /$type = 1;
 
 //                RETURN_FUND_GROUP_DATE
 

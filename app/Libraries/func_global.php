@@ -115,6 +115,117 @@ function getSideBar($menulsit){
         );
     }
 
+    if(menu_access(1,51) || menu_access(2,51)|| menu_access(3,51)|| menu_access(4,51)|| menu_access(5,51)){
+        $page_nav["51"] = array(
+            "group_id" => 50,
+            "title" => getGoupName($data,51),
+            "icon" => "fa-home",
+
+            "sub" => array(
+                "1" => array(
+                    "menu_id" => 1,
+                    "title" => getMenuName($data,51,1),
+                    "url" => "/admin/simple",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"สร้างกลุ่มผู้ใช้",
+                            "url" => "/admin/userGroup/add"
+
+                        ),
+                        "edit"=>array(
+                            "title"=> "แก้ไขกลุ่มผู้ใช้",
+                            "url" => "/admin/userGroup/edit"
+                        )
+                    )
+                ),
+                "2" => array(
+                    "menu_id" => 2,
+                    "title" => getMenuName($data,51,2),
+                    "url" => "/admin/plan",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"สร้างผู้ใช้",
+                            "url" => "/admin/users/add"
+
+                        ),
+                        "edit"=>array(
+                            "title"=> "แก้ไขผู้ใช้",
+                            "url" => "/admin/users/edit"
+                        ),
+                        "getimport"=>array(
+                            "title"=> "นำเข้าผู้ใช้",
+                            "url" => "/admin/users/getimport"
+                        )
+
+                    )
+                ),
+                "3" => array(
+                    "menu_id" => 2,
+                    "title" => getMenuName($data,51,3),
+                    "url" => "/admin/fund",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"สร้างผู้ใช้",
+                            "url" => "/admin/users/add"
+
+                        ),
+                        "edit"=>array(
+                            "title"=> "แก้ไขผู้ใช้",
+                            "url" => "/admin/users/edit"
+                        ),
+                        "getimport"=>array(
+                            "title"=> "นำเข้าผู้ใช้",
+                            "url" => "/admin/users/getimport"
+                        )
+
+                    )
+                ),
+                "4" => array(
+                    "menu_id" => 2,
+                    "title" => getMenuName($data,51,4),
+                    "url" => "/admin/benefit",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"สร้างผู้ใช้",
+                            "url" => "/admin/users/add"
+
+                        ),
+                        "edit"=>array(
+                            "title"=> "แก้ไขผู้ใช้",
+                            "url" => "/admin/users/edit"
+                        ),
+                        "getimport"=>array(
+                            "title"=> "นำเข้าผู้ใช้",
+                            "url" => "/admin/users/getimport"
+                        )
+
+                    )
+                ),
+                "5" => array(
+                    "menu_id" => 2,
+                    "title" => getMenuName($data,51,5),
+                    "url" => "/admin/profit",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"สร้างผู้ใช้",
+                            "url" => "/admin/users/add"
+
+                        ),
+                        "edit"=>array(
+                            "title"=> "แก้ไขผู้ใช้",
+                            "url" => "/admin/users/edit"
+                        ),
+                        "getimport"=>array(
+                            "title"=> "นำเข้าผู้ใช้",
+                            "url" => "/admin/users/getimport"
+                        )
+
+                    )
+                )
+            )
+        );
+    }
+
 
     if(menu_access(1,58) || menu_access(2,58)|| menu_access(3,58)|| menu_access(4,58)|| menu_access(5,58)|| menu_access(6,58)|| menu_access(7,58)|| menu_access(8,58)|| menu_access(9,58)|| menu_access(10,58)|| menu_access(11,58)|| menu_access(12,58)|| menu_access(13,58)){
         $page_nav["58"] = array(
