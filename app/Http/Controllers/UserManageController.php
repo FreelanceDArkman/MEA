@@ -113,12 +113,14 @@ DIV_LNG,SEC_LNG,PART_LNG) VALUES('".$EMP_ID."','".$value["prefix"]."','".$value[
 
                 $ecPass = explode(':',$ecPass)[1];
 
+                $datedefault = new Date("9999-12-31 00:00:00.000") ;
+
                 DB::table('TBL_USER')->insert(
                     [
                         'EMP_ID' => "'".$EMP_ID."'",
                         'USERNAME' => "'".$EMP_ID."'",
                         'PASSWORD' => "'".$ecPass."'",
-                        'PASSWORD_EXPIRE_DATE' => '9999-12-31 00:00:00.000',
+                        'PASSWORD_EXPIRE_DATE' =>"'".$datedefault."'",
                         'CREATE_DATE' => "'".$date."'",
                         'CREATE_BY' => 'Administrator',
                         'LAST_MODIFY_DATE' => "'".$date."'",
