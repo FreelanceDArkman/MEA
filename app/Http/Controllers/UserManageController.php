@@ -33,8 +33,6 @@ class UserManageController extends Controller
 
         $results = null;
 
-
-
         $result=   Excel::load($request->file('exelimport'))->toArray();
         $count = count($result);
 //
@@ -67,7 +65,7 @@ class UserManageController extends Controller
 
 
 
-        Excel::load($request->file('exelimport'), function ($reader) use($type) {
+    $retdate =    Excel::load($request->file('exelimport'), function ($reader) use($type) {
 
             $results = $reader->get();
 
@@ -122,24 +120,7 @@ VALUES('".$EMP_ID."','".$EMP_ID."','".$ecPass."','9999-12-31 00:00:00.000','".$d
 ,'2','".$pri[0]->ACCESS_PERMISSIONS."','13','0','1')";
 
                 DB::insert(DB::raw($insetuser));
-//
-//                DB::table('TBL_USER')->insert(
-//                    [
-//                        'EMP_ID' => "'".$EMP_ID."'",
-//                        'USERNAME' => "'".$EMP_ID."'",
-//                        'PASSWORD' => "'".$ecPass."'",
-//                        'PASSWORD_EXPIRE_DATE' =>"'".$datedefault."'",
-//                        'CREATE_DATE' => "'".$date."'",
-//                        'CREATE_BY' => 'Administrator',
-//                        'LAST_MODIFY_DATE' => "'".$date."'",
-//                        'USER_PRIVILEGE_ID' => '2',
-//                        'ACCESS_PERMISSIONS' => "'".$pri[0]->ACCESS_PERMISSIONS."'",
-//                        'USER_STATUS_ID' => '13',
-//                        'FIRST_LOGIN_FLAG' => '0',
-//                        'EMAIL_NOTIFY_FLAG' => '1'
-//                    ]
-//
-//                );
+
              }
 
 
@@ -159,7 +140,7 @@ VALUES('".$EMP_ID."','".$EMP_ID."','".$ecPass."','9999-12-31 00:00:00.000','".$d
 
 
 
-        return response()->json(array('success' => true, 'html'=>"hello"));
+        return response()->json(array('success' => true, 'html'=>$retdate));
     }
 
 

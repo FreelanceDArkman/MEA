@@ -90,9 +90,10 @@ $arrSidebar =getSideBar($data);
 
                                 </p>
                                 <p id="progress_check" style="display: none;"><img src="{{asset('backend/img/shot.gif')}}"  /> กำลังตรวจสอบ ไฟล์</p>
+                                <p id="progress_import" style="display: none;"><img src="{{asset('backend/img/shot.gif')}}"  /> กำลังนำเข้าข้อมูล</p>
                                 <p id="check_ret" style="display: none"></p>
                                 <p>
-                                    <a href="javascript:void(0);"  data-input="import1" data-import="1" class="btn_check btn btn-xs btn-primary"><i class="fa fa-download"></i> นำเข้าข้อมูล</a>
+                                    <a href="javascript:void(0);"  data-input="import1" data-import="1" class="btn_check btn btn-xs btn-primary"><i class="fa fa-download"></i> ตรวจสอบไฟล์</a>
                                     <a href="javascript:void(0);" style="display: none"  data-input="import1" data-import="1" class="btn_import btn btn-xs btn-primary"><i class="fa fa-download"></i> นำเข้าข้อมูล</a>
                                 </p>
 
@@ -208,6 +209,9 @@ $arrSidebar =getSideBar($data);
         $('.btn_import').on('click',function(){
 
 
+            $('#check_ret').hide();
+            $('#progress_import').show();
+
             var dataimport = new FormData();
             var target = $(this).attr('data-input');
 
@@ -239,7 +243,10 @@ $arrSidebar =getSideBar($data);
 
                 success: function(data){
                     if(data.success){
+                        $('#progress_import').hide();
                         AlertSuccess("ข้อมูลได้ถูก update เรียบร้อยแล้ว");
+                    }else {
+                        Alert('Import','การ import ข้อมูลผิดพลาด กรุณาตรวจสอบ รูปแบบข้อมูลของ ไฟล์ ')
                     }
 
 //                Alert('OK', "ข้อมูลได้ถูก update เรียบร้อยแล้ว");
