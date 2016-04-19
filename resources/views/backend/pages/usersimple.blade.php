@@ -92,8 +92,8 @@ $arrSidebar =getSideBar($data);
                                 <p id="progress_check" style="display: none;"><img src="{{asset('backend/img/shot.gif')}}"  /> กำลังตรวจสอบ ไฟล์</p>
                                 <p id="check_ret" style="display: none"></p>
                                 <p>
-                                    {{--<a href="javascript:void(0);"  data-input="import1" data-import="1" class="btn_check btn btn-xs btn-primary"><i class="fa fa-download"></i> นำเข้าข้อมูล</a>--}}{{-- style="display: none"--}}
-                                    <a href="javascript:void(0);"  data-input="import1" data-import="1" class="btn_import btn btn-xs btn-primary"><i class="fa fa-download"></i> นำเข้าข้อมูล</a>
+                                    <a href="javascript:void(0);"  data-input="import1" data-import="1" class="btn_check btn btn-xs btn-primary"><i class="fa fa-download"></i> นำเข้าข้อมูล</a>
+                                    <a href="javascript:void(0);" style="display: none"  data-input="import1" data-import="1" class="btn_import btn btn-xs btn-primary"><i class="fa fa-download"></i> นำเข้าข้อมูล</a>
                                 </p>
 
                                 <div class="row">
