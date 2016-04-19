@@ -51,13 +51,17 @@
                                     break;
                                 }
 
+
                             }else{
                                 if(Request::is($path)){
                                     echo '<li><a href="'.$submenu['url'].'">'.$submenu["title"].'</a></li>';
                                     echo '<li>'.$mini["title"].'</li>';
                                     break;
                                 }
+
                             }
+
+
                            //var_dump(Route::getCurrentRoute()->getPath());
 
 

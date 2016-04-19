@@ -434,6 +434,15 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
         });
 
+        Route::group(['prefix' => 'simple'], function() {
+            Route::get('/', 'UserManageController@getsimple');
+
+            Route::post('import','UserManageController@importdata');
+            Route::post('check','UserManageController@Checkdate');
+
+
+        });
+
 
 //        Report Start
 

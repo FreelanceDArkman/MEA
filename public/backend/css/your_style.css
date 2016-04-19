@@ -131,3 +131,7 @@ table tbody tr td{
 .ui-state-disabled{
     font-size: 12px !important;
 }
+
+.import_title a{
+    font-size: 24px !important;
+}
