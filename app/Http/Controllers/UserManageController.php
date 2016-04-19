@@ -115,23 +115,31 @@ DIV_LNG,SEC_LNG,PART_LNG) VALUES('".$EMP_ID."','".$value["prefix"]."','".$value[
 
                 $datedefault = new Date("9999-12-31 00:00:00.000") ;
 
-                DB::table('TBL_USER')->insert(
-                    [
-                        'EMP_ID' => "'".$EMP_ID."'",
-                        'USERNAME' => "'".$EMP_ID."'",
-                        'PASSWORD' => "'".$ecPass."'",
-                        'PASSWORD_EXPIRE_DATE' =>"'".$datedefault."'",
-                        'CREATE_DATE' => "'".$date."'",
-                        'CREATE_BY' => 'Administrator',
-                        'LAST_MODIFY_DATE' => "'".$date."'",
-                        'USER_PRIVILEGE_ID' => '2',
-                        'ACCESS_PERMISSIONS' => "'".$pri[0]->ACCESS_PERMISSIONS."'",
-                        'USER_STATUS_ID' => '13',
-                        'FIRST_LOGIN_FLAG' => '0',
-                        'EMAIL_NOTIFY_FLAG' => '1'
-                    ]
 
-                );
+                $insetuser = "INSERT INTO TBL_USER (EMP_ID,USERNAME,PASSWORD,PASSWORD_EXPIRE_DATE,CREATE_DATE
+,CREATE_BY,LAST_MODIFY_DATE,USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,USER_STATUS_ID,FIRST_LOGIN_FLAG,EMAIL_NOTIFY_FLAG)
+VALUES('".$EMP_ID."','".$EMP_ID."','".$ecPass."','9999-12-31 00:00:00.000','".$date."','Administrator','".$date."'
+,'2','".$pri[0]->ACCESS_PERMISSIONS."','13','0','1')";
+
+                DB::insert(DB::raw($insetuser));
+//
+//                DB::table('TBL_USER')->insert(
+//                    [
+//                        'EMP_ID' => "'".$EMP_ID."'",
+//                        'USERNAME' => "'".$EMP_ID."'",
+//                        'PASSWORD' => "'".$ecPass."'",
+//                        'PASSWORD_EXPIRE_DATE' =>"'".$datedefault."'",
+//                        'CREATE_DATE' => "'".$date."'",
+//                        'CREATE_BY' => 'Administrator',
+//                        'LAST_MODIFY_DATE' => "'".$date."'",
+//                        'USER_PRIVILEGE_ID' => '2',
+//                        'ACCESS_PERMISSIONS' => "'".$pri[0]->ACCESS_PERMISSIONS."'",
+//                        'USER_STATUS_ID' => '13',
+//                        'FIRST_LOGIN_FLAG' => '0',
+//                        'EMAIL_NOTIFY_FLAG' => '1'
+//                    ]
+//
+//                );
              }
 
 
