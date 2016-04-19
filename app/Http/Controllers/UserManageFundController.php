@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Input;
 
-class UserManageController extends Controller
+class UserManageFundController extends Controller
 {
 
     public function getsimple()
@@ -20,13 +20,13 @@ class UserManageController extends Controller
         $data = getmemulist();
         $this->pageSetting( [
             'menu_group_id' => 51,
-            'menu_id' => 1,
-            'title' => getMenuName($data,51,1) ." | MEA"
+            'menu_id' => 3,
+            'title' => getMenuName($data,51,3) ." | MEA"
         ]);
 
         //$user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
 
-        return view('backend.pages.usersimple');
+        return view('backend.pages.userfund');
     }
 
     public  function  Checkdate(Request $request){
@@ -61,86 +61,64 @@ class UserManageController extends Controller
 
         $results = null;
 
-        $type = $request->input('type');
+//        $results = $reader->get();
+//
+//        $ret = $results->toArray();
 
 
 
-    $retdate =    Excel::load($request->file('exelimport'), function ($reader) use($type) {
+        $results =    Excel::load($request->file('exelimport'))->toArray();
 
-            $results = $reader->get();
+        foreach($results as $index => $value){
 
-            $ret = $results->toArray();
+            $EMP_ID = $value["emp_id"];
+            $FULL_NAME = $value["full_name"];
+            $PATH_CODE = $value["path_code"];
+            $DEP_CODE = $value["dep_code"];
+            $DIV_CODE = $value["div_code"];
+            $SEC_CODE =  $value["sec_code"];
+            $HIRE_DATE = $value["hire_date"];
+            $END_DATE = $value["end_date"];
+            $POSITION_CODE = $value["position_code"];
+            $POSITION_NAME = $value["position_name"];
+            $JOB_LINE = $value["job_line"];
+            $LEVEL_CODE = $value["level_code"];
+            $EXE_NAME = $value["exe_name"];
+            $EXE1_NAME = $value["exe1_name"];
+            $AGE_YEAR = $value["age_year"];
+            $AGE_DAY = $value["age_day"];
+            $JOB_YEAR = $value["job_year"];
+            $JOB_DAY = $value["job_day"];
+            $EMPLOYER_CONTRIBUTION_1 = $value["employer_contribution_1"];
+            $EMPLOYER_EARNING_2= $value["employer_earning_2"];
 
-//            var_dump($ret);
+            $MEMBER_CONTRIBUTION_3= $value["member_contribution_3"];
+            $MEMBER_EARNING_4= $value["member_earning_4"];
+            $TAX_1= $value["tax_1"];
+            $TAX_12= $value["tax_12"];
+            $TAX_124= $value["tax_124"];
+            $TAX_1234= $value["tax_1234"];
+            $GRATUITY= $value["gratuity"];
+            $GRATUITY_TAX= $value["gratuity_tax"];
+            $PERIOD= $value["period"];
+            $RECORD_DATE= $value["record_date"];
 
-            foreach($ret as $index => $value){
+            $user = DB::table('TBL_MEMBER_BENEFITS')->where('EMP_ID', $EMP_ID)->where('PERIOD', $PERIOD)->get();
 
-                $EMP_ID = $value["empid"];
+            if($user == null) {
 
-                $userinfo = DB::table('TBL_EMPLOYEE_INFO')->where('EMP_ID', $EMP_ID)->get();
-
-                $user = DB::table('TBL_USER')->where('EMP_ID', $EMP_ID)->get();
-
-//                $StatusID = $value["user_status_id"];
-
-            if($userinfo == null){
-
-
-                $insert = "INSERT INTO TBL_EMPLOYEE_INFO (EMP_ID,PREFIX,FULL_NAME,ENG_NAME,FIRST_NAME,LAST_NAME,PRIORITY,JOB_ID,JOB_DESC_SHT,JOB_DESC,PER_ID,START_DATE,END_DATE,COST_CENTER,C_LEVEL,POST_ID,POS_DESC,ORG_ID,ENG_FIRST_NAME,ENG_LAST_NAME,
-BIRTH_DATE,ORG_DESC,PATH_ID,DEP_ID,DIV_ID,SEC_ID,PART_ID,PARTH_SHT,DEP_SHT,DIV_SHT,SEC_SHT,PATH_SHT,PARTH_LNG,DEP_LNG,
-DIV_LNG,SEC_LNG,PART_LNG) VALUES('".$EMP_ID."','".$value["prefix"]."','".$value["fullname"]."','".$value["engname"]."','".$value["firstname"]."','".$value["lastname"]."',".$value["priority"].",".$value["jobid"].",'".$value["jobdescsht"]."','".$value["jobdesc"]."','".$value["perid"]."','".$value["startdate"]."','".$value["enddate"]."','".$value["costcenter"]."',".$value["clevel"].",".$value["posid"].",'".$value["posdesc"]."',".$value["orgid"].",'".$value["engfirstname"]."','".$value["englastname"]."','".$value["birthdate"]."','".$value["orgdesc"]."',".$value["pathid"].",".$value["depid"].",".$value["divid"].",".$value["secid"].",".$value["partid"].",'".$value["pathsht"]."','".$value["depsht"]."','".$value["divsht"]."','".$value["secsht"]."','".$value["partsht"]."','".$value["pathlng"]."','".$value["deplng"]."','".$value["divlng"]."','".$value["seclng"]."','".$value["partlng"]."')";
+                $insert = "INSERT INTO TBL_MEMBER_BENEFITS (EMP_ID,FULL_NAME,PATH_CODE,DEP_CODE,DIV_CODE,SEC_CODE,HIRE_DATE,END_DATE,SALARY,POSITION_CODE,POSITION_NAME,JOB_LINE,LEVEL_CODE,EXE_NAME,EXE1_NAME,AGE_YEAR,AGE_DAY,JOB_YEAR,JOB_DAY,EMPLOYER_CONTRIBUTION_1,EMPLOYER_EARNING_2,MEMBER_CONTRIBUTION_3,,MEMBER_EARNING_4,TAX_1,TAX_12,TAX_124,TAX_1234,GRATUITY,GRATUITY_TAX,PERIOD,RECORD_DATE) VALUES('" . $EMP_ID . "','" . $FULL_NAME . "','" . $PATH_CODE . "','" . $DEP_CODE . "','" . $DIV_CODE . "','" . $SEC_CODE . "','" . $HIRE_DATE . "','" . $END_DATE . "','" . $POSITION_CODE . "','" . $POSITION_NAME . "','" . $JOB_LINE . "','" . $LEVEL_CODE . "','" . $EXE_NAME . "','" . $EXE1_NAME . "','" . $AGE_YEAR . "','" . $AGE_DAY . "','" . $JOB_YEAR . "','" . $JOB_DAY . "','" . $EMPLOYER_CONTRIBUTION_1 . "','" . $EMPLOYER_EARNING_2 . "','" . $MEMBER_CONTRIBUTION_3 . "','" . $MEMBER_EARNING_4 . "','" . $TAX_1 . "','" . $TAX_12 . "','" . $TAX_124 . "','" . $TAX_1234 . "','" . $GRATUITY . "','" . $GRATUITY_TAX . "','" . $PERIOD . "','" . $RECORD_DATE . "')";
 
                 DB::insert(DB::raw($insert));
             }
 
-            if($user == null){
-
-                $date = new Date();
-
-                $pri = $userinfo = DB::table('TBL_PRIVILEGE')->where('USER_PRIVILEGE_ID', 2)->get();
-
-                 $datedata = $value["birthdate"];
-
-                $rest = substr("abcdef", -1);    // returns "f"
-                $rest = substr("abcdef", -2);    // returns "ef"
-                $rest = substr("abcdef", -3, 1);
-
-                $newDate = substr($datedata, -2) . substr($datedata, -3,2). ((int)substr($datedata, 1, 4)) + 543;
-
-                $ecPass = exec("cmd /c md5.bat -e ".$newDate." 2>&1");
-
-                $ecPass = explode(':',$ecPass)[1];
-
-                $datedefault = new Date("9999-12-31 00:00:00.000") ;
 
 
-                $insetuser = "INSERT INTO TBL_USER (EMP_ID,USERNAME,PASSWORD,PASSWORD_EXPIRE_DATE,CREATE_DATE
-,CREATE_BY,LAST_MODIFY_DATE,USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,USER_STATUS_ID,FIRST_LOGIN_FLAG,EMAIL_NOTIFY_FLAG)
-VALUES('".$EMP_ID."','".$EMP_ID."','".$ecPass."','9999-12-31 00:00:00.000','".$date."','Administrator','".$date."'
-,'2','".$pri[0]->ACCESS_PERMISSIONS."','13','0','1')";
-
-                DB::insert(DB::raw($insetuser));
-
-             }
+        }
 
 
 
-            }
-
-
-
-
-            $staturet= true;
-            $data = "ok";
-
-
-        });
-
-
-
-
-
-        return response()->json(array('success' => true, 'html'=>$retdate));
+        return response()->json(array('success' => true, 'html'=>$results));
     }
 
 

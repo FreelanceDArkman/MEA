@@ -135,19 +135,19 @@ function getSideBar($menulsit){
 
                 ),
                 "3" => array(
-                    "menu_id" => 2,
+                    "menu_id" => 3,
                     "title" => getMenuName($data,51,3),
                     "url" => "/admin/fund"
 
                 ),
                 "4" => array(
-                    "menu_id" => 2,
+                    "menu_id" => 4,
                     "title" => getMenuName($data,51,4),
                     "url" => "/admin/benefit"
 
                 ),
                 "5" => array(
-                    "menu_id" => 2,
+                    "menu_id" => 5,
                     "title" => getMenuName($data,51,5),
                     "url" => "/admin/profit"
 

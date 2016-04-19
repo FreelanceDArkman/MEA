@@ -443,6 +443,44 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
         });
 
+        Route::group(['prefix' => 'plan'], function() {
+            Route::get('/', 'UserManagePlanController@getsimple');
+
+            Route::post('import','UserManagePlanController@importdata');
+            Route::post('check','UserManagePlanController@Checkdate');
+
+
+        });
+
+        Route::group(['prefix' => 'fund'], function() {
+            Route::get('/', 'UserManageFundController@getsimple');
+
+            Route::post('import','UserManageFundController@importdata');
+            Route::post('check','UserManageFundController@Checkdate');
+
+
+        });
+//
+//
+//        Route::group(['prefix' => 'benefit'], function() {
+//            Route::get('/', 'UserManageController@getsimple');
+//
+//            Route::post('import','UserManageController@importdata');
+//            Route::post('check','UserManageController@Checkdate');
+//
+//
+//        });
+//
+//
+//        Route::group(['prefix' => 'profit'], function() {
+//            Route::get('/', 'UserManageController@getsimple');
+//
+//            Route::post('import','UserManageController@importdata');
+//            Route::post('check','UserManageController@Checkdate');
+//
+//
+//        });
+
 
 //        Report Start
 
