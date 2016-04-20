@@ -510,7 +510,7 @@ function AlertSuccess(message,callback){
 		content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
 		color: "#5F895F",
 		iconSmall: "fa fa-check bounce animated",
-		timeout: 4000
+		timeout: 1000
 	},callback);
 }
 

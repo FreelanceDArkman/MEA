@@ -33,8 +33,8 @@ class UserManageController extends Controller
 
         $results = null;
 
-        $result=   Excel::load($request->file('exelimport'))->toArray();
-        $count = count($result);
+        $result=   Excel::load($request->file('exelimport'))->get();
+        $count = $result->count();
 //
 //      Excel::load($request->file('exelimport'), function ($reader) use($count) {
 //
@@ -48,7 +48,7 @@ class UserManageController extends Controller
 //
 //        });
 
-        return response()->json(array('success' => true, 'html'=>"ข้อมูลถูกต้อง มีจำนวนทั้งหมด " .$count ." record  กรุณากดปุ่ม นำเข้าข้อมูล ด้านล่างเพื่อ ดำเนินการ import"));
+        return response()->json(array('success' => true, 'html'=> $count));
 
 
 

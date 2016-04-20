@@ -83,7 +83,8 @@ $arrSidebar =getSideBar($data);
 
                                 <p>
                                 <p class="help-block">
-                                    เลือกไฟล์
+                                    เลือกไฟล์<br/>
+                                    <span style="color: red">จำนวน record ที่สามารถ import ได้สูงสุดต่อครั้งคือ <strong>1,000 record เท่านั้น!!!</strong></span>
                                 </p>
                                 <input type="file" class="btn btn-default" id="import1" name="import1">
 
@@ -170,13 +171,20 @@ $arrSidebar =getSideBar($data);
                             success: function(data){
                                 if(data.success){
                                     $('#progress_check').hide();
-                                    $('.btn_check').hide();
-                                    $('.btn_import').show();
+                                    if(parseInt(data.html) > 1000){
+
+                                        Alert('Import', "จำนวน record สูงสุดที่อนุญาติให้ import คือ 10000 record");
+
+                                    }else {
+                                        $('.btn_check').hide();
+                                        $('.btn_import').show();
 //                                    AlertSuccess("ข้อมูลได้ถูก update เรียบร้อยแล้ว");
 
 
-                                    $('#check_ret').show();
-                                    $('#check_ret').html(data.html);
+                                        $('#check_ret').show();
+                                        //
+                                        $('#check_ret').html("ข้อมูลถูกต้อง มีจำนวนทั้งหมด " +data.html +" record  กรุณากดปุ่ม นำเข้าข้อมูล ด้านล่างเพื่อ ดำเนินการ import");
+                                    }
                                 }
 
             //                Alert('OK', "ข้อมูลได้ถูก update เรียบร้อยแล้ว");
@@ -244,7 +252,10 @@ $arrSidebar =getSideBar($data);
                 success: function(data){
                     if(data.success){
                         $('#progress_import').hide();
-                        AlertSuccess("ข้อมูลได้ถูก update เรียบร้อยแล้ว");
+                        AlertSuccess("ข้อมูลได้ถูก update เรียบร้อยแล้ว",function(){
+
+                            window.location.href = "plan";
+                        });
                     }else {
                         Alert('Import','การ import ข้อมูลผิดพลาด กรุณาตรวจสอบ รูปแบบข้อมูลของ ไฟล์ ')
                     }

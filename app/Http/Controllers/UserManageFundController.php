@@ -34,8 +34,8 @@ class UserManageFundController extends Controller
 
         $results = null;
 
-        $result=   Excel::load($request->file('exelimport'))->toArray();
-        $count = count($result);
+        $result=   Excel::load($request->file('exelimport'))->get();
+        $count = $result->count();
 //
 //      Excel::load($request->file('exelimport'), function ($reader) use($count) {
 //
@@ -49,7 +49,7 @@ class UserManageFundController extends Controller
 //
 //        });
 
-        return response()->json(array('success' => true, 'html'=>"ข้อมูลถูกต้อง มีจำนวนทั้งหมด " .$count ." record  กรุณากดปุ่ม นำเข้าข้อมูล ด้านล่างเพื่อ ดำเนินการ import"));
+        return response()->json(array('success' => true, 'html'=>$count));
 
 
 
@@ -62,71 +62,84 @@ class UserManageFundController extends Controller
 
         $results = null;
 
+
 //        $results = $reader->get();
 //
 //        $ret = $results->toArray();
 
         $file = $request->file('exelimport');
+
+
+        $request->file('exelimport')->move(storage_path().'/public/import/' , 'import.xlsx');
+
         //$request->file('exelimport')
 
 //        $results =    Excel::load($request->file('exelimport'))->toArray();
 
-        \Excel::filter('chunk')->load($file)->chunk(250, function($results)
-        {
-//            $results = $reader->get();
-//            foreach($results as $index => $value){
-//
-//                $EMP_ID = $value["emp_id"];
-//                $FULL_NAME = $value["full_name"];
-//                $PATH_CODE = $value["path_code"];
-//                $DEP_CODE = $value["dep_code"];
-//                $DIV_CODE = $value["div_code"];
-//                $SEC_CODE =  $value["sec_code"];
-//                $HIRE_DATE = $value["hire_date"];
-//                $END_DATE = $value["end_date"];
-//                $POSITION_CODE = $value["position_code"];
-//                $POSITION_NAME = $value["position_name"];
-//                $JOB_LINE = $value["job_line"];
-//                $LEVEL_CODE = $value["level_code"];
-//                $EXE_NAME = $value["exe_name"];
-//                $EXE1_NAME = $value["exe1_name"];
-//                $AGE_YEAR = $value["age_year"];
-//                $AGE_DAY = $value["age_day"];
-//                $JOB_YEAR = $value["job_year"];
-//                $JOB_DAY = $value["job_day"];
-//                $EMPLOYER_CONTRIBUTION_1 = $value["employer_contribution_1"];
-//                $EMPLOYER_EARNING_2= $value["employer_earning_2"];
-//
-//                $MEMBER_CONTRIBUTION_3= $value["member_contribution_3"];
-//                $MEMBER_EARNING_4= $value["member_earning_4"];
-//                $TAX_1= $value["tax_1"];
-//                $TAX_12= $value["tax_12"];
-//                $TAX_124= $value["tax_124"];
-//                $TAX_1234= $value["tax_1234"];
-//                $GRATUITY= $value["gratuity"];
-//                $GRATUITY_TAX= $value["gratuity_tax"];
-//                $PERIOD= $value["period"];
-//                $RECORD_DATE= $value["record_date"];
-//
-//                $user = DB::table('TBL_MEMBER_BENEFITS')->where('EMP_ID', $EMP_ID)->where('PERIOD', $PERIOD)->get();
-//
-//                if($user == null) {
-//
-//                    $insert = "INSERT INTO TBL_MEMBER_BENEFITS (EMP_ID,FULL_NAME,PATH_CODE,DEP_CODE,DIV_CODE,SEC_CODE,HIRE_DATE,END_DATE,SALARY,POSITION_CODE,POSITION_NAME,JOB_LINE,LEVEL_CODE,EXE_NAME,EXE1_NAME,AGE_YEAR,AGE_DAY,JOB_YEAR,JOB_DAY,EMPLOYER_CONTRIBUTION_1,EMPLOYER_EARNING_2,MEMBER_CONTRIBUTION_3,,MEMBER_EARNING_4,TAX_1,TAX_12,TAX_124,TAX_1234,GRATUITY,GRATUITY_TAX,PERIOD,RECORD_DATE) VALUES('" . $EMP_ID . "','" . $FULL_NAME . "','" . $PATH_CODE . "','" . $DEP_CODE . "','" . $DIV_CODE . "','" . $SEC_CODE . "','" . $HIRE_DATE . "','" . $END_DATE . "','" . $POSITION_CODE . "','" . $POSITION_NAME . "','" . $JOB_LINE . "','" . $LEVEL_CODE . "','" . $EXE_NAME . "','" . $EXE1_NAME . "','" . $AGE_YEAR . "','" . $AGE_DAY . "','" . $JOB_YEAR . "','" . $JOB_DAY . "','" . $EMPLOYER_CONTRIBUTION_1 . "','" . $EMPLOYER_EARNING_2 . "','" . $MEMBER_CONTRIBUTION_3 . "','" . $MEMBER_EARNING_4 . "','" . $TAX_1 . "','" . $TAX_12 . "','" . $TAX_124 . "','" . $TAX_1234 . "','" . $GRATUITY . "','" . $GRATUITY_TAX . "','" . $PERIOD . "','" . $RECORD_DATE . "')";
-//
-//                    DB::insert(DB::raw($insert));
-//                }
-//
-//
-//
-//            }
+        $ret = Excel::filter('chunk')->load(storage_path('/public/import/import.xlsx'))->chunk(250, function($results){
+
+            $data = array();
+
+//            $results = $reader->toArray();
+            foreach($results as $index => $value) {
+                $EMP_ID = $value["emp_id"];
+                $PERIOD = $value["period"];
+//                $user = DB::table('TBL_MEMBER_BENEFITS')->where('EMP_ID', $EMP_ID)->where('PERIOD', $PERIOD)->count();
+                $allquery = "SELECT COUNT(EMP_ID) AS total FROM TBL_MEMBER_BENEFITS  WHERE EMP_ID= '".$EMP_ID."' AND (PERIOD='".$PERIOD."' OR PERIOD IS NULL)";
+
+                $all = DB::select(DB::raw($allquery));
+               $total =  $all[0]->total;
+
+//                array_push($data,'asd','asda');
+
+                if ($total == 0) {
+                        array_push($data,array(
+                            'EMP_ID' => $value["emp_id"],
+                            'FULL_NAME' =>$value["full_name"],
+                            'PATH_CODE' => $value["path_code"],
+                            'DEP_CODE' => $value["dep_code"],
+                            'DIV_CODE' => $value["div_code"],
+                            'SEC_CODE' => $value["sec_code"],
+                            'HIRE_DATE' =>$value["hire_date"],
+                            'END_DATE' => $value["end_date"],
+                            'POSITION_CODE' => $value["position_code"],
+                            'POSITION_NAME' => $value["position_name"],
+                            'JOB_LINE' => $value["job_line"],
+                            'LEVEL_CODE' => $value["level_code"],
+                            'EXE_NAME' => $value["exe_name"],
+                            'EXE1_NAME' => $value["exe1_name"],
+                            'AGE_YEAR' => $value["age_year"],
+                            'AGE_DAY' => $value["age_day"],
+                            'JOB_YEAR' => $value["job_year"],
+                            'JOB_DAY' => $value["job_day"],
+                            'EMPLOYER_CONTRIBUTION_1' => $value["employer_contribution_1"],
+                            'EMPLOYER_EARNING_2' => $value["employer_earning_2"],
+                            'MEMBER_CONTRIBUTION_3' => $value["member_contribution_3"],
+                            'MEMBER_EARNING_4' => $value["member_earning_4"],
+                            'TAX_1' => $value["tax_1"],
+                            'TAX_12' => $value["tax_12"],
+                            'TAX_124' => $value["tax_124"],
+                            'TAX_1234' => $value["tax_1234"],
+                            'GRATUITY' => $value["gratuity"],
+                            'GRATUITY_TAX' => $value["gratuity_tax"],
+
+                            'RECORD_DATE' => $value["record_date"]
+
+                        ));
+
+
+                }
+
+            }
+
+//            var_dump($data);
+            DB::table('TBL_MEMBER_BENEFITS')->insert($data);
+            //DB::insert(DB::raw($insert));
         });
 
 
 
-
-
-        return response()->json(array('success' => true, 'html'=>$results));
+        return response()->json(array('success' => true, 'html'=>$ret));
     }
 
 
