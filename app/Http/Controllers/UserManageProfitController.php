@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Input;
 use Illuminate\Http\UploadedFile;
 
-class UserManageFundController extends Controller
+class UserManageProfitController extends Controller
 {
 
     public function getsimple()
@@ -21,13 +21,13 @@ class UserManageFundController extends Controller
         $data = getmemulist();
         $this->pageSetting( [
             'menu_group_id' => 51,
-            'menu_id' => 3,
-            'title' => getMenuName($data,51,3) ." | MEA"
+            'menu_id' => 5,
+            'title' => getMenuName($data,51,5) ." | MEA"
         ]);
 
         //$user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
 
-        return view('backend.pages.userfund');
+        return view('backend.pages.userprofit');
     }
 
     public  function  Checkdate(Request $request){
@@ -82,58 +82,40 @@ class UserManageFundController extends Controller
 
 //            $results = $reader->toArray();
             foreach($results as $index => $value) {
-                $EMP_ID = $value["emp_id"];
-                $PERIOD = $value["period"];
+//                $EMP_ID = $value["emp_id"];
+//                $PERIOD = $value["period"];
 //                $user = DB::table('TBL_MEMBER_BENEFITS')->where('EMP_ID', $EMP_ID)->where('PERIOD', $PERIOD)->count();
-                $allquery = "SELECT COUNT(EMP_ID) AS total FROM TBL_MEMBER_BENEFITS  WHERE EMP_ID= '".$EMP_ID."' AND (PERIOD='".$PERIOD."' OR PERIOD IS NULL)";
+//                $allquery = "SELECT COUNT(EMP_ID) AS total FROM TBL_MEMBER_BENEFITS  WHERE EMP_ID= '".$EMP_ID."' AND (PERIOD='".$PERIOD."' OR PERIOD IS NULL)";
 
-                $all = DB::select(DB::raw($allquery));
-               $total =  $all[0]->total;
-
+//                $all = DB::select(DB::raw($allquery));
+//               $total =  $all[0]->total;
+                    $date = new Date();
 //                array_push($data,'asd','asda');
 
-                if ($total == 0) {
+//                if ($total == 0) {
                         array_push($data,array(
                             'EMP_ID' => $value["emp_id"],
-                            'FULL_NAME' =>$value["full_name"],
-                            'PATH_CODE' => $value["path_code"],
-                            'DEP_CODE' => $value["dep_code"],
-                            'DIV_CODE' => $value["div_code"],
-                            'SEC_CODE' => $value["sec_code"],
-                            'HIRE_DATE' =>$value["hire_date"],
-                            'END_DATE' => $value["end_date"],
-                            'POSITION_CODE' => $value["position_code"],
-                            'POSITION_NAME' => $value["position_name"],
-                            'JOB_LINE' => $value["job_line"],
-                            'LEVEL_CODE' => $value["level_code"],
-                            'EXE_NAME' => $value["exe_name"],
-                            'EXE1_NAME' => $value["exe1_name"],
-                            'AGE_YEAR' => $value["age_year"],
-                            'AGE_DAY' => $value["age_day"],
-                            'JOB_YEAR' => $value["job_year"],
-                            'JOB_DAY' => $value["job_day"],
-                            'EMPLOYER_CONTRIBUTION_1' => $value["employer_contribution_1"],
-                            'EMPLOYER_EARNING_2' => $value["employer_earning_2"],
-                            'MEMBER_CONTRIBUTION_3' => $value["member_contribution_3"],
-                            'MEMBER_EARNING_4' => $value["member_earning_4"],
-                            'TAX_1' => $value["tax_1"],
-                            'TAX_12' => $value["tax_12"],
-                            'TAX_124' => $value["tax_124"],
-                            'TAX_1234' => $value["tax_1234"],
-                            'GRATUITY' => $value["gratuity"],
-                            'GRATUITY_TAX' => $value["gratuity_tax"],
+                            'INVESTMENT_PLAN' =>$value["investment_plan"],
+                            'EQUITY' => $value["equity"],
+                            'DEBT' => $value["debt"],
+                            'EQUITY_FUNDS' => $value["equity_funds"],
+                            'BOND_FUNDS' => $value["bond_funds"],
+                            'INVESTMENT_MONEY' =>$value["investment_money"],
+                            'REFERENCE_DATE' => $value["reference_date"],
+                            'MEMBER_STATUS' => $value["member_status"],
+                            'CREATE_DATE' => $date
 
-                            'RECORD_DATE' => $value["record_date"]
+
 
                         ));
 
 
-                }
+//                }
 
             }
 
 //            var_dump($data);
-            DB::table('TBL_MEMBER_BENEFITS')->insert($data);
+            DB::table('TBL_INFORMATION_FROM_ASSET')->insert($data);
             //DB::insert(DB::raw($insert));
         });
 

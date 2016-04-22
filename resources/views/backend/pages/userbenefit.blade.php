@@ -26,6 +26,10 @@ $arrSidebar =getSideBar($data);
             line-height: 12px!important;
 
         }
+        .input-upload{
+            margin-bottom: 10px;
+            display: inline-block;
+        }
     </style>
         <!-- MAIN CONTENT -->
 <div id="content">
@@ -54,29 +58,29 @@ $arrSidebar =getSideBar($data);
                                 <i class="fa fa-file-text"></i>
                             </div>
                             <div class="smart-timeline-time">
-                                {{--<small>รูปแบบที่ 1</small>--}}
+                                <small>รูปแบบที่ 1</small>
                             </div>
                             <div class="smart-timeline-content">
                                 <p class="import_title">
-                                    <a href="javascript:void(0);"><strong>เป็นเมนูนําเข้าข้อมูลสัดส่วนผลตอบแทนการลงทุนของสมาชิก</strong></a>
+                                    <a href="javascript:void(0);"><strong>เป็นเมนูนําเข้าข้อมูลผู้รับผลประโยชน์ของสมาชิก (Excel Import)</strong></a>
                                 </p>
                                 <p>
                                     ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel <br/>
 
-                                <label>9 คอลัม</label>
+                                <label>7 คอลัม</label>
                                 <table style="width: 100px;" class="table table-bordered">
-                                    <tr><td>EMP_ID</td><td>INVESTMENT_PLAN </td><td>EQUITY </td><td>DEBT  </td><td>EQUITY_FUNDS </td><td>BOND_FUNDS</td>
-                                    <td>INVESTMENT_MONEY</td><td>REFERENCE_DATE</td><td>MEMBER_STATUS</td></tr>
+                                    <tr><td>EMP_ID</td><td>FULL_NAME </td><td>FILE_NO </td><td>FILE_PATH  </td><td>CREATE_DATE </td><td>CREATE_BY</td>
+                                    <td>FILE_NAME</td></tr>
                                     <tr>
-                                        <td>1438709</td>
-                                        <td>DIY</td>
-                                        <td>20.09</td>
-                                        <td>79.91</td>
-                                        <td>854735.85</td>
-                                        <td>3399166.65</td>
-                                        <td>4253902.50</td>
+                                        <td>1145713</td>
+                                        <td>ปัญญา ปิยะจันทร์วิจิตต์</td>
+                                        <td>1</td>
+                                        <td>http://measvp.mea.or.th:8081/1145713.pdf</td>
                                         <td>20160317</td>
-                                        <td>N</td>
+                                        <td>Admin</td>
+                                        <td>1145713.pdf</td>
+
+
                                     </tr>
                                 </table>
 
@@ -105,7 +109,97 @@ $arrSidebar =getSideBar($data);
                             </div>
                         </li>
 
+                        <li>
+                            <div class="smart-timeline-icon bg-color-greenDark">
+                                <i class="fa fa-file-text"></i>
+                            </div>
+                            <div class="smart-timeline-time">
+                                <small>รูปแบบที่ 2</small>
+                            </div>
+                            <div class="smart-timeline-content">
+                                <p class="import_title">
+                                    <a href="javascript:void(0);"><strong>เป็นเมนูนําเข้าข้อมูลผู้รับผลประโยชน์ของสมาชิก (PDF Import)</strong></a>
+                                </p>
+                                <p>
+                                    ชนิดไฟล์ที่อนุญาติให้นำเข้า:PDF <br/>
 
+                                    <label><strong style="color: red">ไม่เกิน 10 ไฟล์ต่อครั้ง</strong></label>
+
+
+                                </p>
+
+                                <p>
+                                <p class="help-block">
+                                    เลือกไฟล์<br/>
+
+                                </p>
+
+                                <div class="input-upload">
+                                    <span>ไฟล์ที่ 1</span>
+                                    <input type="file"  class="btn btn-default import_pdf_multi" id="import1" name="import_pdf[]">
+                                </div>
+
+                                <div class="input-upload">
+                                    <span>ไฟล์ที่ 2</span>
+                                    <input type="file" class="btn btn-default import_pdf_multi" id="import2" name="import_pdf[]">
+                                </div>
+
+                                <div class="input-upload">
+                                    <span>ไฟล์ที่ 3</span>
+                                    <input type="file" class="btn btn-default import_pdf_multi" id="import3" name="import_pdf[]">
+                                </div>
+
+                                <div class="input-upload">
+                                    <span>ไฟล์ที่ 4</span>
+                                    <input type="file" class="btn btn-default import_pdf_multi" id="import4" name="import_pdf[]">
+                                </div>
+
+                                <div class="input-upload">
+                                    <span>ไฟล์ที่ 5</span>
+                                    <input type="file" class="btn btn-default import_pdf_multi" id="import5" name="import_pdf[]">
+                                </div>
+
+                                <div class="input-upload">
+                                    <span>ไฟล์ที่ 6</span>
+                                    <input type="file" class="btn btn-default import_pdf_multi" id="import6" name="import_pdf[]">
+                                </div>
+
+                                <div class="input-upload">
+                                    <span>ไฟล์ที่ 7</span>
+                                    <input type="file" class="btn btn-default import_pdf_multi" id="import7" name="import_pdf[]">
+                                </div>
+
+                                <div class="input-upload">
+                                    <span>ไฟล์ที่ 8</span>
+                                    <input type="file" class="btn btn-default import_pdf_multi" id="import8" name="import_pdf[]">
+                                </div>
+
+                                <div class="input-upload">
+                                    <span>ไฟล์ที่ 9</span>
+                                    <input type="file" class="btn btn-default" id="import9" name="import_pdf[]">
+                                </div>
+
+                                <div class="input-upload">
+                                    <span>ไฟล์ที่ 10</span>
+                                    <input type="file" class="btn btn-default" id="import10" name="import_pdf[]">
+                                </div>
+
+
+
+                                </p>
+                                <p id="progress_pdf_check" style="display: none;"><img src="{{asset('backend/img/shot.gif')}}"  /> กำลังตรวจสอบ ไฟล์</p>
+                                <p id="progress_pdf_import" style="display: none;"><img src="{{asset('backend/img/shot.gif')}}"  /> กำลังนำเข้าข้อมูล</p>
+                                <p id="check_pdf_ret" style="display: none"></p>
+                                <p>
+                                    <a href="javascript:void(0);"  data-input="import_pdf" data-import="1" class="btn_pdf_check btn btn-xs btn-primary"><i class="fa fa-download"></i> ตรวจสอบไฟล์</a>
+                                    <a href="javascript:void(0);" style="display: none"  data-input="import_pdf" data-import="1" class="btn_pdf_import btn btn-xs btn-primary"><i class="fa fa-download"></i> นำเข้าข้อมูล</a>
+                                </p>
+
+                                <div class="row">
+
+                                </div>
+                            </div>
+                        </li>
 
 
                     </ul>
@@ -130,6 +224,92 @@ $arrSidebar =getSideBar($data);
 
 
     $(document).ready(function() {
+
+
+        $('.btn_pdf_check').on('click',function(){
+            $('#progress_pdf_check').show();
+            var selfile = 0;
+            var dataimport = new FormData();
+            $('.import_pdf_multi').each(function(){
+                var extall="pdf";
+                var files = $(this).get(0).files;
+                if (files.length > 0){
+
+                    ext = files[0].name.split('.').pop().toLowerCase();
+                    if(parseInt(extall.indexOf(ext)) < 0){
+                        Alert('Import',"กรุณาเลือกไฟล์ PDF เท่านั้น");
+                        $('#progress_pdf_check').hide();
+                    }else {
+
+                        $('#progress_pdf_check').hide();
+                        $('.btn_pdf_check').hide();
+                        $('.btn_pdf_import').show();
+//                                    AlertSuccess("ข้อมูลได้ถูก update เรียบร้อยแล้ว");
+
+
+                        $('#check_pdf_ret').show();
+                        //
+                        $('#check_pdf_ret').html("ไฟล์ที่ท่านต้องการ import ถูกต้อง กรุณากดปุ่ม นำเข้าข้อมูล ด้านล่างเพื่อ ดำเนินการ");
+                    }
+                    selfile = selfile +1;
+//                    dataimport.append("exelimport", files[0]);
+                }
+
+            });
+
+            if(selfile == 0){
+                Alert('Import',"กรุณาเลือกไฟล์ อย่างน้อย 1 ไฟล์");
+                $('#progress_pdf_check').hide();
+            }
+
+
+        });
+
+        $('.btn_pdf_import').on('click',function(){
+            $('#check_pdf_ret').hide();
+            $('#progress_pdf_import').show();
+
+            var dataimport = new FormData();
+            $('.import_pdf_multi').each(function(index){
+
+                var files = $(this).get(0).files;
+                if (files.length > 0){
+
+                    dataimport.append("exelimport_" + index, files[0]);
+                }
+
+            });
+
+            $.ajax({
+
+                type: 'POST', // or post?
+//                dataType: 'json',
+                contentType: false,
+                processData: false,
+                url: 'benefit/import_pdf',
+                data: dataimport,
+
+                success: function(data){
+                    if(data.success){
+                        $('#progress_import').hide();
+                        AlertSuccess("ข้อมูลได้ถูก update เรียบร้อยแล้ว", function(){
+                            window.location.href = "benefit";
+
+                        });
+                    }else {
+                        Alert('Import','การ import ข้อมูลผิดพลาด กรุณาตรวจสอบ รูปแบบข้อมูลของ ไฟล์ ')
+                    }
+
+//                Alert('OK', "ข้อมูลได้ถูก update เรียบร้อยแล้ว");
+
+                },
+                error: function(xhr, textStatus, thrownError) {
+
+                }
+            });
+
+
+        });
 
 
         $('.btn_check').on('click',function(){
@@ -166,7 +346,7 @@ $arrSidebar =getSideBar($data);
             //                dataType: 'json',
                             contentType: false,
                             processData: false,
-                            url: 'profit/check',
+                            url: 'benefit/check',
                             data: dataimport,
 
                             success: function(data){
@@ -249,14 +429,14 @@ $arrSidebar =getSideBar($data);
 //                dataType: 'json',
                 contentType: false,
                 processData: false,
-                url: 'profit/import',
+                url: 'benefit/import',
                 data: dataimport,
 
                 success: function(data){
                     if(data.success){
                         $('#progress_import').hide();
                         AlertSuccess("ข้อมูลได้ถูก update เรียบร้อยแล้ว", function(){
-                            window.location.href = "profit";
+                            window.location.href = "benefit";
 
                         });
                     }else {

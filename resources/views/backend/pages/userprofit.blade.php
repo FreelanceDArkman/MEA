@@ -58,22 +58,25 @@ $arrSidebar =getSideBar($data);
                             </div>
                             <div class="smart-timeline-content">
                                 <p class="import_title">
-                                    <a href="javascript:void(0);"><strong>เป็นเมนูนําเข้าข้อมูลด้านการลงทุนของสมาชิก เช่น ข้อมูลอัตราสมทบ ผลประโยชน์เงินสมทบ</strong></a>
+                                    <a href="javascript:void(0);"><strong>เป็นเมนูนําเข้าข้อมูลสัดส่วนผลตอบแทนการลงทุนของสมาชิก</strong></a>
                                 </p>
                                 <p>
                                     ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel <br/>
 
-                                <label>31 คอลัม</label>
+                                <label>9 คอลัม</label>
                                 <table style="width: 100px;" class="table table-bordered">
-                                    <tr><td>EMP_ID</td><td>FULL_NAME </td><td>PATH_CODE </td><td>DEP_CODE  </td><td>.... </td><td>RECORD_DATE</td></tr>
+                                    <tr><td>EMP_ID</td><td>INVESTMENT_PLAN </td><td>EQUITY </td><td>DEBT  </td><td>EQUITY_FUNDS </td><td>BOND_FUNDS</td>
+                                    <td>INVESTMENT_MONEY</td><td>REFERENCE_DATE</td><td>MEMBER_STATUS</td></tr>
                                     <tr>
-                                        <td>1016934</td>
-                                        <td>น.ส. นิ่มนวล อดุลย์เดช</td>
-                                        <td>1222</td>
-                                        <td>50</td>
-
-                                        <td>....</td>
-                                        <td>2015.01.31</td>
+                                        <td>1438709</td>
+                                        <td>DIY</td>
+                                        <td>20.09</td>
+                                        <td>79.91</td>
+                                        <td>854735.85</td>
+                                        <td>3399166.65</td>
+                                        <td>4253902.50</td>
+                                        <td>20160317</td>
+                                        <td>N</td>
                                     </tr>
                                 </table>
 
@@ -163,7 +166,7 @@ $arrSidebar =getSideBar($data);
             //                dataType: 'json',
                             contentType: false,
                             processData: false,
-                            url: 'fund/check',
+                            url: 'profit/check',
                             data: dataimport,
 
                             success: function(data){
@@ -246,14 +249,14 @@ $arrSidebar =getSideBar($data);
 //                dataType: 'json',
                 contentType: false,
                 processData: false,
-                url: 'fund/import',
+                url: 'profit/import',
                 data: dataimport,
 
                 success: function(data){
                     if(data.success){
                         $('#progress_import').hide();
                         AlertSuccess("ข้อมูลได้ถูก update เรียบร้อยแล้ว", function(){
-                            window.location.href = "fund";
+                            window.location.href = "profit";
 
                         });
                     }else {

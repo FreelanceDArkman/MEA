@@ -462,24 +462,26 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
         });
 //
 //
-//        Route::group(['prefix' => 'benefit'], function() {
-//            Route::get('/', 'UserManageController@getsimple');
-//
-//            Route::post('import','UserManageController@importdata');
-//            Route::post('check','UserManageController@Checkdate');
-//
-//
-//        });
-//
-//
-//        Route::group(['prefix' => 'profit'], function() {
-//            Route::get('/', 'UserManageController@getsimple');
-//
-//            Route::post('import','UserManageController@importdata');
-//            Route::post('check','UserManageController@Checkdate');
+        Route::group(['prefix' => 'benefit'], function() {
+            Route::get('/', 'UserManageBenefitcontroller@getsimple');
+
+            Route::post('import','UserManageBenefitcontroller@importdata');
+            Route::post('import_pdf','UserManageBenefitcontroller@importdata_pdf');
+
+            Route::post('check','UserManageBenefitcontroller@Checkdate');
+
+
+        });
 //
 //
-//        });
+        Route::group(['prefix' => 'profit'], function() {
+            Route::get('/', 'UserManageProfitController@getsimple');
+
+            Route::post('import','UserManageProfitController@importdata');
+            Route::post('check','UserManageProfitController@Checkdate');
+
+
+        });
 
 
 //        Report Start
