@@ -115,7 +115,7 @@ function getSideBar($menulsit){
         );
     }
 
-    if(menu_access(1,51) || menu_access(2,51)|| menu_access(3,51)|| menu_access(4,51)|| menu_access(5,51)){
+    if(menu_access(1,51) || menu_access(2,51)|| menu_access(3,51)|| menu_access(4,51)|| menu_access(5,51)|| menu_access(6,51)|| menu_access(7,51)){
         $page_nav["51"] = array(
             "group_id" => 51,
             "title" => getGoupName($data,51),
@@ -150,6 +150,18 @@ function getSideBar($menulsit){
                     "menu_id" => 5,
                     "title" => getMenuName($data,51,5),
                     "url" => "/admin/profit"
+
+                ),
+                "6" => array(
+                    "menu_id" => 6,
+                    "title" => getMenuName($data,51,6),
+                    "url" => "/admin/extendrate"
+
+                ),
+                "7" => array(
+                    "menu_id" => 7,
+                    "title" => getMenuName($data,51,7),
+                    "url" => "/admin/currentrate"
 
                 )
             )
