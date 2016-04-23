@@ -483,6 +483,24 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
         });
 
+        Route::group(['prefix' => 'extendrate'], function() {
+            Route::get('/', 'UserManageExtendController@getsimple');
+
+            Route::post('import','UserManageExtendController@importdata');
+            Route::post('check','UserManageExtendController@Checkdate');
+
+
+        });
+
+        Route::group(['prefix' => 'currentrate'], function() {
+            Route::get('/', 'UserManageCurrentController@getsimple');
+
+            Route::post('import','UserManageCurrentController@importdata');
+            Route::post('check','UserManageCurrentController@Checkdate');
+
+
+        });
+
 
 //        Report Start
 

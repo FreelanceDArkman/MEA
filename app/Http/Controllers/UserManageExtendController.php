@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Input;
 use Illuminate\Http\UploadedFile;
 
-class UserManageProfitController extends Controller
+class UserManageExtendController extends Controller
 {
 
     public function getsimple()
@@ -21,13 +21,13 @@ class UserManageProfitController extends Controller
         $data = getmemulist();
         $this->pageSetting( [
             'menu_group_id' => 51,
-            'menu_id' => 5,
-            'title' => getMenuName($data,51,5) ." | MEA"
+            'menu_id' => 6,
+            'title' => getMenuName($data,51,6) ." | MEA"
         ]);
 
         //$user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
 
-        return view('backend.pages.userprofit');
+        return view('backend.pages.userextend');
     }
 
     public  function  Checkdate(Request $request){
@@ -78,45 +78,50 @@ class UserManageProfitController extends Controller
 
         $ret = Excel::filter('chunk')->load(storage_path('/public/import/import.xlsx'))->chunk(250, function($results){
 
-            $data = array();
 
-//            $results = $reader->toArray();
+
+
             foreach($results as $index => $value) {
-//                $EMP_ID = $value["emp_id"];
-//                $PERIOD = $value["period"];
-//                $user = DB::table('TBL_MEMBER_BENEFITS')->where('EMP_ID', $EMP_ID)->where('PERIOD', $PERIOD)->count();
-//                $allquery = "SELECT COUNT(EMP_ID) AS total FROM TBL_MEMBER_BENEFITS  WHERE EMP_ID= '".$EMP_ID."' AND (PERIOD='".$PERIOD."' OR PERIOD IS NULL)";
 
-//                $all = DB::select(DB::raw($allquery));
-//               $total =  $all[0]->total;
-                    $date = new Date();
-//                array_push($data,'asd','asda');
+//
+//                $rest = substr("abcdef", -1);    // returns "f"
+//                $rest = substr("abcdef", -2);    // returns "ef"
+//                $rest = substr("abcdef", -3, 1);
 
-//                if ($total == 0) {
-                        array_push($data,array(
-                            'EMP_ID' => $value["emp_id"],
-                            'INVESTMENT_PLAN' =>$value["investment_plan"],
-                            'EQUITY' => $value["equity"],
-                            'DEBT' => $value["debt"],
-                            'EQUITY_FUNDS' => $value["equity_funds"],
-                            'BOND_FUNDS' => $value["bond_funds"],
-                            'INVESTMENT_MONEY' =>$value["investment_money"],
-                            'REFERENCE_DATE' => $value["reference_date"],
-                            'MEMBER_STATUS' => $value["member_status"],
-                            'CREATE_DATE' => $date
+                $im_date_start = $value["contribution_start_date"];
+                $ret_data_start = str_replace("'","",$im_date_start);
+
+                $im_date_end = $value["contribution_rate_old"];
+                $ret_data_end = str_replace("'","",$im_date_end);
+
+                $im_date_modify = $value["contribution_rate_new"];
+                $ret_data_modify = str_replace("'","",$im_date_modify);
+
+//                var_dump($ret_data_start);
+
+                $date_start = new Date($ret_data_start);
+                $date_end = new Date($ret_data_end);
+                $date_modify = new Date($ret_data_modify);
 
 
 
-                        ));
+                $update = array(
+                    'EMP_ID' => $value["emp_id"],
+                    'CONTRIBUTION_START_DATE' =>$date_start,
+                    'CONTRIBUTION_END_DATE' => $date_end,
+                    'CONTRIBUTION_MODIFY_DATE' => $date_modify,
+                    'CONTRIBUTION_RATE_OLD' => $value["contribution_rate_old"],
+                    'CONTRIBUTION_RATE_NEW' => $value["contribution_rate_new"]
 
 
-//                }
+                );
+
+                DB::table('TBL_EMPLOYEE_INFO')->where('EMP_ID',"=",$value["emp_id"])->update($update);
+
 
             }
 
-//            var_dump($data);
-            DB::table('TBL_INFORMATION_FROM_ASSET')->insert($data);
-            //DB::insert(DB::raw($insert));
+
         });
 
 
