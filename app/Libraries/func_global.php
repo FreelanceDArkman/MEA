@@ -168,6 +168,31 @@ function getSideBar($menulsit){
         );
     }
 
+    if(menu_access(1,52)){
+        $page_nav["52"] = array(
+            "group_id" => 52,
+            "title" => getGoupName($data,52),
+            "icon" => "fa-home",
+
+            "sub" => array(
+                "1" => array(
+                    "menu_id" => 1,
+                    "title" => getMenuName($data,51,2),
+                    "url" => "/admin/chooseplan",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"สร้างแผนการลงทุน",
+                            "url" => "/admin/chooseplan/add"
+
+                        )
+                    )
+
+                )
+
+            )
+        );
+    }
+
 
     if(menu_access(1,58) || menu_access(2,58)|| menu_access(3,58)|| menu_access(4,58)|| menu_access(5,58)|| menu_access(6,58)|| menu_access(7,58)|| menu_access(8,58)|| menu_access(9,58)|| menu_access(10,58)|| menu_access(11,58)|| menu_access(12,58)|| menu_access(13,58)){
         $page_nav["58"] = array(

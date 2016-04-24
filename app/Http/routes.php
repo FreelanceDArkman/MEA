@@ -502,6 +502,25 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
         });
 
 
+
+        Route::group(['prefix' => 'chooseplan'], function() {
+
+            Route::get('/', 'C52_1Controller@getindex');
+
+            Route::get('add', 'C52_1Controller@getAdd');
+            Route::post('add', 'C52_1Controller@postAdd');
+            Route::get('edit/{id}', 'C52_1Controller@getEdit')->where('id', '[0-9]+');
+            Route::post('edits', 'C52_1Controller@postEdit');
+            Route::post('delete', 'C52_1Controller@delete');
+
+            Route::post('getall', 'C52_1Controller@Ajax_Index');
+
+
+        });
+
+
+
+
 //        Report Start
 
         Route::group(['prefix' => 'report1'], function() {

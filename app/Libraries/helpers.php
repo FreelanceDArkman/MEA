@@ -416,7 +416,7 @@ if(!function_exists('get_date_notime')) {
 //        Date::setLocale('th');
 //var_dump(($create_date->isLeapYear() == 1) ? "Leap Year" : "Not Leap Year");
         //->addDay(1)->format('j F Y')
-//        Date::setLocale('th');
+        Date::setLocale('th');
         $create_date = new Date($input);
 
         if($create_date->isLeapYear() == 1 && date("m",strtotime($create_date)) == 2 && date("d",strtotime($create_date)) == 29){
