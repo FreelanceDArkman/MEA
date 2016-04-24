@@ -184,6 +184,11 @@ function getSideBar($menulsit){
                             "title"=>"สร้างแผนการลงทุน",
                             "url" => "/admin/chooseplan/add"
 
+                        ),
+                        "edit" => array(
+                            "title"=>"แก้ไขแผนการลงทุน",
+                            "url" => "/admin/chooseplan/edit"
+
                         )
                     )
 
