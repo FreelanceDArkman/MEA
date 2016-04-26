@@ -177,7 +177,7 @@ function getSideBar($menulsit){
             "sub" => array(
                 "1" => array(
                     "menu_id" => 1,
-                    "title" => getMenuName($data,51,2),
+                    "title" => getMenuName($data,52,1),
                     "url" => "/admin/chooseplan",
                     "sub_mini" => array(
                         "add" => array(
@@ -188,6 +188,53 @@ function getSideBar($menulsit){
                         "edit" => array(
                             "title"=>"แก้ไขแผนการลงทุน",
                             "url" => "/admin/chooseplan/edit"
+
+                        )
+                    )
+
+                )
+
+            )
+        );
+    }
+    if(menu_access(1,53) || menu_access(2,53)){
+        $page_nav["53"] = array(
+            "group_id" => 53,
+            "title" => getGoupName($data,53),
+            "icon" => "fa-home",
+
+            "sub" => array(
+                "1" => array(
+                    "menu_id" => 1,
+                    "title" => getMenuName($data,53,1),
+                    "url" => "/admin/newstopic",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"สร้างหมวดหมู่ข่าว",
+                            "url" => "/admin/newstopic/add"
+
+                        ),
+                        "edit" => array(
+                            "title"=>"แกไข้หมวดหมู่ข่าว",
+                            "url" => "/admin/newstopic/edit"
+
+                        )
+                    )
+
+                ),
+                "2" => array(
+                    "menu_id" => 2,
+                    "title" => getMenuName($data,53,2),
+                    "url" => "/admin/news",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"สร้างแผนการลงทุน",
+                            "url" => "/admin/news/add"
+
+                        ),
+                        "edit" => array(
+                            "title"=>"แก้ไขแผนการลงทุน",
+                            "url" => "/admin/news/edit"
 
                         )
                     )

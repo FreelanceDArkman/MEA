@@ -518,6 +518,25 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
         });
 
+        Route::group(['prefix' => 'newstopic'], function() {
+
+            Route::get('/', 'C53_1Controller@getindex');
+
+            Route::get('add', 'C53_1Controller@getAdd');
+            Route::post('add', 'C53_1Controller@postAdd');
+            Route::get('edit/{id}', 'C53_1Controller@getEdit')->where('id', '[0-9]+');
+            Route::post('edits', 'C53_1Controller@postEdit');
+            Route::post('delete', 'C53_1Controller@delete');
+
+            Route::post('getall', 'C53_1Controller@Ajax_Index');
+
+            Route::post('menulist', 'C53_1Controller@Ajax_menulist');
+
+
+
+        });
+
+
 
 
 
