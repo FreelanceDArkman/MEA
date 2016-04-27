@@ -110,12 +110,12 @@ $arrSidebar =getSideBar($data);
                                 <p class="help-block">
                                     เลือกไฟล์
                                 </p>
-                                <input type="file" class="btn btn-default" id="exampleInputFile1">
+                                <input type="file" class="btn btn-default" id="import2" name="import2">
 
 
                                 </p>
                                 <p>
-                                    <a href="javascript:void(0);" class="btn btn-xs btn-primary"><i class="fa fa-download"></i> นำเข้าข้อมูล</a>
+                                    <a href="javascript:void(0);" data-input="import2" data-import="2" class="btn_import btn btn-xs btn-primary"><i class="fa fa-download"></i> นำเข้าข้อมูล</a>
                                 </p>
 
                                 <div class="row">
@@ -145,12 +145,12 @@ $arrSidebar =getSideBar($data);
                                 <p class="help-block">
                                     เลือกไฟล์
                                 </p>
-                                <input type="file" class="btn btn-default" id="exampleInputFile1">
+                                <input type="file" class="btn btn-default" id="import3" name="import3">
 
 
                                 </p>
                                 <p>
-                                    <a href="javascript:void(0);" class="btn btn-xs btn-primary"><i class="fa fa-download"></i> นำเข้าข้อมูล</a>
+                                    <a href="javascript:void(0);" data-input="import3" data-import="3" class="btn_import btn btn-xs btn-primary"><i class="fa fa-download"></i> นำเข้าข้อมูล</a>
                                 </p>
 
                                 <div class="row">

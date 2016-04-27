@@ -537,6 +537,24 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
         });
 
 
+        Route::group(['prefix' => 'topics'], function() {
+
+            Route::get('/', 'C53_2Controller@getindex');
+
+            Route::get('add', 'C53_2Controller@getAdd');
+            Route::post('add', 'C53_2Controller@postAdd');
+            Route::get('edit/{id}', 'C53_2Controller@getEdit')->where('id', '[0-9]+');
+            Route::post('edits', 'C53_2Controller@postEdit');
+            Route::post('delete', 'C53_2Controller@delete');
+
+            Route::post('getall', 'C53_2Controller@Ajax_Index');
+
+            Route::post('menulist', 'C53_2Controller@Ajax_menulist');
+
+
+
+        });
+
 
 
 
