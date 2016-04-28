@@ -31,7 +31,7 @@ class Date extends Carbon
      * @param  string|DateTimeZone $timezone
      * @return Date
      */
-    public function __construct($time = null, $timezone = null)
+    public function __construct($time = null, $timezone = 'Asia/Bangkok')
     {
         if (is_int($time)) {
             $timestamp = $time;
