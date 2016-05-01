@@ -38,8 +38,8 @@ class C53_2Controller extends Controller
             'title' => getMenuName($data,53,2) . ' | MEA'
         ] );
 
-        $menugroup = DB::table('TBL_MENU_GROUP')->get();
-        return view('backend.pages.53_1_add_page')->with(['menugroup'=>$menugroup]);
+        $menucate= DB::table('TBL_NEWS_CATE')->get();
+        return view('backend.pages.53_2_add_page')->with(['menucate'=>$menucate]);
     }
 
     public function getEdit($id)
@@ -51,13 +51,23 @@ class C53_2Controller extends Controller
             'title' => getMenuName($data,53,2) . ' | MEA'
         ] );
 
-        $menugroup = DB::table('TBL_MENU_GROUP')->get();
 
-        $editdata = DB::table('TBL_NEWS_CATE')->where("NEWS_CATE_ID" ,"=",$id)->get()[0];
+        $arrid = explode(',',$id);
+
+
+        $newcate = $arrid[0];
+        $topic = $arrid[1];
+
+
+
+        $menucate = DB::table('TBL_NEWS_CATE')->get();
+
         //if(isset($id)) abort(404);
-        $menulist = DB::table('TBL_MENU_LIST')->get();
+        $Topicdata = DB::table('TBL_NEWS_TOPIC')->where("NEWS_CATE_ID" ,"=",$newcate)->where("NEWS_TOPIC_ID",'=',$topic)->get()[0];
 
-        return view('backend.pages.53_1_edit_page')->with(['editdata'=>$editdata,'menugroup'=>$menugroup,'menulist'=>$menulist]);
+
+
+        return view('backend.pages.53_2_edit_page')->with(['menucate'=>$menucate,'Topicdata'=>$Topicdata]);
     }
 
 
@@ -127,20 +137,28 @@ class C53_2Controller extends Controller
     public function delete(Request $request)
     {
         $deleted = false;
-        $arrId = explode(',',$request->input('group_id'));
+        $arrId = explode(':',$request->input('group_id'));
 
 
 //        var_dump($request["plan_id"]);
         foreach($arrId as $index => $item){
 
             if($item != ""){
+
+                $arrid = explode(',',$item);
+
+
+                $newcate = $arrid[0];
+                $topic = $arrid[1];
+
                 $data = array(
-                    'NEWS_CATE_FLAG' => 1
+                    'NEWS_TOPIC_FLAG' => 1
 
                 );
 
 
-                $deleted =  DB::table('TBL_NEWS_CATE')->where('NEWS_CATE_ID',"=",$item)->update($data);
+
+                $deleted =  DB::table('TBL_NEWS_TOPIC')->where('NEWS_CATE_ID',"=",$newcate)->where('NEWS_TOPIC_ID','=',$topic)->update($data);
             }
 
         }
@@ -149,7 +167,7 @@ class C53_2Controller extends Controller
         if($deleted)  {
             return response()->json(["ret" => "1"]);
         }else{
-            return response()->json(["ret" => "0"]);
+            return response()->json(["ret" => "00"]);
         }
 
 
@@ -166,60 +184,159 @@ class C53_2Controller extends Controller
     {
 
         $ret = false;
-
-
-        $datestart  = new Date($request["START_DATE"]);
-       $datereq = $request["EXPIRE_DATE"];
-        if($request["EXPIRE_DATE"] == ""){
-            $datereq = "9999-12-31 00:00:00.000";
-        }
-        $dateEnd =  new Date($datereq);
-        $today = new Date();
-        $data = array();
-        array_push($data,array(
-            'NEWS_CATE_ID' => $request["NEWS_CATE_ID"],
-            'NEWS_CATE_NAME' =>$request["NEWS_CATE_NAME"],
-            'NEWS_CATE_FLAG' => $request["NEWS_CATE_FLAG"],
-            'START_DATE' => $datestart,
-            'EXPIRE_DATE' => $dateEnd,
-            'MENU_GROUP_ID' => $request["MENU_GROUP_ID"],
-            'MENU_ID' => $request["MENU_ID"],
-            'CREATE_DATE' =>$today,
-            'CREATE_BY'=>"Admin"
-
-        ));
-
-
-        $chk = "SELECT COUNT(NEWS_CATE_ID) As total FROM TBL_NEWS_CATE WHERE NEWS_CATE_ID = ".$request["NEWS_CATE_ID"];
-        $all = DB::select(DB::raw($chk));
-        $total =  $all[0]->total;
-
         $rethtml = "";
 
 
-
-       if($total > 0){
-           $rethtml = "news_cate_id ที่ท่านเลือกมีอยู่ในระบบแล้ว";
-
-       }else{
-           $insert = DB::table('TBL_NEWS_CATE')->insert($data);
-
-           $ret = $insert;
-       }
+        $NEWS_CATE_ID =  $request->input("NEWS_CATE_ID");
+        $NEWS_TOPIC_ID = $request->input("NEWS_TOPIC_ID");
 
 
+        $FILE_NAME = $request->input("FILE_NAME");
+        $NEWS_TOPIC_FLAG = $request->input("NEWS_TOPIC_FLAG");
+        $START_DATE= $request->input("START_DATE");
+        $EXPIRE_DATE = $request->input("EXPIRE_DATE");
+        $NEWS_TOPIC_DETAIL = $request->input("NEWS_TOPIC_DETAIL");
+
+        $NEWS_TOPIC_KEYWORD = $request->input("NEWS_TOPIC_KEYWORD");
+
+
+        $chk = "SELECT COUNT(NEWS_TOPIC_ID) As total FROM TBL_NEWS_TOPIC WHERE NEWS_CATE_ID = ".$NEWS_CATE_ID . " AND NEWS_TOPIC_ID = ".$NEWS_TOPIC_ID;
+        $all = DB::select(DB::raw($chk));
+        $total =  $all[0]->total;
+
+
+        if($total > 0){
+
+            $rethtml = "news_cate_id ที่ท่านเลือกมีอยู่ในระบบแล้ว";
+
+        }else{
+            $thumbnail = $request->file('filethumbnail');
+
+            $importpdf =  $request->file('filesPDF');
+
+            $today = new Date();
+
+            $pathpdf =  getenv('CONTENT_PDF_PATH');
+            $pathThunb = getenv('THUMB_PATH');
+
+//        $file = $importpdf->getClientOriginalName();
+
+            $meapath =DB::table('TBL_CONTROL_CFG')->get();
+
+
+            $datestart = new Date('2000-1-1 00:00:00.000') ;
+            $dateEnd = new Date('9999-12-31 00:00:00.000') ;
+
+
+            if($START_DATE != ""){
+                $datestart = new Date($START_DATE);
+            }
+
+            if($EXPIRE_DATE != ""){
+                $dateEnd = new Date($EXPIRE_DATE);
+            }
+
+            $FILE_PATH = "NULL";
+            $THUMBNAIL = "NULL";
+            $MENU_GROUP_ID = "";
+            $MENU_ID = "";
+
+            $menucate= DB::table('TBL_NEWS_CATE')->where('NEWS_CATE_ID','=',$NEWS_CATE_ID)->get();
+
+             if($menucate){
+                 $MENU_GROUP_ID = $menucate[0]->MENU_GROUP_ID;
+                 $MENU_ID = $menucate[0]->MENU_ID;
+             }
+
+
+            //                Download PDF: multiple
+//
+//                15,16,3,4,5,6,9,10,11,12,13,14
+//
+//                Content View (Rich box) optional to download or show content  : multiple
+//                9,1,2
+//                Content Only: Only one
+//
+//                7,8
+
+            $filePDF = "";
+            $fileThumb= "";
+
+            if($importpdf != null){
+                $filePDF = $importpdf->getClientOriginalName();
+                $importpdf->move(public_path().$pathpdf , $filePDF);
+            }
+
+
+            if($thumbnail != null){
+                $fileThumb = $thumbnail->getClientOriginalName();
+                $thumbnail->move(public_path().$pathThunb , $fileThumb);
+            }
+
+
+
+            $WEB_NEWS_ROOT_PATH  = $meapath[0]->WEB_NEWS_ROOT_PATH;
+
+            $FILE_PATH = $WEB_NEWS_ROOT_PATH.$filePDF;
+            $THUMBNAIL = $WEB_NEWS_ROOT_PATH .$fileThumb;
+
+
+            if($NEWS_CATE_ID == 9 || $NEWS_CATE_ID == 1 || $NEWS_CATE_ID == 2|| $NEWS_CATE_ID == 7|| $NEWS_CATE_ID == 8){
+
+                if($importpdf == null){
+                    $FILE_PATH = "";
+                }else{
+                    $NEWS_TOPIC_DETAIL = "";
+                }
+
+
+                if($NEWS_CATE_ID == 9 || $NEWS_CATE_ID == 1 || $NEWS_CATE_ID == 2){
+
+
+
+                }else{
+                    //7,8
+                }
+
+            }else{
+
+                $NEWS_TOPIC_DETAIL = "";
+            }
+
+
+
+            $data = array('NEWS_CATE_ID' => $NEWS_CATE_ID,
+                'NEWS_TOPIC_ID' =>$NEWS_TOPIC_ID,
+                'FILE_NAME' => $FILE_NAME,
+                'NEWS_TOPIC_DETAIL' => "'" .$NEWS_TOPIC_DETAIL ."'",
+                'FILE_PATH' => $FILE_PATH,
+                'THUMBNAIL' =>$THUMBNAIL,
+                'NEWS_TOPIC_FLAG' => $NEWS_TOPIC_FLAG,
+                'START_DATE' => $datestart,
+                'EXPIRE_DATE' => $dateEnd,
+                'MENU_GROUP_ID' => $MENU_GROUP_ID,
+                'MENU_ID' => $MENU_ID,
+                'NEWS_TOPIC_KEYWORD' =>$NEWS_TOPIC_KEYWORD,
+                'CREATE_DATE' =>$today,
+                'CREATE_BY'=>"Admin");
+
+//            array_push($data,array(
+//
+//
+//            ));
+
+            $ret = DB::table('TBL_NEWS_TOPIC')->insert($data);
+        }
+
+
+
+
+        return response()->json(array('success' => $ret, 'html'=> $rethtml ));
 
 
 
 
 
-        return response()->json(array('success' => $ret, 'html'=>$rethtml));
-
-//        if($insert) {
-//            return redirect()->action('UserGroupController@userGroups');
-//        } else {
-//            return redirect()->action('UserGroupController@getAddUserGroup')->with('submit_errors', 'ไม่สามารถเพิ่มข้อมูลกลุ่มผู้ใช้ได้');
-//        }
 
     }
 
@@ -228,41 +345,171 @@ class C53_2Controller extends Controller
     public function postEdit(Request $request)
     {
         $ret = false;
+        $rethtml = "";
 
 
-        $datestart  = new Date($request["START_DATE"]);
-        $datereq = $request["EXPIRE_DATE"];
-        if($request["EXPIRE_DATE"] == ""){
-            $datereq = "9999-12-31 00:00:00.000";
-        }
-        $dateEnd =  new Date($datereq);
-        $today = new Date();
-        $data = array(
-            'NEWS_CATE_ID' => $request["NEWS_CATE_ID"],
-            'NEWS_CATE_NAME' =>$request["NEWS_CATE_NAME"],
-            'NEWS_CATE_FLAG' => $request["NEWS_CATE_FLAG"],
-            'START_DATE' => $datestart,
-            'EXPIRE_DATE' => $dateEnd,
-            'MENU_GROUP_ID' => $request["MENU_GROUP_ID"],
-            'MENU_ID' => $request["MENU_ID"],
-            'CREATE_DATE' =>$today,
-            'CREATE_BY'=>"Admin"
-
-        );
+        $NEWS_CATE_ID =  $request->input("NEWS_CATE_ID");
+        $NEWS_TOPIC_ID = $request->input("NEWS_TOPIC_ID");
 
 
+        $FILE_NAME = $request->input("FILE_NAME");
+        $NEWS_TOPIC_FLAG = $request->input("NEWS_TOPIC_FLAG");
+        $START_DATE= $request->input("START_DATE");
+        $EXPIRE_DATE = $request->input("EXPIRE_DATE");
+        $NEWS_TOPIC_DETAIL = $request->input("NEWS_TOPIC_DETAIL");
 
-        $update = DB::table('TBL_NEWS_CATE')->where('NEWS_CATE_ID',"=",$request["NEWS_CATE_ID"])->update($data);
+        $NEWS_TOPIC_KEYWORD = $request->input("NEWS_TOPIC_KEYWORD");
 
 
-        $ret = $update;
+//        $chk = "SELECT COUNT(NEWS_TOPIC_ID) As total FROM TBL_NEWS_TOPIC WHERE NEWS_CATE_ID = ".$NEWS_CATE_ID . " AND NEWS_TOPIC_ID = ".$NEWS_TOPIC_ID;
+//        $all = DB::select(DB::raw($chk));
+//        $total =  $all[0]->total;
+
+
+//        if($total > 0){
+//
+//            $rethtml = "news_cate_id ที่ท่านเลือกมีอยู่ในระบบแล้ว";
+//
+//        }else{
+            $thumbnail = $request->file('filethumbnail');
+
+            $importpdf =  $request->file('filesPDF');
+
+            $today = new Date();
+
+            $pathpdf =  getenv('CONTENT_PDF_PATH');
+            $pathThunb = getenv('THUMB_PATH');
+
+//        $file = $importpdf->getClientOriginalName();
+
+            $meapath =DB::table('TBL_CONTROL_CFG')->get();
+
+
+            $datestart = new Date('2000-1-1 00:00:00.000') ;
+            $dateEnd = new Date('9999-12-31 00:00:00.000') ;
+
+
+            if($START_DATE != ""){
+                $datestart = new Date($START_DATE);
+            }
+
+            if($EXPIRE_DATE != ""){
+                $dateEnd = new Date($EXPIRE_DATE);
+            }
+
+            $FILE_PATH = "NULL";
+            $THUMBNAIL = "NULL";
+            $MENU_GROUP_ID = "";
+            $MENU_ID = "";
+
+            $menucate= DB::table('TBL_NEWS_CATE')->where('NEWS_CATE_ID','=',$NEWS_CATE_ID)->get();
+
+            if($menucate){
+                $MENU_GROUP_ID = $menucate[0]->MENU_GROUP_ID;
+                $MENU_ID = $menucate[0]->MENU_ID;
+            }
+
+
+            //                Download PDF: multiple
+//
+//                15,16,3,4,5,6,9,10,11,12,13,14
+//
+//                Content View (Rich box) optional to download or show content  : multiple
+//                9,1,2
+//                Content Only: Only one
+//
+//                7,8
+
+            $filePDF = "";
+            $fileThumb= "";
+
+            if($importpdf != null){
+                $filePDF = $importpdf->getClientOriginalName();
+                $importpdf->move(public_path().$pathpdf , $filePDF);
+            }
+
+
+            if($thumbnail != null){
+                $fileThumb = $thumbnail->getClientOriginalName();
+                $thumbnail->move(public_path().$pathThunb , $fileThumb);
+            }
 
 
 
-        return response()->json(array('success' => $ret, 'html'=>'OK'));
+            $WEB_NEWS_ROOT_PATH  = $meapath[0]->WEB_NEWS_ROOT_PATH;
+
+            $FILE_PATH = $WEB_NEWS_ROOT_PATH.$filePDF;
+            $THUMBNAIL = $WEB_NEWS_ROOT_PATH .$fileThumb;
+
+
+            if($NEWS_CATE_ID == 9 || $NEWS_CATE_ID == 1 || $NEWS_CATE_ID == 2|| $NEWS_CATE_ID == 7|| $NEWS_CATE_ID == 8){
+
+                if($importpdf == null){
+                    $FILE_PATH = "";
+                }else{
+                    $NEWS_TOPIC_DETAIL = "";
+                }
+
+
+                if($NEWS_CATE_ID == 9 || $NEWS_CATE_ID == 1 || $NEWS_CATE_ID == 2){
+
+
+
+                }else{
+                    //7,8
+                }
+
+            }else{
+
+                $NEWS_TOPIC_DETAIL = "";
+            }
+
+
+
+            $data = array('NEWS_CATE_ID' => $NEWS_CATE_ID,
+                'NEWS_TOPIC_ID' =>$NEWS_TOPIC_ID,
+                'FILE_NAME' => $FILE_NAME,
+                'NEWS_TOPIC_DETAIL' => "'" .$NEWS_TOPIC_DETAIL ."'",
+                'FILE_PATH' => $FILE_PATH,
+                'THUMBNAIL' =>$THUMBNAIL,
+                'NEWS_TOPIC_FLAG' => $NEWS_TOPIC_FLAG,
+                'START_DATE' => $datestart,
+                'EXPIRE_DATE' => $dateEnd,
+                'MENU_GROUP_ID' => $MENU_GROUP_ID,
+                'MENU_ID' => $MENU_ID,
+                'NEWS_TOPIC_KEYWORD' =>$NEWS_TOPIC_KEYWORD,
+                'CREATE_DATE' =>$today,
+                'CREATE_BY'=>"Admin");
+
+//            array_push($data,array(
+//
+//
+//            ));
+            $ret = DB::table('TBL_NEWS_TOPIC')->where('NEWS_CATE_ID',"=",$NEWS_CATE_ID)->where('NEWS_TOPIC_ID','=',$NEWS_TOPIC_ID)->update($data);
+//        }
+
+
+
+
+        return response()->json(array('success' => $ret, 'html'=> $rethtml ));
+
+
 
 
     }
 
 
+
+    public function imageupload(Request $request){
+        $file = $request->file('file');
+
+
+        $d1 = new Date();
+        $t1 = $d1->getTimestamp();
+        $name = $t1. ".jpg";
+
+        $request->file('file')->move(public_path().getenv('IMAGE_PATH') , $name);
+
+        return response()->json(array('success' => true, 'html'=>'ok', 'url'=>getenv('IMAGE_PATH') .$name));
+    }
 }

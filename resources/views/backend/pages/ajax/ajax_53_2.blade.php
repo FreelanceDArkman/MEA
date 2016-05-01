@@ -23,7 +23,7 @@
     @if($data)
         @foreach($data as $item)
 
-            @if($item->NEWS_CATE_FLAG == 1)
+            @if($item->NEWS_TOPIC_FLAG == 1)
             <tr style="background-color: #f1f1f1">
                 @else
                 <tr>

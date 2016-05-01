@@ -194,7 +194,7 @@ $arrSidebar =getSideBar($data);
 
                         type: 'post', // or post?
                         dataType: 'json',
-                        url: '/admin/newstopic/delete',
+                        url: '/admin/news/delete',
                         data: jsondata,
 
                         success: function(data) {
@@ -208,7 +208,7 @@ $arrSidebar =getSideBar($data);
                                     timeout: 4000
                                 });
 
-                                window.location.href = '/admin/newstopic';
+                                window.location.href = '/admin/news';
                             }
 
 
@@ -241,7 +241,7 @@ $arrSidebar =getSideBar($data);
                 $(".item_checked").each(function(){
 
                     if($(this).is(":checked")){
-                        checked = checked + $(this).val() + ",";
+                        checked = checked + $(this).val() + ":";
                     }
 
 
@@ -252,7 +252,7 @@ $arrSidebar =getSideBar($data);
 
                     type: 'post', // or post?
                     dataType: 'json',
-                    url: '/admin/newstopic/delete',
+                    url: '/admin/news/delete',
                     data: jsondata,
 
                     success: function(data) {
@@ -266,7 +266,7 @@ $arrSidebar =getSideBar($data);
                                 timeout: 4000
                             });
 
-                            window.location.href = '/admin/newstopic';
+                            window.location.href = '/admin/news';
                         }
 
 
@@ -319,7 +319,7 @@ $arrSidebar =getSideBar($data);
 
                 });
             }else {
-                window.location.href = "/admin/newstopic/edit/" + $(".item_checked:checked").val();
+                window.location.href = "/admin/news/edit/" + $(".item_checked:checked").val();
             }
 
 

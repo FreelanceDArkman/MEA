@@ -168,7 +168,9 @@ class UserManageBenefitcontroller extends Controller
 
                 ));
 
-                $value->move(storage_path().getenv('BENEFICIARY_PDF_PATH') , $file_name);
+                //storage_path
+                //public_path
+                $value->move(public_path().getenv('BENEFICIARY_PDF_PATH') , $file_name);
             }
 
         }

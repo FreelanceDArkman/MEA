@@ -228,12 +228,12 @@ function getSideBar($menulsit){
                     "url" => "/admin/news",
                     "sub_mini" => array(
                         "add" => array(
-                            "title"=>"สร้างแผนการลงทุน",
+                            "title"=>"สร้างหัวข้อข่าว",
                             "url" => "/admin/news/add"
 
                         ),
                         "edit" => array(
-                            "title"=>"แก้ไขแผนการลงทุน",
+                            "title"=>"แก้ไขหัวข้อข่าว",
                             "url" => "/admin/news/edit"
 
                         )
