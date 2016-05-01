@@ -537,7 +537,7 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
         });
 
 
-        Route::group(['prefix' => 'topics'], function() {
+        Route::group(['prefix' => 'news'], function() {
 
             Route::get('/', 'C53_2Controller@getindex');
 

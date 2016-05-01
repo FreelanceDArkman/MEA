@@ -1,6 +1,8 @@
 @extends('backend.layouts.default')
 @section('content')
 
+
+    {{ new Date() }}
     <div id="content">
 
         <div class="row">

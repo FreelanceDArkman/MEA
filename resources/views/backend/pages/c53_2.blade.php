@@ -19,7 +19,7 @@ $arrSidebar =getSideBar($data);
             <ul id="sparks" class="">
                 <li class="sparks-info">
 
-                    <a href="{{action('C53_1Controller@getAdd')}}" class="btn bg-color-green txt-color-white"><i class="fa fa-plus"></i> สร้างหมวดหมู่ข่าว</a>
+                    <a href="{{action('C53_2Controller@getAdd')}}" class="btn bg-color-green txt-color-white"><i class="fa fa-plus"></i> สร้างหัวข้อข่าว</a>
                 </li>
                 <li class="sparks-info">
                     <a href="javascript:void(0);" id="mea_edit"  class="btn bg-color-blueDark txt-color-white"><i class="fa fa-gear fa-lg"></i> แก้ไข</a>
@@ -36,6 +36,20 @@ $arrSidebar =getSideBar($data);
     <!-- widget grid -->
     <section id="widget-grid" class="">
 
+        <div class="row">
+            <div class="col-xs-12">
+                <section>
+                    <label class="label" style="color:#333;font-size: 20px">เลือกหมวดหมู่</label>
+                    <label class="select">
+                        <select class="form-control" id="news_topice_select">
+                            <option value="0">ทั้งหมด</option>
+                           @foreach($menucate as $item)
+                                <option value="{{$item->NEWS_CATE_ID}}">{{$item->NEWS_CATE_NAME}}</option>
+                               @endforeach
+                        </select> <i></i> </label>
+                </section>
+            </div>
+        </div>
         <!-- row -->
         <div class="row">
 
@@ -60,35 +74,64 @@ $arrSidebar =getSideBar($data);
 						data-widget-sortable="false"
 
 						-->
-                    <header>
+                    <header role="heading">
+                        <ul class="nav nav-tabs pull-left in">
+
+                            <li class="active">
+
+                                <a data-toggle="tab" href="#hr1" class="data-tab" data-val="0"> <i class="fa fa-lg fa-arrow-circle-o-down"></i> <span class="hidden-mobile hidden-tablet"> Active </span> </a>
+
+                            </li>
+
+                            <li>
+                                <a data-toggle="tab" href="#hr2" class="data-tab" data-val="1"> <i class="fa fa-lg fa-arrow-circle-o-up"></i> <span class="hidden-mobile hidden-tablet"> Inactive  </span> </a>
+                            </li>
+
+                        </ul>
+                        <span class="jarviswidget-loader"><i class="fa fa-refresh fa-spin"></i></span></header>
 
 
-                    </header>
+                    <div role="content">
 
-                    <!-- widget div-->
-                    <div>
-
-                        <!-- widget edit box -->
-                        <div class="jarviswidget-editbox">
-                            <!-- This area used as dropdown edit box -->
-
-                        </div>
-                        <!-- end widget edit box -->
 
                         <!-- widget content -->
-                        <div class="widget-body no-padding">
+                        <div class="widget-body">
 
-                            <div class="table-responsive">
-                            <div class="result" style="width: 100%; padding: 10px;">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="hr1">
+
+                                    <div class="table-responsive">
+                                        <div class="result" style="width: 100%; padding: 10px;">
 
 
-                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+                                <div class="tab-pane" id="hr2">
+
+
+                                    <div class="table-responsive">
+                                        <div class="result" style="width: 100%; padding: 10px;">
+
+
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                        </div>
+                                </div>
+                            </div>
+                    </div>
                         <!-- end widget content -->
 
-                    </div>
+
+
+                    <!-- widget div-->
+
                     <!-- end widget div -->
 
                 </div>
@@ -124,6 +167,7 @@ $arrSidebar =getSideBar($data);
 
 
     function Render(data){
+
 //        $("#all_data").hide();
         $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
 
@@ -284,20 +328,86 @@ $arrSidebar =getSideBar($data);
 
 
         })
+
+
+        //page click
+        $("#page_click_search li a").on('click',PageRender);
     }
 
 
+    //function Pageclick
+    function PageRender(){
+        var p = $(this).attr('data-page');
+        var page_size = 10;
+        var CurPage = $('#currentpage_search').val();
+        $("#all_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+
+        if(p == "pre"){
+            p = parseInt(CurPage) - 1;
+        }
+
+        if(p == "next"){
+            p = parseInt(CurPage) + 1;
+        }
+        $('#currentpage_all').val(p);
+
+        var NEWS_CATE_ID = $("#news_topice_select").val();
+
+
+
+        var NEWS_TOPIC_FLAG = $("#hd_NEWS_TOPIC_FLAG").val();
+
+
+        var jsondata = {pagesize : page_size,PageNumber:p, NEWS_CATE_ID: NEWS_CATE_ID,NEWS_TOPIC_FLAG:NEWS_TOPIC_FLAG};
+
+        MeaAjax(jsondata,"news/getall",Render);
+    };
 
     // DO NOT REMOVE : GLOBAL FUNCTIONS!
 
     $(document).ready(function() {
 
-        var jsondata = {pagesize : 20,PageNumber:1};
+
+        //add current Pageing
+        $('html').append('<input type="hidden" value="1" id="currentpage_search" />');
+        $('html').append('<input type="hidden" value="0" id="hd_NEWS_TOPIC_FLAG" />');
+        var NEWS_CATE_ID = $("#news_topice_select").val();
+        var NEWS_TOPIC_FLAG = 0;
+        var jsondata = {pagesize : 10,PageNumber:1, NEWS_CATE_ID: NEWS_CATE_ID,NEWS_TOPIC_FLAG:NEWS_TOPIC_FLAG};
 
         $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
 
-        MeaAjax(jsondata,"newstopic/getall",Render);
+        MeaAjax(jsondata,"news/getall",Render);
 
+
+
+        $(".data-tab").on('click',function(){
+            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+//            $(".result").html("");
+            var val = $(this).attr("data-val");
+//            alert(val);
+            var NEWS_CATE_ID = $("#news_topice_select").val();
+            var NEWS_TOPIC_FLAG = val;
+
+            $("#hd_NEWS_TOPIC_FLAG").val(val);
+            var jsondata = {pagesize : 10,PageNumber:1, NEWS_CATE_ID: NEWS_CATE_ID,NEWS_TOPIC_FLAG:NEWS_TOPIC_FLAG};
+            MeaAjax(jsondata,"news/getall",Render);
+
+        });
+
+
+        $("#news_topice_select").on('change',function(){
+            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+//            $(".result").html("");
+            var val = $(this).val();
+//            alert(val);
+            var NEWS_CATE_ID = val;
+//            var NEWS_TOPIC_FLAG = val;
+
+            var NEWS_TOPIC_FLAG = $("#hd_NEWS_TOPIC_FLAG").val();
+            var jsondata = {pagesize : 10,PageNumber:1, NEWS_CATE_ID: NEWS_CATE_ID,NEWS_TOPIC_FLAG:NEWS_TOPIC_FLAG};
+            MeaAjax(jsondata,"news/getall",Render);
+        });
 
 
     })

@@ -13,10 +13,14 @@
 //exec('c:\md5\Readme.txt', $output);
 //echo  system('c:\md5\Readme.txt');
 //echo exec("md5.bat");
+//use Jenssegers\Date\Date;
+$day = new Date();
+$today = date("F j, Y, g:i a");
+echo  $day;
 
 //var_dump($output);
-$output = shell_exec("/backend/md5/md5.bat -e ss 2>&1");
-//$output = shell_exec("./backend/md5/md5.sh -e ss 2>&1");
-////echo passthru("md5.bat");
-var_dump($output);
+//$output = shell_exec("/backend/md5/md5.bat -e ss 2>&1");
+////$output = shell_exec("./backend/md5/md5.sh -e ss 2>&1");
+//////echo passthru("md5.bat");
+//var_dump($output);
 ?>

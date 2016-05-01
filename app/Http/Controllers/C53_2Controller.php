@@ -60,22 +60,27 @@ class C53_2Controller extends Controller
         return view('backend.pages.53_1_edit_page')->with(['editdata'=>$editdata,'menugroup'=>$menugroup,'menulist'=>$menulist]);
     }
 
+
     public  function Ajax_Index(Request $request){
 
         $PageSize = $request->input('pagesize');
         $PageNumber = $request->input('PageNumber');
+        $NEWS_CATE_ID = $request->input('NEWS_CATE_ID');
+        $NEWS_TOPIC_FLAG = $request->input('NEWS_TOPIC_FLAG');
 
         $ArrParam["pagesize"] =$PageSize;
         $ArrParam["PageNumber"] =$PageNumber;
+        $ArrParam["NEWS_CATE_ID"] =$NEWS_CATE_ID;
+        $ArrParam["NEWS_TOPIC_FLAG"] =$NEWS_TOPIC_FLAG;
 
-        $Datacount = $this->getCountAll();
+        $Datacount = $this->getCountAll($ArrParam);
         $Data = $this->getData($ArrParam);
 
         $totals = count($Datacount);
 
         $htmlPaginate =Paginatre_gen($totals,$PageSize,'page_click_search',$PageNumber);
 
-        $returnHTML = view('backend.pages.ajax.ajax_53_1')->with([
+        $returnHTML = view('backend.pages.ajax.ajax_53_2')->with([
             'htmlPaginate'=> $htmlPaginate,
             'data'=>$Data
 
@@ -84,38 +89,36 @@ class C53_2Controller extends Controller
         return response()->json(array('success' => true, 'html'=>$returnHTML));
     }
 
-    public function Ajax_menulist(Request $request){
 
-        $menulist = DB::table('TBL_MENU_LIST')->where("MENU_GROUP_ID","=",$request->input('MENU_GROUP_ID'))->get();
+    public  function  getCountAll($ArrParam){
+        $NEWS_CATE_ID = $ArrParam["NEWS_CATE_ID"];
+        $NEWS_TOPIC_FLAG = $ArrParam["NEWS_TOPIC_FLAG"];
 
-        $data = array();
-
-        if($menulist){
-
-            foreach($menulist as $index => $item){
-                $data[$index] = array(
-                    'MENU_ID'=> $item->MENU_ID,
-                    'MENU_NAME'=>$item->MENU_NAME
-
-                );
-            }
-
+        if($NEWS_CATE_ID > 0){
+            return DB::table('TBL_NEWS_TOPIC')->where("NEWS_CATE_ID","=",$NEWS_CATE_ID)->where("NEWS_TOPIC_FLAG","=",$NEWS_TOPIC_FLAG)->get();
+        }
+        else{
+            return DB::table('TBL_NEWS_TOPIC')->where("NEWS_TOPIC_FLAG","=",$NEWS_TOPIC_FLAG)->get();
         }
 
-
-        return response()->json(array('success' => true, 'html'=>$data));
-    }
-
-    public  function  getCountAll(){
-
-        return DB::table('TBL_NEWS_CATE')->orderby("NEWS_CATE_FLAG")->get();
     }
     public  function  getData($ArrParam){
 
         $PageSize = $ArrParam['pagesize'];
         $PageNumber = $ArrParam['PageNumber'];
+        $NEWS_CATE_ID = $ArrParam["NEWS_CATE_ID"];
+        $NEWS_TOPIC_FLAG = $ArrParam["NEWS_TOPIC_FLAG"];
 
-        $query =  "SELECT * FROM TBL_NEWS_CATE ORDER BY NEWS_CATE_FLAG,NEWS_CATE_ID  OFFSET ".$PageSize." * (".$PageNumber." - 1) ROWS FETCH NEXT ".$PageSize." ROWS ONLY OPTION (RECOMPILE)";
+
+
+        $query = "";
+        if($NEWS_CATE_ID > 0){
+            $query =  "SELECT * FROM TBL_NEWS_TOPIC nt INNER JOIN TBL_NEWS_CATE nc ON nc.NEWS_CATE_ID=nt.NEWS_CATE_ID WHERE nt.NEWS_CATE_ID = '".$NEWS_CATE_ID."' AND nt.NEWS_TOPIC_FLAG = '".$NEWS_TOPIC_FLAG."'  ORDER BY nt.CREATE_DATE DESC  OFFSET ".$PageSize." * (".$PageNumber." - 1) ROWS FETCH NEXT ".$PageSize." ROWS ONLY OPTION (RECOMPILE)";
+        }else{
+            $query =  "SELECT * FROM TBL_NEWS_TOPIC nt INNER JOIN TBL_NEWS_CATE nc ON nc.NEWS_CATE_ID=nt.NEWS_CATE_ID  WHERE  nt.NEWS_TOPIC_FLAG = '".$NEWS_TOPIC_FLAG."' ORDER BY nt.CREATE_DATE DESC  OFFSET ".$PageSize." * (".$PageNumber." - 1) ROWS FETCH NEXT ".$PageSize." ROWS ONLY OPTION (RECOMPILE)";
+        }
+
+
         return DB::select(DB::raw($query));
     }
 
@@ -149,16 +152,7 @@ class C53_2Controller extends Controller
             return response()->json(["ret" => "0"]);
         }
 
-            //return redirect()->action('UserGroupController@userGroups');
 
-//        if($request->ajax())
-//        {
-//            $user_group_exist = UserGroup::UserGroupExist($request->input('group_id'))->first();
-//            if(!$user_group_exist) return response()->json(["errors" => "ไม่สามารถลบข้อมูลกลุ่มผู้ใช้ได้"]);
-//
-//            else return response()->json(["errors" => "ไม่สามารถลบข้อมูลกลุ่มผู้ใช้ได้"]);
-//        }
-//        return response()->json(["errors" => "ไม่สามารถลบข้อมูลกลุ่มผู้ใช้ได้"]);
     }
 
 
