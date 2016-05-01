@@ -477,9 +477,8 @@ class C53_2Controller extends Controller
                 'EXPIRE_DATE' => $dateEnd,
                 'MENU_GROUP_ID' => $MENU_GROUP_ID,
                 'MENU_ID' => $MENU_ID,
-                'NEWS_TOPIC_KEYWORD' =>$NEWS_TOPIC_KEYWORD,
-                'CREATE_DATE' =>$today,
-                'CREATE_BY'=>"Admin");
+                'NEWS_TOPIC_KEYWORD' =>$NEWS_TOPIC_KEYWORD
+            );
 
 //            array_push($data,array(
 //

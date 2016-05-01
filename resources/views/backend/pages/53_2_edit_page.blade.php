@@ -234,7 +234,7 @@
                                             <span style="font-size: 18px">วันที่เริ่มต้น</span>
                                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
 
-                                                <input type="text" name="START_DATE"  value="{{get_date_sql($Topicdata->EXPIRE_DATE)}}" class="mea_date_picker" id="START_DATE" placeholder="วันที่เริ่มต้น"  >
+                                                <input type="text" name="START_DATE"  value="{{get_date_notime($Topicdata->START_DATE)}}" class="mea_date_picker" id="START_DATE" placeholder="วันที่เริ่มต้น"  >
                                                 <input type="hidden" id="hd_START_DATE" value="{{get_date_sql($Topicdata->START_DATE)}}">
                                             </label>
                                         </section>
@@ -242,7 +242,7 @@
                                         <section class="col col-6">
                                             <span style="font-size: 18px">วันที่สิ้นสุด</span>
                                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                                <input type="text" name="EXPIRE_DATE"  value="{{get_date_sql($Topicdata->EXPIRE_DATE)}}" class="mea_date_picker" id="EXPIRE_DATE" placeholder="วันที่สิ้นสุด" >
+                                                <input type="text" name="EXPIRE_DATE"  value="{{get_date_notime($Topicdata->EXPIRE_DATE)}}" class="mea_date_picker" id="EXPIRE_DATE" placeholder="วันที่สิ้นสุด" >
                                                 <input type="hidden" id="hd_EXPIRE_DATE" value="{{get_date_sql($Topicdata->EXPIRE_DATE)}}">
 
                                                 {{--class="datepicker" data-dateformat='dd/mm/yy'--}}
@@ -407,7 +407,7 @@
                                     var NEWS_TOPIC_ID = $("#NEWS_TOPIC_ID").val();
                                     var FILE_NAME= $("#FILE_NAME").val();
 
-                                    var NEWS_TOPIC_FLAG = $(".NEWS_TOPIC_FLAG").val();
+                                    var NEWS_TOPIC_FLAG =  $('input[name=NEWS_TOPIC_FLAG]:checked').val();
                                     var START_DATE= $("#hd_START_DATE").val();
                                     var EXPIRE_DATE= $("#hd_EXPIRE_DATE").val();
 

@@ -245,6 +245,54 @@ function getSideBar($menulsit){
         );
     }
 
+    if(menu_access(1,54) || menu_access(2,54)){
+        $page_nav["54"] = array(
+            "group_id" => 54,
+            "title" => getGoupName($data,54),
+            "icon" => "fa-home",
+
+            "sub" => array(
+                "1" => array(
+                    "menu_id" => 1,
+                    "title" => getMenuName($data,54,1),
+                    "url" => "/admin/faqcate",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"สร้างหมวดหมู่ข่าว",
+                            "url" => "/admin/faqcate/add"
+
+                        ),
+                        "edit" => array(
+                            "title"=>"แกไข้หมวดหมู่ข่าว",
+                            "url" => "/admin/faqcate/edit"
+
+                        )
+                    )
+
+                ),
+                "2" => array(
+                    "menu_id" => 2,
+                    "title" => getMenuName($data,54,2),
+                    "url" => "/admin/faqtopic",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"สร้างหัวข้อข่าว",
+                            "url" => "/admin/faqtopic/add"
+
+                        ),
+                        "edit" => array(
+                            "title"=>"แก้ไขหัวข้อข่าว",
+                            "url" => "/admin/faqtopic/edit"
+
+                        )
+                    )
+
+                )
+
+            )
+        );
+    }
+
 
     if(menu_access(1,58) || menu_access(2,58)|| menu_access(3,58)|| menu_access(4,58)|| menu_access(5,58)|| menu_access(6,58)|| menu_access(7,58)|| menu_access(8,58)|| menu_access(9,58)|| menu_access(10,58)|| menu_access(11,58)|| menu_access(12,58)|| menu_access(13,58)){
         $page_nav["58"] = array(
