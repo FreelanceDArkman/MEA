@@ -596,6 +596,26 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
         });
 
 
+        Route::group(['prefix' => 'contact'], function() {
+
+            Route::get('/', 'C55_1Controller@getindex');
+            Route::post('add', 'C55_1Controller@postAdd');
+
+        });
+
+        Route::group(['prefix' => 'cmail'], function() {
+
+            Route::get('/', 'C55_2Controller@getindex');
+            Route::post('add', 'C55_2Controller@postAdd');
+            Route::post('getall', 'C55_2Controller@Ajax_Index');
+
+            Route::get('forward/{id}', 'C55_2Controller@getforward')->where('id', '[0-9,]+');
+            Route::get('reply/{id}', 'C55_2Controller@getreply')->where('id', '[0-9,]+');
+
+            Route::post('reply', 'C55_2Controller@SendReply');
+            Route::post('forward', 'C55_2Controller@SendForward');
+        });
+
 
 //        Report Start
 

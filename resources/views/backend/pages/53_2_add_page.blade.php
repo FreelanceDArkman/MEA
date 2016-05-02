@@ -211,15 +211,13 @@
 
 
                                         <section class="col col-6">
-                                            <span style="font-size: 18px">วันที่เริ่มต้น</span>
                                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
-
+                                                <span style="font-size: 18px">รหัสหัวข้อข่าว</span>
                                                 <input type="text" name="START_DATE"  class="mea_date_picker" id="START_DATE" placeholder="วันที่เริ่มต้น"  >
                                             </label>
                                         </section>
 
                                         <section class="col col-6">
-                                            <span style="font-size: 18px">วันที่สิ้นสุด</span>
                                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                                 <input type="text" name="EXPIRE_DATE"  class="mea_date_picker" id="EXPIRE_DATE" placeholder="วันที่สิ้นสุด" >
 

@@ -293,6 +293,43 @@ function getSideBar($menulsit){
         );
     }
 
+    if(menu_access(1,55) || menu_access(2,55)){
+        $page_nav["55"] = array(
+            "group_id" => 55,
+            "title" => getGoupName($data,55),
+            "icon" => "fa-home",
+
+            "sub" => array(
+                "1" => array(
+                    "menu_id" => 1,
+                    "title" => getMenuName($data,55,1),
+                    "url" => "/admin/contact"
+
+
+                ),
+                "2" => array(
+                    "menu_id" => 2,
+                    "title" => getMenuName($data,55,2),
+                    "url" => "/admin/cmail",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"ตอบกลับ",
+                            "url" => "/admin/cmail/forward"
+
+                        ),
+                        "edit" => array(
+                            "title"=>"ส่งต่อ",
+                            "url" => "/admin/cmail/reply"
+
+                        )
+                    )
+
+                )
+
+            )
+        );
+    }
+
 
     if(menu_access(1,58) || menu_access(2,58)|| menu_access(3,58)|| menu_access(4,58)|| menu_access(5,58)|| menu_access(6,58)|| menu_access(7,58)|| menu_access(8,58)|| menu_access(9,58)|| menu_access(10,58)|| menu_access(11,58)|| menu_access(12,58)|| menu_access(13,58)){
         $page_nav["58"] = array(
