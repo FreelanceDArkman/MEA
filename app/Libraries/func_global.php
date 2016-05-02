@@ -71,7 +71,7 @@ function getSideBar($menulsit){
         $page_nav["50"] = array(
             "group_id" => 50,
             "title" => getGoupName($data,50),
-            "icon" => "fa-home",
+            "icon" => "fa-user",
 
             "sub" => array(
                 "1" => array(
@@ -119,7 +119,7 @@ function getSideBar($menulsit){
         $page_nav["51"] = array(
             "group_id" => 51,
             "title" => getGoupName($data,51),
-            "icon" => "fa-home",
+            "icon" => "fa-group",
 
             "sub" => array(
                 "1" => array(
@@ -172,7 +172,7 @@ function getSideBar($menulsit){
         $page_nav["52"] = array(
             "group_id" => 52,
             "title" => getGoupName($data,52),
-            "icon" => "fa-home",
+            "icon" => "fa-gavel",
 
             "sub" => array(
                 "1" => array(
@@ -201,7 +201,7 @@ function getSideBar($menulsit){
         $page_nav["53"] = array(
             "group_id" => 53,
             "title" => getGoupName($data,53),
-            "icon" => "fa-home",
+            "icon" => "fa-bullhorn",
 
             "sub" => array(
                 "1" => array(
@@ -249,7 +249,7 @@ function getSideBar($menulsit){
         $page_nav["54"] = array(
             "group_id" => 54,
             "title" => getGoupName($data,54),
-            "icon" => "fa-home",
+            "icon" => "fa-comments-o",
 
             "sub" => array(
                 "1" => array(
@@ -297,7 +297,7 @@ function getSideBar($menulsit){
         $page_nav["55"] = array(
             "group_id" => 55,
             "title" => getGoupName($data,55),
-            "icon" => "fa-home",
+            "icon" => "fa-map-marker",
 
             "sub" => array(
                 "1" => array(
@@ -330,12 +330,64 @@ function getSideBar($menulsit){
         );
     }
 
+    if(menu_access(1,56)){
+        $page_nav["56"] = array(
+            "group_id" => 56,
+            "title" => getGoupName($data,56),
+            "icon" => "fa-signal",
+
+            "sub" => array(
+                "1" => array(
+                    "menu_id" => 1,
+                    "title" => getMenuName($data,56,1),
+                    "url" => "/admin/risk",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"สร้างแบบประเมินความเสี่ยง",
+                            "url" => "/admin/risk/add"
+
+                        ),
+                        "edit" => array(
+                            "title"=>"แก้ไขแบบประเมินความเสี่ยง",
+                            "url" => "/admin/risk/edit"
+
+                        )
+                    )
+
+
+                )
+
+
+            )
+        );
+    }
+
+    if(menu_access(1,57)){
+        $page_nav["57"] = array(
+            "group_id" => 57,
+            "title" => getGoupName($data,57),
+            "icon" => "fa-trophy",
+
+            "sub" => array(
+                "1" => array(
+                    "menu_id" => 1,
+                    "title" => getMenuName($data,57,1),
+                    "url" => "/admin/nav"
+
+
+                )
+
+
+            )
+        );
+    }
+
 
     if(menu_access(1,58) || menu_access(2,58)|| menu_access(3,58)|| menu_access(4,58)|| menu_access(5,58)|| menu_access(6,58)|| menu_access(7,58)|| menu_access(8,58)|| menu_access(9,58)|| menu_access(10,58)|| menu_access(11,58)|| menu_access(12,58)|| menu_access(13,58)){
         $page_nav["58"] = array(
             "group_id" => 58,
             "title" => getGoupName($data,58),
-            "icon" => "fa-home",
+            "icon" => "fa-table",
 
             "sub" => array(
                 "1" => array(
