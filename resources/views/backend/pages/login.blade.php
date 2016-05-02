@@ -13,14 +13,15 @@
 
         </div>
 
+
     @endif
         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm login-bg">
             <h1 class="txt-color-red login-header-big">มุ่งสู่องค์สมถนะสูง</h1>
             <div class="hero">
 
                 <div class="pull-left login-desc-box-l">
-                    <h4 class="paragraph-header">MOVING TOWARDS A HIGH <br/>
-                        PERFORMANCE ORGANIZATION</h4>
+                    <h4 class="paragraph-header">เป็นองค์กรชั้นนำ <br/>
+                        ด้านธุรกิจพลังงานในระดับสากล</h4>
                     {{--<div class="login-app-icons">--}}
                         {{--<a href="javascript:void(0);" class="btn btn-danger btn-sm">Frontend Template</a>--}}
                         {{--<a href="javascript:void(0);" class="btn btn-danger btn-sm">Find out more</a>--}}
