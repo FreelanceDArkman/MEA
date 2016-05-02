@@ -473,7 +473,47 @@ function getSideBar($menulsit){
         );
     }
 
+    if(menu_access(1,59) || menu_access(4,59) || menu_access(3,59)){
+        $page_nav["59"] = array(
+            "group_id" => 59,
+            "title" => getGoupName($data,59),
+            "icon" => "fa-gear",
 
+            "sub" => array(
+                "1" => array(
+                    "menu_id" => 1,
+                    "title" => getMenuName($data,59,1),
+                    "url" => "/admin/nav"
+
+
+                )
+
+
+            ),
+            "sub" => array(
+                "3" => array(
+                    "menu_id" => 3,
+                    "title" => getMenuName($data,59,3),
+                    "url" => "/admin/nav"
+
+
+                )
+
+
+            ),
+            "sub" => array(
+                "3" => array(
+                    "menu_id" => 4,
+                    "title" => getMenuName($data,59,4),
+                    "url" => "/admin/nav"
+
+
+                )
+
+
+            )
+        );
+    }
 
 
 
