@@ -88,14 +88,20 @@ class UserManageExtendController extends Controller
 //                $rest = substr("abcdef", -2);    // returns "ef"
 //                $rest = substr("abcdef", -3, 1);
 
+
+
                 $im_date_start = $value["contribution_start_date"];
                 $ret_data_start = str_replace("'","",$im_date_start);
 
-                $im_date_end = $value["contribution_rate_old"];
+
+
+                $im_date_end = $value["contribution_end_date"];
                 $ret_data_end = str_replace("'","",$im_date_end);
 
-                $im_date_modify = $value["contribution_rate_new"];
+                $im_date_modify = $value["contribution_modify_date"];
                 $ret_data_modify = str_replace("'","",$im_date_modify);
+
+//                var_dump($ret_data_start);
 
 //                var_dump($ret_data_start);
 
