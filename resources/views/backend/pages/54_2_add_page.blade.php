@@ -58,9 +58,22 @@
                         {{--action="{{action('UserController@postAddUser') }}"--}}
                         <form id="smart-form-register" action="" style="margin-bottom: 20px"  >
                             {!! csrf_field() !!}
-                            {{--<input type="hidden" name="_token" value="{!! csrf_token() !!}">--}}
+                            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                             {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
-
+                            <div class="smart-form">
+                                <fieldset>
+                                    <section>
+                                        <label class="input">
+                                            <span style="font-size: 24px">เลือกหมวดหมู่ถาม-ตอบ</span>
+                                                <select class="form-control" id="NEWS_CATE_ID_select" name="NEWS_CATE_ID_select">
+                                                    @foreach($menucate as $item)
+                                                        <option value="{{$item->FAQ_CATE_ID}}">{{$item->FAQ_CATE_NAME}}</option>
+                                                     @endforeach
+                                                </select>
+                                        </label></section>
+                                </fieldset>
+                                
+                            </div>
 
                             <div class="smart-form">
 
@@ -70,21 +83,38 @@
                                     <section>
 
                                         <label class="input">
-                                            <span style="font-size: 18px">รหัสหมวดหมู่</span>
-                                            <input type="text" id="FAQ_CATE_ID" name="FAQ_CATE_ID" placeholder="รหัสหมวดหมู่">
+                                            <span style="font-size: 18px">รหัสคำถาม</span>
+                                            <input type="text" id="FAQ_QUESTION_ID" name="FAQ_QUESTION_ID" placeholder="รหัสหัวข้อข่าว">
                                         </label>
                                     </section>
 
                                     <section>
                                         <label class="input">
-                                            <span style="font-size: 18px">ชื่อหมวดหมู่</span>
-                                            <input type="text" id="FAQ_CATE_NAME" name="FAQ_CATE_NAME" placeholder="ชื่อหมวดหมู่">
+                                            <span style="font-size: 18px">รายละเอียดคำถาม</span>
+                                            <textarea class="form-control"  rows="10" id="FAQ_QUESTION_DETAIL" name="FAQ_QUESTION_DETAIL" ></textarea>
+                                            {{--<input type="text" id="FILE_NAME" name="FILE_NAME" placeholder="ชื่อหัวข้อข่าว">--}}
+                                        </label>
+                                    </section>
+                                </fieldset>
+
+                                <fieldset>
+                                    <section>
+
+                                        <label class="input">
+                                            <span style="font-size: 18px">รหัสคำตอบ</span>
+                                            <input type="text" id="FAQ_ANSWER_ID" name="FAQ_ANSWER_ID" placeholder="รหัสหัวข้อข่าว">
+                                        </label>
+                                    </section>
+
+                                    <section>
+                                        <label class="input">
+                                            <span style="font-size: 18px">รายละเอียดคำตอบ</span>
+                                            <textarea class="form-control"  rows="10" id="FAQ_ANSWER_DETAIL" name="FAQ_ANSWER_DETAIL" ></textarea>
                                         </label>
                                     </section>
                                 </fieldset>
 
                             </div>
-
 
 
 
@@ -107,10 +137,10 @@
                                     <section style="margin-top: 15px;margin-left: 20px;">
                                         <div class="inline-group">
                                             <label class="radio">
-                                                <input type="radio" class="FAQ_CATE_FLAG" name="FAQ_CATE_FLAG" checked="" value="0">
+                                                <input type="radio" class="FAQ_TOPIC_FLAG" name="FAQ_TOPIC_FLAG" checked="" value="0">
                                                 <i></i>เปิด</label>
                                             <label class="radio">
-                                                <input type="radio" class="FAQ_CATE_FLAG" name="FAQ_CATE_FLAG" value="1">
+                                                <input type="radio" class="FAQ_TOPIC_FLAG" name="FAQ_TOPIC_FLAG" value="1">
                                                 <i></i>ปิด</label>
 
                                         </div>
@@ -125,14 +155,27 @@
                                 <fieldset>
 
                                         <section >
-                                            <span style="font-size: 20px;color: #3276b1;">รูปแบบ: Keyword1|Keyword2|Keyword3|Keyword4 <br/>ตัวอย่างเช่น
+                                            <span style="font-size: 20px">คีย์เวิร์ดการค้นหา (คําถาม)</span><br/>
+                                            <span style="font-size: 16px;color: #3276b1;">รูปแบบ: Keyword1|Keyword2|Keyword3|Keyword4 <br/>ตัวอย่างเช่น
                                             <label style="color: darkred ;font-weight: bold">ข่าว|ประชาสัมพันธ์|กองทุน|ลงทุน|ความรู้ </label>  </span>
                                             <label class="input">
-
-
-                                                <input type="text" id="FAQ_CATE_KEYWORD" name="FAQ_CATE_KEYWORD" placeholder="คีย์เวิร์ดในการค้นหา ข้อมูล">
+                                                <input type="text" id="FAQ_QUESTION_KEYWORD" name="FAQ_QUESTION_KEYWORD" placeholder="คีย์เวิร์ดในการค้นหา ข้อมูล">
                                             </label>
                                         </section>
+
+                                </fieldset>
+                                <fieldset>
+
+                                    <section >
+                                        <span style="font-size: 20px">คีย์เวิร์ดการค้นหา (คําตอบ)</span><br/>
+                                            <span style="font-size: 16px;color: #3276b1;">รูปแบบ: Keyword1|Keyword2|Keyword3|Keyword4 <br/>ตัวอย่างเช่น
+                                            <label style="color: darkred ;font-weight: bold">ข่าว|ประชาสัมพันธ์|กองทุน|ลงทุน|ความรู้ </label>  </span>
+                                        <label class="input">
+
+
+                                            <input type="text" id="FAQ_ANSWER_KEYWORD" name="FAQ_ANSWER_KEYWORD" placeholder="คีย์เวิร์ดในการค้นหา ข้อมูล">
+                                        </label>
+                                    </section>
 
 
 
@@ -140,7 +183,6 @@
 
 
                                 </fieldset>
-
 
 
                                 <fieldset>
@@ -162,27 +204,6 @@
                                             <span style="font-size: 18px">วันที่สิ้นสุด</span>
                                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                                 <input type="text" name="EXPIRE_DATE"  class="mea_date_picker" id="EXPIRE_DATE" placeholder="วันที่สิ้นสุด" >
-
-                                                {{--class="datepicker" data-dateformat='dd/mm/yy'--}}
-                                            </label>
-                                        </section>
-                                    </div>
-                                    <div class="row">
-
-
-
-                                        <section class="col col-6">
-                                            <span style="font-size: 18px">หน่วยงานติดต่อ</span>
-                                            <label class="input">
-
-                                                <input type="text" name="FAQ_CONTACT_DEPT"  id="FAQ_CONTACT_DEPT" placeholder="หน่วยงานติดต่อ"  >
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-6">
-                                            <span style="font-size: 18px">หมายเลขติดต่อ</span>
-                                            <label class="input">
-                                                <input type="text" name="FAQ_CONTACT_PHONE"   id="FAQ_CONTACT_PHONE" placeholder="หมายเลขติดต่อ" >
 
                                                 {{--class="datepicker" data-dateformat='dd/mm/yy'--}}
                                             </label>
@@ -235,15 +256,14 @@
 
     <!-- PAGE RELATED PLUGIN(S) -->
     <script src="{{asset('backend/js/plugin/jquery-form/jquery-form.min.js')}}"></script>
-    {{--<script src="{{asset('backend/js/plugin/summernote/summernote.min.js')}}"></script>--}}
+    <script src="{{asset('backend/js/plugin/summernote/summernote.min.js')}}"></script>
 
     <script type="text/javascript">
 
 
-
-
-
         $(document).ready(function() {
+
+
 
 
 
@@ -257,18 +277,24 @@
 
                 // Rules for form validation
                 rules : {
-                    FAQ_CATE_ID : {
+                    FAQ_QUESTION_ID : {
                         required : true,
-                        number : true
-
                     },
-                    FAQ_CATE_NAME : {
+                    FAQ_QUESTION_DETAIL : {
                         required : true
-
                     },
-                    FAQ_CATE_KEYWORD : {
-                        required : true
-                    }
+                    FAQ_ANSWER_ID : {
+                        required : true,
+                    },
+                    FAQ_ANSWER_DETAIL : {
+                        required : true,
+                    },
+                    FAQ_QUESTION_KEYWORD : {
+                        required : true,
+                    },
+                    FAQ_ANSWER_KEYWORD : {
+                        required : true,
+                    },
 
 
                 },
@@ -282,35 +308,39 @@
 //                        },
                                 success: function()
                                 {
-//                             alert($("#hd_retire").val());
+
 
 
                                     var dataimport = new FormData();
 
-                                    var FAQ_CATE_ID = $("#FAQ_CATE_ID").val();
-                                    var FAQ_CATE_NAME = $("#FAQ_CATE_NAME").val();
+                                    var FAQ_CATE_ID = $("#NEWS_CATE_ID_select").val();
+                                    var FAQ_QUESTION_ID = $("#FAQ_QUESTION_ID").val();
+                                    var FAQ_QUESTION_DETAIL= $("#FAQ_QUESTION_DETAIL").val();
+                                    var FAQ_ANSWER_ID= $("#FAQ_ANSWER_ID").val();
+                                    var FAQ_ANSWER_DETAIL= $("#FAQ_ANSWER_DETAIL").val();
 
-
-                                    var FAQ_CATE_FLAG = $('input[name=FAQ_CATE_FLAG]:checked').val();
+                                    var FAQ_TOPIC_FLAG =  $('input[name=FAQ_TOPIC_FLAG]:checked').val();
                                     var START_DATE= $("#hd_START_DATE").val();
                                     var EXPIRE_DATE= $("#hd_EXPIRE_DATE").val();
 
-                                    var FAQ_CATE_KEYWORD = $("#FAQ_CATE_KEYWORD").val();
-
-                                    var FAQ_CONTACT_DEPT = $("#FAQ_CONTACT_DEPT").val();
-                                    var FAQ_CONTACT_PHONE = $("#FAQ_CONTACT_PHONE").val();
+                                    var FAQ_QUESTION_KEYWORD = $("#FAQ_QUESTION_KEYWORD").val();
+                                    var FAQ_ANSWER_KEYWORD = $("#FAQ_ANSWER_KEYWORD").val();
 
 
 
 
                                     dataimport.append('FAQ_CATE_ID',FAQ_CATE_ID);
-                                    dataimport.append('FAQ_CATE_NAME',FAQ_CATE_NAME);
-                                    dataimport.append('FAQ_CATE_FLAG',FAQ_CATE_FLAG);
+                                    dataimport.append('FAQ_QUESTION_ID',FAQ_QUESTION_ID);
+                                    dataimport.append('FAQ_QUESTION_DETAIL',FAQ_QUESTION_DETAIL);
+                                    dataimport.append('FAQ_ANSWER_ID',FAQ_ANSWER_ID);
+                                    dataimport.append('FAQ_ANSWER_DETAIL',FAQ_ANSWER_DETAIL);
+                                    dataimport.append('FAQ_TOPIC_FLAG',FAQ_TOPIC_FLAG);
                                     dataimport.append('START_DATE',START_DATE);
                                     dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
-                                    dataimport.append('FAQ_CATE_KEYWORD',FAQ_CATE_KEYWORD);
-                                    dataimport.append('FAQ_CONTACT_DEPT',FAQ_CONTACT_DEPT);
-                                    dataimport.append('FAQ_CONTACT_PHONE',FAQ_CONTACT_PHONE);
+
+                                    dataimport.append('FAQ_QUESTION_KEYWORD',FAQ_QUESTION_KEYWORD);
+                                    dataimport.append('FAQ_ANSWER_KEYWORD',FAQ_ANSWER_KEYWORD);
+
 
 
                                     $.ajax({
@@ -326,9 +356,9 @@
 
                                             if(data.success){
 
-                                                AlertSuccess("บันทึกหมวดหมู่ถามตอบเรียบร้อยแล้ว",function(){
+                                                AlertSuccess("บันทึกหัวข้อถาม-ตอบเรียบร้อยแล้ว",function(){
 
-                                                    window.location.href = "/admin/faqcate";
+                                                    window.location.href = "/admin/faqtopic";
                                                 });
 
                                             }else {
@@ -363,7 +393,12 @@
             meaDatepicker("START_DATE");
 
             meaDatepicker("EXPIRE_DATE");
-
+//            meaDatepicker("comeback");
+//
+//
+//            meaDatepicker("retire");
+//
+//            meaDatepicker("comeback");
 
 
 

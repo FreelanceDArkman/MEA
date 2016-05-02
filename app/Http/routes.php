@@ -576,7 +576,24 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
 
         });
+        Route::group(['prefix' => 'faqtopic'], function() {
 
+            Route::get('/', 'C54_2Controller@getindex');
+
+            Route::get('add', 'C54_2Controller@getAdd');
+            Route::post('add', 'C54_2Controller@postAdd');
+            Route::get('edit/{id}', 'C54_2Controller@getEdit')->where('id', '[0-9,]+');
+            Route::post('edits', 'C54_2Controller@postEdit');
+            Route::post('delete', 'C54_2Controller@delete');
+
+            Route::post('getall', 'C54_2Controller@Ajax_Index');
+
+            Route::post('menulist', 'C54_2Controller@Ajax_menulist');
+
+            Route::post('imageupload', 'C54_2Controller@imageupload');
+
+
+        });
 
 
 
