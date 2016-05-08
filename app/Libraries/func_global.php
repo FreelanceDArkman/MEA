@@ -483,21 +483,21 @@ function getSideBar($menulsit){
                 "1" => array(
                     "menu_id" => 1,
                     "title" => getMenuName($data,59,1),
-                    "url" => "/admin/nav"
+                    "url" => "/admin/con1"
 
 
                 ),
                 "3" => array(
                     "menu_id" => 3,
                     "title" => getMenuName($data,59,3),
-                    "url" => "/admin/nav"
+                    "url" => "/admin/con2"
 
 
                 ),
                 "4" => array(
                     "menu_id" => 4,
                     "title" => getMenuName($data,59,4),
-                    "url" => "/admin/nav"
+                    "url" => "/admin/con3"
 
 
                 )

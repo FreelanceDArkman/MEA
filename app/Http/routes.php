@@ -635,6 +635,14 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
         });
 
+        Route::group(['prefix' => 'nav'], function() {
+
+            Route::get('/', 'C57_1Controller@getindex');
+            Route::post('getlist', 'C57_1Controller@getSearch');
+            Route::get('getadd', 'C57_1Controller@getAdd');
+
+        });
+
 
 
         Route::group(['prefix' => 'cmail'], function() {
