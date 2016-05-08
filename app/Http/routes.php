@@ -627,6 +627,12 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::post('editquestion', 'C56_1Controller@ajax_editquestion');
             Route::post('deletequestion', 'C56_1Controller@ajax_deletequestion');
 
+            Route::post('updateflag', 'C56_1Controller@ajax_updateflag');
+
+            Route::post('delete', 'C56_1Controller@ajax_deleteQuiz');
+
+
+
         });
 
 

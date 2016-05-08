@@ -452,6 +452,21 @@ class C56_1Controller extends Controller
         return response()->json(array('success' => $ret, 'html'=>'ok'));
     }
 
+
+    public  function ajax_updateflag(Request $request){
+        $ret = false;
+
+        $QUIZ_ID =  $request->input("QUIZ_ID");
+
+        $data2 = array('QUIZ_ACTIVE_FLAG' => 1);
+        $ret =   DB::table('TBL_RISK_QUIZ')->update($data2);
+
+        $data = array('QUIZ_ACTIVE_FLAG' => 0);
+        $ret =   DB::table('TBL_RISK_QUIZ')->where('QUIZ_ID',"=",$QUIZ_ID)->update($data);
+
+        return response()->json(array('success' => $ret, 'html'=>'ok'));
+    }
+
     public  function ajax_deletequestion(Request $request){
 
 
@@ -466,6 +481,29 @@ class C56_1Controller extends Controller
 
         return response()->json(array('success' => $ret, 'html'=>'ok'));
     }
+
+
+    public  function ajax_deleteQuiz(Request $request){
+
+
+        $ret = false;
+
+        $QUIZ_ID =  $request->input("QUIZ_ID");
+
+        $arrQuiz = explode(':',$QUIZ_ID);
+
+        foreach($arrQuiz as $qz){
+            $ret =   DB::table('TBL_RISK_QUIZ')->where('QUIZ_ID',"=",$qz)->delete();
+            $ret =   DB::table('TBL_RISK_QUIZ_SCORE_MAPPING')->where('PLAN_ID',"=",$qz)->delete();
+
+            $ret =   DB::table('TBL_RISK_QUIZ_MANAGE')->where('QUIZ_ID',"=",$qz)->delete();
+        }
+
+
+
+        return response()->json(array('success' => true, 'html'=>'ok'));
+    }
+
 
 
     public function  addquestion(Request $request){

@@ -248,38 +248,48 @@ $arrSidebar =getSideBar($data);
 
 
                 });
-                var jsondata = {group_id : checked};
+                var jsondata = {QUIZ_ID : checked};
 
-                $.ajax({
 
-                    type: 'post', // or post?
-                    dataType: 'json',
-                    url: '/admin/risk/delete',
-                    data: jsondata,
+                AlertConfirm('Alert',"ท่านแน่ใจที่ต้องการจะลบ รายการที่ท่านเลือก",function(){
 
-                    success: function(data) {
 
-                        if(data.ret == "1"){
-                            $.smallBox({
-                                title: "Congratulations! Your form was submitted",
-                                content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                                color: "#5F895F",
-                                iconSmall: "fa fa-check bounce animated",
-                                timeout: 4000
-                            });
+                    $.ajax({
 
-                            window.location.href = '/admin/faqcate';
-                        }
+                        type: 'post', // or post?
+                        dataType: 'json',
+                        url: '/admin/risk/delete',
+                        data: jsondata,
+
+                        success: function(data) {
 
 
 
-                    },
-                    error: function(xhr, textStatus, thrownError) {
+                            if(data.success){
+
+                                AlertSuccess("ท่านได้ทำการลบรายการเรียบร้อยแล้ว");
+
+                                $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+                                var jsondata = {pagesize : 100,PageNumber:1, NEWS_TOPIC_FLAG:0};
+
+                                MeaAjax(jsondata,"risk/getall",Render);
+                            }
+
+
+
+
+
+                        },
+                        error: function(xhr, textStatus, thrownError) {
 //                                alert(xhr.status);
 //                                alert(thrownError);
 //                                alert(textStatus);
-                    }
-                });
+                        }
+                    });
+
+                },null);
+
+
             }else {
                 $.SmartMessageBox({
                     title : "Error!",
@@ -340,6 +350,25 @@ $arrSidebar =getSideBar($data);
         });
         //page click
         $("#page_click_search li a").on('click',PageRender);
+
+
+        $(".raio_chck").on('click',function(){
+
+            var QUIZ_ID = $(this).val();
+
+            var jsondata = {QUIZ_ID : QUIZ_ID};
+
+            MeaAjax(jsondata,"risk/updateflag",function(data){
+                if(data.success){
+                        AlertSuccess("ท่านได้เปลี่ยน รายการชุดแบบประเมินความเสียงเรียบร้อยแล้ว");
+
+                    var jsondata = {pagesize : 100,PageNumber:1, NEWS_TOPIC_FLAG:1};
+                    $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+                    MeaAjax(jsondata,"risk/getall",Render);
+                }
+            });
+
+        });
     }
 
 
@@ -389,19 +418,19 @@ $arrSidebar =getSideBar($data);
 
 
 
-        $(".data-tab").on('click',function(){
-            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
-//            $(".result").html("");
-            var val = $(this).attr("data-val");
-//            alert(val);
-//            var NEWS_CATE_ID = $("#news_topice_select").val();
-            var NEWS_TOPIC_FLAG = val;
-
-            $("#hd_NEWS_TOPIC_FLAG").val(val);
-            var jsondata = {pagesize : 100,PageNumber:1,NEWS_TOPIC_FLAG:NEWS_TOPIC_FLAG};
-            MeaAjax(jsondata,"risk/getall",Render);
-
-        });
+//        $(".data-tab").on('click',function(){
+//            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+////            $(".result").html("");
+//            var val = $(this).attr("data-val");
+////            alert(val);
+////            var NEWS_CATE_ID = $("#news_topice_select").val();
+//            var NEWS_TOPIC_FLAG = val;
+//
+//            $("#hd_NEWS_TOPIC_FLAG").val(val);
+//            var jsondata = {pagesize : 100,PageNumber:1,NEWS_TOPIC_FLAG:NEWS_TOPIC_FLAG};
+//            MeaAjax(jsondata,"risk/getall",Render);
+//
+//        });
 
 
 

@@ -49,7 +49,7 @@ class riskassessmentController extends Controller
                 }
             }
 
-            $sqlcheckquiz = "SELECT TOP 1 * FROM TBL_RISK_QUIZ";
+            $sqlcheckquiz = "SELECT TOP 1 * FROM TBL_RISK_QUIZ WHERE QUIZ_ACTIVE_FLAG = 0";
             $checkquiz = DB::select(DB::raw($sqlcheckquiz))[0];
 
 
