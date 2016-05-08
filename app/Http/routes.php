@@ -648,6 +648,35 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
         });
 
 
+        Route::group(['prefix' => 'con1'], function() {
+
+            Route::get('/', 'C59_1Controller@getindex');
+            Route::post('getlist', 'C59_1Controller@getSearch');
+            Route::post('addsave', 'C59_1Controller@Navsave');
+            Route::post('editsave', 'C59_1Controller@editsave');
+            Route::post('deletenav', 'C59_1Controller@deletenav');
+        });
+
+        Route::group(['prefix' => 'con3'], function() {
+
+            Route::get('/', 'C59_3Controller@getindex');
+            Route::post('getlist', 'C59_3Controller@getSearch');
+            Route::post('addsave', 'C59_3Controller@Navsave');
+            Route::post('editsave', 'C59_3Controller@editsave');
+            Route::post('deletenav', 'C59_3Controller@deletenav');
+        });
+
+        Route::group(['prefix' => 'con4'], function() {
+
+            Route::get('/', 'C59_4Controller@getindex');
+            Route::post('getlist', 'C59_4Controller@getSearch');
+            Route::post('addsave', 'C59_4Controller@Navsave');
+            Route::post('editsave', 'C59_4Controller@editsave');
+            Route::post('deletenav', 'C59_4Controller@deletenav');
+        });
+
+
+
 
         Route::group(['prefix' => 'cmail'], function() {
 
