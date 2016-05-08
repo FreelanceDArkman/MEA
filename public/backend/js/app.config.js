@@ -496,7 +496,38 @@ function Alert(title,message,callbackok,callbackno){
 
 	});
 }
+function AlertConfirm(title,message,callbackok,callbackno){
 
+	var defaultmsg = "Congratulations! Your form was submitted";
+	var TitleDefault = "Error!";
+
+	if(title != ""){
+		TitleDefault = title;
+	}
+
+	if(message != ""){
+		defaultmsg = message;
+	}
+
+	$.SmartMessageBox({
+		title : TitleDefault,
+		content : defaultmsg,
+		buttons : '[No][OK]'
+	}, function(ButtonPressed) {
+		if (ButtonPressed === "OK") {
+
+			if(typeof(callbackok) == 'function' && callbackok != null){
+				callbackok();
+			}
+		}
+		if (ButtonPressed === "No") {
+			if(typeof(callbackno) == 'function' && callbackno != null){
+				callbackno();
+			}
+		}
+
+	});
+}
 
 function AlertSuccess(message,callback){
 

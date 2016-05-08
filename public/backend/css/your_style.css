@@ -47,7 +47,21 @@ h1, h2, h3, h4, h5, h6{
 }
 
 select{
+    font-family: "DB Ozone X" !important;
     font-size: 18px !important;
+}
+
+input {
+    font-family: "DB Ozone X" !important;
+    font-size: 18px !important;
+}
+
+em{
+    font-family: "DB Ozone X" !important;
+    font-size: 14px !important;
+}
+.MessageBoxMiddle .pText{
+    font-size: 20px !important;
 }
 
 #logo{

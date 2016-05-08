@@ -393,6 +393,8 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
     Route::group(['middleware' => ['auth.backend']], function() {
         // login required
         Route::get('/', 'DashboardController@showIndex');
+//        Route::get('/', 'UserGroupController@userGroups');
+
 
         Route::group(['prefix' => 'userGroup'] , function() {
 
@@ -602,6 +604,32 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::post('add', 'C55_1Controller@postAdd');
 
         });
+
+
+        Route::group(['prefix' => 'risk'], function() {
+
+            Route::get('/', 'C56_1Controller@getindex');
+
+            Route::post('getall', 'C56_1Controller@Ajax_Index');
+            Route::get('add', 'C56_1Controller@getAdd');
+            Route::post('add', 'C56_1Controller@postAdd');
+
+
+            Route::get('edit/{id}', 'C56_1Controller@getEdit')->where('id', '[0-9,]+');
+            Route::post('ishave', 'C56_1Controller@CheckUserGroup');
+            Route::post('period', 'C56_1Controller@addperiod');
+            Route::post('getperiod', 'C56_1Controller@ajax_getperiod');
+            Route::post('editperiod', 'C56_1Controller@ajax_editperiod');
+            Route::post('deleteperiod', 'C56_1Controller@ajax_deleteperiod');
+
+            Route::post('question', 'C56_1Controller@addquestion');
+            Route::post('getquestion', 'C56_1Controller@ajax_getquestion');
+            Route::post('editquestion', 'C56_1Controller@ajax_editquestion');
+            Route::post('deletequestion', 'C56_1Controller@ajax_deletequestion');
+
+        });
+
+
 
         Route::group(['prefix' => 'cmail'], function() {
 
