@@ -372,7 +372,14 @@ function getSideBar($menulsit){
                 "1" => array(
                     "menu_id" => 1,
                     "title" => getMenuName($data,57,1),
-                    "url" => "/admin/nav"
+                    "url" => "/admin/nav",
+                    "sub_mini" => array(
+                        "add" => array(
+                            "title"=>"เพิ่มมูลค่าทรัพย์สินสุทธิ",
+                            "url" => "/admin/nav/getadd"
+
+                        )
+                    )
 
 
                 )

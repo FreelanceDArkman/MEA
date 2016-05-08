@@ -35,12 +35,12 @@ $arrSidebar =getSideBar($data);
                 <section style="float: left">
                     <label class="label" style="color:#333;font-size: 20px">เลือกช่วงที่ต้องการดู</label>
                     <label class="select">
-                        <select id="drop_month_start" class="form-control" id="drop_month">
+                        <select id="drop_month_start" class="form-control" >
                             <option selected="selected" value="1">เลือกเดือน</option><option value="1">ม.ค.</option><option value="2">ก.พ.</option><option value="3">มี.ค.</option><option value="4">เม.ย.</option><option value="5">พ.ค.</option><option value="6">มิ.ย.</option><option value="7">ก.ค.</option><option value="8">ส.ค.</option><option value="9">ก.ย.</option><option value="10">ต.ค.</option><option value="11">พ.ย.</option><option value="12">ธ.ค.</option>
                         </select> <i></i> </label>
 
                     <label class="select">
-                        <select id="drop_year_start" class="form-control" id="drop_year">
+                        <select id="drop_year_start" class="form-control" >
                             <option selected="selected" value="2001">เลือกปี</option><option value="2015">2558</option><option value="2016">2559</option><option value="2017">2560</option><option value="2018">2561</option>
                         </select> <i></i> </label>
                 </section>
@@ -48,11 +48,11 @@ $arrSidebar =getSideBar($data);
                 <section style="float: left">
 
                     <label class="select">
-                        <select id="drop_month_end" class="form-control" id="drop_month">
+                        <select id="drop_month_end" class="form-control" >
                             <option selected="selected" value="12">เลือกเดือน</option><option value="1">ม.ค.</option><option value="2">ก.พ.</option><option value="3">มี.ค.</option><option value="4">เม.ย.</option><option value="5">พ.ค.</option><option value="6">มิ.ย.</option><option value="7">ก.ค.</option><option value="8">ส.ค.</option><option value="9">ก.ย.</option><option value="10">ต.ค.</option><option value="11">พ.ย.</option><option value="12">ธ.ค.</option>
                         </select> <i></i> </label>
                     <label class="select">
-                        <select id="drop_year_end" class="form-control" id="drop_year">
+                        <select id="drop_year_end" class="form-control" >
                             <option selected="selected" value="9999">เลือกปี</option><option value="2015">2558</option><option value="2016">2559</option><option value="2017">2560</option><option value="2018">2561</option>
                         </select> <i></i> </label>
                 </section>
@@ -151,178 +151,76 @@ $arrSidebar =getSideBar($data);
 <script type="text/javascript">
 
 
-    function Render(data){
-//        $("#all_data").hide();
-        $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
 
-        $(".result").html(data.html);
-        $(".result").fadeIn('300');
+        function gendedit(){
+            $(".btn_edit_list").on('click',function(){
 
-        $("#mainCheck").on("click",function(){$(".item_checked").not(this).prop('checked', this.checked);});
+                var key = $(this).data('date_ref');
 
-        $(".mea_delete_by").on('click',function(){
-
-            var id = $(this).attr("data-id");
-            $.SmartMessageBox({
-                title : "Error!",
-                content : "ท่านแน่ใจที่ต้องการจะลบ รายการที่ท่านเลือก",
-                buttons : '[ยกเลิก][OK]'
-            }, function(ButtonPressed) {
-                if (ButtonPressed === "OK") {
-
-                    var plan_id = $("#plan_id").val();
-
-                    var jsondata = {group_id : id,plan_id : plan_id};
-
-                    $.ajax({
-
-                        type: 'post', // or post?
-                        dataType: 'json',
-                        url: '/admin/newstopic/delete',
-                        data: jsondata,
-
-                        success: function(data) {
-
-                            if(data.ret == "1"){
-                                $.smallBox({
-                                    title: "Congratulations! Your form was submitted",
-                                    content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                                    color: "#5F895F",
-                                    iconSmall: "fa fa-check bounce animated",
-                                    timeout: 4000
-                                });
-
-                                window.location.href = '/admin/newstopic';
-                            }
+                var drop_day = $("#drop_day").val();
+                var drop_month = $("#drop_month").val();
+                var drop_year = $("#drop_year").val();
+                var NAV_UNIT_1 = $("#NAV_UNIT_1_"+ key).val();
+                var NAV_1 = $("#NAV_1_"+key).val();
+                var RETURN_RATE_1 = $("#RETURN_RATE_1_"+key).val();
+                var NAV_UNIT_2 = $("#NAV_UNIT_2_"+key).val();
+                var NAV_2 = $("#NAV_2_"+key).val();
+                var RETURN_RATE_2 = $("#RETURN_RATE_2_"+key).val();
 
 
+                var json = {
+                    key:key,
+                    drop_day:drop_day,
+                    drop_month:drop_month,
+                    drop_year:drop_year,
+                    NAV_UNIT_1:NAV_UNIT_1,
+                    NAV_1:NAV_1,
+                    RETURN_RATE_1:RETURN_RATE_1,
+                    NAV_UNIT_2:NAV_UNIT_2,
+                    NAV_2:NAV_2,
+                    RETURN_RATE_2:RETURN_RATE_2
 
-                        },
-                        error: function(xhr, textStatus, thrownError) {
-//                                alert(xhr.status);
-//                                alert(thrownError);
-//                                alert(textStatus);
-                        }
-                    });
-                }
-                if (ButtonPressed === "ยกเลิก") {
 
                 }
+
+                MeaAjax(json,"/admin/nav/editsave",function(data){
+                    if(data.success){
+                        AlertSuccess("แก้ไขเรียบร้อยแล้ว",function(){
+                            getlist();
+                        });
+                    }
+                });
+
+
+                return false;
 
             });
-
-        });
-
-        $("#mea_delete").on('click',function(){
+        }
 
 
-
-            var checkcount = $(".item_checked:checked").length;
-
-
-            if(checkcount > 0){
-                var checked = "";
-                $(".item_checked").each(function(){
-
-                    if($(this).is(":checked")){
-                        checked = checked + $(this).val() + ",";
-                    }
+        function genDelete(){
+            $(".btn_delete_list").on('click',function(){
+                    var key = $(this).data('date_ref');
 
 
-                });
-                var jsondata = {group_id : checked};
-
-                $.ajax({
-
-                    type: 'post', // or post?
-                    dataType: 'json',
-                    url: '/admin/newstopic/delete',
-                    data: jsondata,
-
-                    success: function(data) {
-
-                        if(data.ret == "1"){
-                            $.smallBox({
-                                title: "Congratulations! Your form was submitted",
-                                content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                                color: "#5F895F",
-                                iconSmall: "fa fa-check bounce animated",
-                                timeout: 4000
+                AlertConfirm("Alert","ท่านแน่ใจที่ต้องการจะลบรายการนี้",function(){
+                    var json = {key:key}
+                    MeaAjax(json,"/admin/nav/deletenav",function(data){
+                        if(data.success){
+                            AlertSuccess("ลบรายการที่ท่านเลือกเรียบร้อยแล้ว",function(){
+                                getlist();
                             });
-
-                            window.location.href = '/admin/newstopic';
                         }
+                    });
+
+                },null);
 
 
+                return false;
+            });
+        }
 
-                    },
-                    error: function(xhr, textStatus, thrownError) {
-//                                alert(xhr.status);
-//                                alert(thrownError);
-//                                alert(textStatus);
-                    }
-                });
-            }else {
-                $.SmartMessageBox({
-                    title : "Error!",
-                    content : "ท่านยังไม่ได้เลือกรายการ",
-                    buttons : '[OK]'
-                }, function(ButtonPressed) {
-                    if (ButtonPressed === "OK") {
-
-
-                    }
-                    if (ButtonPressed === "No") {
-
-                    }
-
-                });
-            }
-
-        });
-
-        $("#mea_edit").on('click',function(){
-
-            var checkcount = $(".item_checked:checked").length;
-
-
-
-            if(checkcount > 1 || checkcount  == 0){
-                $.SmartMessageBox({
-                    title : "Error!",
-                    content : "ไม่สามารถแก้ไขได้ กรุณาเลือกรายการเพียงรายการเดียว",
-                    buttons : '[OK]'
-                }, function(ButtonPressed) {
-                    if (ButtonPressed === "OK") {
-
-                        return false;
-                    }
-                    if (ButtonPressed === "No") {
-
-                    }
-
-                });
-            }else {
-                window.location.href = "/admin/newstopic/edit/" + $(".item_checked:checked").val();
-            }
-
-
-
-
-
-
-        })
-    }
-
-
-
-    // DO NOT REMOVE : GLOBAL FUNCTIONS!
-
-    $(document).ready(function() {
-
-        $("#search_click").on('click',function(){
-
-
+        function  getlist(){
             var jsondata = {pagesize : 20,PageNumber:1};
 
             $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
@@ -340,10 +238,25 @@ $arrSidebar =getSideBar($data);
             MeaAjax(json,"/admin/nav/getlist",function(data){
 
                 $(".result").html(data.html);
+                gendedit();
+                genDelete();
 
             });
+        }
+
+    // DO NOT REMOVE : GLOBAL FUNCTIONS!
+
+    $(document).ready(function() {
+
+        $("#search_click").on('click',function(){
+
+
+            getlist();
+
+            return false;
 
         });
+
 
 
 
