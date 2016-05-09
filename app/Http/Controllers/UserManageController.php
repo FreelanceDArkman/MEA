@@ -111,9 +111,14 @@ DIV_LNG,SEC_LNG,PART_LNG) VALUES('".$EMP_ID."','".$value["prefix"]."','".$value[
                 $rest = substr("abcdef", -2);    // returns "ef"
                 $rest = substr("abcdef", -3, 1);
 
-                $newDate = substr($datedata, -2) . substr($datedata, -3,2). ((int)substr($datedata, 1, 4)) + 543;
+                //19560316
 
-                var_dump($newDate);
+
+                //16032499
+
+                $newDate = substr($datedata, -2) . substr($datedata, -4,2). ((int)substr($datedata, -8, 4)) + 543;
+
+//                var_dump($newDate);
 
                 $ecPass = exec("cmd /c md5.bat -e ".$newDate." 2>&1");
 
