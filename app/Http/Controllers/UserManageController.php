@@ -132,7 +132,7 @@ DIV_LNG,SEC_LNG,PART_LNG) VALUES('".$EMP_ID."','".$value["prefix"]."','".$value[
 VALUES('".$EMP_ID."','".$EMP_ID."','".$ecPass."','9999-12-31 00:00:00.000','".$date."','Administrator','".$date."'
 ,'2','".$pri[0]->ACCESS_PERMISSIONS."','13','0','1')";
 
-                //DB::insert(DB::raw($insetuser));
+                DB::insert(DB::raw($insetuser));
 
              }
 
