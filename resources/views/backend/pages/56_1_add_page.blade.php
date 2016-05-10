@@ -129,7 +129,7 @@
                             </div>
                             <!-- wizard form starts here -->
 
-                            <div class="smart-form"><footer> <button type="submit" href="http://172.20.10.3:4646/admin/risk/add" class="btn bg-color-green txt-color-white"><i class="fa fa-plus"></i> บันทึก</button></footer></div>
+                            <div class="smart-form"><footer> <button type="submit" href="#" class="btn bg-color-green txt-color-white"><i class="fa fa-plus"></i> บันทึก</button></footer></div>
                         </div>
 
                     </form>

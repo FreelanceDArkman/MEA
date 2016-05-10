@@ -89,13 +89,13 @@ class C56_1Controller extends Controller
         $dateEnd = new Date('9999-12-31 00:00:00.000') ;
 
 
-        if($QUIZ_ACTIVE_DATE != ""){
-            $datestart = new Date($QUIZ_ACTIVE_DATE);
-        }
-
-        if($QUIZ_EXPIRE_DATE != ""){
-            $dateEnd = new Date($QUIZ_EXPIRE_DATE);
-        }
+//        if($QUIZ_ACTIVE_DATE != ""){
+//            $datestart = new Date($QUIZ_ACTIVE_DATE);
+//        }
+//
+//        if($QUIZ_EXPIRE_DATE != ""){
+//            $dateEnd = new Date($QUIZ_EXPIRE_DATE);
+//        }
 
         $data = array('QUIZ_ID' => $QUIZ_ID,
             'QUIZ_DESC' =>$QUIZ_DESC,
@@ -106,28 +106,26 @@ class C56_1Controller extends Controller
         );
 
 
-        if($isupdate){
+//        var_dump($isupdate);
+
+        if($isupdate == "true"){
+
 
             $ret=  DB::table('TBL_RISK_QUIZ')->where('QUIZ_ID',"=",$QUIZ_ID)->update($data);
         }else
         {
+//            var_dump('hello');
             if($total > 0){
 
                 $rethtml = "รหัสแบบสอบถาม ที่ท่านเลือกมีอยู่ในระบบแล้ว";
 
             }else{
 
-
-
-
-
-
                 $today = new Date();
 
 
-
-
                 $ret = DB::table('TBL_RISK_QUIZ')->insert($data);
+                $rethtml = $ret;
             }
         }
 
