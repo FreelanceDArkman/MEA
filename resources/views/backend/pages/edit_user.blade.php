@@ -78,7 +78,7 @@
 
                                 <section>
                                     <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                        <button class="btn btn-primary" id="btn_resetpass" data-id="{{$user->EMP_ID}}" >เปลี่ยนรหัสผ่าน</button></label>
+                                        <button class="btn btn-primary" type="button" id="btn_resetpass" data-id="{{$user->EMP_ID}}" data-user="{{$user->EMP_ID}}" >เปลี่ยนรหัสผ่าน</button></label>
                                         {{--<input type="password" id="password" name="password" placeholder="Password" id="password">--}}
                                         {{--<b class="tooltip tooltip-bottom-right">Don't forget your password</b> --}}
                                 </section>
@@ -449,54 +449,48 @@
             $("#btn_resetpass").on('click',function(){
                 var id = $(this).attr("data-id");
                 var user =  $(this).attr("data-user");
-                $.SmartMessageBox({
-                    title : "Error!",
-                    content : "ท่านแน่ใจที่ต้องการจะ reset  password ของผู้ใช้ใช่หรือไม่",
-                    buttons : '[ยกเลิก][OK]'
-                }, function(ButtonPressed) {
-                    if (ButtonPressed === "OK") {
 
 
-                        var jsondata = {username : user};
+                AlertConfirm("Alert","ท่านแน่ใจที่ต้องการจะ reset  password ของผู้ใช้ใช่หรือไม",function(){
 
-                        $.ajax({
 
-                            type: 'post', // or post?
-                            dataType: 'json',
-                            url: '/admin/users/ReqPass',
-                            data: jsondata,
+                    var jsondata = {username : user};
 
-                            success: function(data) {
+                    $.ajax({
 
-                                if(data.success){
-                                    $.smallBox({
-                                        title: "Congratulations! Your form was submitted",
-                                        content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
-                                        color: "#5F895F",
-                                        iconSmall: "fa fa-check bounce animated",
-                                        timeout: 1000
-                                    });
+                        type: 'post', // or post?
+                        dataType: 'json',
+                        url: '/admin/users/ReqPass',
+                        data: jsondata,
+
+                        success: function(data) {
+
+                            if(data.success){
+                                $.smallBox({
+                                    title: "Congratulations! Your form was submitted",
+                                    content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                                    color: "#5F895F",
+                                    iconSmall: "fa fa-check bounce animated",
+                                    timeout: 1000
+                                });
 
 //
-                                }else {
-                                    Alert("",data.html,"","");
-                                }
+                            }else {
+                                Alert("",data.html,"","");
+                            }
 
 
 
-                            },
-                            error: function(xhr, textStatus, thrownError) {
+                        },
+                        error: function(xhr, textStatus, thrownError) {
 //                                alert(xhr.status);
 //                                alert(thrownError);
 //                                alert(textStatus);
-                            }
-                        });
-                    }
-                    if (ButtonPressed === "ยกเลิก") {
+                        }
+                    });
 
-                    }
+                },null);
 
-                });
 
             });
 
