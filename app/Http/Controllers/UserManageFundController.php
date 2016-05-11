@@ -123,7 +123,11 @@ class UserManageFundController extends Controller
                             'GRATUITY' => $value["gratuity"],
                             'GRATUITY_TAX' => $value["gratuity_tax"],
 
-                            'RECORD_DATE' => $value["record_date"]
+                            'RECORD_DATE' => $value["record_date"],
+                            'PATH_NAME' => $value["path_name"],
+                            'DEP_NAME' => $value["dep_name"],
+                            'DIV_NAME' => $value["div_name"],
+                            'SEC_NAME'=> $value["sec_name"]
 
                         ));
 
