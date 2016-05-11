@@ -62,12 +62,14 @@
 
                             <fieldset>
                                 <section>
+                                    <lable style="font-size:18px">รหัสแผนการลงทุน</lable>
                                     <label class="input">
                                         <input type="text" id="plan_id" disabled="disabled" style="background-color: #f1f1f1"  value="{{$editdata->PLAN_ID}}" name="plan_id" placeholder="รหัสแผนการลงทุน">
                                        </label>
                                 </section>
 
                                 <section>
+                                    <lable style="font-size:18px">ชื่อแผนการลงทุน</lable>
                                     <label class="input">
                                         <input type="text" id="plan_name" value="{{$editdata->PLAN_NAME}}" name="plan_name" placeholder="ชื่อแผนการลงทุน">
                                          </label>
@@ -118,11 +120,13 @@
                             <fieldset>
                                 <div class="row">
                                     <section class="col col-6">
+                                        <lable style="font-size:18px">สัดส่วนตราสารทุน (ขั้นต่ำ)</lable>
                                         <label class="input">
                                             <input type="text"  id="EQUITY_MIN" name="EQUITY_MIN" value="{{$editdata->EQUITY_MIN_PERCENTAGE}}" placeholder="สัดส่วนตราสารทุน (ขั้นต่ำ)  ">
                                              </label>
                                     </section>
                                     <section class="col col-6">
+                                        <lable style="font-size:18px">สัดส่วนตราสารทุน (ขั้นสูง)</lable>
                                         <label class="input">
                                             <input type="text" id="EQUITY_MAX" name="EQUITY_MAX" value="{{$editdata->EQUITY_MAX_PERCENTAGE}}" placeholder="สัดส่วนตราสารทุน (ขั้นสูง)">
                                            </label>
@@ -133,6 +137,7 @@
 
                                     <section class="col col-6">
                                         <label class="input">
+                                            <lable style="font-size:18px">สัดส่วนตราสารหนี้ (ขั้นต่ำ)</lable>
                                             <input type="text" id="DEBT_MIN" name="DEBT_MIN" value="{{$editdata->DEBT_MIN_PERCENTAGE}}" placeholder="สัดส่วนตราสารหนี้ (ขั้นต่ำ)">
                                              </label>
                                     </section>
@@ -154,6 +159,7 @@
                                 <div class="row">
 
                                     <section class="col col-6">
+                                        <lable style="font-size:18px">วันที่เริ่มต้น</lable>
                                         <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                             <input type="text" name="plan_start"  value="{{get_date_notime_en($editdata->PLAN_ACTIVE_DATE)}}" class="mea_date_picker" id="plan_start" placeholder="วันที่เริ่มต้น"  >
                                             <input type="hidden" id="hd_plan_start" value="{{get_date_sql($editdata->PLAN_ACTIVE_DATE)}}">
@@ -161,6 +167,7 @@
                                     </section>
 
                                     <section class="col col-6">
+                                        <lable style="font-size:18px">วันที่สิ้นสุด</lable>
                                         <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                             <input type="text" name="plan_end" value="{{get_date_notime_en($editdata->PLAN_EXPIRE_DATE)}}" class="mea_date_picker" id="plan_end" placeholder="วันที่สิ้นสุด" >
                                             <input type="hidden" id="hd_plan_end" value="{{get_date_sql($editdata->PLAN_EXPIRE_DATE)}}">
