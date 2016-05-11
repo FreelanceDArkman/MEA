@@ -100,6 +100,10 @@ class UserManageFundController extends Controller
                             'DEP_CODE' => $value["dep_code"],
                             'DIV_CODE' => $value["div_code"],
                             'SEC_CODE' => $value["sec_code"],
+                            'PATH_NAME' => $value["path_name"],
+                            'DEP_NAME' => $value["dep_name"],
+                            'DIV_NAME' => $value["div_name"],
+                            'SEC_NAME'=> $value["sec_name"],
                             'HIRE_DATE' =>$value["hire_date"],
                             'END_DATE' => $value["end_date"],
                             'POSITION_CODE' => $value["position_code"],
@@ -122,12 +126,8 @@ class UserManageFundController extends Controller
                             'TAX_1234' => $value["tax_1234"],
                             'GRATUITY' => $value["gratuity"],
                             'GRATUITY_TAX' => $value["gratuity_tax"],
-
                             'RECORD_DATE' => $value["record_date"],
-                            'PATH_NAME' => $value["path_name"],
-                            'DEP_NAME' => $value["dep_name"],
-                            'DIV_NAME' => $value["div_name"],
-                            'SEC_NAME'=> $value["sec_name"]
+                            'PERIOD'=>$value["period"]
 
                         ));
 
