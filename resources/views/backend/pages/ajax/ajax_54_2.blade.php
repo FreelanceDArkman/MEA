@@ -42,7 +42,7 @@
                 <td>{{$item->FAQ_QUESTION_ID}}</td>
                     <td>{{$item->FAQ_QUESTION_DETAIL}}</td>
                     <td>{{$item->FAQ_ANSWER_ID}}</td>
-                    <td>{{$item->FAQ_ANSWER_DETAIL}}</td>
+                    <td>{!! $item->FAQ_ANSWER_DETAIL !!}</td>
 
 
                 <td>{{($item->FAQ_TOPIC_FLAG == "0" ? "Active" : "Inactive")}}</td>
