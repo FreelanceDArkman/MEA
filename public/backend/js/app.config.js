@@ -408,8 +408,11 @@ function  GetDateFormat (date){
 function meaDatepicker(id){
 	//var realid = $('.'+id).attr('id');
 
+	if($("#"+id).length == 0){
+		$("#"+id).after("<input type='hidden' value='' id='hd_"+id+"' />");
+	}
 
-	$("#"+id).after("<input type='hidden' value='' id='hd_"+id+"' />");
+
 
 
 	//$("."+classid).datepicker({

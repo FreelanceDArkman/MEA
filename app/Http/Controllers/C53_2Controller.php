@@ -390,6 +390,7 @@ class C53_2Controller extends Controller
 
 
 
+
         $Notice = $request->input("Notice");
         $Notice_start_DATE = $request->input("Notice_start_DATE");
         $Notice_End_DATE = $request->input("Notice_End_DATE");
