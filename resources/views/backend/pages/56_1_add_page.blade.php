@@ -110,16 +110,26 @@
                                     <section class="col col-6" style="padding-left: 0px;">
                                     <span style="font-size: 18px">วันที่เริ่มต้น</span>
                                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                        @if($quiz)
+                                            <input type="text" name="QUIZ_ACTIVE_DATE" value="{{get_date_notime_en($quiz->QUIZ_ACTIVE_DATE)}}" class="mea_date_picker" id="QUIZ_ACTIVE_DATE" placeholder="วันที่เริ่มต้น"  >
+                                            <input type="hidden" id="hd_QUIZ_ACTIVE_DATE" value="{{get_date_sql($quiz->QUIZ_ACTIVE_DATE) }}">
 
-                                    <input type="text" name="QUIZ_ACTIVE_DATE"  class="mea_date_picker" id="QUIZ_ACTIVE_DATE" placeholder="วันที่เริ่มต้น"  >
+                                        @else
+                                            <input type="text" name="QUIZ_ACTIVE_DATE"  class="mea_date_picker" id="QUIZ_ACTIVE_DATE" placeholder="วันที่เริ่มต้น"  >
+                                        @endif
                                     </label>
                                     </section>
 
                                     <section class="col col-6">
                                     <span style="font-size: 18px">วันที่สิ้นสุด</span>
                                     <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                    <input type="text" name="QUIZ_EXPIRE_DATE"  class="mea_date_picker" id="QUIZ_EXPIRE_DATE" placeholder="วันที่สิ้นสุด" >
+                                        @if($quiz)
+                                            <input type="text" name="QUIZ_EXPIRE_DATE" value="{{get_date_notime_en($quiz->QUIZ_EXPIRE_DATE)}}" class="mea_date_picker" id="QUIZ_EXPIRE_DATE" placeholder="วันที่สิ้นสุด" >
+                                            <input type="hidden" id="hd_QUIZ_EXPIRE_DATE" value="{{get_date_sql($quiz->QUIZ_EXPIRE_DATE) }}">
 
+                                        @else
+                                            <input type="text" name="QUIZ_EXPIRE_DATE"  class="mea_date_picker" id="QUIZ_EXPIRE_DATE" placeholder="วันที่สิ้นสุด" >
+                                        @endif
                                     {{--class="datepicker" data-dateformat='dd/mm/yy'--}}
                                     </label>
                                     </section>
