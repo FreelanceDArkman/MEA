@@ -106,23 +106,23 @@
                                     {{--</div>--}}
 
 
-                                    {{--</section>--}}
-                                    {{--<section class="col col-6">--}}
-                                    {{--<span style="font-size: 18px">วันที่เริ่มต้น</span>--}}
-                                    {{--<label class="input"> <i class="icon-append fa fa-calendar"></i>--}}
+                                    </section>
+                                    <section class="col col-6" style="padding-left: 0px;">
+                                    <span style="font-size: 18px">วันที่เริ่มต้น</span>
+                                    <label class="input"> <i class="icon-append fa fa-calendar"></i>
 
-                                    {{--<input type="text" name="QUIZ_ACTIVE_DATE"  class="mea_date_picker" id="QUIZ_ACTIVE_DATE" placeholder="วันที่เริ่มต้น"  >--}}
-                                    {{--</label>--}}
-                                    {{--</section>--}}
+                                    <input type="text" name="QUIZ_ACTIVE_DATE"  class="mea_date_picker" id="QUIZ_ACTIVE_DATE" placeholder="วันที่เริ่มต้น"  >
+                                    </label>
+                                    </section>
 
-                                    {{--<section class="col col-6">--}}
-                                    {{--<span style="font-size: 18px">วันที่สิ้นสุด</span>--}}
-                                    {{--<label class="input"> <i class="icon-append fa fa-calendar"></i>--}}
-                                    {{--<input type="text" name="QUIZ_EXPIRE_DATE"  class="mea_date_picker" id="QUIZ_EXPIRE_DATE" placeholder="วันที่สิ้นสุด" >--}}
+                                    <section class="col col-6">
+                                    <span style="font-size: 18px">วันที่สิ้นสุด</span>
+                                    <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                    <input type="text" name="QUIZ_EXPIRE_DATE"  class="mea_date_picker" id="QUIZ_EXPIRE_DATE" placeholder="วันที่สิ้นสุด" >
 
                                     {{--class="datepicker" data-dateformat='dd/mm/yy'--}}
-                                    {{--</label>--}}
-                                    {{--</section>--}}
+                                    </label>
+                                    </section>
 
                                 </fieldset>
 
@@ -557,9 +557,9 @@
                GetQuestionLsit(jsons);
            }
 
-//            meaDatepicker("QUIZ_ACTIVE_DATE");
+            meaDatepicker("QUIZ_ACTIVE_DATE");
 
-//            meaDatepicker("QUIZ_EXPIRE_DATE");
+            meaDatepicker("QUIZ_EXPIRE_DATE");
 
 
 
@@ -670,8 +670,8 @@
 
 
 //                                    var QUIZ_ACTIVE_FLAG = $('input[name=QUIZ_ACTIVE_FLAG]:checked').val();
-//                                    var QUIZ_ACTIVE_DATE= $("#hd_QUIZ_ACTIVE_DATE").val();
-//                                    var QUIZ_EXPIRE_DATE= $("#hd_QUIZ_EXPIRE_DATE").val();
+                                    var QUIZ_ACTIVE_DATE= $("#hd_QUIZ_ACTIVE_DATE").val();
+                                    var QUIZ_EXPIRE_DATE= $("#hd_QUIZ_EXPIRE_DATE").val();
 
 
                                     var QUIZ_ACTIVE_FLAG ='1';
