@@ -399,6 +399,22 @@
         }
         $(document).ready(function() {
 
+
+            $(".Notice").on('click',function(){
+
+                var val = $(this).val();
+
+                if(val == 0){
+                    $("#noti_pan").show();
+                }else {
+                    $("#noti_pan").hide();
+                }
+
+//                var style = $("#noti_pan").css("display");
+//                if(style)
+//                $("#noti_pan").slideToggle('fast');
+            });
+
             $('.summernote').summernote({
                 enterHtml: '<p><br></p>' ,
                 height : 400,
