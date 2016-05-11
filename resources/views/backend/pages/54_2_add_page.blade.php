@@ -265,7 +265,23 @@
 
     <script type="text/javascript">
 
-
+        function sendFile(file, editor, welEditable) {
+//            alert("adas");
+            data = new FormData();
+            data.append("file", file);
+            $.ajax({
+                data: data,
+                type: "POST",
+                url: "imageupload",
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+//                    alert(data.url);
+                    editor.insertImage(welEditable, data.url);
+                }
+            });
+        }
         $(document).ready(function() {
 
             $('#FAQ_ANSWER_DETAIL').summernote({
@@ -273,6 +289,9 @@
                 height : 400,
                 focus : true,
                 tabsize : 2,
+                onImageUpload: function(files, editor, welEditable) {
+                    sendFile(files[0], editor, welEditable);
+                }
 
 
 
