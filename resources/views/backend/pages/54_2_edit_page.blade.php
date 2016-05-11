@@ -372,7 +372,7 @@
                                     var FAQ_QUESTION_ID = $("#FAQ_QUESTION_ID").val();
                                     var FAQ_QUESTION_DETAIL= $("#FAQ_QUESTION_DETAIL").val();
                                     var FAQ_ANSWER_ID= $("#FAQ_ANSWER_ID").val();
-                                    var FAQ_ANSWER_DETAIL= $("#FAQ_ANSWER_DETAIL").val();
+                                    var FAQ_ANSWER_DETAIL= $("#FAQ_ANSWER_DETAIL").code();
 
                                     var FAQ_TOPIC_FLAG =  $('input[name=FAQ_TOPIC_FLAG]:checked').val();
                                     var START_DATE= $("#hd_START_DATE").val();
