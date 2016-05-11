@@ -579,7 +579,7 @@ class C56_1Controller extends Controller
 
 
 
-            $id = DB::table('TBL_RISK_QUIZ_MANAGE')->insert($data);
+            $ret = DB::table('TBL_RISK_QUIZ_MANAGE')->insert($data);
         }
 
 

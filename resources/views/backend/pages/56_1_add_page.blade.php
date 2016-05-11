@@ -409,7 +409,7 @@
 
                         <h3> รายละเอียดคําถาม ของท่าน </h3>
                         {{--max-height: 500px; overflow: scroll;--}}
-                        <div id="ret_question" style="padding: 15px; background-color: #f1f1f1; border: 1px solid #C2C2C2">
+                        <div id="ret_question" style="padding: 15px; background-color: #f1f1f1; border: 1px solid #C2C2C2;max-height: 500px; overflow: scroll;">
                             <div class="row" >
                                 <form action="#" id="form_step_3" class="smart-form">
 
@@ -969,10 +969,6 @@ $("#btn_save_question").on('click',function(){
 
 
                 AlertConfirm("Alert",'ท่านแน่ใจที่ต้องการลบ',function(){
-
-
-
-
 
 
 
