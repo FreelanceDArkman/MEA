@@ -39,8 +39,8 @@
 
 
                 <td>{{($item->NEWS_CATE_FLAG == "0" ? "Active" : "Inactive")}}</td>
-                <td>{{get_date_notime($item->START_DATE) }}</td>
-                <td>{{get_date_notime($item->EXPIRE_DATE) }}</td>
+                <td>{{get_date_notime_en($item->START_DATE) }}</td>
+                <td>{{get_date_notime_en($item->EXPIRE_DATE) }}</td>
 
 
             </tr>

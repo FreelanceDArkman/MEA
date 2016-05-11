@@ -42,8 +42,8 @@
 
 
                 <td>{{($item->PLAN_ACTIVE_FLAG == "0" ? "Active" : "Inactive")}}</td>
-                <td>{{get_date_notime($item->PLAN_ACTIVE_DATE) }}</td>
-                <td>{{get_date_notime($item->PLAN_EXPIRE_DATE) }}</td>
+                <td>{{get_date_notime_en($item->PLAN_ACTIVE_DATE) }}</td>
+                <td>{{get_date_notime_en($item->PLAN_EXPIRE_DATE) }}</td>
                 <td>{{$item->EQUITY_MIN_PERCENTAGE}}</td>
                 <td>{{$item->EQUITY_MAX_PERCENTAGE}}</td>
                 <td>{{$item->DEBT_MIN_PERCENTAGE}}</td>
