@@ -35,12 +35,12 @@
         <td>{{$d->EMP_ID}}</td>
         <td>{{$d->FULL_NAME}}</td>
         <td>{{$d->DEP_SHT}}</td>
-        <td>{{$d->EMPLOYER_CONTRIBUTION_1}}</td>
-        <td>{{$d->EMPLOYER_EARNING_2}}</td>
-        <td>{{$d->MEMBER_CONTRIBUTION_3}}</td>
-        <td>{{$d->MEMBER_EARNING_4}}</td>
+        <td>{{meaNumbermoney($d->EMPLOYER_CONTRIBUTION_1)}}</td>
+        <td>{{meaNumbermoney($d->EMPLOYER_EARNING_2)}}</td>
+        <td>{{meaNumbermoney($d->MEMBER_CONTRIBUTION_3)}}</td>
+        <td>{{meaNumbermoney($d->MEMBER_EARNING_4)}}</td>
         <td>{{meaNumbermoney($d->totalA)}}</td>
-        <td>{{$d->tax}}</td>
+        <td>{{meaNumbermoney($d->tax)}}</td>
         <td>{{meaNumbermoney($d->totalAB)}}</td>
 
 
