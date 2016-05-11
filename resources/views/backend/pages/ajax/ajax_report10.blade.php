@@ -19,6 +19,9 @@
     </thead>
     <tbody>
     @foreach($data as $index =>$d)
+
+        @if($d->IOSUSE > 0 || $d->ANDRIODUSE >0)
+
         @if(($index%2)==0)
     <tr>
         @else
@@ -33,7 +36,7 @@
         {{--<td>{{$d->QUIZ_RESULT}}</td>--}}
 
 
-
+                @endif
 
     </tr>
     @endforeach
