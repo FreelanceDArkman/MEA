@@ -127,7 +127,7 @@
 
                     <p>  คะแนนรวมของท่าน : {{$quizprofile->QUIZ_SCORE}}  คะแนน</p>
                     <p>ระดับความเสี่ยงที่ยอมรับได้ : {{$mappingret->RISK_RATE}}</p>
-                        <p> {{$mappingret->RATIO_RECOMMENDED}}</p>
+                        <p>สัดส่วนการลงทุนระหว่างตราสารทุนและตราสารหนี้ : {{$mappingret->RATIO_RECOMMENDED}}</p>
                     @endif
 
                 </div>
@@ -142,7 +142,7 @@
                         <tr>
                             <td style="background-color: #fe5000;color: #fff" >คะแนนรวม</td>
                             <td style="background-color: #fe5000;color: #fff">ความเสี่ยงที่ยอมรับได้</td>
-                            <td style="background-color: #fe5000;color: #fff">สัดส่วนการลงทุนระหว่างตราสารหนี้และตราสารทุน</td>
+                            <td style="background-color: #fe5000;color: #fff">สัดส่วนการลงทุนระหว่างตราสารทุนและตราสารหนี้</td>
                         </tr>
 
                         </thead>
