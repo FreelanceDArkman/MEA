@@ -106,14 +106,53 @@ class AdminReport4Controller extends Controller
             if (!empty($emp_id)&& $check_name== "true") {
                 $where .= " AND fn.EMP_ID = '" . $emp_id . "'";
             }
+
+
             if (!empty($depart)&& $check_depart== "true") {
                 $where .= " AND fn.DEP_SHT  = '" . $depart . "'";
             }
 //        if (!empty($plan)) {
 //            $where .= " AND fn.CONTRIBUTION_RATE_NEW = '" . $plan . "'";
 //        }
+
+//            var_dump($date_end);
             if (!empty($date_start) && !empty($date_end)&& $check_date== "true") {
-                $where .= " AND mm.PERIOD  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
+
+                $arr_start = explode('.',$date_start);
+
+                $arr_end =  explode('.',$date_end);
+
+                $montstart  = $arr_start[1];
+                $yearStart = $arr_start[0];
+
+                $montend  = $arr_end[1];
+                $yearend = $arr_end[0];
+
+
+                $DateStart = new Date($yearStart ."-".$montstart."-1");
+
+
+
+                $da =date('Y-m-d', strtotime("+1 months", strtotime($DateStart)));
+
+                $DateEnd = date('Y-m-d', strtotime($da. ' - 1 days'));
+
+                if($montstart<10){
+                    $montstart = "0".$montstart;
+                }
+
+                if($montend<10){
+                    $montend = "0".$montend;
+                }
+                $strStart = $yearStart .".".$montstart;
+                $strEnd = $yearend .".".$montend;
+
+
+
+//                var_dump($DateEnd);
+
+//                $where .= " AND  YEAR(mm.PERIOD) BETWEEN ".$yearStart." AND " .$yearend ." AND MONTH(mm.PERIOD) BETWEEN " . $montstart ." AND ". $montend ;
+                $where .= " AND mm.PERIOD  BETWEEN '" . $strStart . "' AND '" . $strEnd . "'";
             }
         }
 
