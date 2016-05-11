@@ -105,12 +105,12 @@ class riskassessmentController extends Controller
         ] );
 
 
-        $sqlchoice = "SELECT * FROM TBL_RISK_QUIZ_MANAGE";
+        $sqlchoice = "SELECT  * FROM TBL_RISK_QUIZ_MANAGE qm INNER JOIN TBL_RISK_QUIZ qq ON qq.QUIZ_ID = qm.QUIZ_ID WHERE qq.QUIZ_ACTIVE_FLAG = 0";
 
         $datachoice = DB::select(DB::raw($sqlchoice));
 
 
-        $sqlqtopic ="SELECT DISTINCT(QUESTION_NO),QUESTION_DESC FROM TBL_RISK_QUIZ_MANAGE";
+        $sqlqtopic ="SELECT DISTINCT(QUESTION_NO),QUESTION_DESC FROM TBL_RISK_QUIZ_MANAGE qm INNER JOIN TBL_RISK_QUIZ qq ON qq.QUIZ_ID = qm.QUIZ_ID WHERE qq.QUIZ_ACTIVE_FLAG = 0";
         $dataqtopic = DB::select(DB::raw($sqlqtopic));
        // var_dump($datachoice);
 
@@ -126,7 +126,7 @@ class riskassessmentController extends Controller
         if($quizprofile_profile){
             $quizprofile = $quizprofile_profile[0];
 
-            $sql = "SELECT * FROM TBL_RISK_QUIZ_SCORE_MAPPING";
+            $sql = "SELECT * FROM TBL_RISK_QUIZ_SCORE_MAPPING qm INNER JOIN TBL_RISK_QUIZ qq ON qq.QUIZ_ID = qm.PLAN_ID WHERE qq.QUIZ_ACTIVE_FLAG = 0";
             $mapping = DB::select(DB::raw($sql));
 
 

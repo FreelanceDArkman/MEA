@@ -35,7 +35,8 @@
                 </td>
                 <td style="text-align: center">
                     <a href="/admin/faqtopic/edit/{{$item->FAQ_CATE_ID .",". $item->FAQ_QUESTION_ID}}" class="btn btn-primary btn-xs"><i class="fa fa-gear"></i></a>
-                    <a href="javascript:void(0);"  data-id="{{$item->FAQ_CATE_ID .",". $item->FAQ_QUESTION_ID}}" class="mea_delete_by btn bg-color-red txt-color-white btn-xs"> <i class="glyphicon glyphicon-trash"></i></a>
+
+                    <a href="javascript:void(0);" data-delte="1"  data-id="{{$item->FAQ_CATE_ID .",". $item->FAQ_QUESTION_ID}}" class="mea_delete_by btn bg-color-red txt-color-white btn-xs"> <i class="glyphicon glyphicon-trash"></i></a>
 
                 </td>
                 <td>{{$item->FAQ_CATE_NAME}}</td>
