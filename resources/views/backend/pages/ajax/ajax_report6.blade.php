@@ -31,7 +31,7 @@
         <td>{{$d->EMP_ID}}</td>
         <td>{{$d->FULL_NAME}}</td>
         <td>{{$d->DEP_SHT}}</td>
-        <td>{{get_date_notime($d->LEAVE_FUND_GROUP_DATE)}}</td>
+        <td>{{ ($d->LEAVE_FUND_GROUP_DATE == null ? "" : get_date_notime($d->LEAVE_FUND_GROUP_DATE)) }}</td>
         <td>{{$d->STATUS_DESC}}</td>
 
 
