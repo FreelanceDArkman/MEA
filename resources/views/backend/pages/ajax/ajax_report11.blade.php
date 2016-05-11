@@ -10,7 +10,7 @@
     </tr>
     <tr>
         <th>วันที่</th>
-        <th>แผนการลงทุน</th>
+        <th>แผนการลงทุน <span id="title_th"></span></th>
 
 
 

@@ -224,6 +224,8 @@
                 if(check_date && date_start != "" && date_end != "" ){
                     var str =  'ในช่วงวันที่ ' + GetDateFormat(date_start) + ' ถึง ' + GetDateFormat(date_end);
                     $('.report-period').html(str);
+
+
                 }
                 var jsondata = {
                     pagesize : PageSizeAll,
@@ -297,6 +299,13 @@
 
             $("#serch_data").html(data.html);
             $("#serch_data").fadeIn('300');
+
+            if($("#plan").val()> 0){
+                var val  =$("#plan").val();
+              var ss=  $("#plan option[value='"+val+"']").text();
+                $("#title_th").html(ss);
+            }
+
 
 
             $("#page_click_search li a").on('click',PageRenderSearch);
