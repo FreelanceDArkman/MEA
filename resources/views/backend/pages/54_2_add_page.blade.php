@@ -109,7 +109,12 @@
                                     <section>
                                         <label class="input">
                                             <span style="font-size: 18px">รายละเอียดคำตอบ</span>
-                                            <textarea class="form-control"  rows="10" id="FAQ_ANSWER_DETAIL" name="FAQ_ANSWER_DETAIL" ></textarea>
+                                            <div style="border:1px solid #BDBDBD;">
+
+                                                <div  id="FAQ_ANSWER_DETAIL" name="FAQ_ANSWER_DETAIL"></div>
+                                            </div>
+
+                                            {{--<textarea class="form-control"  rows="10" id="FAQ_ANSWER_DETAIL" name="FAQ_ANSWER_DETAIL" ></textarea>--}}
                                         </label>
                                     </section>
                                 </fieldset>
@@ -263,16 +268,22 @@
 
         $(document).ready(function() {
 
+            $('#FAQ_ANSWER_DETAIL').summernote({
+                enterHtml: '<p><br></p>' ,
+                height : 400,
+                focus : true,
+                tabsize : 2,
 
 
 
+
+            });
 
             $.validator.addMethod("valueNotEquals", function(value, element, arg){
                 return arg != value;
             }, "Please Choose one");
 
             var $registerForm = $("#smart-form-register").validate({
-
 
 
                 // Rules for form validation
@@ -317,7 +328,10 @@
                                     var FAQ_QUESTION_ID = $("#FAQ_QUESTION_ID").val();
                                     var FAQ_QUESTION_DETAIL= $("#FAQ_QUESTION_DETAIL").val();
                                     var FAQ_ANSWER_ID= $("#FAQ_ANSWER_ID").val();
-                                    var FAQ_ANSWER_DETAIL= $("#FAQ_ANSWER_DETAIL").val();
+
+                                    var FAQ_ANSWER_DETAIL= $("#FAQ_ANSWER_DETAIL").code();
+
+//                                    var FAQ_ANSWER_DETAIL= $("#FAQ_ANSWER_DETAIL").val();
 
                                     var FAQ_TOPIC_FLAG =  $('input[name=FAQ_TOPIC_FLAG]:checked').val();
                                     var START_DATE= $("#hd_START_DATE").val();
@@ -386,7 +400,6 @@
 //                    alert("error");
                 }
             });
-
 
 
 
