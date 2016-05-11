@@ -292,8 +292,10 @@ LEFT OUTER JOIN ( SELECT SUM(andr.COUNT_FIRST_ACTIVATED) as AndrCOUNT, CONVERT(V
 
                 foreach ($results as $user) {
 
+                    if($user["IOSUSE"] >0 || $user["ANDRIODUSE"] > 0){
+                        $sheet->appendRow($user);
+                    }
 
-                    $sheet->appendRow($user);
                 }
 
 
