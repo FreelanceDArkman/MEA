@@ -501,8 +501,6 @@
                                         dataimport.append("filethumbnail", filethumbnail[0]);
                                     }
 
-
-//                                        alert(filesPDF);
                                     $.ajax({
 
                                         type: 'POST', // or post?

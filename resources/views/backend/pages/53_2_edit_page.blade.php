@@ -434,8 +434,6 @@
                 var catVal = $(this).val();
                 Checkoncontentinput(catVal);
 
-
-
             });
 
 
