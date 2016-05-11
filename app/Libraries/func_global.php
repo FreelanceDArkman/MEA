@@ -258,12 +258,12 @@ function getSideBar($menulsit){
                     "url" => "/admin/faqcate",
                     "sub_mini" => array(
                         "add" => array(
-                            "title"=>"สร้างหมวดหมู่ข่าว",
+                            "title"=>"สร้างหมวดหมู่หัวข้อถาม-ตอบ",
                             "url" => "/admin/faqcate/add"
 
                         ),
                         "edit" => array(
-                            "title"=>"แกไข้หมวดหมู่ข่าว",
+                            "title"=>"แกไข้หมวดหมู่หัวข้อถาม-ตอบ",
                             "url" => "/admin/faqcate/edit"
 
                         )
@@ -276,12 +276,12 @@ function getSideBar($menulsit){
                     "url" => "/admin/faqtopic",
                     "sub_mini" => array(
                         "add" => array(
-                            "title"=>"สร้างหัวข้อข่าว",
+                            "title"=>"สร้างหัวข้อถาม-ตอบ",
                             "url" => "/admin/faqtopic/add"
 
                         ),
                         "edit" => array(
-                            "title"=>"แก้ไขหัวข้อข่าว",
+                            "title"=>"แก้ไขหัวข้อถาม-ตอบ",
                             "url" => "/admin/faqtopic/edit"
 
                         )
