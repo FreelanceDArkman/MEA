@@ -585,6 +585,9 @@
             meaDatepicker("START_DATE");
 
             meaDatepicker("EXPIRE_DATE");
+
+            meaDatepicker("Notice_start_DATE");
+            meaDatepicker("Notice_End_DATE");
 //            meaDatepicker("comeback");
 //
 //
