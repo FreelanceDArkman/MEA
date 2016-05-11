@@ -127,7 +127,7 @@
                                 <div  style="border: 1px solid #BDBDBD">
 
 
-                                    <div  id="FAQ_ANSWER_DETAIL" name="FAQ_ANSWER_DETAIL"></div>
+                                    <div  id="FAQ_ANSWER_DETAIL" name="FAQ_ANSWER_DETAIL">{!! $Topicdata->FAQ_ANSWER_DETAIL!!}</div>
                                     {{--<div class="summernote"  >--}}
 
                                     {{--</div>--}}
@@ -318,7 +318,7 @@
 
             });
 
-            $('.summernote').code({!! $Topicdata->FAQ_ANSWER_DETAIL!!});
+            {{--$('#FAQ_ANSWER_DETAIL').code({!! $Topicdata->FAQ_ANSWER_DETAIL!!});--}}
 
 
 
