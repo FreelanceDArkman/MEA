@@ -266,7 +266,7 @@ class C53_2Controller extends Controller
                 $filePDF = $importpdf->getClientOriginalName();
                 $importpdf->move(public_path().$pathpdf , $filePDF);
 
-                file_put_contents( 'C:\FileSharing\fund_file\contents', $filePDF);
+                //file_put_contents( 'C:\FileSharing\fund_file\contents', $filePDF);
             }
 
 
@@ -274,7 +274,7 @@ class C53_2Controller extends Controller
                 $fileThumb = $thumbnail->getClientOriginalName();
                 $thumbnail->move(public_path().$pathThunb , $fileThumb);
 
-                file_put_contents( 'C:\FileSharing\fund_file\contents', $fileThumb);
+                //file_put_contents( 'C:\FileSharing\fund_file\contents', $fileThumb);
             }
 
 
