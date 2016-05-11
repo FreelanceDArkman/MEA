@@ -419,7 +419,7 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
                         $fund = $value["leave_fund_group_date"];
                         $firstlogin = $value["first_login_flag"];
 
-                        $update1 = "UPDATE TBL_USER SET USER_STATUS_ID = '".$StatusID."', LEAVE_FUND_GROUP_DATE='".$fund."' ,FIRST_LOGIN_FLAG = '".$firstlogin."' WHERE EMP_ID = '".$EMP_ID."' ";
+                        $update1 = "UPDATE TBL_USER SET USER_STATUS_ID = '".$StatusID."', LEAVE_FUND_GROUP_DATE='".$fund."' ,LEAVE_FUND_FLAG = '".$firstlogin."' WHERE EMP_ID = '".$EMP_ID."' ";
                         DB::insert(DB::raw($update1));
                         break;
                     case "3":

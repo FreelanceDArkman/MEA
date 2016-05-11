@@ -100,7 +100,7 @@ $arrSidebar =getSideBar($data);
                                 </p>
                                 <p>ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel
                                 <table style="width: 100px;" class="table table-bordered">
-                                    <tr><td>EMP_ID</td><td>USER_STATUS_ID</td><td>LEAVE_FUND_GROUP_DATE</td><td>FIRST_LOGIN_FLAG</td></tr>
+                                    <tr><td>EMP_ID</td><td>USER_STATUS_ID</td><td>LEAVE_FUND_GROUP_DATE</td><td>LEAVE_FUND_FLAG</td></tr>
                                     <tr><td>0000001</td><td>11</td>
                                     <td>2015-01-01</td>
                                     <td>1</td></tr>
