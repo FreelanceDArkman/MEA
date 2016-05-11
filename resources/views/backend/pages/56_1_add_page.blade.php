@@ -685,8 +685,8 @@
 
 
                                     var QUIZ_ACTIVE_FLAG ='1';
-                                    var QUIZ_ACTIVE_DATE= '2000-01-01';
-                                    var QUIZ_EXPIRE_DATE= '9999-12-31';
+//                                    var QUIZ_ACTIVE_DATE= '2000-01-01';
+//                                    var QUIZ_EXPIRE_DATE= '9999-12-31';
                                     var isupdate = false;
 
                                     if($("#quisid").data('update')){
