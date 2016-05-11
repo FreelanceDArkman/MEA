@@ -62,12 +62,14 @@
 
                             <fieldset>
                                 <section>
+                                    <label style="font-size: 18px">รหัสหมวดหมู่ข่าว</label>
                                     <label class="input">
                                         <input type="text" id="NEWS_CATE_ID" disabled="disabled" style="background-color: #f1f1f1;" value="{{$editdata->NEWS_CATE_ID}}" name="NEWS_CATE_ID" placeholder="รหัสหมวดหมู่ข่าว">
                                     </label>
                                 </section>
 
                                 <section>
+                                    <label style="font-size: 18px">ชื่อหมวดหมู่ข่าว</label>
                                     <label class="input">
                                         <input type="text" id="NEWS_CATE_NAME" value="{{$editdata->NEWS_CATE_NAME}}" name="NEWS_CATE_NAME" placeholder="ชื่อหมวดหมู่ข่าว">
                                     </label>
@@ -117,6 +119,7 @@
                             <fieldset>
                                 <div class="row">
                                     <section class="col col-6">
+                                        <label style="font-size: 18px">เลือกเมนูหลัก</label>
                                         <label class="input">
                                             <select class="form-control" id="MENU_GROUP_ID" name="MENU_GROUP_ID">
                                                 <option value="default">เลือกเมนูหลัก</option>
@@ -135,6 +138,7 @@
                                         </label>
                                     </section>
                                     <section class="col col-6">
+                                        <label style="font-size: 18px">เลือกเมนูย่อย</label>
                                         <label class="input">
                                             <select class="form-control" id="MENU_ID" name="MENU_ID">
                                                 <option value="default">เลือกเมนูย่อย</option>
@@ -165,6 +169,7 @@
                                 <div class="row">
 
                                     <section class="col col-6">
+                                        <label style="font-size: 18px">วันที่เริ่มต้น</label>
                                         <label class="input"> <i class="icon-append fa fa-calendar"></i>
 
                                             <input type="text"   name="START_DATE" value="{{get_date_notime_en($editdata->START_DATE)}}" class="mea_date_picker"  id="START_DATE" placeholder="วันที่เริ่มต้น"  >
@@ -173,6 +178,7 @@
                                     </section>
 
                                     <section class="col col-6">
+                                        <label style="font-size: 18px">วันที่สิ้นสุด</label>
                                         <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                             <input type="text" name="EXPIRE_DATE"  class="mea_date_picker" value="{{get_date_notime_en($editdata->EXPIRE_DATE)}}"  id="EXPIRE_DATE" placeholder="วันที่สิ้นสุด" >
                                             <input type="hidden" id="hd_EXPIRE_DATE" value="{{get_date_sql($editdata->EXPIRE_DATE)}}">

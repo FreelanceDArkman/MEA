@@ -215,7 +215,7 @@ function getSideBar($menulsit){
 
                         ),
                         "edit" => array(
-                            "title"=>"แกไข้หมวดหมู่ข่าว",
+                            "title"=>"แกไขหมวดหมู่ข่าว",
                             "url" => "/admin/newstopic/edit"
 
                         )
