@@ -143,6 +143,7 @@
                                     </section>
 
                                     <section class="col col-6" id="expire_check">
+                                        <lable style="font-size:18px">สัดส่วนตราสารหนี้ (ขั้นสูง)</lable>
                                         <label class="input state-success">
                                             <input type="text" id="DEBT_MAX" name="DEBT_MAX"  value="{{$editdata->DEBT_MAX_PERCENTAGE}}"class="mea_date_picker" placeholder="สัดส่วนตราสารหนี้ (ขั้นสูง)"   >
                                         </label>
