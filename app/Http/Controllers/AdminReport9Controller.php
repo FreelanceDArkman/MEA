@@ -328,7 +328,7 @@ OUTER APPLY ( SELECT TOP 1  m.PERIOD ,m.EMPLOYER_CONTRIBUTION_1,m.EMPLOYER_EARNI
 
                 $sheet->row(1, array('รายงานข้อมูลผลประโยชน์สมาชิก'));
                 if($ArrParam["check_date"] == "true" && $ArrParam["date_start"] != "" && $ArrParam["date_end"] != ""){
-                    $sheet->row(2, array('ในช่วงวันที่ ' . get_date_notime($ArrParam["date_start"]) . ' ถึง ' . get_date_notime($ArrParam["date_end"])   ));
+                    $sheet->row(2, array('ในช่วงวันที่ ' . $ArrParam["date_start"] . ' ถึง ' . $ArrParam["date_end"]   ));
                 }
 
                 $sheet->row(3, array('รายงานข้อมูล ณ วันที่ ' . get_date_notime(date("Y-m-d H:i:s"))));
@@ -683,7 +683,7 @@ FROM TBL_MEMBER_BENEFITS m WHERE m.EMP_ID= fn.EMP_ID ORDER BY m.PERIOD DESC)  mm
                 $sheet->row(1, array('รายงานข้อมูลเปรียบเทียบเงินกองทุนและเงินบำเหน็จ'));
 
                 if($ArrParam["check_date"] == "true" && $ArrParam["date_start"] != "" && $ArrParam["date_end"] != ""){
-                    $sheet->row(2, array('ในช่วงวันที่ ' . get_date_notime($ArrParam["date_start"]) . ' ถึง ' . get_date_notime($ArrParam["date_end"])   ));
+                    $sheet->row(2, array('ในช่วงวันที่ ' . $ArrParam["date_start"] . ' ถึง ' . $ArrParam["date_end"]  ));
                 }
 
                 $sheet->row(3, array('รายงานข้อมูล ณ วันที่ ' . get_date_notime(date("Y-m-d H:i:s"))));

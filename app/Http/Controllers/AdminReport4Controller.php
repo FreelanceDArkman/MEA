@@ -333,7 +333,7 @@ FROM TBL_EMPLOYEE_INFO fn LEFT OUTER JOIN TBL_MEMBER_BENEFITS mm ON mm.EMP_ID = 
                 $sheet->row(1, array('รายงานข้อมูลการลงทุนของสมาชิก'));
 
                 if($ArrParam["check_date"] == "true" && $ArrParam["date_start"] != "" && $ArrParam["date_end"] != ""){
-                    $sheet->row(2, array('ในช่วงวันที่ ' . get_date_notime($ArrParam["date_start"]) . ' ถึง ' . get_date_notime($ArrParam["date_end"])   ));
+                    $sheet->row(2, array('ในช่วงวันที่ ' . $ArrParam["date_start"] . ' ถึง ' . $ArrParam["date_end"]  ));
                 }
 
                 $sheet->row(3, array('รายงานข้อมูล ณ วันที่ ' . get_date_notime(date("Y-m-d H:i:s"))));
