@@ -89,13 +89,13 @@ class C56_1Controller extends Controller
         $dateEnd = new Date('9999-12-31 00:00:00.000') ;
 
 
-//        if($QUIZ_ACTIVE_DATE != ""){
-//            $datestart = new Date($QUIZ_ACTIVE_DATE);
-//        }
-//
-//        if($QUIZ_EXPIRE_DATE != ""){
-//            $dateEnd = new Date($QUIZ_EXPIRE_DATE);
-//        }
+        if($QUIZ_ACTIVE_DATE != ""){
+            $datestart = new Date($QUIZ_ACTIVE_DATE);
+        }
+
+        if($QUIZ_EXPIRE_DATE != ""){
+            $dateEnd = new Date($QUIZ_EXPIRE_DATE);
+        }
 
         $data = array('QUIZ_ID' => $QUIZ_ID,
             'QUIZ_DESC' =>$QUIZ_DESC,
