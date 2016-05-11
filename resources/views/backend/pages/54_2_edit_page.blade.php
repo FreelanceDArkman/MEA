@@ -81,8 +81,6 @@
 
                             <div class="smart-form">
 
-
-
                                 <fieldset>
                                     <section>
 
@@ -110,17 +108,31 @@
                                         </label>
                                     </section>
 
-                                    <section>
-                                        <label class="input">
-                                            <span style="font-size: 18px">รายละเอียดคำตอบ</span>
-                                            <textarea class="form-control"  rows="10" style="font-size: 18px" id="FAQ_ANSWER_DETAIL" name="FAQ_ANSWER_DETAIL" >{{$Topicdata->FAQ_ANSWER_DETAIL}}</textarea>
-                                        </label>
-                                    </section>
+
                                 </fieldset>
 
                             </div>
 
+                            {{--<section>--}}
+                                {{--<label class="input">--}}
+                                    {{--<span style="font-size: 18px">รายละเอียดคำตอบ</span>--}}
+                                    {{--<textarea class="form-control"  rows="10" style="font-size: 18px" id="FAQ_ANSWER_DETAIL" name="FAQ_ANSWER_DETAIL" >{{$Topicdata->FAQ_ANSWER_DETAIL}}</textarea>--}}
+                                {{--</label>--}}
+                            {{--</section>--}}
+                            <div id="editor" style="padding:15px;">
+                                <header>
+                                    รายละเอียดคำตอบ
+                                </header>
 
+                                <div  style="border: 1px solid #BDBDBD">
+
+
+                                    <div  id="FAQ_ANSWER_DETAIL" name="FAQ_ANSWER_DETAIL">{{$Topicdata->FAQ_ANSWER_DETAIL}}</div>
+                                    {{--<div class="summernote"  >--}}
+
+                                    {{--</div>--}}
+                                </div>
+                            </div>
                             <div class="smart-form">
 
                                 <fieldset>
@@ -271,9 +283,40 @@
     <script src="{{asset('backend/js/plugin/summernote/summernote.min.js')}}"></script>
 
     <script type="text/javascript">
-
+        function sendFile(file, editor, welEditable) {
+//            alert("adas");
+            data = new FormData();
+            data.append("file", file);
+            $.ajax({
+                data: data,
+                type: "POST",
+                url: "imageupload",
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(data) {
+//                    alert(data.url);
+                    editor.insertImage(welEditable, data.url);
+                }
+            });
+        }
 
         $(document).ready(function() {
+
+
+            $('#FAQ_ANSWER_DETAIL').summernote({
+                enterHtml: '<p><br></p>' ,
+                height : 400,
+                focus : true,
+                tabsize : 2,
+                onImageUpload: function(files, editor, welEditable) {
+                    sendFile(files[0], editor, welEditable);
+                }
+
+
+
+
+            });
 
 
 

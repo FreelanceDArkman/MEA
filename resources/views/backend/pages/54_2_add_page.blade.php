@@ -106,24 +106,27 @@
                                         </label>
                                     </section>
 
-                                    <section>
-                                        <label class="input">
-                                            <span style="font-size: 18px">รายละเอียดคำตอบ</span>
-                                            <div style="border:1px solid #BDBDBD;">
 
-                                                <div  id="FAQ_ANSWER_DETAIL" name="FAQ_ANSWER_DETAIL"></div>
-                                            </div>
-
-                                            {{--<textarea class="form-control"  rows="10" id="FAQ_ANSWER_DETAIL" name="FAQ_ANSWER_DETAIL" ></textarea>--}}
-                                        </label>
-                                    </section>
                                 </fieldset>
 
                             </div>
 
 
 
+                            <div id="editor" style="padding:15px;">
+                                <header>
+                                    รายละเอียดคำตอบ
+                                </header>
 
+                                <div  style="border: 1px solid #BDBDBD">
+
+
+                                    <div  id="FAQ_ANSWER_DETAIL" name="FAQ_ANSWER_DETAIL"></div>
+                                    {{--<div class="summernote"  >--}}
+
+                                    {{--</div>--}}
+                                </div>
+                            </div>
 
 
 
