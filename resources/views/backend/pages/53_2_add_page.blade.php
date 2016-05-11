@@ -157,9 +157,6 @@
                                 <fieldset>
 
 
-
-
-
                                     <header>
                                         สถานะ
                                     </header>
@@ -196,9 +193,6 @@
 
 
 
-
-
-
                                 </fieldset>
 
 
@@ -232,6 +226,64 @@
 
                                 </fieldset>
 
+{{--//notic pan--}}
+
+                                <fieldset>
+
+                                    <header>
+                                        ท่านต้องการส่ง Notification หรือไม่
+                                    </header>
+
+                                    <section style="margin-top: 15px;margin-left: 20px;">
+                                        <div class="inline-group">
+                                            <label class="radio">
+                                                <input type="radio" class="Notice" name="Notice"  value="0">
+                                                <i></i>ใช่</label>
+                                            <label class="radio">
+                                                <input type="radio" checked="checked" class="Notice" name="Notice" value="1">
+                                                <i></i>ไม่</label>
+
+                                        </div>
+
+
+                                    </section>
+
+
+                                </fieldset>
+                                <fieldset id="noti_pan" style="display: none">
+
+                                    <section>
+
+                                        <label class="input">
+                                            <span style="font-size: 18px">ข้อความที่ต้องการส่ง</span>
+                                            <input type="text" id="noti_message" name="noti_message" placeholder="ข้อความที่ต้องการส่ง">
+                                        </label>
+                                    </section>
+                                    <div class="row">
+
+
+
+                                        <section class="col col-6">
+                                            <label style="font-size: 18px">วันที่เริ่มต้น</label>
+                                            <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                                {{--<span style="font-size: 18px">รหัสหัวข้อข่าว</span>--}}
+
+                                                <input type="text" name="Notice_start_DATE"  class="mea_date_picker" id="Notice_start_DATE" placeholder="วันที่เริ่มต้น"  >
+                                            </label>
+                                        </section>
+
+                                        <section class="col col-6">
+                                            <label style="font-size: 18px">วันที่สิ้นสุด</label>
+                                            <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                                <input type="text" name="Notice_End_DATE"  class="mea_date_picker" id="Notice_End_DATE" placeholder="วันที่สิ้นสุด" >
+
+                                                {{--class="datepicker" data-dateformat='dd/mm/yy'--}}
+                                            </label>
+                                        </section>
+                                    </div>
+
+
+                                </fieldset>
 
 
                                 <footer>
@@ -242,9 +294,6 @@
                                     </button>
                                 </footer>
                             </div>
-
-
-
 
 
                         </form>
@@ -291,14 +340,19 @@
 //                Content Only: Only one
 //
 //                7,8
-            if( parseInt(catVal)  == 9 || parseInt(catVal)  == 1||parseInt(catVal)  == 2||parseInt(catVal)  == 7||parseInt(catVal)  == 8){
+            if( parseInt(catVal)  == 9 || parseInt(catVal)  == 1||parseInt(catVal)  == 2) {
                 $("#editor").show();
                 $("#thunb").show();
-
+                $("#pdf").show();
+            }
+            else  if(parseInt(catVal)  == 7||parseInt(catVal)  == 8){
+                $("#editor").show();
+                $("#pdf").hide();
 
             }else {
                 $("#editor").hide();
                 $("#thunb").hide();
+                $("#pdf").show();
             }
         }
 
@@ -320,6 +374,24 @@
             });
         }
         $(document).ready(function() {
+
+            $(".Notice").on('click',function(){
+
+                var val = $(this).val();
+
+                if(val == 0){
+                    $("#noti_pan").show();
+                }else {
+                    $("#noti_pan").hide();
+                }
+
+//                var style = $("#noti_pan").css("display");
+//                if(style)
+//                $("#noti_pan").slideToggle('fast');
+            });
+
+
+
 
             $('.summernote').summernote({
                 enterHtml: '<p><br></p>' ,
@@ -386,13 +458,20 @@
                                     var NEWS_TOPIC_ID = $("#NEWS_TOPIC_ID").val();
                                     var FILE_NAME= $("#FILE_NAME").val();
 
-                                    var NEWS_TOPIC_FLAG = $(".NEWS_TOPIC_FLAG").val();
+                                    var NEWS_TOPIC_FLAG = $('input[name=NEWS_TOPIC_FLAG]:checked').val();
                                     var START_DATE= $("#hd_START_DATE").val();
                                     var EXPIRE_DATE= $("#hd_EXPIRE_DATE").val();
 
                                     var NEWS_TOPIC_KEYWORD = $("#NEWS_TOPIC_KEYWORD").val();
 
                                     var NEWS_TOPIC_DETAIL = $('.summernote').code();
+
+
+
+                                    var Notice = $('input[name=Notice]:checked').val();
+                                    var Notice_start_DATE = $("#hd_Notice_start_DATE").val();
+                                    var Notice_End_DATE = $("#hd_Notice_End_DATE").val();
+                                    var noti_message = $("#noti_message").val();
 
 
                                     dataimport.append('NEWS_CATE_ID',NEWS_CATE_ID);
@@ -403,6 +482,12 @@
                                     dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
                                     dataimport.append('NEWS_TOPIC_DETAIL',NEWS_TOPIC_DETAIL);
                                     dataimport.append('NEWS_TOPIC_KEYWORD',NEWS_TOPIC_KEYWORD);
+
+                                    dataimport.append('Notice',Notice);
+                                    dataimport.append('Notice_start_DATE',Notice_start_DATE);
+                                    dataimport.append('Notice_End_DATE',Notice_End_DATE);
+                                    dataimport.append('noti_message',noti_message);
+
 
 
                                     var filesPDF = $("#importpdf").get(0).files;
@@ -480,6 +565,10 @@
             meaDatepicker("START_DATE");
 
             meaDatepicker("EXPIRE_DATE");
+
+
+            meaDatepicker("Notice_start_DATE");
+            meaDatepicker("Notice_End_DATE");
 //            meaDatepicker("comeback");
 //
 //

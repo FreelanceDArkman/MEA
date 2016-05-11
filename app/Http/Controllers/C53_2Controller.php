@@ -200,6 +200,13 @@ class C53_2Controller extends Controller
         $NEWS_TOPIC_KEYWORD = $request->input("NEWS_TOPIC_KEYWORD");
 
 
+
+        $Notice = $request->input("Notice");
+        $Notice_start_DATE = $request->input("Notice_start_DATE");
+        $Notice_End_DATE = $request->input("Notice_End_DATE");
+        $noti_message = $request->input("noti_message");
+
+
         $chk = "SELECT COUNT(NEWS_TOPIC_ID) As total FROM TBL_NEWS_TOPIC WHERE NEWS_CATE_ID = ".$NEWS_CATE_ID . " AND NEWS_TOPIC_ID = ".$NEWS_TOPIC_ID;
         $all = DB::select(DB::raw($chk));
         $total =  $all[0]->total;
@@ -330,6 +337,22 @@ class C53_2Controller extends Controller
 //            ));
 
             $ret = DB::table('TBL_NEWS_TOPIC')->insert($data);
+
+//            $Notice = $request->input("Notice");
+//            $Notice_start_DATE = $request->input("Notice_start_DATE");
+//            $Notice_End_DATE = $request->input("Notice_End_DATE");
+//            $noti_message = $request->input("noti_message");
+
+            if($Notice == 0){
+                $datanotice = array(
+
+                    'NOTIFY_MSG' =>$noti_message,
+                    'START_DATE'=>$Notice_start_DATE,
+                    'END_DATE'=>$Notice_End_DATE
+                );
+
+                DB::table('TBL_NEWS_NOTIFICATION')->insert($datanotice);
+            }
         }
 
 

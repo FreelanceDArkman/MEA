@@ -309,14 +309,19 @@
 //                Content Only: Only one
 //
 //                7,8
-            if( parseInt(catVal)  == 9 || parseInt(catVal)  == 1||parseInt(catVal)  == 2||parseInt(catVal)  == 7||parseInt(catVal)  == 8){
+            if( parseInt(catVal)  == 9 || parseInt(catVal)  == 1||parseInt(catVal)  == 2) {
                 $("#editor").show();
                 $("#thunb").show();
-
+                $("#pdf").show();
+            }
+            else  if(parseInt(catVal)  == 7||parseInt(catVal)  == 8){
+                $("#editor").show();
+                $("#pdf").hide();
 
             }else {
                 $("#editor").hide();
                 $("#thunb").hide();
+                $("#pdf").show();
             }
         }
 
