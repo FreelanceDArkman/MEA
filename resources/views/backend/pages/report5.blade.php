@@ -47,7 +47,7 @@
                                     </label>
                                 </section>
                                 <section class="col col-4">
-                                    <label class="label"><input type="checkbox" id="check_plan" value="plan"> อัตราสมทบ</label>
+                                    <label class="label"><input type="checkbox" id="check_plan" value="plan"> ประเภทสมาชิก</label>
                                     <label class="input">
 
                                         <select name="plan" id="plan" class="form-control">
@@ -125,7 +125,7 @@
                         <!-- widget content -->
                         <div class="widget-body">
                             <p class="report-title">
-                                ข้อมูลสมากชิกทุกประเภท
+                                ข้อมูลสมาชิกทุกประเภท
 
                             </p>
                             <p class="report-period"> </p>
