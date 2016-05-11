@@ -51,7 +51,7 @@ class AdminReport12Controller extends Controller
         $check_date=$ArrParam["check_date"] ;
 
 
-        $where = " WHERE lg.USERNAME IS NOT  NULL AND AND lg.ACTIVITY = 'Login'";
+        $where = " WHERE lg.USERNAME IS NOT  NULL AND  lg.ACTIVITY = 'Login'";
 
         if (!empty($emp_id) && $check_name== "true") {
             $where .= " AND lg.USERNAME = '" . $emp_id . "'";
