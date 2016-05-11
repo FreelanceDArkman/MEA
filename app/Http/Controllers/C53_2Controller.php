@@ -224,8 +224,8 @@ class C53_2Controller extends Controller
             $meapath =DB::table('TBL_CONTROL_CFG')->get();
 
 
-            $datestart = new Date('2000-1-1 00:00:00.000') ;
-            $dateEnd = new Date('9999-12-31 00:00:00.000') ;
+            $datestart = new Date('2000-1-1 00:00:00.000');
+            $dateEnd = new Date('9999-12-31 00:00:00.000');
 
 
             if($START_DATE != ""){
@@ -265,12 +265,16 @@ class C53_2Controller extends Controller
             if($importpdf != null){
                 $filePDF = $importpdf->getClientOriginalName();
                 $importpdf->move(public_path().$pathpdf , $filePDF);
+
+                file_put_contents( 'C:\FileSharing\fund_file\contents', $filePDF);
             }
 
 
             if($thumbnail != null){
                 $fileThumb = $thumbnail->getClientOriginalName();
                 $thumbnail->move(public_path().$pathThunb , $fileThumb);
+
+                file_put_contents( 'C:\FileSharing\fund_file\contents', $fileThumb);
             }
 
 
