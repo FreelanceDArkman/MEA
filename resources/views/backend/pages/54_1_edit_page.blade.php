@@ -169,7 +169,7 @@
                                         <section class="col col-6">
                                             <span style="font-size: 18px">วันที่เริ่มต้น</span>
                                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                                <input type="text" name="START_DATE"  value="{{get_date_notime($Topicdata->START_DATE)}}" class="mea_date_picker" id="START_DATE" placeholder="วันที่เริ่มต้น"  >
+                                                <input type="text" name="START_DATE"  value="{{get_date_notime_en($Topicdata->START_DATE)}}" class="mea_date_picker" id="START_DATE" placeholder="วันที่เริ่มต้น"  >
                                                 <input type="hidden" id="hd_START_DATE" value="{{get_date_sql($Topicdata->START_DATE)}}">
                                             </label>
                                         </section>
@@ -177,7 +177,7 @@
                                         <section class="col col-6">
                                             <span style="font-size: 18px">วันที่สิ้นสุด</span>
                                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
-                                                <input type="text" name="EXPIRE_DATE"  value="{{get_date_notime($Topicdata->EXPIRE_DATE)}}" class="mea_date_picker" id="EXPIRE_DATE" placeholder="วันที่สิ้นสุด" >
+                                                <input type="text" name="EXPIRE_DATE"  value="{{get_date_notime_en($Topicdata->EXPIRE_DATE)}}" class="mea_date_picker" id="EXPIRE_DATE" placeholder="วันที่สิ้นสุด" >
                                                 <input type="hidden" id="hd_EXPIRE_DATE" value="{{get_date_sql($Topicdata->EXPIRE_DATE)}}">
 
                                                 {{--class="datepicker" data-dateformat='dd/mm/yy'--}}

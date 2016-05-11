@@ -263,7 +263,7 @@ function getSideBar($menulsit){
 
                         ),
                         "edit" => array(
-                            "title"=>"แกไข้หมวดหมู่หัวข้อถาม-ตอบ",
+                            "title"=>"แก้ไข้หมวดหมู่หัวข้อถาม-ตอบ",
                             "url" => "/admin/faqcate/edit"
 
                         )
