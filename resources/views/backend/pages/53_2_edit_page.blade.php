@@ -387,7 +387,7 @@
             $.ajax({
                 data: data,
                 type: "POST",
-                url: "imageupload",
+                url: "/admin/news/imageupload",
                 cache: false,
                 contentType: false,
                 processData: false,
