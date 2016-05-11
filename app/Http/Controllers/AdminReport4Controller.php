@@ -63,7 +63,37 @@ class AdminReport4Controller extends Controller
 //            $where .= " AND fn.CONTRIBUTION_RATE_NEW = '" . $plan . "'";
 //        }
         if (!empty($date_start) && !empty($date_end)&& $check_date== "true") {
-            $where .= " AND mm.PERIOD  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
+
+
+            $arr_start = explode('.',$date_start);
+
+            $arr_end =  explode('.',$date_end);
+
+            $montstart  = $arr_start[1];
+            $yearStart = $arr_start[0];
+
+            $montend  = $arr_end[1];
+            $yearend = $arr_end[0];
+
+
+            $DateStart = new Date($yearStart ."-".$montstart."-1");
+
+
+
+            $da =date('Y-m-d', strtotime("+1 months", strtotime($DateStart)));
+
+            $DateEnd = date('Y-m-d', strtotime($da. ' - 1 days'));
+
+            if($montstart<10){
+                $montstart = "0".$montstart;
+            }
+
+            if($montend<10){
+                $montend = "0".$montend;
+            }
+            $strStart = $yearStart .".".$montstart;
+            $strEnd = $yearend .".".$montend;
+            $where .= " AND mm.PERIOD  BETWEEN '" . $strStart . "' AND '" . $strEnd . "'";
         }
 
 
