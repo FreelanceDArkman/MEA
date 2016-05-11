@@ -135,7 +135,7 @@
                         <!-- widget content -->
                         <div class="widget-body">
                             <p class="report-title">
-                                รายงานข้อมูลการลงทุนของสมาชิก
+                                รายงานแสดงข้อมูลเงินสะสม เงินสมทบ ประโยชน์เงินสะสม ประโยชน์เงินสมทบ
 
                             </p>
                             <p class="report-period"> </p>

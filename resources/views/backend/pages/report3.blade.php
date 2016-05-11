@@ -115,7 +115,7 @@
                         <!-- widget content -->
                         <div class="widget-body">
                             <p class="report-title">
-                                รายชื่อสมาชิกเปลี่ยนแผนการลงทุน
+                                รายงานข้อมูลสมาชิกที่มีการเปลี่ยนแปลงอัตราสะสม
 
                             </p>
                             <p class="report-period"> </p>
