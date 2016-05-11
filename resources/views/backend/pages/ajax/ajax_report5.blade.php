@@ -34,7 +34,7 @@
         <td>{{$d->USER_PRIVILEGE_DESC}}</td>
                 <td>{{$d->STATUS_DESC}}</td>
 
-        <td>{{ ($d->LEAVE_FUND_GROUP_DATE == null? "" : $d->LEAVE_FUND_GROUP_DATE) }}</td>
+        <td>{{ ($d->LEAVE_FUND_GROUP_DATE == null? "" : get_date_notime($d->LEAVE_FUND_GROUP_DATE) ) }}</td>
 
 
 
