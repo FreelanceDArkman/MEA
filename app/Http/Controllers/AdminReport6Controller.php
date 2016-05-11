@@ -274,7 +274,7 @@ INNER JOIN TBL_USER_STATUS usr ON usr.USER_STATUS_ID = us.USER_STATUS_ID";
                 $header[1] = "ชื่อ-นามสกุล";
                 $header[2] = "หน่วยงาน";
                 $header[3] = "วันที่พ้นสภาพ";
-                $header[4] = "สาเหตุ้";
+                $header[4] = "สาเหตุ";
 //                $header[4] = "สถานะของสมาชิก";
 //                $header[5] = "วันที่พ้นสภาพ";
 
