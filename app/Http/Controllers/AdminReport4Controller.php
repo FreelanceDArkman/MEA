@@ -291,6 +291,8 @@ FROM TBL_EMPLOYEE_INFO fn LEFT OUTER JOIN TBL_MEMBER_BENEFITS mm ON mm.EMP_ID = 
         // $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
 
         $data = $this->DataSource($ArrParam,true,false);
+
+
         $results = array();
         foreach ($data as $item) {
 //            $item->filed1 = 'some modification';
@@ -303,7 +305,7 @@ FROM TBL_EMPLOYEE_INFO fn LEFT OUTER JOIN TBL_MEMBER_BENEFITS mm ON mm.EMP_ID = 
             #an array syntax, it's up to you
         }
 
-
+//        var_dump($results);
 
         Excel::create('ExcelExport', function ($excel) use ($results,$ArrParam){
 
@@ -318,7 +320,7 @@ FROM TBL_EMPLOYEE_INFO fn LEFT OUTER JOIN TBL_MEMBER_BENEFITS mm ON mm.EMP_ID = 
                 // first row styling and writing content
                 $sheet->mergeCells('A1:H1');
                 $sheet->mergeCells('A2:H2');
-                $sheet->mergeCells('A3:H');
+                $sheet->mergeCells('A3:H3');
                 $sheet->row(1, function ($row) {
                     $row->setFontFamily('Comic Sans MS');
                     $row->setFontSize(20);
