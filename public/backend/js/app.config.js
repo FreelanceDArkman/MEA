@@ -408,7 +408,7 @@ function  GetDateFormat (date){
 function meaDatepicker(id){
 	//var realid = $('.'+id).attr('id');
 
-	if($("#"+id).length == 0){
+	if($("#hd_"+id).length == 0){
 		$("#"+id).after("<input type='hidden' value='' id='hd_"+id+"' />");
 	}
 
