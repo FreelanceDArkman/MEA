@@ -37,7 +37,7 @@
         <td>{{$d->EMPLOYER_EARNING_2}}</td>
         <td>{{$d->MEMBER_CONTRIBUTION_3}}</td>
                 <td>{{$d->MEMBER_EARNING_4}}</td>
-                <td>{{$d->total}}</td>
+                <td>{{ meaNumbermoney($d->total) }}</td>
 
 
 
