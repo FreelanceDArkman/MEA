@@ -40,12 +40,12 @@
         <td>{{$d->PLAN_ID_OLD}}</td>
         <td>{{$d->EQUITY_RATE_OLD}}</td>
         <td>{{$d->DEBT_RATE_OLD}}</td>
-        <td>{{get_date_notime($d->MODIFY_DATE_OLD)}}</td>
+        <td>{{ ($d->MODIFY_DATE_OLD == null? "" : get_date_notime($d->MODIFY_DATE_OLD) ) }}</td>
 
         <td>{{$d->PLAN_ID_NEW}}</td>
         <td>{{$d->EQUITY_RATE_NEW}}</td>
         <td>{{$d->DEBT_RATE_NEW}}</td>
-        <td>{{get_date_notime($d->MODIFY_DATE_NEW)}}</td>
+        <td>{{($d->MODIFY_DATE_NEW == null ? "" :get_date_notime($d->MODIFY_DATE_NEW) )}}</td>
 
 
 

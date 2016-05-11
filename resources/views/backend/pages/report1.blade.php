@@ -88,7 +88,7 @@ $arrSidebar =getSideBar($data);
                                                     </label>
                                                 </section>
                                                 <section class="col col-4">
-                                                    <label class="label"><input type="checkbox" id="check_plan" value="plan"> แผนการลงทุนก</label>
+                                                    <label class="label"><input type="checkbox" id="check_plan" value="plan"> แผนการลงทุน</label>
                                                     <label class="input">
                                                         <select name="plan" id="plan" class="form-control">
                                                             <option value="">แผนการลงทุน</option>
