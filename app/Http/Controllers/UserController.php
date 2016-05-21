@@ -23,7 +23,8 @@ class UserController extends Controller
             'title' => 'จัดการผู้ใช้ | MEA'
         ]);
 
-        $user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
+//        $user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
+        $user_group = DB::table('TBL_USER_STATUS')->select('USER_STATUS_ID','STATUS_DESC')->orderBy('USER_STATUS_ID', 'asc')->get();
 
         return view('backend.pages.users')->with([
             'user_group' => $user_group
@@ -90,7 +91,9 @@ class UserController extends Controller
         $where = " WHERE pri.USER_PRIVILEGE_ID IS NOT  NULL";
 
         if ($filter1 != "") {
-            $where .= " AND pri.USER_PRIVILEGE_ID = '" . $filter1 . "'";
+            $where .= " AND us.USER_STATUS_ID = '" . $filter1 . "'";
+
+            session(['USER_STATUS_ID' => $filter1]);
         }
 
         if ($filter2 != "" && $datasearch != ""){

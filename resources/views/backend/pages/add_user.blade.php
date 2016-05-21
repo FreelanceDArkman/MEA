@@ -62,13 +62,14 @@
 
                             <fieldset>
                                 <section>
-                                    <label class="input"> <i class="icon-append fa fa-user"></i>
+
+                                    <label class="input" style="font-size: 16px"> รหัสพนักงาน
                                         <input type="text" id="user_id" name="user_id" placeholder="รหัสพนักงาน">
                                         <b class="tooltip tooltip-bottom-right">Needed to enter the website</b> </label>
                                 </section>
 
                                 <section>
-                                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                                    <label class="input" style="font-size: 16px"> ชื่อผู้ใช้
                                         <input type="text" id="user_name" name="user_name" placeholder="ชื่อผู้ใช้">
                                         <b class="tooltip tooltip-bottom-right">Needed to enter the website</b> </label>
                                 </section>
@@ -76,13 +77,13 @@
 
 
                                 <section>
-                                    <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                    <label class="input" style="font-size: 16px"> Password
                                         <input type="password" id="password" name="password" placeholder="Password" id="password">
                                         <b class="tooltip tooltip-bottom-right">Don't forget your password</b> </label>
                                 </section>
 
                                 <section>
-                                    <label class="input"> <i class="icon-append fa fa-lock"></i>
+                                    <label class="input" style="font-size: 16px">Confirm password
                                         <input type="password" name="passwordConfirm" placeholder="Confirm password">
                                         <b class="tooltip tooltip-bottom-right">Don't forget your password</b> </label>
                                 </section>
@@ -128,12 +129,12 @@
                             <fieldset>
                                 <div class="row">
                                     <section class="col col-6">
-                                        <label class="input"> <i class="icon-append fa fa-envelope-o"></i>
+                                        <label class="input" style="font-size: 16px"> อีเมล์
                                             <input type="email"  id="email" name="email" placeholder="อีเมล์">
                                             <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
                                     </section>
                                     <section class="col col-6">
-                                        <label class="input"><i class="icon-append fa fa-phone"></i>
+                                        <label class="input" style="font-size: 16px">โทรศัพท์
                                             <input type="text" id="phone" name="phone" placeholder="โทรศัพท์">
                                             <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
                                     </section>
@@ -142,13 +143,13 @@
                                 <div class="row">
 
                                     <section class="col col-6">
-                                        <label class="input"><i class="icon-append fa fa-phone"></i>
+                                        <label class="input" style="font-size: 16px">ที่อยู่
                                             <input type="text" id="address" name="address" placeholder="ที่อยู่">
                                             <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
                                     </section>
 
-                                    <section class="col col-6" id="expire_check">
-                                        <label class="input state-success"> <i class="icon-append fa fa-calendar"></i>
+                                    <section class="col col-6" id="expire_check" style="font-size: 16px">
+                                        <label class="input state-success" style="font-size: 16px"> ระบุวันที่หมดอายุของรหัสผ่าน
                                <input type="text" id="expire" name="expire"  class="mea_date_picker" placeholder="ระบุวันที่หมดอายุของรหัสผ่าน"   >
                                         </label>
                                     </section>
@@ -161,7 +162,7 @@
                             <fieldset>
                                 <div class="row">
                                     <section class="col col-6">
-                                        <label class="select">
+                                        <label class="select" style="font-size: 16px">กลุ่มผู้ใช้
                                             <select id="group_id" name="group_id">
                                                 @if($user_group)
                                                     <option value="default">กลุ่มผู้ใช้</option>
@@ -172,7 +173,7 @@
                                             </select> <i></i> </label>
                                     </section>
                                     <section class="col col-6">
-                                        <label class="select">
+                                        <label class="select" style="font-size: 16px">สถานะ
                                             <select id="status" name="status">
                                                 <option value="default">สถานะ</option>
                                                 @if($user_status)
@@ -187,13 +188,13 @@
                                 <div class="row">
 
                                     <section class="col col-6">
-                                        <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                        <label class="input" style="font-size: 16px"> วันที่ลาออกจากกองทุน
                                             <input type="text" name="retire"  class="mea_date_picker" id="retire" placeholder="วันที่ลาออกจากกองทุน"  >
                                         </label>
                                     </section>
 
                                     <section class="col col-6">
-                                        <label class="input"> <i class="icon-append fa fa-calendar"></i>
+                                        <label class="input" style="font-size: 16px">วันที่กลับเข้ากองทุน
                                             <input type="text" name="comeback"  class="mea_date_picker" id="comeback" placeholder="วันที่กลับเข้ากองทุน" >
 
                                             {{--class="datepicker" data-dateformat='dd/mm/yy'--}}

@@ -63,7 +63,7 @@
                             <fieldset>
                                 <section>
 
-                                    <label class="input">  รหัสพนักงาน </i>
+                                    <label class="input" style="font-size: 16px">  รหัสพนักงาน </i>
                                         <input type="text" value="{{$user->EMP_ID}}" id="user_id" name="user_id" style="background-color:#f1f1f1;color:#333" placeholder="รหัสพนักงาน" disabled>
                                         <b class="tooltip tooltip-bottom-right">Needed to enter the website</b> </label>
                                 </section>

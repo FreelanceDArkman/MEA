@@ -80,7 +80,7 @@
                 <td>{{$userGroup->EMAIL}}</td>
                 <td>{{$userGroup->PHONE}}</td>
                 <td>{{get_date_notime($userGroup->CREATE_DATE)}}</td>
-                <td>{{get_date_notime($userGroup->LAST_MODIFY_DATE)}}</td>
+                <td>{{get_date($userGroup->LAST_MODIFY_DATE)}}</td>
             </tr>
 
 

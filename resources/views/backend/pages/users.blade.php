@@ -86,6 +86,9 @@ $arrSidebar =getSideBar($data);
 						data-widget-sortable="false"
 
 						-->
+
+
+                    <input type="hidden" id="currentStatus" value="{{session()->get('USER_STATUS_ID')}}" />
                     <header>
 
 
@@ -108,7 +111,11 @@ $arrSidebar =getSideBar($data);
                                     {{--<option value="0" >ค้นหากลุ่มผู้ใช้</option>--}}
                                     <option value="" >แสดงทั้งหมด</option>
                                     @foreach($user_group as $index => $group)
-                                        <option value="{{$group->USER_PRIVILEGE_ID}}">{{$group->USER_PRIVILEGE_DESC}}</option>
+                                        @if(session()->get('USER_STATUS_ID') == $group->USER_STATUS_ID)
+                                        <option selected="selected" value="{{$group->USER_STATUS_ID}}">{{$group->STATUS_DESC}}</option>
+                                        @else
+                                            <option value="{{$group->USER_STATUS_ID}}">{{$group->STATUS_DESC}}</option>
+                                        @endif
                                     @endforeach
                                 @endif
                             </select>
@@ -433,7 +440,8 @@ $arrSidebar =getSideBar($data);
     $(document).ready(function() {
         $('html').append('<input type="hidden" value="1" id="currentpage_search" />');
 
-        var jsondata = {pagesize : 25,PageNumber:1};
+        var cu = $("#currentStatus").val();
+        var jsondata = {pagesize : 25,PageNumber:1,filter1:cu};
 
         $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
 

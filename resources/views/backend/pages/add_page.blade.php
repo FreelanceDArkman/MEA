@@ -62,13 +62,15 @@
 
                             <fieldset>
                                 <section>
-                                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                                    <lable style="font-size:18px">รหัสแผนการลงทุน</lable>
+                                    <label class="input">
                                         <input type="text" id="plan_id" name="plan_id" placeholder="รหัสแผนการลงทุน">
                                         <b class="tooltip tooltip-bottom-right">Needed to enter the website</b> </label>
                                 </section>
 
                                 <section>
-                                    <label class="input"> <i class="icon-append fa fa-user"></i>
+                                    <lable style="font-size:18px">ชื่อแผนการลงทุน</lable>
+                                    <label class="input">
                                         <input type="text" id="plan_name" name="plan_name" placeholder="ชื่อแผนการลงทุน">
                                         <b class="tooltip tooltip-bottom-right">Needed to enter the website</b> </label>
                                 </section>
@@ -101,11 +103,13 @@
                             <fieldset>
                                 <div class="row">
                                     <section class="col col-6">
+                                        <lable style="font-size:18px">สัดส่วนตราสารทุน (ขั้นต่ำ)</lable>
                                         <label class="input">
                                             <input type="text"  id="EQUITY_MIN" name="EQUITY_MIN" placeholder="สัดส่วนตราสารทุน (ขั้นต่ำ)  ">
                                              </label>
                                     </section>
                                     <section class="col col-6">
+                                        <lable style="font-size:18px">สัดส่วนตราสารทุน (ขั้นสูง)</lable>
                                         <label class="input">
                                             <input type="text" id="EQUITY_MAX" name="EQUITY_MAX" placeholder="สัดส่วนตราสารทุน (ขั้นสูง)">
                                            </label>
@@ -115,12 +119,15 @@
                                 <div class="row">
 
                                     <section class="col col-6">
+                                        <lable style="font-size:18px">สัดส่วนตราสารหนี้ (ขั้นต่ำ)</lable>
                                         <label class="input">
+
                                             <input type="text" id="DEBT_MIN" name="DEBT_MIN" placeholder="สัดส่วนตราสารหนี้ (ขั้นต่ำ)">
                                              </label>
                                     </section>
 
                                     <section class="col col-6" id="expire_check">
+                                        <lable style="font-size:18px">สัดส่วนตราสารหนี้ (ขั้นสูง)</lable>
                                         <label class="input state-success">
                                             <input type="text" id="DEBT_MAX" name="DEBT_MAX"  class="mea_date_picker" placeholder="สัดส่วนตราสารหนี้ (ขั้นสูง)"   >
                                         </label>
@@ -137,12 +144,14 @@
                                 <div class="row">
 
                                     <section class="col col-6">
+                                        <lable style="font-size:18px">วันที่เริ่มต้น</lable>
                                         <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                             <input type="text" name="plan_start"  class="mea_date_picker" id="plan_start" placeholder="วันที่เริ่มต้น"  >
                                         </label>
                                     </section>
 
                                     <section class="col col-6">
+                                        <lable style="font-size:18px">วันที่สิ้นสุด</lable>
                                         <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                             <input type="text" name="plan_end"  class="mea_date_picker" id="plan_end" placeholder="วันที่สิ้นสุด" >
 
