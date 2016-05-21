@@ -13,8 +13,14 @@ if (!function_exists('getManual')) {
         $man = DB::select(DB::raw($sql44));
 
 
+        if($man != null){
+            return $man[0]->FILE_PATH;
+        }else{
+            return null;
+        }
+
 //        $user_group = DB::table('TBL_MENU_LIST')->get();
-        return $man[0]->FILE_PATH;
+
     }
 
 }

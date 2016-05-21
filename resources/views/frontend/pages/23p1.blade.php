@@ -132,6 +132,8 @@
                                          {{--@endif--}}
                                     </div>
                                 </div>
+
+
                                 @if($Isaccess && get_user_access_status_flag() != 2)
                                 <div class="row">
                                     <div class="col-md-12" style="padding: 0 100px 0 100px;">
@@ -144,6 +146,7 @@
                                 @endif
                             </div>
 
+                           @if($Isaccess && get_user_access_status_flag() != 2)
                             <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}"  >
                                 <form action="{{ action('cumulativeController@InsertPlan') }}" id="sky-form1" class="sky-form" method="post">
                                     {!! csrf_field() !!}
@@ -213,6 +216,12 @@
                                 </form>
                             </div>
 
+                                @else
+                            <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
+                                <strong>สถานะของท่าน คือ สมาชิกแบบคงเงินหรือรับเงินเป็นงวด ไม่สามารถเปลี่ยนอัตราสะสมได้
+                                </strong>
+                            </div>
+                            @endif
 
 
                         </div>

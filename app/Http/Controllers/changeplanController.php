@@ -166,7 +166,6 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND YE
 
 
 
-
         $sql2 = "SELECT TOP 1 * FROM TBL_INFORMATION_FROM_ASSET WHERE EMP_ID  = '".get_userID()."'  ORDER BY Create_DATE DESC";
 
         $Currnentasset = DB::select(DB::raw($sql2))[0];
