@@ -70,11 +70,14 @@ class C59_1Controller extends Controller
 
         $ID=$request->input('ID');
         $NAME=$request->input('NAME');
-        $FILE_PATH=$request->input('FILE_PATH');
+
         $URL=$request->input('URL');
 
+        $thumbnail = $request->file('client_upload');
+        $fileThumb= "";
+        $pathThunb = getenv('THUMB_PATH');
 
-
+        $FILE_PATH="http://measvp.mea.or.th:8081/contents/".$fileThumb;
         $chk = "SELECT COUNT(ID) As total FROM TBL_EXT_LINK WHERE ID = ".$ID ;
         $all = DB::select(DB::raw($chk));
         $total =  $all[0]->total;
@@ -90,7 +93,12 @@ class C59_1Controller extends Controller
                 'URL' => $URL
             );
 
+            if($thumbnail != null){
+                $fileThumb = "client_". $ID .".png";
+                $thumbnail->move(public_path().$pathThunb , $fileThumb);
 
+                //file_put_contents( 'C:\FileSharing\fund_file\contents', $fileThumb);
+            }
             $ret = DB::table('TBL_EXT_LINK')->insert($data);
         }
 
@@ -112,12 +120,15 @@ class C59_1Controller extends Controller
 
         $ID=$request->input('ID');
         $NAME=$request->input('NAME');
-        $FILE_PATH=$request->input('FILE_PATH');
+//        $FILE_PATH=$request->input('FILE_PATH');
         $URL=$request->input('URL');
 
 
+        $thumbnail = $request->file('client_upload');
+        $fileThumb= "";
+        $pathThunb = getenv('THUMB_PATH');
 
-
+        $FILE_PATH="http://measvp.mea.or.th:8081/contents/".$fileThumb;
         $data = array(
 
             'NAME' =>$NAME,
@@ -125,6 +136,13 @@ class C59_1Controller extends Controller
             'URL' => $URL
         );
 
+
+        if($thumbnail != null){
+            $fileThumb = "client_". $ID .".png";
+            $thumbnail->move(public_path().$pathThunb , $fileThumb);
+
+            //file_put_contents( 'C:\FileSharing\fund_file\contents', $fileThumb);
+        }
         $ret = DB::table('TBL_EXT_LINK')->where('ID ',"=",$ID)->update($data);
 
 

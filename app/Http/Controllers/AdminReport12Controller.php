@@ -117,7 +117,7 @@ class AdminReport12Controller extends Controller
         }
 
 
-        $query="SELECT lg.DATETIME,lg.USERNAME,lg.ACCESS_CHANNEL,lg.OS,lg.BROWSER,lg.IP_ADDRESS FROM TBL_HISTORY_LOG lg";
+        $query="SELECT lg.DATETIME,lg.USERNAME,lg.ACTIVITY,lg.ACCESS_CHANNEL,lg.OS,lg.BROWSER,lg.IP_ADDRESS FROM TBL_HISTORY_LOG lg";
 
 
         if($IsCase){
@@ -245,9 +245,9 @@ class AdminReport12Controller extends Controller
 //                ));
                 //
                 // first row styling and writing content
-                $sheet->mergeCells('A1:F1');
-                $sheet->mergeCells('A2:F2');
-                $sheet->mergeCells('A3:F3');
+                $sheet->mergeCells('A1:G1');
+                $sheet->mergeCells('A2:G2');
+                $sheet->mergeCells('A3:G3');
                 $sheet->row(1, function ($row) {
                     $row->setFontFamily('Comic Sans MS');
                     $row->setFontSize(20);
@@ -267,10 +267,11 @@ class AdminReport12Controller extends Controller
                 $header[] = null;
                 $header[0] = 'วันที่';
                 $header[1] = "รหัสพนักงาน";
-                $header[2] = "ช่องทางเข้าใช้งาน";
-                $header[3] = "ระบบปฏิบัติงาน";
-                $header[4] = "บราวเซอร์";
-                $header[5] = "IP Address";
+                $header[2] = "Activity";
+                $header[3] = "ช่องทางเข้าใช้งาน";
+                $header[4] = "ระบบปฏิบัติงาน";
+                $header[5] = "บราวเซอร์";
+                $header[6] = "IP Address";
 
 
 

@@ -4,6 +4,28 @@ use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\DB;
 
 
+
+if (!function_exists('getClientLink')) {
+
+    function getClientLink(){
+        $sql44  = "SELECT * FROM TBL_EXT_LINK";
+
+
+        $man = DB::select(DB::raw($sql44));
+
+
+        if($man != null){
+            return $man;
+        }else{
+            return null;
+        }
+
+//        $user_group = DB::table('TBL_MENU_LIST')->get();
+
+    }
+
+}
+
 if (!function_exists('getManual')) {
 
     function getManual(){

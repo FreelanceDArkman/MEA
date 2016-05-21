@@ -6,11 +6,12 @@
 
     <thead>
     <tr>
-        <th colspan="6" style="text-align: center">รายงานข้อมูล ณ วันที่ {{get_date_notime(date("Y-m-d H:i:s"))}}</th>
+        <th colspan="7" style="text-align: center">รายงานข้อมูล ณ วันที่ {{get_date_notime(date("Y-m-d H:i:s"))}}</th>
     </tr>
     <tr>
         <th>วันที่</th>
         <th>รหัสพนักงาน</th>
+        <th>Activity</th>
         <th>ช่องทางเข้าใช้งาน</th>
         <th>ระบบปฏิบัติงาน</th>
         <th>บราวเซอร์</th>
@@ -26,7 +27,9 @@
             <tr class="odd">
             @endif
         <td>{{get_date($d->DATETIME)}}</td>
+
         <td>{{$d->USERNAME}}</td>
+        <td>{{$d->ACTIVITY}}</td>
         <td>{{$d->ACCESS_CHANNEL}}</td>
         <td>{{$d->OS}}</td>
         <td>{{$d->BROWSER}}</td>

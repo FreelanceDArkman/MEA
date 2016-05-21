@@ -6,7 +6,7 @@
         <tr>
             <th style="width: 5%">รหัส</th>
             <th style="width: 25%">ชื่อหน่วยงาน</th>
-            <th style="width: 35%">Path</th>
+            <th style="width: 35%">อับโหลดรูป <span style="color: red; font-size: 16px"> *ขนาดรูปภาพต้องเป็นขนาด 200 x 150 px เท่านั้น </span></th>
             <th style="width: 35%">Url</th>
             <th style="width: 5%">Action</th>
         </tr>
@@ -17,7 +17,8 @@
     <tr>
         <td> {{$list->ID}} </td>
         <td><input type="text" id="NAME_{{$list->ID}}" value="{{$list->NAME}}" class="form-control"></td>
-        <td><input type="text" id="FILE_PATH_{{$list->ID}}" value="{{$list->FILE_PATH}}" class="form-control"></td>
+        {{--<td><input type="text" id="FILE_PATH_{{$list->ID}}" value="{{$list->FILE_PATH}}" class="form-control"></td>--}}
+        <td><input type="file" class="btn btn-default" id="client_upload_{{$list->ID}}" name="client_upload_{{$list->ID}}"></td>
         <td><input type="text" id="URL_{{$list->ID}}" value="{{$list->URL}}" class="form-control"></td>
         <td>
             <a href="#" class="btn btn-primary btn-xs btn_edit_list" data-id="{{$list->ID}}"  ><i class="fa fa-plus"></i>แก้ไข</a>

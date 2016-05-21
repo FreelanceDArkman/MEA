@@ -72,7 +72,7 @@ $arrSidebar =getSideBar($data);
                                     <tr>
                                         <th>รหัส</th>
                                         <th>ชื่อหน่วยงาน</th>
-                                        <th>Path</th>
+                                        <th>อับโหลดรูป <span style="color: red; font-size: 16px"> *ขนาดรูปภาพต้องเป็นขนาด 200 x 150 px เท่านั้น </span></th>
                                         <th>Url</th>
                                         <th>Action</th>
                                     </tr>
@@ -95,9 +95,10 @@ $arrSidebar =getSideBar($data);
         </section>
     </td>
     <td style="width: 35%">
+
         <section>
             <label class="input">
-                <input type="text" id="FILE_PATH" name="FILE_PATH" class="form-control" style="background: #f0fff0;border-color: #7DC27D;"  />
+            <input type="file" class="btn btn-default" id="client_upload" name="client_upload">
             </label>
         </section>
     </td>
@@ -184,25 +185,63 @@ $arrSidebar =getSideBar($data);
                 var NAME = $("#NAME_" + ID).val();
                 var FILE_PATH = $("#FILE_PATH_" + ID).val();
                 var URL = $("#URL_" + ID).val();
+                var files = $("#client_upload_" + ID).get(0).files;
 
 
 
-                if($("#formadd").valid()){
-                    var jsondata = {
-                        ID : ID,
-                        NAME:NAME,
-                        FILE_PATH:FILE_PATH,
-                        URL:URL};
 
-                }
+                var dataimport = new FormData();
 
-                MeaAjax(jsondata,"/admin/con1/editsave",function(data){
-                    if(data.success){
-                        AlertSuccess("แก้ไขเรียบร้อยแล้ว",function(){
-                            getlist();
-                        });
+                dataimport.append("client_upload", files[0]);
+                dataimport.append("ID", ID);
+                dataimport.append("NAME", NAME);
+                dataimport.append("URL", URL);
+
+
+                $.ajax({
+
+                    type: 'POST', // or post?
+//                dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    url: '/admin/con1/editsave',
+                    data: dataimport,
+
+                    success: function(data){
+                        if(data.success){
+                            $('#progress_import').hide();
+                            AlertSuccess("แก้ไขเรียบร้อยแล้ว",function(){
+
+                                getlist();
+                            });
+                        }else {
+                            Alert("Alert",data.html,null,null);
+                        }
+
+//                Alert('OK', "ข้อมูลได้ถูก update เรียบร้อยแล้ว");
+
+                    },
+                    error: function(xhr, textStatus, thrownError) {
+
                     }
                 });
+
+////                if($("#formadd").valid()){
+//                    var jsondata = {
+//                        ID : ID,
+//                        NAME:NAME,
+//                        FILE_PATH:FILE_PATH,
+//                        URL:URL};
+//
+////                }
+//
+//                MeaAjax(jsondata,"/admin/con1/editsave",function(data){
+//                    if(data.success){
+//                        AlertSuccess("แก้ไขเรียบร้อยแล้ว",function(){
+//                            getlist();
+//                        });
+//                    }
+//                });
 
 
                 return false;
@@ -268,10 +307,7 @@ $arrSidebar =getSideBar($data);
                     required: true,
 
                 },
-                FILE_PATH :{
-                    required: true,
 
-                },
                 URL :{
                     required: true,
 
@@ -303,26 +339,75 @@ $arrSidebar =getSideBar($data);
             var URL = $("#URL").val();
 
 
+            var dataimport = new FormData();
 
+
+
+            var files = $("#client_upload").get(0).files;
+
+            var importType= $(this).attr('data-import');
+
+
+//            dataimport.append("client_upload", files[0]);
+
+//            if (files.length > 0) {
+//
+//
+//
+//            }
             if($("#formadd").valid()){
-                var jsondata = {
-                    ID : ID,
-                    NAME:NAME,
-                    FILE_PATH:FILE_PATH,
-                    URL:URL};
+//                var jsondata = {
+//                    ID : ID,
+//                    NAME:NAME,
+//                    FILE_PATH:FILE_PATH,
+//                    URL:URL};
+
+                dataimport.append("client_upload", files[0]);
+                dataimport.append("ID", ID);
+                dataimport.append("NAME", NAME);
+                dataimport.append("URL", URL);
 
             }
 
-            MeaAjax(jsondata,"/admin/con1/addsave",function(data){
-                if(data.success){
-                    AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
-                        $("#insert-pan").slideToggle('fast');
-                        getlist();
-                    });
-                }else {
-                    Alert("Alert",data.html,null,null);
+
+            $.ajax({
+
+                type: 'POST', // or post?
+//                dataType: 'json',
+                contentType: false,
+                processData: false,
+                url: '/admin/con1/addsave',
+                data: dataimport,
+
+                success: function(data){
+                    if(data.success){
+                        $('#progress_import').hide();
+                        AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
+
+                            getlist();
+                        });
+                    }else {
+                        Alert("Alert",data.html,null,null);
+                    }
+
+//                Alert('OK', "ข้อมูลได้ถูก update เรียบร้อยแล้ว");
+
+                },
+                error: function(xhr, textStatus, thrownError) {
+
                 }
             });
+
+//            MeaAjax(jsondata,"/admin/con1/addsave",function(data){
+//                if(data.success){
+//                    AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
+//                        $("#insert-pan").slideToggle('fast');
+//                        getlist();
+//                    });
+//                }else {
+//                    Alert("Alert",data.html,null,null);
+//                }
+//            });
 
         });
 
