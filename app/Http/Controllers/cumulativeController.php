@@ -310,17 +310,21 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
        }
 
 
-
+        $USER = DB::table('TBL_USER')->where("EMP_ID" ,"=",get_userID())->get()[0];
 
         $effectiveDate = New Date(date("Y",strtotime($datenextmont))."-".date("m",strtotime($datenextmont))."-1");
         $emp_id =  get_userID();
         $plan_id =   $request->input('TYPE_TOPIC');
         $USER_SAVING_RATE =   $request->input('maxVal2');
-        $addby = $request->input('user');
+        $addby = get_userID();
+        $USER_STATUS_ID = $USER->USER_STATUS_ID;
+        $LEAVE_FUND_GROUP_DATE = "NULL";
+        if($USER->LEAVE_FUND_GROUP_DATE != null){
+            $LEAVE_FUND_GROUP_DATE = $USER->LEAVE_FUND_GROUP_DATE;
+        }
 
-
-        $sql = "INSERT INTO TBL_USER_SAVING_RATE (EMP_ID,USER_SAVING_RATE,CHANGE_SAVING_RATE_DATE,EFFECTIVE_DATE,MODIFY_COUNT,MODIFY_BY)
-VALUES( '".$emp_id."' ,$USER_SAVING_RATE, '".$create_date."','".$effectiveDate."',$Modify_count,'".$addby."')";
+        $sql = "INSERT INTO TBL_USER_SAVING_RATE (EMP_ID,USER_SAVING_RATE,CHANGE_SAVING_RATE_DATE,EFFECTIVE_DATE,MODIFY_COUNT,MODIFY_BY,USER_STATUS_ID,LEAVE_FUND_GROUP_DATE)
+VALUES( '".$emp_id."' ,$USER_SAVING_RATE, '".$create_date."','".$effectiveDate."',$Modify_count,'".$addby."',$USER_STATUS_ID,$LEAVE_FUND_GROUP_DATE)";
 
         $ret =DB::insert(DB::raw($sql));
 
