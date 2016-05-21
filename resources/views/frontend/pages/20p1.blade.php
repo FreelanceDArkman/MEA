@@ -253,7 +253,7 @@
                         </div>
                         <div class="tab-pane fade" id="profile-2">
 
-                            <form id="form_resetpass" class="sky-form" action="{{ action('editprofileController@ResetPassworduser') }}" method="post">
+                            <form id="form_resetpass" style="font-family: DB Ozone X !important;" class="reg-page" action="{{ action('editprofileController@ResetPassworduser') }}" method="post">
                                 {!! csrf_field() !!}
                                 <div class="reg-header">
                                     <h2>เปลี่ยนรหัสผ่าน</h2>
@@ -271,19 +271,25 @@
 
 
 
-
+                                <label style="margin-left: 45px">รหัสผ่านเดิม <span class="color-red">*</span></label>
                                 <div class="input-group margin-bottom-20" style="padding: 0 40px 0 40px;">
+
                                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                     <input type="password" maxlength="12" placeholder="รหัสผ่านเดิม" class="form-control" name="old_password" id="old_password">
                                 </div>
-                                <div class="input-group margin-bottom-20"  style="padding: 0 40px 0 40px;">
+                                <label style="margin-left: 45px">รหัสผ่านใหม่ <span class="color-red">*</span></label>
+                                <div class="input-group "  style="padding: 0 40px 0 40px;">
                                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                     <input type="password" maxlength="12" placeholder="รหัสผ่านใหม่" class="form-control" name="new_password" id="new_password">
                                 </div>
-                                <div class="input-group margin-bottom-20"  style="padding: 0 40px 0 40px;">
+                                <span style="margin-left: 45px;font-size: 16px; color: red; line-height: 10px; height: 20px">*รหัสผ่านมีความยาวไม่น้อยกว่า 8-12 หลัก โดยมีทั้งตัวเลขและตัวอักษร   </span>
+                                <div class="margin-bottom-20"></div>
+                                <label style="margin-left: 45px">ยืนยันรหัสผ่านใหม่ <span class="color-red">*</span></label>
+                                <div class="input-group "  style="padding: 0 40px 0 40px;">
                                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                                     <input type="password" maxlength="12" placeholder="ยืนยันรหัสผ่านใหม่" class="form-control" name="con_password" id="con_password">
                                 </div>
+                                <div class="margin-bottom-20"></div>
                                 <div class="row">
                                     <div class="col-md-12"   style="padding: 0 40px 30px 40px;">
                                         <button class="btn-u btn-u-lg btn-block btn-u-red" type="submit">ส่งข้อมูล</button>

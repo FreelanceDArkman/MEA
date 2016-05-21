@@ -50,7 +50,9 @@ a {
    color: #63666a;
    text-decoration: none;
 }
-
+.form-control{
+	height: auto;
+}
 a,
 a:focus,
 a:hover,
