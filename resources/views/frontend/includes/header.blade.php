@@ -25,7 +25,7 @@ $current = Route::getCurrentRoute()->getPath();
                 <li><a href="/contact"><i class="fa fa-map-marker"></i> {{ getGoupName($data,8) }}</a></li>
                 <li class="topbar-devider"></li>
 
-             @if(logged_in())
+             @if(logged_in() && ($current != "firstlogin"))
                     <li> <a href="/profile"><i class="fa fa-user"></i> สวัสดี  {{get_username()}}</a>
 
 

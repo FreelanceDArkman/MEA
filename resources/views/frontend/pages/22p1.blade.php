@@ -184,6 +184,8 @@
 
                             <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}" >
 
+                                @if($numberofchange < 4)
+
                                 {{--{{$Isaccess . "---" .get_user_access_status_flag()}}--}}
 
                                 @if( $Isaccess && get_user_access_status_flag() == 2)
@@ -249,7 +251,11 @@
                                                 @endif
                                             @endif
                                             <footer>
-                                                <button type="submit" class="btn-u btn-u-default">ส่งข้อมูล</button>
+                                                @if($numberofchange == 3)
+                                                <button type="submit" onclick="return check();"  class="btn-u btn-u-default">ส่งข้อมูล</button>
+                                                @else
+                                                    <button type="submit" class="btn-u btn-u-default">ส่งข้อมูล</button>
+                                                    @endif
                                                 <button type="button" class="btn-u" id="btn_cancelinvest" >ยกเลิก</button>
                                             </footer>
                                         </form>
@@ -259,13 +265,20 @@
                                         </div>
                                     @endif
 
+                                    @else
+
+                                        <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
+                                            <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->FUND_PLAN_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
+                                        </div>
+
+
+                                    @endif
+
+
                                 @else
-
                                     <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
-                                        <strong> * การเปลี่ยนแปลงและแก้ไขแผนการลงทุน เปลี่ยนได้ไม่เกินปีละ {{$dataCheck->FUND_PLAN_TIME_CHANGE_PER_YEAR}} ครั้ง ภายในวันที่ {{$dataCheck->FUND_PLAN_CHANGE_PERIOD}} ของทุกเดือน และมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป</strong>
+                                        <strong> * ท่านทำการเปลี่ยนแผนการลงทุนของปีปัจจุบัน ครบจํานวนครั้งที่กองทุนสำรองเลี้ยงชีพกําหนดแล้ว  </strong>
                                     </div>
-
-
                                 @endif
 
                             </div>
@@ -276,10 +289,10 @@
                         </div>
 
                                 @if($ishowhis)
-                        <div class="tab-pane fade active in" id="profile-1">
-                            @else
+                                <div class="tab-pane fade active in" id="profile-1">
+                                @else
                                 <div class="tab-pane fade " id="profile-1">
-                                    @endif
+                                @endif
 
 
                                     <form class="form-inline mea_searchbox" role="form" method="post" action="{{action('changeplanController@getIndexbysearch')}}">
@@ -340,7 +353,7 @@
                                                 {{--<td style="text-align: center;">{{$item->EMP_ID}}</td>--}}
                                                 {{--<td style="text-align: center;">{{$item->FULL_NAME}}</td>--}}
 
-                                                @if( count($historyPlan) > $index+1)DEBT_RATE
+                                                @if( count($historyPlan) > $index+1)
 
                                                 <td style="text-align: center;">{{$historyPlan[$index+1]->PLAN_NAME}}</td>
                                                 <td style="text-align: center;">{{$historyPlan[$index+1]->EQUITY_RATE}}</td>
@@ -383,6 +396,11 @@
     </div>
 
     <script>
+
+
+        function  check(){
+           return confirm('ท่านกำลังทำการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทำรายการ หรือยกเลิก');
+        }
         $(document).ready(function(){
 
 

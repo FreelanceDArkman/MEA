@@ -84,7 +84,7 @@ VALUES($emp_id,$plan_id,$equip,$dept,'".$create_date."','".$effectiveDate."',$Mo
         ] );
 
 
-
+        $numberofchange = $this->getNumofPlan()->TOTAL;
         // saving_rate_change_periodaccess_status_flag
 //         var_dump(session()->get('user_data')->fund_plan_change_per_year . "<br/>");
 //        var_dump(session()->get('user_data')->current_fund_plan_modify_count);
@@ -216,7 +216,8 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
             'infoaset'=>$infoaset,
             'empinfo'=>$empinfo,
             'planchoose'=>$planchoose,
-            'Isaccess' =>$Isaccess
+            'Isaccess' =>$Isaccess,
+            'numberofchange'=>$numberofchange
         ] );
     }
 
@@ -230,13 +231,9 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         ] );
 
 
+        $numberofchange = $this->getNumofPlan()->TOTAL;
 
 
-
-        // saving_rate_change_periodaccess_status_flag
-//         var_dump(session()->get('user_data')->fund_plan_change_per_year . "<br/>");
-//        var_dump(session()->get('user_data')->current_fund_plan_modify_count);
-//access_status_flag
 
         $sql5 = "SELECT USER_PRIVILEGE_DESC FROM tbl_USER us
 INNER JOIN tbl_privilege pi ON pi.USER_PRIVILEGE_ID = us.USER_PRIVILEGE_ID
@@ -365,9 +362,13 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
             'empinfo'=>$empinfo,
             'planchoose'=>$planchoose,
             'Isaccess'=>$Isaccess,
-            'quizdoit' => $quizdoit
+            'quizdoit' => $quizdoit,
+            'numberofchange'=>$numberofchange
         ]);
     }
+
+
+
 
     public function deleplan(Request $request)
     {
@@ -383,5 +384,13 @@ AND YEAR(MODIFY_DATE) = YEAR(GETDATE())";
         }
 
         return redirect()->to('/changeplan')->with('del2','ok');
+    }
+
+
+    public function  getNumofPlan(){
+
+        $count = "SELECT COUNT(*) AS TOTAL FROM TBL_USER_FUND_CHOOSE WHERE EMP_ID = 1234567  AND YEAR(MODIFY_DATE) = YEAR(GETDATE())";
+
+        return DB::select(DB::raw($count))[0];
     }
 }

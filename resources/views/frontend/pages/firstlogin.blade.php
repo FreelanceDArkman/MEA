@@ -23,11 +23,11 @@
 
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+    <div class="row" >
+        <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
 
 
-            <form id="form_resetpass" class="reg-page sky-form" action="{{ action('Auth\AuthController@ResetPassword') }}" method="post">
+            <form id="form_resetpass"  style="font-family: DB Ozone X !important;" class="reg-page " action="{{ action('Auth\AuthController@ResetPassword') }}" method="post">
                 {!! csrf_field() !!}
                 <div class="reg-header">
                     <h2>เปลี่ยนรหัสผ่าน</h2>
@@ -40,25 +40,33 @@
                     {{--@endif--}}
                 </div>
 
-
+                <label for="email">*อีเมล์</label>
                 <div class="input-group ">
                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                    <input type="email" placeholder="อีเมล์" class="form-control" name="email" id="email">
+                    <input type="email" placeholder="อีเมล์" style="background-color: #fff0f0" class="form-control" name="email" id="email">
                 </div>
                 <div class="margin-bottom-20"></div>
+                <label for="old_password">*รหัสผ่านเดิม</label>
                 <div class="input-group ">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <input type="password" placeholder="รหัสผ่านเดิม" class="form-control" name="old_password" id="old_password">
+                    <input type="password" placeholder="รหัสผ่านเดิม"  style="background-color: #fff0f0" class="form-control" name="old_password" id="old_password">
                 </div>
+                <span style="font-size: 16px; color: red; line-height: 10px; height: 20px">*ว/ด/ป เกิดของพนักงาน เช่น 31082525   </span>
+
+
                 <div class="margin-bottom-20"></div>
+                <label for="new_password">*รหัสผ่านใหม่</label>
                 <div class="input-group ">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <input type="password" placeholder="รหัสผ่านใหม่" class="form-control" name="new_password" id="new_password">
+                    <input type="password" placeholder="รหัสผ่านใหม่" style="background-color: #fff0f0" maxlength="12" class="form-control" name="new_password" id="new_password">
                 </div>
+                <span style="font-size: 16px; color: red; line-height: 10px; height: 20px">*รหัสผ่านมีความยาวไม่น้อยกว่า 8-12 หลัก โดยมีทั้งตัวเลขและตัวอักษร   </span>
+
                 <div class="margin-bottom-20"></div>
+                <label for="con_password">*ยืนยันรหัสผ่านใหม่</label>
                 <div class="input-group ">
                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                    <input type="password" placeholder="ยืนยันรหัสผ่านใหม่" class="form-control" name="con_password" id="con_password">
+                    <input type="password" placeholder="ยืนยันรหัสผ่านใหม่" style="background-color: #fff0f0" class="form-control" name="con_password" id="con_password">
                 </div>
                 <div class="margin-bottom-20"></div>
                 <div class="row">
