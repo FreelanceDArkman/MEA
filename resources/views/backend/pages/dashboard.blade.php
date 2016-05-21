@@ -10,7 +10,7 @@
 
 
 
-        <p style="font-size: 60px !important;color: #fff">เป็นองค์กรชั้นนำ <br/> ด้านธุรกิจพลังงานในระดับสากล</p>
+        <p style="font-size: 60px !important;color: #fff">เป็นองค์กรชั้นนำ <br/> ด้านธุรกิจพลังงานไฟฟ้าในระดับสากล</p>
 
         <img src="frontend/assets/img/mockup/mea_fund_logo.png" >
 

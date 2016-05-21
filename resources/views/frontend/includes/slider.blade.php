@@ -6,8 +6,9 @@
         <img src="frontend/assets/img/sliders/layer/bg3.jpg" class="ls-bg" alt="Slide background">
 
             <span class="ls-s-1" style=" color: #ffffff; line-height:45px; text-decoration:none;text-shadow:0px 1px 0px #2f6627;font-weight: 200; font-size: 60px; top:100px; left: 50px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1000; ">
-               เป็นองค์กรชั้นนำ<br>
-                ด้านธุรกิจพลังงานในระดับสากล
+                เป็นองค์กรชั้นนำ  <br/>
+                ด้านธุรกิจพลังงานไฟฟ้า  <br/>
+                ระดับสากล
             </span>
         {{--<span class="ls-s-1" style=" color: #ffffff; line-height:45px;text-decoration:none;text-shadow:0px 1px 0px #2f6627; font-weight: 200; font-size: 35px; top:159px; left: 50px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1000; ">--}}
              {{--MOVING TOWARDS A HIGH <br>PERFORMANCE ORGANIZATION--}}
