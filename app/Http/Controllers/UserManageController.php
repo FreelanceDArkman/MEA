@@ -80,7 +80,7 @@ class UserManageController extends Controller
 //            $results = $reader->get();  
             $ret = $results->toArray();
 
-            $empidtoStatus = "123,";
+            $empidtoStatus = "123";
             foreach($ret as $index => $value){
 
 //                var_dump($value["enddate"]);
