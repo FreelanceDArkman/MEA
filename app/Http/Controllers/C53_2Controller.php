@@ -188,7 +188,7 @@ class C53_2Controller extends Controller
 
 
         $NEWS_CATE_ID =  $request->input("NEWS_CATE_ID");
-        $NEWS_TOPIC_ID = $request->input("NEWS_TOPIC_ID");
+//        $NEWS_TOPIC_ID = $request->input("NEWS_TOPIC_ID");
 
 
         $FILE_NAME = $request->input("FILE_NAME");
@@ -207,9 +207,10 @@ class C53_2Controller extends Controller
         $noti_message = $request->input("noti_message");
 
 
-        $chk = "SELECT COUNT(NEWS_TOPIC_ID) As total FROM TBL_NEWS_TOPIC WHERE NEWS_CATE_ID = ".$NEWS_CATE_ID . " AND NEWS_TOPIC_ID = ".$NEWS_TOPIC_ID;
-        $all = DB::select(DB::raw($chk));
-        $total =  $all[0]->total;
+//        $chk = "SELECT COUNT(NEWS_TOPIC_ID) As total FROM TBL_NEWS_TOPIC WHERE NEWS_CATE_ID = ".$NEWS_CATE_ID . " AND NEWS_TOPIC_ID = ".$NEWS_TOPIC_ID;
+//        $all = DB::select(DB::raw($chk));
+       // $total =  $all[0]->total;
+        $total =  0;
 
 
         if($total > 0){
@@ -316,8 +317,9 @@ class C53_2Controller extends Controller
 
 
 
-            $data = array('NEWS_CATE_ID' => $NEWS_CATE_ID,
-                'NEWS_TOPIC_ID' =>$NEWS_TOPIC_ID,
+            $data = array(
+                'NEWS_CATE_ID' => $NEWS_CATE_ID,
+//                'NEWS_TOPIC_ID' =>$NEWS_TOPIC_ID,
                 'FILE_NAME' => $FILE_NAME,
                 'NEWS_TOPIC_DETAIL' => $NEWS_TOPIC_DETAIL ,
                 'FILE_PATH' => $FILE_PATH,
@@ -501,7 +503,7 @@ class C53_2Controller extends Controller
 
 
             $data = array('NEWS_CATE_ID' => $NEWS_CATE_ID,
-                'NEWS_TOPIC_ID' =>$NEWS_TOPIC_ID,
+//                'NEWS_TOPIC_ID' =>$NEWS_TOPIC_ID,
                 'FILE_NAME' => $FILE_NAME,
                 'NEWS_TOPIC_DETAIL' =>  $NEWS_TOPIC_DETAIL ,
                 'FILE_PATH' => $FILE_PATH,

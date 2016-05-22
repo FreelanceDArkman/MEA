@@ -80,13 +80,13 @@
 
 
                                 <fieldset>
-                                    <section>
+                                    {{--<section>--}}
 
-                                        <label class="input">
-                                            <span style="font-size: 18px">รหัสหัวข้อข่าว</span>
-                                            <input type="text" id="NEWS_TOPIC_ID" name="NEWS_TOPIC_ID" placeholder="รหัสหัวข้อข่าว">
-                                        </label>
-                                    </section>
+                                        {{--<label class="input">--}}
+                                            {{--<span style="font-size: 18px">รหัสหัวข้อข่าว</span>--}}
+                                            {{--<input type="text" id="NEWS_TOPIC_ID" name="NEWS_TOPIC_ID" placeholder="รหัสหัวข้อข่าว">--}}
+                                        {{--</label>--}}
+                                    {{--</section>--}}
 
                                     <section>
                                         <label class="input">
@@ -428,10 +428,10 @@
 
                 // Rules for form validation
                 rules : {
-                    NEWS_TOPIC_ID : {
-                        required : true,
-
-                    },
+//                    NEWS_TOPIC_ID : {
+//                        required : true,
+//
+//                    },
                     FILE_NAME : {
                         required : true
 
@@ -455,7 +455,7 @@
                                     var dataimport = new FormData();
 
                                     var NEWS_CATE_ID = $("#NEWS_CATE_ID_select").val();
-                                    var NEWS_TOPIC_ID = $("#NEWS_TOPIC_ID").val();
+//                                    var NEWS_TOPIC_ID = $("#NEWS_TOPIC_ID").val();
                                     var FILE_NAME= $("#FILE_NAME").val();
 
                                     var NEWS_TOPIC_FLAG = $('input[name=NEWS_TOPIC_FLAG]:checked').val();
@@ -475,7 +475,7 @@
 
 
                                     dataimport.append('NEWS_CATE_ID',NEWS_CATE_ID);
-                                    dataimport.append('NEWS_TOPIC_ID',NEWS_TOPIC_ID);
+//                                    dataimport.append('NEWS_TOPIC_ID',NEWS_TOPIC_ID);
                                     dataimport.append('FILE_NAME',FILE_NAME);
                                     dataimport.append('NEWS_TOPIC_FLAG',NEWS_TOPIC_FLAG);
                                     dataimport.append('START_DATE',START_DATE);

@@ -84,7 +84,7 @@
 
 
                                 <fieldset>
-                                    <section>
+                                    <section style="display: none">
 
                                         <label class="input">
                                             <span style="font-size: 18px">รหัสหัวข้อข่าว</span>
