@@ -21,7 +21,7 @@
 
                 <div class="pull-left login-desc-box-l">
                     <h4 class="paragraph-header">เป็นองค์กรชั้นนำ <br/>
-                        ด้านธุรกิจพลังงานในระดับสากล</h4>
+                        ด้านธุรกิจพลังงานไฟฟ้าในระดับสากล </h4>
                     {{--<div class="login-app-icons">--}}
                         {{--<a href="javascript:void(0);" class="btn btn-danger btn-sm">Frontend Template</a>--}}
                         {{--<a href="javascript:void(0);" class="btn btn-danger btn-sm">Find out more</a>--}}
