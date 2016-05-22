@@ -429,7 +429,7 @@
 //                dataType: 'json',
                     contentType: false,
                     processData: false,
-                    url: 'users/import',
+                    url: 'import2',
                     data: dataimport,
 
                     success: function(data){

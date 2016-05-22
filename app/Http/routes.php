@@ -431,9 +431,9 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
             Route::get('getimport','UserController@getimport');
             Route::post('import','UserController@importdata');
-            Route::post('import2','UserController@importdata2');
-            Route::post('check','UserController@Checkdate');
 
+            Route::post('check','UserController@Checkdate');
+            Route::post('import2','UserController@importdata2');
 
         });
 
