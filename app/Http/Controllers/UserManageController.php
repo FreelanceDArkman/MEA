@@ -61,19 +61,20 @@ class UserManageController extends Controller
 
         $results = null;
 
-        $type = $request->input('type');
+
+        $file = $request->file('exelimport');
+
+        $request->file('exelimport')->move(storage_path().'/public/import/' , 'import.xlsx');
+
+        $ret = Excel::filter('chunk')->load(storage_path('/public/import/import.xlsx'))->chunk(250, function($results){
 
 
 
-    $retdate =    Excel::load($request->file('exelimport'), function ($reader) use($type) {
 
-            $results = $reader->get();
-
-            $ret = $results->toArray();
 
 //            var_dump($ret);
 
-            foreach($ret as $index => $value){
+            foreach($results as $index => $value){
 
                 $EMP_ID = $value["empid"];
 
@@ -83,77 +84,68 @@ class UserManageController extends Controller
 
 //                $StatusID = $value["user_status_id"];
 
-            if($userinfo == null){
+                if($userinfo == null){
 
-                $dateS = new Date($value["startdate"]);
+                    $dateS = new Date($value["startdate"]);
 
-                $dateStart = date("d/m/Y", strtotime($dateS));
+                    $dateStart = date("d/m/Y", strtotime($dateS));
 
-                $dateE = new Date($value["enddate"]);
-                $dateEnd = date("d/m/Y", strtotime($dateE));
+                    $dateE = new Date($value["enddate"]);
+                    $dateEnd = date("d/m/Y", strtotime($dateE));
 
-                $insert = "INSERT INTO TBL_EMPLOYEE_INFO (EMP_ID,PREFIX,FULL_NAME,ENG_NAME,FIRST_NAME,LAST_NAME,PRIORITY,JOB_ID,JOB_DESC_SHT,JOB_DESC,PER_ID,START_DATE,END_DATE,COST_CENTER,C_LEVEL,POST_ID,POS_DESC,ORG_ID,ENG_FIRST_NAME,ENG_LAST_NAME,
+                    $insert = "INSERT INTO TBL_EMPLOYEE_INFO (EMP_ID,PREFIX,FULL_NAME,ENG_NAME,FIRST_NAME,LAST_NAME,PRIORITY,JOB_ID,JOB_DESC_SHT,JOB_DESC,PER_ID,START_DATE,END_DATE,COST_CENTER,C_LEVEL,POST_ID,POS_DESC,ORG_ID,ENG_FIRST_NAME,ENG_LAST_NAME,
 BIRTH_DATE,ORG_DESC,PATH_ID,DEP_ID,DIV_ID,SEC_ID,PART_ID,PARTH_SHT,DEP_SHT,DIV_SHT,SEC_SHT,PATH_SHT,PARTH_LNG,DEP_LNG,
 DIV_LNG,SEC_LNG,PART_LNG) VALUES('".$EMP_ID."','".$value["prefix"]."','".$value["fullname"]."','".$value["engname"]."','".$value["firstname"]."','".$value["lastname"]."',".$value["priority"].",".$value["jobid"].",'".$value["jobdescsht"]."','".$value["jobdesc"]."','".$value["perid"]."','".$dateStart."','".$dateEnd."','".$value["costcenter"]."',".$value["clevel"].",".$value["posid"].",'".$value["posdesc"]."',".$value["orgid"].",'".$value["engfirstname"]."','".$value["englastname"]."','".$value["birthdate"]."','".$value["orgdesc"]."',".$value["pathid"].",".$value["depid"].",".$value["divid"].",".$value["secid"].",".$value["partid"].",'".$value["pathsht"]."','".$value["depsht"]."','".$value["divsht"]."','".$value["secsht"]."','".$value["partsht"]."','".$value["pathlng"]."','".$value["deplng"]."','".$value["divlng"]."','".$value["seclng"]."','".$value["partlng"]."')";
 
-                DB::insert(DB::raw($insert));
-            }
+                    DB::insert(DB::raw($insert));
+                }
 
-            if($user == null){
+                if($user == null){
 
-                $date = new Date();
+                    $date = new Date();
 
-                $pri = $userinfo = DB::table('TBL_PRIVILEGE')->where('USER_PRIVILEGE_ID', 2)->get();
+                    $pri = $userinfo = DB::table('TBL_PRIVILEGE')->where('USER_PRIVILEGE_ID', 2)->get();
 
-                 $datedata = $value["birthdate"];
+                    $datedata = $value["birthdate"];
 
-                $rest = substr("abcdef", -1);    // returns "f"
-                $rest = substr("abcdef", -2);    // returns "ef"
-                $rest = substr("abcdef", -3, 1);
-
-                //19560316
+                    $rest = substr("abcdef", -1);    // returns "f"
+                    $rest = substr("abcdef", -2);    // returns "ef"
+                    $rest = substr("abcdef", -3, 1);
 
 
-                //16032499
 
-                $newDate = substr($datedata, -2) . substr($datedata, -4,2). ((int)substr($datedata, -8, 4)) + 543;
-
-//                var_dump($newDate);
-
-                $ecPass = exec("cmd /c md5.bat -e ".$newDate." 2>&1");
-
-                $ecPass = explode(':',$ecPass)[1];
-
-                $datedefault = new Date("9999-12-31 00:00:00.000") ;
+                    $newDate = substr($datedata, -2) . substr($datedata, -4,2). ((int)substr($datedata, -8, 4)) + 543;
 
 
-                $insetuser = "INSERT INTO TBL_USER (EMP_ID,USERNAME,PASSWORD,PASSWORD_EXPIRE_DATE,CREATE_DATE
+
+                    $ecPass = exec("cmd /c md5.bat -e ".$newDate." 2>&1");
+
+                    $ecPass = explode(':',$ecPass)[1];
+
+                    $datedefault = new Date("9999-12-31 00:00:00.000") ;
+
+
+                    $insetuser = "INSERT INTO TBL_USER (EMP_ID,USERNAME,PASSWORD,PASSWORD_EXPIRE_DATE,CREATE_DATE
 ,CREATE_BY,LAST_MODIFY_DATE,USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,USER_STATUS_ID,FIRST_LOGIN_FLAG,EMAIL_NOTIFY_FLAG)
 VALUES('".$EMP_ID."','".$EMP_ID."','".$ecPass."','9999-12-31 00:00:00.000','".$date."','Administrator','".$date."'
 ,'2','".$pri[0]->ACCESS_PERMISSIONS."','13','0','1')";
 
-                DB::insert(DB::raw($insetuser));
+                    DB::insert(DB::raw($insetuser));
 
-             }
-
-
+                }
 
             }
 
-
-
-
-            $staturet= true;
-            $data = "ok";
 
 
         });
 
 
+        return response()->json(array('success' => true, 'html'=>$ret));
+
+        $type = $request->input('type');
 
 
-
-        return response()->json(array('success' => true, 'html'=>$retdate));
     }
 
 
