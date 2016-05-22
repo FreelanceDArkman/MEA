@@ -68,7 +68,7 @@ class UserManageController extends Controller
 
         $request->file('exelimport')->move(storage_path().'/public/import/' , 'import.xlsx');
 
-        Excel::load(storage_path('/public/import/import.xlsx'), function ($reader)  {
+        $retdate = Excel::load(storage_path('/public/import/import.xlsx'), function ($reader)  {
             $results =$reader->setDateColumns(array(
                 'startdate',
                 'enddate'
@@ -194,7 +194,7 @@ class UserManageController extends Controller
             DB::table('TBL_USER')->insert($datauser);
 
         });
-
+        return response()->json(array('success' => true, 'html'=>$retdate));
 //    $sd =    Excel::load(storage_path('/public/import/import.xlsx'), function($file) {
 //
 //            // modify stuff
@@ -335,7 +335,7 @@ class UserManageController extends Controller
 //        });
 
 
-        return response()->json(array('success' => true, 'html'=>$ret));
+
 
 
 
