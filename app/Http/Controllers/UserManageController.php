@@ -74,6 +74,7 @@ class UserManageController extends Controller
                 'enddate'
             ))->get();
             $data = array();
+            $dataupdate = array();
             $datauser = array();
 //            $results = $reader->get();  
             $ret = $results->toArray();
@@ -141,6 +142,57 @@ class UserManageController extends Controller
 
 
                     ));
+                }else{
+
+                    $dateS = new Date($value["startdate"]);
+
+                    $dateStart = date("d/m/Y", strtotime($dateS));
+
+                    $dateE = new Date($value["enddate"]);
+                    $dateEnd = date("d/m/Y", strtotime($dateE));
+                    $dataupdate = array(
+                        'EMP_ID' => $value["empid"],
+                        'PREFIX' => $value["prefix"],
+                        'FULL_NAME' => $value["fullname"],
+                        'ENG_NAME' =>$value["engname"],
+                        'FIRST_NAME' => $value["firstname"],
+                        'LAST_NAME' => $value["lastname"],
+                        'PRIORITY' => $value["priority"],
+                        'JOB_ID' => $value["jobid"],
+                        'JOB_DESC_SHT' => $value["jobdescsht"],
+                        'JOB_DESC' => $value["jobdesc"],
+                        'PER_ID' => $value["perid"],
+                        'START_DATE' => $dateStart,
+                        'END_DATE' => $dateEnd,
+                        'COST_CENTER' => $value["costcenter"],
+                        'C_LEVEL' => $value["clevel"],
+                        'POST_ID' => $value["posid"],
+                        'POS_DESC' => $value["posdesc"],
+                        'ORG_ID' => $value["orgid"],
+                        'ENG_FIRST_NAME' => $value["engfirstname"],
+                        'ENG_LAST_NAME' => $value["englastname"],
+                        'BIRTH_DATE' => $value["birthdate"],
+                        'ORG_DESC' => $value["orgdesc"],
+                        'PATH_ID' => $value["pathid"],
+                        'DEP_ID' => $value["depid"],
+                        'DIV_ID' => $value["divid"],
+                        'SEC_ID' => $value["secid"],
+                        'PART_ID' => $value["partid"],
+                        'PARTH_SHT' => $value["pathsht"],
+                        'DEP_SHT' => $value["depsht"],
+                        'DIV_SHT' => $value["divsht"],
+                        'SEC_SHT' => $value["secsht"],
+                        'PATH_SHT' => $value["partsht"],
+                        'PARTH_LNG' => $value["pathlng"],
+                        'DEP_LNG' => $value["deplng"],
+                        'DIV_LNG' => $value["divlng"],
+                        'SEC_LNG' => $value["seclng"],
+                        'PART_LNG' => $value["partlng"],
+
+
+                    );
+
+                    DB::table('TBL_EMPLOYEE_INFO')->where('EMP_ID',"=",$value["empid"])->update($dataupdate);
                 }
 
 
