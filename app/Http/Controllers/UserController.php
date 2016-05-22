@@ -238,8 +238,6 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
 
 
 
-
-
     public  function  getEditUser($id){
         $this->pageSetting( [
             'menu_group_id' => 50,
@@ -308,6 +306,163 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
 
 
         return response()->json(array('success' => $staturet, 'html'=>$data));
+    }
+
+    public  function  postEditUser1(Request $request){
+
+
+        $user_id=$request->input('user_id');
+        $PLAN_ID =$request->input('PLAN_ID');
+        $EQUITY_RATE=$request->input('EQUITY_RATE');
+        $DEBT_RATE=$request->input('DEBT_RATE');
+        $MODIFY_COUNT=$request->input('MODIFY_COUNT');
+
+
+        $MODIFY_DATE  = new Date($request->input('MODIFY_DATE'));
+        $EFFECTIVE_DATE = new Date($request->input('EFFECTIVE_DATE'));
+
+
+
+
+          $users = DB::table('TBL_USER')->where('EMP_ID','=',$user_id)->get();
+
+//        var_dump($users[0]->USER_STATUS_ID);
+
+        $date = new Date();
+
+
+        $data = array(
+            'EMP_ID' => $user_id,
+            'PLAN_ID' =>$PLAN_ID,
+            'EQUITY_RATE' => $EQUITY_RATE,
+            'DEBT_RATE' => $DEBT_RATE ,
+            'MODIFY_DATE' => $MODIFY_DATE,
+            'EFFECTIVE_DATE' =>$EFFECTIVE_DATE,
+            'MODIFY_COUNT' => $MODIFY_COUNT,
+            'MODIFY_BY' => get_userID(),
+            'USER_STATUS_ID' => $users[0]->USER_STATUS_ID,
+            'LEAVE_FUND_GROUP_DATE' => $users[0]->LEAVE_FUND_GROUP_DATE
+        );
+
+
+
+
+        $ret = DB::table('TBL_USER_FUND_CHOOSE')->insert($data);
+
+
+
+
+
+
+        return response()->json(array('success' => $ret, 'html'=>"ok"));
+    }
+
+    public  function  postEditUser2(Request $request){
+
+
+        $user_id=$request->input('user_id');
+        $USER_SAVING_RATE =$request->input('USER_SAVING_RATE');
+
+
+        $MODIFY_COUNT=$request->input('MODIFY_COUNT');
+
+
+        $CHANGE_SAVING_RATE_DATE  = new Date($request->input('CHANGE_SAVING_RATE_DATE'));
+        $EFFECTIVE_DATE = new Date($request->input('EFFECTIVE_DATE'));
+
+
+
+
+        $users = DB::table('TBL_USER')->where('EMP_ID','=',$user_id)->get();
+
+//        var_dump($users[0]->USER_STATUS_ID);
+
+        $date = new Date();
+
+
+        $data = array(
+            'EMP_ID' => $user_id,
+            'USER_SAVING_RATE' =>$USER_SAVING_RATE,
+            'CHANGE_SAVING_RATE_DATE' => $CHANGE_SAVING_RATE_DATE,
+            'EFFECTIVE_DATE' =>$EFFECTIVE_DATE,
+            'MODIFY_COUNT' => $MODIFY_COUNT,
+            'MODIFY_BY' => get_userID(),
+            'USER_STATUS_ID' => $users[0]->USER_STATUS_ID,
+            'LEAVE_FUND_GROUP_DATE' => $users[0]->LEAVE_FUND_GROUP_DATE
+        );
+
+
+
+
+        $ret = DB::table('TBL_USER_SAVING_RATE')->insert($data);
+
+
+
+
+
+
+        return response()->json(array('success' => $ret, 'html'=>"ok"));
+    }
+
+    public  function  postEditUser3(Request $request){
+
+
+        $user_id=$request->input('user_id');
+        $FULL_NAME =$request->input('FULL_NAME');
+
+
+
+//        $file = $request->file('pdfimport')->getClientOriginalName();
+//        $emp_id = explode('.',$file)[0];
+//        $extension = explode('.',$file)[1];
+
+
+//        $file_name = $emp_id . "." . $extension;
+
+        $file_name  = $user_id. ".pdf";
+        $filePath = "";
+
+
+        $qfileName = "SELECT WEB_BENEFICIARY_ROOT_PATH FROM TBL_CONTROL_CFG";
+        $datafile_name= DB::select(DB::raw($qfileName));
+
+        if($datafile_name)
+        {
+            $filePath = $datafile_name[0]->WEB_BENEFICIARY_ROOT_PATH . $user_id . ".pdf";
+        }
+
+        $TBL_USER_BENEFICIARY = DB::table('TBL_USER_BENEFICIARY')->where('EMP_ID','=',$user_id)->get();
+
+//        var_dump($users[0]->USER_STATUS_ID);
+
+        $date = new Date();
+
+
+        $data = array(
+            'EMP_ID' => $user_id,
+            'FULL_NAME' =>$FULL_NAME,
+            'FILE_PATH' => $filePath,
+            'CREATE_DATE' =>$date,
+            'CREATE_BY' => get_userID(),
+            'FILE_NAME' => $file_name
+
+        );
+
+
+
+        if($TBL_USER_BENEFICIARY){
+            $ret = DB::table('TBL_USER_BENEFICIARY')->where('EMP_ID','=',$user_id)->update($data);
+        }else{
+            $ret = DB::table('TBL_USER_BENEFICIARY')->insert($data);
+        }
+
+
+        $request->file('pdfimport')->move(public_path().getenv('BENEFICIARY_PDF_PATH') , $file_name);
+
+
+
+
+        return response()->json(array('success' => $ret, 'html'=>"ok"));
     }
 
     public function deleteUser(Request $request)

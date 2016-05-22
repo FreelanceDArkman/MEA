@@ -435,6 +435,13 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::post('check','UserController@Checkdate');
             Route::post('import2','UserController@importdata2');
 
+            Route::post('edit1', 'UserController@postEditUser1');
+            Route::post('edit2', 'UserController@postEditUser2');
+
+            Route::post('edit3', 'UserController@postEditUser3');
+
+
+
         });
 
         Route::group(['prefix' => 'simple'], function() {

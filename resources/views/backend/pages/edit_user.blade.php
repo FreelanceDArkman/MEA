@@ -337,7 +337,7 @@
                                             <label class="select">เลือกแผนการลงทุน
                                                 <select id="PLAN_ID" name="PLAN_ID">
                                                     @if($userplan)
-                                                        <option value="default">แผนการลงทุน</option>
+                                                        <option value="default">เลือกแผนการลงทุน</option>
                                                         @foreach($userplan as $group)
                                                             <option value="{{ $group->PLAN_ID }}">{{ $group->PLAN_NAME }}</option>
                                                         @endforeach
@@ -350,7 +350,7 @@
                                     <div class="row">
                                         <section class="col col-6">
                                             <label class="input"> สัดส่วนทุน (%)
-                                                <input type="text" value="{{$user->EMP_ID}}" id="EQUITY_RATE" name="EQUITY_RATE"  placeholder="สัดส่วนทุน (%)" >
+                                                <input type="text" id="EQUITY_RATE" name="EQUITY_RATE"  placeholder="สัดส่วนทุน (%)" >
                                                 <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
                                         </section>
                                         <section class="col col-6">
@@ -485,7 +485,7 @@
                                             </p>
                                             <div class="input-upload">
 
-                                                <input type="file"  class="btn btn-default import_pdf_multi" id="import1" name="import_pdf[]">
+                                                <input type="file"  class="btn btn-default import_pdf_multi" id="import_pdf" name="import_pdf">
                                             </div>
                                         </div>
 
@@ -544,7 +544,9 @@
 
         $(document).ready(function() {
 
-
+            $.validator.addMethod("valueNotEquals", function(value, element, arg){
+                return arg != value;
+            }, "Please Choose one");
 
 
             //optonalInsert form
@@ -566,12 +568,7 @@
             });
 
 
-//            $(".disable_pan").on('click',function(){
-//
-//                Alert('Alert','ท่านยังไมไ่ด้ สร้างผู้ใช้ ');
-//
-//                return false;
-//            });
+
 
 
             ///End Optional Insert form
@@ -728,9 +725,252 @@
 
             });
 
-            $.validator.addMethod("valueNotEquals", function(value, element, arg){
-                return arg != value;
-            }, "Please Choose one");
+
+            var $registerForm3 = $("#smart-form-register_3").validate({
+
+
+
+                // Rules for form validation
+                rules : {
+
+                    FULL_NAME : {
+                        required : true,
+
+                    }
+
+                },
+
+
+                submitHandler: function(form)
+                {
+                    $(form).ajaxSubmit(
+                            {
+
+                                success: function()
+                                {
+                                    var user_id = $("#user_id").val();
+                                    var FULL_NAME = $("#FULL_NAME").val();
+
+                                    var dataimport = new FormData();
+                                    var files = $("#import_pdf").get(0).files;
+//                                    var files = $(this).get(0).files;
+
+                                    dataimport.append("pdfimport", files[0]);
+                                    dataimport.append("user_id", user_id);
+                                    dataimport.append("FULL_NAME", FULL_NAME);
+
+
+                                    $.ajax({
+
+                                        type: 'POST', // or post?
+//                dataType: 'json',
+                                        contentType: false,
+                                        processData: false,
+                                        url: '/admin/users/edit3',
+                                        data: dataimport,
+
+                                        success: function(data){
+                                            if(data.success){
+
+                                                AlertSuccess("บันทึกเรียบร้อยแล้ว", function(){
+                                                    window.location.href =  "/admin/users/edit/" + user_id;
+
+                                                });
+                                            }else {
+                                                Alert('Import','การ import ข้อมูลผิดพลาด กรุณาตรวจสอบ รูปแบบข้อมูลของ ไฟล์ ')
+                                            }
+
+
+
+                                        },
+                                        error: function(xhr, textStatus, thrownError) {
+
+                                        }
+                                    });
+
+                                    return false;
+                                }
+                            });
+                },
+
+                // Do not change code below
+                errorPlacement : function(error, element) {
+                    error.insertAfter(element.parent());
+
+//                    alert("error");
+                }
+            });
+
+
+            meaDatepicker("CHANGE_SAVING_RATE_DATE");
+            meaDatepicker("EFFECTIVE_DATE_1");
+
+
+            var $registerForm2 = $("#smart-form-register_2").validate({
+
+
+
+                // Rules for form validation
+                rules : {
+
+                    USER_SAVING_RATE : {
+                        required : true,
+
+                        maxlength : 100,
+                        number:true
+                    }
+
+                },
+
+                // Messages for form validation
+//                messages : {
+
+//
+//                },
+                // Ajax form submition
+                submitHandler: function(form)
+                {
+                    $(form).ajaxSubmit(
+                            {
+
+                                success: function()
+                                {
+                                    var user_id = $("#user_id").val();
+                                    var USER_SAVING_RATE = $("#USER_SAVING_RATE").val();
+
+
+                                    var MODIFY_COUNT= $("#MODIFY_COUNT_1").val();
+                                    var CHANGE_SAVING_RATE_DATE = $("#hd_CHANGE_SAVING_RATE_DATE").val();
+                                    var EFFECTIVE_DATE = $("#hd_EFFECTIVE_DATE_1").val();
+
+
+                                    var jsondata = {
+                                        user_id:user_id,
+                                        USER_SAVING_RATE :USER_SAVING_RATE,
+                                        MODIFY_COUNT:MODIFY_COUNT,
+                                        CHANGE_SAVING_RATE_DATE:CHANGE_SAVING_RATE_DATE,
+                                        EFFECTIVE_DATE:EFFECTIVE_DATE
+
+
+                                    };
+
+                                    MeaAjax(jsondata,"/admin/users/edit2",function(data){
+                                        if(data.success){
+
+                                            AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
+
+                                                window.location.href = "/admin/users/edit/" + user_id;
+                                            });
+
+                                        }else {
+                                            Alert("",data.html,null,null);
+                                        }
+                                    });
+
+                                    return false;
+                                }
+                            });
+                },
+
+                // Do not change code below
+                errorPlacement : function(error, element) {
+                    error.insertAfter(element.parent());
+
+//                    alert("error");
+                }
+            });
+
+            meaDatepicker("MODIFY_DATE");
+            meaDatepicker("EFFECTIVE_DATE");
+
+            var $registerForm1 = $("#smart-form-register_1").validate({
+
+
+
+                // Rules for form validation
+                rules : {
+
+                    EQUITY_RATE : {
+                        required : true,
+
+                        maxlength : 100,
+                        number:true
+                    },
+                    PLAN_ID : {valueNotEquals: "default"},
+
+                    DEBT_RATE : {
+                        required : true,
+
+                        maxlength : 100,
+                        number:true
+                    },
+                    MODIFY_COUNT : {
+                        required : true,
+                        number:true
+                    }
+                },
+
+                // Messages for form validation
+//                messages : {
+
+//
+//                },
+                // Ajax form submition
+                submitHandler: function(form)
+                {
+                    $(form).ajaxSubmit(
+                            {
+
+                                success: function()
+                                {
+                                    var user_id = $("#user_id").val();
+                                    var PLAN_ID = $("#PLAN_ID").val();
+                                    var EQUITY_RATE= $("#EQUITY_RATE").val();
+
+                                    var DEBT_RATE= $("#DEBT_RATE").val();
+
+                                    var MODIFY_COUNT= $("#MODIFY_COUNT").val();
+                                    var MODIFY_DATE = $("#hd_MODIFY_DATE").val();
+                                    var EFFECTIVE_DATE = $("#hd_EFFECTIVE_DATE").val();
+
+
+                                    var jsondata = {
+                                        user_id:user_id,
+                                        PLAN_ID :PLAN_ID,
+                                        EQUITY_RATE:EQUITY_RATE,
+                                        DEBT_RATE:DEBT_RATE,
+                                        MODIFY_COUNT:MODIFY_COUNT,
+                                        MODIFY_DATE:MODIFY_DATE,
+                                        EFFECTIVE_DATE:EFFECTIVE_DATE
+
+                                    };
+
+                                    MeaAjax(jsondata,"/admin/users/edit1",function(data){
+                                        if(data.success){
+
+                                            AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
+
+                                                window.location.href = "/admin/users/edit/" + user_id;
+                                            });
+
+                                        }else {
+                                            Alert("",data.html,null,null);
+                                        }
+                                    });
+
+                                    return false;
+                                }
+                            });
+                },
+
+                // Do not change code below
+                errorPlacement : function(error, element) {
+                    error.insertAfter(element.parent());
+
+//                    alert("error");
+                }
+            });
+
 
             var $registerForm = $("#smart-form-register").validate({
 
