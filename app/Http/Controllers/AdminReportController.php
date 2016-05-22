@@ -492,6 +492,144 @@ class AdminReportController extends Controller
 //        })->download('xls');
     }
 
+
+
+
+    public function ajax_report1_search_export_txt()
+    {
+//        window.location.href =  "report1/exportsearch?EmpID=" + EmpID +"&depart=" + depart + "&plan=" + plan + "&date_start" + "&date_end=" + date_end;
+//        Input::get("param");
+
+        $ArrParam = array();
+        $ArrParam["pagesize"] ="";
+        $ArrParam["PageNumber"] ="";
+        $ArrParam["emp_id"] =Input::get("EmpID");
+        $ArrParam["depart"] =Input::get("depart");
+        $ArrParam["plan"] =Input::get("plan");
+        $ArrParam["date_start"] =Input::get("date_start");
+        $ArrParam["date_end"] =Input::get("date_end");
+
+        $ArrParam["check_name"] =Input::get("check_name");
+        $ArrParam["check_depart"] =Input::get("check_depart");
+        $ArrParam["check_plan"] =Input::get("check_plan");
+        $ArrParam["check_date"] =Input::get("check_date");
+        // $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
+        $data = $this->DataSource2($ArrParam,true,false);
+
+
+        $results = array();
+        $exportText = "";
+        foreach ($data as $item) {
+//            $item->filed1 = 'some modification';
+//            $item->filed2 = 'some modification2';
+            $results[] = (array)$item;
+            $exportText .=  $item->EMP_ID. " "  . date("d",strtotime($item->EFFECTIVE_DATE_NEW)).date("m",strtotime($item->EFFECTIVE_DATE_NEW)).date("Y",strtotime($item->EFFECTIVE_DATE_NEW))." " ." 31129999 ". $item->EQUITY_RATE_NEW."|".$item->DEBT_RATE_NEW ."\r\n";
+
+//                . date("d",strtotime($item->EFFECTIVE_DATE_NEW)).date("m",strtotime($item->EFFECTIVE_DATE_NEW)).date("Y",strtotime($item->EFFECTIVE_DATE_NEW)). "\r\n";
+        }
+        $path =public_path().'/contents/export_text.txt';
+        \File::put($path , $exportText);
+
+
+        $headers = array(
+            'Content-Type: application/text',
+        );
+        return \Response::download($path, 'export_text2.txt', $headers);
+
+
+    }
+
+    public function ajax_report1_all_export_text()
+    {
+
+        $ArrParam = array();
+        $ArrParam["pagesize"] ="";
+        $ArrParam["PageNumber"] ="";
+        $ArrParam["emp_id"] ="";
+        $ArrParam["depart"] ="";
+        $ArrParam["plan"] ="";
+        $ArrParam["date_start"] ="";
+        $ArrParam["date_end"] ="";
+        // $sql2 = "SELECT TOP  5 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
+        $data = $this->DataSource2($ArrParam,false,false);
+
+        $results = array();
+        $exportText = "";
+        foreach ($data as $item) {
+//            $item->filed1 = 'some modification';
+//            $item->filed2 = 'some modification2';
+            $results[] = (array)$item;
+            $exportText .=  $item->EMP_ID. " "  . date("d",strtotime($item->EFFECTIVE_DATE_NEW)).date("m",strtotime($item->EFFECTIVE_DATE_NEW)).date("Y",strtotime($item->EFFECTIVE_DATE_NEW))." " ." 31129999 ". $item->EQUITY_RATE_NEW."|".$item->DEBT_RATE_NEW ."\r\n";
+
+//                . date("d",strtotime($item->EFFECTIVE_DATE_NEW)).date("m",strtotime($item->EFFECTIVE_DATE_NEW)).date("Y",strtotime($item->EFFECTIVE_DATE_NEW)). "\r\n";
+        }
+        $path =public_path().'/contents/export_text.txt';
+        \File::put($path , $exportText);
+
+
+        $headers = array(
+            'Content-Type: application/text',
+        );
+        return \Response::download($path, 'export_text2.txt', $headers);
+
+    }
+
+    public  function  DataSource2($ArrParam, $IsCase, $ispageing= true){
+
+        $where = "";
+        if($ispageing){
+            $PageSize = $ArrParam['pagesize'];
+            $PageNumber = $ArrParam['PageNumber'];
+        }
+
+        if($IsCase) {
+
+            $emp_id = $ArrParam['emp_id'];
+            $depart = $ArrParam['depart'];
+            $plan = $ArrParam['plan'];
+            $date_start = $ArrParam['date_start'];
+            $date_end = $ArrParam['date_end'];
+
+            $check_name =$ArrParam["check_name"] ;
+            $check_depart =$ArrParam["check_depart"] ;
+            $check_plan=$ArrParam["check_plan"] ;
+            $check_date=$ArrParam["check_date"] ;
+
+
+            $where = " WHERE focus.EMP_ID IS NOT  NULL";
+
+            if (!empty($emp_id)&& $check_name== "true") {
+                $where .= " AND focus.EMP_ID = '" . $emp_id . "'";
+            }
+            if (!empty($depart)&& $check_depart== "true") {
+                $where .= " AND em.DEP_SHT  = '" . $depart . "'";
+            }
+            if (!empty($plan)&& $check_plan== "true") {
+                $where .= " AND new.PLAN_ID = '" . $plan . "'";
+            }
+            if (!empty($date_start) && !empty($date_end)&& $check_date== "true") {
+                $where .= " AND new.MODIFY_DATE BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
+            }
+        }
+
+
+        $query="SELECT focus.EMP_ID As EMP_ID,em.FULL_NAME AS FULL_NAME,em.DEP_SHT AS DEP_SHT,mb.LEVEL_CODE AS LEVEL_CODE,mb.AGE_YEAR AS AGE_YEAR,new.PLAN_ID AS PLAN_ID_NEW ,old.PLAN_ID AS PLAN_ID_OLD,old.EQUITY_RATE AS EQUITY_RATE_OLD,old.DEBT_RATE AS DEBT_RATE_OLD,old.MODIFY_DATE AS MODIFY_DATE_OLD ,new.EQUITY_RATE AS EQUITY_RATE_NEW,new.DEBT_RATE AS DEBT_RATE_NEW,new.MODIFY_DATE AS MODIFY_DATE_NEW , new.EFFECTIVE_DATE AS EFFECTIVE_DATE_NEW FROM (SELECT f.EMP_ID, MAX(f.MODIFY_DATE) as datenew FROM TBL_USER_FUND_CHOOSE f GROUP BY f.EMP_ID) AS focus INNER JOIN TBL_EMPLOYEE_INFO em ON em.EMP_ID = focus.EMP_ID CROSS APPLY ( SELECT TOP 1 be.LEVEL_CODE, be.AGE_YEAR FROM TBL_MEMBER_BENEFITS be WHERE be.EMP_ID = focus.EMP_ID ORDER BY be.RECORD_DATE DESC) AS mb CROSS APPLY ( SELECT TOP 1 fn.PLAN_ID,fn.EQUITY_RATE,fn.DEBT_RATE,fn.MODIFY_DATE, fn.EFFECTIVE_DATE FROM TBL_USER_FUND_CHOOSE fn WHERE fn.EMP_ID = focus.EMP_ID ORDER BY fn.MODIFY_DATE DESC) AS new OUTER APPLY (SELECT  TOP 1 ol.PLAN_ID,ol.EQUITY_RATE,ol.DEBT_RATE,ol.MODIFY_DATE FROM TBL_USER_FUND_CHOOSE ol WHERE ol.EMP_ID = focus.EMP_ID AND ol.MODIFY_DATE < new.MODIFY_DATE ORDER BY ol.MODIFY_DATE DESC) AS old  ";
+
+
+        if($IsCase){
+            $query .= $where;
+        }
+
+        $query .= " ORDER BY focus.datenew DESC";
+
+        if($ispageing){
+            $query .=  " OFFSET ".$PageSize." * (".$PageNumber." - 1) ROWS FETCH NEXT ".$PageSize." ROWS ONLY OPTION (RECOMPILE)";
+        }
+
+
+        return DB::select(DB::raw($query));
+    }
+
     public function ajax_report1_search_ana_export()
     {
 

@@ -706,6 +706,10 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::get('/exportall', 'AdminReportController@ajax_report1_all_export');
 
 
+            Route::get('/exportsearch_txt', 'AdminReportController@ajax_report1_search_export_txt');
+
+            Route::get('/exportall_text2', 'AdminReportController@ajax_report1_all_export_text');
+
 
 
         });

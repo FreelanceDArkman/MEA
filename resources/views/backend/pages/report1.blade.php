@@ -134,6 +134,7 @@ $arrSidebar =getSideBar($data);
 
 
                                 <a href="#" id="export_search" style="margin-top: 30px;" class="btn btn-labeled btn-success mea-btn-export"> <span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i></span>Export </a>
+                                <a href="#" id="export_search_txt" style="margin-top: 30px;" class="btn btn-labeled btn-warning mea-btn-export"> <span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i></span>Export .txt </a>
                                 <!-- Widget ID (each widget will need unique ID)-->
                                 <div class="jarviswidget jarviswidget-color-blueDark" style="margin-top: 5px;" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-togglebutton="false">
                                     <!-- widget options:
@@ -145,7 +146,7 @@ $arrSidebar =getSideBar($data);
                                     data-widget-deletebutton="false"
                                     data-widget-fullscreenbutton="false"
                                     data-widget-custombutton="false"
-                                    data-widget-collapsed="true"
+                                    data-widget-collapsed="true"export_search
                                     data-widget-sortable="false"
 
                                     -->
@@ -196,20 +197,11 @@ $arrSidebar =getSideBar($data);
 
 
                                 <a href="{{action('AdminReportController@ajax_report1_all_export')}}" style="margin-top: 30px;" class="btn btn-labeled btn-success mea-btn-export"> <span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i></span>Export </a>
+
+                                <a href="{{action('AdminReportController@ajax_report1_all_export_text')}}"  style="margin-top: 30px;" class="btn btn-labeled btn-warning mea-btn-export"> <span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i></span>Export .txt </a>
+
                                 <div class="jarviswidget jarviswidget-color-blueDark" style="margin-top: 5px;" id="wid-id-2" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-togglebutton="false">
-                                    <!-- widget options:
-                                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
-                                    data-widget-colorbutton="false"
-                                    data-widget-editbutton="false"
-                                    data-widget-togglebutton="false"
-                                    data-widget-deletebutton="false"
-                                    data-widget-fullscreenbutton="false"
-                                    data-widget-custombutton="false"
-                                    data-widget-collapsed="true"
-                                    data-widget-sortable="false"
-
-                                    -->
                                     <select class="form-control mea-pagesize" id="page-size-all">
                                         <option value="25">25</option>
                                         <option value="50">50</option>
@@ -301,25 +293,6 @@ $arrSidebar =getSideBar($data);
                                 <a href="#" id="export_cal" style="margin-top: 30px;" class="btn btn-labeled btn-success mea-btn-export"> <span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i></span>Export </a>
                                 <!-- Widget ID (each widget will need unique ID)-->
                                 <div class="jarviswidget jarviswidget-color-blueDark" style="margin-top: 5px;" id="wid-id-0" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-colorbutton="false" data-widget-fullscreenbutton="false" data-widget-togglebutton="false">
-                                    <!-- widget options:
-                                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-                                    data-widget-colorbutton="false"
-                                    data-widget-editbutton="false"
-                                    data-widget-togglebutton="false"
-                                    data-widget-deletebutton="false"
-                                    data-widget-fullscreenbutton="false"
-                                    data-widget-custombutton="false"
-                                    data-widget-collapsed="true"
-                                    data-widget-sortable="false"
-
-                                    -->
-
-                                    {{--<select class="form-control mea-pagesize" id="page-size-search">--}}
-                                        {{--<option value="25">25</option>--}}
-                                        {{--<option value="50">50</option>--}}
-                                        {{--<option value="100">100</option>--}}
-                                    {{--</select>--}}
 
                                     <header>
                                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
@@ -518,6 +491,27 @@ $arrSidebar =getSideBar($data);
 
 
                 window.location.href =  "report1/exportsearch?EmpID=" + EmpID +"&depart=" + depart + "&plan=" + plan + "&date_start=" +date_start + "&date_end=" + date_end+ '&check_name=' + check_name+ '&check_depart=' + check_depart+ '&check_plan=' + check_plan+ '&check_date=' + check_date;
+
+            return false;
+        });
+
+        $('#export_search_txt').on('click',function(){
+
+            var PageSizeAll = $('#page-size-search').val();
+            var EmpID = $('#name').val();
+            var depart = $('#depart').val();
+            var plan = $('#plan').val();
+            var date_start = $('#hd_date_start').val();
+            var date_end =$('#hd_date_end').val();
+
+            var check_name =$('#check_name').is(':checked');
+            var check_depart =$('#check_depart').is(':checked');
+            var check_plan =$('#check_plan').is(':checked');
+            var check_date =$('#check_date').is(':checked');
+
+
+
+            window.location.href =  "report1/exportsearch_txt?EmpID=" + EmpID +"&depart=" + depart + "&plan=" + plan + "&date_start=" +date_start + "&date_end=" + date_end+ '&check_name=' + check_name+ '&check_depart=' + check_depart+ '&check_plan=' + check_plan+ '&check_date=' + check_date;
 
             return false;
         });
