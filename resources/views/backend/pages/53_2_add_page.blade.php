@@ -560,12 +560,12 @@
 
 
 
-            meaDatepicker("START_DATE");
+            meaDatepicker("START_DATE","EXPIRE_DATE");
 
             meaDatepicker("EXPIRE_DATE");
 
 
-            meaDatepicker("Notice_start_DATE");
+            meaDatepicker("Notice_start_DATE","Notice_End_DATE");
             meaDatepicker("Notice_End_DATE");
 //            meaDatepicker("comeback");
 //
