@@ -47,13 +47,13 @@
                         </li>
 
                         <li>
-                            <a data-toggle="tab" href="#hr2"> Step 2- <span class="hidden-mobile hidden-tablet"> ข้อมูลการเลือกแผนของสมาชิก </span> </a>
+                            <a data-toggle="tab" class="disable_pan" href="javascript:void(0);"> Step 2- <span class="hidden-mobile hidden-tablet"> ข้อมูลการเลือกแผนของสมาชิก </span> </a>
                         </li>
                         <li>
-                            <a data-toggle="tab" href="#hr3"> Step 3- <span class="hidden-mobile hidden-tablet"> ข้อมูลการเปลี่ยนอัตราสะสมของสมาชิก </span> </a>
+                            <a data-toggle="tab" class="disable_pan" href="javascript:void(0);"> Step 3- <span class="hidden-mobile hidden-tablet"> ข้อมูลการเปลี่ยนอัตราสะสมของสมาชิก </span> </a>
                         </li>
                         <li>
-                            <a data-toggle="tab" href="#hr4"> Step 4- <span class="hidden-mobile hidden-tablet">ข้อมูลผู้รับผลประโยชน์ </span> </a>
+                            <a data-toggle="tab" class="disable_pan" href="javascript:void(0);"> Step 4- <span class="hidden-mobile hidden-tablet">ข้อมูลผู้รับผลประโยชน์ </span> </a>
                         </li>
 
 
@@ -313,7 +313,12 @@
             });
 
 
+            $(".disable_pan").on('click',function(){
 
+                Alert('Alert','ท่านยังไมไ่ด้ สร้างผู้ใช้ ');
+
+                return false;
+            });
 
 
             ///End Optional Insert form
@@ -436,7 +441,7 @@
                         if(data.success){
                             $('#progress_import').hide();
                             AlertSuccess("ข้อมูลได้ถูก update เรียบร้อยแล้ว",function(){
-                                window.location.href = "simple";
+                                window.location.href = "edit/" + data.html;
                             });
                         }else {
                             Alert('Import','การ import ข้อมูลผิดพลาด กรุณาตรวจสอบ รูปแบบข้อมูลของ ไฟล์ ')
@@ -451,6 +456,9 @@
                 });
 
             });
+
+
+
             //End import
 
 
