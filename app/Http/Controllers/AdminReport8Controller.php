@@ -64,14 +64,13 @@ class AdminReport8Controller extends Controller
 //            $where .= " AND us.USER_STATUS_ID = '" . $plan . "'";
 //        }
         if (!empty($date_start) && !empty($date_end) && $check_date== "true") {
-            $where .= " AND rs.QUIZ_TEST_DATE  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
+            $where .= " AND qz.QUIZ_TEST_DATE  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
         }
 
 
 //        $where = " WHERE (focus.EMP_ID = '".$emp_id."' OR em.DEP_SHT  = '".$depart."' OR new.PLAN_ID = '".$plan."' OR new.MODIFY_DATE BETWEEN '".$date_start."' AND '".$date_end."')";
 
-        $allquery = "SELECT COUNT(fn.EMP_ID) AS total FROM TBL_RISK_QUIZ_RESULT rs
-INNER JOIN TBL_EMPLOYEE_INFO fn ON fn.EMP_ID = rs.EMP_ID";
+        $allquery = "SELECT COUNT(fn.EMP_ID) As total FROM TBL_USER us CROSS APPLY(SELECT TOP 1 rs.QUIZ_TEST_DATE,rs.QUIZ_SCORE,rs.QUIZ_RESULT FROM TBL_RISK_QUIZ_RESULT rs WHERE us.EMP_ID= rs.EMP_ID ORDER BY rs.QUIZ_TEST_DATE DESC) AS qz INNER JOIN TBL_EMPLOYEE_INFO fn ON fn.EMP_ID = us.EMP_ID";
 
         if($IsCase){
             $allquery .= $where;
@@ -116,20 +115,19 @@ INNER JOIN TBL_EMPLOYEE_INFO fn ON fn.EMP_ID = rs.EMP_ID";
 //                $where .= " AND us.USER_STATUS_ID = '" . $plan . "'";
 //            }
             if (!empty($date_start) && !empty($date_end) && $check_date== "true") {
-                $where .= " AND rs.QUIZ_TEST_DATE  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
+                $where .= " AND qz.QUIZ_TEST_DATE  BETWEEN '" . $date_start . "' AND '" . $date_end . "'";
             }
         }
 
 
-        $query="SELECT fn.EMP_ID, fn.FULL_NAME ,fn.DEP_SHT,rs.QUIZ_TEST_DATE,rs.QUIZ_SCORE,rs.QUIZ_RESULT FROM TBL_RISK_QUIZ_RESULT rs
-INNER JOIN TBL_EMPLOYEE_INFO fn ON fn.EMP_ID = rs.EMP_ID";
+        $query="SELECT fn.EMP_ID, fn.FULL_NAME ,fn.DEP_SHT,qz.QUIZ_TEST_DATE,qz.QUIZ_SCORE,qz.QUIZ_RESULT FROM TBL_USER us CROSS APPLY(SELECT TOP 1 rs.QUIZ_TEST_DATE,rs.QUIZ_SCORE,rs.QUIZ_RESULT FROM TBL_RISK_QUIZ_RESULT rs WHERE us.EMP_ID= rs.EMP_ID ORDER BY rs.QUIZ_TEST_DATE DESC) AS qz INNER JOIN TBL_EMPLOYEE_INFO fn ON fn.EMP_ID = us.EMP_ID";
 
 
         if($IsCase){
             $query .= $where;
         }
 
-        $query .= " ORDER BY rs.QUIZ_TEST_DATE DESC";
+        $query .= " ORDER BY qz.QUIZ_TEST_DATE DESC";
 
         if($ispageing){
             $query .=  " OFFSET ".$PageSize." * (".$PageNumber." - 1) ROWS FETCH NEXT ".$PageSize." ROWS ONLY OPTION (RECOMPILE)";
