@@ -96,7 +96,7 @@
 
                     </ul>
                     <div class="tab-content">
-                        @if($ishowhis)
+                        @if($ishowhis && $CurrnentPlan)
                             <div class="tab-pane fade " id="home-1" style="position: relative" >
                                 @else
                                     <div class="tab-pane fade active in" id="home-1" style="position: relative" >
