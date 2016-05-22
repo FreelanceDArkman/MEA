@@ -6,7 +6,7 @@
 
     <thead>
     <tr>
-        <th colspan="13" style="text-align: center">รายงานข้อมูล ณ วันที่ {{get_date_notime(date("Y-m-d H:i:s"))}}</th>
+        <th colspan="15" style="text-align: center">รายงานข้อมูล ณ วันที่ {{get_date_notime(date("Y-m-d H:i:s"))}}</th>
     </tr>
     <tr>
         <th>รหัสพนักงาน</th>
@@ -22,6 +22,8 @@
         <th>ตราสารทุน(ใหม่)</th>
         <th>ตราสารหนี้(ใหม่)</th>
         <th>วันที่ทำรายการ(ใหม่)</th>
+        <th>สถานะ</th>
+        <th>วันที่พ้นสภาพ</th>
     </tr>
     </thead>
     <tbody>
@@ -46,6 +48,9 @@
         <td>{{$d->EQUITY_RATE_NEW}}</td>
         <td>{{$d->DEBT_RATE_NEW}}</td>
         <td>{{($d->MODIFY_DATE_NEW == null ? "" :get_date_notime($d->MODIFY_DATE_NEW) )}}</td>
+        <td>{{($d->STATUS_DESC == null ? "" :$d->STATUS_DESC)}}</td>
+
+        <td>{{($d->LEAVE_FUND_GROUP_DATE == null ? "" :get_date_notime($d->LEAVE_FUND_GROUP_DATE) )}}</td>
 
 
 

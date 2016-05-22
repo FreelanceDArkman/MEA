@@ -6,7 +6,7 @@
 
     <thead>
     <tr>
-        <th colspan="8" style="text-align: center">รายงานข้อมูล ณ วันที่ {{get_date_notime(date("Y-m-d H:i:s"))}}</th>
+        <th colspan="10" style="text-align: center">รายงานข้อมูล ณ วันที่ {{get_date_notime(date("Y-m-d H:i:s"))}}</th>
     </tr>
     <tr>
         <th>รหัสพนักงาน</th>
@@ -17,6 +17,8 @@
         <th>วันที่ทำรายการ</th>
         <th>วันที่มีผล</th>
         <th>ผู้ทำรายการ</th>
+        <th>สถานะ</th>
+        <th>วันที่พ้นสภาพ</th>
     </tr>
     </thead>
     <tbody>
@@ -35,7 +37,9 @@
         <td>{{get_date_notime($d->modify_new)}}</td>
         <td>{{get_date_notime($d->effec_new)}}</td>
         <td>{{$d->new_modify_by}}</td>
+                <td>{{($d->STATUS_DESC == null ? "" :$d->STATUS_DESC)}}</td>
 
+                <td>{{($d->LEAVE_FUND_GROUP_DATE == null ? "" :get_date_notime($d->LEAVE_FUND_GROUP_DATE) )}}</td>
 
 
     </tr>

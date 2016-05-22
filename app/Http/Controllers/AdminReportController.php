@@ -122,7 +122,7 @@ class AdminReportController extends Controller
         }
 
 
-        $query="SELECT focus.EMP_ID As EMP_ID,em.FULL_NAME AS FULL_NAME,em.DEP_SHT AS DEP_SHT,mb.LEVEL_CODE AS LEVEL_CODE,mb.AGE_YEAR AS AGE_YEAR,new.PLAN_ID AS PLAN_ID_NEW ,old.PLAN_ID AS PLAN_ID_OLD,old.EQUITY_RATE AS EQUITY_RATE_OLD,old.DEBT_RATE AS DEBT_RATE_OLD,old.MODIFY_DATE AS MODIFY_DATE_OLD ,new.EQUITY_RATE AS EQUITY_RATE_NEW,new.DEBT_RATE AS DEBT_RATE_NEW,new.MODIFY_DATE AS MODIFY_DATE_NEW FROM (SELECT f.EMP_ID, MAX(f.MODIFY_DATE) as datenew FROM TBL_USER_FUND_CHOOSE f GROUP BY f.EMP_ID) AS focus INNER JOIN TBL_EMPLOYEE_INFO em ON em.EMP_ID = focus.EMP_ID CROSS APPLY ( SELECT TOP 1 be.LEVEL_CODE, be.AGE_YEAR FROM TBL_MEMBER_BENEFITS be WHERE be.EMP_ID = focus.EMP_ID ORDER BY be.RECORD_DATE DESC) AS mb CROSS APPLY ( SELECT TOP 1 fn.PLAN_ID,fn.EQUITY_RATE,fn.DEBT_RATE,fn.MODIFY_DATE FROM TBL_USER_FUND_CHOOSE fn WHERE fn.EMP_ID = focus.EMP_ID ORDER BY fn.MODIFY_DATE DESC) AS new OUTER APPLY (SELECT  TOP 1 ol.PLAN_ID,ol.EQUITY_RATE,ol.DEBT_RATE,ol.MODIFY_DATE FROM TBL_USER_FUND_CHOOSE ol WHERE ol.EMP_ID = focus.EMP_ID AND ol.MODIFY_DATE < new.MODIFY_DATE ORDER BY ol.MODIFY_DATE DESC) AS old ";
+        $query="SELECT focus.EMP_ID As EMP_ID,em.FULL_NAME AS FULL_NAME,em.DEP_SHT AS DEP_SHT,mb.LEVEL_CODE AS LEVEL_CODE,mb.AGE_YEAR AS AGE_YEAR,new.PLAN_ID AS PLAN_ID_NEW ,old.PLAN_ID AS PLAN_ID_OLD,old.EQUITY_RATE AS EQUITY_RATE_OLD,old.DEBT_RATE AS DEBT_RATE_OLD,old.MODIFY_DATE AS MODIFY_DATE_OLD ,new.EQUITY_RATE AS EQUITY_RATE_NEW,new.DEBT_RATE AS DEBT_RATE_NEW,new.MODIFY_DATE AS MODIFY_DATE_NEW, new.STATUS_DESC, new.LEAVE_FUND_GROUP_DATE  FROM (SELECT f.EMP_ID, MAX(f.MODIFY_DATE) as datenew FROM TBL_USER_FUND_CHOOSE f GROUP BY f.EMP_ID) AS focus INNER JOIN TBL_EMPLOYEE_INFO em ON em.EMP_ID = focus.EMP_ID CROSS APPLY ( SELECT TOP 1 be.LEVEL_CODE, be.AGE_YEAR FROM TBL_MEMBER_BENEFITS be WHERE be.EMP_ID = focus.EMP_ID ORDER BY be.RECORD_DATE DESC) AS mb CROSS APPLY ( SELECT TOP 1 fn.PLAN_ID,fn.EQUITY_RATE,fn.DEBT_RATE,fn.MODIFY_DATE,uss.STATUS_DESC,fn.USER_STATUS_ID,fn.LEAVE_FUND_GROUP_DATE FROM TBL_USER_FUND_CHOOSE fn LEFT OUTER JOIN TBL_USER_STATUS uss ON uss.USER_STATUS_ID = fn.USER_STATUS_ID WHERE fn.EMP_ID = focus.EMP_ID ORDER BY fn.MODIFY_DATE DESC) AS new OUTER APPLY (SELECT  TOP 1 ol.PLAN_ID,ol.EQUITY_RATE,ol.DEBT_RATE,ol.MODIFY_DATE FROM TBL_USER_FUND_CHOOSE ol WHERE ol.EMP_ID = focus.EMP_ID AND ol.MODIFY_DATE < new.MODIFY_DATE ORDER BY ol.MODIFY_DATE DESC) AS old";
 
 
         if($IsCase){
@@ -324,7 +324,7 @@ class AdminReportController extends Controller
 
             $excel->sheet('Sheetname', function ($sheet) use ($results){
 
-                $sheet->mergeCells('A1:M1');
+                $sheet->mergeCells('A1:O1');
                 $sheet->row(1, function ($row) {
                     $row->setFontFamily('Comic Sans MS');
                     $row->setFontSize(20);
@@ -352,7 +352,8 @@ class AdminReportController extends Controller
                 $header[10] = "ตราสารทุน(ใหม่)";
                 $header[11] = "ตราสารหนี้(ใหม่)";
                 $header[12] = "วันที่ทำรายการ(ใหม่)";
-
+                $header[13] = "สถานะ";
+                $header[14] = "วันที่ออก";
 
                 $sheet->row(2, $header);
 
@@ -422,9 +423,9 @@ class AdminReportController extends Controller
 
             $excel->sheet('Sheetname', function ($sheet) use ($results,$ArrParam){
 
-                $sheet->mergeCells('A1:M1');
-                $sheet->mergeCells('A2:M2');
-                $sheet->mergeCells('A3:M3');
+                $sheet->mergeCells('A1:O1');
+                $sheet->mergeCells('A2:O2');
+                $sheet->mergeCells('A3:O3');
                 $sheet->row(1, function ($row) {
                     $row->setFontFamily('Comic Sans MS');
                     $row->setFontSize(20);
@@ -460,6 +461,8 @@ class AdminReportController extends Controller
                 $header[10] = "ตราสารทุน(ใหม่)";
                 $header[11] = "ตราสารหนี้(ใหม่)";
                 $header[12] = "วันที่ทำรายการ(ใหม่)";
+                $header[13] = "สถานะ";
+                $header[14] = "วันที่พ้นสภาพ";
 
 
                 $sheet->row(4, $header);

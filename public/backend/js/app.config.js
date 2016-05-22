@@ -405,7 +405,7 @@ function  GetDateFormat (date){
 	return '<span style="color:red">' + date + ' ' + monthNamesShort[month] + ' ' + (parseInt(year) + 543) + '</span>';
 
 }
-function meaDatepicker(id){
+function meaDatepicker(id,id_date_end){
 	//var realid = $('.'+id).attr('id');
 
 	if($("#hd_"+id).length == 0){
@@ -449,6 +449,10 @@ function meaDatepicker(id){
 		onSelect : function(selectedDate) {
 
 			$("#date_end").datepicker('option', 'minDate', selectedDate);
+
+			if(id_date_end != null){
+				$("#" + id_date_end).datepicker('option', 'minDate', selectedDate);
+			}
 			//console.log(selectedDate);
 			//var arrselectedDate = selectedDate.split(' ');
 			//console.log(arrselectedDate);

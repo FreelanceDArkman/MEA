@@ -117,9 +117,9 @@ class AdminReport2Controller extends Controller
         }
 
 
-        $query="SELECT focus.EMP_ID As EMP_ID,em.FULL_NAME AS FULL_NAME,em.DEP_SHT AS DEP_SHT ,old.USER_SAVING_RATE as rate_old, new.USER_SAVING_RATE AS rate_new,new.CHANGE_SAVING_RATE_DATE AS modify_new , new.EFFECTIVE_DATE AS effec_new,new.MODIFY_BY AS new_modify_by
+        $query="SELECT focus.EMP_ID As EMP_ID,em.FULL_NAME AS FULL_NAME,em.DEP_SHT AS DEP_SHT ,old.USER_SAVING_RATE as rate_old, new.USER_SAVING_RATE AS rate_new,new.CHANGE_SAVING_RATE_DATE AS modify_new , new.EFFECTIVE_DATE AS effec_new,new.MODIFY_BY AS new_modify_by,new.STATUS_DESC,new.LEAVE_FUND_GROUP_DATE
 FROM (SELECT f.EMP_ID, MAX(f.CHANGE_SAVING_RATE_DATE) as datenew FROM TBL_USER_SAVING_RATE f GROUP BY f.EMP_ID) AS focus
-INNER JOIN TBL_EMPLOYEE_INFO em ON em.EMP_ID = focus.EMP_ID CROSS APPLY (SELECT TOP 1 fn.USER_SAVING_RATE,fn.CHANGE_SAVING_RATE_DATE , fn.EFFECTIVE_DATE, fn.MODIFY_BY FROM TBL_USER_SAVING_RATE fn WHERE fn.EMP_ID = focus.EMP_ID ORDER BY fn.CHANGE_SAVING_RATE_DATE DESC) AS new
+INNER JOIN TBL_EMPLOYEE_INFO em ON em.EMP_ID = focus.EMP_ID CROSS APPLY (SELECT TOP 1 fn.USER_SAVING_RATE,fn.CHANGE_SAVING_RATE_DATE , fn.EFFECTIVE_DATE, fn.MODIFY_BY,uss.STATUS_DESC,fn.USER_STATUS_ID,fn.LEAVE_FUND_GROUP_DATE FROM TBL_USER_SAVING_RATE fn LEFT OUTER JOIN TBL_USER_STATUS uss ON uss.USER_STATUS_ID = fn.USER_STATUS_ID WHERE fn.EMP_ID = focus.EMP_ID ORDER BY fn.CHANGE_SAVING_RATE_DATE DESC) AS new
 OUTER APPLY (SELECT TOP 1 ol.USER_SAVING_RATE FROM TBL_USER_SAVING_RATE ol WHERE ol.EMP_ID = focus.EMP_ID AND ol.CHANGE_SAVING_RATE_DATE <new.CHANGE_SAVING_RATE_DATE ORDER BY ol.CHANGE_SAVING_RATE_DATE DESC) AS old";
 
 
@@ -246,9 +246,9 @@ OUTER APPLY (SELECT TOP 1 ol.USER_SAVING_RATE FROM TBL_USER_SAVING_RATE ol WHERE
 //                ));
                 //
                 // first row styling and writing content
-                $sheet->mergeCells('A1:H1');
-                $sheet->mergeCells('A2:H2');
-                $sheet->mergeCells('A3:H3');
+                $sheet->mergeCells('A1:J1');
+                $sheet->mergeCells('A2:J2');
+                $sheet->mergeCells('A3:J3');
                 $sheet->row(1, function ($row) {
                     $row->setFontFamily('Comic Sans MS');
                     $row->setFontSize(20);
@@ -278,6 +278,9 @@ OUTER APPLY (SELECT TOP 1 ol.USER_SAVING_RATE FROM TBL_USER_SAVING_RATE ol WHERE
                 $header[5] = "วันที่ทำรายการ";
                 $header[6] = "วันที่มีผล";
                 $header[7] = "ผู้ทำรายการ";
+                $header[8] = "สถานะ";
+                $header[9] = "วันที่พ้นสภาพ";
+
 
                 $sheet->row(4, $header);
 
