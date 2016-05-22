@@ -70,7 +70,8 @@ class UserManageController extends Controller
 
 
 
-
+            $data = array();
+            $datauser = array();
 
 //            var_dump($ret);
 
@@ -93,11 +94,52 @@ class UserManageController extends Controller
                     $dateE = new Date($value["enddate"]);
                     $dateEnd = date("d/m/Y", strtotime($dateE));
 
-                    $insert = "INSERT INTO TBL_EMPLOYEE_INFO (EMP_ID,PREFIX,FULL_NAME,ENG_NAME,FIRST_NAME,LAST_NAME,PRIORITY,JOB_ID,JOB_DESC_SHT,JOB_DESC,PER_ID,START_DATE,END_DATE,COST_CENTER,C_LEVEL,POST_ID,POS_DESC,ORG_ID,ENG_FIRST_NAME,ENG_LAST_NAME,
-BIRTH_DATE,ORG_DESC,PATH_ID,DEP_ID,DIV_ID,SEC_ID,PART_ID,PARTH_SHT,DEP_SHT,DIV_SHT,SEC_SHT,PATH_SHT,PARTH_LNG,DEP_LNG,
-DIV_LNG,SEC_LNG,PART_LNG) VALUES('".$EMP_ID."','".$value["prefix"]."','".$value["fullname"]."','".$value["engname"]."','".$value["firstname"]."','".$value["lastname"]."',".$value["priority"].",".$value["jobid"].",'".$value["jobdescsht"]."','".$value["jobdesc"]."','".$value["perid"]."','".$dateStart."','".$dateEnd."','".$value["costcenter"]."',".$value["clevel"].",".$value["posid"].",'".$value["posdesc"]."',".$value["orgid"].",'".$value["engfirstname"]."','".$value["englastname"]."','".$value["birthdate"]."','".$value["orgdesc"]."',".$value["pathid"].",".$value["depid"].",".$value["divid"].",".$value["secid"].",".$value["partid"].",'".$value["pathsht"]."','".$value["depsht"]."','".$value["divsht"]."','".$value["secsht"]."','".$value["partsht"]."','".$value["pathlng"]."','".$value["deplng"]."','".$value["divlng"]."','".$value["seclng"]."','".$value["partlng"]."')";
 
-                    DB::insert(DB::raw($insert));
+                    array_push($data, array(
+                        'EMP_ID' => $value["emp_id"],
+                        'PREFIX' => $value["prefix"],
+                        'FULL_NAME' => $value["fullname"],
+                        'ENG_NAME' =>$value["engname"],
+                        'FIRST_NAME' => $value["firstname"],
+                        'LAST_NAME' => $value["lastname"],
+                        'PRIORITY' => $value["priority"],
+                        'JOB_ID' => $value["jobid"],
+                        'JOB_DESC_SHT' => $value["jobdescsht"],
+                        'JOB_DESC' => $value["jobdesc"],
+                        'PER_ID' => $value["perid"],
+                        'START_DATE' => $dateStart,
+                        'END_DATE' => $dateEnd,
+                        'COST_CENTER' => $value["costcenter"],
+                        'C_LEVEL' => $value["clevel"],
+                        'POST_ID' => $value["posid"],
+                        'POS_DESC' => $value["posdesc"],
+                        'ORG_ID' => $value["orgid"],
+                        'ENG_FIRST_NAME' => $value["engfirstname"],
+                        'ENG_LAST_NAME' => $value["englastname"],
+                        'BIRTH_DATE' => $value["birthdate"],
+                        'ORG_DESC' => $value["orgdesc"],
+                        'PATH_ID' => $value["pathid"],
+                        'DEP_ID' => $value["depid"],
+                        'DIV_ID' => $value["divid"],
+                        'SEC_ID' => $value["secid"],
+                        'PART_ID' => $value["partid"],
+                        'PARTH_SHT' => $value["pathsht"],
+                        'DEP_SHT' => $value["depsht"],
+                        'DIV_SHT' => $value["divsht"],
+                        'SEC_SHT' => $value["secsht"],
+                        'PATH_SHT' => $value["partsht"],
+                        'PARTH_LNG' => $value["pathlng"],
+                        'DEP_LNG' => $value["deplng"],
+                        'DIV_LNG' => $value["divlng"],
+                        'SEC_LNG' => $value["seclng"],
+                        'PART_LNG' => $value["partlng"],
+
+
+                    ));
+
+
+
+
                 }
 
                 if($user == null){
@@ -123,27 +165,42 @@ DIV_LNG,SEC_LNG,PART_LNG) VALUES('".$EMP_ID."','".$value["prefix"]."','".$value[
                     $ecPass = explode(':',$ecPass)[1];
 
                     $datedefault = new Date("9999-12-31 00:00:00.000") ;
+                    $admin= 'Administrator';
+                    $user_id = '2';
+
+                    array_push($datauser, array(
+                        'EMP_ID' => $EMP_ID,
+                        'USERNAME' => $EMP_ID,
+                        'PASSWORD' => $ecPass,
+                        'PASSWORD_EXPIRE_DATE' =>$datedefault,
+                        'CREATE_DATE' => $date,
+                        'CREATE_BY' => $admin,
+                        'LAST_MODIFY_DATE' =>$date,
+                        'USER_PRIVILEGE_ID' => $user_id,
+                        'ACCESS_PERMISSIONS' => $pri[0]->ACCESS_PERMISSIONS,
+                        'USER_STATUS_ID' => 13,
+                        'FIRST_LOGIN_FLAG' => 0,
+                        'EMAIL_NOTIFY_FLAG' => 1
 
 
-                    $insetuser = "INSERT INTO TBL_USER (EMP_ID,USERNAME,PASSWORD,PASSWORD_EXPIRE_DATE,CREATE_DATE
-,CREATE_BY,LAST_MODIFY_DATE,USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,USER_STATUS_ID,FIRST_LOGIN_FLAG,EMAIL_NOTIFY_FLAG)
-VALUES('".$EMP_ID."','".$EMP_ID."','".$ecPass."','9999-12-31 00:00:00.000','".$date."','Administrator','".$date."'
-,'2','".$pri[0]->ACCESS_PERMISSIONS."','13','0','1')";
 
-                    DB::insert(DB::raw($insetuser));
+                    ));
+
 
                 }
 
             }
 
 
+            DB::table('TBL_EMPLOYEE_INFO')->insert($data);
+            DB::table('TBL_USER')->insert($datauser);
 
         });
 
 
         return response()->json(array('success' => true, 'html'=>$ret));
 
-        $type = $request->input('type');
+       // $type = $request->input('type');
 
 
     }
