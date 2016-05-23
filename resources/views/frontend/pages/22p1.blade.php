@@ -164,7 +164,9 @@
                                     </div>
 
                                 </div>
-                                @if($Isaccess && get_user_access_status_flag() != 2)
+                                {{--&& get_user_access_status_flag() != 2--}}
+
+                                @if($Isaccess &&  (get_user_access_status_flag() == 2 ||get_user_access_status_flag() == 0))
                                         @if($quizdoit)
                                         <div class="row">
                                             <div class="col-md-12" style="padding: 0 100px 0 100px;">
