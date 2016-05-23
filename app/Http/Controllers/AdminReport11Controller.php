@@ -131,7 +131,7 @@ WHERE fnn.PLAN_ID = ".$plan." GROUP BY CONVERT(VARCHAR(10), fnn.MODIFY_DATE, 120
             $query .= $where;
         }
 
-        $query .= " ORDER BY CONVERT(VARCHAR(10), fn.MODIFY_DATE, 120)";
+        $query .= " ORDER BY CONVERT(VARCHAR(10), fn.MODIFY_DATE, 120) DESC";
 
         if($ispageing){
             $query .=  " OFFSET ".$PageSize." * (".$PageNumber." - 1) ROWS FETCH NEXT ".$PageSize." ROWS ONLY OPTION (RECOMPILE)";
