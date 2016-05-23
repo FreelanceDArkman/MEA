@@ -310,9 +310,9 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
 
     public  function  postEditUser1(Request $request){
 
-
+        $arrPlanTopic = explode(",", $request->input('PLAN_ID'));
         $user_id=$request->input('user_id');
-        $PLAN_ID =$request->input('PLAN_ID');
+        $PLAN_ID =$arrPlanTopic[0];
         $EQUITY_RATE=$request->input('EQUITY_RATE');
         $DEBT_RATE=$request->input('DEBT_RATE');
         $MODIFY_COUNT=$request->input('MODIFY_COUNT');

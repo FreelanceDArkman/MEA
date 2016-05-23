@@ -90,8 +90,8 @@
                                     </p>
                                     <input type="file" class="btn btn-default" id="import1" name="import1">
                                     <p style="height: 15px;"></p>
-                                    <p id="progress_check" style="display: none;"><img src="http://172.20.10.3:4646/backend/img/shot.gif"> กำลังตรวจสอบ ไฟล์</p>
-                                    <p id="progress_import" style="display: none;"><img src="http://172.20.10.3:4646/backend/img/shot.gif"> กำลังนำเข้าข้อมูล</p>
+                                    <p id="progress_check" style="display: none;"><img src="/backend/img/shot.gif"> กำลังตรวจสอบ ไฟล์</p>
+                                    <p id="progress_import" style="display: none;"><img src="/backend/img/shot.gif"> กำลังนำเข้าข้อมูล</p>
                                     <p id="check_ret" style="display: none"></p>
                                     <p>
                                         <a href="javascript:void(0);" data-input="import1" data-import="1" class="btn_check btn btn-xs btn-primary"><i class="fa fa-download"></i> ตรวจสอบไฟล์</a>
@@ -339,7 +339,7 @@
                                                     @if($userplan)
                                                         <option value="default">เลือกแผนการลงทุน</option>
                                                         @foreach($userplan as $group)
-                                                            <option value="{{ $group->PLAN_ID }}">{{ $group->PLAN_NAME }}</option>
+                                                            <option value="{{$group->PLAN_ID ."," .$group->EQUITY_MIN_PERCENTAGE."," .$group->EQUITY_MAX_PERCENTAGE."," .$group->DEBT_MIN_PERCENTAGE."," .$group->DEBT_MAX_PERCENTAGE}}">{{ $group->PLAN_NAME }}</option>
                                                         @endforeach
                                                     @endif
                                                 </select> </label>
@@ -355,7 +355,7 @@
                                         </section>
                                         <section class="col col-6">
                                             <label class="input">สัดส่วนหนี้ (%)
-                                                <input type="text" id="DEBT_RATE" name="DEBT_RATE" placeholder="สัดส่วนหนี้ (%)"  >
+                                                <input type="text" id="DEBT_RATE" name="DEBT_RATE" placeholder="สัดส่วนหนี้ (%)"  readonly  >
                                                 <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
                                         </section>
                                     </div>
@@ -548,6 +548,59 @@
                 return arg != value;
             }, "Please Choose one");
 
+
+
+            //min max
+
+            $('#EQUITY_RATE').on('keyup',function(){
+
+                var val =  $(this).val();
+                if(val <= 100){
+
+                    $('#DEBT_RATE').val(100 -val);
+                }else {
+
+                    alert('กรุณาใส่ข้อมูล ไม่เกิน 100');
+                }
+
+
+            });
+
+            $('#DEBT_RATE').on('keyup',function(){
+                var val =  $(this).val();
+
+                if(val <= 100){
+
+                    $('#EQUITY_RATE').val(100 -val);
+                }else {
+
+                    alert('กรุณาใส่ข้อมูล ไม่เกิน 100');
+                }
+
+
+            });
+
+
+            $("#PLAN_ID").on('change',function(){
+
+//                alert($(this).val());
+
+                var arrval = $(this).val().split(',');
+
+                var maxeq = arrval[2]
+                var mineq = arrval[1]
+                var maxdeb =arrval[4]
+                var mindeb =arrval[3]
+
+
+                $("#EQUITY_RATE").attr('placeholder',mineq + "-" + maxeq)
+
+//                $("#DEBT_RATE").attr('placeholder',mindeb + "-" + maxdeb)
+
+
+
+            });
+            //end min max
 
             //optonalInsert form
 
@@ -923,6 +976,20 @@
 
                                 success: function()
                                 {
+
+
+                                    var arrval =  $("#PLAN_ID").val().split(',');
+
+
+
+
+                                    var maxeq = arrval[2]
+
+
+                                    var mineq = arrval[1]
+//                                    var maxdeb =arrval[4]
+//                                    var mindeb =arrval[3]
+
                                     var user_id = $("#user_id").val();
                                     var PLAN_ID = $("#PLAN_ID").val();
                                     var EQUITY_RATE= $("#EQUITY_RATE").val();
@@ -934,29 +1001,42 @@
                                     var EFFECTIVE_DATE = $("#hd_EFFECTIVE_DATE").val();
 
 
-                                    var jsondata = {
-                                        user_id:user_id,
-                                        PLAN_ID :PLAN_ID,
-                                        EQUITY_RATE:EQUITY_RATE,
-                                        DEBT_RATE:DEBT_RATE,
-                                        MODIFY_COUNT:MODIFY_COUNT,
-                                        MODIFY_DATE:MODIFY_DATE,
-                                        EFFECTIVE_DATE:EFFECTIVE_DATE
 
-                                    };
 
-                                    MeaAjax(jsondata,"/admin/users/edit1",function(data){
-                                        if(data.success){
+                                    if(((parseInt(EQUITY_RATE)>=parseInt(mineq) && parseInt(EQUITY_RATE)<=parseInt(maxeq))  ) ){
 
-                                            AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
 
-                                                window.location.href = "/admin/users/edit/" + user_id;
-                                            });
+                                        var jsondata = {
+                                            user_id:user_id,
+                                            PLAN_ID :PLAN_ID,
+                                            EQUITY_RATE:EQUITY_RATE,
+                                            DEBT_RATE:DEBT_RATE,
+                                            MODIFY_COUNT:MODIFY_COUNT,
+                                            MODIFY_DATE:MODIFY_DATE,
+                                            EFFECTIVE_DATE:EFFECTIVE_DATE
 
-                                        }else {
-                                            Alert("",data.html,null,null);
-                                        }
-                                    });
+                                        };
+
+                                        MeaAjax(jsondata,"/admin/users/edit1",function(data){
+                                            if(data.success){
+
+                                                AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
+
+                                                    window.location.href = "/admin/users/edit/" + user_id;
+                                                });
+
+                                            }else {
+                                                Alert("",data.html,null,null);
+                                            }
+                                        });
+                                    }else {
+                                        Alert('Error','ท่านเลือกจำนวนสัดส่วนตราสารทุน เกินจำนวนที่กำหนด' );
+                                    }
+
+
+
+
+
 
                                     return false;
                                 }

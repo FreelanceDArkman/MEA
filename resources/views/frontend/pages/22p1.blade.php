@@ -551,7 +551,7 @@
 
                 $("#maxVal1").attr('placeholder',mineq + "-" + maxeq)
 
-                $("#maxVal2").attr('placeholder',mindeb + "-" + maxdeb)
+//                $("#maxVal2").attr('placeholder',mindeb + "-" + maxdeb)
 
 
 
@@ -614,8 +614,8 @@
                     var maxVal2 = $("#maxVal2").val();
 
 
-
-                    if(((parseInt(maxVal1)>=parseInt(mineq) && parseInt(maxVal1)<=parseInt(maxeq)) && (parseInt(maxVal2)>=parseInt(mindeb) && parseInt(maxVal2)<=parseInt(maxdeb)) ) ){
+//                    if(((parseInt(maxVal1)>=parseInt(mineq) && parseInt(maxVal1)<=parseInt(maxeq)) && (parseInt(maxVal2)>=parseInt(mindeb) && parseInt(maxVal2)<=parseInt(maxdeb)) ) ){
+                    if(((parseInt(maxVal1)>=parseInt(mineq) && parseInt(maxVal1)<=parseInt(maxeq)) ) ){
                         $(form).submit();
                     }else {
                         alert('ท่านเลือกจำนวนสัดส่วนตราสารทุน เกินจำนวนที่กำหนด' );
