@@ -14,7 +14,7 @@
                 <div class="reg-header">
                     <h2>เข้าสู่ระบบ</h2>
                     @if($errors->any())
-                        <h4>{{$errors->first()}}</h4>
+                        <h4 style="color: red;">{{$errors->first()}}</h4>
                     @endif
                 </div>
                 <label for="username">ชื่อผู้ใช้</label>

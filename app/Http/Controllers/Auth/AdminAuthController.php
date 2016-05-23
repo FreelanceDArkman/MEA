@@ -130,9 +130,25 @@ class AdminAuthController extends Controller
         );
         $curl = new Curl('Login', $data);
         $result_login = $curl->getResult();
+        $retError = "";
         if($result_login->errCode != 0) {
             // login fail
-            return redirect()->to('admin/login')->with('messages', 'The username or password you entered is incorrect.');
+
+            switch($result_login->errCode){
+                case  1:
+                    $retError = "ท่านระบุรหัสผู้ใช้งานไม่ถูกต้อง";
+                    break;
+                case  2:
+                    $retError = "ท่านระบุรหัสผ่านไม่ถูกต้อง" ;
+                    break;
+                case 7706:
+                    $retError = "รหัสผู้ใช้งานของท่านไม่ได้รับอนุญาตให้เข้าใช้งานระบบ กรุณาติดต่อผู้ดูแลระบบ"  ;
+                    break;
+                default:
+                    $retError=   'The email or password you entered is incorrect.';
+                    break;
+            }
+            return redirect()->to('admin/login')->with('messages', $retError);
         } else {
             // logged in
             if(!in_array($result_login->result[0]->user_privilege_id, Config::get('mea.admin_groups'))) {

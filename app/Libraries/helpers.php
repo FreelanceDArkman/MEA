@@ -26,10 +26,31 @@ if (!function_exists('getClientLink')) {
 
 }
 
+if (!function_exists('getManual_admin')) {
+
+    function getManual_admin(){
+        $sql44  = "SELECT * FROM TBL_NEWS_TOPIC WHERE NEWS_CATE_ID = 99 AND NEWS_TOPIC_ID = 3";
+
+
+        $man = DB::select(DB::raw($sql44));
+
+
+        if($man != null){
+            return $man[0]->FILE_PATH;
+        }else{
+            return null;
+        }
+
+//        $user_group = DB::table('TBL_MENU_LIST')->get();
+
+    }
+
+}
+
 if (!function_exists('getManual')) {
 
     function getManual(){
-        $sql44  = "SELECT * FROM TBL_NEWS_TOPIC WHERE NEWS_CATE_ID = 99 AND NEWS_TOPIC_ID = 34";
+        $sql44  = "SELECT * FROM TBL_NEWS_TOPIC WHERE NEWS_CATE_ID = 99 AND NEWS_TOPIC_ID = 2";
 
 
         $man = DB::select(DB::raw($sql44));
