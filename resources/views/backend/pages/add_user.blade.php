@@ -134,10 +134,10 @@
                                                     <section style="margin-top: 15px;margin-left: 20px;">
                                                         <div class="inline-group">
                                                             <label class="radio">
-                                                                <input type="radio" class="chk_firstlogin" name="first_login" checked="" value="0">
+                                                                <input type="radio" class="chk_firstlogin" name="chk_firstlogin" checked="" value="0">
                                                                 <i></i>ใช่</label>
                                                             <label class="radio">
-                                                                <input type="radio" class="chk_firstlogin" name="first_login" value="1">
+                                                                <input type="radio" class="chk_firstlogin" name="chk_firstlogin" value="1">
                                                                 <i></i>ไม่ใช่</label>
 
                                                         </div>
@@ -152,10 +152,10 @@
                                                     <section style="margin-top: 15px;margin-left: 20px;">
                                                         <div class="inline-group">
                                                             <label class="radio">
-                                                                <input type="radio" class="chk_expire" name="pass_expire" checked="" value="0">
+                                                                <input type="radio" class="chk_expire" name="chk_expire" checked="" value="0">
                                                                 <i></i>ใช่</label>
                                                             <label class="radio">
-                                                                <input type="radio" class="chk_expire" name="pass_expire" value="1">
+                                                                <input type="radio" class="chk_expire" name="chk_expire" value="1">
                                                                 <i></i>ไม่ใช่</label>
 
                                                         </div>
@@ -539,8 +539,10 @@
                             var user_name = $("#user_name").val();
                             var password= $("#password").val();
 
-                            var chk_firstlogin= $(".chk_firstlogin").val();
-                            var chk_expire= $(".chk_expire").val();
+                            var chk_firstlogin=  $('input[name=chk_firstlogin]:checked').val();
+
+
+                            var chk_expire= $('input[name=chk_expire]:checked').val();
 
                             var email= $("#email").val();
                             var phone= $("#phone").val();
@@ -576,7 +578,7 @@
 
                                     AlertSuccess("บันทึกผู้ใช้เรียบร้อยแล้ว",function(){
 
-                                        window.location.href = "users";
+                                        window.location.href = "/admin/users";
                                     });
 
                                 }else {

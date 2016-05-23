@@ -283,7 +283,7 @@
                                     var plan_start= $("#hd_plan_start").val();
                                     var plan_end= $("#hd_plan_end").val();
 
-                                    var plan_status = $(".plan_status").val();
+                                    var plan_status =$('input[name=plan_status]:checked').val();
 
                                     var jsondata = {
                                         plan_id:plan_id,

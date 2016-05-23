@@ -153,10 +153,10 @@
                                             <section style="margin-top: 15px;margin-left: 20px;">
                                                 <div class="inline-group">
                                                     <label class="radio">
-                                                        <input type="radio" {{$logyes}}  class="chk_firstlogin" name="first_login"  value="0">
+                                                        <input type="radio" {{$logyes}}  class="chk_firstlogin" name="chk_firstlogin"  value="0">
                                                         <i></i>ใช่</label>
                                                     <label class="radio">
-                                                        <input type="radio" {{$logno}} class="chk_firstlogin" name="first_login" value="1">
+                                                        <input type="radio" {{$logno}} class="chk_firstlogin" name="chk_firstlogin" value="1">
                                                         <i></i>ไม่ใช่</label>
 
                                                 </div>
@@ -191,10 +191,10 @@
 
                                                         ?>
 
-                                                        <input type="radio" {{$retyes}} class="chk_expire" name="pass_expire"    value="0">
+                                                        <input type="radio" {{$retyes}} class="chk_expire" name="chk_expire"    value="0">
                                                         <i></i>ใช่</label>
                                                     <label class="radio">
-                                                        <input type="radio" {{$retno}} class="chk_expire" name="pass_expire" value="1">
+                                                        <input type="radio" {{$retno}} class="chk_expire" name="chk_expire" value="1">
                                                         <i></i>ไม่ใช่</label>
 
                                                 </div>
@@ -1022,8 +1022,8 @@
                             var user_name = $("#user_name").val();
                             var password= $("#password").val();
 
-                            var chk_firstlogin= $(".chk_firstlogin").val();
-                            var chk_expire= $(".chk_expire").val();
+                            var chk_firstlogin= $('input[name=chk_firstlogin]:checked').val();
+                            var chk_expire= $('input[name=chk_expire]:checked').val();
 
                             var email= $("#email").val();
                             var phone= $("#phone").val();
