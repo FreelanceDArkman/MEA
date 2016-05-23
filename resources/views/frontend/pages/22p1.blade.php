@@ -394,7 +394,7 @@
         </div>
         <!-- End Profile Content -->
     </div>
-
+<input type="hidden" id="flag100"  value="{{get_user_access_status_flag()}}" />
     <script>
 
 
@@ -594,11 +594,13 @@
                     var arrval =  $("#TYPE_TOPIC").val().split(',');
 
 
-                    var flag100 = {{session()->get('user_data')->access_status_flag}};
+                    var flag100 = $("#flag100").val();
 
                     var maxeq = arrval[2]
                     if(flag100 == 2){
                         maxeq = 100;
+                    }else if (flag100 == 0){
+                        maxeq = 50;
                     }
 
                     var mineq = arrval[1]
@@ -614,7 +616,7 @@
                     if(((parseInt(maxVal1)>=parseInt(mineq) && parseInt(maxVal1)<=parseInt(maxeq)) && (parseInt(maxVal2)>=parseInt(mindeb) && parseInt(maxVal2)<=parseInt(maxdeb)) ) ){
                         $(form).submit();
                     }else {
-                        alert('กรุณาระบุ ค่าให้ถูกต้อง')
+                        alert('ท่านเลือกจำนวนสัดส่วนตราสารทุน เกินจำนวนที่กำหนด' );
                     }
 //                    $(form).ajaxSubmit(
 //                            {
