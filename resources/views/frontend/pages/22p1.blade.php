@@ -103,14 +103,14 @@
 
 
                             @if($CurrnentPlan)
-                                @if($CurrnentPlan[0]->MODIFY_COUNT == session()->get('user_data')->fund_plan_change_per_year)
+                                @if($CurrnentPlan[0]->MODIFY_COUNT < session()->get('user_data')->fund_plan_change_per_year)
                                     <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                         <strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>
                                     </div>
                                     @endif
                             @else
                                 @if($effective)
-                                            @if($effective[0]->MODIFY_COUNT == session()->get('user_data')->fund_plan_change_per_year)
+                                            @if($effective[0]->MODIFY_COUNT < session()->get('user_data')->fund_plan_change_per_year)
                                             <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                                 <strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>
                                             </div>

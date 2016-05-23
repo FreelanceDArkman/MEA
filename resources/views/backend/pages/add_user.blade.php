@@ -85,8 +85,8 @@
                                             </p>
                                             <input type="file" class="btn btn-default" id="import1" name="import1">
                                             <p style="height: 15px;"></p>
-                                            <p id="progress_check" style="display: none;"><img src="http://172.20.10.3:4646/backend/img/shot.gif"> กำลังตรวจสอบ ไฟล์</p>
-                                            <p id="progress_import" style="display: none;"><img src="http://172.20.10.3:4646/backend/img/shot.gif"> กำลังนำเข้าข้อมูล</p>
+                                            <p id="progress_check" style="display: none;"><img src="/backend/img/shot.gif"> กำลังตรวจสอบ ไฟล์</p>
+                                            <p id="progress_import" style="display: none;"><img src="/backend/img/shot.gif"> กำลังนำเข้าข้อมูล</p>
                                             <p id="check_ret" style="display: none"></p>
                                             <p>
                                                 <a href="javascript:void(0);" data-input="import1" data-import="1" class="btn_check btn btn-xs btn-primary"><i class="fa fa-download"></i> ตรวจสอบไฟล์</a>
