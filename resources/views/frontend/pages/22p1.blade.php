@@ -118,7 +118,7 @@
                                 @endif
                             @endif
 
-
+   
                             <div id="all_invest" style="{{objectcheckdisplaynone($CurrnentPlan)}}" >
                                 <div class="row">
 
@@ -188,7 +188,7 @@
 
                                 {{--{{$Isaccess . "---" .get_user_access_status_flag()}}--}}
 
-                                @if( $Isaccess && get_user_access_status_flag() == 2)
+                                @if( $Isaccess && (get_user_access_status_flag() == 2 ||get_user_access_status_flag() == 1))
 
                                     @if($quizdoit)
                                         <form action="{{ action('changeplanController@InsertInvestPlan') }}" id="sky-form1" class="sky-form" method="post">

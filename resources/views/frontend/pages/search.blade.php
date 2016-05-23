@@ -30,6 +30,7 @@
 
 <!--=== Search Results ===-->
 <div class="container s-results margin-bottom-50">
+    <span class="results-number" style="font-weight: bold;" >ค้นหาคำว่า : {{$keyword}}</span>
     <span class="results-number">ผลการค้นหา พบ {{$allrecord}} รายการ</span>
 
     @if($recordss)
