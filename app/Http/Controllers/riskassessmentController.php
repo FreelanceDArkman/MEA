@@ -92,7 +92,7 @@ class riskassessmentController extends Controller
 
         //var_dump(quizScore($quizprofile->QUIZ_RESULT));
 
-var_dump($mappingret);
+//var_dump($mappingret);
 
         return view('frontend.pages.24p1')->with([
             'quizprofile'=>$quizprofile,

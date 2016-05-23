@@ -29,7 +29,7 @@ if (!function_exists('getClientLink')) {
 if (!function_exists('getManual')) {
 
     function getManual(){
-        $sql44  = "SELECT * FROM TBL_NEWS_TOPIC WHERE NEWS_CATE_ID = 99 AND NEWS_TOPIC_ID = 2";
+        $sql44  = "SELECT * FROM TBL_NEWS_TOPIC WHERE NEWS_CATE_ID = 99 AND NEWS_TOPIC_ID = 34";
 
 
         $man = DB::select(DB::raw($sql44));
