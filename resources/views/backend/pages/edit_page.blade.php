@@ -356,7 +356,12 @@
 //
 //            meaDatepicker("comeback");
 
+            var dd = $("#hd_plan_start").val();
+            var todaya = new Date(dd);
 
+
+
+            $("#plan_end").datepicker('option', 'minDate', todaya);
 
 
         });

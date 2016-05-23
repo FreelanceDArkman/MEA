@@ -381,7 +381,12 @@
 
             meaDatepicker("EXPIRE_DATE");
 
+            var dd = $("#hd_START_DATE").val();
+            var todaya = new Date(dd);
 
+
+
+            $("#EXPIRE_DATE").datepicker('option', 'minDate', todaya);
 
 
 

@@ -516,8 +516,11 @@ $arrSidebar =getSideBar($data);
             return false;
         });
 
-        meaDatepicker("date_start");
+        meaDatepicker("date_start","date_end");
         meaDatepicker("date_end");
+
+        
+
 
         $("#all_data").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
 

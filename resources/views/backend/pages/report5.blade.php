@@ -193,7 +193,7 @@
                 return false;
             });
 
-            meaDatepicker("date_start");
+            meaDatepicker("date_start","date_end");
             meaDatepicker("date_end");
 
 

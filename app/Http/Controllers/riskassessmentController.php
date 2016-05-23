@@ -24,6 +24,9 @@ class riskassessmentController extends Controller
         $sql2 = "SELECT TOP 1 * FROM TBL_RISK_QUIZ_RESULT WHERE EMP_ID = '".get_userID()."' ORDER BY QUIZ_TEST_DATE DESC";
 
         $quizprofile_data =  DB::select(DB::raw($sql2));
+
+
+
         $quizprofile = null;
         $mappingret = null;
         $ischeckok = false;
@@ -76,7 +79,9 @@ class riskassessmentController extends Controller
             }
         }
 
-
+//        if($mappingret == null){
+//            $mappingret=0;
+//        }
         //QUIZ_ACTIVE_DATE
 
         //QUIZ_EXPIRE_DATE
@@ -86,6 +91,8 @@ class riskassessmentController extends Controller
 
 
         //var_dump(quizScore($quizprofile->QUIZ_RESULT));
+
+var_dump($mappingret);
 
         return view('frontend.pages.24p1')->with([
             'quizprofile'=>$quizprofile,

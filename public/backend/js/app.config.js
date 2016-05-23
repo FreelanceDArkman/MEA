@@ -444,6 +444,8 @@ function meaDatepicker(id,id_date_end){
 			//	year = year - 543;
          //
 			//$(date).val(arrselectedDate[0] + " " + arrselectedDate[1] + " " + (parseInt(arrselectedDate[2]) - 543))
+
+
 		},
 
 		onSelect : function(selectedDate) {
@@ -466,7 +468,12 @@ function meaDatepicker(id,id_date_end){
 			//$('#finishdate').datepicker('option', 'minDate', selectedDate);
 		}
 
+
+
 	});
+
+
+
 
 //.datepicker("setDate" , new Date(d.getFullYear() + 543,d.getMonth(),d.getDate()));
 }
