@@ -196,7 +196,7 @@ if (!$no_main_header) {
 
         <!-- logout button -->
         <div id="logout" class="btn-header transparent pull-right">
-            <span> <a href="{{action('Auth\AdminAuthController@checkLogout')}}" data-action="userLogout" title="Sign Out" data-logout-msg="You can improve your security further after logging out by closing this opened browser"><i class="fa fa-sign-out"></i></a> </span>
+            <span> <a href="{{action('Auth\AdminAuthController@checkLogout')}}" data-action="userLogout" title="Sign Out" data-logout-msg="ท่านแน่ใจที่ต้องการออกจากระบบ"><i class="fa fa-sign-out"></i></a> </span>
         </div>
         <!-- end logout button -->
 
@@ -234,7 +234,13 @@ if (!$no_main_header) {
         {{--</div>--}}
         {{--<!-- end voice command -->--}}
 
+        <ul class="header-dropdown-list hidden-xs">
+            <li>
+                <a href="{{getManual_admin()}}" target="_blank" class="dropdown-toggle" >
+                     <span> คู่มือการใช้งาน </span>  </a>
 
+            </li>
+        </ul>
 
     </div>
     <!-- end pulled right: nav area -->
