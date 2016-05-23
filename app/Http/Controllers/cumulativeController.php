@@ -324,7 +324,7 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         }
 
         $sql = "INSERT INTO TBL_USER_SAVING_RATE (EMP_ID,USER_SAVING_RATE,CHANGE_SAVING_RATE_DATE,EFFECTIVE_DATE,MODIFY_COUNT,MODIFY_BY,USER_STATUS_ID,LEAVE_FUND_GROUP_DATE)
-VALUES( '".$emp_id."' ,$USER_SAVING_RATE, '".$create_date."','".$effectiveDate."',$Modify_count,'".$addby."','".$USER_STATUS_ID."',$LEAVE_FUND_GROUP_DATE)";
+VALUES( '".$emp_id."' ,$USER_SAVING_RATE, '".$create_date."','".$effectiveDate."',$Modify_count,'".$addby."','".$USER_STATUS_ID."','".$LEAVE_FUND_GROUP_DATE."')";
 
         $ret =DB::insert(DB::raw($sql));
 
