@@ -52,6 +52,8 @@ class changeplanController extends Controller
         $addby = get_userID();
         $USER_STATUS_ID = $USER->USER_STATUS_ID;
         $LEAVE_FUND_GROUP_DATE = "NULL";
+
+
         if($USER->LEAVE_FUND_GROUP_DATE != null){
             $LEAVE_FUND_GROUP_DATE = $USER->LEAVE_FUND_GROUP_DATE;
         }
@@ -62,7 +64,7 @@ class changeplanController extends Controller
 //    var_dump($USER);
 
         $sql = "INSERT INTO TBL_USER_FUND_CHOOSE (EMP_ID,PLAN_ID,EQUITY_RATE,DEBT_RATE,MODIFY_DATE,EFFECTIVE_DATE,MODIFY_COUNT,MODIFY_BY,USER_STATUS_ID,LEAVE_FUND_GROUP_DATE)
-VALUES($emp_id,$plan_id,$equip,$dept,'".$create_date."','".$effectiveDate."',$Modify_count,'".$addby."','".$USER_STATUS_ID."',$LEAVE_FUND_GROUP_DATE)";
+VALUES($emp_id,$plan_id,$equip,$dept,'".$create_date."','".$effectiveDate."',$Modify_count,'".$addby."','".$USER_STATUS_ID."','".$LEAVE_FUND_GROUP_DATE."')";
 
         $val =  array(
             "emp_id" => $emp_id,
