@@ -67,7 +67,9 @@ a:hover {
    color: #fe5000;
    text-decoration: underline;
 }
-
+select {
+	font-size: 20px !important;
+}
 /*Intro Page
 ------------------------------------*/
 .intro-page-img-frames {

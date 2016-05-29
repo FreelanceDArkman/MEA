@@ -16,12 +16,14 @@
 
     @endif
         <div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm login-bg">
-            <h1 class="txt-color-red login-header-big">มุ่งสู่องค์สมถนะสูง</h1>
+            {{--<h1 class="txt-color-red login-header-big">มุ่งสู่องค์สมถนะสูง</h1>--}}
+
+            <h1 style="height: 50px"></h1>
             <div class="hero">
 
                 <div class="pull-left login-desc-box-l">
-                    <h4 class="paragraph-header">เป็นองค์กรชั้นนำ <br/>
-                        ด้านธุรกิจพลังงานไฟฟ้าในระดับสากล </h4>
+                    <h1 class="txt-color-red login-header-big">เป็นองค์กรชั้นนำ <br/>
+                        ด้านธุรกิจพลังงานไฟฟ้าในระดับสากล </h1>
                     {{--<div class="login-app-icons">--}}
                         {{--<a href="javascript:void(0);" class="btn btn-danger btn-sm">Frontend Template</a>--}}
                         {{--<a href="javascript:void(0);" class="btn btn-danger btn-sm">Find out more</a>--}}

@@ -101,7 +101,22 @@ class AuthController extends Controller
         $result_login = $curl->getResult();
         if($result_login->errCode != 0) {
             // login fail
-            return redirect()->to('firstlogin')->withErrors(['ไม่พบชื่อ login นี้', 'The email or password you entered is incorrect.']);
+            $retError = "";
+            switch($result_login->errCode){
+                case  1:
+                    $retError = "ท่านระบุรหัสผู้ใช้งานไม่ถูกต้อง";
+                    break;
+                case  2:
+                    $retError = "ท่านระบุรหัสผ่านไม่ถูกต้อง" ;
+                    break;
+                case 7706:
+                    $retError = "รหัสผู้ใช้งานของท่านไม่ได้รับอนุญาตให้เข้าใช้งานระบบ กรุณาติดต่อผู้ดูแลระบบ"  ;
+                    break;
+                default:
+                    $retError=   'ไม่พบชื่อ login นี้';
+                    break;
+            }
+            return redirect()->to('firstlogin')->withErrors([$retError]);
         } else {
 
             Session::flush();
@@ -172,18 +187,29 @@ class AuthController extends Controller
             // login fail
             return redirect()->to('login')->withErrors([$retError]);
         } else {
-
             session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
+            if(get_user_access_status_flag() == 1){
+
+                $retError = "ท่านไม่สามารถเข้าใช้งานระบบได้ เนื่องจากท่านได้ลาออกจากสมาชิกกองทุน เมื่อวันที่ "  . get_user_LEAVE_FUND_GROUP_DATE() . " หากต้องการรายละเอียดเพิ่มเติม กรุณาติดต่อกองทุนสำรองเลี้ยงชีพ";
 
 
-            if($result_login->result[0]->first_login_flag == "0"){
-                //echo "asdasd" . $result_login->result[0]->first_login_flag;
-                return redirect()->to('firstlogin')->with('emp_id',$result_login->result[0]->emp_id);
+                return redirect()->to('login')->withErrors([$retError]);
+
             }else{
-                // logged in
-                   // echo  "hello";
-                return redirect()->intended('/profile');
+
+
+
+                if($result_login->result[0]->first_login_flag == "0"){
+                    //echo "asdasd" . $result_login->result[0]->first_login_flag;
+                    return redirect()->to('firstlogin')->with('emp_id',$result_login->result[0]->emp_id);
+                }else{
+                    // logged in
+                    // echo  "hello";
+                    return redirect()->intended('/profile');
+                }
             }
+
+
 
         }
     }

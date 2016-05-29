@@ -371,6 +371,18 @@ if(!function_exists('get_user_access_status_flag')) {
     }
 }
 
+
+if(!function_exists('get_user_LEAVE_FUND_GROUP_DATE')) {
+    function get_user_LEAVE_FUND_GROUP_DATE()
+    {
+        if(session()->has('user_data')){
+
+            return session()->get('user_data')->LEAVE_FUND_GROUP_DATE;
+        }
+        return '';
+    }
+}
+
 if(!function_exists('get_is_before_status_2538')) {
     function get_is_before_status_2538()
     {

@@ -30,6 +30,7 @@
                     <input type="password" maxlength="12" placeholder="Password" class="form-control" name="password" id="password">
 
                 </div>
+                <span style="font-size: 16px; color: red; line-height: 10px; height: 20px">*กรณีเข้าระบบครั้งแรก รหัสผ่านคือ ว/ด/ป เกิดของพนักงาน เช่น 31082525</span><br/>
                 <span style="font-size: 16px; color: red; line-height: 10px; height: 20px">*รหัสผ่านมีความยาวไม่น้อยกว่า 8-12 หลัก โดยมีทั้งตัวเลขและตัวอักษร   </span>
 
 

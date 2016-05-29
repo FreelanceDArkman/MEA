@@ -111,7 +111,7 @@
 
                         <footer>
                             <button type="submit" class="btn-u" onclick="return Checkbefore()">ส่งคำตอบแบบสอบถาม</button>
-                            <button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>
+                            {{--<button type="button" class="btn-u btn-u-default" onclick="window.history.back();">Back</button>--}}
                         </footer>
                     </form>
 

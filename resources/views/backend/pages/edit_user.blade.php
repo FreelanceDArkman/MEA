@@ -76,7 +76,7 @@
                             <!-- widget content -->
                             <div class="widget-body no-padding">
                                 {{--action="{{action('UserController@postAddUser') }}"--}}
-
+                              <p style="padding: 20px;font-size: 22px;"><strong> รหัสพนักงาน :</strong> {{get_userID()}}  <strong> ชื่อ-สกุล : </strong>{{get_username()}}</p>
 
                                 <p style="padding: 20px; font-size: 22px;font-weight: bold;color: #00a1d9;padding-bottom: 0px">
                                     *ท่านสามารถ แก้ไขผู้ใช้ได้โดย วิธีการ Import File    <a href="javascript:void(0);" id="option_insert" class="btn btn-primary btn-xs">กดที่นี่!</a>
@@ -105,7 +105,7 @@
 
 
                                         <fieldset>
-                                            <section>
+                                            <section style="display: none">
 
                                                 <label class="input" style="font-size: 16px">  รหัสพนักงาน </i>
                                                     <input type="text" value="{{$user->EMP_ID}}" id="user_id" name="user_id" style="background-color:#f1f1f1;color:#333" placeholder="รหัสพนักงาน" disabled>
@@ -325,7 +325,7 @@
                             <!-- end widget content -->
                         </div>
                         <div class="tab-pane" id="hr2">
-
+                            <p style="padding: 20px;font-size: 22px;"><strong> รหัสพนักงาน :</strong> {{get_userID()}}  <strong> ชื่อ-สกุล : </strong>{{get_username()}}</p>
                             <form id="smart-form-register_1" action=""   class="smart-form">
                                 {!! csrf_field() !!}
 
@@ -339,7 +339,11 @@
                                                     @if($userplan)
                                                         <option value="default">เลือกแผนการลงทุน</option>
                                                         @foreach($userplan as $group)
-                                                            <option value="{{$group->PLAN_ID ."," .$group->EQUITY_MIN_PERCENTAGE."," .$group->EQUITY_MAX_PERCENTAGE."," .$group->DEBT_MIN_PERCENTAGE."," .$group->DEBT_MAX_PERCENTAGE}}">{{ $group->PLAN_NAME }}</option>
+                                                            @if($group->PLAN_NAME == "DIY")
+                                                            <option selected="selected" value="{{$group->PLAN_ID ."," .$group->EQUITY_MIN_PERCENTAGE."," .$group->EQUITY_MAX_PERCENTAGE."," .$group->DEBT_MIN_PERCENTAGE."," .$group->DEBT_MAX_PERCENTAGE}}">{{ $group->PLAN_NAME }}</option>
+                                                            @else
+                                                                <option  value="{{$group->PLAN_ID ."," .$group->EQUITY_MIN_PERCENTAGE."," .$group->EQUITY_MAX_PERCENTAGE."," .$group->DEBT_MIN_PERCENTAGE."," .$group->DEBT_MAX_PERCENTAGE}}">{{ $group->PLAN_NAME }}</option>
+                                                                @endif
                                                         @endforeach
                                                     @endif
                                                 </select> </label>
@@ -355,7 +359,7 @@
                                         </section>
                                         <section class="col col-6">
                                             <label class="input">สัดส่วนหนี้ (%)
-                                                <input type="text" id="DEBT_RATE" name="DEBT_RATE" placeholder="สัดส่วนหนี้ (%)"  readonly  >
+                                                <input style="background-color: #f1f1f1" type="text" id="DEBT_RATE" name="DEBT_RATE" placeholder="สัดส่วนหนี้ (%)"  readonly  >
                                                 <b class="tooltip tooltip-bottom-right">Needed to verify your account</b> </label>
                                         </section>
                                     </div>
@@ -398,6 +402,7 @@
                             </form>
                         </div>
                         <div class="tab-pane" id="hr3">
+                            <p style="padding: 20px;font-size: 22px;"><strong> รหัสพนักงาน :</strong> {{get_userID()}}  <strong> ชื่อ-สกุล : </strong>{{get_username()}}</p>
                             <form id="smart-form-register_2" action=""   class="smart-form">
                                 {!! csrf_field() !!}
 
@@ -450,6 +455,7 @@
                             </form>
                         </div>
                         <div class="tab-pane" id="hr4">
+                            <p style="padding: 20px;font-size: 22px;"><strong> รหัสพนักงาน :</strong> {{get_userID()}}  <strong> ชื่อ-สกุล : </strong>{{get_username()}}</p>
                             <form id="smart-form-register_3" action=""   class="smart-form">
                                 {!! csrf_field() !!}
 
@@ -580,6 +586,13 @@
 
             });
 
+          var planval =   $("#PLAN_ID").val();
+            var arrval1 = planval.split(',');
+            var maxeq1 = arrval1[2]
+            var mineq1 = arrval1[1]
+            var maxdeb1 =arrval1[4]
+            var mindeb1 =arrval1[3]
+            $("#EQUITY_RATE").attr('placeholder',mineq1 + "-" + maxeq1);
 
             $("#PLAN_ID").on('change',function(){
 

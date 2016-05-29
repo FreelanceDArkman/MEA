@@ -104,27 +104,32 @@ $arrSidebar =getSideBar($data);
                         </div>
                         <!-- end widget edit box -->
                         <div id="sort-by-year">
+                            <div style="display: inline-block">
 
-                            <select name="group_drop" id="group_drop" class="form-control" style="display: inline-block">
+                                <span style="font-size: 16px;">สถานะผู้ใช้</span><br/>
+                                <select name="group_drop" id="group_drop" class="form-control" style="display: inline-block">
 
-                                @if($user_group)
-                                    {{--<option value="0" >ค้นหากลุ่มผู้ใช้</option>--}}
-                                    <option value="" >แสดงทั้งหมด</option>
-                                    @foreach($user_group as $index => $group)
-                                        @if(session()->get('USER_STATUS_ID') == $group->USER_STATUS_ID)
-                                        <option selected="selected" value="{{$group->USER_STATUS_ID}}">{{$group->STATUS_DESC}}</option>
-                                        @else
-                                            <option value="{{$group->USER_STATUS_ID}}">{{$group->STATUS_DESC}}</option>
-                                        @endif
-                                    @endforeach
-                                @endif
-                            </select>
+                                    @if($user_group)
+                                        {{--<option value="0" >ค้นหากลุ่มผู้ใช้</option>--}}
+                                        <option value="" >แสดงทั้งหมด</option>
+                                        @foreach($user_group as $index => $group)
+                                            @if(session()->get('USER_STATUS_ID') == $group->USER_STATUS_ID)
+                                                <option selected="selected" value="{{$group->USER_STATUS_ID}}">{{$group->STATUS_DESC}}</option>
+                                            @else
+                                                <option value="{{$group->USER_STATUS_ID}}">{{$group->STATUS_DESC}}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
+                            </div>
 
-                            <input type="text" style="display: inline-block;width: 200px" class="form-control filter_row" id="user_code"   data-filter="us.EMP_ID" placeholder="Filter รหัสพนักงาน" data-operator="=" />
+                            <div style="display: inline-block"> <span style="font-size: 16px;">รหัสพนักงาน</span><br/>
+                                <input type="text" style="display: inline-block;width: 200px" class="form-control filter_row" id="user_code"   data-filter="us.EMP_ID" placeholder="Filter รหัสพนักงาน" data-operator="=" /></div>
 
-                            <input type="text" style="display: inline-block;width: 200px" class="form-control filter_row" id="user_profile"  data-filter="emp.FULL_NAME" placeholder="Filter ชื่อ-สกุล" data-operator="LIKE" />
+                            <div style="display: inline-block"> <span style="font-size: 16px;">ชื่อ-สกุล</span><br/><input type="text" style="display: inline-block;width: 200px" class="form-control filter_row" id="user_profile"  data-filter="emp.FULL_NAME" placeholder="Filter ชื่อ-สกุล" data-operator="LIKE" /></div>
 
-                            <input type="text" style="display: inline-block;width: 200px" class="form-control filter_row" id="user_name"  data-filter="us.USERNAME" placeholder="Filter ชื่อผู้ใช้" data-operator="LIKE"/>
+                            <div style="display: inline-block"> <span style="font-size: 16px;">ชื่อผู้ใช้</span><br/><input type="text" style="display: inline-block;width: 200px" class="form-control filter_row" id="user_name"  data-filter="us.USERNAME" placeholder="Filter ชื่อผู้ใช้" data-operator="LIKE"/></div>
+
                         </div>
                         <!-- widget content -->
                         <div class="widget-body no-padding">
