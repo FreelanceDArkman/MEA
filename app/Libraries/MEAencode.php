@@ -1,4 +1,5 @@
 <?php
+namespace App\Libraries;
 
 class Security {
     public static function encrypt($input, $key) {

@@ -206,7 +206,7 @@ class UserController extends Controller
 
             $date = new Date();
             $MEASecEncoe = new \Security();
-            $ecPass =  $MEASecEncoe->encrypt($newDate,"#Gm2014$06$30@97");
+            $ecPass =  $MEASecEncoe->encrypt($password,"#Gm2014$06$30@97");
 
 //            $ecPass = exec("cmd /c md5.bat -e ".$password." 2>&1");
 //
