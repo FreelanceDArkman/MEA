@@ -217,8 +217,8 @@ class UserManageController extends Controller
                         $rest = substr("abcdef", -3, 1);
 
 
-
-                        $newDate = substr($datedata, -2) . substr($datedata, -4,2). ((int)substr($datedata, -8, 4)) + 543;
+                        $newDate =substr($datedata, -2) . substr($datedata, -4,2) . (((int)substr($datedata, -8, 4) )+543) ;
+//                        $newDate = substr($datedata, -2) . substr($datedata, -4,2). ((int)substr($datedata, -8, 4)) + 543;
 
 
                         $MEASecEncoe = new \Security();
