@@ -220,10 +220,11 @@ class UserManageController extends Controller
                         $newDate = substr($datedata, -2) . substr($datedata, -4,2). ((int)substr($datedata, -8, 4)) + 543;
 
 
+                        $MEASecEncoe = new \Security();
+                        $ecPass =  $MEASecEncoe->encrypt($newDate,"#Gm2014$06$30@97");
+                        //$ecPass = exec("cmd /c md5.bat -e ".$newDate." 2>&1");
 
-                        $ecPass = exec("cmd /c md5.bat -e ".$newDate." 2>&1");
-
-                        $ecPass = explode(':',$ecPass)[1];
+                        //$ecPass = explode(':',$ecPass)[1];
 
                         $datedefault = new Date("9999-12-31 00:00:00.000") ;
                         $admin= 'Administrator';
