@@ -11,6 +11,7 @@ use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Input;
+use App\Http\Controllers\Security;
 
 class UserManageController extends Controller
 {

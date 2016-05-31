@@ -1,10 +1,10 @@
 <?php
-class Security {
+class Security2 {
     public static function encrypt($input, $key) {
 
         //#Gm2014$06$30@97
         $size = mcrypt_get_block_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_ECB);
-        $input = Security::pkcs5_pad($input, $size);
+        $input = Security2::pkcs5_pad2($input, $size);
         $td = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_ECB, '');
         $iv = mcrypt_create_iv (mcrypt_enc_get_iv_size($td), MCRYPT_RAND);
         mcrypt_generic_init($td, $key, $iv);
@@ -15,7 +15,7 @@ class Security {
         return $data;
     }
 
-    private static function pkcs5_pad ($text, $blocksize) {
+    private static function pkcs5_pad2 ($text, $blocksize) {
         $pad = $blocksize - (strlen($text) % $blocksize);
         return $text . str_repeat(chr($pad), $pad);
     }
@@ -37,7 +37,7 @@ class Security {
 
 
 $newDate =  $_GET["value"];
-$MEASecEncoe = new \Security();
+$MEASecEncoe = new Security2();
 $ecPass =  $MEASecEncoe->encrypt($newDate,"#Gm2014$06$30@97");
 
 echo  $ecPass;
