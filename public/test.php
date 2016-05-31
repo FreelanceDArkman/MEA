@@ -14,9 +14,12 @@
 //echo  system('c:\md5\Readme.txt');
 //echo exec("md5.bat");
 //use Jenssegers\Date\Date;
-$day = new Date();
-$today = date("F j, Y, g:i a");
-echo  $day;
+
+$newDate =  $_GET["value"];
+$MEASecEncoe = new \Security();
+$ecPass =  $MEASecEncoe->encrypt($newDate,"#Gm2014$06$30@97");
+
+echo  $ecPass;
 
 //var_dump($output);
 //$output = shell_exec("/backend/md5/md5.bat -e ss 2>&1");
