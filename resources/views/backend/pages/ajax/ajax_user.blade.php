@@ -49,7 +49,7 @@
         <th style="text-align: center;width:10%">Action</th>
         <th style="width:7%">รหัสพนักงาน</th>
         <th style="width:19%" data-class="expand">ชื่อ-สกุล</th>
-        <th style="width:7%" data-hide="phone">ชื่อผู้ใช้</th>
+        {{--<th style="width:7%" data-hide="phone">ชื่อผู้ใช้</th>--}}
         <th style="width:10%" data-hide="phone">สถานะ</th>
         <th style="width:5%" data-hide="phone">กลุ่มผู้ใช้</th>
         <th style="width:10%" data-hide="phone">อีเมล์</th>
@@ -74,7 +74,7 @@
                 </td>
                 <td>{{$userGroup->EMP_ID}}</td>
                 <td>{{$userGroup->FULL_NAME}}</td>
-                <td>{{$userGroup->USERNAME}}
+                {{--<td>{{$userGroup->USERNAME}}--}}
                 <td>{{$userGroup->STATUS_DESC}}</td>
                 <td>{{$userGroup->USER_PRIVILEGE_DESC}}</td>
                 <td>{{$userGroup->EMAIL}}</td>
