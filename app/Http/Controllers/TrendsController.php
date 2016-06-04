@@ -230,6 +230,7 @@ class TrendsController extends Controller
         $empStart =DB::table('TBL_EMPLOYEE_INFO')->where('EMP_ID','=',get_userID())->first();
 
 
+
         $show = $this->isShowGraph($empStart);
 
         $graph = $this->getGraphColum($netasset);
@@ -301,7 +302,14 @@ class TrendsController extends Controller
 INNER JOIN TBL_INVESTMENT_PLAN pl ON pl.PlAN_ID = fm.PLAN_ID
 WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
-        return DB::select(DB::raw($sql2))[0];
+        $ret = DB::select(DB::raw($sql2));
+        if($ret){
+            return $ret[0];
+        }else{
+            return null;
+        }
+
+
     }
 
 
@@ -450,7 +458,22 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
     function  isShowGraph($empStart){
         $compardate = new Date('1995-11-3');
-        $START_DATE = new Date($empStart->START_DATE);
+
+
+        $arrday = explode('/',$empStart->START_DATE);
+
+        $day = $arrday[0];
+        $mont = $arrday[1];
+        $year =$arrday[2];
+
+        if($mont < 10){
+            $mont = intval($mont);
+        }
+        $stringDate = $day .'-'.$mont.'-'.$year;
+
+
+
+        $START_DATE = new Date($stringDate);
         $show = true;
 //        var_dump($START_DATE);
 //        if($START_DATE < $compardate){

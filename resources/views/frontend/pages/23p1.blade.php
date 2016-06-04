@@ -71,7 +71,12 @@
                                 </li>
                                 <li>
                                     <small>แผนการลงทุน</small>
+
+                                    @if($planchoose)
                                     <h4 style="text-align: center" class="counter">{{$planchoose->PLAN_NAME}}</h4>
+                                        @else
+                                        <h4 style="text-align: center" class="counter"></h4>
+                                    @endif
                                 </li>
 
                             </ul>
@@ -152,7 +157,7 @@
                                     {!! csrf_field() !!}
                                     <header>เลือกแผนการลงทุน</header>
                                     <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
-                                        <strong> * การเปลี่นแปลงและแก้ไขอัตราสะสม ทำได้ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือนและมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป </strong>
+                                        <strong> * การเปลี่ยนแปลงและแก้ไขอัตราสะสม ทำได้ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือนและมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป </strong>
                                     </div>
 
                                     <br/>

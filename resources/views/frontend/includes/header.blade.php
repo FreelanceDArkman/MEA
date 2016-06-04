@@ -14,8 +14,10 @@ $current = Route::getCurrentRoute()->getPath();
 
         <!-- Topbar -->
         <div class="topbar">
+
             <ul class="loginbar pull-right">
                 {{--hoverSelector--}}
+                @if($current != "firstlogin")
                 <li ><a href="/qa"> <i class="fa fa-comment"></i> {{ getGoupName($data,6) }}</a></li>
                 <li class="topbar-devider"></li>
                 <li>
@@ -24,7 +26,7 @@ $current = Route::getCurrentRoute()->getPath();
                 <li class="topbar-devider"></li>
                 <li><a href="/contact"><i class="fa fa-map-marker"></i> {{ getGoupName($data,8) }}</a></li>
                 <li class="topbar-devider"></li>
-
+                @endif
              @if(logged_in() && ($current != "firstlogin"))
                     <li> <a href="/profile"><i class="fa fa-user"></i> สวัสดี  {{get_username()}}</a>
 
@@ -39,6 +41,7 @@ $current = Route::getCurrentRoute()->getPath();
                 @endif
 
             </ul>
+
         </div>
         <!-- End Topbar -->
 
@@ -50,9 +53,11 @@ $current = Route::getCurrentRoute()->getPath();
         <!-- End Toggle -->
     </div><!--/end container-->
 
+
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
         <div class="container">
+            @if($current != "firstlogin")
             <ul class="nav navbar-nav">
                 <!-- Home -->
                 <li class="dropdown dropdown-hide-sub {{IsActive('/')}}">
@@ -64,7 +69,7 @@ $current = Route::getCurrentRoute()->getPath();
                 <!-- End Home -->
 
                 <!-- Demo Pages -->
-               @if(menu_access(1,20) && ($current != "firstlogin"))
+               @if(menu_access(1,20) )
                 <li class="dropdown {{IsActive('editprofile,informationbeneficiary,resetpassword,trends,reportingmemberbenefit,compares,changeplan,historyinvestmentplan,cumulative,historycumulative,riskassessment')}}" >
                     <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
 
@@ -255,9 +260,12 @@ $current = Route::getCurrentRoute()->getPath();
                 </li>
                 <!-- End Search Block -->
             </ul>
+            @endif
         </div><!--/end container-->
     </div><!--/navbar-collapse-->
-</div>
+    </div>
+
+
 <script type="text/javascript">
 
 //    function clickButton(e, buttonid) {

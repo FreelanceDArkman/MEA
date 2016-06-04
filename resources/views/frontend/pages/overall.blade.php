@@ -68,7 +68,11 @@
                             </li>
                             <li>
                                 <small>แผนการลงทุน</small>
+                                @if($planchoose)
                                 <h4 style="text-align: center" class="counter">{{$planchoose->PLAN_NAME}}</h4>
+                                    @else
+                                    <h4 style="text-align: center" class="counter"></h4>
+                                @endif
                             </li>
 
                         </ul>

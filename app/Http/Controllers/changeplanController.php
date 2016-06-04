@@ -295,7 +295,12 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND en
         $empinfo = null;
         $planchoose = null;
         $Isaccess = null;
-        $Currnentasset = DB::select(DB::raw($sql2))[0];
+        $Currnentasset_db = DB::select(DB::raw($sql2));
+        $Currnentasset = null;
+        if($Currnentasset_db){
+            $Currnentasset = $Currnentasset_db[0];
+        }
+
 
 
 
@@ -326,7 +331,12 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND en
 
         $sql44  = "SELECT TOP 1 * FROM TBL_INFORMATION_FROM_ASSET WHERE EMP_ID =  '".get_userID()."' ORDER BY CREATE_DATE DESC";
 
-        $infoaset = DB::select(DB::raw($sql44))[0];
+        $infoaset = null;
+        $infoaset_db = DB::select(DB::raw($sql44));
+        if($infoaset_db){
+            $infoaset = $infoaset_db[0];
+        }
+
 
         $sql111 = "SELECT TOP  5 * FROM  TBL_EMPLOYEE_INFO WHERE EMP_ID = '".get_userID()."'";
         $empinfo = DB::select(DB::raw($sql111))[0];

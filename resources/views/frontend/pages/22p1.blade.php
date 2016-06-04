@@ -103,14 +103,14 @@
 
 
                             @if($CurrnentPlan)
-                                @if($CurrnentPlan[0]->MODIFY_COUNT < session()->get('user_data')->fund_plan_change_per_year)
+                                @if($numberofchange == (intval(session()->get('user_data')->fund_plan_change_per_year) - 1))
                                     <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                         <strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>
                                     </div>
                                     @endif
                             @else
                                 @if($effective)
-                                            @if($effective[0]->MODIFY_COUNT < session()->get('user_data')->fund_plan_change_per_year)
+                                            @if($numberofchange == (intval(session()->get('user_data')->fund_plan_change_per_year) - 1))
                                             <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                                 <strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>
                                             </div>
@@ -210,7 +210,12 @@
                                                             <option value="default"> กรุณาเลือก </option>
                                                             @foreach($dropplan as $index => $item)
 
-                                                                <option value="{{$item->PLAN_ID ."," .$item->EQUITY_MIN_PERCENTAGE."," .$item->EQUITY_MAX_PERCENTAGE."," .$item->DEBT_MIN_PERCENTAGE."," .$item->DEBT_MAX_PERCENTAGE}}">{{$item->PLAN_NAME}}</option>
+                                                                @if($item->PLAN_NAME == 'DIY')
+
+                                                                <option selected value="{{$item->PLAN_ID ."," .$item->EQUITY_MIN_PERCENTAGE."," .$item->EQUITY_MAX_PERCENTAGE."," .$item->DEBT_MIN_PERCENTAGE."," .$item->DEBT_MAX_PERCENTAGE}}">{{$item->PLAN_NAME}}</option>
+                                                                @else
+                                                                    <option value="{{$item->PLAN_ID ."," .$item->EQUITY_MIN_PERCENTAGE."," .$item->EQUITY_MAX_PERCENTAGE."," .$item->DEBT_MIN_PERCENTAGE."," .$item->DEBT_MAX_PERCENTAGE}}">{{$item->PLAN_NAME}}</option>
+                                                                    @endif
 
                                                             @endforeach
                                                         </select>
@@ -225,14 +230,15 @@
                                             <fieldset>
                                                 <legend>ระบุสัดส่วนการลงทุน</legend>
                                                 <div class="row">
-                                                    <section class="col col-4">
-                                                        <label class="label">สัดส่วนตราสารทุน (%)</label>
+                                                    <section class="col col-6">
+                                                        <label class="label">สัดส่วนตราสารทุน (%)     <span style="font-size: 11px;color: red;" class="minmax_label"></span></label>
+
                                                         <label class="input">
                                                             <i class="icon-append fa fa-asterisk"></i>
                                                             <input type="text" name="maxVal1" id="maxVal1">
                                                         </label>
                                                     </section>
-                                                    <section class="col col-4">
+                                                    <section class="col col-6">
                                                         <label class="label">สัดส่วนตราสารหนี้ (%)</label>
                                                         <label class="input">
                                                             <i class="icon-append fa fa-asterisk"></i>
@@ -537,6 +543,23 @@
             //});
 
 
+            var flag100 = $("#flag100").val();
+            var arrval_1 =  $("#TYPE_TOPIC").val().split(',');
+
+            var maxeq_1 = arrval_1[2]
+            var mineq_1 = arrval_1[1]
+            var maxdeb_1 =arrval_1[4]
+            var mindeb_1 =arrval_1[3]
+
+            if(flag100 == 2) {
+                maxeq_1 = 100;
+            }
+
+            $("#maxVal1").attr('placeholder',mineq_1 + "-" + maxeq_1)
+
+            $(".minmax_label").html('ค่าที่สามารถใส่ได้ ระหว่าง ' + mineq_1 + "-" + maxeq_1)
+
+
             $("#TYPE_TOPIC").on('change',function(){
 
 //                alert($(this).val());
@@ -548,9 +571,12 @@
                 var maxdeb =arrval[4]
                 var mindeb =arrval[3]
 
+                if(flag100 == 2) {
+                    maxeq = 100;
+                }
 
                 $("#maxVal1").attr('placeholder',mineq + "-" + maxeq)
-
+                $(".minmax_label").html('ค่าที่สามารถใส่ได้ ระหว่าง ' + mineq + "-" + maxeq)
 //                $("#maxVal2").attr('placeholder',mindeb + "-" + maxdeb)
 
 

@@ -1,6 +1,10 @@
 @extends('frontend.layouts.login')
 @section('content')
-
+<style type="text/css">
+    .header{
+        height: 115px !important;
+    }
+</style>
 
     <div class="row">
         <div class="col-md-12">

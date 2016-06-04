@@ -145,9 +145,9 @@ class AdminAuthController extends Controller
                     $retError = "รหัสผู้ใช้งานของท่านไม่ได้รับอนุญาตให้เข้าใช้งานระบบ กรุณาติดต่อผู้ดูแลระบบ"  ;
                     break;
                 case 7707:
-                    $retError = "ท่านไม่สามารถเข้าใช้งานระบบได้ เนื่องจากท่านได้ลาออกจากสมาชิกกองทุน เมื่อวันที่ "  . $result_login->leave_fund_group_date() . " หากต้องการรายละเอียดเพิ่มเติม กรุณาติดต่อกองทุนสำรองเลี้ยงชีพ";
+                    $retError = "ท่านไม่สามารถเข้าใช้งานระบบได้ เนื่องจากท่านได้ลาออกจากสมาชิกกองทุน เมื่อวันที่ "  . get_date_notime($result_login->leave_fund_group_date)  . " หากต้องการรายละเอียดเพิ่มเติม กรุณาติดต่อกองทุนสำรองเลี้ยงชีพ";
                     break;
-                    
+
                 default:
                     $retError=   'The email or password you entered is incorrect.';
                     break;
