@@ -56,15 +56,15 @@ class changeplanController extends Controller
 
         if($USER->LEAVE_FUND_GROUP_DATE != null){
             $LEAVE_FUND_GROUP_DATE = $USER->LEAVE_FUND_GROUP_DATE;
+
+            $sql = "INSERT INTO TBL_USER_FUND_CHOOSE (EMP_ID,PLAN_ID,EQUITY_RATE,DEBT_RATE,MODIFY_DATE,EFFECTIVE_DATE,MODIFY_COUNT,MODIFY_BY,USER_STATUS_ID,LEAVE_FUND_GROUP_DATE)
+VALUES($emp_id,$plan_id,$equip,$dept,'".$create_date."','".$effectiveDate."',$Modify_count,'".$addby."','".$USER_STATUS_ID."','".$LEAVE_FUND_GROUP_DATE."')";
+        }else{
+            $sql = "INSERT INTO TBL_USER_FUND_CHOOSE (EMP_ID,PLAN_ID,EQUITY_RATE,DEBT_RATE,MODIFY_DATE,EFFECTIVE_DATE,MODIFY_COUNT,MODIFY_BY,USER_STATUS_ID,LEAVE_FUND_GROUP_DATE)
+VALUES($emp_id,$plan_id,$equip,$dept,'".$create_date."','".$effectiveDate."',$Modify_count,'".$addby."','".$USER_STATUS_ID."',NULL)";
         }
 
 
-//        $addby = $request->input('user');
-
-//    var_dump($USER);
-
-        $sql = "INSERT INTO TBL_USER_FUND_CHOOSE (EMP_ID,PLAN_ID,EQUITY_RATE,DEBT_RATE,MODIFY_DATE,EFFECTIVE_DATE,MODIFY_COUNT,MODIFY_BY,USER_STATUS_ID,LEAVE_FUND_GROUP_DATE)
-VALUES($emp_id,$plan_id,$equip,$dept,'".$create_date."','".$effectiveDate."',$Modify_count,'".$addby."','".$USER_STATUS_ID."','".$LEAVE_FUND_GROUP_DATE."')";
 
         $val =  array(
             "emp_id" => $emp_id,
