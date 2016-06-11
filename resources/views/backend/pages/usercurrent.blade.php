@@ -64,6 +64,9 @@ $arrSidebar =getSideBar($data);
                                     ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel <br/>
 
                                 <label>6 คอลัม</label>
+                                </p>
+                                <a class="btn btn-xs btn-success" href="{{ action('UserManageCurrentController@dowloadsample')}}"> ดูตัวอย่างไฟล์</a>
+<p></p>
                                 <table style="width: 100px;" class="table table-bordered">
                                     <tr><td>EMP_ID</td><td>USER_SAVING_RATE </td><td>CHANGE_SAVING_RATE_DATE </td><td>EFFECTIVE_DATE  </td><td>MODIFY_COUNT </td><td>MODIFY_BY</td></tr>
                                     <tr>
@@ -77,8 +80,18 @@ $arrSidebar =getSideBar($data);
                                     </tr>
                                 </table>
 
+<p>EMP_ID = รหัสพนักงาน
+</p>
+                                <p>USER_SAVING_RATE = อัตราสะสมที่สมาชิกเลือก
                                 </p>
-
+                                <p>CHANGE_SAVING_RATE_DATE = วัน-เวลาที่สมาชิกเปลี่ยนอัตราสะสม (รูปแบบ yyyy-mm-dd hh:mm:ss) ***กรณีไม่มีข้อมูลเวลา (ใช้รูปแบบ yyyy-mm-dd)
+                                </p>
+                                <p>EFFECTIVE_DATE = วันที่อัตราสะสมมีผล (รูปแบบ yyyy-mm-dd)
+                                </p>
+                                <p>MODIFY_COUNT = ครั้งที่สมาชิกเปลี่ยนอัตราสะสม
+                                </p>
+                                <p>MODIFY_BY = รหัสพนักงานที่ทำรายการ
+                                </p>
                                 <p>
                                 <p class="help-block">
                                     เลือกไฟล์<br/>

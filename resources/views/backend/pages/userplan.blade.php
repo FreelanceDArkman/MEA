@@ -60,10 +60,14 @@ $arrSidebar =getSideBar($data);
                                 <p class="import_title">
                                     <a href="javascript:void(0);"><strong>เป็นเมนูนําเข้าข้อมูลการเลือกแผนการลงทุนของสมาชิก</strong></a>
                                 </p>
+
                                 <p>
                                     ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel <br/>
 
                                 <label>9 คอลัม</label>
+                                </p>
+                                <a class="btn btn-xs btn-success" href="{{ action('UserManagePlanController@dowloadsample')}}"> ดูตัวอย่างไฟล์</a>
+                                <p></p>
                                 <table style="width: 100px;" class="table table-bordered">
                                     <tr><td>PLAN_ID</td><td>EMP_ID </td><td>EQUITY_RATE </td><td>DEBT_RATE  </td><td>MODIFY_DATE </td><td>EFFECTIVE_DATE </td><td>MODIFY_COUNT</td><td>MODIFY_COUNT_TIMESTAMP </td><td>MODIFY_BY</td></tr>
                                     <tr>
@@ -78,7 +82,23 @@ $arrSidebar =getSideBar($data);
                                         <td>User</td>
                                     </tr>
                                 </table>
-
+                                <p>PLAN_ID = รหัสแผนการลงทุน (4 = DIY)
+                                </p>
+                                <p>EMP_ID = รหัสพนักงาน
+                                </p>
+                                <p>EQUITY_RATE = สัดส่วนทุนที่สมาชิกเลือก
+                                </p>
+                                <p>DEBT_RATE = สัดส่วนหนี้ที่สมาชิกเลือก
+                                </p>
+                                <p>MODIFY_DATE = วัน-เวลาที่สมาชิกทำรายการ (รูปแบบ yyyy-mm-dd hh:mm) ***กรณีไม่มีข้อมูลเวลา (ใช้รูปแบบ yyyy-mm-dd)
+                                </p>
+                                <p>EFFECTIVE_DATE = วันที่มีผล (รูปแบบ yyyy-mm-dd)
+                                </p>
+                                <p>MODIFY_COUNT = ครั้งที่ทำรายการเลือกแผน
+                                </p>
+                                <p>MODIFY_COUNT_TIME_STAMP = วัน-เวลาที่สมาชิกทำรายการ (รูปแบบ yyyy-mm-dd hh:mm) ใช้ข้อมูลเดียวกับคอลัมภ์ MODIFY_DATE
+                                </p>
+                                <p>MODIFY_BY = รหัสพนักงานที่ทำรายการ
                                 </p>
 
                                 <p>

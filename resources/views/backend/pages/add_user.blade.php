@@ -78,6 +78,9 @@
                                         </p>
 
                                         <div id="import_form" class="smart-form" style="display: none;padding: 20px; font-size: 18px;">
+
+                                            <a class="btn btn-xs btn-success" href="{{ action('UserController@dowloadsample_add')}}"> ดูตัวอย่างไฟล์</a>
+                                            <p></p>
                                             <p class="help-block">
                                                 เลือกไฟล์
                                                 <br/>

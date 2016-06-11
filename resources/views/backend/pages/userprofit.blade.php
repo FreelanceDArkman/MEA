@@ -64,6 +64,9 @@ $arrSidebar =getSideBar($data);
                                     ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel <br/>
 
                                 <label>9 คอลัม</label>
+                                </p>
+                                <a class="btn btn-xs btn-success" href="{{ action('UserManageProfitController@dowloadsample')}}"> ดูตัวอย่างไฟล์</a>
+                                <p></p>
                                 <table style="width: 100px;" class="table table-bordered">
                                     <tr><td>EMP_ID</td><td>INVESTMENT_PLAN </td><td>EQUITY </td><td>DEBT  </td><td>EQUITY_FUNDS </td><td>BOND_FUNDS</td>
                                     <td>INVESTMENT_MONEY</td><td>REFERENCE_DATE</td><td>MEMBER_STATUS</td></tr>
@@ -80,8 +83,23 @@ $arrSidebar =getSideBar($data);
                                     </tr>
                                 </table>
 
+<p>EMP_ID = รหัสพนักงาน
+</p>
+                                <p>INVESTMENT_PLAN = ชื่อแผนการลงทุน (Default = DIY)
                                 </p>
-
+                                <p>EQUITY = สัดส่วนทุน
+                                </p>
+                                <p>DEBT = สัดส่วนหนี้
+                                </p>
+                                <p>EQUITY_FUNDS = เงินตราสารทุน
+                                </p>
+                                <p>BOND_FUNDS = เงินตราสารหนี้
+                                </p>
+                                <p>INVESTMENT_MONEY = เงินลงทุนทั้งหมด
+                                </p>
+                                <p>REFERENCE_DATE = วันที่อ้างอิง
+                                </p>
+                                <p>MEMBER_STATUS = สถานะการเป็นสมาชิกกองทุน</p>
                                 <p>
                                 <p class="help-block">
                                     เลือกไฟล์<br/>

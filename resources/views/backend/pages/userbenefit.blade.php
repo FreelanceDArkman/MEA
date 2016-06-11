@@ -67,7 +67,9 @@ $arrSidebar =getSideBar($data);
                                 <p>
                                     ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel <br/>
 
-                                <label>7 คอลัม</label>
+                                <label>7 คอลัม</label></p>
+                                <a class="btn btn-xs btn-success" href="{{ action('UserManageBenefitcontroller@dowloadsample')}}"> ดูตัวอย่างไฟล์</a>
+                                <p></p>
                                 <table style="width: 100px;" class="table table-bordered">
                                     <tr><td>EMP_ID</td><td>FULL_NAME </td><td>FILE_NO </td><td>FILE_PATH  </td><td>CREATE_DATE </td><td>CREATE_BY</td>
                                     <td>FILE_NAME</td></tr>
@@ -84,7 +86,19 @@ $arrSidebar =getSideBar($data);
                                     </tr>
                                 </table>
 
+<p>EMP_ID = รหัสพนักงาน
+</p>
+                                <p>FULL_NAME = ชื่อ-สกุลพนักงาน
                                 </p>
+                                <p>FILE_NO = เลขที่ของไฟล์ผู้รับผลประโยชน์ของของสมาชิก (Default = 1)
+                                </p>
+                                <p>FILE_PATH = พาธอ้างอิง (รูปแบบ http://measvp.mea.or.th:8081/beneficiary/EMP_ID.pdf)
+                                </p>
+                                <p>CREATE_DATE = วันที่นำข้อมูลเข้าระบบ (รูปแบบ yyyymmdd)
+                                </p>
+                                <p>CREATE_BY = รหัสพนักงานที่นำข้อมูลเข้าระบบ
+                                </p>
+                                <p>FILE_NAME = ชื่อไฟล์ผู้รับผลประโยชน์ของของสมาชิก (รูปแบบ EMP_ID.pdf)</p>
 
                                 <p>
                                 <p class="help-block">

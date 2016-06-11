@@ -64,7 +64,10 @@ $arrSidebar =getSideBar($data);
                                     ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel <br/>
 
                                 <label>6 คอลัม</label>
-                                <table style="width: 100px;" class="table table-bordered">
+                                </p>
+                                <a class="btn btn-xs btn-success" href="{{ action('UserManageExtendController@dowloadsample')}}"> ดูตัวอย่างไฟล์</a>
+
+                                <p></p><table style="width: 100px;" class="table table-bordered">
                                     <tr><td>EMP_ID</td><td>CONTRIBUTION_START_DATE </td><td>CONTRIBUTION_END_DATE </td><td>CONTRIBUTION_MODIFY_DATE  </td><td>CONTRIBUTION_RATE_OLD </td><td>CONTRIBUTION_RATE_NEW</td></tr>
                                     <tr>
                                         <td>1438709</td>
@@ -76,9 +79,19 @@ $arrSidebar =getSideBar($data);
 
                                     </tr>
                                 </table>
-
+<p>EMP_ID = รหัสพนักงาน
+</p>
+                                <p>CONTRIBUTION_START_DATE = วันที่อัตราสมทบมีผล (รูปแบบ yyyy-mm-dd)
+                                </p>
+                                <p>CONTRIBUTION_END_DATE = วันที่อัตราสมทบสิ้นสุด (รูปแบบ yyyy-mm-dd)
                                 </p>
 
+                                <p>CONTRIBUTION_MODIFY_DATE = วันที่อัตราสมทบมีการเปลี่ยนแปลง (รูปแบบ yyyy-mm-dd)
+                                </p>
+
+                                <p>CONTRIBUTION_RATE_OLD = อัตราสมทบเดิม
+                                </p>
+                                <p>CONTRIBUTION_RATE_NEW = อัตราสมทบใหม่</p>
                                 <p>
                                 <p class="help-block">
                                     เลือกไฟล์<br/>

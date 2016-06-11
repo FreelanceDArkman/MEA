@@ -60,16 +60,34 @@ $arrSidebar =getSideBar($data);
                                 <p>
                                     <a href="javascript:void(0);"><strong>เพื่อทําการ update status ให้กับ user จํานวนมาก</strong></a>
                                 </p>
-                                <p>
-                                    ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel
-
+                                <p>นิดไฟล์ที่อนุญาติให้นำเข้า:Exel</p>
+                                <a class="btn btn-xs btn-success" href="{{ action('UserController@dowloadsample')}}"> ดูตัวอย่างไฟล์</a>
+                                <p></p>
                                 <table style="width: 100px;" class="table table-bordered">
                                     <tr><td>EMP_ID</td><td>USER_STATUS_ID</td></tr>
                                     <tr><td>0000001</td><td>11</td></tr>
                                 </table>
-
+                                <p>EMP_ID = รหัสพนักงาน
+                                </p>
+                                <p>USER_STATUS_ID = สถานะของสมาชิก
                                 </p>
 
+                                <div>
+                                    <table style="width: 600px;" class="table table-bordered">
+                                        <tr><td>USER_STATUS_ID</td><td>คำอธิบาย</td></tr>
+                                        <tr><td>01</td><td>พ้นสภาพเนื่องจากลาออกจาก กฟน และกองทุน</td></tr>
+                                        <tr><td>04</td><td>พ้นสภาพเนื่องจากลาออกจากกองทุนครั้งที่ 1</td></tr>
+                                        <tr><td>05</td><td>สมาชิกแบบคงเงิน</td></tr>
+                                        <tr><td>06</td><td>สมาชิกแบบรับเงินเป็นงวด</td></tr>
+                                        <tr><td>11</td><td>สมาชิกปัจจุบัน</td></tr>
+                                        <tr><td>12</td><td>สมาชิกปัจจุบัน (Re-Entry)</td></tr>
+                                        <tr><td>13</td><td>สมาชิกใหม่</td></tr>
+                                        <tr><td>14</td><td>Unknown</td></tr>
+                                        <tr><td>15</td><td>พ้นสภาพสมาชิก (ลาออกจากกองทุนครบ 2 ครั้ง)</td></tr>
+
+
+                                    </table>
+                                </div>
                                 <p>
                                 <p class="help-block">
                                     เลือกไฟล์
@@ -98,14 +116,40 @@ $arrSidebar =getSideBar($data);
                                 <p>
                                     <a href="javascript:void(0);"><strong>เพื่อทําการ update status, ค่า flag ที่เกี่ยวข้อง กรณีท่ีมีสมาชิกลาออกจากกองทุน</strong></a>
                                 </p>
-                                <p>ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel
+                                <p>ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel </p>
+                                <a class="btn btn-xs btn-success" href="{{ action('UserController@dowloadsample2')}}"> ดูตัวอย่างไฟล์</a>
+                                <p></p>
                                 <table style="width: 100px;" class="table table-bordered">
                                     <tr><td>EMP_ID</td><td>USER_STATUS_ID</td><td>LEAVE_FUND_GROUP_DATE</td><td>LEAVE_FUND_FLAG</td></tr>
                                     <tr><td>0000001</td><td>11</td>
                                     <td>2015-01-01</td>
                                     <td>1</td></tr>
                                 </table>
+<p>EMP_ID = รหัสพนักงาน
+</p>
+                                <p>USER_STATUS_ID = สถานะของสมาชิก
                                 </p>
+                                <p>LEAVE_FUND_GROUP_DATE = วันที่สมาชิกลาออกจากกองทุน (รูปแบบ yyyy-mm-dd)
+                                </p>
+                                <p>LEAVE_FUND_FLAG = ครั้งที่สมาชิกลาออกจากกองทุน
+                                </p>
+                                <div>
+                                    <table style="width: 600px;" class="table table-bordered">
+                                        <tr><td>USER_STATUS_ID</td><td>คำอธิบาย</td></tr>
+                                        <tr><td>01</td><td>พ้นสภาพเนื่องจากลาออกจาก กฟน และกองทุน</td></tr>
+                                        <tr><td>04</td><td>พ้นสภาพเนื่องจากลาออกจากกองทุนครั้งที่ 1</td></tr>
+                                        <tr><td>05</td><td>สมาชิกแบบคงเงิน</td></tr>
+                                        <tr><td>06</td><td>สมาชิกแบบรับเงินเป็นงวด</td></tr>
+                                        <tr><td>11</td><td>สมาชิกปัจจุบัน</td></tr>
+                                        <tr><td>12</td><td>สมาชิกปัจจุบัน (Re-Entry)</td></tr>
+                                        <tr><td>13</td><td>สมาชิกใหม่</td></tr>
+                                        <tr><td>14</td><td>Unknown</td></tr>
+                                        <tr><td>15</td><td>พ้นสภาพสมาชิก (ลาออกจากกองทุนครบ 2 ครั้ง)</td></tr>
+
+
+                                    </table>
+                                </div>
+
                                 <p>
                                 <p class="help-block">
                                     เลือกไฟล์
@@ -135,12 +179,36 @@ $arrSidebar =getSideBar($data);
                                 <p>
                                     <a href="javascript:void(0);"><strong>เพื่อทําการ update status, ค่า flag ที่เกี่ยวข้อง กรณีที่มีสมาชิกกลับเข้ากองทุน</strong></a>
                                 </p>
-                                <p>ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel
+                                <p>ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel</p>
+                                <a class="btn btn-xs btn-success" href="{{ action('UserController@dowloadsample3')}}"> ดูตัวอย่างไฟล์</a>
+                                <p></p>
                                 <table style="width: 100px;" class="table table-bordered">
                                     <tr><td>EMP_ID</td><td>USER_STATUS_ID</td><td>RETURN_FUND_GROUP_DATE</td></tr>
                                     <tr><td>0000001</td><td>12</td><td>2016-01-01</td></tr>
                                 </table>
+<p>EMP_ID = รหัสพนักงาน
+</p>
+                                <p>USER_STATUS_ID = สถานะของสมาชิก
                                 </p>
+                                <p>RETURN_FUND_GROUP_DATE = วันที่สมาชิกลาออกจากกองทุน (รูปแบบ yyyy-mm-dd)
+                                </p>
+                                <div>
+                                    <table style="width: 600px;" class="table table-bordered">
+                                        <tr><td>USER_STATUS_ID</td><td>คำอธิบาย</td></tr>
+                                        <tr><td>01</td><td>พ้นสภาพเนื่องจากลาออกจาก กฟน และกองทุน</td></tr>
+                                        <tr><td>04</td><td>พ้นสภาพเนื่องจากลาออกจากกองทุนครั้งที่ 1</td></tr>
+                                        <tr><td>05</td><td>สมาชิกแบบคงเงิน</td></tr>
+                                        <tr><td>06</td><td>สมาชิกแบบรับเงินเป็นงวด</td></tr>
+                                        <tr><td>11</td><td>สมาชิกปัจจุบัน</td></tr>
+                                        <tr><td>12</td><td>สมาชิกปัจจุบัน (Re-Entry)</td></tr>
+                                        <tr><td>13</td><td>สมาชิกใหม่</td></tr>
+                                        <tr><td>14</td><td>Unknown</td></tr>
+                                        <tr><td>15</td><td>พ้นสภาพสมาชิก (ลาออกจากกองทุนครบ 2 ครั้ง)</td></tr>
+
+
+                                    </table>
+                                </div>
+
                                 <p>
                                 <p class="help-block">
                                     เลือกไฟล์

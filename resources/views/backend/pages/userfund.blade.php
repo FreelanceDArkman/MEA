@@ -64,6 +64,9 @@ $arrSidebar =getSideBar($data);
                                     ชนิดไฟล์ที่อนุญาติให้นำเข้า:Exel <br/>
 
                                 <label>31 คอลัม</label>
+                                </p>
+                                <a class="btn btn-xs btn-success" href="{{ action('UserManageFundController@dowloadsample')}}"> ดูตัวอย่างไฟล์</a>
+                                <p></p>
                                 <table style="width: 100px;" class="table table-bordered">
                                     <tr><td>EMP_ID</td><td>FULL_NAME </td><td>PATH_CODE </td><td>DEP_CODE  </td><td>.... </td><td>RECORD_DATE</td></tr>
                                     <tr>
@@ -77,7 +80,7 @@ $arrSidebar =getSideBar($data);
                                     </tr>
                                 </table>
 
-                                </p>
+
 
                                 <p>
                                 <p class="help-block">

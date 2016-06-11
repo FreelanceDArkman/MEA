@@ -29,6 +29,13 @@ class UserManageExtendController extends Controller
 
         return view('backend.pages.userextend');
     }
+    public  function  dowloadsample(){
+        $file = 'contents/sample/member_contribution.xls';
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return \Response::download($file, 'member_contribution.xls', $headers);
+    }
 
     public  function  Checkdate(Request $request){
 

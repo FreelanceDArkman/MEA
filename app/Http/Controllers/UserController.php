@@ -539,6 +539,44 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
     }
 
 
+    public  function  dowloadsample(){
+        $file = 'contents/sample/update_status_type1.xls';
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return \Response::download($file, 'update_status_type1.xls', $headers);
+    }
+    public  function  dowloadsample2(){
+        $file = 'contents/sample/update_status_type2.xls';
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return \Response::download($file, 'update_status_type1.xls', $headers);
+    }
+    public  function  dowloadsample3(){
+        $file = 'contents/sample/update_status_type3.xls';
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return \Response::download($file, 'update_status_type1.xls', $headers);
+    }
+
+
+    public  function  dowloadsample_add(){
+        $file = 'contents/sample/employee_info.xls';
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return \Response::download($file, 'employee_info.xls', $headers);
+    }
+    public  function  dowloadsample_edit(){
+        $file = 'contents/sample/employee_info.xls';
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return \Response::download($file, 'employee_info.xls', $headers);
+    }
+
     public function importdata(Request $request){
 
 

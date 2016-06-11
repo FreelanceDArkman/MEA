@@ -441,7 +441,13 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::post('edit3', 'UserController@postEditUser3');
 
 
+            Route::get('downloadsample', 'UserController@dowloadsample');
+            Route::get('downloadsample2', 'UserController@dowloadsample2');
+            Route::get('downloadsample3', 'UserController@dowloadsample3');
 
+
+            Route::get('downloadsample_add', 'UserController@dowloadsample_add');
+            Route::get('downloadsample_edit', 'UserController@dowloadsample_edit');
         });
 
         Route::group(['prefix' => 'simple'], function() {
@@ -450,7 +456,7 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::post('import','UserManageController@importdata');
             Route::post('check','UserManageController@Checkdate');
 
-
+            Route::get('downloadsample', 'UserManageController@dowloadsample');
         });
 
         Route::group(['prefix' => 'plan'], function() {
@@ -458,7 +464,7 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
             Route::post('import','UserManagePlanController@importdata');
             Route::post('check','UserManagePlanController@Checkdate');
-
+            Route::get('downloadsample', 'UserManagePlanController@dowloadsample');
 
         });
 
@@ -468,7 +474,7 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::post('import','UserManageFundController@importdata');
             Route::post('check','UserManageFundController@Checkdate');
 
-
+            Route::get('downloadsample', 'UserManageFundController@dowloadsample');
         });
 //
 //
@@ -480,7 +486,7 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
             Route::post('check','UserManageBenefitcontroller@Checkdate');
 
-
+            Route::get('downloadsample', 'UserManageBenefitcontroller@dowloadsample');
         });
 //
 //
@@ -489,7 +495,7 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
             Route::post('import','UserManageProfitController@importdata');
             Route::post('check','UserManageProfitController@Checkdate');
-
+            Route::get('downloadsample', 'UserManageProfitController@dowloadsample');
 
         });
 
@@ -498,7 +504,7 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
 
             Route::post('import','UserManageExtendController@importdata');
             Route::post('check','UserManageExtendController@Checkdate');
-
+            Route::get('downloadsample', 'UserManageExtendController@dowloadsample');
 
         });
 
@@ -508,7 +514,7 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::post('import','UserManageCurrentController@importdata');
             Route::post('check','UserManageCurrentController@Checkdate');
 
-
+            Route::get('downloadsample', 'UserManageCurrentController@dowloadsample');
         });
 
 

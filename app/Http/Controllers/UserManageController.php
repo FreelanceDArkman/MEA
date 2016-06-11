@@ -55,7 +55,13 @@ class UserManageController extends Controller
 
     }
 
-
+    public  function  dowloadsample(){
+        $file = 'contents/sample/employee_info.xls';
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return \Response::download($file, 'employee_info.xls', $headers);
+    }
     public function importdata(Request $request){
 
 

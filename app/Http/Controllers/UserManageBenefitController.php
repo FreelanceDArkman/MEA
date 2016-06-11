@@ -55,7 +55,13 @@ class UserManageBenefitcontroller extends Controller
 
     }
 
-
+    public  function  dowloadsample(){
+        $file = 'contents/sample/member_beneficiary.xls';
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return \Response::download($file, 'member_beneficiary.xls', $headers);
+    }
     public function importdata(Request $request){
 
 

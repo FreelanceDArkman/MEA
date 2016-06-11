@@ -54,7 +54,13 @@ class UserManagePlanController extends Controller
 
     }
 
-
+    public  function  dowloadsample(){
+        $file = 'contents/sample/member_fund_plan.xls';
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return \Response::download($file, 'member_fund_plan.xls', $headers);
+    }
     public function importdata(Request $request){
 
 

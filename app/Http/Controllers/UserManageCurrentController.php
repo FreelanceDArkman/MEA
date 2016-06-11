@@ -29,7 +29,13 @@ class UserManageCurrentController extends Controller
 
         return view('backend.pages.usercurrent');
     }
-
+    public  function  dowloadsample(){
+        $file = 'contents/sample/saving_rate.xls';
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return \Response::download($file, 'saving_rate.xls', $headers);
+    }
     public  function  Checkdate(Request $request){
 
         $results = null;

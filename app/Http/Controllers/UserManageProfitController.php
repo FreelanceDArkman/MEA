@@ -29,7 +29,13 @@ class UserManageProfitController extends Controller
 
         return view('backend.pages.userprofit');
     }
-
+    public  function  dowloadsample(){
+        $file = 'contents/sample/member_investment_ratio.xls';
+        $headers = array(
+            'Content-Type: application/pdf',
+        );
+        return \Response::download($file, 'member_investment_ratio.xls', $headers);
+    }
     public  function  Checkdate(Request $request){
 
         $results = null;
