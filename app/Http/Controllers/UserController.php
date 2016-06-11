@@ -520,7 +520,43 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
         return response()->json(array('success' => $staturet, 'html'=>$message));
     }
 
+    public function ReqPassword_optional(Request $request)
+    {
 
+
+        $staturet = false;
+        $message  ="";
+        $EMP_ID =$request->input('username');
+
+        $userinfo = DB::table('TBL_EMPLOYEE_INFO')->where('EMP_ID', $EMP_ID)->get();
+
+        if($userinfo){
+            $datedata = $userinfo[0]->BIRTH_DATE;
+
+            $newDate =substr($datedata, -2) . substr($datedata, -4,2) . (((int)substr($datedata, -8, 4) )+543) ;
+
+            $MEASecEncoe = new \Security();
+            $ecPass =  $MEASecEncoe->encrypt($newDate,"#Gm2014$06$30@97");
+
+
+            $insert = "UPDATE TBL_USER SET PASSWORD = '".$ecPass."' WHERE EMP_ID = '".$EMP_ID."'";
+
+
+
+           if(DB::insert(DB::raw($insert))) {
+               $message = "ระบบได้ทำการ reset รหัสผ่านเรียบร้อยแล้ว";
+
+               $staturet = true;
+           }
+        }else{
+            $message = "ไม่พบข้อมูลของผู้ใช้";
+        }
+
+
+
+
+        return response()->json(array('success' => $staturet, 'html'=>$message));
+    }
 
 
     public function getimport()

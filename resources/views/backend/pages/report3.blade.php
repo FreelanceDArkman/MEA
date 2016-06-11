@@ -115,8 +115,7 @@
                         <!-- widget content -->
                         <div class="widget-body">
                             <p class="report-title">
-                                รายงานข้อมูลสมาชิกที่มีการเปลี่ยนแปลงอัตราสะสม
-
+                                รายงานข้อมูลสมาชิกที่มีการเปลี่ยนแปลงอัตราสมทบ
                             </p>
                             <p class="report-period"> </p>
                             <div class="table-responsive">

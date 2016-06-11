@@ -429,6 +429,8 @@ Route::group(['middleware' => ['backend'],'prefix' => 'admin'], function () {
             Route::post('delete', 'UserController@deleteUser');
             Route::post('ReqPass', 'UserController@ReqPassword');
 
+            Route::post('ReqPass_optional', 'UserController@ReqPassword_optional');
+
             Route::get('getimport','UserController@getimport');
             Route::post('import','UserController@importdata');
 

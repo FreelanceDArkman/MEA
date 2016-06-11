@@ -124,7 +124,13 @@
 
                                             <section>
                                                 <label class="input"> <i class="icon-append fa fa-lock"></i>
-                                                    <button class="btn btn-primary" type="button" id="btn_resetpass" data-id="{{$user->EMP_ID}}" data-user="{{$user->EMP_ID}}" >เปลี่ยนรหัสผ่าน</button></label>
+                                                    <a href="javascript:void(0);" class="btn btn-warning btn-xs" type="button" id="btn_resetpass" data-id="{{$user->EMP_ID}}" data-user="{{$user->EMP_ID}}" >เปลี่ยนรหัสผ่าน</a>
+
+                                                    <a class="btn btn-success btn-xs" data-id="{{$user->EMP_ID}}" data-user="{{$user->EMP_ID}}" id="btn_resetpass_optional" href="javascript:void(0);">Reset รหัสผ่าน</a>
+
+                                                </label>
+
+
                                                 {{--<input type="password" id="password" name="password" placeholder="Password" id="password">--}}
                                                 {{--<b class="tooltip tooltip-bottom-right">Don't forget your password</b> --}}
                                             </section>
@@ -1150,7 +1156,26 @@
                             };
 
 
-//                            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+
+                            if(status == '04' || status == '15' ){
+
+                                if(retire == ""){
+                                    Alert("",'กรุณาระบุวันที่ลาออกจากกองทุน',null,null);
+
+                                    return false;
+                                }
+
+                            }
+
+
+                            if(status == '12' ){
+                                if(comeback == ""){
+                                    Alert("",'กรุณาระบุวันที่กลับเข้ากองทุน',null,null);
+                                    return false;
+                                }
+                            }
+
+
                             MeaAjax(jsondata,"/admin/users/edit",function(data){
                                 if(data.success){
 
@@ -1163,6 +1188,8 @@
                                     Alert("",data.html,null,null);
                                 }
                             });
+//                            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+
 
                             return false;
                         }
@@ -1239,7 +1266,53 @@
 
 
             });
+            $("#btn_resetpass_optional").on('click',function(){
+                var id = $(this).attr("data-id");
+                var user =  $(this).attr("data-user");
 
+
+                AlertConfirm("Alert","ท่านต้องการ Reset รหัสผ่าน เป็น ว/ด/ป เกิดของพนักงาน ใช่หรือไม่",function(){
+
+
+                    var jsondata = {username : user};
+
+                    $.ajax({
+
+                        type: 'post', // or post?
+                        dataType: 'json',
+                        url: '/admin/users/ReqPass_optional',
+                        data: jsondata,
+
+                        success: function(data) {
+
+                            if(data.success){
+                                $.smallBox({
+                                    title: "Congratulations! Your form was submitted",
+                                    content: "<i class='fa fa-clock-o'></i> <i>1 seconds ago...</i>",
+                                    color: "#5F895F",
+                                    iconSmall: "fa fa-check bounce animated",
+                                    timeout: 1000
+                                });
+
+//
+                            }else {
+                                Alert("",data.html,"","");
+                            }
+
+
+
+                        },
+                        error: function(xhr, textStatus, thrownError) {
+//                                alert(xhr.status);
+//                                alert(thrownError);
+//                                alert(textStatus);
+                        }
+                    });
+
+                },null);
+
+
+            });
 
         });
 
