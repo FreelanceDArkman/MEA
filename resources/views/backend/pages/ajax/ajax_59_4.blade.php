@@ -21,7 +21,7 @@
         <td><input type="text" id="SAVING_RATE_TIME_CHANGE_PER_MONTH{{$list->CONTROL_ID}}" value="{{$list->SAVING_RATE_TIME_CHANGE_PER_MONTH}}" class="form-control"></td>
         <td><input type="text" id="SAVING_RATE_CHANGE_PERIOD{{$list->CONTROL_ID}}" value="{{$list->SAVING_RATE_CHANGE_PERIOD}}" class="form-control"></td>
         <td>
-            <a href="#" class="btn btn-primary btn-xs btn_edit_list" data-id="{{$list->CONTROL_ID}}"  ><i class="fa fa-plus"></i>แก้ไข</a>
+            <a href="#" class="btn btn-primary btn-xs btn_edit_list" data-id="{{$list->CONTROL_ID}}"  >บันทึก</a>
 
         </td>
     </tr>

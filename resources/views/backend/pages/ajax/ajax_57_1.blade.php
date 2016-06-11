@@ -85,7 +85,7 @@
 
             </td>
             <td rowspan="2" style="vertical-align: middle;text-align: center">
-                <a href="#" class="btn btn-primary btn-xs btn_edit_list" data-date_ref="{{get_date_sql($list->REFERENCE_DATE)}}"  ><i class="fa fa-plus"></i>แก้ไข</a>
+                <a href="#" class="btn btn-primary btn-xs btn_edit_list" data-date_ref="{{get_date_sql($list->REFERENCE_DATE)}}"  >บันทึก</a>
                 <a href="javascript:void(0);" data-date_ref="{{get_date_sql($list->REFERENCE_DATE)}}"  class="btn_delete_list btn bg-color-red txt-color-white btn-xs"> <i class="glyphicon glyphicon-trash"></i>ลบ</a>
 
             </td>

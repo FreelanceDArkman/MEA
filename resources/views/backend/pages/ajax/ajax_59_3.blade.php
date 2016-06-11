@@ -19,7 +19,7 @@
         <td><input type="text" id="WS_BENEFICIARY_ROOT_PATH_{{$list->CONTROL_ID}}" value="{{$list->WS_BENEFICIARY_ROOT_PATH}}" class="form-control"></td>
         <td><input type="text" id="WEB_BENEFICIARY_ROOT_PATH_{{$list->CONTROL_ID}}" value="{{$list->WEB_BENEFICIARY_ROOT_PATH}}" class="form-control"></td>
         <td>
-            <a href="#" class="btn btn-primary btn-xs btn_edit_list" data-id="{{$list->CONTROL_ID}}"  ><i class="fa fa-plus"></i>แก้ไข</a>
+            <a href="#" class="btn btn-primary btn-xs btn_edit_list" data-id="{{$list->CONTROL_ID}}"  >บันทึก</a>
 
         </td>
     </tr>

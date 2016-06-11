@@ -21,7 +21,7 @@
         <td><input type="file" class="btn btn-default" id="client_upload_{{$list->ID}}" name="client_upload_{{$list->ID}}"></td>
         <td><input type="text" id="URL_{{$list->ID}}" value="{{$list->URL}}" class="form-control"></td>
         <td>
-            <a href="#" class="btn btn-primary btn-xs btn_edit_list" data-id="{{$list->ID}}"  ><i class="fa fa-plus"></i>แก้ไข</a>
+            <a href="#" class="btn btn-primary btn-xs btn_edit_list" data-id="{{$list->ID}}"  >บันทึก</a>
             <a href="javascript:void(0);"  data-id="{{$list->ID}}" class="btn_delete_list btn bg-color-red txt-color-white btn-xs"> <i class="glyphicon glyphicon-trash"></i>ลบ</a>
         </td>
     </tr>
