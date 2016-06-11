@@ -249,6 +249,7 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
 
 
         $user =  DB::table('TBL_USER')->where('EMP_ID',$id)->get();
+        $userinfo = DB::table('TBL_EMPLOYEE_INFO')->where('EMP_ID',$id)->get();
 
         $user_group = DB::table('TBL_PRIVILEGE')->select('USER_PRIVILEGE_ID','USER_PRIVILEGE_DESC')->orderBy('USER_PRIVILEGE_ID', 'asc')->get();
         $user_status = DB::table('TBL_USER_STATUS')->get();
@@ -258,7 +259,8 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
             'user' => $user[0],
             'user_group' => $user_group,
             'user_status' => $user_status,
-            'userplan'=>$userplan
+            'userplan'=>$userplan,
+            'userinfo' =>$userinfo
         ]);
     }
 

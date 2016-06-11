@@ -325,7 +325,9 @@
                             <!-- end widget content -->
                         </div>
                         <div class="tab-pane" id="hr2">
-                            <p style="padding: 20px;font-size: 22px;"><strong> รหัสพนักงาน :</strong> {{get_userID()}}  <strong> ชื่อ-สกุล : </strong>{{get_username()}}</p>
+                            @if($userinfo)
+                            <p style="padding: 20px;font-size: 22px;"><strong> รหัสพนักงาน :</strong> {{$userinfo[0]->EMP_ID}}  <strong> ชื่อ-สกุล : </strong>{{$userinfo[0]->FULL_NAME}}</p>
+                            @endif
                             <form id="smart-form-register_1" action=""   class="smart-form">
                                 {!! csrf_field() !!}
 

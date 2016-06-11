@@ -1,8 +1,10 @@
 @extends('backend.layouts.default')
 @section('content')
 
-
-    <div id="content" style="background-color: #333 !important; height: 1030px; padding-top: 100px; text-align: center !important;">
+ <style type="text/css">
+     #main{padding-bottom: 0px !important;}
+ </style>
+    <div id="content" style="background-color: #333 !important; height: 1080px; padding-top: 100px; text-align: center !important;">
 
 
         <h1 style="font-size: 35px !important; color: #fff">ยินดีต้อนรับ สู่ ระบบ Admin กองทุนสำรองเลี้ยงชีพ การไฟฟ้านครหลวง</h1>

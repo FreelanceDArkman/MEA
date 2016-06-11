@@ -63,6 +63,10 @@ section em{
     font-family: "DB Ozone X" !important;
     font-size: 14px !important;
 }
+
+.page-footer{
+    display: none !important;
+}
 .MessageBoxMiddle .pText{
     font-size: 20px !important;
 }
