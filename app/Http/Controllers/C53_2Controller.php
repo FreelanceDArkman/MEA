@@ -271,7 +271,9 @@ class C53_2Controller extends Controller
             $fileThumb= "";
 
             if($importpdf != null){
-                $filePDF = $importpdf->getClientOriginalName();
+//                $filePDF = $importpdf->getClientOriginalName();
+
+                $filePDF  = uniqid().".pdf";
                 $importpdf->move(public_path().$pathpdf , $filePDF);
 
                 //file_put_contents( 'C:\FileSharing\fund_file\contents', $filePDF);
@@ -279,10 +281,14 @@ class C53_2Controller extends Controller
 
 
             if($thumbnail != null){
-                $fileThumb = $thumbnail->getClientOriginalName();
+                $fileThumb  = uniqid(). ".jpg";
+//                $fileThumb = $thumbnail->getClientOriginalName();
                 $thumbnail->move(public_path().$pathThunb , $fileThumb);
 
                 //file_put_contents( 'C:\FileSharing\fund_file\contents', $fileThumb);
+            }else{
+                $fileThumb = 'default.jpg';
+//                $thumbnail->move(public_path().$pathThunb , 'default.jpg');
             }
 
 
