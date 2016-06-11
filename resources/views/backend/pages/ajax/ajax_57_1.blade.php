@@ -35,7 +35,7 @@
                     $today = new Date();
                     $years = date("Y", strtotime($today)) + 5;
                 $days = 31;
-                    $months = ['ม.ค.','ก.พ.','มี.ค.','เม.ษ.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+                    $months = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
                 for($i=1; $i<= $days; $i++){
                     if(date("d", strtotime($list->REFERENCE_DATE)) == $i){
                         $ret  = $ret . "<option selected=\"selected\" value=\"".$i."\">".$i."</option>";

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Jenssegers\Date\Date;
 
 class YearbookController extends Controller
 {
@@ -39,17 +40,17 @@ class YearbookController extends Controller
     }
 
     public function  GetFeed($feedby){
-
+        $today = new Date();
         if($feedby == null || $feedby == 1){
-            return DB::table('tbl_news_topic')->where('NEWS_CATE_ID','9')->orderBy('create_date', 'desc')->paginate(6);
+            return DB::table('tbl_news_topic')->where('START_DATE','<=',get_date_sql($today))->where('EXPIRE_DATE','>=',get_date_sql($today))->where('NEWS_CATE_ID','9')->where('NEWS_TOPIC_FLAG','=',0)->orderBy('create_date', 'desc')->paginate(6);
         }
 
         if($feedby == 2){
-            return DB::table('tbl_news_topic')->where('NEWS_CATE_ID','9')->orderBy('VIEW_STAT', 'desc')->paginate(6);
+            return DB::table('tbl_news_topic')->where('START_DATE','<=',get_date_sql($today))->where('EXPIRE_DATE','>=',get_date_sql($today))->where('NEWS_CATE_ID','9')->where('NEWS_TOPIC_FLAG','=',0)->orderBy('VIEW_STAT', 'desc')->paginate(6);
         }
 
         if($feedby == 3){
-            return DB::table('tbl_news_topic')->where('NEWS_CATE_ID','9')->orderBy('DL_STAT', 'desc')->paginate(6);
+            return DB::table('tbl_news_topic')->where('START_DATE','<=',get_date_sql($today))->where('EXPIRE_DATE','>=',get_date_sql($today))->where('NEWS_CATE_ID','9')->where('NEWS_TOPIC_FLAG','=',0)->orderBy('DL_STAT', 'desc')->paginate(6);
         }
 
     }
