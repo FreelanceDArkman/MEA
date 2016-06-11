@@ -190,26 +190,15 @@ class AuthController extends Controller
             // login fail
             return redirect()->to('login')->withErrors([$retError]);
         } else {
-            session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
-//            if(get_user_access_status_flag() == 1){
-//
-//                $retError = "ท่านไม่สามารถเข้าใช้งานระบบได้ เนื่องจากท่านได้ลาออกจากสมาชิกกองทุน เมื่อวันที่ "  . get_user_LEAVE_FUND_GROUP_DATE() . " หากต้องการรายละเอียดเพิ่มเติม กรุณาติดต่อกองทุนสำรองเลี้ยงชีพ";
-//
-//
-//                return redirect()->to('login')->withErrors([$retError]);
-//
-//            }else{
-//
-//
-//
-//
-//            }
+
+
 
             if($result_login->result[0]->first_login_flag == "0"){
                 //echo "asdasd" . $result_login->result[0]->first_login_flag;
                 return redirect()->to('firstlogin')->with('emp_id',$result_login->result[0]->emp_id);
             }else{
                 // logged in
+                session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
                 // echo  "hello";
                 return redirect()->intended('/profile');
             }

@@ -481,12 +481,7 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
         }
         $staturet= true;
         $data = "ok";
-//
-//        if($deleted)  {
-//            return response()->json(["ret" => "1"]);
-//        }else{
-//            return response()->json(["ret" => "0"]);
-//        }
+
 
 
         return response()->json(array('success' => $staturet, 'html'=>$data));
@@ -544,15 +539,13 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
 
     public function importdata(Request $request){
 
-//        var_dump($request->file('exelimport'));
-//        $inputfile= $request->input('exelimport');
-        //Input::file('import1')
+
 
         $results = null;
 
         $type = $request->input('type');
 
-//        var_dump($type . "jjjjjj");
+
 
         Excel::load($request->file('exelimport'), function ($reader) use($type) {
 
@@ -565,11 +558,7 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
                 $EMP_ID = $value["emp_id"];
                 $StatusID = $value["user_status_id"];
 
-//
 
-//                /$type = 1;
-
-//                RETURN_FUND_GROUP_DATE
 
                 switch($type){
                     case  "1":
@@ -598,59 +587,7 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
 
 
 
-           // var_dump($results);
 
-
-//            $reader->each(function($sheet) {
-//                foreach ($sheet->toArray() as $row) {
-////                    User::firstOrCreate($row);
-////                    $ret .= $row;
-//                    $ret = $row-.
-//                }
-//            });
-
-//            $ret = (array)$results;
-
-
-
-//            var_dump($ret[0]["emp_id"]);
-
-
-
-
-
-//            $insert = "UPDATE TBL_USER SET USER_STATUS_ID = '".."' ";
-
-
-
-
-
-//            DB::insert(DB::raw($insert));
-
-
-
-            $staturet= true;
-            $data = "ok";
-
-//
-//            array(2) {
-//                ["*title"]=> string(6) "Sheet1"
-//                ["*items"]=>
-//  array(1) {
-//                    [0]=>
-//    object(Maatwebsite\Excel\Collections\CellCollection)#823 (2) {
-//    ["title":protected]=>
-//      NULL
-//      ["items":protected]=>
-//      array(2) {
-//                        ["emp_id"]=>
-//        string(8) "00000001"
-//                        ["user_status_id"]=>
-//        float(11)
-//      }
-//    }
-//  }
-//}
         });
 
 
@@ -894,18 +831,7 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
 
         $result=   Excel::load($request->file('exelimport'))->get();
         $count = $result->count();
-//
-//      Excel::load($request->file('exelimport'), function ($reader) use($count) {
-//
-//            $results = $reader->get();
-//
-//            $ret = $results->toArray();
-//
-//
-//            $count = count($ret);
-//
-//
-//        });
+
 
         return response()->json(array('success' => true, 'html'=> $count));
 

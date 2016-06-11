@@ -1,7 +1,9 @@
 <?php
 $data = getmemulist();
+$current = Route::getCurrentRoute()->getPath();
 ?>
 <div id="footer-v3" class="footer-v3">
+    @if($current != "firstlogin")
     <div class="footer">
         <div class="container">
             <div class="row">
@@ -83,7 +85,7 @@ $data = getmemulist();
             </div>
         </div>
     </div><!--/footer-->
-
+    @endif
     <div class="copyright">
         <div class="container">
             <div class="row">

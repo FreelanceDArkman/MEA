@@ -7,9 +7,18 @@ $current = Route::getCurrentRoute()->getPath();
 <div class="header">
     <div class="container">
         <!-- Logo -->
+        @if($current != "firstlogin")
         <a class="logo" href="/" target="_blank">
+
             <img src="/frontend/assets/img/logo1-default.png" alt="Logo">
         </a>
+            @else
+            <a class="logo" href="#" >
+
+                <img src="/frontend/assets/img/logo1-default.png" alt="Logo">
+            </a>
+            @endif
+
         <!-- End Logo -->
 
         <!-- Topbar -->
@@ -26,18 +35,20 @@ $current = Route::getCurrentRoute()->getPath();
                 <li class="topbar-devider"></li>
                 <li><a href="/contact"><i class="fa fa-map-marker"></i> {{ getGoupName($data,8) }}</a></li>
                 <li class="topbar-devider"></li>
-                @endif
-             @if(logged_in() && ($current != "firstlogin"))
-                    <li> <a href="/profile"><i class="fa fa-user"></i> สวัสดี  {{get_username()}}</a>
+
+                     @if(logged_in() && ($current != "firstlogin"))
+                            <li> <a href="/profile"><i class="fa fa-user"></i> สวัสดี  {{get_username()}}</a>
 
 
-                    </li>
-                    <li class="topbar-devider"></li>
-                <li> <a href="/logout"><i class="fa fa fa-sign-out"></i> ออกจากระบบ</a> </li>
+                            </li>
+                            <li class="topbar-devider"></li>
+                        <li> <a href="/logout"><i class="fa fa fa-sign-out"></i> ออกจากระบบ</a> </li>
 
 
-               @else
-                    <li><a href="/login"> <i class="fa fa-user"></i> เข้าสู่ระบบ </a></li>
+                       @else
+                            <li><a href="/login"> <i class="fa fa-user"></i> เข้าสู่ระบบ </a></li>
+                        @endif
+
                 @endif
 
             </ul>
