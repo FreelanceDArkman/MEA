@@ -51,7 +51,7 @@ class changeplanController extends Controller
         $dept =   $request->input('maxVal2');
         $addby = get_userID();
         $USER_STATUS_ID = $USER->USER_STATUS_ID;
-        $LEAVE_FUND_GROUP_DATE = "NULL";
+        $LEAVE_FUND_GROUP_DATE = null;
 
 
         if($USER->LEAVE_FUND_GROUP_DATE != null){
