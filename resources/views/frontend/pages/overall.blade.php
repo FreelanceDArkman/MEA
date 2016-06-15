@@ -234,10 +234,10 @@
                     //Circles 1
                     Circles.create({
                         id:         'circle-1',
-                        percentage: {{$empinfo->USER_SAVING_RATE}},
+                        percentage: {{$savingrate->USER_SAVING_RATE}},
                         radius:     80,
                         width:      3,
-                        number:     {{$empinfo->USER_SAVING_RATE}},
+                        number:     {{$savingrate->USER_SAVING_RATE}},
                         text:       '%',
                         colors:     ['#eee', '#FE5000'],
                         duration:   2000
@@ -247,10 +247,10 @@
                     //Circles 2
                     Circles.create({
                         id:         'circle-2',
-                        percentage: {{$savingrate->CONTRIBUTION_RATE_NEW}},
+                        percentage: {{$empinfo->CONTRIBUTION_RATE_NEW}},
                         radius:     80,
                         width:      3,
-                        number:     {{$savingrate->CONTRIBUTION_RATE_NEW}},
+                        number:     {{$empinfo->CONTRIBUTION_RATE_NEW}},
                         text:       '%',
                         colors:     ['#eee', '#FE5000'],
                         duration:   2000
