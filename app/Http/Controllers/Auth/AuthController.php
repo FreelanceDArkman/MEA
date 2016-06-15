@@ -78,7 +78,7 @@ class AuthController extends Controller
 
         $netasset  = DB::table('TBL_USER')->Where('EMP_ID', '=' , $id)->first();
 
-        $email = $netasset->EMAIL;
+       // $email = $netasset->EMAIL;
         if($request->input('email')){
             $email = $request->input('email');
         }
