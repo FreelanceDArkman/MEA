@@ -78,6 +78,9 @@ class AuthController extends Controller
 
         $netasset  = DB::table('TBL_USER')->Where('EMP_ID', '=' , $id)->first();
 
+
+
+
        // $email = $netasset->EMAIL;
         if($request->input('email')){
             $email = $request->input('email');
@@ -99,12 +102,15 @@ class AuthController extends Controller
         $curl = new Curl('FIRST_LOGIN', $data);
 
         $result_login = $curl->getResult();
+
+        var_dump($netasset );
+
         if($result_login->errCode != 0) {
             // login fail
             $retError = "";
             switch($result_login->errCode){
                 case  1:
-                    $retError = "ท่านระบุรหัสผู้ใช้งานไม่ถูกต้อง";
+                    $retError = "ท่านระบุรหัสผู้ใช้งานไม่ถูกต้อง" ;
                     break;
                 case  2:
                     $retError = "ท่านระบุรหัสผ่านไม่ถูกต้อง" ;
@@ -116,7 +122,7 @@ class AuthController extends Controller
                     $retError=   'ไม่พบชื่อ login นี้';
                     break;
             }
-            return redirect()->to('firstlogin')->withErrors([$retError]);
+          //  return redirect()->to('firstlogin')->withErrors([$retError]);
         } else {
 
             Session::flush();
@@ -192,13 +198,13 @@ class AuthController extends Controller
         } else {
 
 
-
+            session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
             if($result_login->result[0]->first_login_flag == "0"){
                 //echo "asdasd" . $result_login->result[0]->first_login_flag;
                 return redirect()->to('firstlogin')->with('emp_id',$result_login->result[0]->emp_id);
             }else{
                 // logged in
-                session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
+
                 // echo  "hello";
                 return redirect()->intended('/profile');
             }
