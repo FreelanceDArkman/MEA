@@ -112,6 +112,7 @@
                                         <span style="font-size: 20px;color: #3276b1;">รูปแบบไฟล์ : เป็นไฟล์นามสกุล PDF เท่านั้น</span>
                                         <label class="input">
                                             <input type="file" class="btn btn-default" id="importpdf" name="importpdf">
+                                            <input type="hidden" id="thumb_current" value="{{$Topicdata->THUMBNAIL}}">
                                         </label>
                                     </section>
 
@@ -492,6 +493,8 @@
                                     var Notice_End_DATE = $("#hd_Notice_End_DATE").val();
                                     var noti_message = $("#noti_message").val();
 
+                                    var THUMBNAIL = $("#thumb_current").val();
+
 
                                     dataimport.append('NEWS_CATE_ID',NEWS_CATE_ID);
                                     dataimport.append('NEWS_TOPIC_ID',NEWS_TOPIC_ID);
@@ -507,6 +510,11 @@
                                     dataimport.append('Notice_start_DATE',Notice_start_DATE);
                                     dataimport.append('Notice_End_DATE',Notice_End_DATE);
                                     dataimport.append('noti_message',noti_message);
+
+                                    dataimport.append('THUMBNAIL',THUMBNAIL);
+
+
+
 
                                     var filesPDF = $("#importpdf").get(0).files;
 

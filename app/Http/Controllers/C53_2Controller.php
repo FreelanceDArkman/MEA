@@ -461,7 +461,10 @@ class C53_2Controller extends Controller
 //                Content Only: Only one
 //
 //                7,8
+            $THUMBNAIL = "";
+            $currentthumb = $request->input("THUMBNAIL");
 
+            $WEB_NEWS_ROOT_PATH  = $meapath[0]->WEB_NEWS_ROOT_PATH;
             $filePDF = "";
             $fileThumb= "";
 
@@ -474,14 +477,23 @@ class C53_2Controller extends Controller
             if($thumbnail != null){
                 $fileThumb = $thumbnail->getClientOriginalName();
                 $thumbnail->move(public_path().$pathThunb , $fileThumb);
+                $THUMBNAIL = $WEB_NEWS_ROOT_PATH .$fileThumb;
+            }else{
+
+                $fileThumb = 'default.jpg';
+                if($currentthumb != ""){
+                    $THUMBNAIL = $currentthumb;
+                }else{
+                    $THUMBNAIL = $WEB_NEWS_ROOT_PATH .$fileThumb;
+                }
             }
 
 
 
-            $WEB_NEWS_ROOT_PATH  = $meapath[0]->WEB_NEWS_ROOT_PATH;
-
             $FILE_PATH = $WEB_NEWS_ROOT_PATH.$filePDF;
-            $THUMBNAIL = $WEB_NEWS_ROOT_PATH .$fileThumb;
+
+
+
 
 
             if($NEWS_CATE_ID == 9 || $NEWS_CATE_ID == 1 || $NEWS_CATE_ID == 2|| $NEWS_CATE_ID == 7|| $NEWS_CATE_ID == 8){

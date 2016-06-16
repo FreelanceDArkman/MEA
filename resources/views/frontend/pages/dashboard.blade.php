@@ -36,7 +36,7 @@
                 <div class="col-md-4 md-margin-bottom-40">
                     <div class="news-v1-in">
 
-                       
+
                         @if($item->THUMBNAIL)
                             <img class="img-responsive" src="{{$item->THUMBNAIL}}" alt="">
                         @else
