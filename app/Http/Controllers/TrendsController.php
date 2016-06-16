@@ -229,7 +229,7 @@ class TrendsController extends Controller
 
 
         $sorted =  asort($netasset2);
-
+        $sorted2 =  asort($netasset);
 
 
 //        $sorted = collect($netasset2)->sortBy('RECORD_DATE');
@@ -329,6 +329,8 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
     function getDB_TBL_INFORMATION_FROM_ASSET_bysearch($month,$year){
         $sql = "SELECT TOP  5 * FROM  TBL_INFORMATION_FROM_ASSET  WHERe MONTH(CREATE_DATE) = ".$month." AND YEAR(CREATE_DATE) = '".$year."' AND EMP_ID = ".get_userID()." ORDER BY CREATE_DATE ASC";
+
+        var_dump($sql);
         return  DB::select(DB::raw($sql));
     }
 
@@ -513,19 +515,21 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
         if($show){
 
+            $count1 = 0;
             foreach($netasset2 as $index => $arrItem2){
-                $item2_1[$index] =  ((float)$arrItem2->EMPLOYER_CONTRIBUTION_1) +  ((float)$arrItem2->MEMBER_EARNING_4) ;
-                $item2_2[$index] =  ((float)$arrItem2->GRATUITY) -  ((float)$arrItem2->GRATUITY_TAX) ;
-
+                $item2_1[$count1] =  ((float)$arrItem2->EMPLOYER_CONTRIBUTION_1) +  ((float)$arrItem2->MEMBER_EARNING_4) ;
+                $item2_2[$count1] =  ((float)$arrItem2->GRATUITY) -  ((float)$arrItem2->GRATUITY_TAX) ;
+                $count1 = $count1 +1;
 
             }
 
         }
 
-
+        $count2 = 0;
         foreach($netasset2 as $index => $arrItem2){
-            $item1[$index] =  ((float)$arrItem2->EMPLOYER_EARNING_2) +  ((float)$arrItem2->MEMBER_EARNING_4) ;
-            $item1Date[$index] = get_date_nodate($arrItem2->RECORD_DATE);
+            $item1[$count2] =  ((float)$arrItem2->EMPLOYER_EARNING_2) +  ((float)$arrItem2->MEMBER_EARNING_4) ;
+            $item1Date[$count2] = get_date_nodate($arrItem2->RECORD_DATE);
+            $count2 = $count2 +1;
         }
         //Graph 3
         $graph3["title"] = array("text" => 'เปรียบเทียบเงินกองทุนเลี้ยงชีพ กับเงินบำเหน็จ');
@@ -643,11 +647,14 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         $Debt = array();
         $DateCreate = array();
 
+        $count=0;
         foreach($netasset as $index => $arrItem){
 
-            $euqity[$index] =  (float)$arrItem->EQUITY;
-            $Debt[$index] = (float)$arrItem->DEBT;
-            $DateCreate[$index] = get_date_notime($arrItem->CREATE_DATE);
+            $euqity[$count] =  (float)$arrItem->EQUITY;
+            $Debt[$count] = (float)$arrItem->DEBT;
+            $DateCreate[$count] = get_date_notime($arrItem->CREATE_DATE);
+
+            $count = $count +1;
 
         }
 
