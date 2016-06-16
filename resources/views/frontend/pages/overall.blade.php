@@ -232,7 +232,8 @@
                 //Circles Master v1
                 initCirclesMaster1: function () {
                     //Circles 1
-                    Circles.create({
+                    @if($savingrate)
+                 Circles.create({
                         id:         'circle-1',
                         percentage: {{$savingrate->USER_SAVING_RATE}},
                         radius:     80,
@@ -242,7 +243,7 @@
                         colors:     ['#eee', '#FE5000'],
                         duration:   2000
                     })
-
+                    @endif
                     @if($savingrate)
                     //Circles 2
                     Circles.create({
