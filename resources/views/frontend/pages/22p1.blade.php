@@ -104,16 +104,16 @@
 
                             @if($CurrnentPlan)
                                 @if($numberofchange == (intval(session()->get('user_data')->fund_plan_change_per_year) - 1))
-                                    <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
-                                        <strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>
-                                    </div>
+                                    {{--<div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">--}}
+                                        {{--<strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>--}}
+                                    {{--</div>--}}
                                     @endif
                             @else
                                 @if($effective)
                                             @if($numberofchange == (intval(session()->get('user_data')->fund_plan_change_per_year) - 1))
-                                            <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
-                                                <strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>
-                                            </div>
+                                            {{--<div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">--}}
+                                                {{--<strong> ท่านกําลังทําการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทํารายการ หรือยกเลิก</strong>--}}
+                                            {{--</div>--}}
                                             @endif
                                 @endif
                             @endif
