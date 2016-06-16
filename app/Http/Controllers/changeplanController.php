@@ -411,7 +411,7 @@ AND YEAR(MODIFY_DATE) = YEAR(GETDATE())";
 
     public function  getNumofPlan(){
 
-        $count = "SELECT COUNT(*) AS TOTAL FROM TBL_USER_FUND_CHOOSE WHERE EMP_ID = 1234567  AND YEAR(MODIFY_DATE) = YEAR(GETDATE())";
+        $count = "SELECT COUNT(*) AS TOTAL FROM TBL_USER_FUND_CHOOSE WHERE EMP_ID =  '".get_userID()."' AND YEAR(MODIFY_DATE) = YEAR(GETDATE())";
 
         return DB::select(DB::raw($count))[0];
     }
