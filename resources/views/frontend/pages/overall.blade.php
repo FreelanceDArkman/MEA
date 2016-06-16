@@ -96,13 +96,13 @@
                         <h3 class="circle-title">อัตราสะสม</h3>
 
                     </div>
-                    @if($savingrate)
+
                     <div class="inner-pchart col-md-3">
                         <div class="circle" id="circle-2"></div>
                         <h3 class="circle-title">อัตราสมทบ</h3>
 
                     </div>
-                    @endif
+
                     <div class="inner-pchart col-md-3">
                         <div class="circle" id="circle-3"></div>
                         <h3 class="circle-title">ตราสารทุน</h3>
@@ -244,7 +244,7 @@
                         duration:   2000
                     })
                     @endif
-                    @if($savingrate)
+                    @if($empinfo)
                     //Circles 2
                     Circles.create({
                         id:         'circle-2',
