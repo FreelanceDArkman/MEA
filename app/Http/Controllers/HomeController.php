@@ -41,20 +41,27 @@ class HomeController extends Controller
     public function  GetFeed($feedby){
 
         $today = new Date();
-
+        $sql = "";
         if($feedby == null || $feedby == 1){
-            return DB::table('tbl_news_topic')->where('START_DATE','<=',get_date_sql($today))->where('EXPIRE_DATE','>=',get_date_sql($today))->where('NEWS_CATE_ID','1')->orWhere('NEWS_CATE_ID','2')->where('NEWS_TOPIC_FLAG','=',0)->orderBy('create_date', 'desc')->paginate(6);
+
+
+            return DB::table('tbl_news_topic')->where('START_DATE','<=',get_date_sql($today))->where('EXPIRE_DATE','>=',get_date_sql($today))->whereIn('NEWS_CATE_ID',[1, 2])->where('NEWS_TOPIC_FLAG','=',0)->orderBy('create_date', 'desc')->paginate(6);
+
+
         }
 
         if($feedby == 2){
-            return DB::table('tbl_news_topic')->where('START_DATE','<=',get_date_sql($today))->where('EXPIRE_DATE','>=',get_date_sql($today))->where('NEWS_CATE_ID','1')->orWhere('NEWS_CATE_ID','2')->where('NEWS_TOPIC_FLAG','=',0)->orderBy('VIEW_STAT', 'desc')->paginate(6);
+
+            return DB::table('tbl_news_topic')->where('START_DATE','<=',get_date_sql($today))->where('EXPIRE_DATE','>=',get_date_sql($today))->whereIn('NEWS_CATE_ID',[1, 2])->where('NEWS_TOPIC_FLAG','=',0)->orderBy('VIEW_STAT', 'desc')->paginate(6);
         }
 
         if($feedby == 3){
 
-            return DB::table('tbl_news_topic')->where('START_DATE','<=',get_date_sql($today))->where('EXPIRE_DATE','>=',get_date_sql($today))->where('NEWS_CATE_ID','1')->orWhere('NEWS_CATE_ID','2')->where('NEWS_TOPIC_FLAG','=',0)->orderBy('DL_STAT', 'desc')->paginate(6);
+            return DB::table('tbl_news_topic')->where('START_DATE','<=',get_date_sql($today))->where('EXPIRE_DATE','>=',get_date_sql($today))->whereIn('NEWS_CATE_ID',[1, 2])->where('NEWS_TOPIC_FLAG','=',0)->orderBy('DL_STAT', 'desc')->paginate(6);
 //            return DB::table('tbl_news_topic')->where('NEWS_TOPIC_FLAG','=',0)->where('NEWS_CATE_ID','1')->orWhere('NEWS_CATE_ID','2')->orderBy('DL_STAT', 'desc')->paginate(6);
         }
+
+        DB::update(DB::raw($sql));
 
     }
 

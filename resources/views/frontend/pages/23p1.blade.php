@@ -101,7 +101,8 @@
 
                     </ul>
                     <div class="tab-content">
-                        @if($ishowhis && $CurrnentPlan)
+                        {{--//$ishowhis--}}
+                        @if($ishowhis)
                             <div class="tab-pane fade " id="home-1" style="position: relative" >
                                 @else
                                     <div class="tab-pane fade active in" id="home-1" style="position: relative" >
@@ -308,6 +309,15 @@
 
                                             @endif
                                         @endforeach
+
+                                    @else
+                                        <tr>
+                                            <td colspan="5" style="text-align: center" >
+
+                                                <strong>ไม่พบข้อมูลในระบบ</strong>
+
+                                            </td>
+                                        </tr>
                                     @endif
 
 

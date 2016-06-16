@@ -231,7 +231,7 @@ WHERe YEAR(sav.CHANGE_SAVING_RATE_DATE) = '".$request->input('drop_year')."' AND
 
         $arrDropYear = array();
         $count = 0;
-        $ret ="<option>เลือกปี</option>";
+        $ret ="<option value='1990'>เลือกปี</option>";
         for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
             $arrDropYear[$count] = $i;
 

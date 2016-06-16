@@ -52,8 +52,6 @@
                             <span class="service-heading">Overall Profile</span>
                             <span class="counter">ยินดีต้อนรับคุณ {{$empinfo->FULL_NAME}}</span>
 
-
-
                         </div>
                     </div>
 
@@ -207,7 +205,6 @@
                             <a href="{{ action('TrendsController@ExportExcel1') }}" class="btn btn-success" style="margin-bottom: 10px" type="button"><i class="fa fa-download"></i> Export</a>
 
                             <div class="table-responsive">
-
                                 @if($netasset2tbl)
                                 <table class="table table-bordered table-striped tbl_mea">
                                     <thead>
@@ -449,7 +446,11 @@
 //
 //            alert('eee');
 //        }
-
+Highcharts.setOptions({
+    lang: {
+        thousandsSep: ','
+    }
+});
         $(function () {
 
             {{--var showw = {{$show2}};--}}

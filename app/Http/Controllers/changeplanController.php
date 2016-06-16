@@ -158,7 +158,7 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND YE
 
         $arrDropYear = array();
         $count = 0;
-        $ret ="<option>เลือกปี</option>";
+        $ret ="<option value='1990'>เลือกปี</option>";
 
 
         for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
@@ -214,6 +214,10 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         if($datetoday < $arrpages[0] || $datetoday>$arrpages[1]){
             $Isaccess = false;
         }
+
+        $q =   "SELECT * FROM TBL_RISK_QUIZ_RESULT WHERe EMP_ID = '".get_userID()."' AND YEAR(QUIZ_TEST_DATE) = YEAR(GETDATE())";
+
+        $quizdoit =DB::select(DB::raw($q));
 //var_dump($dropplan);
         return view('frontend.pages.22p1')->with([
             'dropplan' => $dropplan,
@@ -229,6 +233,7 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
             'empinfo'=>$empinfo,
             'planchoose'=>$planchoose,
             'Isaccess' =>$Isaccess,
+            'quizdoit' => $quizdoit,
             'numberofchange'=>$numberofchange
         ] );
     }
@@ -368,6 +373,8 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         $q =   "SELECT * FROM TBL_RISK_QUIZ_RESULT WHERe EMP_ID = '".get_userID()."' AND YEAR(QUIZ_TEST_DATE) = YEAR(GETDATE())";
 
         $quizdoit =DB::select(DB::raw($q));
+
+
 
 
         return view('frontend.pages.22p1')->with([

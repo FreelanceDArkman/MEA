@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Package\Curl;
 use App\Http\Requests;
@@ -227,6 +228,17 @@ class TrendsController extends Controller
 
 
 
+        $sorted =  asort($netasset2);
+
+
+
+//        $sorted = collect($netasset2)->sortBy('RECORD_DATE');
+//
+//        $sorted->values()->all();
+
+
+
+
         $empStart =DB::table('TBL_EMPLOYEE_INFO')->where('EMP_ID','=',get_userID())->first();
 
 
@@ -322,10 +334,9 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
 
     function getDB_TBL_INFORMATION_FROM_ASSET(){
-        $sql = "SELECT TOP  5 * FROM  TBL_INFORMATION_FROM_ASSET WHERe EMP_ID = ".get_userID()." ORDER BY CREATE_DATE ASC";
+        $sql = "SELECT TOP  5 * FROM  TBL_INFORMATION_FROM_ASSET WHERe EMP_ID = ".get_userID()." ORDER BY CREATE_DATE DESC";
         return  DB::select(DB::raw($sql));
     }
-
 
 
 
@@ -343,7 +354,8 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 //        var_dump($dateEndreal->format('Y-m-d'));
 
 
-        $sql2 = "SELECT TOP  12 * FROM  TBL_MEMBER_BENEFITS WHERe RECORD_DATE BETWEEN '".$dateStart->format('Y-m-d')."' AND  '" .$dateEndreal->format('Y-m-d')."' AND EMP_ID = '1234567' ORDER BY RECORD_DATE ASC";
+        $sql2 = "SELECT TOP  12 * FROM  TBL_MEMBER_BENEFITS WHERe RECORD_DATE BETWEEN '".$dateStart->format('Y-m-d')."' AND  '" .$dateEndreal->format('Y-m-d')."' AND EMP_ID = ".get_userID()." ORDER BY RECORD_DATE ASC";
+
         return DB::select(DB::raw($sql2));
     }
 
@@ -361,14 +373,18 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 //        var_dump($dateEndreal->format('Y-m-d'));
 
 
-        $sql2 = "SELECT  * FROM  TBL_MEMBER_BENEFITS WHERe RECORD_DATE BETWEEN '".$dateStart->format('Y-m-d')."' AND  '" .$dateEndreal->format('Y-m-d')."' AND EMP_ID = '1234567' ORDER BY RECORD_DATE DESC";
+        $sql2 = "SELECT  * FROM  TBL_MEMBER_BENEFITS WHERe RECORD_DATE BETWEEN '".$dateStart->format('Y-m-d')."' AND  '" .$dateEndreal->format('Y-m-d')."' AND EMP_ID = ".get_userID()." ORDER BY RECORD_DATE DESC";
         return DB::select(DB::raw($sql2));
     }
 
 
     function  getDB_TBL_MEMBER_BENEFITS(){
-        $sql2 = "SELECT TOP  12 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE ASC";
-        return DB::select(DB::raw($sql2));
+
+
+//        $sql2 = "SELECT TOP  12 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE DESC";
+//        return DB::select(DB::raw($sql2));
+
+        return DB::table('TBL_MEMBER_BENEFITS')->where('EMP_ID','=',get_userID())->orderBy('RECORD_DATE', 'desc')->take(12)->get();
     }
 
 
@@ -566,10 +582,12 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         $item1 = array();
         $item1Date = array();
 
-
+       $count = 0;
         foreach($netasset2 as $index => $arrItem2){
-            $item1[$index] =  ((float)$arrItem2->EMPLOYER_EARNING_2) +  ((float)$arrItem2->MEMBER_EARNING_4) ;
-            $item1Date[$index] = get_date_nodate($arrItem2->RECORD_DATE);
+
+            $item1[$count] =  ((float)$arrItem2->EMPLOYER_EARNING_2) +  ((float)$arrItem2->MEMBER_EARNING_4) ;
+            $item1Date[$count] = get_date_nodate($arrItem2->RECORD_DATE);
+            $count = $count +1;
         }
 
         //Graph 2
