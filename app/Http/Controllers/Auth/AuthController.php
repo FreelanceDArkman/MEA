@@ -74,7 +74,7 @@ class AuthController extends Controller
 
     public function ResetPassword(Request $request)
     {
-        $id =get_userID();
+        $id =  $request->input('emp_id');
 
         $netasset  = DB::table('TBL_USER')->Where('EMP_ID', '=' , $id)->first();
 
@@ -103,7 +103,7 @@ class AuthController extends Controller
 
         $result_login = $curl->getResult();
 
-        var_dump($netasset );
+//        var_dump($netasset );
 
         if($result_login->errCode != 0) {
             // login fail
@@ -198,13 +198,13 @@ class AuthController extends Controller
         } else {
 
 
-            session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
             if($result_login->result[0]->first_login_flag == "0"){
                 //echo "asdasd" . $result_login->result[0]->first_login_flag;
+//                session(['first_emp_id' => $filter1]);
                 return redirect()->to('firstlogin')->with('emp_id',$result_login->result[0]->emp_id);
             }else{
                 // logged in
-
+                session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
                 // echo  "hello";
                 return redirect()->intended('/profile');
             }
