@@ -136,7 +136,10 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
             $Isaccess = false;
         }
 
-//    var_dump($Isaccess);
+
+
+
+    var_dump($Isaccess);
 
 
         return view('frontend.pages.23p1')->with([

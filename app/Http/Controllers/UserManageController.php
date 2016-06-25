@@ -62,6 +62,8 @@ class UserManageController extends Controller
         );
         return \Response::download($file, 'employee_info.xls', $headers);
     }
+
+
     public function importdata(Request $request){
 
 

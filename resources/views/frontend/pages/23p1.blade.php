@@ -140,7 +140,7 @@
                                 </div>
 
 
-                                @if($Isaccess && get_user_access_status_flag() != 2)
+                                @if($Isaccess && (get_user_access_status_flag() == 2 || get_user_access_status_flag() == 0))
                                 <div class="row">
                                     <div class="col-md-12" style="padding: 0 100px 0 100px;">
 
@@ -152,7 +152,12 @@
                                 @endif
                             </div>
 
-                           @if($Isaccess && get_user_access_status_flag() != 2)
+                                   {{--{{get_user_access_status_flag()}}--}}
+                                        {{--&& get_user_access_status_flag() != 2--}}
+
+                                        {{--{{$Isaccess . "asdasd"}}--}}
+
+                           @if( $Isaccess && (get_user_access_status_flag() == 2 || get_user_access_status_flag() == 0))
                             <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}"  >
                                 <form action="{{ action('cumulativeController@InsertPlan') }}" id="sky-form1" class="sky-form" method="post">
                                     {!! csrf_field() !!}
@@ -223,10 +228,19 @@
                             </div>
 
                                 @else
+
+                               @if(get_user_access_status_flag() == 2)
                             <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                 <strong>สถานะของท่าน คือ สมาชิกแบบคงเงินหรือรับเงินเป็นงวด ไม่สามารถเปลี่ยนอัตราสะสมได้
                                 </strong>
                             </div>
+                                @else
+                                                <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
+                                                    <strong> * การเปลี่ยนแปลงและแก้ไขอัตราสะสม ทำได้ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือนและมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป </strong>
+                                                </div>
+                                            @endif
+
+
                             @endif
 
 

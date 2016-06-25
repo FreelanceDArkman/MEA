@@ -232,6 +232,9 @@ class TrendsController extends Controller
         $sorted2 =  asort($netasset);
 
 
+
+
+
 //        $sorted = collect($netasset2)->sortBy('RECORD_DATE');
 //
 //        $sorted->values()->all();

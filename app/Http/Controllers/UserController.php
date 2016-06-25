@@ -285,6 +285,8 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
         $status=$request->input('status');
 
 
+        $permission =  DB::table('TBL_PRIVILEGE')->where('USER_PRIVILEGE_ID',$group_id)->get();
+
         if($chk_expire == 1){
             $expire = "9999-12-31 00:00:00.000";
         }
@@ -295,7 +297,7 @@ USER_PRIVILEGE_ID,ACCESS_PERMISSIONS,FIRST_LOGIN_FLAG,LEAVE_FUND_GROUP_DATE
 
 
         $insert = "UPDATE TBL_USER SET EMAIL = '".$email."' , PHONE= '".$phone."' , ADDRESS='".$address."',FIRST_LOGIN_FLAG ='".$chk_firstlogin."',PASSWORD_EXPIRE_DATE='".$expire."',USER_PRIVILEGE_ID='".$group_id."',USER_STATUS_ID='".$status."'
-        ,LEAVE_FUND_GROUP_DATE= ".($retire== "" ? 'NULL': "'". $retire ."'" ).",RETURN_FUND_GROUP_DATE = ".($comeback== "" ? 'NULL': "'". $comeback . "'" )." ,LAST_MODIFY_DATE ='".$date."'  WHERE EMP_ID = '".$user_id."'";
+        ,LEAVE_FUND_GROUP_DATE= ".($retire== "" ? 'NULL': "'". $retire ."'" ).",RETURN_FUND_GROUP_DATE = ".($comeback== "" ? 'NULL': "'". $comeback . "'" )." ,LAST_MODIFY_DATE ='".$date."' , ACCESS_PERMISSIONS= '".$permission[0]->ACCESS_PERMISSIONS."'  WHERE EMP_ID = '".$user_id."'";
 
 
 
