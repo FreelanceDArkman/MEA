@@ -181,7 +181,7 @@
 
                             </fieldset>
                             <footer>
-                                <button type="submit"  class="btn btn-primary">ส่งข้อมูล
+                                <button type="button" id=“btn_form” class="btn btn-primary">ส่งข้อมูล
                                 </button>
                                 <button type="button" class="btn btn-default" onclick="window.history.back();">
                                     ยกเลิก
@@ -238,113 +238,96 @@
                 return arg != value;
             }, "Please Choose one");
 
-            var $registerForm = $("#smart-form-register").validate({
 
 
 
-                // Rules for form validation
-                rules : {
-                    plan_id : {
-                        required : true,
+            $("#btn_form").on('click',function(){
+
+                var $registerForm = $("#smart-form-register").validate({
+
+                    rules : {
+                        plan_id : {
+                            required : true,
+
+                        },
+                        plan_name : {
+                            required : true
+
+                        },
+                        EQUITY_MIN : {
+                            required : true,
+                            number : true,
+                        },
+                        EQUITY_MAX : {
+                            required : true,
+                            number : true,
+                        },
+                        DEBT_MIN : {
+                            required : true,
+                            number : true,
+                        },
+                        DEBT_MAX : {
+                            required : true,
+                            number : true,
+                        }
+
 
                     },
-                    plan_name : {
-                        required : true
 
-                    },
-                    EQUITY_MIN : {
-                        required : true,
-                        number : true,
-                    },
-                    EQUITY_MAX : {
-                        required : true,
-                        number : true,
-                    },
-                    DEBT_MIN : {
-                        required : true,
-                        number : true,
-                    },
-                    DEBT_MAX : {
-                        required : true,
-                        number : true,
+                    errorPlacement : function(error, element) {
+                        error.insertAfter(element.parent());
+
+//                    alert("error");
                     }
+                });
 
+                if($registerForm.valid()){
+                    var plan_id = $("#plan_id").val();
+                    var plan_name = $("#plan_name").val();
+                    var EQUITY_MIN= $("#EQUITY_MIN").val();
 
-                },
+                    var EQUITY_MAX= $("#EQUITY_MAX").val();
+                    var DEBT_MIN= $("#DEBT_MIN").val();
 
-                // Messages for form validation
-//                messages : {
+                    var DEBT_MAX= $("#DEBT_MAX").val();
+                    var plan_start= $("#hd_plan_start").val();
+                    var plan_end= $("#hd_plan_end").val();
 
-//
-//                },
-                // Ajax form submition
-                submitHandler: function(form)
-                {
-                    $(form).ajaxSubmit(
-                            {
-//                        beforeSend: function()
-//                        {
-//                            alert('no');
-//                        },
-                                success: function()
-                                {
-//                             alert($("#hd_retire").val());
-
-                                    var plan_id = $("#plan_id").val();
-                                    var plan_name = $("#plan_name").val();
-                                    var EQUITY_MIN= $("#EQUITY_MIN").val();
-
-                                    var EQUITY_MAX= $("#EQUITY_MAX").val();
-                                    var DEBT_MIN= $("#DEBT_MIN").val();
-
-                                    var DEBT_MAX= $("#DEBT_MAX").val();
-                                    var plan_start= $("#hd_plan_start").val();
-                                    var plan_end= $("#hd_plan_end").val();
-
-                                    var plan_status =  $('input[name=plan_status]:checked').val();
+                    var plan_status =  $('input[name=plan_status]:checked').val();
 //                                    $(".plan_status").val();
-                                    var jsondata = {
-                                        plan_id:plan_id,
-                                        plan_name :plan_name,
-                                        EQUITY_MIN:EQUITY_MIN,
-                                        EQUITY_MAX:EQUITY_MAX,
-                                        DEBT_MIN:DEBT_MIN,
-                                        DEBT_MAX:DEBT_MAX,
-                                        plan_start:plan_start,
-                                        plan_end:plan_end,
-                                        plan_status :plan_status
-                                    };
+                    var jsondata = {
+                        plan_id:plan_id,
+                        plan_name :plan_name,
+                        EQUITY_MIN:EQUITY_MIN,
+                        EQUITY_MAX:EQUITY_MAX,
+                        DEBT_MIN:DEBT_MIN,
+                        DEBT_MAX:DEBT_MAX,
+                        plan_start:plan_start,
+                        plan_end:plan_end,
+                        plan_status :plan_status
+                    };
 
 
 //                            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
-                                    MeaAjax(jsondata,"/admin/chooseplan/edits",function(data){
-                                        if(data.success){
+                    MeaAjax(jsondata,"/admin/chooseplan/edits",function(data){
+                        if(data.success){
 
-                                            AlertSuccess("บันทึกแผนการลงทุนเรียบร้อยแล้ว",function(){
+                            AlertSuccess("บันทึกแผนการลงทุนเรียบร้อยแล้ว",function(){
 
-                                                window.location.href = "/admin/chooseplan/edit/" + plan_id;
-                                            });
-
-                                        }else {
-                                            Alert("",data.html,null,null);
-                                        }
-                                    });
-
-                                    return false;
-                                }
+                                window.location.href = "/admin/chooseplan/edit/" + plan_id;
                             });
-                },
 
-                // Do not change code below
-                errorPlacement : function(error, element) {
-                    error.insertAfter(element.parent());
+                        }else {
+                            Alert("",data.html,null,null);
+                        }
+                    });
 
-//                    alert("error");
+                    return false;
                 }
+
+                return false;
+
             });
-
-
-
 
             meaDatepicker("plan_start","plan_end");
 

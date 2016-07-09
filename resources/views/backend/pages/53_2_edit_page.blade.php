@@ -309,7 +309,7 @@
                                 </fieldset>
 
                                 <footer>
-                                    <button type="submit"  class="btn btn-primary">ส่งข้อมูล
+                                    <button type="button" id=“btn_form”  class="btn btn-primary">ส่งข้อมูล
                                     </button>
                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                         ยกเลิก
@@ -443,149 +443,126 @@
                 return arg != value;
             }, "Please Choose one");
 
-            var $registerForm = $("#smart-form-register").validate({
 
 
 
-                // Rules for form validation
-                rules : {
-                    NEWS_TOPIC_ID : {
-                        required : true,
+            $("#btn_form").on('click',function(){
+
+
+                var $registerForm = $("#smart-form-register").validate({
+
+                    rules : {
+                        NEWS_TOPIC_ID : {
+                            required : true,
+
+                        },
+                        FILE_NAME : {
+                            required : true
+
+                        }
+
 
                     },
-                    FILE_NAME : {
-                        required : true
 
+                    errorPlacement : function(error, element) {
+                        error.insertAfter(element.parent());
+
+                    }
+                });
+
+                if($registerForm.valid()){
+
+                    var dataimport = new FormData();
+
+                    var NEWS_CATE_ID = $("#NEWS_CATE_ID_select").val();
+                    var NEWS_TOPIC_ID = $("#NEWS_TOPIC_ID").val();
+                    var FILE_NAME= $("#FILE_NAME").val();
+
+                    var NEWS_TOPIC_FLAG =  $('input[name=NEWS_TOPIC_FLAG]:checked').val();
+                    var START_DATE= $("#hd_START_DATE").val();
+                    var EXPIRE_DATE= $("#hd_EXPIRE_DATE").val();
+
+                    var NEWS_TOPIC_KEYWORD = $("#NEWS_TOPIC_KEYWORD").val();
+
+                    var NEWS_TOPIC_DETAIL = $('.summernote').code();
+
+
+                    var Notice = $('input[name=Notice]:checked').val();
+                    var Notice_start_DATE = $("#hd_Notice_start_DATE").val();
+                    var Notice_End_DATE = $("#hd_Notice_End_DATE").val();
+                    var noti_message = $("#noti_message").val();
+
+                    var THUMBNAIL = $("#thumb_current").val();
+
+
+                    dataimport.append('NEWS_CATE_ID',NEWS_CATE_ID);
+                    dataimport.append('NEWS_TOPIC_ID',NEWS_TOPIC_ID);
+                    dataimport.append('FILE_NAME',FILE_NAME);
+                    dataimport.append('NEWS_TOPIC_FLAG',NEWS_TOPIC_FLAG);
+                    dataimport.append('START_DATE',START_DATE);
+                    dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
+                    dataimport.append('NEWS_TOPIC_DETAIL',NEWS_TOPIC_DETAIL);
+                    dataimport.append('NEWS_TOPIC_KEYWORD',NEWS_TOPIC_KEYWORD);
+
+
+                    dataimport.append('Notice',Notice);
+                    dataimport.append('Notice_start_DATE',Notice_start_DATE);
+                    dataimport.append('Notice_End_DATE',Notice_End_DATE);
+                    dataimport.append('noti_message',noti_message);
+
+                    dataimport.append('THUMBNAIL',THUMBNAIL);
+
+
+
+
+                    var filesPDF = $("#importpdf").get(0).files;
+
+                    var filethumbnail = $("#thumbnail").get(0).files;
+
+                    if (filesPDF.length > 0) {
+                        dataimport.append("filesPDF", filesPDF[0]);
+                    }
+                    if (filethumbnail.length > 0) {
+                        dataimport.append("filethumbnail", filethumbnail[0]);
                     }
 
 
-                },
-                submitHandler: function(form)
-                {
-                    $(form).ajaxSubmit(
-                            {
-//                        beforeSend: function()
-//                        {
-//                            Alert("",data.html,null,null);
-//                        },
-                                success: function()
-                                {
-//                             alert($("#hd_retire").val());
-
-
-                                    var dataimport = new FormData();
-
-                                    var NEWS_CATE_ID = $("#NEWS_CATE_ID_select").val();
-                                    var NEWS_TOPIC_ID = $("#NEWS_TOPIC_ID").val();
-                                    var FILE_NAME= $("#FILE_NAME").val();
-
-                                    var NEWS_TOPIC_FLAG =  $('input[name=NEWS_TOPIC_FLAG]:checked').val();
-                                    var START_DATE= $("#hd_START_DATE").val();
-                                    var EXPIRE_DATE= $("#hd_EXPIRE_DATE").val();
-
-                                    var NEWS_TOPIC_KEYWORD = $("#NEWS_TOPIC_KEYWORD").val();
-
-                                    var NEWS_TOPIC_DETAIL = $('.summernote').code();
-
-
-                                    var Notice = $('input[name=Notice]:checked').val();
-                                    var Notice_start_DATE = $("#hd_Notice_start_DATE").val();
-                                    var Notice_End_DATE = $("#hd_Notice_End_DATE").val();
-                                    var noti_message = $("#noti_message").val();
-
-                                    var THUMBNAIL = $("#thumb_current").val();
-
-
-                                    dataimport.append('NEWS_CATE_ID',NEWS_CATE_ID);
-                                    dataimport.append('NEWS_TOPIC_ID',NEWS_TOPIC_ID);
-                                    dataimport.append('FILE_NAME',FILE_NAME);
-                                    dataimport.append('NEWS_TOPIC_FLAG',NEWS_TOPIC_FLAG);
-                                    dataimport.append('START_DATE',START_DATE);
-                                    dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
-                                    dataimport.append('NEWS_TOPIC_DETAIL',NEWS_TOPIC_DETAIL);
-                                    dataimport.append('NEWS_TOPIC_KEYWORD',NEWS_TOPIC_KEYWORD);
-
-
-                                    dataimport.append('Notice',Notice);
-                                    dataimport.append('Notice_start_DATE',Notice_start_DATE);
-                                    dataimport.append('Notice_End_DATE',Notice_End_DATE);
-                                    dataimport.append('noti_message',noti_message);
-
-                                    dataimport.append('THUMBNAIL',THUMBNAIL);
-
-
-
-
-                                    var filesPDF = $("#importpdf").get(0).files;
-
-                                    var filethumbnail = $("#thumbnail").get(0).files;
-
-                                    if (filesPDF.length > 0) {
-                                        dataimport.append("filesPDF", filesPDF[0]);
-                                    }
-                                    if (filethumbnail.length > 0) {
-                                        dataimport.append("filethumbnail", filethumbnail[0]);
-                                    }
-
-
 //                                        alert(filesPDF);
-                                    $.ajax({
+                    $.ajax({
 
-                                        type: 'POST', // or post?
+                        type: 'POST', // or post?
 //                dataType: 'json',
-                                        contentType: false,
-                                        processData: false,
-                                        url: '/admin/news/edits',
-                                        data: dataimport,
+                        contentType: false,
+                        processData: false,
+                        url: '/admin/news/edits',
+                        data: dataimport,
 
-                                        success: function(data){
+                        success: function(data){
 
-                                            if(data.success){
+                            if(data.success){
 
-                                                AlertSuccess("แก้ไขหัวข้อข่าวเรียบร้อยแล้ว",function(){
+                                AlertSuccess("แก้ไขหัวข้อข่าวเรียบร้อยแล้ว",function(){
 
-                                                    window.location.href = "/admin/news";
-                                                });
+                                    window.location.href = "/admin/news";
+                                });
 
-                                            }else {
-                                                Alert("",data.html,null,null);
-                                            }
+                            }else {
+                                Alert("",data.html,null,null);
+                            }
 
 //                Alert('OK', "ข้อมูลได้ถูก update เรียบร้อยแล้ว");
 
-                                        },
-                                        error: function(xhr, textStatus, thrownError) {
+                        },
+                        error: function(xhr, textStatus, thrownError) {
 
-                                        }
-                                    });
-//                            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
-//                                    MeaAjax(jsondata,"add",function(data){
-//                                        if(data.success){
-//
-//                                            AlertSuccess("บันทึกหมวดหมู่ข่าวเรียบร้อยแล้ว",function(){
-//
-//                                                window.location.href = "/admin/newstopic";
-//                                            });
-//
-//                                        }else {
-//                                            Alert("",data.html,null,null);
-//                                        }
-//                                    });
+                        }
+                    });
 
-                                    return false;
-                                }
-                            });
-                },
-
-                // Do not change code below
-                errorPlacement : function(error, element) {
-                    error.insertAfter(element.parent());
-
-//                    alert("error");
+                    return false;
                 }
+                return false;
+
             });
-
-
 
 
             meaDatepicker("START_DATE","EXPIRE_DATE");

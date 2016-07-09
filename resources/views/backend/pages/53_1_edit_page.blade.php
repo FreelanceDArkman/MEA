@@ -190,7 +190,7 @@
 
                             </fieldset>
                             <footer>
-                                <button type="submit"  class="btn btn-primary">ส่งข้อมูล
+                                <button type="button" id="btn_form" class="btn btn-primary">ส่งข้อมูล
                                 </button>
                                 <button type="button" class="btn btn-default" onclick="window.history.back();">
                                     ยกเลิก
@@ -277,100 +277,84 @@
                 return arg != value;
             }, "Please Choose one");
 
-            var $registerForm = $("#smart-form-register").validate({
 
 
 
-                // Rules for form validation
-                rules : {
-                    NEWS_CATE_ID : {
-                        required : true,
 
+            $("#btn_form").on('click',function(){
+
+
+                var $registerForm = $("#smart-form-register").validate({
+
+                    rules : {
+                        NEWS_CATE_ID : {
+                            required : true,
+
+                        },
+                        NEWS_CATE_NAME : {
+                            required : true
+
+                        },
+                        MENU_GROUP_ID :{
+                            valueNotEquals: "default"
+                        },
+                        MENU_ID :{
+                            valueNotEquals: "default"
+                        }
                     },
-                    NEWS_CATE_NAME : {
-                        required : true
 
-                    },
-                    MENU_GROUP_ID :{
-                        valueNotEquals: "default"
-                    },
-                    MENU_ID :{
-                        valueNotEquals: "default"
+                    errorPlacement : function(error, element) {
+                        error.insertAfter(element.parent());
+
                     }
+                });
+
+
+                if($registerForm.valid()){
+                    var NEWS_CATE_ID = $("#NEWS_CATE_ID").val();
+                    var NEWS_CATE_NAME = $("#NEWS_CATE_NAME").val();
+                    var NEWS_CATE_FLAG= $(".NEWS_CATE_FLAG").val();
+
+                    var MENU_GROUP_ID= $("#MENU_GROUP_ID").val();
+                    var MENU_ID= $("#MENU_ID").val();
+
+                    var START_DATE= $("#hd_START_DATE").val();
+                    var EXPIRE_DATE= $("#hd_EXPIRE_DATE").val();
 
 
 
-                },
-
-                // Messages for form validation
-//                messages : {
-
-//
-//                },
-                // Ajax form submition
-                submitHandler: function(form)
-                {
-                    $(form).ajaxSubmit(
-                            {
-//                        beforeSend: function()
-//                        {
-//                            alert('no');
-//                        },
-                                success: function()
-                                {
-//                             alert($("#hd_retire").val());
-
-                                    var NEWS_CATE_ID = $("#NEWS_CATE_ID").val();
-                                    var NEWS_CATE_NAME = $("#NEWS_CATE_NAME").val();
-                                    var NEWS_CATE_FLAG= $(".NEWS_CATE_FLAG").val();
-
-                                    var MENU_GROUP_ID= $("#MENU_GROUP_ID").val();
-                                    var MENU_ID= $("#MENU_ID").val();
-
-                                    var START_DATE= $("#hd_START_DATE").val();
-                                    var EXPIRE_DATE= $("#hd_EXPIRE_DATE").val();
-
-
-
-                                    var jsondata = {
-                                        NEWS_CATE_ID:NEWS_CATE_ID,
-                                        NEWS_CATE_NAME :NEWS_CATE_NAME,
-                                        NEWS_CATE_FLAG:NEWS_CATE_FLAG,
-                                        START_DATE:START_DATE,
-                                        EXPIRE_DATE:EXPIRE_DATE,
-                                        MENU_GROUP_ID :MENU_GROUP_ID,
-                                        MENU_ID :MENU_ID
-                                    };
+                    var jsondata = {
+                        NEWS_CATE_ID:NEWS_CATE_ID,
+                        NEWS_CATE_NAME :NEWS_CATE_NAME,
+                        NEWS_CATE_FLAG:NEWS_CATE_FLAG,
+                        START_DATE:START_DATE,
+                        EXPIRE_DATE:EXPIRE_DATE,
+                        MENU_GROUP_ID :MENU_GROUP_ID,
+                        MENU_ID :MENU_ID
+                    };
 
 
 //                            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
-                                    MeaAjax(jsondata,"/admin/newstopic/edits",function(data){
-                                        if(data.success){
+                    MeaAjax(jsondata,"/admin/newstopic/edits",function(data){
+                        if(data.success){
 
-                                            AlertSuccess("บันทึกหมวดหมู่ข่าวเรียบร้อยแล้ว",function(){
+                            AlertSuccess("บันทึกหมวดหมู่ข่าวเรียบร้อยแล้ว",function(){
 
-                                                window.location.href = "/admin/newstopic";
-                                            });
-
-                                        }else {
-                                            Alert("",data.html,null,null);
-                                        }
-                                    });
-
-                                    return false;
-                                }
+                                window.location.href = "/admin/newstopic";
                             });
-                },
 
-                // Do not change code below
-                errorPlacement : function(error, element) {
-                    error.insertAfter(element.parent());
+                        }else {
+                            Alert("",data.html,null,null);
+                        }
+                    });
 
-//                    alert("error");
+                    return false;
                 }
+
+                return false;
+
+
             });
-
-
 
 
             meaDatepicker("START_DATE","EXPIRE_DATE");

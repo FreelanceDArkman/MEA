@@ -139,7 +139,7 @@
                             </div>
                             <!-- wizard form starts here -->
 
-                            <div class="smart-form"><footer> <button type="submit" href="#" class="btn bg-color-green txt-color-white"><i class="fa fa-plus"></i> บันทึก</button></footer></div>
+                            <div class="smart-form"><footer> <button type="btn_form" id=“btn_form” href="#" class="btn bg-color-green txt-color-white"><i class="fa fa-plus"></i> บันทึก</button></footer></div>
                         </div>
 
                     </form>
@@ -635,121 +635,108 @@
                                 Alert("Error!","กรุณาใส่ข้อมูลใน Step 1 ก่อน ");
                             }
 
-
-
-
-
                     }
                 }
 
             });
 
-            var $registerForm = $("#risk_form").validate({
 
+            $("#btn_form").on('click',function(){
+                var $registerForm = $("#risk_form").validate({
 
+                    rules: {
 
-                // Rules for form validation
-                rules: {
+                        QUIZ_ID: {
+                            required: true,
+                            number: true
+                        },
+                        QUIZ_DESC: {
+                            required: true
+                        }
 
-                    QUIZ_ID: {
-                        required: true,
-                        number: true
                     },
-                    QUIZ_DESC: {
-                        required: true
+
+                    errorPlacement : function(error, element) {
+                        error.insertAfter(element.parent());
+
                     }
+                });
 
-                },
-                submitHandler: function(form)
-                {
-                    $(form).ajaxSubmit(
-                            {
-//                        beforeSend: function()
-//                        {
-//                            Alert("",data.html,null,null);
-//                        },
-                                success: function()
-                                {
-//                             alert($("#hd_retire").val());
+                if($registerForm.valid()){
+                    var dataimport = new FormData();
 
-
-                                    var dataimport = new FormData();
-
-                                    var QUIZ_ID = $("#QUIZ_ID").val();
-                                    var QUIZ_DESC = $("#QUIZ_DESC").val();
+                    var QUIZ_ID = $("#QUIZ_ID").val();
+                    var QUIZ_DESC = $("#QUIZ_DESC").val();
 
 
 //                                    var QUIZ_ACTIVE_FLAG = $('input[name=QUIZ_ACTIVE_FLAG]:checked').val();
-                                    var QUIZ_ACTIVE_DATE= $("#hd_QUIZ_ACTIVE_DATE").val();
-                                    var QUIZ_EXPIRE_DATE= $("#hd_QUIZ_EXPIRE_DATE").val();
+                    var QUIZ_ACTIVE_DATE= $("#hd_QUIZ_ACTIVE_DATE").val();
+                    var QUIZ_EXPIRE_DATE= $("#hd_QUIZ_EXPIRE_DATE").val();
 
 
-                                    var QUIZ_ACTIVE_FLAG ='1';
+                    var QUIZ_ACTIVE_FLAG ='1';
 //                                    var QUIZ_ACTIVE_DATE= '2000-01-01';
 //                                    var QUIZ_EXPIRE_DATE= '9999-12-31';
-                                    var isupdate = false;
+                    var isupdate = false;
 
-                                    if($("#quisid").data('update')){
-                                        isupdate = true;
-                                    }
-
-
-
-                                    dataimport.append('QUIZ_ID',QUIZ_ID);
-                                    dataimport.append('QUIZ_DESC',QUIZ_DESC);
-                                    dataimport.append('QUIZ_ACTIVE_FLAG',QUIZ_ACTIVE_FLAG);
-                                    dataimport.append('QUIZ_ACTIVE_DATE',QUIZ_ACTIVE_DATE);
-                                    dataimport.append('QUIZ_EXPIRE_DATE',QUIZ_EXPIRE_DATE);
-                                    dataimport.append('isupdate',isupdate);
+                    if($("#quisid").data('update')){
+                        isupdate = true;
+                    }
 
 
 
+                    dataimport.append('QUIZ_ID',QUIZ_ID);
+                    dataimport.append('QUIZ_DESC',QUIZ_DESC);
+                    dataimport.append('QUIZ_ACTIVE_FLAG',QUIZ_ACTIVE_FLAG);
+                    dataimport.append('QUIZ_ACTIVE_DATE',QUIZ_ACTIVE_DATE);
+                    dataimport.append('QUIZ_EXPIRE_DATE',QUIZ_EXPIRE_DATE);
+                    dataimport.append('isupdate',isupdate);
 
-                                    $.ajax({
 
-                                        type: 'POST', // or post?
+
+
+                    $.ajax({
+
+                        type: 'POST', // or post?
 //                dataType: 'json',
-                                        contentType: false,
-                                        processData: false,
-                                        url: '/admin/risk/ishave',
-                                        data: dataimport,
+                        contentType: false,
+                        processData: false,
+                        url: '/admin/risk/ishave',
+                        data: dataimport,
 
-                                        success: function(data){
+                        success: function(data){
 
-                                            if(data.success){
+                            if(data.success){
 
-                                                $("#quisid").val(QUIZ_ID);
-                                                //$('html').append('<input type="hidden" value=""+QUIZ_ID+"" />')
+                                $("#quisid").val(QUIZ_ID);
+                                //$('html').append('<input type="hidden" value=""+QUIZ_ID+"" />')
 
-                                                AlertSuccess("บันทึกหมวดหมู่ถามตอบเรียบร้อยแล้ว",function(){
-                                                    window.location.href = "/admin/risk/edit/" +QUIZ_ID ;
-                                                });
+                                AlertSuccess("บันทึกหมวดหมู่ถามตอบเรียบร้อยแล้ว",function(){
+                                    window.location.href = "/admin/risk/edit/" +QUIZ_ID ;
+                                });
 
-                                            }else {
-                                                Alert("",data.html,null,null);
-                                            }
-
-
-
-                                        },
-                                        error: function(xhr, textStatus, thrownError) {
-
-                                        }
-                                    });
+                            }else {
+                                Alert("",data.html,null,null);
+                            }
 
 
-                                    return false;
-                                }
-                            });
-                },
 
-                // Do not change code below
-                errorPlacement : function(error, element) {
-                    error.insertAfter(element.parent());
+                        },
+                        error: function(xhr, textStatus, thrownError) {
 
-//                    alert("error");
+                        }
+                    });
+
+
+                    return false;
                 }
+
+                return false;
+
             });
+
+
+
 
 
 
@@ -797,7 +784,7 @@
                 }
             });
 
-$("#btn_save_question").on('click',function(){
+          $("#btn_save_question").on('click',function(){
 
 
     var vlid = $("#form_step_3").valid();

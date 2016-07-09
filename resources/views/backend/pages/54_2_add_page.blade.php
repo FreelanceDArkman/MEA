@@ -224,7 +224,7 @@
 
 
                                 <footer>
-                                    <button type="submit"  class="btn btn-primary">ส่งข้อมูล
+                                    <button type="button" id=“btn_form” class="btn btn-primary">ส่งข้อมูล
                                     </button>
                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                         ยกเลิก
@@ -296,144 +296,128 @@
                     sendFile(files[0], editor, welEditable);
                 }
 
-
-
-
             });
 
             $.validator.addMethod("valueNotEquals", function(value, element, arg){
                 return arg != value;
             }, "Please Choose one");
 
-            var $registerForm = $("#smart-form-register").validate({
 
 
-                // Rules for form validation
-                rules : {
-                    FAQ_QUESTION_ID : {
-                        required : true,
+
+            $("#btn_form").on('click',function(){
+
+                var $registerForm = $("#smart-form-register").validate({
+
+
+                    // Rules for form validation
+                    rules : {
+                        FAQ_QUESTION_ID : {
+                            required : true,
+                        },
+                        FAQ_QUESTION_DETAIL : {
+                            required : true
+                        },
+                        FAQ_ANSWER_ID : {
+                            required : true,
+                        },
+                        FAQ_ANSWER_DETAIL : {
+                            required : true,
+                        },
+                        FAQ_QUESTION_KEYWORD : {
+                            required : true,
+                        },
+                        FAQ_ANSWER_KEYWORD : {
+                            required : true,
+                        },
+
+
                     },
-                    FAQ_QUESTION_DETAIL : {
-                        required : true
-                    },
-                    FAQ_ANSWER_ID : {
-                        required : true,
-                    },
-                    FAQ_ANSWER_DETAIL : {
-                        required : true,
-                    },
-                    FAQ_QUESTION_KEYWORD : {
-                        required : true,
-                    },
-                    FAQ_ANSWER_KEYWORD : {
-                        required : true,
-                    },
+
+                    errorPlacement : function(error, element) {
+                        error.insertAfter(element.parent());
+
+                    }
+                });
 
 
-                },
-                submitHandler: function(form)
-                {
-                    $(form).ajaxSubmit(
-                            {
-//                        beforeSend: function()
-//                        {
-//                            Alert("",data.html,null,null);
-//                        },
-                                success: function()
-                                {
+                if($registerForm.valid()){
+
+                    var dataimport = new FormData();
+
+                    var FAQ_CATE_ID = $("#NEWS_CATE_ID_select").val();
+                    var FAQ_QUESTION_ID = $("#FAQ_QUESTION_ID").val();
+                    var FAQ_QUESTION_DETAIL= $("#FAQ_QUESTION_DETAIL").val();
+                    var FAQ_ANSWER_ID= $("#FAQ_ANSWER_ID").val();
+
+                    var FAQ_ANSWER_DETAIL= $("#FAQ_ANSWER_DETAIL").code();
 
 
+                    var FAQ_TOPIC_FLAG =  $('input[name=FAQ_TOPIC_FLAG]:checked').val();
+                    var START_DATE= $("#hd_START_DATE").val();
+                    var EXPIRE_DATE= $("#hd_EXPIRE_DATE").val();
 
-                                    var dataimport = new FormData();
-
-                                    var FAQ_CATE_ID = $("#NEWS_CATE_ID_select").val();
-                                    var FAQ_QUESTION_ID = $("#FAQ_QUESTION_ID").val();
-                                    var FAQ_QUESTION_DETAIL= $("#FAQ_QUESTION_DETAIL").val();
-                                    var FAQ_ANSWER_ID= $("#FAQ_ANSWER_ID").val();
-
-                                    var FAQ_ANSWER_DETAIL= $("#FAQ_ANSWER_DETAIL").code();
-
-//                                    var FAQ_ANSWER_DETAIL= $("#FAQ_ANSWER_DETAIL").val();
-
-                                    var FAQ_TOPIC_FLAG =  $('input[name=FAQ_TOPIC_FLAG]:checked').val();
-                                    var START_DATE= $("#hd_START_DATE").val();
-                                    var EXPIRE_DATE= $("#hd_EXPIRE_DATE").val();
-
-                                    var FAQ_QUESTION_KEYWORD = $("#FAQ_QUESTION_KEYWORD").val();
-                                    var FAQ_ANSWER_KEYWORD = $("#FAQ_ANSWER_KEYWORD").val();
+                    var FAQ_QUESTION_KEYWORD = $("#FAQ_QUESTION_KEYWORD").val();
+                    var FAQ_ANSWER_KEYWORD = $("#FAQ_ANSWER_KEYWORD").val();
 
 
 
 
-                                    dataimport.append('FAQ_CATE_ID',FAQ_CATE_ID);
-                                    dataimport.append('FAQ_QUESTION_ID',FAQ_QUESTION_ID);
-                                    dataimport.append('FAQ_QUESTION_DETAIL',FAQ_QUESTION_DETAIL);
-                                    dataimport.append('FAQ_ANSWER_ID',FAQ_ANSWER_ID);
-                                    dataimport.append('FAQ_ANSWER_DETAIL',FAQ_ANSWER_DETAIL);
-                                    dataimport.append('FAQ_TOPIC_FLAG',FAQ_TOPIC_FLAG);
-                                    dataimport.append('START_DATE',START_DATE);
-                                    dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
+                    dataimport.append('FAQ_CATE_ID',FAQ_CATE_ID);
+                    dataimport.append('FAQ_QUESTION_ID',FAQ_QUESTION_ID);
+                    dataimport.append('FAQ_QUESTION_DETAIL',FAQ_QUESTION_DETAIL);
+                    dataimport.append('FAQ_ANSWER_ID',FAQ_ANSWER_ID);
+                    dataimport.append('FAQ_ANSWER_DETAIL',FAQ_ANSWER_DETAIL);
+                    dataimport.append('FAQ_TOPIC_FLAG',FAQ_TOPIC_FLAG);
+                    dataimport.append('START_DATE',START_DATE);
+                    dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
 
-                                    dataimport.append('FAQ_QUESTION_KEYWORD',FAQ_QUESTION_KEYWORD);
-                                    dataimport.append('FAQ_ANSWER_KEYWORD',FAQ_ANSWER_KEYWORD);
+                    dataimport.append('FAQ_QUESTION_KEYWORD',FAQ_QUESTION_KEYWORD);
+                    dataimport.append('FAQ_ANSWER_KEYWORD',FAQ_ANSWER_KEYWORD);
 
 
 
-                                    $.ajax({
+                    $.ajax({
 
-                                        type: 'POST', // or post?
+                        type: 'POST', // or post?
 //                dataType: 'json',
-                                        contentType: false,
-                                        processData: false,
-                                        url: 'add',
-                                        data: dataimport,
+                        contentType: false,
+                        processData: false,
+                        url: 'add',
+                        data: dataimport,
 
-                                        success: function(data){
+                        success: function(data){
 
-                                            if(data.success){
+                            if(data.success){
 
-                                                AlertSuccess("บันทึกหัวข้อถาม-ตอบเรียบร้อยแล้ว",function(){
+                                AlertSuccess("บันทึกหัวข้อถาม-ตอบเรียบร้อยแล้ว",function(){
 
-                                                    window.location.href = "/admin/faqtopic";
-                                                });
+                                    window.location.href = "/admin/faqtopic";
+                                });
 
-                                            }else {
-                                                Alert("",data.html,null,null);
-                                            }
+                            }else {
+                                Alert("",data.html,null,null);
+                            }
 
+                        },
+                        error: function(xhr, textStatus, thrownError) {
 
-
-                                        },
-                                        error: function(xhr, textStatus, thrownError) {
-
-                                        }
-                                    });
+                        }
+                    });
 
 
-                                    return false;
-                                }
-                            });
-                },
+                    return false;
 
-                // Do not change code below
-                errorPlacement : function(error, element) {
-                    error.insertAfter(element.parent());
-
-//                    alert("error");
                 }
-            });
+                return false;
 
+            });
 
 
             meaDatepicker("START_DATE","EXPIRE_DATE");
 
             meaDatepicker("EXPIRE_DATE");
-//            meaDatepicker("comeback");
-//
-//
-//            meaDatepicker("retire");
-//
-//            meaDatepicker("comeback");
+
 
 
 

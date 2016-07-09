@@ -195,7 +195,7 @@
 
 
                                 <footer>
-                                    <button type="submit"  class="btn btn-primary">ส่งข้อมูล
+                                    <button type="button" id=“btn_form”  class="btn btn-primary">ส่งข้อมูล
                                     </button>
                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                         ยกเลิก
@@ -251,113 +251,109 @@
                 return arg != value;
             }, "Please Choose one");
 
-            var $registerForm = $("#smart-form-register").validate({
 
 
 
-                // Rules for form validation
-                rules : {
-                    FAQ_CATE_ID : {
-                        required : true,
-                        number : true
+            $("#btn_form").on('click',function(){
+
+
+                var $registerForm = $("#smart-form-register").validate({
+
+
+
+                    // Rules for form validation
+                    rules : {
+                        FAQ_CATE_ID : {
+                            required : true,
+                            number : true
+
+                        },
+                        FAQ_CATE_NAME : {
+                            required : true
+
+                        },
+                        FAQ_CATE_KEYWORD : {
+                            required : true
+                        }
+
 
                     },
-                    FAQ_CATE_NAME : {
-                        required : true
 
-                    },
-                    FAQ_CATE_KEYWORD : {
-                        required : true
-                    }
-
-
-                },
-                submitHandler: function(form)
-                {
-                    $(form).ajaxSubmit(
-                            {
-//                        beforeSend: function()
-//                        {
-//                            Alert("",data.html,null,null);
-//                        },
-                                success: function()
-                                {
-//                             alert($("#hd_retire").val());
-
-
-                                    var dataimport = new FormData();
-
-                                    var FAQ_CATE_ID = $("#FAQ_CATE_ID").val();
-                                    var FAQ_CATE_NAME = $("#FAQ_CATE_NAME").val();
-
-
-                                    var FAQ_CATE_FLAG = $('input[name=FAQ_CATE_FLAG]:checked').val();
-                                    var START_DATE= $("#hd_START_DATE").val();
-                                    var EXPIRE_DATE= $("#hd_EXPIRE_DATE").val();
-
-                                    var FAQ_CATE_KEYWORD = $("#FAQ_CATE_KEYWORD").val();
-
-                                    var FAQ_CONTACT_DEPT = $("#FAQ_CONTACT_DEPT").val();
-                                    var FAQ_CONTACT_PHONE = $("#FAQ_CONTACT_PHONE").val();
-
-
-
-
-                                    dataimport.append('FAQ_CATE_ID',FAQ_CATE_ID);
-                                    dataimport.append('FAQ_CATE_NAME',FAQ_CATE_NAME);
-                                    dataimport.append('FAQ_CATE_FLAG',FAQ_CATE_FLAG);
-                                    dataimport.append('START_DATE',START_DATE);
-                                    dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
-                                    dataimport.append('FAQ_CATE_KEYWORD',FAQ_CATE_KEYWORD);
-                                    dataimport.append('FAQ_CONTACT_DEPT',FAQ_CONTACT_DEPT);
-                                    dataimport.append('FAQ_CONTACT_PHONE',FAQ_CONTACT_PHONE);
-
-
-                                    $.ajax({
-
-                                        type: 'POST', // or post?
-//                dataType: 'json',
-                                        contentType: false,
-                                        processData: false,
-                                        url: 'add',
-                                        data: dataimport,
-
-                                        success: function(data){
-
-                                            if(data.success){
-
-                                                AlertSuccess("บันทึกหมวดหมู่ถามตอบเรียบร้อยแล้ว",function(){
-
-                                                    window.location.href = "/admin/faqcate";
-                                                });
-
-                                            }else {
-                                                Alert("",data.html,null,null);
-                                            }
-
-
-
-                                        },
-                                        error: function(xhr, textStatus, thrownError) {
-
-                                        }
-                                    });
-
-
-                                    return false;
-                                }
-                            });
-                },
-
-                // Do not change code below
-                errorPlacement : function(error, element) {
-                    error.insertAfter(element.parent());
+                    errorPlacement : function(error, element) {
+                        error.insertAfter(element.parent());
 
 //                    alert("error");
+                    }
+                });
+
+
+                if($registerForm.valid()){
+
+                    var dataimport = new FormData();
+
+                    var FAQ_CATE_ID = $("#FAQ_CATE_ID").val();
+                    var FAQ_CATE_NAME = $("#FAQ_CATE_NAME").val();
+
+
+                    var FAQ_CATE_FLAG = $('input[name=FAQ_CATE_FLAG]:checked').val();
+                    var START_DATE= $("#hd_START_DATE").val();
+                    var EXPIRE_DATE= $("#hd_EXPIRE_DATE").val();
+
+                    var FAQ_CATE_KEYWORD = $("#FAQ_CATE_KEYWORD").val();
+
+                    var FAQ_CONTACT_DEPT = $("#FAQ_CONTACT_DEPT").val();
+                    var FAQ_CONTACT_PHONE = $("#FAQ_CONTACT_PHONE").val();
+
+
+
+
+                    dataimport.append('FAQ_CATE_ID',FAQ_CATE_ID);
+                    dataimport.append('FAQ_CATE_NAME',FAQ_CATE_NAME);
+                    dataimport.append('FAQ_CATE_FLAG',FAQ_CATE_FLAG);
+                    dataimport.append('START_DATE',START_DATE);
+                    dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
+                    dataimport.append('FAQ_CATE_KEYWORD',FAQ_CATE_KEYWORD);
+                    dataimport.append('FAQ_CONTACT_DEPT',FAQ_CONTACT_DEPT);
+                    dataimport.append('FAQ_CONTACT_PHONE',FAQ_CONTACT_PHONE);
+
+
+                    $.ajax({
+
+                        type: 'POST', // or post?
+//                dataType: 'json',
+                        contentType: false,
+                        processData: false,
+                        url: 'add',
+                        data: dataimport,
+
+                        success: function(data){
+
+                            if(data.success){
+
+                                AlertSuccess("บันทึกหมวดหมู่ถามตอบเรียบร้อยแล้ว",function(){
+
+                                    window.location.href = "/admin/faqcate";
+                                });
+
+                            }else {
+                                Alert("",data.html,null,null);
+                            }
+
+
+
+                        },
+                        error: function(xhr, textStatus, thrownError) {
+
+                        }
+                    });
+
+
+                    return false;
                 }
+
+                return false;
+
             });
-
-
 
 
             meaDatepicker("START_DATE","EXPIRE_DATE");

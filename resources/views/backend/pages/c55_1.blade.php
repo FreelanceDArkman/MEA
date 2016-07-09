@@ -161,14 +161,8 @@
 
                             <div class="smart-form">
 
-
-
-
-
-
-
                                 <footer>
-                                    <button type="submit"  class="btn btn-primary">ส่งข้อมูล
+                                    <button type="button" id=“btn_form” class="btn btn-primary">ส่งข้อมูล
                                     </button>
                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                         ยกเลิก
@@ -223,130 +217,118 @@
                 return arg != value;
             }, "Please Choose one");
 
-            var $registerForm = $("#smart-form-register").validate({
 
 
 
-                // Rules for form validation
-                rules : {
-                    LOCATION_ID : {
-                        required : true,
-                        number:true
+            $("#btn_form").on('click',function(){
+                var $registerForm = $("#smart-form-register").validate({
+
+
+
+                    // Rules for form validation
+                    rules : {
+                        LOCATION_ID : {
+                            required : true,
+                            number:true
+                        },
+                        LOCATION_NAME : {
+                            required : true
+                        },
+                        LOCATION_ADDRESS : {
+                            required : true,
+                        },
+                        LOCATION_SERVICE_CENTER : {
+                            required : true,
+                        }
+
                     },
-                    LOCATION_NAME : {
-                        required : true
-                    },
-                    LOCATION_ADDRESS : {
-                        required : true,
-                    },
-                    LOCATION_SERVICE_CENTER : {
-                        required : true,
-                    }
 
-                },
-                submitHandler: function(form)
-                {
-                    $(form).ajaxSubmit(
-                            {
-//                        beforeSend: function()
-//                        {
-//                            Alert("",data.html,null,null);
-//                        },
-                                success: function()
-                                {
-
-
-
-                                    var dataimport = new FormData();
-
-                                    var LOCATION_ID = $("#LOCATION_ID").val();
-                                    var LOCATION_NAME = $("#LOCATION_NAME").val();
-                                    var LOCATION_ADDRESS= $("#LOCATION_ADDRESS").val();
-                                    var LOCATION_SERVICE_CENTER= $("#LOCATION_SERVICE_CENTER").val();
-                                    var LOCATION_EMAIL= $("#LOCATION_EMAIL").val();
-
-                                    var LOCATION_TRAVEL= $("#LOCATION_TRAVEL").val();
-                                    var LOCATION_GPS_LAT= $("#LOCATION_GPS_LAT").val();
-
-                                    var LOCATION_GPS_LNG = $("#LOCATION_GPS_LNG").val();
-
-
-
-
-
-                                    dataimport.append('LOCATION_ID',LOCATION_ID);
-                                    dataimport.append('LOCATION_NAME',LOCATION_NAME);
-                                    dataimport.append('LOCATION_ADDRESS',LOCATION_ADDRESS);
-                                    dataimport.append('LOCATION_SERVICE_CENTER',LOCATION_SERVICE_CENTER);
-                                    dataimport.append('LOCATION_EMAIL',LOCATION_EMAIL);
-                                    dataimport.append('LOCATION_TRAVEL',LOCATION_TRAVEL);
-                                    dataimport.append('LOCATION_GPS_LAT',LOCATION_GPS_LAT);
-                                    dataimport.append('LOCATION_GPS_LNG',LOCATION_GPS_LNG);
-
-
-                                    var filesPDF = $("#mappdf").get(0).files;
-
-
-                                    if (filesPDF.length > 0) {
-                                        dataimport.append("filesPDF", filesPDF[0]);
-                                    }
-
-                                    $.ajax({
-
-                                        type: 'POST', // or post?
-//                dataType: 'json',
-                                        contentType: false,
-                                        processData: false,
-                                        url: '/admin/contact/add',
-                                        data: dataimport,
-
-                                        success: function(data){
-
-                                            if(data.success){
-
-                                                AlertSuccess("บันทึกช่องทางติดต่อเรียบร้อยแล้ว",function(){
-
-                                                    window.location.href = "/admin/contact";
-                                                });
-
-                                            }else {
-                                                Alert("",data.html,null,null);
-                                            }
-
-
-
-                                        },
-                                        error: function(xhr, textStatus, thrownError) {
-
-                                        }
-                                    });
-
-
-                                    return false;
-                                }
-                            });
-                },
-
-                // Do not change code below
-                errorPlacement : function(error, element) {
-                    error.insertAfter(element.parent());
+                    errorPlacement : function(error, element) {
+                        error.insertAfter(element.parent());
 
 //                    alert("error");
+                    }
+                });
+
+
+                if($registerForm.valid()){
+                    var dataimport = new FormData();
+
+                    var LOCATION_ID = $("#LOCATION_ID").val();
+                    var LOCATION_NAME = $("#LOCATION_NAME").val();
+                    var LOCATION_ADDRESS= $("#LOCATION_ADDRESS").val();
+                    var LOCATION_SERVICE_CENTER= $("#LOCATION_SERVICE_CENTER").val();
+                    var LOCATION_EMAIL= $("#LOCATION_EMAIL").val();
+
+                    var LOCATION_TRAVEL= $("#LOCATION_TRAVEL").val();
+                    var LOCATION_GPS_LAT= $("#LOCATION_GPS_LAT").val();
+
+                    var LOCATION_GPS_LNG = $("#LOCATION_GPS_LNG").val();
+
+
+
+
+
+                    dataimport.append('LOCATION_ID',LOCATION_ID);
+                    dataimport.append('LOCATION_NAME',LOCATION_NAME);
+                    dataimport.append('LOCATION_ADDRESS',LOCATION_ADDRESS);
+                    dataimport.append('LOCATION_SERVICE_CENTER',LOCATION_SERVICE_CENTER);
+                    dataimport.append('LOCATION_EMAIL',LOCATION_EMAIL);
+                    dataimport.append('LOCATION_TRAVEL',LOCATION_TRAVEL);
+                    dataimport.append('LOCATION_GPS_LAT',LOCATION_GPS_LAT);
+                    dataimport.append('LOCATION_GPS_LNG',LOCATION_GPS_LNG);
+
+
+                    var filesPDF = $("#mappdf").get(0).files;
+
+
+                    if (filesPDF.length > 0) {
+                        dataimport.append("filesPDF", filesPDF[0]);
+                    }
+
+                    $.ajax({
+
+                        type: 'POST', // or post?
+//                dataType: 'json',
+                        contentType: false,
+                        processData: false,
+                        url: '/admin/contact/add',
+                        data: dataimport,
+
+                        success: function(data){
+
+                            if(data.success){
+
+                                AlertSuccess("บันทึกช่องทางติดต่อเรียบร้อยแล้ว",function(){
+
+                                    window.location.href = "/admin/contact";
+                                });
+
+                            }else {
+                                Alert("",data.html,null,null);
+                            }
+
+
+
+                        },
+                        error: function(xhr, textStatus, thrownError) {
+
+                        }
+                    });
+
+
+                    return false;
                 }
+
+                return false;
+
             });
-
-
 
 
             meaDatepicker("START_DATE","EXPIRE_DATE");
 
             meaDatepicker("EXPIRE_DATE");
-//            meaDatepicker("comeback");
-//
-//
-//            meaDatepicker("retire");
-//
-//            meaDatepicker("comeback");
+
 
 
 

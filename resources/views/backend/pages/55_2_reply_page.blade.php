@@ -117,7 +117,7 @@
 
 
                                 <footer>
-                                    <button type="submit"  class="btn btn-primary">ส่งข้อความ
+                                    <button type="button"  id=“btn_form” class="btn btn-primary">ส่งข้อความ
                                     </button>
                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                         ยกเลิก
@@ -181,15 +181,6 @@
                 tabsize : 2,
 
 
-//                toolbar: [
-//                    // [groupName, [list of button]]
-//                    ['style', ['bold', 'italic', 'underline', 'clear']],
-//                    ['font', ['strikethrough', 'superscript', 'subscript']],
-//                    ['fontsize', ['fontsize']],
-//                    ['color', ['color']],
-//                    ['para', ['ul', 'ol', 'paragraph']],
-//                    ['height', ['height']]
-//                ]
 
             });
 
@@ -198,101 +189,91 @@
 
 
 
-//            $('.summernote').summernote('code');
 
             $.validator.addMethod("valueNotEquals", function(value, element, arg){
                 return arg != value;
             }, "Please Choose one");
 
-            var $registerForm = $("#smart-form-register").validate({
+
+
+            $("#btn_form").on('click',function(){
+
+                var $registerForm = $("#smart-form-register").validate({
 
 
 
-                // Rules for form validation
-                rules : {
-                    INFM_EMAIL : {
-                        required : true,
-                        email : true
+                    // Rules for form validation
+                    rules : {
+                        INFM_EMAIL : {
+                            required : true,
+                            email : true
+                        },
+                        INFM_topic : {
+                            required : true
+                        }
+
                     },
-                    INFM_topic : {
-                        required : true
+
+                    errorPlacement : function(error, element) {
+                        error.insertAfter(element.parent());
+
                     }
+                });
 
-                },
-                submitHandler: function(form)
-                {
-                    $(form).ajaxSubmit(
-                            {
-//                        beforeSend: function()
-//                        {
-//                            Alert("",data.html,null,null);
-//                        },
-                                success: function()
-                                {
-//                             alert($("#hd_retire").val());
+                if($registerForm.valid()){
+                    var dataimport = new FormData();
 
-
-                                    var dataimport = new FormData();
-
-                                    var INFM_ID = $("#INFM_ID").val();
-                                    var INFM_EMAIL = $("#INFM_EMAIL").val();
-                                    var INFM_topic = $("#INFM_topic").val();
-                                    var Detail =  $('.summernote').code();
-                                    var REMARK = $("#REMARK").val();
+                    var INFM_ID = $("#INFM_ID").val();
+                    var INFM_EMAIL = $("#INFM_EMAIL").val();
+                    var INFM_topic = $("#INFM_topic").val();
+                    var Detail =  $('.summernote').code();
+                    var REMARK = $("#REMARK").val();
 
 
 
-                                    dataimport.append('INFM_ID',INFM_ID);
-                                    dataimport.append('INFM_EMAIL',INFM_EMAIL);
-                                    dataimport.append('INFM_topic',INFM_topic);
-                                    dataimport.append('Detail',Detail);
-                                    dataimport.append('REMARK',REMARK);
+                    dataimport.append('INFM_ID',INFM_ID);
+                    dataimport.append('INFM_EMAIL',INFM_EMAIL);
+                    dataimport.append('INFM_topic',INFM_topic);
+                    dataimport.append('Detail',Detail);
+                    dataimport.append('REMARK',REMARK);
 
-                                    $.ajax({
+                    $.ajax({
 
-                                        type: 'POST', // or post?
+                        type: 'POST', // or post?
 //                dataType: 'json',
-                                        contentType: false,
-                                        processData: false,
-                                        url: '/admin/cmail/reply',
-                                        data: dataimport,
+                        contentType: false,
+                        processData: false,
+                        url: '/admin/cmail/reply',
+                        data: dataimport,
 
-                                        success: function(data){
+                        success: function(data){
 
-                                            if(data.success){
+                            if(data.success){
 
-                                                AlertSuccess("ส่งอีเมล์ ตอบกลับไปยังท่านสมาชิกเรียบร้อยแล้ว",function(){
+                                AlertSuccess("ส่งอีเมล์ ตอบกลับไปยังท่านสมาชิกเรียบร้อยแล้ว",function(){
 
-                                                    window.location.href = "/admin/cmail";
-                                                });
+                                    window.location.href = "/admin/cmail";
+                                });
 
-                                            }else {
-                                                Alert("",data.html,null,null);
-                                            }
-
-
-
-                                        },
-                                        error: function(xhr, textStatus, thrownError) {
-
-                                        }
-                                    });
+                            }else {
+                                Alert("",data.html,null,null);
+                            }
 
 
-                                    return false;
-                                }
-                            });
-                },
 
-                // Do not change code below
-                errorPlacement : function(error, element) {
-                    error.insertAfter(element.parent());
+                        },
+                        error: function(xhr, textStatus, thrownError) {
 
+                        }
+                    });
+
+
+                    return false;
                 }
+
+                return false;
+
             });
-
-
-
 
 
 

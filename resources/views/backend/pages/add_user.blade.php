@@ -243,11 +243,9 @@
                                                             </label>
                                                         </section>
                                                     </div>
-
-
-                                                </fieldset>
+                                            </fieldset>
                                                 <footer>
-                                                    <button type="submit"  class="btn btn-primary">ส่งข้อมูล
+                                                    <button type="button" id=“btn_form” class="btn btn-primary">ส่งข้อมูล
                                                     </button>
                                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                                         ยกเลิก
@@ -484,124 +482,110 @@
                 return arg != value;
             }, "Please Choose one");
 
-            var $registerForm = $("#smart-form-register").validate({
 
 
+            $("#btn_form").on('click',function(){
 
-                // Rules for form validation
-                rules : {
-                    user_id : {
-                        required : true,
-                        maxlength: 7,
-                        number : true
-                    },
-                    user_name : {
-                        required : true
+                var $registerForm = $("#smart-form-register").validate({
 
+                    rules : {
+                        user_id : {
+                            required : true,
+                            maxlength: 7,
+                            number : true
+                        },
+                        user_name : {
+                            required : true
+
+                        },
+                        email : {
+                            required : true,
+                            email : true
+                        },
+                        status : {valueNotEquals: "default"},
+                        group_id:{
+                            valueNotEquals: "default"
+                        },
+                        password : {
+                            required : true,
+                            minlength : 3,
+                            maxlength : 20
+                        },
+                        passwordConfirm : {
+                            required : true,
+                            minlength : 3,
+                            maxlength : 20,
+                            equalTo : '#password'
+                        }
                     },
-                    email : {
-                        required : true,
-                        email : true
-                    },
-                    status : {valueNotEquals: "default"},
-                    group_id:{
-                        valueNotEquals: "default"
-                    },
-                    password : {
-                        required : true,
-                        minlength : 3,
-                        maxlength : 20
-                    },
-                    passwordConfirm : {
-                        required : true,
-                        minlength : 3,
-                        maxlength : 20,
-                        equalTo : '#password'
+
+                    errorPlacement : function(error, element) {
+                        error.insertAfter(element.parent());
+
+//                    alert("error");
                     }
-                },
+                });
 
-                // Messages for form validation
-//                messages : {
+                if($registerForm.valid()){
 
-//
-//                },
-                // Ajax form submition
-                submitHandler: function(form)
-                {
-                    $(form).ajaxSubmit(
-                    {
-//                        beforeSend: function()
-//                        {
-//                            alert('no');
-//                        },
-                        success: function()
-                        {
-//                             alert($("#hd_retire").val());
+                    var user_id = $("#user_id").val();
+                    var user_name = $("#user_name").val();
+                    var password= $("#password").val();
 
-                            var user_id = $("#user_id").val();
-                            var user_name = $("#user_name").val();
-                            var password= $("#password").val();
-
-                            var chk_firstlogin=  $('input[name=chk_firstlogin]:checked').val();
+                    var chk_firstlogin=  $('input[name=chk_firstlogin]:checked').val();
 
 
-                            var chk_expire= $('input[name=chk_expire]:checked').val();
+                    var chk_expire= $('input[name=chk_expire]:checked').val();
 
-                            var email= $("#email").val();
-                            var phone= $("#phone").val();
-                            var address= $("#address").val();
+                    var email= $("#email").val();
+                    var phone= $("#phone").val();
+                    var address= $("#address").val();
 
-                            var retire= $("#hd_retire").val();
-                            var comeback= $("#hd_comeback").val();
-                            var expire= $("#hd_expire").val();
+                    var retire= $("#hd_retire").val();
+                    var comeback= $("#hd_comeback").val();
+                    var expire= $("#hd_expire").val();
 
-                            var group_id= $("#group_id").val();
-                            var status= $("#status").val();
+                    var group_id= $("#group_id").val();
+                    var status= $("#status").val();
 
-                            var jsondata = {
-                                user_id:user_id,
-                                user_name :user_name,
-                                password:password,
-                                chk_firstlogin:chk_firstlogin,
-                                chk_expire:chk_expire,
-                                email:email,
-                                phone:phone,
-                                address:address,
-                                retire:retire,
-                                comeback:comeback,
-                                expire:expire,
-                                group_id:group_id,
-                                status:status
-                            };
+                    var jsondata = {
+                        user_id:user_id,
+                        user_name :user_name,
+                        password:password,
+                        chk_firstlogin:chk_firstlogin,
+                        chk_expire:chk_expire,
+                        email:email,
+                        phone:phone,
+                        address:address,
+                        retire:retire,
+                        comeback:comeback,
+                        expire:expire,
+                        group_id:group_id,
+                        status:status
+                    };
 
 
 //                            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
-                            MeaAjax(jsondata,"add",function(data){
-                                if(data.success){
+                    MeaAjax(jsondata,"add",function(data){
+                        if(data.success){
 
-                                    AlertSuccess("บันทึกผู้ใช้เรียบร้อยแล้ว",function(){
+                            AlertSuccess("บันทึกผู้ใช้เรียบร้อยแล้ว",function(){
 
-                                        window.location.href = "/admin/users";
-                                    });
-
-                                }else {
-                                    Alert("",data.html,null,null);
-                                }
+                                window.location.href = "/admin/users";
                             });
 
-                            return false;
+                        }else {
+                            Alert("",data.html,null,null);
                         }
                     });
-                },
 
-                // Do not change code below
-                errorPlacement : function(error, element) {
-                    error.insertAfter(element.parent());
+                    return false;
 
-//                    alert("error");
                 }
-            });
 
+                return false;
+
+            });
 
 
 
@@ -609,11 +593,7 @@
 
             meaDatepicker("retire");
             meaDatepicker("comeback");
-//
-//
-//            meaDatepicker("retire");
-//
-//            meaDatepicker("comeback");
+
 
 
 
