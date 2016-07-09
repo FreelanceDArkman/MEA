@@ -84,6 +84,10 @@
 <script src="{{asset('backend/js/smart-chat-ui/smart.chat.ui.min.js')}}"></script>
 <script src="{{asset('backend/js/smart-chat-ui/smart.chat.manager.min.js')}}"></script>
 
+
+<!-- PAGE RELATED PLUGIN(S) -->
+<script src="{{asset('backend/js/plugin/jquery-form/jquery-form.min.js')}}"></script>
+
 <script type="text/javascript">
     // DO NOT REMOVE : GLOBAL FUNCTIONS!
     $(document).ready(function() {

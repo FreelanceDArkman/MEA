@@ -321,7 +321,7 @@
 
                                         </fieldset>
                                         <footer>
-                                            <button type="submit"  class="btn btn-primary">แก้ไขข้อมูล
+                                            <button type="button"  id="btn_form" class="btn btn-primary">แก้ไขข้อมูล
                                             </button>
                                             <button type="button" class="btn btn-default" onclick="window.history.back();">
                                                 ยกเลิก
@@ -406,7 +406,7 @@
 
 
                                 <footer>
-                                    <button type="submit"  class="btn btn-primary">เพิ่มข้อมูล
+                                    <button type="button"  id="btn_form1" class="btn btn-primary">เพิ่มข้อมูล
                                     </button>
                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                         ยกเลิก
@@ -463,7 +463,7 @@
 
 
                                 <footer>
-                                    <button type="submit"  class="btn btn-primary">เพิ่มข้อมูล
+                                    <button type="button" id="btn_form2" class="btn btn-primary">เพิ่มข้อมูล
                                     </button>
                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                         ยกเลิก
@@ -521,16 +521,13 @@
 
 
 
-
-
-
                                 </fieldset>
 
 
 
 
                                 <footer>
-                                    <button type="submit"  class="btn btn-primary">เพิ่มข้อมูล
+                                    <button type="button" id="btn_form3" class="btn btn-primary">เพิ่มข้อมูล
                                     </button>
                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                         ยกเลิก
@@ -812,407 +809,380 @@
             });
 
 
-            var $registerForm3 = $("#smart-form-register_3").validate({
 
 
 
-                // Rules for form validation
-                rules : {
+            $("#btn_form3").on('click',function(e){
 
-                    FULL_NAME : {
-                        required : true,
+                var $registerForm3 = $("#smart-form-register_3").validate({
+
+
+
+                    // Rules for form validation
+                    rules : {
+
+                        FULL_NAME : {
+                            required : true,
+
+                        }
+
+                    },
+                    // Do not change code below
+                    errorPlacement : function(error, element) {
+                        error.insertAfter(element.parent());
 
                     }
+                });
 
-                },
 
+                if($registerForm3.valid()){
+                    var user_id = $("#user_id").val();
+                    var FULL_NAME = $("#FULL_NAME").val();
 
-                submitHandler: function(form)
-                {
-                    $(form).ajaxSubmit(
-                            {
-
-                                success: function()
-                                {
-                                    var user_id = $("#user_id").val();
-                                    var FULL_NAME = $("#FULL_NAME").val();
-
-                                    var dataimport = new FormData();
-                                    var files = $("#import_pdf").get(0).files;
+                    var dataimport = new FormData();
+                    var files = $("#import_pdf").get(0).files;
 //                                    var files = $(this).get(0).files;
 
-                                    dataimport.append("pdfimport", files[0]);
-                                    dataimport.append("user_id", user_id);
-                                    dataimport.append("FULL_NAME", FULL_NAME);
+                    dataimport.append("pdfimport", files[0]);
+                    dataimport.append("user_id", user_id);
+                    dataimport.append("FULL_NAME", FULL_NAME);
 
 
-                                    $.ajax({
+                    $.ajax({
 
-                                        type: 'POST', // or post?
+                        type: 'POST', // or post?
 //                dataType: 'json',
-                                        contentType: false,
-                                        processData: false,
-                                        url: '/admin/users/edit3',
-                                        data: dataimport,
+                        contentType: false,
+                        processData: false,
+                        url: '/admin/users/edit3',
+                        data: dataimport,
 
-                                        success: function(data){
-                                            if(data.success){
+                        success: function(data){
+                            if(data.success){
 
-                                                AlertSuccess("บันทึกเรียบร้อยแล้ว", function(){
-                                                    window.location.href =  "/admin/users/edit/" + user_id;
+                                AlertSuccess("บันทึกเรียบร้อยแล้ว", function(){
+                                    window.location.href =  "/admin/users/edit/" + user_id;
 
-                                                });
-                                            }else {
-                                                Alert('Import','การ import ข้อมูลผิดพลาด กรุณาตรวจสอบ รูปแบบข้อมูลของ ไฟล์ ')
-                                            }
+                                });
+                            }else {
+                                Alert('Import','การ import ข้อมูลผิดพลาด กรุณาตรวจสอบ รูปแบบข้อมูลของ ไฟล์ ')
+                            }
 
 
 
-                                        },
-                                        error: function(xhr, textStatus, thrownError) {
+                        },
+                        error: function(xhr, textStatus, thrownError) {
 
-                                        }
-                                    });
+                        }
+                    });
 
-                                    return false;
-                                }
-                            });
-                },
-
-                // Do not change code below
-                errorPlacement : function(error, element) {
-                    error.insertAfter(element.parent());
-
-//                    alert("error");
+                    return false;
                 }
-            });
 
+                return false;
+
+            });
 
             meaDatepicker("CHANGE_SAVING_RATE_DATE");
             meaDatepicker("EFFECTIVE_DATE_1");
 
 
-            var $registerForm2 = $("#smart-form-register_2").validate({
 
 
+            $("#btn_form2").on('click',function(e){
 
-                // Rules for form validation
-                rules : {
+                var $registerForm2 = $("#smart-form-register_2").validate({
 
-                    USER_SAVING_RATE : {
-                        required : true,
+                    rules : {
 
-                        maxlength : 100,
-                        number:true
+                        USER_SAVING_RATE : {
+                            required : true,
+
+                            maxlength : 100,
+                            number:true
+                        }
+
+                    },
+
+                    errorPlacement : function(error, element) {
+                        error.insertAfter(element.parent());
+
                     }
-
-                },
-
-                // Messages for form validation
-//                messages : {
-
-//
-//                },
-                // Ajax form submition
-                submitHandler: function(form)
-                {
-                    $(form).ajaxSubmit(
-                            {
-
-                                success: function()
-                                {
-                                    var user_id = $("#user_id").val();
-                                    var USER_SAVING_RATE = $("#USER_SAVING_RATE").val();
+                });
 
 
-                                    var MODIFY_COUNT= $("#MODIFY_COUNT_1").val();
-                                    var CHANGE_SAVING_RATE_DATE = $("#hd_CHANGE_SAVING_RATE_DATE").val();
-                                    var EFFECTIVE_DATE = $("#hd_EFFECTIVE_DATE_1").val();
 
 
-                                    var jsondata = {
-                                        user_id:user_id,
-                                        USER_SAVING_RATE :USER_SAVING_RATE,
-                                        MODIFY_COUNT:MODIFY_COUNT,
-                                        CHANGE_SAVING_RATE_DATE:CHANGE_SAVING_RATE_DATE,
-                                        EFFECTIVE_DATE:EFFECTIVE_DATE
+                if($registerForm2.valid()){
+                    var user_id = $("#user_id").val();
+                    var USER_SAVING_RATE = $("#USER_SAVING_RATE").val();
 
 
-                                    };
+                    var MODIFY_COUNT= $("#MODIFY_COUNT_1").val();
+                    var CHANGE_SAVING_RATE_DATE = $("#hd_CHANGE_SAVING_RATE_DATE").val();
+                    var EFFECTIVE_DATE = $("#hd_EFFECTIVE_DATE_1").val();
 
-                                    MeaAjax(jsondata,"/admin/users/edit2",function(data){
-                                        if(data.success){
 
-                                            AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
+                    var jsondata = {
+                        user_id:user_id,
+                        USER_SAVING_RATE :USER_SAVING_RATE,
+                        MODIFY_COUNT:MODIFY_COUNT,
+                        CHANGE_SAVING_RATE_DATE:CHANGE_SAVING_RATE_DATE,
+                        EFFECTIVE_DATE:EFFECTIVE_DATE
 
-                                                window.location.href = "/admin/users/edit/" + user_id;
-                                            });
 
-                                        }else {
-                                            Alert("",data.html,null,null);
-                                        }
-                                    });
+                    };
 
-                                    return false;
-                                }
+                    MeaAjax(jsondata,"/admin/users/edit2",function(data){
+                        if(data.success){
+
+                            AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
+
+                                window.location.href = "/admin/users/edit/" + user_id;
                             });
-                },
 
-                // Do not change code below
-                errorPlacement : function(error, element) {
-                    error.insertAfter(element.parent());
+                        }else {
+                            Alert("",data.html,null,null);
+                        }
+                    });
 
-//                    alert("error");
+                    return false;
                 }
+                return false;
             });
+
+
 
             meaDatepicker("MODIFY_DATE");
             meaDatepicker("EFFECTIVE_DATE");
 
-            var $registerForm1 = $("#smart-form-register_1").validate({
 
 
 
-                // Rules for form validation
-                rules : {
 
-                    EQUITY_RATE : {
-                        required : true,
+            $("#btn_form1").on('click',function(e){
+                var $registerForm1 = $("#smart-form-register_1").validate({
 
-                        maxlength : 100,
-                        number:true
+
+
+                    // Rules for form validation
+                    rules : {
+
+                        EQUITY_RATE : {
+                            required : true,
+
+                            maxlength : 100,
+                            number:true
+                        },
+                        PLAN_ID : {valueNotEquals: "default"},
+
+                        DEBT_RATE : {
+                            required : true,
+
+                            maxlength : 100,
+                            number:true
+                        },
+                        MODIFY_COUNT : {
+                            required : true,
+                            number:true
+                        }
                     },
-                    PLAN_ID : {valueNotEquals: "default"},
 
-                    DEBT_RATE : {
-                        required : true,
 
-                        maxlength : 100,
-                        number:true
-                    },
-                    MODIFY_COUNT : {
-                        required : true,
-                        number:true
+                    // Do not change code below
+                    errorPlacement : function(error, element) {
+                        error.insertAfter(element.parent());
+
+//                    alert("error");
                     }
-                },
-
-                // Messages for form validation
-//                messages : {
-
-//
-//                },
-                // Ajax form submition
-                submitHandler: function(form)
-                {
-                    $(form).ajaxSubmit(
-                            {
-
-                                success: function()
-                                {
+                });
 
 
-                                    var arrval =  $("#PLAN_ID").val().split(',');
+                if($registerForm1.valid()){
+                    var arrval =  $("#PLAN_ID").val().split(',');
 
 
 
 
-                                    var maxeq = arrval[2]
+                    var maxeq = arrval[2]
 
 
-                                    var mineq = arrval[1]
+                    var mineq = arrval[1]
 //                                    var maxdeb =arrval[4]
 //                                    var mindeb =arrval[3]
 
-                                    var user_id = $("#user_id").val();
-                                    var PLAN_ID = $("#PLAN_ID").val();
-                                    var EQUITY_RATE= $("#EQUITY_RATE").val();
+                    var user_id = $("#user_id").val();
+                    var PLAN_ID = $("#PLAN_ID").val();
+                    var EQUITY_RATE= $("#EQUITY_RATE").val();
 
-                                    var DEBT_RATE= $("#DEBT_RATE").val();
+                    var DEBT_RATE= $("#DEBT_RATE").val();
 
-                                    var MODIFY_COUNT= $("#MODIFY_COUNT").val();
-                                    var MODIFY_DATE = $("#hd_MODIFY_DATE").val();
-                                    var EFFECTIVE_DATE = $("#hd_EFFECTIVE_DATE").val();
-
-
-
-
-                                    if(((parseInt(EQUITY_RATE)>=parseInt(mineq) && parseInt(EQUITY_RATE)<=parseInt(maxeq))  ) ){
-
-
-                                        var jsondata = {
-                                            user_id:user_id,
-                                            PLAN_ID :PLAN_ID,
-                                            EQUITY_RATE:EQUITY_RATE,
-                                            DEBT_RATE:DEBT_RATE,
-                                            MODIFY_COUNT:MODIFY_COUNT,
-                                            MODIFY_DATE:MODIFY_DATE,
-                                            EFFECTIVE_DATE:EFFECTIVE_DATE
-
-                                        };
-
-                                        MeaAjax(jsondata,"/admin/users/edit1",function(data){
-                                            if(data.success){
-
-                                                AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
-
-                                                    window.location.href = "/admin/users/edit/" + user_id;
-                                                });
-
-                                            }else {
-                                                Alert("",data.html,null,null);
-                                            }
-                                        });
-                                    }else {
-                                        Alert('Error','ท่านเลือกจำนวนสัดส่วนตราสารทุน เกินจำนวนที่กำหนด' );
-                                    }
+                    var MODIFY_COUNT= $("#MODIFY_COUNT").val();
+                    var MODIFY_DATE = $("#hd_MODIFY_DATE").val();
+                    var EFFECTIVE_DATE = $("#hd_EFFECTIVE_DATE").val();
 
 
 
 
+                    if(((parseInt(EQUITY_RATE)>=parseInt(mineq) && parseInt(EQUITY_RATE)<=parseInt(maxeq))  ) ){
 
 
-                                    return false;
-                                }
-                            });
-                },
+                        var jsondata = {
+                            user_id:user_id,
+                            PLAN_ID :PLAN_ID,
+                            EQUITY_RATE:EQUITY_RATE,
+                            DEBT_RATE:DEBT_RATE,
+                            MODIFY_COUNT:MODIFY_COUNT,
+                            MODIFY_DATE:MODIFY_DATE,
+                            EFFECTIVE_DATE:EFFECTIVE_DATE
 
-                // Do not change code below
-                errorPlacement : function(error, element) {
-                    error.insertAfter(element.parent());
+                        };
 
-//                    alert("error");
-                }
+                        MeaAjax(jsondata,"/admin/users/edit1",function(data){
+                            if(data.success){
+
+                                AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
+
+                                    window.location.href = "/admin/users/edit/" + user_id;
+                                });
+
+                            }else {
+                                Alert("",data.html,null,null);
+                            }
+                        });
+                    }else {
+                        Alert('Error','ท่านเลือกจำนวนสัดส่วนตราสารทุน เกินจำนวนที่กำหนด' );
+                    }
+
+
+
+
+
+
+                    return false;
+                };
+
+                return false;
             });
 
 
-            var $registerForm = $("#smart-form-register").validate({
+            $("#btn_form").on('click',function(e){
+
+                var $registerForm = $("#smart-form-register").validate({
 
 
+                    rules: {
 
-                // Rules for form validation
-                rules : {
-
-                    email : {
-                        required : true,
-                        email : true
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        status: {valueNotEquals: "default"},
+                        group_id: {
+                            valueNotEquals: "default"
+                        },
+                        password: {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 20
+                        },
+                        passwordConfirm: {
+                            required: true,
+                            minlength: 3,
+                            maxlength: 20,
+                            equalTo: '#password'
+                        }
                     },
-                    status : {valueNotEquals: "default"},
-                    group_id:{
-                        valueNotEquals: "default"
-                    },
-                    password : {
-                        required : true,
-                        minlength : 3,
-                        maxlength : 20
-                    },
-                    passwordConfirm : {
-                        required : true,
-                        minlength : 3,
-                        maxlength : 20,
-                        equalTo : '#password'
+                    errorPlacement : function(error, element) {
+                        console.log("Submit Error");
+                        error.insertAfter(element.parent());
+
+//                    alert("error");
                     }
-                },
+                });
 
-                // Messages for form validation
-//                messages : {
 
-//
-//                },
-                // Ajax form submition
-                submitHandler: function(form)
-                {
-                    $(form).ajaxSubmit(
-                    {
-//                        beforeSend: function()
-//                        {
-//                            alert('no');
-//                        },
-                        success: function()
-                        {
+
+                if($registerForm.valid()){
+
+                    console.log("Submit Success");
 //                             alert($("#hd_retire").val());
 
-                            var user_id = $("#user_id").val();
-                            var user_name = $("#user_name").val();
-                            var password= $("#password").val();
+                    var user_id = $("#user_id").val();
+                    var user_name = $("#user_name").val();
+                    var password= $("#password").val();
 
-                            var chk_firstlogin= $('input[name=chk_firstlogin]:checked').val();
-                            var chk_expire= $('input[name=chk_expire]:checked').val();
+                    var chk_firstlogin= $('input[name=chk_firstlogin]:checked').val();
+                    var chk_expire= $('input[name=chk_expire]:checked').val();
 
-                            var email= $("#email").val();
-                            var phone= $("#phone").val();
-                            var address= $("#address").val();
+                    var email= $("#email").val();
+                    var phone= $("#phone").val();
+                    var address= $("#address").val();
 
-                            var retire= $("#hd_retire").val();
-                            var comeback= $("#hd_comeback").val();
-                            var expire= $("#hd_expire").val();
+                    var retire= $("#hd_retire").val();
+                    var comeback= $("#hd_comeback").val();
+                    var expire= $("#hd_expire").val();
 
-                            var group_id= $("#group_id").val();
-                            var status= $("#status").val();
+                    var group_id= $("#group_id").val();
+                    var status= $("#status").val();
 
-                            var jsondata = {
-                                user_id:user_id,
-                                user_name :user_name,
-                                password:password,
-                                chk_firstlogin:chk_firstlogin,
-                                chk_expire:chk_expire,
-                                email:email,
-                                phone:phone,
-                                address:address,
-                                retire:retire,
-                                comeback:comeback,
-                                expire:expire,
-                                group_id:group_id,
-                                status:status
-                            };
-
-
-
-                            if(status == '04' || status == '15' ){
-
-                                if(retire == ""){
-                                    Alert("",'กรุณาระบุวันที่ลาออกจากกองทุน',null,null);
-
-                                    return false;
-                                }
-
-                            }
+                    var jsondata = {
+                        user_id:user_id,
+                        user_name :user_name,
+                        password:password,
+                        chk_firstlogin:chk_firstlogin,
+                        chk_expire:chk_expire,
+                        email:email,
+                        phone:phone,
+                        address:address,
+                        retire:retire,
+                        comeback:comeback,
+                        expire:expire,
+                        group_id:group_id,
+                        status:status
+                    };
 
 
-                            if(status == '12' ){
-                                if(comeback == ""){
-                                    Alert("",'กรุณาระบุวันที่กลับเข้ากองทุน',null,null);
-                                    return false;
-                                }
-                            }
+                    if(status == '04' || status == '15' ){
 
-
-                            MeaAjax(jsondata,"/admin/users/edit",function(data){
-                                if(data.success){
-
-                                    AlertSuccess("บันทึกผู้ใช้เรียบร้อยแล้ว",function(){
-
-                                        window.location.href = "/admin/users/";
-                                    });
-
-                                }else {
-                                    Alert("",data.html,null,null);
-                                }
-                            });
-//                            $(".result").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
-
+                        if(retire == ""){
+                            Alert("",'กรุณาระบุวันที่ลาออกจากกองทุน',null,null);
 
                             return false;
                         }
+
+                    }
+
+
+                    if(status == '12' ){
+                        if(comeback == ""){
+                            Alert("",'กรุณาระบุวันที่กลับเข้ากองทุน',null,null);
+                            return false;
+                        }
+                    }
+
+
+                    MeaAjax(jsondata,"/admin/users/edit",function(data){
+                        if(data.success){
+
+                            AlertSuccess("บันทึกผู้ใช้เรียบร้อยแล้ว",function(){
+
+                                window.location.href = "/admin/users/";
+                            });
+
+                        }else {
+                            Alert("",data.html,null,null);
+                        }
                     });
-                },
+//
 
-                // Do not change code below
-                errorPlacement : function(error, element) {
-                    error.insertAfter(element.parent());
 
-//                    alert("error");
+                    return false;
                 }
+                return false;
+
             });
+
 
 
 
@@ -1221,11 +1191,7 @@
 
             meaDatepicker("retire");
             meaDatepicker("comeback");
-//
-//
-//            meaDatepicker("retire");
-//
-//            meaDatepicker("comeback");
+
 
 
 
