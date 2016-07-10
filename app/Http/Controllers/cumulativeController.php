@@ -139,8 +139,6 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
 
 
-    var_dump($Isaccess);
-
 
         return view('frontend.pages.23p1')->with([
             'CurrnentPlan'=>$CurrnentPlan,
@@ -333,15 +331,32 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         $USER_SAVING_RATE =   $request->input('maxVal2');
         $addby = get_userID();
         $USER_STATUS_ID = $USER->USER_STATUS_ID;
-        $LEAVE_FUND_GROUP_DATE = "NULL";
+        $LEAVE_FUND_GROUP_DATE = null;
         if($USER->LEAVE_FUND_GROUP_DATE != null){
             $LEAVE_FUND_GROUP_DATE = $USER->LEAVE_FUND_GROUP_DATE;
         }
 
-        $sql = "INSERT INTO TBL_USER_SAVING_RATE (EMP_ID,USER_SAVING_RATE,CHANGE_SAVING_RATE_DATE,EFFECTIVE_DATE,MODIFY_COUNT,MODIFY_BY,USER_STATUS_ID,LEAVE_FUND_GROUP_DATE)
-VALUES( '".$emp_id."' ,$USER_SAVING_RATE, '".$create_date."','".$effectiveDate."',$Modify_count,'".$addby."','".$USER_STATUS_ID."','".$LEAVE_FUND_GROUP_DATE."')";
 
-        $ret =DB::insert(DB::raw($sql));
+
+        $data = array(
+            'EMP_ID' => $emp_id,
+            'USER_SAVING_RATE' =>$USER_SAVING_RATE,
+            'CHANGE_SAVING_RATE_DATE' => $create_date,
+            'EFFECTIVE_DATE' => $effectiveDate,
+            'MODIFY_COUNT' => $Modify_count,
+            'MODIFY_BY' =>$addby,
+            'USER_STATUS_ID' => $USER_STATUS_ID,
+            'LEAVE_FUND_GROUP_DATE' => $LEAVE_FUND_GROUP_DATE
+
+        );
+
+
+
+
+        $ret = DB::table('TBL_USER_SAVING_RATE')->insert($data);
+
+
+
 
 
         $val =  array(

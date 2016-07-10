@@ -109,17 +109,45 @@
 
                 <hr>
 
+                <?php
+
+                $page = 1;
+                $p = Request::path();
+                $arrP = explode('/',$p);
+
+
+                //                    var_dump(count($arrP));
+
+                if(count($arrP) > 1){
+                    if($arrP[1] != null){
+                        $page = $arrP[1];
+                    }
+                }
+
+
+
+
+
+                function getde ($page,$target){
+                    $ret = "";
+                    if($page== $target){
+                        $ret = "active";
+                    }
+
+                    return $ret;
+                }
+                ?>
                 <div class="tab-v2">
                     <ul class="nav nav-tabs">
 
-                            <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,20,1) }}</a></li>
-                            <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,20,2) }}</a></li>
-                        <li class=""><a href="#profile-2" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,20,3) }}</a></li>
+                            <li class="<?php echo getde($page,1) ?>"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,20,1) }}</a></li>
+                            <li class="<?php echo getde($page,2) ?>"><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,20,2) }}</a></li>
+                        <li class="<?php echo getde($page,3) ?>"><a href="#profile-2" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,20,3) }}</a></li>
 
                     </ul>
                     <div class="tab-content">
 
-                            <div class="tab-pane fade active in" id="home-1" style="position: relative" >
+                            <div class="tab-pane fade <?php echo getde($page,1) ?> in" id="home-1" style="position: relative" >
 
                                 <form action="{{action('editprofileController@EditProfile')}}" method="post" id="sky-form3" class="sky-form contact-style">
 
@@ -224,7 +252,7 @@
 
 
                            </div>
-                         <div class="tab-pane fade a" id="profile-1">
+                         <div class="tab-pane fade <?php echo getde($page,2) ?> in" id="profile-1">
                             <div class="table-responsiv">
                                 {{--$_SERVER['SCRIPT_FILENAME'];--}}
                                 <table class="table table-striped table-bordered">
@@ -256,7 +284,7 @@
                             </div>
 
                         </div>
-                        <div class="tab-pane fade" id="profile-2">
+                        <div class="tab-pane fade <?php echo getde($page,3) ?> in" id="profile-2">
 
                             <form id="form_resetpass" style="font-family: DB Ozone X !important;" class="reg-page" action="{{ action('editprofileController@ResetPassworduser') }}" method="post">
                                 {!! csrf_field() !!}

@@ -228,8 +228,9 @@ class TrendsController extends Controller
 
 
 
+
         $sorted =  asort($netasset2);
-        $sorted2 =  asort($netasset);
+
 
 
 
@@ -249,6 +250,9 @@ class TrendsController extends Controller
         $show = $this->isShowGraph($empStart);
 
         $graph = $this->getGraphColum($netasset);
+
+
+
         $graph2 = $this->getGraphBenefit($netasset2);
         $graph3 =$this->getGraphfund($netasset2,$show);
 
@@ -339,7 +343,11 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
 
     function getDB_TBL_INFORMATION_FROM_ASSET(){
-        $sql = "SELECT TOP  5 * FROM  TBL_INFORMATION_FROM_ASSET WHERe EMP_ID = ".get_userID()." ORDER BY CREATE_DATE DESC";
+
+        $sql = "SELECT * FROM
+(sELECT TOP  5 * FROM  TBL_INFORMATION_FROM_ASSET WHERe EMP_ID = ".get_userID()."  ORDER BY CREATE_DATE DESC) AS tmp
+ORDER BY tmp.CREATE_DATE ASC";
+//        $sql = "SELECT TOP  5 * FROM  TBL_INFORMATION_FROM_ASSET WHERe EMP_ID = ".get_userID()." ORDER BY CREATE_DATE DESC";
         return  DB::select(DB::raw($sql));
     }
 

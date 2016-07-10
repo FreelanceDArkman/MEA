@@ -295,6 +295,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['prefix' => 'editprofile'] , function() {
 
             Route::get('/','editprofileController@getIndex');
+            Route::get('{id}','editprofileController@getIndex')->where('id', '[0-9]+');
             Route::post('/e1','editprofileController@EditProfile');
             Route::post('/e2','editprofileController@ResetPassworduser');
 
@@ -338,6 +339,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['prefix' => 'changeplan'] , function() {
 
             Route::get('/', 'changeplanController@getIndex');
+            Route::get('{id}','changeplanController@getIndex')->where('id', '[0-9]+');
             Route::post('/changeplan','changeplanController@InsertInvestPlan');
             Route::get('/delplan1','changeplanController@deleplan');
             Route::post('/', 'changeplanController@getIndexbysearch');
@@ -353,6 +355,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::group(['prefix' => 'cumulative'] , function() {
             Route::get('/', 'cumulativeController@getIndex');
+            Route::get('{id}','cumulativeController@getIndex')->where('id', '[0-9]+');
             Route::get('/delplan', 'cumulativeController@deleplan');
             Route::post('/cumulative', 'cumulativeController@InsertPlan');
             Route::post('/', 'cumulativeController@getIndexbysearch');

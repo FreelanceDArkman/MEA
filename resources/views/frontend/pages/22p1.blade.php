@@ -83,14 +83,43 @@
 
                 <hr>
 
+                <?php
+
+                    $page = 1;
+                    $p = Request::path();
+                    $arrP = explode('/',$p);
+
+
+//                    var_dump(count($arrP));
+
+                    if(count($arrP) > 1){
+                        if($arrP[1] != null){
+                            $page = 2;
+                        }
+                    }
+
+
+
+
+
+                    function getde ($page,$target){
+                            $ret = "";
+                        if($page== $target){
+                            $ret = "active";
+                        }
+
+                        return $ret;
+                    }
+                ?>
+                {{--{{  Request::path()   }}--}}
                 <div class="tab-v2">
                     <ul class="nav nav-tabs">
                         @if($ishowhis)
-                        <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,22,1) }}</a></li>
-                        <li class="active"><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,22,2) }}</a></li>
+                        <li class="<?php echo getde($page,1) ?>"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,22,1) }}</a></li>
+                        <li class="<?php echo getde($page,2) ?>"><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,22,2) }}</a></li>
                         @else
-                            <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,22,1) }}</a></li>
-                            <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,22,2) }}</a></li>
+                            <li class="<?php echo getde($page,1) ?>"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,22,1) }}</a></li>
+                            <li class="<?php echo getde($page,2) ?>"><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,22,2) }}</a></li>
                         @endif
 
                     </ul>
@@ -98,7 +127,7 @@
                         @if($ishowhis)
                         <div class="tab-pane fade " id="home-1" style="position: relative" >
                             @else
-                                <div class="tab-pane fade active in" id="home-1" style="position: relative" >
+                                <div class="tab-pane fade <?php echo getde($page,1) ?> in" id="home-1" style="position: relative" >
                                     @endif
 
 
@@ -299,9 +328,9 @@
                         </div>
 
                                 @if($ishowhis)
-                                <div class="tab-pane fade active in" id="profile-1">
+                                <div class="tab-pane fade  <?php echo getde($page,2) ?>in" id="profile-1">
                                 @else
-                                <div class="tab-pane fade " id="profile-1">
+                                <div class="tab-pane fade <?php echo getde($page,2) ?> in" id="profile-1">
                                 @endif
 
 

@@ -94,7 +94,9 @@ $current = Route::getCurrentRoute()->getPath();
                             <ul class="dropdown-menu">
                                 <li><a href="/trends">{{ getMenuName($data,21,1) }}</a></li>
                                 <li><a href="/reportingmemberbenefit">{{ getMenuName($data,21,2)}}</a></li>
+                                @if(get_is_before_status_2538() == 0)
                                 <li><a  href="/compares">{{ getMenuName($data,21,3) }}</a></li>
+                                @endif
 
                             </ul>
                         </li>
@@ -102,7 +104,7 @@ $current = Route::getCurrentRoute()->getPath();
                             <a href="javascript:void(0);">{{ getGoupName($data,22) }}</a>
                             <ul class="dropdown-menu">
                                 <li><a  href="/changeplan">{{ getMenuName($data,22,1) }}</a></li>
-                                <li><a  href="/historyinvestmentplan">{{ getMenuName($data,22,2) }}</a></li>
+                                <li><a  href="/changeplan/2">{{ getMenuName($data,22,2) }}</a></li>
 
 
                             </ul>
@@ -111,7 +113,7 @@ $current = Route::getCurrentRoute()->getPath();
                             <a href="javascript:void(0);">{{ getGoupName($data,23) }}</a>
                             <ul class="dropdown-menu">
                                 <li><a  href="/cumulative">{{ getMenuName($data,23,1) }}</a></li>
-                                <li><a  href="/historycumulative">{{ getMenuName($data,23,2) }}</a></li>
+                                <li><a  href="/cumulative/2">{{ getMenuName($data,23,2) }}</a></li>
 
 
                             </ul>
@@ -123,8 +125,8 @@ $current = Route::getCurrentRoute()->getPath();
                             <a href="javascript:void(0);">{{ getMenuName($data,20,1) }}</a>
                             <ul class="dropdown-menu">
                                 <li><a  href="/editprofile">{{ getMenuName($data,20,1) }}</a></li>
-                                <li><a  href="/informationbeneficiary">{{ getMenuName($data,20,2) }}</a></li>
-                                <li><a  href="/resetpassword">{{ getMenuName($data,20,3) }}</a></li>
+                                <li><a  href="/editprofile/2">{{ getMenuName($data,20,2) }}</a></li>
+                                <li><a  href="/editprofile/3">{{ getMenuName($data,20,3) }}</a></li>
 
                             </ul>
                         </li>
