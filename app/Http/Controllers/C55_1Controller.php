@@ -63,10 +63,11 @@ class C55_1Controller extends Controller
         $all = DB::select(DB::raw($chk));
 
 
-        $importpdf =  $request->file('filesPDF');
+        $importpdf =  $request->file('mappdf');
         $WEB_NEWS_ROOT_PATH  = $meapath[0]->WEB_NEWS_ROOT_PATH;
         $filePDF = "";
         $LOCATION_PIC = "";
+
 
         if($importpdf != null){
 //            $filePDF = $importpdf->getClientOriginalName();
@@ -74,7 +75,6 @@ class C55_1Controller extends Controller
             $importpdf->move(public_path().$pathpdf , $filePDF);
             $LOCATION_PIC = $WEB_NEWS_ROOT_PATH.$filePDF;
         }
-
 
 
 
@@ -106,9 +106,9 @@ class C55_1Controller extends Controller
         }
 
 
-        return response()->json(array('success' => $ret, 'html'=> $rethtml ));
+//        return response()->json(array('success' => $ret, 'html'=> $rethtml ));
 
-
+        return redirect()->to('admin/contact')->with('message','ok');
 
 
 

@@ -103,11 +103,11 @@ class C59_1Controller extends Controller
         }
 
 
+        return redirect()->to('admin/con1')->with('message','ok');
 
 
-
-
-        return response()->json(array('success' => $ret, 'html'=>$rethtml));
+//
+//        return response()->json(array('success' => $ret, 'html'=>$rethtml));
     }
 
 

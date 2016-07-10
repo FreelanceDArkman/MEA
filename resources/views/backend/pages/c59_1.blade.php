@@ -66,7 +66,8 @@ $arrSidebar =getSideBar($data);
                     <div id="insert-pan" style="padding: 20px 20px 0px 20px ;display:none;" >
                         <div class="widget-body no-padding">
 
-                            <form action="" id="formadd" class="smart-form">
+                            <form  id="formadd" enctype="multipart/form-data" method="post" action="{{action('C59_1Controller@Navsave')}}" class="smart-form">
+                                {!! csrf_field() !!}
                                 <table class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
@@ -77,7 +78,7 @@ $arrSidebar =getSideBar($data);
                                         <th>Action</th>
                                     </tr>
                                     </thead>
-<tbody>
+                                    <tbody>
 
 <tr>
     <td style="width: 5%">
@@ -110,7 +111,7 @@ $arrSidebar =getSideBar($data);
         </section>
     </td>
     <td style="width: 5%">
-        <a id="add-con1" style="padding: 5px 10px 5px 10px" class="btn bg-color-green txt-color-white"><i class="fa fa-plus"></i> เพิ่ม</a>
+        <button type="button" id="add-con1" style="padding: 5px 10px 5px 10px" class="btn bg-color-green txt-color-white"><i class="fa fa-plus"></i> เพิ่ม</button>
     </td>
 </tr>
 </tbody>
@@ -226,22 +227,6 @@ $arrSidebar =getSideBar($data);
                     }
                 });
 
-////                if($("#formadd").valid()){
-//                    var jsondata = {
-//                        ID : ID,
-//                        NAME:NAME,
-//                        FILE_PATH:FILE_PATH,
-//                        URL:URL};
-//
-////                }
-//
-//                MeaAjax(jsondata,"/admin/con1/editsave",function(data){
-//                    if(data.success){
-//                        AlertSuccess("แก้ไขเรียบร้อยแล้ว",function(){
-//                            getlist();
-//                        });
-//                    }
-//                });
 
 
                 return false;
@@ -330,22 +315,22 @@ $arrSidebar =getSideBar($data);
 
         $("#add-con1").on('click',function(){
 
-
-
-
-            var ID = $("#ID").val();
-            var NAME = $("#NAME").val();
-            var FILE_PATH = $("#FILE_PATH").val();
-            var URL = $("#URL").val();
-
-
-            var dataimport = new FormData();
-
-
-
-            var files = $("#client_upload").get(0).files;
-
-            var importType= $(this).attr('data-import');
+//
+//
+//
+//            var ID = $("#ID").val();
+//            var NAME = $("#NAME").val();
+//            var FILE_PATH = $("#FILE_PATH").val();
+//            var URL = $("#URL").val();
+//
+//
+//            var dataimport = new FormData();
+//
+//
+//
+//            var files = $("#client_upload").get(0).files;
+//
+//            var importType= $(this).attr('data-import');
 
 
 //            dataimport.append("client_upload", files[0]);
@@ -356,58 +341,51 @@ $arrSidebar =getSideBar($data);
 //
 //            }
             if($("#formadd").valid()){
+
+                $("#formadd").submit();
 //                var jsondata = {
 //                    ID : ID,
 //                    NAME:NAME,
 //                    FILE_PATH:FILE_PATH,
 //                    URL:URL};
 
-                dataimport.append("client_upload", files[0]);
-                dataimport.append("ID", ID);
-                dataimport.append("NAME", NAME);
-                dataimport.append("URL", URL);
+//                dataimport.append("client_upload", files[0]);
+//                dataimport.append("ID", ID);
+//                dataimport.append("NAME", NAME);
+//                dataimport.append("URL", URL);
 
             }
 
 
-            $.ajax({
-
-                type: 'POST', // or post?
-//                dataType: 'json',
-                contentType: false,
-                processData: false,
-                url: '/admin/con1/addsave',
-                data: dataimport,
-
-                success: function(data){
-                    if(data.success){
-                        $('#progress_import').hide();
-                        AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
-
-                            getlist();
-                        });
-                    }else {
-                        Alert("Alert",data.html,null,null);
-                    }
-
-//                Alert('OK', "ข้อมูลได้ถูก update เรียบร้อยแล้ว");
-
-                },
-                error: function(xhr, textStatus, thrownError) {
-
-                }
-            });
-
-//            MeaAjax(jsondata,"/admin/con1/addsave",function(data){
-//                if(data.success){
-//                    AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
-//                        $("#insert-pan").slideToggle('fast');
-//                        getlist();
-//                    });
-//                }else {
-//                    Alert("Alert",data.html,null,null);
+//            $.ajax({
+//
+//                type: 'POST', // or post?
+////                dataType: 'json',
+//                contentType: false,
+//                processData: false,
+//                url: '/admin/con1/addsave',
+//                data: dataimport,
+//
+//                success: function(data){
+//                    if(data.success){
+//                        $('#progress_import').hide();
+//                        AlertSuccess("บันทึกเรียบร้อยแล้ว",function(){
+//
+//                            getlist();
+//                        });
+//                    }else {
+//                        Alert("Alert",data.html,null,null);
+//                    }
+//
+////                Alert('OK', "ข้อมูลได้ถูก update เรียบร้อยแล้ว");
+//
+//                },
+//                error: function(xhr, textStatus, thrownError) {
+//
 //                }
 //            });
+
+
 
         });
 

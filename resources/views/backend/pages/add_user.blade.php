@@ -482,51 +482,50 @@
                 return arg != value;
             }, "Please Choose one");
 
+            $("#smart-form-register").validate({
 
-
-            $("#btn_form").on('click',function(){
-
-                var $registerForm = $("#smart-form-register").validate({
-
-                    rules : {
-                        user_id : {
-                            required : true,
-                            maxlength: 7,
-                            number : true
-                        },
-                        user_name : {
-                            required : true
-
-                        },
-                        email : {
-                            required : true,
-                            email : true
-                        },
-                        status : {valueNotEquals: "default"},
-                        group_id:{
-                            valueNotEquals: "default"
-                        },
-                        password : {
-                            required : true,
-                            minlength : 3,
-                            maxlength : 20
-                        },
-                        passwordConfirm : {
-                            required : true,
-                            minlength : 3,
-                            maxlength : 20,
-                            equalTo : '#password'
-                        }
+                rules : {
+                    user_id : {
+                        required : true,
+                        maxlength: 7,
+                        number : true
                     },
+                    user_name : {
+                        required : true
 
-                    errorPlacement : function(error, element) {
-                        error.insertAfter(element.parent());
+                    },
+                    email : {
+                        required : true,
+                        email : true
+                    },
+                    status : {valueNotEquals: "default"},
+                    group_id:{
+                        valueNotEquals: "default"
+                    },
+                    password : {
+                        required : true,
+                        minlength : 3,
+                        maxlength : 20
+                    },
+                    passwordConfirm : {
+                        required : true,
+                        minlength : 3,
+                        maxlength : 20,
+                        equalTo : '#password'
+                    }
+                },
+
+                errorPlacement : function(error, element) {
+                    error.insertAfter(element.parent());
 
 //                    alert("error");
-                    }
-                });
+                }
+            });
+            $("#btn_form").on('click',function(){
 
-                if($registerForm.valid()){
+
+
+                if( $("#smart-form-register").valid()){
 
                     var user_id = $("#user_id").val();
                     var user_name = $("#user_name").val();

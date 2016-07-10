@@ -730,9 +730,6 @@
                 var importType= $(this).attr('data-import');
 
 
-
-
-
             });
 
             $('.btn_import').on('click',function(){
