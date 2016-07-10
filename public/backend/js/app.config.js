@@ -359,8 +359,12 @@ if (month == 1) {
 } else {
 	year = d.getYear();
 }
+
+
 var month  = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.']
 var toDay = d.getDate() + " " + (month[d.getMonth()])  + " " +  (d.getFullYear());
+
+
 
 
 //console.log(toDay);
@@ -394,6 +398,10 @@ function MeaAjax(jsondata,urls,callback){
 		}
 	});
 }
+
+
+
+
 function  GetDateFormat (date){
 
 	var d = new Date(date);
@@ -409,7 +417,7 @@ function meaDatepicker(id,id_date_end){
 	//var realid = $('.'+id).attr('id');
 
 	if($("#hd_"+id).length == 0){
-		$("#"+id).after("<input type='hidden' value='' id='hd_"+id+"' />");
+		$("#"+id).after("<input type='hidden' value='' name='hd_"+id+"' id='hd_"+id+"' />");
 	}
 
 
@@ -557,5 +565,30 @@ function AlertSuccess(message,callback){
 		iconSmall: "fa fa-check bounce animated",
 		timeout: 1000
 	},callback);
+}
+
+function MEA_post_to_url(path, params, method) {
+	// cal function
+	// post_to_url('http://www.hotels2thailand.com/thailand-hotels-tell-thankyou.aspx', { 'pd': qProductId, 'm': data });
+
+	method = method || "post"; // Set method to post by default, if not specified.
+
+	// The rest of this code assumes you are not using a library.
+	// It can be made less wordy if you use one.
+	var form = document.createElement("form");
+	form.setAttribute("method", method);
+	form.setAttribute("action", path);
+
+	for (var key in params) {
+		var hiddenField = document.createElement("input");
+		hiddenField.setAttribute("type", "hidden");
+		hiddenField.setAttribute("name", key);
+		hiddenField.setAttribute("value", params[key]);
+
+		form.appendChild(hiddenField);
+	}
+
+	document.body.appendChild(form);    // Not entirely sure if this is necessary
+	form.submit();
 }
 

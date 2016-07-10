@@ -139,7 +139,7 @@
                             </div>
                             <!-- wizard form starts here -->
 
-                            <div class="smart-form"><footer> <button type="btn_form" id=“btn_form” href="#" class="btn bg-color-green txt-color-white"><i class="fa fa-plus"></i> บันทึก</button></footer></div>
+                            <div class="smart-form"><footer> <button type="btn_form" id="btn_form" href="#" class="btn bg-color-green txt-color-white"><i class="fa fa-plus"></i> บันทึก</button></footer></div>
                         </div>
 
                     </form>
@@ -587,47 +587,31 @@
                     }else {
 
                             if($("#quisid").val() != ""){
-                                var dataimport = new FormData();
 
 
-                                dataimport.append('PLAN_ID',PLAN_ID);
-                                dataimport.append('SCORE_RANGE',p1);
-                                dataimport.append('RISK_RATE',p2);
-                                dataimport.append('RATIO_RECOMMENDED',p3);
+                                var dataimport = {
+                                    PLAN_ID:PLAN_ID,
+                                    SCORE_RANGE:p1,
+                                    RISK_RATE:p2,
+                                    RATIO_RECOMMENDED:p3
 
+                                };
 
-                                $.ajax({
+                                MeaAjax(dataimport,'/admin/risk/period',function(data){
+                                    if(data.success){
 
-                                    type: 'POST', // or post?
-//                dataType: 'json',
-                                    contentType: false,
-                                    processData: false,
-                                    url: '/admin/risk/period',
-                                    data: dataimport,
+                                        AlertSuccess("บันทึกช่วงคะแนนแบบประเมินเรียบร้อยแล้ว");
+                                        var json = {PLAN_ID:PLAN_ID };
+                                        $("#ret_period").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
+                                        GetPeriodLsit(json);
 
-                                    success: function(data){
-
-                                        if(data.success){
-
-
-                                            //$('html').append('<input type="hidden" value=""+QUIZ_ID+"" />')
-
-                                            AlertSuccess("บันทึกช่วงคะแนนแบบประเมินเรียบร้อยแล้ว");
-                                            var json = {PLAN_ID:PLAN_ID };
-                                            $("#ret_period").html('<img style="margin: 0 auto;" src="/backend/img/spiner.gif" />');
-                                            GetPeriodLsit(json);
-
-                                        }else {
-                                            Alert("",data.html,null,null);
-                                        }
-
-
-
-                                    },
-                                    error: function(xhr, textStatus, thrownError) {
-
+                                    }else {
+                                        Alert("",data.html,null,null);
                                     }
+
                                 });
+
+
 
                                 return false;
 
@@ -640,30 +624,30 @@
 
             });
 
+            $("#risk_form").validate({
 
-            $("#btn_form").on('click',function(){
-                var $registerForm = $("#risk_form").validate({
+                rules: {
 
-                    rules: {
-
-                        QUIZ_ID: {
-                            required: true,
-                            number: true
-                        },
-                        QUIZ_DESC: {
-                            required: true
-                        }
-
+                    QUIZ_ID: {
+                        required: true,
+                        number: true
                     },
-
-                    errorPlacement : function(error, element) {
-                        error.insertAfter(element.parent());
-
+                    QUIZ_DESC: {
+                        required: true
                     }
-                });
 
-                if($registerForm.valid()){
-                    var dataimport = new FormData();
+                },
+
+                errorPlacement : function(error, element) {
+                    error.insertAfter(element.parent());
+
+                }
+            });
+            $("#btn_form").on('click',function(){
+
+
+                if($("#risk_form").valid()){
+
 
                     var QUIZ_ID = $("#QUIZ_ID").val();
                     var QUIZ_DESC = $("#QUIZ_DESC").val();
@@ -685,47 +669,35 @@
 
 
 
-                    dataimport.append('QUIZ_ID',QUIZ_ID);
-                    dataimport.append('QUIZ_DESC',QUIZ_DESC);
-                    dataimport.append('QUIZ_ACTIVE_FLAG',QUIZ_ACTIVE_FLAG);
-                    dataimport.append('QUIZ_ACTIVE_DATE',QUIZ_ACTIVE_DATE);
-                    dataimport.append('QUIZ_EXPIRE_DATE',QUIZ_EXPIRE_DATE);
-                    dataimport.append('isupdate',isupdate);
 
+                    var dataimport = {
+                        QUIZ_ID:QUIZ_ID,
+                        QUIZ_DESC:QUIZ_DESC,
+                        QUIZ_ACTIVE_FLAG:QUIZ_ACTIVE_FLAG,
+                        QUIZ_ACTIVE_DATE:QUIZ_ACTIVE_DATE,
+                        QUIZ_EXPIRE_DATE:QUIZ_EXPIRE_DATE,
+                        isupdate:isupdate
 
+                    };
 
+                    MeaAjax(dataimport,'/admin/risk/ishave',function(data){
+                        if(data.success){
 
-                    $.ajax({
+                            $("#quisid").val(QUIZ_ID);
+                            //$('html').append('<input type="hidden" value=""+QUIZ_ID+"" />')
 
-                        type: 'POST', // or post?
-//                dataType: 'json',
-                        contentType: false,
-                        processData: false,
-                        url: '/admin/risk/ishave',
-                        data: dataimport,
+                            AlertSuccess("บันทึกหมวดหมู่ถามตอบเรียบร้อยแล้ว",function(){
+                                window.location.href = "/admin/risk/edit/" +QUIZ_ID ;
+                            });
 
-                        success: function(data){
-
-                            if(data.success){
-
-                                $("#quisid").val(QUIZ_ID);
-                                //$('html').append('<input type="hidden" value=""+QUIZ_ID+"" />')
-
-                                AlertSuccess("บันทึกหมวดหมู่ถามตอบเรียบร้อยแล้ว",function(){
-                                    window.location.href = "/admin/risk/edit/" +QUIZ_ID ;
-                                });
-
-                            }else {
-                                Alert("",data.html,null,null);
-                            }
-
-
-
-                        },
-                        error: function(xhr, textStatus, thrownError) {
-
+                        }else {
+                            Alert("",data.html,null,null);
                         }
+
+
                     });
+
+
 
 
                     return false;
@@ -814,57 +786,60 @@
             if(vlid){
                 var json = {PLAN_ID:$("#quisid").val() };
 
-                var dataimport = new FormData();
+//                var dataimport = new FormData();
+//
+//
+//
+//                dataimport.append('QUIZ_ID',QUIZ_ID);
+//                dataimport.append('QUESTION_NO',QUESTION_NO);
+//                dataimport.append('QUESTION_DESC',QUESTION_DESC);
+//                dataimport.append('QUESTION_CHOICE_SCORE_1',QUESTION_CHOICE_SCORE_1);
+//                dataimport.append('QUESTION_CHOICE_SCORE_2',QUESTION_CHOICE_SCORE_2);
+//                dataimport.append('QUESTION_CHOICE_SCORE_3',QUESTION_CHOICE_SCORE_3);
+//                dataimport.append('QUESTION_CHOICE_SCORE_4',QUESTION_CHOICE_SCORE_4);
+//                dataimport.append('QUESTION_CHOICE_DESC_1',QUESTION_CHOICE_DESC_1);
+//                dataimport.append('QUESTION_CHOICE_DESC_2',QUESTION_CHOICE_DESC_2);
+//                dataimport.append('QUESTION_CHOICE_DESC_3',QUESTION_CHOICE_DESC_3);
+//                dataimport.append('QUESTION_CHOICE_DESC_4',QUESTION_CHOICE_DESC_4);
 
 
 
-                dataimport.append('QUIZ_ID',QUIZ_ID);
-                dataimport.append('QUESTION_NO',QUESTION_NO);
-                dataimport.append('QUESTION_DESC',QUESTION_DESC);
-                dataimport.append('QUESTION_CHOICE_SCORE_1',QUESTION_CHOICE_SCORE_1);
-                dataimport.append('QUESTION_CHOICE_SCORE_2',QUESTION_CHOICE_SCORE_2);
-                dataimport.append('QUESTION_CHOICE_SCORE_3',QUESTION_CHOICE_SCORE_3);
-                dataimport.append('QUESTION_CHOICE_SCORE_4',QUESTION_CHOICE_SCORE_4);
-                dataimport.append('QUESTION_CHOICE_DESC_1',QUESTION_CHOICE_DESC_1);
-                dataimport.append('QUESTION_CHOICE_DESC_2',QUESTION_CHOICE_DESC_2);
-                dataimport.append('QUESTION_CHOICE_DESC_3',QUESTION_CHOICE_DESC_3);
-                dataimport.append('QUESTION_CHOICE_DESC_4',QUESTION_CHOICE_DESC_4);
+                var dataimport = {
+                    QUIZ_ID:QUIZ_ID,
+                    QUESTION_NO:QUESTION_NO,
+                    QUESTION_DESC:QUESTION_DESC,
+                    QUESTION_CHOICE_SCORE_1:QUESTION_CHOICE_SCORE_1,
+                    QUESTION_CHOICE_SCORE_2:QUESTION_CHOICE_SCORE_2,
+                    QUESTION_CHOICE_SCORE_3:QUESTION_CHOICE_SCORE_3,
+                    QUESTION_CHOICE_SCORE_4:QUESTION_CHOICE_SCORE_4,
+                    QUESTION_CHOICE_DESC_1:QUESTION_CHOICE_DESC_1,
+                    QUESTION_CHOICE_DESC_2:QUESTION_CHOICE_DESC_2,
+                    QUESTION_CHOICE_DESC_3:QUESTION_CHOICE_DESC_3,
+                    QUESTION_CHOICE_DESC_4:QUESTION_CHOICE_DESC_4
+
+                };
+
+                MeaAjax(dataimport,'/admin/risk/question',function(data){
+                    if(data.success){
 
 
-                $.ajax({
+                        //$('html').append('<input type="hidden" value=""+QUIZ_ID+"" />')
 
-                    type: 'POST', // or post?
-//                dataType: 'json',
-                    contentType: false,
-                    processData: false,
-                    url: '/admin/risk/question',
-                    data: dataimport,
-
-                    success: function(data){
-
-                        if(data.success){
+                        AlertSuccess("บันทึกช่วงคะแนนแบบประเมินเรียบร้อยแล้ว");
 
 
-                            //$('html').append('<input type="hidden" value=""+QUIZ_ID+"" />')
+                        var json = {QUIZ_ID:$("#quisid").val() };
 
-                            AlertSuccess("บันทึกช่วงคะแนนแบบประเมินเรียบร้อยแล้ว");
+                        GetQuestionLsit(json);
 
-
-                            var json = {QUIZ_ID:$("#quisid").val() };
-
-                            GetQuestionLsit(json);
-
-                        }else {
-                            Alert("",data.html,null,null);
-                        }
-
-
-
-                    },
-                    error: function(xhr, textStatus, thrownError) {
-
+                    }else {
+                        Alert("",data.html,null,null);
                     }
+
                 });
+
+
+
 
             }
 

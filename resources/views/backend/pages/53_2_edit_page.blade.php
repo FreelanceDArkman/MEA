@@ -56,7 +56,7 @@
                     <!-- widget content -->
                     <div class="widget-body no-padding">
                         {{--action="{{action('UserController@postAddUser') }}"--}}
-                        <form id="smart-form-register" action="" style="margin-bottom: 20px"  >
+                        <form id="smart-form-register" enctype="multipart/form-data" method="post" action="{{action('C53_2Controller@postEdit')}}" style="margin-bottom: 20px"  >
                             {!! csrf_field() !!}
                             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                             {{--<input type="hidden" name="_token" value="{{ csrf_token() }}">--}}
@@ -88,7 +88,7 @@
 
                                         <label class="input">
                                             <span style="font-size: 18px">รหัสหัวข้อข่าว</span>
-                                            <input type="text" id="NEWS_TOPIC_ID" style="background-color: #f1f1f1;" disabled="disabled" value="{{$Topicdata->NEWS_TOPIC_ID}}" name="NEWS_TOPIC_ID" placeholder="รหัสหัวข้อข่าว">
+                                            <input type="text" id="NEWS_TOPIC_ID" style="background-color: #f1f1f1;"  value="{{$Topicdata->NEWS_TOPIC_ID}}" name="NEWS_TOPIC_ID" placeholder="รหัสหัวข้อข่าว">
                                         </label>
                                     </section>
 
@@ -128,7 +128,7 @@
                                 <span style="font-size: 20px;color: #3276b1;">กรณีขึ้นย่อหน้าใหม่: Enter </span>
                                 <div  style="border: 1px solid #BDBDBD">
 
-
+                                    <input type="hidden" name="NEWS_TOPIC_DETAIL" id="NEWS_TOPIC_DETAIL" />
                                     <textarea class="summernote" name="summernote">{{$Topicdata->NEWS_TOPIC_DETAIL}}</textarea>
                                     {{--<div class="summernote"  >--}}
 
@@ -233,7 +233,7 @@
                                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
 
                                                 <input type="text" name="START_DATE"  value="{{get_date_notime_en($Topicdata->START_DATE)}}" class="mea_date_picker" id="START_DATE" placeholder="วันที่เริ่มต้น"  >
-                                                <input type="hidden" id="hd_START_DATE" value="{{get_date_sql($Topicdata->START_DATE)}}">
+                                                <input type="hidden" name="hd_START_DATE" id="hd_START_DATE" value="{{get_date_sql($Topicdata->START_DATE)}}">
                                             </label>
                                         </section>
 
@@ -241,7 +241,7 @@
                                             <span style="font-size: 18px">วันที่สิ้นสุด</span>
                                             <label class="input"> <i class="icon-append fa fa-calendar"></i>
                                                 <input type="text" name="EXPIRE_DATE"  value="{{get_date_notime_en($Topicdata->EXPIRE_DATE)}}" class="mea_date_picker" id="EXPIRE_DATE" placeholder="วันที่สิ้นสุด" >
-                                                <input type="hidden" id="hd_EXPIRE_DATE" value="{{get_date_sql($Topicdata->EXPIRE_DATE)}}">
+                                                <input type="hidden" name="hd_EXPIRE_DATE" id="hd_EXPIRE_DATE" value="{{get_date_sql($Topicdata->EXPIRE_DATE)}}">
 
                                                 {{--class="datepicker" data-dateformat='dd/mm/yy'--}}
                                             </label>
@@ -309,7 +309,7 @@
                                 </fieldset>
 
                                 <footer>
-                                    <button type="button" id=“btn_form”  class="btn btn-primary">ส่งข้อมูล
+                                    <button type="button" id="btn_form"  class="btn btn-primary">ส่งข้อมูล
                                     </button>
                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                         ยกเลิก
@@ -472,93 +472,97 @@
 
                 if($registerForm.valid()){
 
-                    var dataimport = new FormData();
+                    $("#NEWS_TOPIC_DETAIL").val($('.summernote').code());
 
-                    var NEWS_CATE_ID = $("#NEWS_CATE_ID_select").val();
-                    var NEWS_TOPIC_ID = $("#NEWS_TOPIC_ID").val();
-                    var FILE_NAME= $("#FILE_NAME").val();
+                    $("#smart-form-register").submit();
 
-                    var NEWS_TOPIC_FLAG =  $('input[name=NEWS_TOPIC_FLAG]:checked').val();
-                    var START_DATE= $("#hd_START_DATE").val();
-                    var EXPIRE_DATE= $("#hd_EXPIRE_DATE").val();
-
-                    var NEWS_TOPIC_KEYWORD = $("#NEWS_TOPIC_KEYWORD").val();
-
-                    var NEWS_TOPIC_DETAIL = $('.summernote').code();
-
-
-                    var Notice = $('input[name=Notice]:checked').val();
-                    var Notice_start_DATE = $("#hd_Notice_start_DATE").val();
-                    var Notice_End_DATE = $("#hd_Notice_End_DATE").val();
-                    var noti_message = $("#noti_message").val();
-
-                    var THUMBNAIL = $("#thumb_current").val();
-
-
-                    dataimport.append('NEWS_CATE_ID',NEWS_CATE_ID);
-                    dataimport.append('NEWS_TOPIC_ID',NEWS_TOPIC_ID);
-                    dataimport.append('FILE_NAME',FILE_NAME);
-                    dataimport.append('NEWS_TOPIC_FLAG',NEWS_TOPIC_FLAG);
-                    dataimport.append('START_DATE',START_DATE);
-                    dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
-                    dataimport.append('NEWS_TOPIC_DETAIL',NEWS_TOPIC_DETAIL);
-                    dataimport.append('NEWS_TOPIC_KEYWORD',NEWS_TOPIC_KEYWORD);
-
-
-                    dataimport.append('Notice',Notice);
-                    dataimport.append('Notice_start_DATE',Notice_start_DATE);
-                    dataimport.append('Notice_End_DATE',Notice_End_DATE);
-                    dataimport.append('noti_message',noti_message);
-
-                    dataimport.append('THUMBNAIL',THUMBNAIL);
-
-
-
-
-                    var filesPDF = $("#importpdf").get(0).files;
-
-                    var filethumbnail = $("#thumbnail").get(0).files;
-
-                    if (filesPDF.length > 0) {
-                        dataimport.append("filesPDF", filesPDF[0]);
-                    }
-                    if (filethumbnail.length > 0) {
-                        dataimport.append("filethumbnail", filethumbnail[0]);
-                    }
-
-
-//                                        alert(filesPDF);
-                    $.ajax({
-
-                        type: 'POST', // or post?
-//                dataType: 'json',
-                        contentType: false,
-                        processData: false,
-                        url: '/admin/news/edits',
-                        data: dataimport,
-
-                        success: function(data){
-
-                            if(data.success){
-
-                                AlertSuccess("แก้ไขหัวข้อข่าวเรียบร้อยแล้ว",function(){
-
-                                    window.location.href = "/admin/news";
-                                });
-
-                            }else {
-                                Alert("",data.html,null,null);
-                            }
-
-//                Alert('OK', "ข้อมูลได้ถูก update เรียบร้อยแล้ว");
-
-                        },
-                        error: function(xhr, textStatus, thrownError) {
-
-                        }
-                    });
-
-                    return false;
+//                    var dataimport = new FormData();
+//
+//                    var NEWS_CATE_ID = $("#NEWS_CATE_ID_select").val();
+//                    var NEWS_TOPIC_ID = $("#NEWS_TOPIC_ID").val();
+//                    var FILE_NAME= $("#FILE_NAME").val();
+//
+//                    var NEWS_TOPIC_FLAG =  $('input[name=NEWS_TOPIC_FLAG]:checked').val();
+//                    var START_DATE= $("#hd_START_DATE").val();
+//                    var EXPIRE_DATE= $("#hd_EXPIRE_DATE").val();
+//
+//                    var NEWS_TOPIC_KEYWORD = $("#NEWS_TOPIC_KEYWORD").val();
+//
+//                    var NEWS_TOPIC_DETAIL = $('.summernote').code();
+//
+//
+//                    var Notice = $('input[name=Notice]:checked').val();
+//                    var Notice_start_DATE = $("#hd_Notice_start_DATE").val();
+//                    var Notice_End_DATE = $("#hd_Notice_End_DATE").val();
+//                    var noti_message = $("#noti_message").val();
+//
+//                    var THUMBNAIL = $("#thumb_current").val();
+//
+//
+//                    dataimport.append('NEWS_CATE_ID',NEWS_CATE_ID);
+//                    dataimport.append('NEWS_TOPIC_ID',NEWS_TOPIC_ID);
+//                    dataimport.append('FILE_NAME',FILE_NAME);
+//                    dataimport.append('NEWS_TOPIC_FLAG',NEWS_TOPIC_FLAG);
+//                    dataimport.append('START_DATE',START_DATE);
+//                    dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
+//                    dataimport.append('NEWS_TOPIC_DETAIL',NEWS_TOPIC_DETAIL);
+//                    dataimport.append('NEWS_TOPIC_KEYWORD',NEWS_TOPIC_KEYWORD);
+//
+//
+//                    dataimport.append('Notice',Notice);
+//                    dataimport.append('Notice_start_DATE',Notice_start_DATE);
+//                    dataimport.append('Notice_End_DATE',Notice_End_DATE);
+//                    dataimport.append('noti_message',noti_message);
+//
+//                    dataimport.append('THUMBNAIL',THUMBNAIL);
+//
+//
+//
+//
+//                    var filesPDF = $("#importpdf").get(0).files;
+//
+//                    var filethumbnail = $("#thumbnail").get(0).files;
+//
+//                    if (filesPDF.length > 0) {
+//                        dataimport.append("filesPDF", filesPDF[0]);
+//                    }
+//                    if (filethumbnail.length > 0) {
+//                        dataimport.append("filethumbnail", filethumbnail[0]);
+//                    }
+//
+//
+////                                        alert(filesPDF);
+//                    $.ajax({
+//
+//                        type: 'POST', // or post?
+////                dataType: 'json',
+//                        contentType: false,
+//                        processData: false,
+//                        url: '/admin/news/edits',
+//                        data: dataimport,
+//
+//                        success: function(data){
+//
+//                            if(data.success){
+//
+//                                AlertSuccess("แก้ไขหัวข้อข่าวเรียบร้อยแล้ว",function(){
+//
+//                                    window.location.href = "/admin/news";
+//                                });
+//
+//                            }else {
+//                                Alert("",data.html,null,null);
+//                            }
+//
+////                Alert('OK', "ข้อมูลได้ถูก update เรียบร้อยแล้ว");
+//
+//                        },
+//                        error: function(xhr, textStatus, thrownError) {
+//
+//                        }
+//                    });
+//
+//                    return false;
                 }
                 return false;
 

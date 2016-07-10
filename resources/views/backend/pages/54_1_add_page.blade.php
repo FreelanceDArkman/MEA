@@ -195,7 +195,7 @@
 
 
                                 <footer>
-                                    <button type="button" id=“btn_form”  class="btn btn-primary">ส่งข้อมูล
+                                    <button type="button" id="btn_form"  class="btn btn-primary">ส่งข้อมูล
                                     </button>
                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                         ยกเลิก
@@ -253,43 +253,46 @@
 
 
 
+           $("#smart-form-register").validate({
+
+
+
+                // Rules for form validation
+                rules : {
+                    FAQ_CATE_ID : {
+                        required : true,
+                        number : true
+
+                    },
+                    FAQ_CATE_NAME : {
+                        required : true
+
+                    },
+                    FAQ_CATE_KEYWORD : {
+                        required : true
+                    }
+
+
+                },
+
+                errorPlacement : function(error, element) {
+                    error.insertAfter(element.parent());
+
+//                    alert("error");
+                }
+            });
 
             $("#btn_form").on('click',function(){
 
 
-                var $registerForm = $("#smart-form-register").validate({
+
+
+                if($("#smart-form-register").valid()){
 
 
 
-                    // Rules for form validation
-                    rules : {
-                        FAQ_CATE_ID : {
-                            required : true,
-                            number : true
 
-                        },
-                        FAQ_CATE_NAME : {
-                            required : true
-
-                        },
-                        FAQ_CATE_KEYWORD : {
-                            required : true
-                        }
-
-
-                    },
-
-                    errorPlacement : function(error, element) {
-                        error.insertAfter(element.parent());
-
-//                    alert("error");
-                    }
-                });
-
-
-                if($registerForm.valid()){
-
-                    var dataimport = new FormData();
+//                    var dataimport = new FormData();
 
                     var FAQ_CATE_ID = $("#FAQ_CATE_ID").val();
                     var FAQ_CATE_NAME = $("#FAQ_CATE_NAME").val();
@@ -304,48 +307,54 @@
                     var FAQ_CONTACT_DEPT = $("#FAQ_CONTACT_DEPT").val();
                     var FAQ_CONTACT_PHONE = $("#FAQ_CONTACT_PHONE").val();
 
+//
+//
+//
+//                    dataimport.append('FAQ_CATE_ID',FAQ_CATE_ID);
+//                    dataimport.append('FAQ_CATE_NAME',FAQ_CATE_NAME);
+//                    dataimport.append('FAQ_CATE_FLAG',FAQ_CATE_FLAG);
+//                    dataimport.append('START_DATE',START_DATE);
+//                    dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
+//                    dataimport.append('FAQ_CATE_KEYWORD',FAQ_CATE_KEYWORD);
+//                    dataimport.append('FAQ_CONTACT_DEPT',FAQ_CONTACT_DEPT);
+//                    dataimport.append('FAQ_CONTACT_PHONE',FAQ_CONTACT_PHONE);
 
 
+                    var dataimport = {FAQ_CATE_ID:FAQ_CATE_ID,FAQ_CATE_NAME:FAQ_CATE_NAME,FAQ_CATE_FLAG:FAQ_CATE_FLAG,START_DATE:START_DATE,
+                        EXPIRE_DATE:EXPIRE_DATE,FAQ_CATE_KEYWORD:FAQ_CATE_KEYWORD,FAQ_CONTACT_DEPT:FAQ_CONTACT_DEPT,FAQ_CONTACT_PHONE:FAQ_CONTACT_PHONE}
 
-                    dataimport.append('FAQ_CATE_ID',FAQ_CATE_ID);
-                    dataimport.append('FAQ_CATE_NAME',FAQ_CATE_NAME);
-                    dataimport.append('FAQ_CATE_FLAG',FAQ_CATE_FLAG);
-                    dataimport.append('START_DATE',START_DATE);
-                    dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
-                    dataimport.append('FAQ_CATE_KEYWORD',FAQ_CATE_KEYWORD);
-                    dataimport.append('FAQ_CONTACT_DEPT',FAQ_CONTACT_DEPT);
-                    dataimport.append('FAQ_CONTACT_PHONE',FAQ_CONTACT_PHONE);
+                    MeaAjax(dataimport,'add',function(data){
+                        if(data.success){
 
+                            AlertSuccess("บันทึกหมวดหมู่ถามตอบเรียบร้อยแล้ว",function(){
 
-                    $.ajax({
+                                window.location.href = "/admin/faqcate";
+                            });
 
-                        type: 'POST', // or post?
-//                dataType: 'json',
-                        contentType: false,
-                        processData: false,
-                        url: 'add',
-                        data: dataimport,
-
-                        success: function(data){
-
-                            if(data.success){
-
-                                AlertSuccess("บันทึกหมวดหมู่ถามตอบเรียบร้อยแล้ว",function(){
-
-                                    window.location.href = "/admin/faqcate";
-                                });
-
-                            }else {
-                                Alert("",data.html,null,null);
-                            }
-
-
-
-                        },
-                        error: function(xhr, textStatus, thrownError) {
-
+                        }else {
+                            Alert("",data.html,null,null);
                         }
                     });
+//                    $.ajax({
+//
+//                        type: 'POST', // or post?
+////                dataType: 'json',
+//                        contentType: false,
+//                        processData: false,
+//                        url: 'add',
+//                        data: dataimport,
+//
+//                        success: function(data){
+//
+//
+//
+//
+//
+//                        },
+//                        error: function(xhr, textStatus, thrownError) {
+//
+//                        }
+//                    });
 
 
                     return false;

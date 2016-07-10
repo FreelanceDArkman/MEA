@@ -175,11 +175,6 @@ class C53_2Controller extends Controller
 
 
 
-
-
-
-
-
     public function postAdd(Request $request)
     {
 
@@ -187,14 +182,16 @@ class C53_2Controller extends Controller
         $rethtml = "";
 
 
-        $NEWS_CATE_ID =  $request->input("NEWS_CATE_ID");
+
+
+        $NEWS_CATE_ID =  $request->input("NEWS_CATE_ID_select");
 //        $NEWS_TOPIC_ID = $request->input("NEWS_TOPIC_ID");
 
 
         $FILE_NAME = $request->input("FILE_NAME");
         $NEWS_TOPIC_FLAG = $request->input("NEWS_TOPIC_FLAG");
-        $START_DATE= $request->input("START_DATE");
-        $EXPIRE_DATE = $request->input("EXPIRE_DATE");
+        $START_DATE= $request->input("hd_START_DATE");
+        $EXPIRE_DATE = $request->input("hd_EXPIRE_DATE");
         $NEWS_TOPIC_DETAIL = $request->input("NEWS_TOPIC_DETAIL");
 
         $NEWS_TOPIC_KEYWORD = $request->input("NEWS_TOPIC_KEYWORD");
@@ -218,9 +215,9 @@ class C53_2Controller extends Controller
             $rethtml = "news_cate_id ที่ท่านเลือกมีอยู่ในระบบแล้ว";
 
         }else{
-            $thumbnail = $request->file('filethumbnail');
+            $thumbnail = $request->file('thumbnail');
 
-            $importpdf =  $request->file('filesPDF');
+            $importpdf =  $request->file('importpdf');
 
             $today = new Date();
 
@@ -365,8 +362,8 @@ class C53_2Controller extends Controller
 
 
 
-
-        return response()->json(array('success' => $ret, 'html'=> $rethtml ));
+        return redirect()->to('admin/news')->with('message','ok');
+//        return response()->json(array('success' => $ret, 'html'=> $rethtml ));
 
 
 
@@ -383,14 +380,14 @@ class C53_2Controller extends Controller
         $rethtml = "";
 
 
-        $NEWS_CATE_ID =  $request->input("NEWS_CATE_ID");
+        $NEWS_CATE_ID =  $request->input("NEWS_CATE_ID_select");
         $NEWS_TOPIC_ID = $request->input("NEWS_TOPIC_ID");
 
 
         $FILE_NAME = $request->input("FILE_NAME");
         $NEWS_TOPIC_FLAG = $request->input("NEWS_TOPIC_FLAG");
-        $START_DATE= $request->input("START_DATE");
-        $EXPIRE_DATE = $request->input("EXPIRE_DATE");
+        $START_DATE= $request->input("hd_START_DATE");
+        $EXPIRE_DATE = $request->input("hd_hEXPIRE_DATE");
         $NEWS_TOPIC_DETAIL = $request->input("NEWS_TOPIC_DETAIL");
 
         $NEWS_TOPIC_KEYWORD = $request->input("NEWS_TOPIC_KEYWORD");
@@ -403,19 +400,10 @@ class C53_2Controller extends Controller
         $Notice_start_DATE = $request->input("Notice_start_DATE");
         $Notice_End_DATE = $request->input("Notice_End_DATE");
         $noti_message = $request->input("noti_message");
-//        $chk = "SELECT COUNT(NEWS_TOPIC_ID) As total FROM TBL_NEWS_TOPIC WHERE NEWS_CATE_ID = ".$NEWS_CATE_ID . " AND NEWS_TOPIC_ID = ".$NEWS_TOPIC_ID;
-//        $all = DB::select(DB::raw($chk));
-//        $total =  $all[0]->total;
-
-
-//        if($total > 0){
 //
-//            $rethtml = "news_cate_id ที่ท่านเลือกมีอยู่ในระบบแล้ว";
-//
-//        }else{
-            $thumbnail = $request->file('filethumbnail');
+            $thumbnail = $request->file('thumbnail');
 
-            $importpdf =  $request->file('filesPDF');
+            $importpdf =  $request->file('importpdf');
 
             $today = new Date();
 
@@ -452,14 +440,7 @@ class C53_2Controller extends Controller
             }
 
 
-            //                Download PDF: multiple
-//
-//                15,16,3,4,5,6,9,10,11,12,13,14
-//
-//                Content View (Rich box) optional to download or show content  : multiple
-//                9,1,2
-//                Content Only: Only one
-//
+
 //                7,8
             $THUMBNAIL = "";
             $currentthumb = $request->input("THUMBNAIL");
@@ -534,10 +515,8 @@ class C53_2Controller extends Controller
                 'NEWS_TOPIC_KEYWORD' =>$NEWS_TOPIC_KEYWORD
             );
 
-//            array_push($data,array(
-//
-//
-//            ));
+//        var_dump($data);
+
             $ret = DB::table('TBL_NEWS_TOPIC')->where('NEWS_CATE_ID',"=",$NEWS_CATE_ID)->where('NEWS_TOPIC_ID','=',$NEWS_TOPIC_ID)->update($data);
 //        }
 
@@ -553,8 +532,10 @@ class C53_2Controller extends Controller
         }
 
 
-        return response()->json(array('success' => $ret, 'html'=> $rethtml ));
 
+//        return response()->json(array('success' => $ret, 'html'=> $rethtml ));
+
+        return redirect()->to('admin/news')->with('message','ok');
 
 
 
@@ -563,7 +544,7 @@ class C53_2Controller extends Controller
 
 
     public function imageupload(Request $request){
-        $file = $request->file('file');
+        $file = $request->file('files');
 
 
         $d1 = new Date();

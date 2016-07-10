@@ -224,7 +224,7 @@
 
 
                                 <footer>
-                                    <button type="button" id=“btn_form” class="btn btn-primary">ส่งข้อมูล
+                                    <button type="button" id="btn_form" class="btn btn-primary">ส่งข้อมูล
                                     </button>
                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                         ยกเลิก
@@ -303,47 +303,45 @@
             }, "Please Choose one");
 
 
+             $("#smart-form-register").validate({
 
+
+                // Rules for form validation
+                rules : {
+                    FAQ_QUESTION_ID : {
+                        required : true,
+                    },
+                    FAQ_QUESTION_DETAIL : {
+                        required : true
+                    },
+                    FAQ_ANSWER_ID : {
+                        required : true,
+                    },
+                    FAQ_ANSWER_DETAIL : {
+                        required : true,
+                    },
+                    FAQ_QUESTION_KEYWORD : {
+                        required : true,
+                    },
+                    FAQ_ANSWER_KEYWORD : {
+                        required : true,
+                    },
+
+
+                },
+
+                errorPlacement : function(error, element) {
+                    error.insertAfter(element.parent());
+
+                }
+            });
 
             $("#btn_form").on('click',function(){
 
-                var $registerForm = $("#smart-form-register").validate({
 
+                if($("#smart-form-register").valid()){
 
-                    // Rules for form validation
-                    rules : {
-                        FAQ_QUESTION_ID : {
-                            required : true,
-                        },
-                        FAQ_QUESTION_DETAIL : {
-                            required : true
-                        },
-                        FAQ_ANSWER_ID : {
-                            required : true,
-                        },
-                        FAQ_ANSWER_DETAIL : {
-                            required : true,
-                        },
-                        FAQ_QUESTION_KEYWORD : {
-                            required : true,
-                        },
-                        FAQ_ANSWER_KEYWORD : {
-                            required : true,
-                        },
-
-
-                    },
-
-                    errorPlacement : function(error, element) {
-                        error.insertAfter(element.parent());
-
-                    }
-                });
-
-
-                if($registerForm.valid()){
-
-                    var dataimport = new FormData();
+//                    var dataimport = new FormData();
 
                     var FAQ_CATE_ID = $("#NEWS_CATE_ID_select").val();
                     var FAQ_QUESTION_ID = $("#FAQ_QUESTION_ID").val();
@@ -361,49 +359,76 @@
                     var FAQ_ANSWER_KEYWORD = $("#FAQ_ANSWER_KEYWORD").val();
 
 
+//                    dataimport.append('FAQ_CATE_ID',FAQ_CATE_ID);
+//                    dataimport.append('FAQ_QUESTION_ID',FAQ_QUESTION_ID);
+//                    dataimport.append('FAQ_QUESTION_DETAIL',FAQ_QUESTION_DETAIL);
+//                    dataimport.append('FAQ_ANSWER_ID',FAQ_ANSWER_ID);
+//                    dataimport.append('FAQ_ANSWER_DETAIL',FAQ_ANSWER_DETAIL);
+//                    dataimport.append('FAQ_TOPIC_FLAG',FAQ_TOPIC_FLAG);
+//                    dataimport.append('START_DATE',START_DATE);
+//                    dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
+//
+//                    dataimport.append('FAQ_QUESTION_KEYWORD',FAQ_QUESTION_KEYWORD);
+//                    dataimport.append('FAQ_ANSWER_KEYWORD',FAQ_ANSWER_KEYWORD);
 
+                    var dataimport = {
+                        FAQ_CATE_ID:FAQ_CATE_ID,
+                        FAQ_QUESTION_ID:FAQ_QUESTION_ID,
+                        FAQ_QUESTION_DETAIL:FAQ_QUESTION_DETAIL,
+                        FAQ_ANSWER_ID:FAQ_ANSWER_ID,
+                        FAQ_ANSWER_DETAIL:FAQ_ANSWER_DETAIL,
+                        FAQ_TOPIC_FLAG:FAQ_TOPIC_FLAG,
+                        START_DATE:START_DATE,
+                        EXPIRE_DATE:EXPIRE_DATE,
+                        FAQ_QUESTION_KEYWORD:FAQ_QUESTION_KEYWORD,
+                        FAQ_ANSWER_KEYWORD:FAQ_ANSWER_KEYWORD
+                    };
 
-                    dataimport.append('FAQ_CATE_ID',FAQ_CATE_ID);
-                    dataimport.append('FAQ_QUESTION_ID',FAQ_QUESTION_ID);
-                    dataimport.append('FAQ_QUESTION_DETAIL',FAQ_QUESTION_DETAIL);
-                    dataimport.append('FAQ_ANSWER_ID',FAQ_ANSWER_ID);
-                    dataimport.append('FAQ_ANSWER_DETAIL',FAQ_ANSWER_DETAIL);
-                    dataimport.append('FAQ_TOPIC_FLAG',FAQ_TOPIC_FLAG);
-                    dataimport.append('START_DATE',START_DATE);
-                    dataimport.append('EXPIRE_DATE',EXPIRE_DATE);
+                    MeaAjax(dataimport,'add',function(data){
+                        if(data.success){
 
-                    dataimport.append('FAQ_QUESTION_KEYWORD',FAQ_QUESTION_KEYWORD);
-                    dataimport.append('FAQ_ANSWER_KEYWORD',FAQ_ANSWER_KEYWORD);
+                            AlertSuccess("บันทึกหัวข้อถาม-ตอบเรียบร้อยแล้ว",function(){
 
+                                window.location.href = "/admin/faqtopic";
+                            });
 
-
-                    $.ajax({
-
-                        type: 'POST', // or post?
-//                dataType: 'json',
-                        contentType: false,
-                        processData: false,
-                        url: 'add',
-                        data: dataimport,
-
-                        success: function(data){
-
-                            if(data.success){
-
-                                AlertSuccess("บันทึกหัวข้อถาม-ตอบเรียบร้อยแล้ว",function(){
-
-                                    window.location.href = "/admin/faqtopic";
-                                });
-
-                            }else {
-                                Alert("",data.html,null,null);
-                            }
-
-                        },
-                        error: function(xhr, textStatus, thrownError) {
-
+                        }else {
+                            Alert("",data.html,null,null);
                         }
+
                     });
+
+
+//
+//
+//
+//                    $.ajax({
+//
+//                        type: 'POST', // or post?
+////                dataType: 'json',
+//                        contentType: false,
+//                        processData: false,
+//                        url: 'add',
+//                        data: dataimport,
+//
+//                        success: function(data){
+//
+//                            if(data.success){
+//
+//                                AlertSuccess("บันทึกหัวข้อถาม-ตอบเรียบร้อยแล้ว",function(){
+//
+//                                    window.location.href = "/admin/faqtopic";
+//                                });
+//
+//                            }else {
+//                                Alert("",data.html,null,null);
+//                            }
+//
+//                        },
+//                        error: function(xhr, textStatus, thrownError) {
+//
+//                        }
+//                    });
 
 
                     return false;

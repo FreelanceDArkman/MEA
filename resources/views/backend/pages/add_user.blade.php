@@ -245,7 +245,7 @@
                                                     </div>
                                             </fieldset>
                                                 <footer>
-                                                    <button type="button" id=“btn_form” class="btn btn-primary">ส่งข้อมูล
+                                                    <button type="button" id="btn_form" class="btn btn-primary">ส่งข้อมูล
                                                     </button>
                                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                                         ยกเลิก

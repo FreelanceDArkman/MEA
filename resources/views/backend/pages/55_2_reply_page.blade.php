@@ -117,7 +117,7 @@
 
 
                                 <footer>
-                                    <button type="button"  id=“btn_form” class="btn btn-primary">ส่งข้อความ
+                                    <button type="button"  id="btn_form" class="btn btn-primary">ส่งข้อความ
                                     </button>
                                     <button type="button" class="btn btn-default" onclick="window.history.back();">
                                         ยกเลิก
@@ -221,7 +221,7 @@
                 });
 
                 if($registerForm.valid()){
-                    var dataimport = new FormData();
+//                    var dataimport = new FormData();
 
                     var INFM_ID = $("#INFM_ID").val();
                     var INFM_EMAIL = $("#INFM_EMAIL").val();
@@ -231,41 +231,30 @@
 
 
 
-                    dataimport.append('INFM_ID',INFM_ID);
-                    dataimport.append('INFM_EMAIL',INFM_EMAIL);
-                    dataimport.append('INFM_topic',INFM_topic);
-                    dataimport.append('Detail',Detail);
-                    dataimport.append('REMARK',REMARK);
+                    var dataimport = {
+                        INFM_ID:INFM_ID,
+                        INFM_EMAIL:INFM_EMAIL,
+                        INFM_topic:INFM_topic,
+                        Detail:Detail,
+                        REMARK:REMARK
 
-                    $.ajax({
+                    };
 
-                        type: 'POST', // or post?
-//                dataType: 'json',
-                        contentType: false,
-                        processData: false,
-                        url: '/admin/cmail/reply',
-                        data: dataimport,
+                    MeaAjax(dataimport,'/admin/cmail/reply',function(data){
+                        if(data.success){
 
-                        success: function(data){
+                            AlertSuccess("ส่งอีเมล์ ตอบกลับไปยังท่านสมาชิกเรียบร้อยแล้ว",function(){
 
-                            if(data.success){
+                                window.location.href = "/admin/cmail";
+                            });
 
-                                AlertSuccess("ส่งอีเมล์ ตอบกลับไปยังท่านสมาชิกเรียบร้อยแล้ว",function(){
-
-                                    window.location.href = "/admin/cmail";
-                                });
-
-                            }else {
-                                Alert("",data.html,null,null);
-                            }
-
-
-
-                        },
-                        error: function(xhr, textStatus, thrownError) {
-
+                        }else {
+                            Alert("",data.html,null,null);
                         }
+
                     });
+
+
 
 
                     return false;

@@ -368,6 +368,13 @@ $arrSidebar =getSideBar($data);
     $(document).ready(function() {
 
 
+        @if (Session::has('message'))
+             AlertSuccess("บันทึกหัวข้อข่าวเรียบร้อยแล้ว",function(){
+
+           // window.location.href = "/admin/news";
+        });
+        @endif
+
         //add current Pageing
         $('html').append('<input type="hidden" value="1" id="currentpage_search" />');
         $('html').append('<input type="hidden" value="0" id="hd_NEWS_TOPIC_FLAG" />');
