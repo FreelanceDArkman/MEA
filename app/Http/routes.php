@@ -309,6 +309,7 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::group(['prefix' => 'trends'] , function() {
             Route::get('/','TrendsController@getIndex');
+            Route::get('{id}','TrendsController@getIndex')->where('id', '[0-9]+');
 
             Route::post('/','TrendsController@getIndexbysearchColum');
 

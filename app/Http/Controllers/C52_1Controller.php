@@ -89,23 +89,13 @@ class C52_1Controller extends Controller
 
         }
 
-
         if($deleted)  {
             return response()->json(["ret" => "1"]);
         }else{
             return response()->json(["ret" => "0"]);
         }
 
-            //return redirect()->action('UserGroupController@userGroups');
 
-//        if($request->ajax())
-//        {
-//            $user_group_exist = UserGroup::UserGroupExist($request->input('group_id'))->first();
-//            if(!$user_group_exist) return response()->json(["errors" => "ไม่สามารถลบข้อมูลกลุ่มผู้ใช้ได้"]);
-//
-//            else return response()->json(["errors" => "ไม่สามารถลบข้อมูลกลุ่มผู้ใช้ได้"]);
-//        }
-//        return response()->json(["errors" => "ไม่สามารถลบข้อมูลกลุ่มผู้ใช้ได้"]);
     }
 
 

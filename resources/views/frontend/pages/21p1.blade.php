@@ -81,28 +81,55 @@
                 <!--End Service Block v3-->
 
                 <hr>
+                <?php
 
+                $page = 1;
+                $p = Request::path();
+                $arrP = explode('/',$p);
+
+
+                //                    var_dump(count($arrP));
+
+                if(count($arrP) > 1){
+                    if($arrP[1] != null){
+                        $page = $arrP[1];
+                    }
+                }
+
+
+
+
+
+                function getde ($page,$target){
+                    $ret = "";
+                    if($page== $target){
+                        $ret = "active";
+                    }
+
+                    return $ret;
+                }
+                ?>
                 <div class="tab-v2">
                     <ul class="nav nav-tabs">
 
                         @if($show2 == 1)
-                        <li class="active"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
-                        <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,2) }}</a></li>
+                        <li class="<?php echo getde($page,1) ?>"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
+                        <li class="<?php echo getde($page,2) ?>"><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,2) }}</a></li>
                             @if(get_is_before_status_2538() == 0)
-                        <li class=""><a href="#messages-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,3) }}</a></li>
+                        <li class="<?php echo getde($page,3) ?>"><a href="#messages-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,3) }}</a></li>
                             @endif
                             @elseif($show2 == 2)
-                            <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
-                            <li class="active"><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,2) }}</a></li>
+                            <li class="<?php echo getde($page,1) ?>"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
+                            <li class="<?php echo getde($page,2) ?>"><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,2) }}</a></li>
                             @if(get_is_before_status_2538() == 0)
-                            <li class=""><a href="#messages-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,3) }}</a></li>
+                            <li class="<?php echo getde($page,3) ?>"><a href="#messages-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,3) }}</a></li>
                             @endif
                         @elseif($show2 == 3)
 
-                            <li class=""><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
-                            <li class=""><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,2) }}</a></li>
+                            <li class="<?php echo getde($page,1) ?>"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
+                            <li class="<?php echo getde($page,2) ?>"><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,2) }}</a></li>
                             @if(get_is_before_status_2538() == 0)
-                            <li class="active"><a href="#messages-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,3) }}</a></li>
+                            <li class="<?php echo getde($page,3) ?>"><a href="#messages-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,3) }}</a></li>
                             @endif
                         @endif
 
@@ -110,7 +137,7 @@
                     <div class="tab-content">
 
                         @if($show2 == 1)
-                            <div class="tab-pane fade active in" id="home-1" style="position: relative" >
+                            <div class="tab-pane fade <?php echo getde($page,1) ?> in" id="home-1" style="position: relative" >
                             @else
                                 <div class="tab-pane fade" id="home-1" style="position: relative" >
                             @endif
@@ -148,7 +175,7 @@
                         </div>
 
                                 @if($show2 == 2)
-                        <div class="tab-pane fade active in" id="profile-1">
+                        <div class="tab-pane fade <?php echo getde($page,2) ?> in" id="profile-1">
                             @else
                                 <div class="tab-pane fade " id="profile-1">
                                 @endif
@@ -270,7 +297,7 @@
 
                            @if(get_is_before_status_2538() == 0)
                                 @if($show2 == 3)
-                            <div class="tab-pane fade active in" id="messages-1">
+                            <div class="tab-pane fade <?php echo getde($page,3) ?> in" id="messages-1">
                                      @else
                             <div class="tab-pane fade" id="messages-1">
                                     @endif

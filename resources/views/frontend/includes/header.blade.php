@@ -93,9 +93,9 @@ $current = Route::getCurrentRoute()->getPath();
                             <a href="javascript:void(0);">{{ getGoupName($data,21) }}</a>
                             <ul class="dropdown-menu">
                                 <li><a href="/trends">{{ getMenuName($data,21,1) }}</a></li>
-                                <li><a href="/reportingmemberbenefit">{{ getMenuName($data,21,2)}}</a></li>
+                                <li><a href="/trends/2">{{ getMenuName($data,21,2)}}</a></li>
                                 @if(get_is_before_status_2538() == 0)
-                                <li><a  href="/compares">{{ getMenuName($data,21,3) }}</a></li>
+                                <li><a  href="/trends/3">{{ getMenuName($data,21,3) }}</a></li>
                                 @endif
 
                             </ul>
