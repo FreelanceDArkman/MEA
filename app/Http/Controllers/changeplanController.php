@@ -324,7 +324,7 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND en
 
         $arrDropYear = array();
         $count = 0;
-        $ret ="<option selected='selected'>เลือกปี</option>";
+        $ret ="<option selected='selected' value='1990'>เลือกปี</option>";
         for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
             $arrDropYear[$count] = $i;
 
@@ -393,6 +393,7 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
             'Isaccess'=>$Isaccess,
             'quizdoit' => $quizdoit,
             'numberofchange'=>$numberofchange
+
         ]);
     }
 

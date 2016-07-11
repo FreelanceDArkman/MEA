@@ -328,13 +328,13 @@
                         </div>
 
                                 @if($ishowhis)
-                                <div class="tab-pane fade  <?php echo getde($page,2) ?>in" id="profile-1">
+                                <div class="tab-pane fade  <?php echo getde($page,2) ?> in" id="profile-1">
                                 @else
                                 <div class="tab-pane fade <?php echo getde($page,2) ?> in" id="profile-1">
                                 @endif
 
-
-                                    <form class="form-inline mea_searchbox" role="form" method="post" action="{{action('changeplanController@getIndexbysearch')}}">
+{{--//action="{{action('changeplanController@getIndexbysearch')}}"--}}
+                                    <form class="form-inline mea_searchbox" role="form" method="post"  action="/changeplan/{{$page}}">
                                         {!! csrf_field() !!}
                                         <div class="form-group">
                                             <label class="sr-only" for="exampleInputEmail2">Email address</label>

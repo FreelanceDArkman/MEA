@@ -85,7 +85,7 @@ WHERe sav.EMP_ID = '".get_userID()."' ORDER BY sav.CHANGE_SAVING_RATE_DATE DESC"
 
         $arrDropYear = array();
         $count = 0;
-        $ret ="<option selected='selected'>เลือกปี</option>";
+        $ret ="<option selected='selected' value='1999'>เลือกปี</option>";
         for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
             $arrDropYear[$count] = $i;
 
