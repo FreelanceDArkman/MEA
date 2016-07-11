@@ -312,7 +312,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('{id}','TrendsController@getIndex')->where('id', '[0-9]+');
 
             Route::post('/','TrendsController@getIndexbysearchColum');
-            Route::get('{id}','TrendsController@getIndexbysearchColum')->where('id', '[0-9]+');
+//            Route::get('{id}','TrendsController@getIndexbysearchColum')->where('id', '[0-9]+');
 
             Route::get('/s2','TrendsController@getIndex');
             Route::post('/s2','TrendsController@getIndexbysearchgp2');
@@ -345,7 +345,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/changeplan','changeplanController@InsertInvestPlan');
             Route::get('/delplan1','changeplanController@deleplan');
             Route::post('/', 'changeplanController@getIndexbysearch');
-            Route::get('{id}','changeplanController@getIndexbysearch')->where('id', '[0-9]+');
+//            Route::get('{id}','changeplanController@getIndexbysearch')->where('id', '[0-9]+');
 //            Route::get('{id}', 'QaController@getIndexByID')->where('id', '[0-9]+');
 
 
