@@ -4,6 +4,16 @@ use Jenssegers\Date\Date;
 use Illuminate\Support\Facades\DB;
 
 
+if (!function_exists('getfilerAndDup')) {
+
+    function getfilerAndDup($pathName){
+       
+
+    }
+
+}
+
+
 
 if (!function_exists('getClientLink')) {
 
@@ -25,6 +35,10 @@ if (!function_exists('getClientLink')) {
     }
 
 }
+
+
+
+
 
 if (!function_exists('getManual_admin')) {
 

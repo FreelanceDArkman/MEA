@@ -26,9 +26,9 @@
          </div>
 
             
-
+        {{$showsearch}}
           <div class="col-md-9">
-             
+            
               @if($showsearch)
               <div id="main"  style="display:none;">
                   @else
@@ -101,7 +101,7 @@
                       </div>
                   </div>
 
-                  @if(@showsearch)
+                  @if($showsearch)
     <div id="all" style="display: block">
         @else
         <div id="all" style="display: none">
