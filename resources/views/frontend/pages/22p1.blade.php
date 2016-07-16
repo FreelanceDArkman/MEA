@@ -442,13 +442,21 @@
         </div>
         <!-- End Profile Content -->
     </div>
+            </div>
+
+        </div>
 <input type="hidden" id="flag100"  value="{{get_user_access_status_flag()}}" />
-    <script>
+
+
+   <script type="text/javascript">
 
 
         function  check(){
            return confirm('ท่านกำลังทำการเปลี่ยนแผนการลงทุนครบจํานวนครั้งที่กองทุนฯ กําหนด กรุณายืนยันการทำรายการ หรือยกเลิก');
         }
+
+
+       
         $(document).ready(function(){
 
 
@@ -479,26 +487,6 @@
 
 
             });
-
-//            $('#btn_changplan').on('click',function(){
-//
-//                $('#all_invest').slideUp('400',function(){
-//                    $('#invest_form').slideDown();
-//
-//                })
-//               //
-//            //invest_form
-//            });
-//
-//            $('#btn_cancelinvest').on('click',function(){
-//
-//                $('#invest_form').slideUp('400',function(){
-//                    $('#all_invest').slideDown();
-//
-//                })
-//                //
-//                //invest_form
-//            });
 
 
 
@@ -714,4 +702,4 @@
     </script>
 
 @stop
-
+ 

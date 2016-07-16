@@ -154,14 +154,32 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND YE
 
         }
 
+        //Generate Drop
+        $colObj = collect($historyPlan);
+        $max = null;
+        $min = null;
+        $max = $colObj->max('MODIFY_DATE');
+        $min = $colObj->min('MODIFY_DATE');
 
+
+        $dateMin = new Date($min);
+        $dateMax = new Date($max);
+
+
+        $yearMin = date("Y",strtotime($dateMin));
+        $yearMax = date("Y",strtotime($dateMax));
+
+
+
+        $intYearhMin =  intval($yearMin) + 543;
+        $intYearhMax= intval($yearMax) + 543;
 
         $arrDropYear = array();
         $count = 0;
         $ret ="<option value='1990'>เลือกปี</option>";
 
 
-        for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
+        for($i = $intYearhMin; $i <= $intYearhMax; $i++){
             $arrDropYear[$count] = $i;
 
             if(($i-543) == (int)$request->input('drop_year')){
@@ -321,11 +339,33 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND en
 
         }
 
+        //Generate Drop
+        $colObj = collect($historyPlan);
+        $max = null;
+        $min = null;
+        $max = $colObj->max('MODIFY_DATE');
+        $min = $colObj->min('MODIFY_DATE');
+
+
+        $dateMin = new Date($min);
+        $dateMax = new Date($max);
+
+
+        $yearMin = date("Y",strtotime($dateMin));
+        $yearMax = date("Y",strtotime($dateMax));
+
+
+
+        $intYearhMin =  intval($yearMin) + 543;
+        $intYearhMax= intval($yearMax) + 543;
+
+
+
 
         $arrDropYear = array();
         $count = 0;
         $ret ="<option selected='selected' value='1990'>เลือกปี</option>";
-        for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
+        for($i = $intYearhMin; $i <=  $intYearhMax; $i++){
             $arrDropYear[$count] = $i;
 
             $ret = $ret . "<option value=".($i-543).">".$i."</option>";

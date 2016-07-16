@@ -42,7 +42,8 @@
 
                 <hr>
                 <h4>ลืมรหัสผ่าน ?</h4>
-                <p> <a class="color-green" href="/forgotpassword">กดที่นี่</a> ตั้งค่ารหัสผ่านใหม่.</p>
+                <p> 
+<a class="color-green" style="color:#e74c3c!important;font-weight:bold;" href="/forgotpassword">กดที่นี่</a> ตั้งค่ารหัสผ่านใหม่.</p>
             </form>
         </div>
     </div><!--/row-->

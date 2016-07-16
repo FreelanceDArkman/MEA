@@ -241,7 +241,7 @@
                                         {{--</label>--}}
                                         {{--</section>--}}
 
-                                        <p><button type="submit" class="btn-u">Send Message</button></p>
+                                        <p><button type="submit" class="btn-u">ส่งข้อมูล</button></p>
                                     </fieldset>
 
                                     <div class="message">

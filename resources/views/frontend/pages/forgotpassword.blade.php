@@ -9,7 +9,8 @@
                 <div class="reg-header">
                     <h2>ลืมรหัสผ่าน?</h2>
                     @if($errors->any())
-                        <h4>{{$errors->first()}}</h4>
+                        <h4>{{ $errors->default->get(0)[0]}}</h4>
+                            <p>{{ $errors->default->get(1)[0]}}</p>
                     @endif
 
                     @if (Session::has('message'))

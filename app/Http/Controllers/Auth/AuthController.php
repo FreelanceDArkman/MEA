@@ -141,12 +141,30 @@ class AuthController extends Controller
             "username" => $request->input('username')
 
         );
+
+
         $curl = new Curl('REQUEST_NEW_PASS', $data);
 
         $result_login = $curl->getResult();
+
+
+
         if($result_login->errCode != 0) {
-            // login fail
-            return redirect()->to('forgotpassword')->withErrors(['ไม่พบชื่อ login นี้', 'The email or password you entered is incorrect.']);
+
+            $head = "";
+            $body = "";
+            switch($result_login->errCode){
+                case 7705:
+                    $head = "ไม่พบชื่อ Email ท่านในระบบ " ;
+                    $body = "ติดต่อกองจัดการกองทุนสำรองเลี้ยงชีพ ฝ่ายการเงิน";
+                    break;
+                default:
+                    $head = "ไม่พบชื่อ login นี้";
+                    $body = "'ติดต่อกองจัดการกองทุนสำรองเลี้ยงชีพ ฝ่ายการเงิน";
+                    break;
+
+            }
+            return redirect()->to('forgotpassword')->withErrors([$head, $body]);
         } else {
             // logged in
             //session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);

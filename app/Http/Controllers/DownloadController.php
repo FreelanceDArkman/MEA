@@ -14,7 +14,7 @@ class DownloadController extends Controller
     public function getIndex()
     {
         $this->pageSetting( [
-            'title' => 'Dashboard | MEA FUND'
+            'title' => 'เอกสารดาวน์โหลด | MEA FUND'
         ] );
 
 //        $sql = "SELECT * FROM tbl_news_topic WHERE NEWS_CATE_ID = 10 ORDER BY create_date DESC";
@@ -28,7 +28,7 @@ class DownloadController extends Controller
     public function getIndexByID($id)
     {
         $this->pageSetting( [
-            'title' => 'รายงานประจำปี | MEA FUND'
+            'title' => 'เอกสารดาวน์โหลด | MEA FUND'
         ] );
 
 

@@ -82,11 +82,32 @@ WHERe sav.EMP_ID = '".get_userID()."' ORDER BY sav.CHANGE_SAVING_RATE_DATE DESC"
 
         }
 
+        //Generate Drop
+        $colObj = collect($historyPlan);
+        $max = null;
+        $min = null;
+        $max = $colObj->max('CHANGE_SAVING_RATE_DATE');
+        $min = $colObj->min('CHANGE_SAVING_RATE_DATE');
+
+
+        $dateMin = new Date($min);
+        $dateMax = new Date($max);
+
+
+        $yearMin = date("Y",strtotime($dateMin));
+        $yearMax = date("Y",strtotime($dateMax));
+
+
+
+        $intYearhMin =  intval($yearMin) + 543;
+        $intYearhMax= intval($yearMax) + 543;
+
+
 
         $arrDropYear = array();
         $count = 0;
         $ret ="<option selected='selected' value='1999'>เลือกปี</option>";
-        for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
+        for($i = $intYearhMin; $i <=  $intYearhMax; $i++){
             $arrDropYear[$count] = $i;
 
             $ret = $ret . "<option value=".($i-543).">".$i."</option>";
@@ -228,12 +249,30 @@ WHERe YEAR(sav.CHANGE_SAVING_RATE_DATE) = '".$request->input('drop_year')."' AND
             $currentyear = get_date_year($effective[0]->CHANGE_SAVING_RATE_DATE);
         }
 
+        //Generate Drop
+        $colObj = collect($historyPlan);
+        $max = null;
+        $min = null;
+        $max = $colObj->max('CHANGE_SAVING_RATE_DATE');
+        $min = $colObj->min('CHANGE_SAVING_RATE_DATE');
 
+
+        $dateMin = new Date($min);
+        $dateMax = new Date($max);
+
+
+        $yearMin = date("Y",strtotime($dateMin));
+        $yearMax = date("Y",strtotime($dateMax));
+
+
+
+        $intYearhMin =  intval($yearMin) + 543;
+        $intYearhMax= intval($yearMax) + 543;
 
         $arrDropYear = array();
         $count = 0;
         $ret ="<option value='1990'>เลือกปี</option>";
-        for($i = ((int)$currentyear) - 5; $i <=  $currentyear +1; $i++){
+        for($i = $intYearhMin; $i <=  $intYearhMax; $i++){
             $arrDropYear[$count] = $i;
 
             if(($i-543) == (int)$request->input('drop_year')){

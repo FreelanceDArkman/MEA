@@ -79,7 +79,9 @@ h1, h2, h3, h4, h5, h6{
     color: #FE5000 !important;
 }
 
-
+ul.tags-v2>li{
+    display:block;
+}
 
 .dropdown-menu {
     font-size: 18px !important;

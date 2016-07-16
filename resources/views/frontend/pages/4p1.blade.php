@@ -18,7 +18,7 @@
             <div class="headline-v2 bg-color-light"><h2>{{ getGoupName($data,4) }}</h2></div>
             <!-- Tags v2 -->
             <ul class="list-inline tags-v2 margin-bottom-50">
-                <li><a href="/download">{{ getMenuName($data,4,1) }}</a></li>
+                <li><a href="/downloads">{{ getMenuName($data,4,1) }}</a></li>
                 <li><a href="/test">{{ getMenuName($data,4,2) }}</a></li>
 
 

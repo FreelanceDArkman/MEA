@@ -18,7 +18,7 @@ class editprofileController extends Controller
         $this->pageSetting( [
             'menu_group_id' => 20,
             'menu_id' => 1,
-            'title' => 'แก้ไขข้อมูลส่วนตัว'
+            'title' => 'แก้ไขข้อมูลส่วนตัว | MEA FUND'
         ] );
 
         $agent = new MeaAgent();

@@ -189,14 +189,14 @@
                             <div id="invest_form" style="{{objectcheckdisplayblock($CurrnentPlan)}}"  >
                                 <form action="{{ action('cumulativeController@InsertPlan') }}" id="sky-form1" class="sky-form" method="post">
                                     {!! csrf_field() !!}
-                                    <header>เลือกแผนการลงทุน</header>
+                                    <header><!--เลือกแผนการลงทุน--></header>
                                     <div class="alert alert-warning fade in" style="margin-left: 20px; margin-right: 20px">
                                         <strong> * การเปลี่ยนแปลงและแก้ไขอัตราสะสม ทำได้ภายในวันที่ {{$dataCheck->SAVING_RATE_CHANGE_PERIOD}} ของทุกเดือนและมีผลตั้งแต่วันที่ 1 ของเดือนถัดไป </strong>
                                     </div>
-
+                                   
                                     <br/>
                                     <fieldset>
-                                        <legend>ระบุสัดส่วนการลงทุน</legend>
+                                        <legend></legend>
                                         <div class="row">
 
                                             <section>
