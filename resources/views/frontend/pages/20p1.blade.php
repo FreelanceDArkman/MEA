@@ -130,7 +130,7 @@
 
                 function getde ($page,$target){
                     $ret = "";
-                    if($page== $target){
+                    if($page== $target || $page == "e".$target){
                         $ret = "active";
                     }
 

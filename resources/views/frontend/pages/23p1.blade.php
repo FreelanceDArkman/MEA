@@ -95,7 +95,6 @@
                 $arrP = explode('/',$p);
 
 
-                //                    var_dump(count($arrP));
 
                 if(count($arrP) > 1){
                     if($arrP[1] != null){
@@ -289,14 +288,6 @@
                                     <label class="sr-only" for="exampleInputEmail2">Email address</label>
                                     <select name="drop_year" id="drop_year">
                                             {!! $ret !!}}
-                                        {{--<option value="2011">2554</option>--}}
-                                        {{--<option value="2012">2555</option>--}}
-                                        {{--<option value="2013">2556</option>--}}
-                                        {{--<option value="2014">2557</option>--}}
-                                        {{--<option value="2015">2558</option>--}}
-                                        {{--<option value="2016">2559</option>--}}
-                                        {{--<option value="2017">2560</option>--}}
-                                        {{--<option value="2018">2561</option>--}}
                                     </select>
                                 </div>
 

@@ -112,7 +112,7 @@
                 <div class="tab-v2">
                     <ul class="nav nav-tabs">
 
-                       
+                       {{$show2}}
 
                  @if($show2 == 1)
                         <li class="<?php echo getde($page,1) ?>"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
@@ -270,7 +270,7 @@
                                 @if($show2 == 3)
                             <div class="tab-pane fade <?php echo getde($page,3) ?> in" id="messages-1">
                                      @else
-                            <div class="tab-pane fade" id="messages-1">
+                            <div class="tab-pane fade <?php echo getde($page,3) ?> in" id="messages-1">
                                     @endif
 
                             <form class="form-inline mea_searchbox" role="form" method="post" action="{{action('TrendsController@getIndexbysearchgpLastest')}}">
@@ -361,24 +361,7 @@
 
 
                                     </tr>
-                                    {{--<tr >--}}
-                                        {{--<th style="text-align:center;">1</th>--}}
-                                        {{--<th style="text-align:center;">2</th>--}}
-                                        {{--<th style="text-align:center;">3</th>--}}
-                                        {{--<th style="text-align:center;">4</th>--}}
-                                        {{--<th style="text-align:center;background-color: #ffeba7">5</th>--}}
-                                        {{--<th style="text-align:center;background-color: #ffeba7">6</th>--}}
-                                        {{--<th style="text-align:center;background-color: #ffeba7">7</th>--}}
-                                        {{--<th style="text-align:center;background-color: #fff5b4">8</th>--}}
-                                        {{--<th style="text-align:center;background-color: #fff5b4">9</th>--}}
-                                        {{--<th style="text-align:center;background-color: #fff5b4">10</th>--}}
-                                        {{--<th style="text-align:center;background-color: #ffeba7">11</th>--}}
-                                        {{--<th style="text-align:center;background-color: #ffeba7">12</th>--}}
-                                        {{--<th style="text-align:center;background-color: #ffeba7">13</th>--}}
-                                        {{--<th style="text-align:center;background-color: #fff5b4">14</th>--}}
-                                        {{--<th style="text-align:center;background-color: #fff5b4">15</th>--}}
-                                        {{--<th style="text-align:center;background-color: #fff5b4">16</th>--}}
-                                    {{--</tr>--}}
+                                   
 
 
 

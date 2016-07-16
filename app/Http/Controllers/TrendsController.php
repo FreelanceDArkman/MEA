@@ -315,7 +315,7 @@ ORDER BY tmp.CREATE_DATE ASC";
 
 
 
-        $sql2 = "SELECT TOP  12 * FROM  TBL_MEMBER_BENEFITS WHERe RECORD_DATE BETWEEN '".$dateStart->format('Y-m-d')."' AND  '" .$dateEndreal->format('Y-m-d')."' AND EMP_ID = ".get_userID()." ORDER BY RECORD_DATE ASC";
+        $sql2 = "SELECT * FROM ( SELECT TOP  12 * FROM  TBL_MEMBER_BENEFITS WHERe RECORD_DATE BETWEEN '".$dateStart->format('Y-m-d')."' AND  '" .$dateEndreal->format('Y-m-d')."' AND EMP_ID = ".get_userID()." ORDER BY RECORD_DATE DESC ) AS tmp  ORDER BY RECORD_DATE DESC";
 
         return DB::select(DB::raw($sql2));
     }
@@ -340,7 +340,7 @@ ORDER BY tmp.CREATE_DATE ASC";
 
     function  getDB_TBL_MEMBER_BENEFITS(){
 
-        $sql = "SELECT * FROM ( SELECT  TOP 12 *  FROM TBL_MEMBER_BENEFITS WHERe EMP_ID = ".get_userID()." ORDER BY RECORD_DATE DESC ) AS tmp  ORDER BY RECORD_DATE ASC";
+        $sql = "SELECT * FROM ( SELECT  TOP 12 *  FROM TBL_MEMBER_BENEFITS WHERe EMP_ID = ".get_userID()." ORDER BY RECORD_DATE DESC ) AS tmp  ORDER BY RECORD_DATE DESC";
         //return DB::table('TBL_MEMBER_BENEFITS')->where('EMP_ID','=',get_userID())->orderBy('RECORD_DATE', 'desc')->take(12)->get();
          return  DB::select(DB::raw($sql));
     }
