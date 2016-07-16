@@ -154,8 +154,18 @@ WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND YE
 
         }
 
+
+        $sqlhisAll = "SELECT uc.MODIFY_COUNT,uc.MODIFY_DATE,uc.EMP_ID,enf.FULL_NAME ,uc.PLAN_ID , pl.PLAN_NAME ,uc.DEBT_RATE
+,uc.EQUITY_RATE,uc.EFFECTIVE_DATE, ROW_NUMBER() OVER (ORDER BY uc.MODIFY_DATE DESC) AS rownum
+FROM TBL_EMPLOYEE_INFO enf
+INNER JOIN TBL_USER_FUND_CHOOSE uc ON uc.EMP_ID = enf.EMP_ID
+INNER JOIN TBL_INVESTMENT_PLAN pl ON pl.PLAN_ID =uc.PLAN_ID
+WHERE GETDATE() > pl.PLAN_ACTIVE_DATE AND GETDATE() < pl.PLAN_EXPIRE_DATE AND enf.EMP_ID ='".get_userID()."' ";
+
+        $historyPlanAll = DB::select(DB::raw($sqlhisAll));
+
         //Generate Drop
-        $colObj = collect($historyPlan);
+        $colObj = collect($historyPlanAll);
         $max = null;
         $min = null;
         $max = $colObj->max('MODIFY_DATE');

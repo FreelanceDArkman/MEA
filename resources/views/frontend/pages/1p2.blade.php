@@ -10,9 +10,6 @@
 
     </div>
 
-
-
-
     <div class="row">
         <!-- Blog Sidebar -->
         <div class="col-md-3">

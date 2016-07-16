@@ -249,8 +249,17 @@ WHERe YEAR(sav.CHANGE_SAVING_RATE_DATE) = '".$request->input('drop_year')."' AND
             $currentyear = get_date_year($effective[0]->CHANGE_SAVING_RATE_DATE);
         }
 
+
+
+        $sqlhisall = "SELECT * FROM TBL_EMPLOYEE_INFO emp
+INNER JOIN TBL_USER_SAVING_RATE sav ON sav.EMP_ID = emp.EMP_ID
+WHERe sav.EMP_ID = '".get_userID()."' ORDER BY sav.CHANGE_SAVING_RATE_DATE DESC";
+
+        $historyPlanAll = DB::select(DB::raw($sqlhisall));
+
+
         //Generate Drop
-        $colObj = collect($historyPlan);
+        $colObj = collect($historyPlanAll);
         $max = null;
         $min = null;
         $max = $colObj->max('CHANGE_SAVING_RATE_DATE');

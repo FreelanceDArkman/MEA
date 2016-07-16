@@ -41,7 +41,8 @@ class TrendsController extends Controller
         $netasset2tbl =$this->getDB_TBL_MEMBER_BENEFITS_bysearch_table($monthstart,$yearstart,$monthend,$yearend);
 
 
-
+        $netassetall = $this->getDB_TBL_INFORMATION_FROM_ASSET();
+        $netasset2All =$this->getDB_TBL_MEMBER_BENEFITS();
 
         $empStart =DB::table('TBL_EMPLOYEE_INFO')->where('EMP_ID','=',get_userID())->first();
 
@@ -54,22 +55,22 @@ class TrendsController extends Controller
         $graph2 = $this->getGraphBenefit($netasset2);
         $graph3 =$this->getGraphfund($netasset2,$show);
 
-        $yearColume = $this->getYearDrop(null,$netasset,1);
-        $monthColum = $this->getMonthDrop(null,$netasset,1);
+        $yearColume = $this->getYearDrop(null,$netassetall,1);
+        $monthColum = $this->getMonthDrop(null,$netassetall,1);
 
-        $monthColum2 = $this->getMonthDrop($monthstart,$netasset2,2);
-        $yearColume2 = $this->getYearDrop($yearstart,$netasset2,2);
-
-
-        $yearColumeend2 = $this->getYearDrop($yearend,$netasset2,2);
-        $monthColumend2 = $this->getMonthDrop($monthend,$netasset2,2);
-
-        $monthColum3 = $this->getMonthDrop(null,$netasset2,2);
-        $yearColume3 = $this->getYearDrop(null,$netasset2,2);
+        $monthColum2 = $this->getMonthDrop($monthstart,$netasset2All,2);
+        $yearColume2 = $this->getYearDrop($yearstart,$netasset2All,2);
 
 
-        $yearColumeend3 = $this->getYearDrop(null,$netasset2,2);
-        $monthColumend3 = $this->getMonthDrop(null,$netasset2,2);
+        $yearColumeend2 = $this->getYearDrop($yearend,$netasset2All,2);
+        $monthColumend2 = $this->getMonthDrop($monthend,$netasset2All,2);
+
+        $monthColum3 = $this->getMonthDrop(null,$netasset2All,2);
+        $yearColume3 = $this->getYearDrop(null,$netasset2All,2);
+
+
+        $yearColumeend3 = $this->getYearDrop(null,$netasset2All,2);
+        $monthColumend3 = $this->getMonthDrop(null,$netasset2All,2);
 
         $show2 = 2;
 
@@ -109,7 +110,8 @@ class TrendsController extends Controller
         $netasset2tbl =$this->getDB_TBL_MEMBER_BENEFITS_bysearch_table($monthstart,$yearstart,$monthend,$yearend);
 
 
-
+        $netassetall = $this->getDB_TBL_INFORMATION_FROM_ASSET();
+        $netasset2All =$this->getDB_TBL_MEMBER_BENEFITS();
         $empStart =DB::table('TBL_EMPLOYEE_INFO')->where('EMP_ID','=',get_userID())->first();
 
 
@@ -121,19 +123,19 @@ class TrendsController extends Controller
         $graph2 = $this->getGraphBenefit($netasset2);
         $graph3 =$this->getGraphfund($netasset2,$show);
 
-        $yearColume = $this->getYearDrop(null,$netasset,1);
-        $monthColum = $this->getMonthDrop(null,$netasset,1);
+        $yearColume = $this->getYearDrop(null,$netassetall,1);
+        $monthColum = $this->getMonthDrop(null,$netassetall,1);
 
-        $monthColum2 = $this->getMonthDrop(null,$netasset2,2);
-        $yearColume2 = $this->getYearDrop(null,$netasset2,2);
-
-
-        $yearColumeend2 = $this->getYearDrop(null,$netasset2,2);
-        $monthColumend2 = $this->getMonthDrop(null,$netasset2,2);
+        $monthColum2 = $this->getMonthDrop(null,$netasset2All,2);
+        $yearColume2 = $this->getYearDrop(null,$netasset2All,2);
 
 
-        $monthColum3 = $this->getMonthDrop($monthstart,$netasset2,2);
-        $yearColume3 = $this->getYearDrop($yearstart,$netasset2,2);
+        $yearColumeend2 = $this->getYearDrop(null,$netasset2All,2);
+        $monthColumend2 = $this->getMonthDrop(null,$netasset2All,2);
+
+
+        $monthColum3 = $this->getMonthDrop($monthstart,$netasset2All,2);
+        $yearColume3 = $this->getYearDrop($yearstart,$netasset2All,2);
 
 
         $yearColumeend3 = $this->getYearDrop($yearend,$netasset2,2);
@@ -173,7 +175,8 @@ class TrendsController extends Controller
 
         $empStart =DB::table('TBL_EMPLOYEE_INFO')->where('EMP_ID','=',get_userID())->first();
 
-
+        $netassetall = $this->getDB_TBL_INFORMATION_FROM_ASSET();
+        $netasset2All =$this->getDB_TBL_MEMBER_BENEFITS();
         $show = $this->isShowGraph($empStart);
 
         $graph = array();
@@ -182,23 +185,23 @@ class TrendsController extends Controller
         $graph2 = $this->getGraphBenefit($netasset2);
         $graph3 =$this->getGraphfund($netasset2,$show);
 
-        $yearColume = $this->getYearDrop($year,$netasset,1);
-        $monthColum = $this->getMonthDrop($month,$netasset,1);
+        $yearColume = $this->getYearDrop($year,$netassetall,1);
+        $monthColum = $this->getMonthDrop($month,$netassetall,1);
 
-        $monthColum2 = $this->getMonthDrop(null,$netasset2,2);
-        $yearColume2 = $this->getYearDrop(null,$netasset2,2);
-
-
-        $yearColumeend2 = $this->getYearDrop(null,$netasset2,2);
-        $monthColumend2 = $this->getMonthDrop(null,$netasset2,2);
+        $monthColum2 = $this->getMonthDrop(null,$netasset2All,2);
+        $yearColume2 = $this->getYearDrop(null,$netasset2All,2);
 
 
-        $monthColum3 = $this->getMonthDrop(null,$netasset2,2);
-        $yearColume3 = $this->getYearDrop(null,$netasset2,2);
+        $yearColumeend2 = $this->getYearDrop(null,$netasset2All,2);
+        $monthColumend2 = $this->getMonthDrop(null,$netasset2All,2);
 
 
-        $yearColumeend3 = $this->getYearDrop(null,$netasset2,2);
-        $monthColumend3 = $this->getMonthDrop(null,$netasset2,2);
+        $monthColum3 = $this->getMonthDrop(null,$netasset2All,2);
+        $yearColume3 = $this->getYearDrop(null,$netasset2All,2);
+
+
+        $yearColumeend3 = $this->getYearDrop(null,$netasset2All,2);
+        $monthColumend3 = $this->getMonthDrop(null,$netasset2All,2);
 
         $show2 = 1;
 

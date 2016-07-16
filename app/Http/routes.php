@@ -51,8 +51,14 @@ Route::group(['middleware' => ['web']], function () {
     });
 
 
+    Route::group(['prefix' => '/valuefund'] , function() {
 
-    Route::get('/valuefund','ValueFundController@getIndex');
+        Route::get('/','ValueFundController@getIndex');
+        Route::post('/','ValueFundController@getIndex');
+
+
+    });
+
 
 
 
