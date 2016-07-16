@@ -28,8 +28,8 @@
             
 
           <div class="col-md-9">
-
-              @if(@showsearch)
+             
+              @if($showsearch)
               <div id="main"  style="display:none;">
                   @else
                   <div id="main"  style="display:block;">
