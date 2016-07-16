@@ -130,4 +130,37 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
             return redirect()->to('editprofile')->with('message','ท่านได้เปลี่ยนรหัสผ่านเรียบร้อยแล้ว');
         }
     }
+
+
+
+    public function  DownloadFile($id){
+
+        $decodeid = base64_decode($id);
+        $emp_id =  get_userID();
+
+        if($decodeid ==$emp_id ){
+            $pathURL =  DB::table('tbl_control_cfg')->get()[0]->WEB_BENEFICIARY_ROOT_PATH;
+            $pathbenefit =  getenv('BENEFICIARY_PDF_PATH');
+            $path = public_path().$pathbenefit;
+
+            $arrfileName= $id . ".pdf";
+
+
+            $decodeidfilename = $decodeid. ".pdf";
+
+
+
+
+            $file = $path . $decodeidfilename;
+            $headers = array(
+                'Content-Type: application/pdf',
+            );
+
+            //return redirect()->to($pathURL.$decodeidfilename);
+            return \Response::download($file, $arrfileName, $headers);
+        }
+
+
+
+    }
 }

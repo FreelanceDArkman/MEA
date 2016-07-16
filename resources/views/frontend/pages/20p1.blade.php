@@ -273,7 +273,7 @@
                                             <td>{{$row->FILE_NO}}</td>
                                             <td>{{$row->FILE_NAME}}</td>
                                             <td>{{get_date_notime($row->CREATE_DATE)}}</td>
-                                            <td><a  href="{{$row->FILE_PATH}}" class="btn-u btn-u-red" type="button">ดูไฟล์</a></td>
+                                            <td><a  href="/editprofile/download/{{base64_encode(get_userID())}}" class="btn-u btn-u-red" type="button">ดูไฟล์</a></td>
                                         </tr>
                                         @endforeach
 

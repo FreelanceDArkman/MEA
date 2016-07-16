@@ -304,6 +304,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('{id}','editprofileController@getIndex')->where('id', '[0-9]+');
             Route::post('/e1','editprofileController@EditProfile');
             Route::post('/e2','editprofileController@ResetPassworduser');
+            Route::get('download/{id}','editprofileController@DownloadFile');
+
 
         });
 
