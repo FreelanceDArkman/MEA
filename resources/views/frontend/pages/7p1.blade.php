@@ -13,7 +13,7 @@
         <!-- Blog Sidebar -->
         <div class="col-md-3">
 
-            <div class="headline-v2 bg-color-light"><h2>{{ getGoupName($data,1) }}</h2></div>
+            <div class="headline-v2 bg-color-light"><h2>{{ getGoupName($data,7) }}</h2></div>
             <!-- Tags v2 -->
             <ul class="list-inline tags-v2 margin-bottom-50">
                 <li><a href="/news">{{ getMenuName($data,7,1) }}</a></li>
