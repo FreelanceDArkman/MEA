@@ -221,36 +221,15 @@ class TrendsController extends Controller
         ] );
 
 
-
         $netasset = $this->getDB_TBL_INFORMATION_FROM_ASSET();
         $netasset2 =$this->getDB_TBL_MEMBER_BENEFITS();
         $netasset2tbl =$this->getDB_TBL_MEMBER_BENEFITS_table();
 
-
-
-
-        $sorted =  asort($netasset2);
-
-
-
-
-
-
-//        $sorted = collect($netasset2)->sortBy('RECORD_DATE');
-//
-//        $sorted->values()->all();
-
-
-
-
         $empStart =DB::table('TBL_EMPLOYEE_INFO')->where('EMP_ID','=',get_userID())->first();
 
 
-
         $show = $this->isShowGraph($empStart);
-
         $graph = $this->getGraphColum($netasset);
-
 
 
         $graph2 = $this->getGraphBenefit($netasset2);
@@ -265,7 +244,6 @@ class TrendsController extends Controller
 
         $yearColumeend2 = $this->getYearDrop(null);
         $monthColumend2 = $this->getMonthDrop(null);
-
 
 
         $monthColum3 = $this->getMonthDrop(null);
@@ -302,42 +280,14 @@ class TrendsController extends Controller
             'planchoose'=>$planchoose,
             'netasset2tbl'=>$netasset2tbl]);
 
-
-
-
     }
-
-    function  getempINFO(){
-        $sql = "SELECT TOP  5 * FROM  TBL_EMPLOYEE_INFO WHERE EMP_ID = '".get_userID()."'";
-        return DB::select(DB::raw($sql))[0];
-
-
-
-    }
-
-    function  getPLanchoose(){
-
-        $sql2 = "SELECT TOP 1 * FROM TBL_USER_FUND_CHOOSE fm
-INNER JOIN TBL_INVESTMENT_PLAN pl ON pl.PlAN_ID = fm.PLAN_ID
-WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
-
-        $ret = DB::select(DB::raw($sql2));
-        if($ret){
-            return $ret[0];
-        }else{
-            return null;
-        }
-
-
-    }
-
 
 
 
     function getDB_TBL_INFORMATION_FROM_ASSET_bysearch($month,$year){
-        $sql = "SELECT TOP  5 * FROM  TBL_INFORMATION_FROM_ASSET  WHERe MONTH(CREATE_DATE) = ".$month." AND YEAR(CREATE_DATE) = '".$year."' AND EMP_ID = ".get_userID()." ORDER BY CREATE_DATE ASC";
+        $sql = "SELECT * FROM (
+SELECT TOP  5 * FROM  TBL_INFORMATION_FROM_ASSET  WHERe MONTH(CREATE_DATE) = ".$month." AND YEAR(CREATE_DATE) = '".$year."' AND EMP_ID = ".get_userID()." ORDER BY CREATE_DATE DESC) As Tmp ORDER BY tmp.CREATE_DATE ASC";
 
-        var_dump($sql);
         return  DB::select(DB::raw($sql));
     }
 
@@ -352,7 +302,6 @@ ORDER BY tmp.CREATE_DATE ASC";
     }
 
 
-
     function  getDB_TBL_MEMBER_BENEFITS_bysearch($month,$year,$monthend,$yearend){
 
         $dateStart = new Date($year."-".$month."-1");
@@ -364,7 +313,6 @@ ORDER BY tmp.CREATE_DATE ASC";
 
         $dateEndreal = New Date(date("Y",strtotime($datenextmont))."-".date("m",strtotime($datenextmont))."-1");
 
-//        var_dump($dateEndreal->format('Y-m-d'));
 
 
         $sql2 = "SELECT TOP  12 * FROM  TBL_MEMBER_BENEFITS WHERe RECORD_DATE BETWEEN '".$dateStart->format('Y-m-d')."' AND  '" .$dateEndreal->format('Y-m-d')."' AND EMP_ID = ".get_userID()." ORDER BY RECORD_DATE ASC";
@@ -383,7 +331,6 @@ ORDER BY tmp.CREATE_DATE ASC";
 
         $dateEndreal = New Date(date("Y",strtotime($datenextmont))."-".date("m",strtotime($datenextmont))."-1");
 
-//        var_dump($dateEndreal->format('Y-m-d'));
 
 
         $sql2 = "SELECT  * FROM  TBL_MEMBER_BENEFITS WHERe RECORD_DATE BETWEEN '".$dateStart->format('Y-m-d')."' AND  '" .$dateEndreal->format('Y-m-d')."' AND EMP_ID = ".get_userID()." ORDER BY RECORD_DATE DESC";
@@ -393,11 +340,9 @@ ORDER BY tmp.CREATE_DATE ASC";
 
     function  getDB_TBL_MEMBER_BENEFITS(){
 
-
-//        $sql2 = "SELECT TOP  12 * FROM  TBL_MEMBER_BENEFITS WHERe EMP_ID = '".get_userID()."' ORDER BY RECORD_DATE DESC";
-//        return DB::select(DB::raw($sql2));
-
-        return DB::table('TBL_MEMBER_BENEFITS')->where('EMP_ID','=',get_userID())->orderBy('RECORD_DATE', 'desc')->take(12)->get();
+        $sql = "SELECT * FROM ( SELECT  TOP 12 *  FROM TBL_MEMBER_BENEFITS WHERe EMP_ID = ".get_userID()." ORDER BY RECORD_DATE DESC ) AS tmp  ORDER BY RECORD_DATE ASC";
+        //return DB::table('TBL_MEMBER_BENEFITS')->where('EMP_ID','=',get_userID())->orderBy('RECORD_DATE', 'desc')->take(12)->get();
+         return  DB::select(DB::raw($sql));
     }
 
 
@@ -408,7 +353,27 @@ ORDER BY tmp.CREATE_DATE ASC";
 
 
 
+    function  getempINFO(){
+        $sql = "SELECT TOP  5 * FROM  TBL_EMPLOYEE_INFO WHERE EMP_ID = '".get_userID()."'";
+        return DB::select(DB::raw($sql))[0];
 
+    }
+
+    function  getPLanchoose(){
+
+        $sql2 = "SELECT TOP 1 * FROM TBL_USER_FUND_CHOOSE fm
+INNER JOIN TBL_INVESTMENT_PLAN pl ON pl.PlAN_ID = fm.PLAN_ID
+WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
+
+        $ret = DB::select(DB::raw($sql2));
+        if($ret){
+            return $ret[0];
+        }else{
+            return null;
+        }
+
+
+    }
 
 
 

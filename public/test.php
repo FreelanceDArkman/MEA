@@ -36,11 +36,19 @@ class Security2 {
 
 
 
-$newDate =  $_GET["value"];
+$datedata =  $_GET["value"];
 $MEASecEncoe = new Security2();
-$ecPass =  $MEASecEncoe->encrypt($newDate,"#Gm2014$06$30@97");
+// . substr($datedata, -4,2). ((int)substr($datedata, -8, 4)) + 543;
 
-echo  $ecPass;
+$newDate = substr($datedata, -2) . substr($datedata, -4,2) . (( (int)substr($datedata, -8, 4) )+543) ;
+//$ecPass =  $MEASecEncoe->encrypt($newDate,"#Gm2014$06$30@97");
+
+
+
+
+
+
+echo  $newDate;
 
 //var_dump($output);
 //$output = shell_exec("/backend/md5/md5.bat -e ss 2>&1");

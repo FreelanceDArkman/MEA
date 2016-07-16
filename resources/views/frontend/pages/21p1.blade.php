@@ -87,8 +87,7 @@
                 $p = Request::path();
                 $arrP = explode('/',$p);
 
-
-                //                    var_dump(count($arrP));
+                
 
                 if(count($arrP) > 1){
                     if($arrP[1] != null){
@@ -96,50 +95,54 @@
                     }
                 }
 
-
-
-
-
                 function getde ($page,$target){
                     $ret = "";
-                    if($page== $target){
+                    if($page== $target || $page == "s".$target){
                         $ret = "active";
                     }
 
                     return $ret;
                 }
+
+
+
                 ?>
+
+
                 <div class="tab-v2">
                     <ul class="nav nav-tabs">
 
-                        @if($show2 == 1)
+                       
+
+                 @if($show2 == 1)
                         <li class="<?php echo getde($page,1) ?>"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
                         <li class="<?php echo getde($page,2) ?>"><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,2) }}</a></li>
                             @if(get_is_before_status_2538() == 0)
                         <li class="<?php echo getde($page,3) ?>"><a href="#messages-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,3) }}</a></li>
                             @endif
-                            @elseif($show2 == 2)
+                 @elseif($show2 == 2)
                             <li class="<?php echo getde($page,1) ?>"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
                             <li class="<?php echo getde($page,2) ?>"><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,2) }}</a></li>
                             @if(get_is_before_status_2538() == 0)
                             <li class="<?php echo getde($page,3) ?>"><a href="#messages-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,3) }}</a></li>
                             @endif
-                        @elseif($show2 == 3)
-
+                @elseif($show2 == 3)
                             <li class="<?php echo getde($page,1) ?>"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
                             <li class="<?php echo getde($page,2) ?>"><a href="#profile-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,2) }}</a></li>
                             @if(get_is_before_status_2538() == 0)
                             <li class="<?php echo getde($page,3) ?>"><a href="#messages-1" data-toggle="tab" aria-expanded="true">{{ getMenuName($data,21,3) }}</a></li>
                             @endif
-                        @endif
+               @endif
 
                     </ul>
+
+
                     <div class="tab-content">
 
                         @if($show2 == 1)
                             <div class="tab-pane fade <?php echo getde($page,1) ?> in" id="home-1" style="position: relative" >
                             @else
-                                <div class="tab-pane fade" id="home-1" style="position: relative" >
+                                <div class="tab-pane fade <?php echo getde($page,1) ?> in" id="home-1" style="position: relative" >
                             @endif
 
                             <form class="form-inline mea_searchbox" role="form" method="post" action="{{action('TrendsController@getIndexbysearchColum')}}">
@@ -151,14 +154,7 @@
                                     </select>
                                     <select name="drop_year" id="drop_year">
                                         {!! $yearColume !!}}
-                                        {{--<option value="2011">2554</option>--}}
-                                        {{--<option value="2012">2555</option>--}}
-                                        {{--<option value="2013">2556</option>--}}
-                                        {{--<option value="2014">2557</option>--}}
-                                        {{--<option value="2015">2558</option>--}}
-                                        {{--<option value="2016">2559</option>--}}
-                                        {{--<option value="2017">2560</option>--}}
-                                        {{--<option value="2018">2561</option>--}}
+                                    
                                     </select>
                                 </div>
 
@@ -174,11 +170,11 @@
                             </div>
                         </div>
 
-                                @if($show2 == 2)
+                        @if($show2 == 2)
                         <div class="tab-pane fade <?php echo getde($page,2) ?> in" id="profile-1">
-                            @else
-                                <div class="tab-pane fade " id="profile-1">
-                                @endif
+                        @else
+                          <div class="tab-pane fade  <?php echo getde($page,2) ?> in" id="profile-1">
+                         @endif
 
 
                             <form class="form-inline mea_searchbox" role="form" method="post" action="{{action('TrendsController@getIndexbysearchgp2')}}">
@@ -190,14 +186,7 @@
                                     </select>
                                     <select name="drop_year_2_start" id="drop_year_2_start">
                                         {!! $yearColume2 !!}}
-                                        {{--<option value="2011">2554</option>--}}
-                                        {{--<option value="2012">2555</option>--}}
-                                        {{--<option value="2013">2556</option>--}}
-                                        {{--<option value="2014">2557</option>--}}
-                                        {{--<option value="2015">2558</option>--}}
-                                        {{--<option value="2016">2559</option>--}}
-                                        {{--<option value="2017">2560</option>--}}
-                                        {{--<option value="2018">2561</option>--}}
+                                      
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -207,14 +196,7 @@
                                     </select>
                                     <select name="drop_year_2_end" id="drop_year_2_end">
                                         {!! $yearColumeend2 !!}}
-                                        {{--<option value="2011">2554</option>--}}
-                                        {{--<option value="2012">2555</option>--}}
-                                        {{--<option value="2013">2556</option>--}}
-                                        {{--<option value="2014">2557</option>--}}
-                                        {{--<option value="2015">2558</option>--}}
-                                        {{--<option value="2016">2559</option>--}}
-                                        {{--<option value="2017">2560</option>--}}
-                                        {{--<option value="2018">2561</option>--}}
+                                      
                                     </select>
                                 </div>
 
@@ -256,17 +238,6 @@
                                         <th style="text-align:center;background-color: #fff5b4">ผลประโยชน์เงินสะสม</th>
                                     </tr>
 
-                                    {{--<tr >--}}
-                                        {{--<th style="text-align:center;">1</th>--}}
-                                        {{--<th style="text-align:center;">2</th>--}}
-                                        {{--<th style="text-align:center;">3</th>--}}
-                                        {{--<th style="text-align:center;">4</th>--}}
-                                        {{--<th style="text-align:center;background-color: #ffeba7">5</th>--}}
-                                        {{--<th style="text-align:center;background-color: #ffeba7">6</th>--}}
-                                        {{--<th style="text-align:center;background-color: #fff5b4">7</th>--}}
-                                        {{--<th style="text-align:center;background-color: #fff5b4">8</th>--}}
-                                        {{--<th style="text-align:center;">9</th>--}}
-                                    {{--</tr>--}}
                                     </thead>
 
 
