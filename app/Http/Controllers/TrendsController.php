@@ -43,7 +43,6 @@ class TrendsController extends Controller
 
 
 
-
         $empStart =DB::table('TBL_EMPLOYEE_INFO')->where('EMP_ID','=',get_userID())->first();
 
 
@@ -55,22 +54,22 @@ class TrendsController extends Controller
         $graph2 = $this->getGraphBenefit($netasset2);
         $graph3 =$this->getGraphfund($netasset2,$show);
 
-        $yearColume = $this->getYearDrop(null);
-        $monthColum = $this->getMonthDrop(null);
+        $yearColume = $this->getYearDrop(null,$netasset,1);
+        $monthColum = $this->getMonthDrop(null,$netasset,1);
 
-        $monthColum2 = $this->getMonthDrop($monthstart);
-        $yearColume2 = $this->getYearDrop($yearstart);
-
-
-        $yearColumeend2 = $this->getYearDrop($yearend);
-        $monthColumend2 = $this->getMonthDrop($monthend);
-
-        $monthColum3 = $this->getMonthDrop(null);
-        $yearColume3 = $this->getYearDrop(null);
+        $monthColum2 = $this->getMonthDrop($monthstart,$netasset2,2);
+        $yearColume2 = $this->getYearDrop($yearstart,$netasset2,2);
 
 
-        $yearColumeend3 = $this->getYearDrop(null);
-        $monthColumend3 = $this->getMonthDrop(null);
+        $yearColumeend2 = $this->getYearDrop($yearend,$netasset2,2);
+        $monthColumend2 = $this->getMonthDrop($monthend,$netasset2,2);
+
+        $monthColum3 = $this->getMonthDrop(null,$netasset2,2);
+        $yearColume3 = $this->getYearDrop(null,$netasset2,2);
+
+
+        $yearColumeend3 = $this->getYearDrop(null,$netasset2,2);
+        $monthColumend3 = $this->getMonthDrop(null,$netasset2,2);
 
         $show2 = 2;
 
@@ -122,23 +121,23 @@ class TrendsController extends Controller
         $graph2 = $this->getGraphBenefit($netasset2);
         $graph3 =$this->getGraphfund($netasset2,$show);
 
-        $yearColume = $this->getYearDrop(null);
-        $monthColum = $this->getMonthDrop(null);
+        $yearColume = $this->getYearDrop(null,$netasset,1);
+        $monthColum = $this->getMonthDrop(null,$netasset,1);
 
-        $monthColum2 = $this->getMonthDrop(null);
-        $yearColume2 = $this->getYearDrop(null);
-
-
-        $yearColumeend2 = $this->getYearDrop(null);
-        $monthColumend2 = $this->getMonthDrop(null);
+        $monthColum2 = $this->getMonthDrop(null,$netasset2,2);
+        $yearColume2 = $this->getYearDrop(null,$netasset2,2);
 
 
-        $monthColum3 = $this->getMonthDrop($monthstart);
-        $yearColume3 = $this->getYearDrop($yearstart);
+        $yearColumeend2 = $this->getYearDrop(null,$netasset2,2);
+        $monthColumend2 = $this->getMonthDrop(null,$netasset2,2);
 
 
-        $yearColumeend3 = $this->getYearDrop($yearend);
-        $monthColumend3 = $this->getMonthDrop($monthend);
+        $monthColum3 = $this->getMonthDrop($monthstart,$netasset2,2);
+        $yearColume3 = $this->getYearDrop($yearstart,$netasset2,2);
+
+
+        $yearColumeend3 = $this->getYearDrop($yearend,$netasset2,2);
+        $monthColumend3 = $this->getMonthDrop($monthend,$netasset2,2);
 
 
         $show2 = 3;
@@ -183,23 +182,23 @@ class TrendsController extends Controller
         $graph2 = $this->getGraphBenefit($netasset2);
         $graph3 =$this->getGraphfund($netasset2,$show);
 
-        $yearColume = $this->getYearDrop($year);
-        $monthColum = $this->getMonthDrop($month);
+        $yearColume = $this->getYearDrop($year,$netasset,1);
+        $monthColum = $this->getMonthDrop($month,$netasset,1);
 
-        $monthColum2 = $this->getMonthDrop(null);
-        $yearColume2 = $this->getYearDrop(null);
-
-
-        $yearColumeend2 = $this->getYearDrop(null);
-        $monthColumend2 = $this->getMonthDrop(null);
+        $monthColum2 = $this->getMonthDrop(null,$netasset2,2);
+        $yearColume2 = $this->getYearDrop(null,$netasset2,2);
 
 
-        $monthColum3 = $this->getMonthDrop(null);
-        $yearColume3 = $this->getYearDrop(null);
+        $yearColumeend2 = $this->getYearDrop(null,$netasset2,2);
+        $monthColumend2 = $this->getMonthDrop(null,$netasset2,2);
 
 
-        $yearColumeend3 = $this->getYearDrop(null);
-        $monthColumend3 = $this->getMonthDrop(null);
+        $monthColum3 = $this->getMonthDrop(null,$netasset2,2);
+        $yearColume3 = $this->getYearDrop(null,$netasset2,2);
+
+
+        $yearColumeend3 = $this->getYearDrop(null,$netasset2,2);
+        $monthColumend3 = $this->getMonthDrop(null,$netasset2,2);
 
         $show2 = 1;
 
@@ -235,23 +234,23 @@ class TrendsController extends Controller
         $graph2 = $this->getGraphBenefit($netasset2);
         $graph3 =$this->getGraphfund($netasset2,$show);
 
-        $yearColume = $this->getYearDrop(null);
-        $monthColum = $this->getMonthDrop(null);
+        $yearColume = $this->getYearDrop(null,$netasset,1);
+        $monthColum = $this->getMonthDrop(null,$netasset,1);
 
-        $monthColum2 = $this->getMonthDrop(null);
-        $yearColume2 = $this->getYearDrop(null);
-
-
-        $yearColumeend2 = $this->getYearDrop(null);
-        $monthColumend2 = $this->getMonthDrop(null);
+        $monthColum2 = $this->getMonthDrop(null,$netasset2,2);
+        $yearColume2 = $this->getYearDrop(null,$netasset2,2);
 
 
-        $monthColum3 = $this->getMonthDrop(null);
-        $yearColume3 = $this->getYearDrop(null);
+        $yearColumeend2 = $this->getYearDrop(null,$netasset2,2);
+        $monthColumend2 = $this->getMonthDrop(null,$netasset2,2);
 
 
-        $yearColumeend3 = $this->getYearDrop(null);
-        $monthColumend3 = $this->getMonthDrop(null);
+        $monthColum3 = $this->getMonthDrop(null,$netasset2,2);
+        $yearColume3 = $this->getYearDrop(null,$netasset2,2);
+
+
+        $yearColumeend3 = $this->getYearDrop(null,$netasset2,2);
+        $monthColumend3 = $this->getMonthDrop(null,$netasset2,2);
 
         $show2 = 1;
 
@@ -315,7 +314,7 @@ ORDER BY tmp.CREATE_DATE ASC";
 
 
 
-        $sql2 = "SELECT * FROM ( SELECT TOP  12 * FROM  TBL_MEMBER_BENEFITS WHERe RECORD_DATE BETWEEN '".$dateStart->format('Y-m-d')."' AND  '" .$dateEndreal->format('Y-m-d')."' AND EMP_ID = ".get_userID()." ORDER BY RECORD_DATE DESC ) AS tmp  ORDER BY RECORD_DATE DESC";
+        $sql2 = "SELECT * FROM ( SELECT TOP  12 * FROM  TBL_MEMBER_BENEFITS WHERe RECORD_DATE BETWEEN '".$dateStart->format('Y-m-d')."' AND  '" .$dateEndreal->format('Y-m-d')."' AND EMP_ID = ".get_userID()." ORDER BY RECORD_DATE DESC ) AS tmp  ORDER BY RECORD_DATE ASC";
 
         return DB::select(DB::raw($sql2));
     }
@@ -340,7 +339,7 @@ ORDER BY tmp.CREATE_DATE ASC";
 
     function  getDB_TBL_MEMBER_BENEFITS(){
 
-        $sql = "SELECT * FROM ( SELECT  TOP 12 *  FROM TBL_MEMBER_BENEFITS WHERe EMP_ID = ".get_userID()." ORDER BY RECORD_DATE DESC ) AS tmp  ORDER BY RECORD_DATE DESC";
+        $sql = "SELECT * FROM ( SELECT  TOP 12 *  FROM TBL_MEMBER_BENEFITS WHERe EMP_ID = ".get_userID()." ORDER BY RECORD_DATE DESC ) AS tmp  ORDER BY RECORD_DATE ASC";
         //return DB::table('TBL_MEMBER_BENEFITS')->where('EMP_ID','=',get_userID())->orderBy('RECORD_DATE', 'desc')->take(12)->get();
          return  DB::select(DB::raw($sql));
     }
@@ -377,7 +376,50 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
 
 
-    function getMonthDrop($month){
+    function getMonthDrop($month,$obj,$flag){
+
+
+        $colObj = collect($obj);
+        $max = null;
+        $min = null;
+        if($flag == 1){
+            $max = $colObj->max('CREATE_DATE');
+            $min = $colObj->min('CREATE_DATE');
+        }
+
+        if($flag == 2){
+            $max = $colObj->max('RECORD_DATE');
+            $min = $colObj->min('RECORD_DATE');
+        }
+
+        $dateMin = new Date($min);
+        $dateMax = new Date($max);
+
+
+
+
+        //$date_diff=strtotime($dateMax)-strtotime($dateMin);
+        //$montdiff =  floor(($date_diff)/2628000);
+
+        $date_diff = date_diff($dateMax, $dateMin);
+        $montdiff = $date_diff->m;
+
+
+
+        $monthMin = date("m",strtotime($dateMin));
+        $monthMax = date("m",strtotime($dateMax));
+
+
+
+        $intMonthMin = intval($monthMin);
+        $intMonthMax= intval($monthMax);
+
+        //$monthmaxVal = (($monthMin + $montdiff) > 12 ? 12:($monthMin + $montdiff) );
+        //$monthMinVal = ( $montdiff>$intMonthMin ? 1 : $intMonthMin);
+        $monthmaxVal = 12;
+        $monthMinVal = 1 ;
+
+        // $minMonth = $obj.
 
         if($month){
             $ret ="<option  value='1' >เลือกเดือน</option>";
@@ -388,7 +430,7 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
         $arrMonth = ["ม.ค.","ก.พ.","มี.ค.","เม.ย.","พ.ค.","มิ.ย.","ก.ค.","ส.ค.","ก.ย.","ต.ค.","พ.ย.","ธ.ค."];
 
-        for($i = 1; $i<=12;$i++){
+        for($i = $monthMinVal; $i<=$monthmaxVal;$i++){
             if($month){
 
                 if($month == $i){
@@ -408,10 +450,40 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
 
     }
 
-    function  getYearDrop($year){
+    function  getYearDrop($year,$obj,$flag){
 
-        $today = new Date();
-        $currentyear = get_date_year($today);
+        $colObj = collect($obj);
+        $max = null;
+        $min = null;
+        if($flag == 1){
+            $max = $colObj->max('CREATE_DATE');
+            $min = $colObj->min('CREATE_DATE');
+        }
+
+        if($flag == 2){
+            $max = $colObj->max('RECORD_DATE');
+            $min = $colObj->min('RECORD_DATE');
+        }
+
+
+        $dateMin = new Date($min);
+        $dateMax = new Date($max);
+
+
+        $yearMin = date("Y",strtotime($dateMin));
+        $yearMax = date("Y",strtotime($dateMax));
+
+
+
+        $intYearhMin =  intval($yearMin) + 543;
+        $intYearhMax= intval($yearMax) + 543;
+
+
+
+
+
+        //$today = new Date();
+        ////$currentyear = get_date_year($today);
 
         $arrDropYear = array();
         $count = 0;
@@ -422,7 +494,7 @@ WHERE fm.EMP_ID = '".get_userID()."' ORDER BY fm.MODIFY_DATE DESC";
         }
 
 
-        for($i = ((int)$currentyear) - 5; $i <=  $currentyear ; $i++){
+        for($i = $intYearhMin; $i <=  $intYearhMax ; $i++){
             $arrDropYear[$count] = $i;
 
 

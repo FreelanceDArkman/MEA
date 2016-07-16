@@ -112,7 +112,7 @@
                 <div class="tab-v2">
                     <ul class="nav nav-tabs">
 
-                       {{$show2}}
+                   
 
                  @if($show2 == 1)
                         <li class="<?php echo getde($page,1) ?>"><a href="#home-1" data-toggle="tab" aria-expanded="true" >{{ getMenuName($data,21,1) }}</a></li>
@@ -196,7 +196,6 @@
                                     </select>
                                     <select name="drop_year_2_end" id="drop_year_2_end">
                                         {!! $yearColumeend2 !!}}
-                                      
                                     </select>
                                 </div>
 
@@ -207,8 +206,6 @@
 
                             <hr>
 
-                            {{--<form class="reg-page" action="{{ action('TrendsController@ExportExcel1') }}" method="post">--}}
-                                {{--</form>--}}
                             <a href="{{ action('TrendsController@ExportExcel1') }}" class="btn btn-success" style="margin-bottom: 10px" type="button"><i class="fa fa-download"></i> Export</a>
 
                             <div class="table-responsive">
@@ -282,14 +279,7 @@
                                     </select>
                                     <select name="drop_year_3_start" id="drop_year_3_start">
                                         {!! $yearColume3 !!}}
-                                        {{--<option value="2011">2554</option>--}}
-                                        {{--<option value="2012">2555</option>--}}
-                                        {{--<option value="2013">2556</option>--}}
-                                        {{--<option value="2014">2557</option>--}}
-                                        {{--<option value="2015">2558</option>--}}
-                                        {{--<option value="2016">2559</option>--}}
-                                        {{--<option value="2017">2560</option>--}}
-                                        {{--<option value="2018">2561</option>--}}
+                                      
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -299,14 +289,7 @@
                                     </select>
                                     <select name="drop_year_3_end" id="drop_year_3_end">
                                         {!! $yearColumeend3 !!}}
-                                        {{--<option value="2011">2554</option>--}}
-                                        {{--<option value="2012">2555</option>--}}
-                                        {{--<option value="2013">2556</option>--}}
-                                        {{--<option value="2014">2557</option>--}}
-                                        {{--<option value="2015">2558</option>--}}
-                                        {{--<option value="2016">2559</option>--}}
-                                        {{--<option value="2017">2560</option>--}}
-                                        {{--<option value="2018">2561</option>--}}
+                                       
                                     </select>
                                 </div>
 
