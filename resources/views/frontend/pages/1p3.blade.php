@@ -18,11 +18,18 @@
             <div class="headline-v2 bg-color-light"><h2>{{getGoupName($data,1) }}</h2></div>
             <!-- Tags v2 -->
             <ul class="list-inline tags-v2 margin-bottom-50">
-                 <a href="/valuefund">{{ getMenuName($data,1,1) }}</a></li>
-                <li><a href="/netasset">{{ getMenuName($data,1,2) }}</a></li>
-                <li><a href="/economic">{{ getMenuName($data,1,3) }}</a></li>
+                <ul class="list-inline tags-v2 margin-bottom-50">
+                    <li>
+                        <a href="/valuefund">{{ getMenuName($data,1,1) }}</a>
+                    </li>
+                    <li>
+                        <a href="/netasset">{{ getMenuName($data,1,2) }}</a>
+                    </li>
+                    <li>
+                        <a href="/economic">{{ getMenuName($data,1,3) }}</a>
+                    </li>
 
-            </ul>
+                </ul>
             <!-- End Tags v2 -->
 
 
