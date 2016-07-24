@@ -138,8 +138,8 @@ class TrendsController extends Controller
         $yearColume3 = $this->getYearDrop($yearstart,$netasset2All,2);
 
 
-        $yearColumeend3 = $this->getYearDrop($yearend,$netasset2,2);
-        $monthColumend3 = $this->getMonthDrop($monthend,$netasset2,2);
+        $yearColumeend3 = $this->getYearDrop($yearend,$netasset2All,2);
+        $monthColumend3 = $this->getMonthDrop($monthend,$netasset2All,2);
 
 
         $show2 = 3;

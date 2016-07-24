@@ -324,14 +324,14 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/','TrendsController@getIndexbysearchColum');
 //          Route::get('{id}','TrendsController@getIndexbysearchColum')->where('id', '[0-9]+');
 
-           // Route::get('/s2','TrendsController@getIndex');
+            Route::get('/s2','TrendsController@getIndex');
            // Route::get('/s2/{id}','TrendsController@getIndex')->where('id', '[0-9]+');
             Route::post('/s2','TrendsController@getIndexbysearchgp2');
             //Route::post('/s2/{id}','TrendsController@getIndexbysearchgp2')->where('id', '[0-9]+');
 
 
            Route::post('/s3','TrendsController@getIndexbysearchgpLastest');
-           //Route::get('/s3','TrendsController@getIndex');
+           Route::get('/s3','TrendsController@getIndex');
 
 
         });
