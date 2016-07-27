@@ -115,6 +115,9 @@ class AuthController extends Controller
                 case  2:
                     $retError = "ท่านระบุรหัสผ่านไม่ถูกต้อง" ;
                     break;
+                case  6:
+                    $retError = "ไม่อนุญาตให้ตั้งรหัสผ่านใหม่ เหมือนรหัสผ่านเดิม กรุณาตั้งรหัสผ่านใหม่อีกครั้ง" ;
+                    break;
                 case 7706:
                     $retError = "รหัสผู้ใช้งานของท่านไม่ได้รับอนุญาตให้เข้าใช้งานระบบ กรุณาติดต่อผู้ดูแลระบบ"  ;
                     break;
@@ -122,7 +125,7 @@ class AuthController extends Controller
                     $retError=   'ไม่พบชื่อ login นี้';
                     break;
             }
-          //  return redirect()->to('firstlogin')->withErrors([$retError]);
+           return redirect()->to('firstlogin')->withErrors([$retError]);
         } else {
 
             Session::flush();

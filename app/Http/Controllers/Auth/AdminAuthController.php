@@ -81,8 +81,27 @@ class AdminAuthController extends Controller
 
         $result_login = $curl->getResult();
         if($result_login->errCode != 0) {
+            $retError = "";
+
+            switch($result_login->errCode){
+                case  1:
+                    $retError = "ท่านระบุรหัสผู้ใช้งานไม่ถูกต้อง" ;
+                    break;
+                case  2:
+                    $retError = "ท่านระบุรหัสผ่านไม่ถูกต้อง" ;
+                    break;
+                case  6:
+                    $retError = "ไม่อนุญาตให้ตั้งรหัสผ่านใหม่ เหมือนรหัสผ่านเดิม กรุณาตั้งรหัสผ่านใหม่อีกครั้ง" ;
+                    break;
+                case 7706:
+                    $retError = "รหัสผู้ใช้งานของท่านไม่ได้รับอนุญาตให้เข้าใช้งานระบบ กรุณาติดต่อผู้ดูแลระบบ"  ;
+                    break;
+                default:
+                    $retError=   'ไม่พบชื่อ login นี้';
+                    break;
+            }
             // login fail
-            return redirect()->to('admin/firstlogin')->withErrors(['ไม่พบชื่อ login นี้', 'The email or password you entered is incorrect.']);
+            return redirect()->to('admin/firstlogin')->withErrors([$retError]);
         } else {
             // logged in
 //            session(['logged_in' => true, 'user_data' => $result_login->result[0], 'access_channel' => 'frontend']);
