@@ -10,8 +10,10 @@
         <div class="col-md-12">
 
             @if (Session::has('message'))
-                <div class="alert alert-warning fade in alert-dismissable">
 
+
+                <div class="alert alert-warning fade in alert-dismissable">
+                    <input type="hidden" value="{{ Session::get('message') }}" id="error" />
                     <strong>{{ Session::get('message') }}</strong>
                 </div>
                 <p> </p>
@@ -29,7 +31,7 @@
     </div>
     <div class="row" >
         <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
-
+          
 
             <form id="form_resetpass"  style="font-family: DB Ozone X !important;" class="reg-page " action="{{ action('Auth\AuthController@ResetPassword') }}" method="post">
                 {!! csrf_field() !!}
@@ -40,7 +42,7 @@
                     @endif
 
                     {{--@if (Session::has('emp_id'))--}}
-                        <input type="hidden" name="emp_id" value="{{ Session::get('emp_id') }}" />
+                        <input type="hidden" name="emp_id" value="{{Session::get('emp_id') }}" />
                     {{--@endif--}}
                 </div>
 
@@ -84,7 +86,14 @@
     </div><!--/row-->
 
         <script>
-            $(document).ready(function(){
+            $(document).ready(function () {
+
+
+                if ($("#error").length) {
+                    alert($("#error").val());
+                }
+
+
                 $("#form_resetpass").validate({
 
                     rules:

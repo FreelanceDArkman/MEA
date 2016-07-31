@@ -85,7 +85,9 @@ class UserManageController extends Controller
             $data = array();
             $dataupdate = array();
             $datauser = array();
-//            $results = $reader->get();  
+//            $results = $reader->get();
+
+
             $ret = $results->toArray();
 
             $empidtoStatus = "123";

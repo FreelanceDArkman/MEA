@@ -432,6 +432,7 @@ class C53_2Controller extends Controller
             $MENU_GROUP_ID = "";
             $MENU_ID = "";
 
+
             $menucate= DB::table('TBL_NEWS_CATE')->where('NEWS_CATE_ID','=',$NEWS_CATE_ID)->get();
 
             if($menucate){
@@ -443,20 +444,22 @@ class C53_2Controller extends Controller
 
 //                7,8
             $THUMBNAIL = "";
-            $currentthumb = $request->input("THUMBNAIL");
+            $currentthumb = $request->input("thumb_current");
 
             $WEB_NEWS_ROOT_PATH  = $meapath[0]->WEB_NEWS_ROOT_PATH;
             $filePDF = "";
             $fileThumb= "";
 
             if($importpdf != null){
-                $filePDF = $importpdf->getClientOriginalName();
+                 $filePDF  = uniqid().".pdf";
+                //$filePDF = $importpdf->getClientOriginalName();
                 $importpdf->move(public_path().$pathpdf , $filePDF);
             }
 
 
             if($thumbnail != null){
-                $fileThumb = $thumbnail->getClientOriginalName();
+                //$fileThumb = $thumbnail->getClientOriginalName();
+                $fileThumb  = uniqid(). ".jpg";
                 $thumbnail->move(public_path().$pathThunb , $fileThumb);
                 $THUMBNAIL = $WEB_NEWS_ROOT_PATH .$fileThumb;
             }else{
@@ -474,13 +477,17 @@ class C53_2Controller extends Controller
             $FILE_PATH = $WEB_NEWS_ROOT_PATH.$filePDF;
 
 
-
+            //$Topicdata = DB::table('TBL_NEWS_TOPIC')->where("NEWS_CATE_ID" ,"=",$NEWS_CATE_ID)->where("NEWS_TOPIC_ID",'=',$NEWS_TOPIC_ID)->get()[0];
 
 
             if($NEWS_CATE_ID == 9 || $NEWS_CATE_ID == 1 || $NEWS_CATE_ID == 2|| $NEWS_CATE_ID == 7|| $NEWS_CATE_ID == 8){
 
                 if($importpdf == null){
-                    $FILE_PATH = "";
+
+
+                    $FILE_PATH = $request->input("pdf_current");
+
+
                 }else{
                     $NEWS_TOPIC_DETAIL = "";
                 }

@@ -108,11 +108,16 @@
                                     <header>
                                         แนบไฟล์
                                     </header>
+                                    @if($Topicdata->FILE_PATH != "")
+                                    <div style="padding:10px;">
+                                       <a href="{{$Topicdata->FILE_PATH}}"  target="_blank">คลิ๊ก ดูตัวอย่างไฟล์</a>
+                                    </div>
+                                    @endif
                                     <section style="margin-top: 15px;margin-left: 20px;">
                                         <span style="font-size: 20px;color: #3276b1;">รูปแบบไฟล์ : เป็นไฟล์นามสกุล PDF เท่านั้น</span>
                                         <label class="input">
                                             <input type="file" class="btn btn-default" id="importpdf" name="importpdf">
-                                            <input type="hidden" id="thumb_current" value="{{$Topicdata->THUMBNAIL}}">
+                                            <input type="hidden" id="pdf_current" name="pdf_current" value="{{$Topicdata->FILE_PATH}}">
                                         </label>
                                     </section>
 
@@ -144,11 +149,17 @@
                                     <header>
                                         Thumbnail
                                     </header>
+                                    @if($Topicdata->THUMBNAIL != "")
+                                    <div style="padding:20px;">
+                                       <img src="{{$Topicdata->THUMBNAIL}}" />
+                                    </div>
+                                    @endif
                                     <section style="margin-top: 15px;margin-left: 20px;">
                                          <span style="font-size: 20px;color: #3276b1;">รูปแบบไฟล์ : เป็นไฟล์ภาพ นามสกุล JPG ขนาด 350x230 pixel เท่านั้น</span>
                                             {{--<label style="color: darkred ;font-weight: bold">ข่าว|ประชาสัมพันธ์|กองทุน|ลงทุน|ความรู้ </label>--}}
                                         <label class="input">
                                             <input type="file" class="btn btn-default" id="thumbnail" name="thumbnail">
+                                            <input type="hidden" id="thumb_current" name="thumb_current" value="{{$Topicdata->THUMBNAIL}}">
                                         </label>
                                     </section>
 

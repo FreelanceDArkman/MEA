@@ -18,6 +18,7 @@
 
         @if (Session::has('message'))
             <div class="alert alert-success fade in">
+                <input type="hidden" value="{{ Session::get('message') }}" id="error" />
                 <button class="close" data-dismiss="alert">
                     ×
                 </button>
@@ -67,7 +68,7 @@
 
 
                     @if (Session::has('emp_id'))
-                        <input type="hidden" name="emp_id" value="{{ Session::get('emp_id') }}" />
+                        <input type="hidden" name="emp_id" value="{{Session::get('emp_id') }}" />
                     @endif
                     <fieldset>
                         <section>
@@ -144,7 +145,12 @@
 <script type="text/javascript">
     runAllForms();
 
-    $(function() {
+    $(function () {
+
+
+        if ($("#error").length) {
+            alert($("#error").val());
+        }
         // Validation
         $("#login-form").validate({
             // Rules for form validation
